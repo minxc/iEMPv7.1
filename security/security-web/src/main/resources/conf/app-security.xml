@@ -1,0 +1,86 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+	http://www.springframework.org/schema/security
+	http://www.springframework.org/schema/security/spring-security-4.1.xsd">
+
+    <security:http entry-point-ref="authenticationLoginEntry">
+        <security:remember-me key="rememberPrivateKey"/>
+        <security:logout success-handler-ref="logoutSuccessHandler"/>
+
+        <security:custom-filter ref="csrfFilter" after="CAS_FILTER"/>
+
+        <security:custom-filter before="FILTER_SECURITY_INTERCEPTOR" ref="securityInterceptor"/>
+        <security:access-denied-handler ref="accessDeniedHandler"/>
+        <security:csrf disabled="true"/>
+    </security:http>
+
+    <!--  <security:custom-filter ref="xssFilter" before="FORM_LOGIN_FILTER"/>  部分容器有bug先移除掉 xss校验-->
+
+    <bean id="authenticationLoginEntry" class="org.minxc.emp.security.forbidden.DefualtAuthenticationEntryPoint"/>
+    <bean id="accessDeniedHandler" class="org.minxc.emp.security.forbidden.DefaultAccessDeniedHandler"/>
+    <bean id="logoutSuccessHandler" class="org.minxc.emp.security.login.logout.DefaultLogoutSuccessHandler"/>
+
+    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver"  p:defaultLocale="zh_CN"/>
+
+    <!-- 防止XSS注入 -->
+    <bean id="xssFilter" class="org.minxc.emp.security.filter.XssFilter">
+        <property name="ingores">
+            <list>
+                <value>/login.*</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- 防止CSRF攻击 -->
+    <bean id="csrfFilter" class="org.minxc.emp.security.filter.RefererCsrfFilter">
+        <property name="ingores">
+            <list>
+                 <value>127.0.0.1</value>
+                 <value>47.106.139.29</value>
+                 <value>47.106.139.29</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- 获取用户对象信息 -->
+    <bean id="userDetailsService" class="org.minxc.emp.security.login.UserDetailsServiceImpl"/>
+    <bean id="passwordEncoder" class="org.minxc.emp.security.login.CustomPwdEncoder"></bean>
+
+    <security:authentication-manager alias="authenticationManager">
+        <security:authentication-provider user-service-ref="userDetailsService">
+            <security:password-encoder ref="passwordEncoder"/>
+        </security:authentication-provider>
+    </security:authentication-manager>
+
+    <!-- 访问决策器 -->
+    <bean id="accessDecisionManager" class="org.minxc.emp.security.authentication.AccessDecisionManagerImpl"/>
+
+
+    <!-- 获取 URL 对应的角色 -->
+    <bean id="securityMetadataSource"
+          class="org.minxc.emp.security.authentication.FilterInvocationSecurityMetadataSourceImpl">
+        <property name="ingores">
+            <list>
+                <value>/login.*</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- 授权判断 -->
+    <bean id="securityInterceptor" class="org.minxc.emp.security.authentication.SecurityInterceptor">
+        <property name="authenticationManager" ref="authenticationManager"/>
+        <property name="accessDecisionManager" ref="accessDecisionManager"/>
+        <property name="securityMetadataSource" ref="securityMetadataSource"/>
+    </bean>
+
+    <!-- 将当前登录用户等登录信息注入进contextUtil中 -->
+    <bean id="loginContext" class="org.minxc.emp.security.login.context.LoginContext"></bean>
+    <bean id="contextUtil" class="ContextUtil">
+        <property name="currentContext" ref="loginContext"></property>
+    </bean>
+
+</beans>
