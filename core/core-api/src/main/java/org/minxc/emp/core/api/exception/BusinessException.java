@@ -15,11 +15,10 @@
 
 */ 
 
-package com.minxc.emp.core.exception;
+package org.minxc.emp.core.api.exception;
 
-import org.minxc.emp.core.api.StatusCode;
-
-import com.minxc.emp.core.impl.CommonStatusCode;
+import org.minxc.emp.core.api.status.CommonStatusCode;
+import org.minxc.emp.core.api.status.StatusCode;
 
 /**      
 * 项目名称：core-impl   

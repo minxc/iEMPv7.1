@@ -17,9 +17,8 @@
 
 package com.minxc.emp.core.util;
 
-import com.google.common.collect.Collections2;
 import com.google.common.collect.Lists;
-import com.minxc.emp.core.exception.BusinessException;
+import org.minxc.emp.core.api.exception.BusinessException;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
@@ -28,10 +27,8 @@ import org.springframework.context.ApplicationEvent;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.env.Environment;
-import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 

@@ -3,7 +3,7 @@
 
 * @Title: SortDirection.java 
 
-* @Package org.minxc.emp.core.constant 
+* @Package org.minxc.emp.core.api.constant
 
 * @Description: TODO(用一句话描述该文件做什么) 
 
@@ -15,7 +15,7 @@
 
 */
 
-package org.minxc.emp.core.constant;
+package org.minxc.emp.core.api.query;
 
 /*
  * 
@@ -68,6 +68,8 @@ public enum SortDirection {
 	public boolean equalsWithKey(String key) {
 		return this.key.equals(key);
 	}
+
+
 
 	public static SortDirection fromString(String value) {
 		try {

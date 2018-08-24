@@ -3,7 +3,7 @@
 
 * @Title: StringConstants.java 
 
-* @Package org.minxc.emp.core.constant 
+* @Package org.minxc.emp.core.api.constant
 
 * @Description: TODO(用一句话描述该文件做什么) 
 
@@ -15,7 +15,7 @@
 
 */
 
-package org.minxc.emp.core.constant;
+package org.minxc.emp.core.api.constant;
 
 /*     
 * 项目名称：core-api   

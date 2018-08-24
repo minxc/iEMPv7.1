@@ -3,7 +3,7 @@
 
 * @Title: ColumnType.java 
 
-* @Package org.minxc.emp.core.constant 
+* @Package org.minxc.emp.core.api.constant
 
 * @Description: TODO(用一句话描述该文件做什么) 
 
@@ -15,7 +15,9 @@
 
 */ 
 
-package org.minxc.emp.core.constant;
+package org.minxc.emp.core.api.constant;
+
+import org.minxc.emp.core.api.exception.BusinessException;
 
 import java.util.Arrays;
 

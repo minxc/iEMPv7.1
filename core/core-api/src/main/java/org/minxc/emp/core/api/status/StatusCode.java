@@ -15,7 +15,7 @@
 
 */ 
 
-package org.minxc.emp.core.api;
+package org.minxc.emp.core.api.status;
 
 
 /**      

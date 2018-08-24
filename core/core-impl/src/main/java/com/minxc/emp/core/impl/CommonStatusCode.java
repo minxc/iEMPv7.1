@@ -17,7 +17,7 @@
 
 package com.minxc.emp.core.impl;
 
-import org.minxc.emp.core.api.StatusCode;
+import org.minxc.emp.core.api.status.StatusCode;
 
 /**      
 * 项目名称：core-impl   
