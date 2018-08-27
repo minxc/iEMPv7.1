@@ -8,6 +8,8 @@ import java.io.Serializable;
  */
 public class DefaultJmsDTO<T extends Serializable> implements JmsDTO{
 
+	private static final long serialVersionUID = 6441512940066825924L;
+
 	private String type;
 	
 	private T data;
