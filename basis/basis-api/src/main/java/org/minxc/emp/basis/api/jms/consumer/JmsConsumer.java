@@ -2,7 +2,8 @@ package org.minxc.emp.basis.api.jms.consumer;
 
 import java.io.Serializable;
 
-import com.dstz.sys.api.jms.model.JmsDTO;
+import org.minxc.emp.basis.api.jms.model.JmsDTO;
+
 
 /**
  * 所有消费者 均需要实现该接口
