@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.minxc.emp.dao.ResourceLinkEntityMapper">
+  <resultMap id="BaseResultMap" type="org.minxc.emp.model.ResourceLinkEntity">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="RES_ID" jdbcType="VARCHAR" property="resId" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="RES_URL" jdbcType="VARCHAR" property="resUrl" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, RES_ID, NAME, RES_URL
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from YMMG_RESOURCE_LINK
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from YMMG_RESOURCE_LINK
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="org.minxc.emp.model.ResourceLinkEntity">
+    insert into YMMG_RESOURCE_LINK (ID, RES_ID, NAME, 
+      RES_URL)
+    values (#{id,jdbcType=VARCHAR}, #{resId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{resUrl,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.minxc.emp.model.ResourceLinkEntity">
+    insert into YMMG_RESOURCE_LINK
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="resId != null">
+        RES_ID,
+      </if>
+      <if test="name != null">
+        NAME,
+      </if>
+      <if test="resUrl != null">
+        RES_URL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="resId != null">
+        #{resId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="resUrl != null">
+        #{resUrl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.minxc.emp.model.ResourceLinkEntity">
+    update YMMG_RESOURCE_LINK
+    <set>
+      <if test="resId != null">
+        RES_ID = #{resId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="resUrl != null">
+        RES_URL = #{resUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.minxc.emp.model.ResourceLinkEntity">
+    update YMMG_RESOURCE_LINK
+    set RES_ID = #{resId,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR},
+      RES_URL = #{resUrl,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

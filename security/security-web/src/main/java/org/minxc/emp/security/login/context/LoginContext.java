@@ -1,7 +1,8 @@
 package org.minxc.emp.security.login.context;
 
-
+import com.minxc.emp.core.util.AppContextUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.minxc.emp.base.core.cache.Cache;
 import org.minxc.emp.base.core.util.AppUtil;
 import org.minxc.emp.base.core.util.StringUtil;
@@ -13,6 +14,7 @@ import org.minxc.emp.organization.api.service.UserService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import sun.awt.AppContext;
 
 import javax.annotation.Resource;
 import java.util.Locale;
@@ -91,7 +93,7 @@ public class LoginContext implements CurrentContext {
         }
         String userId = getCurrentUserId();
         //从缓存中取
-        Cache Cache = (Cache) AppUtil.getBean(Cache.class);
+        Cache Cache = (Cache) AppContextUtil.getBean(Cache.class);
         String userKey = CurrentContext.CURRENT_ORG + userId;
         if (Cache.containKey(userKey)) {
             return (Group) Cache.getByKey(userKey);
@@ -136,7 +138,7 @@ public class LoginContext implements CurrentContext {
 
     @Override
     public void setCurrentUserByAccount(String account) {
-        if (StringUtil.isEmpty(account)) {
+        if (StringUtils.isEmpty(account)) {
             throw new RuntimeException("输入帐号为空!");
         }
         User user = userService.getUserByAccount(account);

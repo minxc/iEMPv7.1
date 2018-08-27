@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.minxc.emp.dao.TreeEntityMapper">
+  <resultMap id="BaseResultMap" type="org.minxc.emp.model.TreeEntity">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="KEY" jdbcType="VARCHAR" property="key" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="DESCRIPTION" jdbcType="VARCHAR" property="description" />
+    <result column="IS_SYSTEM" jdbcType="DECIMAL" property="isSystem" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, KEY, NAME, DESCRIPTION, IS_SYSTEM
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from YMMG_TREE
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from YMMG_TREE
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="org.minxc.emp.model.TreeEntity">
+    insert into YMMG_TREE (ID, KEY, NAME, 
+      DESCRIPTION, IS_SYSTEM)
+    values (#{id,jdbcType=VARCHAR}, #{key,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR}, #{isSystem,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="org.minxc.emp.model.TreeEntity">
+    insert into YMMG_TREE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="key != null">
+        KEY,
+      </if>
+      <if test="name != null">
+        NAME,
+      </if>
+      <if test="description != null">
+        DESCRIPTION,
+      </if>
+      <if test="isSystem != null">
+        IS_SYSTEM,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="key != null">
+        #{key,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="isSystem != null">
+        #{isSystem,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.minxc.emp.model.TreeEntity">
+    update YMMG_TREE
+    <set>
+      <if test="key != null">
+        KEY = #{key,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        DESCRIPTION = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="isSystem != null">
+        IS_SYSTEM = #{isSystem,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.minxc.emp.model.TreeEntity">
+    update YMMG_TREE
+    set KEY = #{key,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR},
+      DESCRIPTION = #{description,jdbcType=VARCHAR},
+      IS_SYSTEM = #{isSystem,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

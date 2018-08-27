@@ -5,6 +5,12 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
+import org.minxc.emp.common.rest.GenericController;
+import org.minxc.emp.common.rest.util.RequestUtil;
+import org.minxc.emp.core.api.aop.annotation.ErrorCatching;
+import org.minxc.emp.core.api.exception.BusinessException;
+import org.minxc.emp.core.api.response.impl.ResultMessage;
 import org.springframework.security.authentication.AccountExpiredException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
@@ -16,12 +22,6 @@ import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import org.minxc.emp.base.api.aop.annotion.CatchError;
-import org.minxc.emp.base.api.exception.BusinessException;
-import org.minxc.emp.base.api.response.impl.ResultMsg;
-import org.minxc.emp.base.core.util.StringUtil;
-import org.minxc.emp.base.rest.GenericController;
-import org.minxc.emp.base.rest.util.RequestUtil;
 import org.minxc.emp.organization.api.service.UserService;
 import org.minxc.emp.security.constant.PlatFormStatusCode;
 import org.minxc.emp.security.login.SecurityUtil;
@@ -34,14 +34,14 @@ public class LoginController extends GenericController {
     SessionAuthenticationStrategy sessionStrategy = new NullAuthenticatedSessionStrategy();
 
     @RequestMapping(value = "login/valid")
-    @CatchError
-    public ResultMsg login(HttpServletRequest request, HttpServletResponse response) {
+    @ErrorCatching
+    public ResultMessage login(HttpServletRequest request, HttpServletResponse response) {
         String account = RequestUtil.getString(request, "account");
         String password = RequestUtil.getString(request, "password");
-        if (StringUtil.isEmpty(account)) {
+        if (StringUtils.isEmpty(account)) {
             throw new BusinessException("账户不能为空", PlatFormStatusCode.LOGIN_ERROR);
         }
-        if (StringUtil.isEmpty(password)) {
+        if (StringUtils.isEmpty(password)) {
             throw new BusinessException("密码不能为空", PlatFormStatusCode.LOGIN_ERROR);
         }
 

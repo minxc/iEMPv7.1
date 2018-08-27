@@ -24,16 +24,13 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.*;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonDeserializer;
-import com.fasterxml.jackson.databind.JsonSerializer;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.databind.*;
+import com.fasterxml.jackson.databind.jsontype.TypeSerializer;
+import com.fasterxml.jackson.databind.node.*;
 import com.fasterxml.jackson.databind.type.CollectionType;
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
 /*
@@ -53,6 +50,7 @@ public class JacksonUtil {
 
 	private static ObjectMapper objectMapper = new ObjectMapper();
 	private static ObjectMapper xmlMapper = new XmlMapper();
+//	private static JsonNodeFactory jsonNodeFactory = new JsonNodeFactory(false);
 
 	/**
 	 * 防止反射调用构造器创建对象
@@ -297,4 +295,41 @@ public class JacksonUtil {
 		}
 		return listMap;
 	}
+
+
+	/**
+	 * Factory method for constructing an empty JSON Object ("struct") node
+	 */
+	public static ObjectNode jsonObject(){
+		return xmlMapper.createObjectNode();
+	}
+	/**
+	 * Factory method for constructing an empty JSON Array node
+	 */
+	public static ArrayNode jsonArray(){
+		return xmlMapper.createArrayNode();
+	}
+
+
+
+	public static JsonNode parseToJsonObject(String jsonString) throws Exception{
+		return objectMapper.readTree(jsonString);
+	}
+
+
+	public static void main(String[] args){
+
+		ObjectNode node = JsonNodeFactory.instance.objectNode();
+		node.put("min", "闵");
+		node.put("xc", "现畅");
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			mapper.writeValue(System.out, node);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+
+
 }

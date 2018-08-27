@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.minxc.emp.dao.UserEntityMapper">
+  <resultMap id="BaseResultMap" type="org.minxc.emp.model.UserEntity">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="FULLNAME" jdbcType="VARCHAR" property="fullname" />
+    <result column="ACCOUNT" jdbcType="VARCHAR" property="account" />
+    <result column="PASSWORD" jdbcType="VARCHAR" property="password" />
+    <result column="EMAIL" jdbcType="VARCHAR" property="email" />
+    <result column="MOBILE" jdbcType="VARCHAR" property="mobile" />
+    <result column="WEIXIN" jdbcType="VARCHAR" property="weixin" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="ADDRESS" jdbcType="VARCHAR" property="address" />
+    <result column="PHOTO" jdbcType="VARCHAR" property="photo" />
+    <result column="SEX" jdbcType="VARCHAR" property="sex" />
+    <result column="USERFROM" jdbcType="VARCHAR" property="userfrom" />
+    <result column="STATUS" jdbcType="DECIMAL" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, FULLNAME, ACCOUNT, PASSWORD, EMAIL, MOBILE, WEIXIN, CREATE_TIME, ADDRESS, PHOTO, 
+    SEX, USERFROM, STATUS
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from YMMG_USER
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from YMMG_USER
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="org.minxc.emp.model.UserEntity">
+    insert into YMMG_USER (ID, FULLNAME, ACCOUNT, 
+      PASSWORD, EMAIL, MOBILE, 
+      WEIXIN, CREATE_TIME, ADDRESS, 
+      PHOTO, SEX, USERFROM, 
+      STATUS)
+    values (#{id,jdbcType=VARCHAR}, #{fullname,jdbcType=VARCHAR}, #{account,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
+      #{weixin,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{address,jdbcType=VARCHAR}, 
+      #{photo,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{userfrom,jdbcType=VARCHAR}, 
+      #{status,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="org.minxc.emp.model.UserEntity">
+    insert into YMMG_USER
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="fullname != null">
+        FULLNAME,
+      </if>
+      <if test="account != null">
+        ACCOUNT,
+      </if>
+      <if test="password != null">
+        PASSWORD,
+      </if>
+      <if test="email != null">
+        EMAIL,
+      </if>
+      <if test="mobile != null">
+        MOBILE,
+      </if>
+      <if test="weixin != null">
+        WEIXIN,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="address != null">
+        ADDRESS,
+      </if>
+      <if test="photo != null">
+        PHOTO,
+      </if>
+      <if test="sex != null">
+        SEX,
+      </if>
+      <if test="userfrom != null">
+        USERFROM,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="fullname != null">
+        #{fullname,jdbcType=VARCHAR},
+      </if>
+      <if test="account != null">
+        #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="weixin != null">
+        #{weixin,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="photo != null">
+        #{photo,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="userfrom != null">
+        #{userfrom,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.minxc.emp.model.UserEntity">
+    update YMMG_USER
+    <set>
+      <if test="fullname != null">
+        FULLNAME = #{fullname,jdbcType=VARCHAR},
+      </if>
+      <if test="account != null">
+        ACCOUNT = #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        PASSWORD = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        MOBILE = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="weixin != null">
+        WEIXIN = #{weixin,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="address != null">
+        ADDRESS = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="photo != null">
+        PHOTO = #{photo,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        SEX = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="userfrom != null">
+        USERFROM = #{userfrom,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.minxc.emp.model.UserEntity">
+    update YMMG_USER
+    set FULLNAME = #{fullname,jdbcType=VARCHAR},
+      ACCOUNT = #{account,jdbcType=VARCHAR},
+      PASSWORD = #{password,jdbcType=VARCHAR},
+      EMAIL = #{email,jdbcType=VARCHAR},
+      MOBILE = #{mobile,jdbcType=VARCHAR},
+      WEIXIN = #{weixin,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      ADDRESS = #{address,jdbcType=VARCHAR},
+      PHOTO = #{photo,jdbcType=VARCHAR},
+      SEX = #{sex,jdbcType=VARCHAR},
+      USERFROM = #{userfrom,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

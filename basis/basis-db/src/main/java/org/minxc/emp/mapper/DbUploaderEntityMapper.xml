@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.minxc.emp.dao.DbUploaderEntityMapper">
+  <resultMap id="BaseResultMap" type="org.minxc.emp.model.DbUploaderEntity">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="org.minxc.emp.model.DbUploaderEntity">
+    <result column="BYTES" jdbcType="BLOB" property="bytes" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID
+  </sql>
+  <sql id="Blob_Column_List">
+    BYTES
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from YMMG_DB_UPLOADER
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from YMMG_DB_UPLOADER
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="org.minxc.emp.model.DbUploaderEntity">
+    insert into YMMG_DB_UPLOADER (ID, BYTES)
+    values (#{id,jdbcType=VARCHAR}, #{bytes,jdbcType=BLOB})
+  </insert>
+  <insert id="insertSelective" parameterType="org.minxc.emp.model.DbUploaderEntity">
+    insert into YMMG_DB_UPLOADER
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="bytes != null">
+        BYTES,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="bytes != null">
+        #{bytes,jdbcType=BLOB},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.minxc.emp.model.DbUploaderEntity">
+    update YMMG_DB_UPLOADER
+    <set>
+      <if test="bytes != null">
+        BYTES = #{bytes,jdbcType=BLOB},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="org.minxc.emp.model.DbUploaderEntity">
+    update YMMG_DB_UPLOADER
+    set BYTES = #{bytes,jdbcType=BLOB}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

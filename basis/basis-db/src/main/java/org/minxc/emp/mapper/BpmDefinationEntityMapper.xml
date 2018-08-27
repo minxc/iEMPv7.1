@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.minxc.emp.dao.BpmDefinationEntityMapper">
+  <resultMap id="BaseResultMap" type="org.minxc.emp.model.BpmDefinationEntity">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="KEY" jdbcType="VARCHAR" property="key" />
+    <result column="DESCRIPTION" jdbcType="VARCHAR" property="description" />
+    <result column="TYPE_ID" jdbcType="VARCHAR" property="typeId" />
+    <result column="STATUS" jdbcType="VARCHAR" property="status" />
+    <result column="ACT_DEF_ID" jdbcType="VARCHAR" property="actDefId" />
+    <result column="ACT_MODEL_ID" jdbcType="VARCHAR" property="actModelId" />
+    <result column="ACT_DEPLOY_ID" jdbcType="VARCHAR" property="actDeployId" />
+    <result column="VERSION" jdbcType="DECIMAL" property="version" />
+    <result column="MAIN_DEF_ID" jdbcType="VARCHAR" property="mainDefId" />
+    <result column="IS_MAIN" jdbcType="CHAR" property="isMain" />
+    <result column="CREATE_BY" jdbcType="VARCHAR" property="createBy" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="CREATE_ORG_ID" jdbcType="VARCHAR" property="createOrgId" />
+    <result column="UPDATE_BY" jdbcType="VARCHAR" property="updateBy" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="SUPPORT_MOBILE" jdbcType="DECIMAL" property="supportMobile" />
+    <result column="REV" jdbcType="DECIMAL" property="rev" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="org.minxc.emp.model.BpmDefinationEntity">
+    <result column="DEF_SETTING" jdbcType="CLOB" property="defSetting" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, NAME, KEY, DESCRIPTION, TYPE_ID, STATUS, ACT_DEF_ID, ACT_MODEL_ID, ACT_DEPLOY_ID, 
+    VERSION, MAIN_DEF_ID, IS_MAIN, CREATE_BY, CREATE_TIME, CREATE_ORG_ID, UPDATE_BY, 
+    UPDATE_TIME, SUPPORT_MOBILE, REV
+  </sql>
+  <sql id="Blob_Column_List">
+    DEF_SETTING
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from YMMG_BPM_DEFINITION
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from YMMG_BPM_DEFINITION
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="org.minxc.emp.model.BpmDefinationEntity">
+    insert into YMMG_BPM_DEFINITION (ID, NAME, KEY, 
+      DESCRIPTION, TYPE_ID, STATUS, 
+      ACT_DEF_ID, ACT_MODEL_ID, ACT_DEPLOY_ID, 
+      VERSION, MAIN_DEF_ID, IS_MAIN, 
+      CREATE_BY, CREATE_TIME, CREATE_ORG_ID, 
+      UPDATE_BY, UPDATE_TIME, SUPPORT_MOBILE, 
+      REV, DEF_SETTING)
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{key,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR}, #{typeId,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{actDefId,jdbcType=VARCHAR}, #{actModelId,jdbcType=VARCHAR}, #{actDeployId,jdbcType=VARCHAR}, 
+      #{version,jdbcType=DECIMAL}, #{mainDefId,jdbcType=VARCHAR}, #{isMain,jdbcType=CHAR}, 
+      #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{createOrgId,jdbcType=VARCHAR}, 
+      #{updateBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{supportMobile,jdbcType=DECIMAL}, 
+      #{rev,jdbcType=DECIMAL}, #{defSetting,jdbcType=CLOB})
+  </insert>
+  <insert id="insertSelective" parameterType="org.minxc.emp.model.BpmDefinationEntity">
+    insert into YMMG_BPM_DEFINITION
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="name != null">
+        NAME,
+      </if>
+      <if test="key != null">
+        KEY,
+      </if>
+      <if test="description != null">
+        DESCRIPTION,
+      </if>
+      <if test="typeId != null">
+        TYPE_ID,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="actDefId != null">
+        ACT_DEF_ID,
+      </if>
+      <if test="actModelId != null">
+        ACT_MODEL_ID,
+      </if>
+      <if test="actDeployId != null">
+        ACT_DEPLOY_ID,
+      </if>
+      <if test="version != null">
+        VERSION,
+      </if>
+      <if test="mainDefId != null">
+        MAIN_DEF_ID,
+      </if>
+      <if test="isMain != null">
+        IS_MAIN,
+      </if>
+      <if test="createBy != null">
+        CREATE_BY,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="createOrgId != null">
+        CREATE_ORG_ID,
+      </if>
+      <if test="updateBy != null">
+        UPDATE_BY,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+      <if test="supportMobile != null">
+        SUPPORT_MOBILE,
+      </if>
+      <if test="rev != null">
+        REV,
+      </if>
+      <if test="defSetting != null">
+        DEF_SETTING,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="key != null">
+        #{key,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="typeId != null">
+        #{typeId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="actDefId != null">
+        #{actDefId,jdbcType=VARCHAR},
+      </if>
+      <if test="actModelId != null">
+        #{actModelId,jdbcType=VARCHAR},
+      </if>
+      <if test="actDeployId != null">
+        #{actDeployId,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=DECIMAL},
+      </if>
+      <if test="mainDefId != null">
+        #{mainDefId,jdbcType=VARCHAR},
+      </if>
+      <if test="isMain != null">
+        #{isMain,jdbcType=CHAR},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createOrgId != null">
+        #{createOrgId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="supportMobile != null">
+        #{supportMobile,jdbcType=DECIMAL},
+      </if>
+      <if test="rev != null">
+        #{rev,jdbcType=DECIMAL},
+      </if>
+      <if test="defSetting != null">
+        #{defSetting,jdbcType=CLOB},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.minxc.emp.model.BpmDefinationEntity">
+    update YMMG_BPM_DEFINITION
+    <set>
+      <if test="name != null">
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="key != null">
+        KEY = #{key,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        DESCRIPTION = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="typeId != null">
+        TYPE_ID = #{typeId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="actDefId != null">
+        ACT_DEF_ID = #{actDefId,jdbcType=VARCHAR},
+      </if>
+      <if test="actModelId != null">
+        ACT_MODEL_ID = #{actModelId,jdbcType=VARCHAR},
+      </if>
+      <if test="actDeployId != null">
+        ACT_DEPLOY_ID = #{actDeployId,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null">
+        VERSION = #{version,jdbcType=DECIMAL},
+      </if>
+      <if test="mainDefId != null">
+        MAIN_DEF_ID = #{mainDefId,jdbcType=VARCHAR},
+      </if>
+      <if test="isMain != null">
+        IS_MAIN = #{isMain,jdbcType=CHAR},
+      </if>
+      <if test="createBy != null">
+        CREATE_BY = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createOrgId != null">
+        CREATE_ORG_ID = #{createOrgId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null">
+        UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="supportMobile != null">
+        SUPPORT_MOBILE = #{supportMobile,jdbcType=DECIMAL},
+      </if>
+      <if test="rev != null">
+        REV = #{rev,jdbcType=DECIMAL},
+      </if>
+      <if test="defSetting != null">
+        DEF_SETTING = #{defSetting,jdbcType=CLOB},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="org.minxc.emp.model.BpmDefinationEntity">
+    update YMMG_BPM_DEFINITION
+    set NAME = #{name,jdbcType=VARCHAR},
+      KEY = #{key,jdbcType=VARCHAR},
+      DESCRIPTION = #{description,jdbcType=VARCHAR},
+      TYPE_ID = #{typeId,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR},
+      ACT_DEF_ID = #{actDefId,jdbcType=VARCHAR},
+      ACT_MODEL_ID = #{actModelId,jdbcType=VARCHAR},
+      ACT_DEPLOY_ID = #{actDeployId,jdbcType=VARCHAR},
+      VERSION = #{version,jdbcType=DECIMAL},
+      MAIN_DEF_ID = #{mainDefId,jdbcType=VARCHAR},
+      IS_MAIN = #{isMain,jdbcType=CHAR},
+      CREATE_BY = #{createBy,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      CREATE_ORG_ID = #{createOrgId,jdbcType=VARCHAR},
+      UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      SUPPORT_MOBILE = #{supportMobile,jdbcType=DECIMAL},
+      REV = #{rev,jdbcType=DECIMAL},
+      DEF_SETTING = #{defSetting,jdbcType=CLOB}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.minxc.emp.model.BpmDefinationEntity">
+    update YMMG_BPM_DEFINITION
+    set NAME = #{name,jdbcType=VARCHAR},
+      KEY = #{key,jdbcType=VARCHAR},
+      DESCRIPTION = #{description,jdbcType=VARCHAR},
+      TYPE_ID = #{typeId,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR},
+      ACT_DEF_ID = #{actDefId,jdbcType=VARCHAR},
+      ACT_MODEL_ID = #{actModelId,jdbcType=VARCHAR},
+      ACT_DEPLOY_ID = #{actDeployId,jdbcType=VARCHAR},
+      VERSION = #{version,jdbcType=DECIMAL},
+      MAIN_DEF_ID = #{mainDefId,jdbcType=VARCHAR},
+      IS_MAIN = #{isMain,jdbcType=CHAR},
+      CREATE_BY = #{createBy,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      CREATE_ORG_ID = #{createOrgId,jdbcType=VARCHAR},
+      UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      SUPPORT_MOBILE = #{supportMobile,jdbcType=DECIMAL},
+      REV = #{rev,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

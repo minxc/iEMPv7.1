@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.minxc.emp.dao.DbIdGeneratorEntityMapper">
+  <resultMap id="BaseResultMap" type="org.minxc.emp.model.DbIdGeneratorEntity">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="START_VALUE" jdbcType="DECIMAL" property="startValue" />
+    <result column="MAXIMUM" jdbcType="DECIMAL" property="maximum" />
+    <result column="MACHINE" jdbcType="VARCHAR" property="machine" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, START_VALUE, MAXIMUM, MACHINE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from YMMG_DB_ID_GENERATOR
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from YMMG_DB_ID_GENERATOR
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="org.minxc.emp.model.DbIdGeneratorEntity">
+    insert into YMMG_DB_ID_GENERATOR (ID, START_VALUE, MAXIMUM, 
+      MACHINE)
+    values (#{id,jdbcType=VARCHAR}, #{startValue,jdbcType=DECIMAL}, #{maximum,jdbcType=DECIMAL}, 
+      #{machine,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.minxc.emp.model.DbIdGeneratorEntity">
+    insert into YMMG_DB_ID_GENERATOR
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="startValue != null">
+        START_VALUE,
+      </if>
+      <if test="maximum != null">
+        MAXIMUM,
+      </if>
+      <if test="machine != null">
+        MACHINE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="startValue != null">
+        #{startValue,jdbcType=DECIMAL},
+      </if>
+      <if test="maximum != null">
+        #{maximum,jdbcType=DECIMAL},
+      </if>
+      <if test="machine != null">
+        #{machine,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.minxc.emp.model.DbIdGeneratorEntity">
+    update YMMG_DB_ID_GENERATOR
+    <set>
+      <if test="startValue != null">
+        START_VALUE = #{startValue,jdbcType=DECIMAL},
+      </if>
+      <if test="maximum != null">
+        MAXIMUM = #{maximum,jdbcType=DECIMAL},
+      </if>
+      <if test="machine != null">
+        MACHINE = #{machine,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.minxc.emp.model.DbIdGeneratorEntity">
+    update YMMG_DB_ID_GENERATOR
+    set START_VALUE = #{startValue,jdbcType=DECIMAL},
+      MAXIMUM = #{maximum,jdbcType=DECIMAL},
+      MACHINE = #{machine,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

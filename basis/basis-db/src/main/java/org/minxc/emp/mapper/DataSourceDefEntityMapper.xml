@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.minxc.emp.dao.DataSourceDefEntityMapper">
+  <resultMap id="BaseResultMap" type="org.minxc.emp.model.DataSourceDefEntity">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="CLASS_PATH" jdbcType="VARCHAR" property="classPath" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="org.minxc.emp.model.DataSourceDefEntity">
+    <result column="ATTRIBUTES_JSON" jdbcType="CLOB" property="attributesJson" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, NAME, CLASS_PATH
+  </sql>
+  <sql id="Blob_Column_List">
+    ATTRIBUTES_JSON
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from YMMG_DATA_SOURCE_DEF
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from YMMG_DATA_SOURCE_DEF
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="org.minxc.emp.model.DataSourceDefEntity">
+    insert into YMMG_DATA_SOURCE_DEF (ID, NAME, CLASS_PATH, 
+      ATTRIBUTES_JSON)
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{classPath,jdbcType=VARCHAR}, 
+      #{attributesJson,jdbcType=CLOB})
+  </insert>
+  <insert id="insertSelective" parameterType="org.minxc.emp.model.DataSourceDefEntity">
+    insert into YMMG_DATA_SOURCE_DEF
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="name != null">
+        NAME,
+      </if>
+      <if test="classPath != null">
+        CLASS_PATH,
+      </if>
+      <if test="attributesJson != null">
+        ATTRIBUTES_JSON,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="classPath != null">
+        #{classPath,jdbcType=VARCHAR},
+      </if>
+      <if test="attributesJson != null">
+        #{attributesJson,jdbcType=CLOB},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.minxc.emp.model.DataSourceDefEntity">
+    update YMMG_DATA_SOURCE_DEF
+    <set>
+      <if test="name != null">
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="classPath != null">
+        CLASS_PATH = #{classPath,jdbcType=VARCHAR},
+      </if>
+      <if test="attributesJson != null">
+        ATTRIBUTES_JSON = #{attributesJson,jdbcType=CLOB},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="org.minxc.emp.model.DataSourceDefEntity">
+    update YMMG_DATA_SOURCE_DEF
+    set NAME = #{name,jdbcType=VARCHAR},
+      CLASS_PATH = #{classPath,jdbcType=VARCHAR},
+      ATTRIBUTES_JSON = #{attributesJson,jdbcType=CLOB}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.minxc.emp.model.DataSourceDefEntity">
+    update YMMG_DATA_SOURCE_DEF
+    set NAME = #{name,jdbcType=VARCHAR},
+      CLASS_PATH = #{classPath,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

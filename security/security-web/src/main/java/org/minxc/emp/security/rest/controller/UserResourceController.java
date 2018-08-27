@@ -7,19 +7,13 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.minxc.emp.core.util.BeanUtils;
+import org.minxc.emp.core.api.aop.annotation.ErrorCatching;
 import org.minxc.emp.security.util.SubSystemUtil;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson.JSONObject;
-import org.minxc.emp.base.api.aop.annotion.CatchError;
-import org.minxc.emp.base.api.exception.BusinessException;
-import org.minxc.emp.base.api.response.impl.ResultMsg;
-import org.minxc.emp.base.core.util.AppUtil;
-import org.minxc.emp.base.core.util.BeanUtils;
-import org.minxc.emp.base.core.util.StringUtil;
-import org.minxc.emp.base.rest.GenericController;
-import org.minxc.emp.base.rest.util.RequestUtil;
 import org.minxc.emp.organization.api.constant.GroupTypeConstant;
 import org.minxc.emp.organization.api.model.Group;
 import org.minxc.emp.organization.api.model.User;
@@ -43,7 +37,7 @@ public class UserResourceController extends GenericController {
 
 
     @RequestMapping("userResource/userMsg")
-    @CatchError
+    @ErrorCatching
     public ResultMsg<JSONObject> userMsg(HttpServletRequest request, HttpServletResponse response) throws Exception {
         List<Subsystem> subsystemList = SystemResourceService.getCurrentUserSystem();
         JSONObject mv = new JSONObject();

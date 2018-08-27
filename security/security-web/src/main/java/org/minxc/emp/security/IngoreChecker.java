@@ -1,6 +1,7 @@
 package org.minxc.emp.security;
 
-import org.springframework.beans.BeanUtils;
+
+import com.minxc.emp.core.util.BeanUtils;
 
 import java.util.ArrayList;
 import java.util.List;

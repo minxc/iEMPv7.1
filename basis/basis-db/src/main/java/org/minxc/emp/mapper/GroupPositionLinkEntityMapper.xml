@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.minxc.emp.dao.GroupPositionLinkEntityMapper">
+  <resultMap id="BaseResultMap" type="org.minxc.emp.model.GroupPositionLinkEntity">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="GROUP_ID" jdbcType="VARCHAR" property="groupId" />
+    <result column="POSITION_ID" jdbcType="VARCHAR" property="positionId" />
+    <result column="POSITION_NAME" jdbcType="VARCHAR" property="positionName" />
+    <result column="POSITION_CODE" jdbcType="VARCHAR" property="positionCode" />
+    <result column="JOB_NAME" jdbcType="VARCHAR" property="jobName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, GROUP_ID, POSITION_ID, POSITION_NAME, POSITION_CODE, JOB_NAME
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from YMMG_GROUP_POSITION_LINK
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from YMMG_GROUP_POSITION_LINK
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="org.minxc.emp.model.GroupPositionLinkEntity">
+    insert into YMMG_GROUP_POSITION_LINK (ID, GROUP_ID, POSITION_ID, 
+      POSITION_NAME, POSITION_CODE, JOB_NAME
+      )
+    values (#{id,jdbcType=VARCHAR}, #{groupId,jdbcType=VARCHAR}, #{positionId,jdbcType=VARCHAR}, 
+      #{positionName,jdbcType=VARCHAR}, #{positionCode,jdbcType=VARCHAR}, #{jobName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.minxc.emp.model.GroupPositionLinkEntity">
+    insert into YMMG_GROUP_POSITION_LINK
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="groupId != null">
+        GROUP_ID,
+      </if>
+      <if test="positionId != null">
+        POSITION_ID,
+      </if>
+      <if test="positionName != null">
+        POSITION_NAME,
+      </if>
+      <if test="positionCode != null">
+        POSITION_CODE,
+      </if>
+      <if test="jobName != null">
+        JOB_NAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="groupId != null">
+        #{groupId,jdbcType=VARCHAR},
+      </if>
+      <if test="positionId != null">
+        #{positionId,jdbcType=VARCHAR},
+      </if>
+      <if test="positionName != null">
+        #{positionName,jdbcType=VARCHAR},
+      </if>
+      <if test="positionCode != null">
+        #{positionCode,jdbcType=VARCHAR},
+      </if>
+      <if test="jobName != null">
+        #{jobName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.minxc.emp.model.GroupPositionLinkEntity">
+    update YMMG_GROUP_POSITION_LINK
+    <set>
+      <if test="groupId != null">
+        GROUP_ID = #{groupId,jdbcType=VARCHAR},
+      </if>
+      <if test="positionId != null">
+        POSITION_ID = #{positionId,jdbcType=VARCHAR},
+      </if>
+      <if test="positionName != null">
+        POSITION_NAME = #{positionName,jdbcType=VARCHAR},
+      </if>
+      <if test="positionCode != null">
+        POSITION_CODE = #{positionCode,jdbcType=VARCHAR},
+      </if>
+      <if test="jobName != null">
+        JOB_NAME = #{jobName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.minxc.emp.model.GroupPositionLinkEntity">
+    update YMMG_GROUP_POSITION_LINK
+    set GROUP_ID = #{groupId,jdbcType=VARCHAR},
+      POSITION_ID = #{positionId,jdbcType=VARCHAR},
+      POSITION_NAME = #{positionName,jdbcType=VARCHAR},
+      POSITION_CODE = #{positionCode,jdbcType=VARCHAR},
+      JOB_NAME = #{jobName,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

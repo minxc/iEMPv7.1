@@ -1,9 +1,9 @@
 package org.minxc.emp.security.login;
 
-import org.minxc.emp.base.core.encrypt.EncryptUtil;
-import org.minxc.emp.base.core.util.AppUtil;
-import org.minxc.emp.base.rest.util.RequestUtil;
+import com.minxc.emp.core.util.AppContextUtil;
+import com.minxc.emp.core.util.CryptoUtil;
 import org.apache.commons.codec.binary.Base64;
+import org.minxc.emp.common.rest.util.RequestUtil;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -12,6 +12,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.codec.Hex;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices;
+import sun.awt.AppContext;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -39,7 +40,8 @@ public class SecurityUtil {
         String rememberMe = RequestUtil.getString(request, "rememberMe", "0");
         if (!"1".equals(rememberMe)) return;
 
-        String enPassword = EncryptUtil.encryptSha256(password);
+//        String enPassword = CryptoUtil.encryptSha256(password);
+        String enPassword = CryptoUtil.encodeSHA(password);
 
         long tokenValiditySeconds = 1209600; // 14 days
         long tokenExpiryTime = System.currentTimeMillis() + (tokenValiditySeconds * 1000);
@@ -62,7 +64,7 @@ public class SecurityUtil {
      * @return
      */
     public static Authentication login(HttpServletRequest request, String userName, String pwd, boolean isIgnorePwd) {
-        AuthenticationManager authenticationManager = (AuthenticationManager) AppUtil.getBean("authenticationManager");
+        AuthenticationManager authenticationManager = (AuthenticationManager) AppContextUtil.getBean("authenticationManager");
         CustomPwdEncoder.setIngore(isIgnorePwd);
         UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(userName, pwd);
         authRequest.setDetails(new WebAuthenticationDetails(request));

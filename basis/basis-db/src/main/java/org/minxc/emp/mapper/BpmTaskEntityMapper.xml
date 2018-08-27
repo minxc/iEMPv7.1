@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.minxc.emp.dao.BpmTaskEntityMapper">
+  <resultMap id="BaseResultMap" type="org.minxc.emp.model.BpmTaskEntity">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="SUBJECT" jdbcType="VARCHAR" property="subject" />
+    <result column="INST_ID" jdbcType="VARCHAR" property="instId" />
+    <result column="TASK_ID" jdbcType="VARCHAR" property="taskId" />
+    <result column="ACT_INST_ID" jdbcType="VARCHAR" property="actInstId" />
+    <result column="ACT_EXECUTION_ID" jdbcType="VARCHAR" property="actExecutionId" />
+    <result column="NODE_ID" jdbcType="VARCHAR" property="nodeId" />
+    <result column="DEF_ID" jdbcType="VARCHAR" property="defId" />
+    <result column="ASSIGNEE_ID" jdbcType="VARCHAR" property="assigneeId" />
+    <result column="ASSIGNEE_NAMES" jdbcType="VARCHAR" property="assigneeNames" />
+    <result column="STATUS" jdbcType="VARCHAR" property="status" />
+    <result column="PRIORITY" jdbcType="DECIMAL" property="priority" />
+    <result column="DUE_TIME" jdbcType="TIMESTAMP" property="dueTime" />
+    <result column="TASK_TYPE" jdbcType="VARCHAR" property="taskType" />
+    <result column="PARENT_ID" jdbcType="VARCHAR" property="parentId" />
+    <result column="TYPE_ID" jdbcType="VARCHAR" property="typeId" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="CREATE_BY" jdbcType="VARCHAR" property="createBy" />
+    <result column="SUPPORT_MOBILE" jdbcType="DECIMAL" property="supportMobile" />
+    <result column="BACK_NODE" jdbcType="VARCHAR" property="backNode" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, NAME, SUBJECT, INST_ID, TASK_ID, ACT_INST_ID, ACT_EXECUTION_ID, NODE_ID, DEF_ID, 
+    ASSIGNEE_ID, ASSIGNEE_NAMES, STATUS, PRIORITY, DUE_TIME, TASK_TYPE, PARENT_ID, TYPE_ID, 
+    CREATE_TIME, CREATE_BY, SUPPORT_MOBILE, BACK_NODE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from YMMG_BPM_TASK
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from YMMG_BPM_TASK
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="org.minxc.emp.model.BpmTaskEntity">
+    insert into YMMG_BPM_TASK (ID, NAME, SUBJECT, 
+      INST_ID, TASK_ID, ACT_INST_ID, 
+      ACT_EXECUTION_ID, NODE_ID, DEF_ID, 
+      ASSIGNEE_ID, ASSIGNEE_NAMES, STATUS, 
+      PRIORITY, DUE_TIME, TASK_TYPE, 
+      PARENT_ID, TYPE_ID, CREATE_TIME, 
+      CREATE_BY, SUPPORT_MOBILE, BACK_NODE
+      )
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{subject,jdbcType=VARCHAR}, 
+      #{instId,jdbcType=VARCHAR}, #{taskId,jdbcType=VARCHAR}, #{actInstId,jdbcType=VARCHAR}, 
+      #{actExecutionId,jdbcType=VARCHAR}, #{nodeId,jdbcType=VARCHAR}, #{defId,jdbcType=VARCHAR}, 
+      #{assigneeId,jdbcType=VARCHAR}, #{assigneeNames,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{priority,jdbcType=DECIMAL}, #{dueTime,jdbcType=TIMESTAMP}, #{taskType,jdbcType=VARCHAR}, 
+      #{parentId,jdbcType=VARCHAR}, #{typeId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{createBy,jdbcType=VARCHAR}, #{supportMobile,jdbcType=DECIMAL}, #{backNode,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.minxc.emp.model.BpmTaskEntity">
+    insert into YMMG_BPM_TASK
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="name != null">
+        NAME,
+      </if>
+      <if test="subject != null">
+        SUBJECT,
+      </if>
+      <if test="instId != null">
+        INST_ID,
+      </if>
+      <if test="taskId != null">
+        TASK_ID,
+      </if>
+      <if test="actInstId != null">
+        ACT_INST_ID,
+      </if>
+      <if test="actExecutionId != null">
+        ACT_EXECUTION_ID,
+      </if>
+      <if test="nodeId != null">
+        NODE_ID,
+      </if>
+      <if test="defId != null">
+        DEF_ID,
+      </if>
+      <if test="assigneeId != null">
+        ASSIGNEE_ID,
+      </if>
+      <if test="assigneeNames != null">
+        ASSIGNEE_NAMES,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="priority != null">
+        PRIORITY,
+      </if>
+      <if test="dueTime != null">
+        DUE_TIME,
+      </if>
+      <if test="taskType != null">
+        TASK_TYPE,
+      </if>
+      <if test="parentId != null">
+        PARENT_ID,
+      </if>
+      <if test="typeId != null">
+        TYPE_ID,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="createBy != null">
+        CREATE_BY,
+      </if>
+      <if test="supportMobile != null">
+        SUPPORT_MOBILE,
+      </if>
+      <if test="backNode != null">
+        BACK_NODE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="subject != null">
+        #{subject,jdbcType=VARCHAR},
+      </if>
+      <if test="instId != null">
+        #{instId,jdbcType=VARCHAR},
+      </if>
+      <if test="taskId != null">
+        #{taskId,jdbcType=VARCHAR},
+      </if>
+      <if test="actInstId != null">
+        #{actInstId,jdbcType=VARCHAR},
+      </if>
+      <if test="actExecutionId != null">
+        #{actExecutionId,jdbcType=VARCHAR},
+      </if>
+      <if test="nodeId != null">
+        #{nodeId,jdbcType=VARCHAR},
+      </if>
+      <if test="defId != null">
+        #{defId,jdbcType=VARCHAR},
+      </if>
+      <if test="assigneeId != null">
+        #{assigneeId,jdbcType=VARCHAR},
+      </if>
+      <if test="assigneeNames != null">
+        #{assigneeNames,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="priority != null">
+        #{priority,jdbcType=DECIMAL},
+      </if>
+      <if test="dueTime != null">
+        #{dueTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="taskType != null">
+        #{taskType,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="typeId != null">
+        #{typeId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="supportMobile != null">
+        #{supportMobile,jdbcType=DECIMAL},
+      </if>
+      <if test="backNode != null">
+        #{backNode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.minxc.emp.model.BpmTaskEntity">
+    update YMMG_BPM_TASK
+    <set>
+      <if test="name != null">
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="subject != null">
+        SUBJECT = #{subject,jdbcType=VARCHAR},
+      </if>
+      <if test="instId != null">
+        INST_ID = #{instId,jdbcType=VARCHAR},
+      </if>
+      <if test="taskId != null">
+        TASK_ID = #{taskId,jdbcType=VARCHAR},
+      </if>
+      <if test="actInstId != null">
+        ACT_INST_ID = #{actInstId,jdbcType=VARCHAR},
+      </if>
+      <if test="actExecutionId != null">
+        ACT_EXECUTION_ID = #{actExecutionId,jdbcType=VARCHAR},
+      </if>
+      <if test="nodeId != null">
+        NODE_ID = #{nodeId,jdbcType=VARCHAR},
+      </if>
+      <if test="defId != null">
+        DEF_ID = #{defId,jdbcType=VARCHAR},
+      </if>
+      <if test="assigneeId != null">
+        ASSIGNEE_ID = #{assigneeId,jdbcType=VARCHAR},
+      </if>
+      <if test="assigneeNames != null">
+        ASSIGNEE_NAMES = #{assigneeNames,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="priority != null">
+        PRIORITY = #{priority,jdbcType=DECIMAL},
+      </if>
+      <if test="dueTime != null">
+        DUE_TIME = #{dueTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="taskType != null">
+        TASK_TYPE = #{taskType,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        PARENT_ID = #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="typeId != null">
+        TYPE_ID = #{typeId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        CREATE_BY = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="supportMobile != null">
+        SUPPORT_MOBILE = #{supportMobile,jdbcType=DECIMAL},
+      </if>
+      <if test="backNode != null">
+        BACK_NODE = #{backNode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.minxc.emp.model.BpmTaskEntity">
+    update YMMG_BPM_TASK
+    set NAME = #{name,jdbcType=VARCHAR},
+      SUBJECT = #{subject,jdbcType=VARCHAR},
+      INST_ID = #{instId,jdbcType=VARCHAR},
+      TASK_ID = #{taskId,jdbcType=VARCHAR},
+      ACT_INST_ID = #{actInstId,jdbcType=VARCHAR},
+      ACT_EXECUTION_ID = #{actExecutionId,jdbcType=VARCHAR},
+      NODE_ID = #{nodeId,jdbcType=VARCHAR},
+      DEF_ID = #{defId,jdbcType=VARCHAR},
+      ASSIGNEE_ID = #{assigneeId,jdbcType=VARCHAR},
+      ASSIGNEE_NAMES = #{assigneeNames,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR},
+      PRIORITY = #{priority,jdbcType=DECIMAL},
+      DUE_TIME = #{dueTime,jdbcType=TIMESTAMP},
+      TASK_TYPE = #{taskType,jdbcType=VARCHAR},
+      PARENT_ID = #{parentId,jdbcType=VARCHAR},
+      TYPE_ID = #{typeId,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      CREATE_BY = #{createBy,jdbcType=VARCHAR},
+      SUPPORT_MOBILE = #{supportMobile,jdbcType=DECIMAL},
+      BACK_NODE = #{backNode,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

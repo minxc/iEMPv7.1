@@ -1,6 +1,7 @@
 package org.minxc.emp.security.constant;
 
-import org.minxc.emp.base.api.constant.StatusCode;
+
+import org.minxc.emp.core.api.status.StatusCode;
 
 public enum PlatFormStatusCode implements StatusCode {
 
@@ -12,37 +13,42 @@ public enum PlatFormStatusCode implements StatusCode {
     PARAM_ILLEGAL("100", "参数校验不通过");
 
     private String code;
-    private String desc;
-    private String system;
+    private String description;
+    private String application;
 
     PlatFormStatusCode(String code, String description) {
         this.setCode(code);
-        this.setDesc(description);
-        this.setSystem("PLATFORM");
+        this.setDescription(description);
+        this.setApplication("PLATFORM");
     }
 
     public String getCode() {
         return code;
     }
 
+    @Override
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description){
+        this.description = description;
+    }
     public void setCode(String code) {
         this.code = code;
     }
 
-    public String getDesc() {
-        return desc;
+
+    public String getApplication() {
+        return application;
     }
 
-    public void setDesc(String msg) {
-        this.desc = msg;
+    @Override
+    public String getTenant() {
+        return null;
     }
-
-    public String getSystem() {
-        return system;
-    }
-
-    public void setSystem(String system) {
-        this.system = system;
+    public void setApplication(String application) {
+        this.application = application;
     }
 
 }

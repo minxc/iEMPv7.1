@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.minxc.emp.dao.ScriptEntityMapper">
+  <resultMap id="BaseResultMap" type="org.minxc.emp.model.ScriptEntity">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="CATEGORY" jdbcType="VARCHAR" property="category" />
+    <result column="NOTES" jdbcType="VARCHAR" property="notes" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="org.minxc.emp.model.ScriptEntity">
+    <result column="SCRIPT" jdbcType="CLOB" property="script" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, NAME, CATEGORY, NOTES
+  </sql>
+  <sql id="Blob_Column_List">
+    SCRIPT
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from YMMG_SCRIPT
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from YMMG_SCRIPT
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="org.minxc.emp.model.ScriptEntity">
+    insert into YMMG_SCRIPT (ID, NAME, CATEGORY, 
+      NOTES, SCRIPT)
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{category,jdbcType=VARCHAR}, 
+      #{notes,jdbcType=VARCHAR}, #{script,jdbcType=CLOB})
+  </insert>
+  <insert id="insertSelective" parameterType="org.minxc.emp.model.ScriptEntity">
+    insert into YMMG_SCRIPT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="name != null">
+        NAME,
+      </if>
+      <if test="category != null">
+        CATEGORY,
+      </if>
+      <if test="notes != null">
+        NOTES,
+      </if>
+      <if test="script != null">
+        SCRIPT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="category != null">
+        #{category,jdbcType=VARCHAR},
+      </if>
+      <if test="notes != null">
+        #{notes,jdbcType=VARCHAR},
+      </if>
+      <if test="script != null">
+        #{script,jdbcType=CLOB},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.minxc.emp.model.ScriptEntity">
+    update YMMG_SCRIPT
+    <set>
+      <if test="name != null">
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="category != null">
+        CATEGORY = #{category,jdbcType=VARCHAR},
+      </if>
+      <if test="notes != null">
+        NOTES = #{notes,jdbcType=VARCHAR},
+      </if>
+      <if test="script != null">
+        SCRIPT = #{script,jdbcType=CLOB},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="org.minxc.emp.model.ScriptEntity">
+    update YMMG_SCRIPT
+    set NAME = #{name,jdbcType=VARCHAR},
+      CATEGORY = #{category,jdbcType=VARCHAR},
+      NOTES = #{notes,jdbcType=VARCHAR},
+      SCRIPT = #{script,jdbcType=CLOB}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.minxc.emp.model.ScriptEntity">
+    update YMMG_SCRIPT
+    set NAME = #{name,jdbcType=VARCHAR},
+      CATEGORY = #{category,jdbcType=VARCHAR},
+      NOTES = #{notes,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

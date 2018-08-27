@@ -23,5 +23,4 @@ public interface RequestResult {
 
     public String getCause();
 
-    public Object getData();
 }

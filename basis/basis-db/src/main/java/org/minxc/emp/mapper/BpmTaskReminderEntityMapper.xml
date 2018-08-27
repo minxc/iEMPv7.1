@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.minxc.emp.dao.BpmTaskReminderEntityMapper">
+  <resultMap id="BaseResultMap" type="org.minxc.emp.model.BpmTaskReminderEntity">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="TASK_ID" jdbcType="VARCHAR" property="taskId" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="REL_DATE" jdbcType="VARCHAR" property="relDate" />
+    <result column="DUE_ACTION" jdbcType="VARCHAR" property="dueAction" />
+    <result column="DUE_SCRIPT" jdbcType="VARCHAR" property="dueScript" />
+    <result column="DUE_DATE" jdbcType="TIMESTAMP" property="dueDate" />
+    <result column="IS_SEND_MSG" jdbcType="DECIMAL" property="isSendMsg" />
+    <result column="MSG_SEND_DATE" jdbcType="TIMESTAMP" property="msgSendDate" />
+    <result column="MSG_INTERVAL" jdbcType="DECIMAL" property="msgInterval" />
+    <result column="MSG_COUNT" jdbcType="DECIMAL" property="msgCount" />
+    <result column="MSG_TYPE" jdbcType="VARCHAR" property="msgType" />
+    <result column="HTML_MSG" jdbcType="VARCHAR" property="htmlMsg" />
+    <result column="PLAIN_MSG" jdbcType="VARCHAR" property="plainMsg" />
+    <result column="WARNINGSET" jdbcType="VARCHAR" property="warningset" />
+    <result column="TRIGGER_DATE" jdbcType="TIMESTAMP" property="triggerDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, TASK_ID, NAME, REL_DATE, DUE_ACTION, DUE_SCRIPT, DUE_DATE, IS_SEND_MSG, MSG_SEND_DATE, 
+    MSG_INTERVAL, MSG_COUNT, MSG_TYPE, HTML_MSG, PLAIN_MSG, WARNINGSET, TRIGGER_DATE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from YMMG_BPM_TASK_REMINDER
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from YMMG_BPM_TASK_REMINDER
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="org.minxc.emp.model.BpmTaskReminderEntity">
+    insert into YMMG_BPM_TASK_REMINDER (ID, TASK_ID, NAME, 
+      REL_DATE, DUE_ACTION, DUE_SCRIPT, 
+      DUE_DATE, IS_SEND_MSG, MSG_SEND_DATE, 
+      MSG_INTERVAL, MSG_COUNT, MSG_TYPE, 
+      HTML_MSG, PLAIN_MSG, WARNINGSET, 
+      TRIGGER_DATE)
+    values (#{id,jdbcType=VARCHAR}, #{taskId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{relDate,jdbcType=VARCHAR}, #{dueAction,jdbcType=VARCHAR}, #{dueScript,jdbcType=VARCHAR}, 
+      #{dueDate,jdbcType=TIMESTAMP}, #{isSendMsg,jdbcType=DECIMAL}, #{msgSendDate,jdbcType=TIMESTAMP}, 
+      #{msgInterval,jdbcType=DECIMAL}, #{msgCount,jdbcType=DECIMAL}, #{msgType,jdbcType=VARCHAR}, 
+      #{htmlMsg,jdbcType=VARCHAR}, #{plainMsg,jdbcType=VARCHAR}, #{warningset,jdbcType=VARCHAR}, 
+      #{triggerDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="org.minxc.emp.model.BpmTaskReminderEntity">
+    insert into YMMG_BPM_TASK_REMINDER
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="taskId != null">
+        TASK_ID,
+      </if>
+      <if test="name != null">
+        NAME,
+      </if>
+      <if test="relDate != null">
+        REL_DATE,
+      </if>
+      <if test="dueAction != null">
+        DUE_ACTION,
+      </if>
+      <if test="dueScript != null">
+        DUE_SCRIPT,
+      </if>
+      <if test="dueDate != null">
+        DUE_DATE,
+      </if>
+      <if test="isSendMsg != null">
+        IS_SEND_MSG,
+      </if>
+      <if test="msgSendDate != null">
+        MSG_SEND_DATE,
+      </if>
+      <if test="msgInterval != null">
+        MSG_INTERVAL,
+      </if>
+      <if test="msgCount != null">
+        MSG_COUNT,
+      </if>
+      <if test="msgType != null">
+        MSG_TYPE,
+      </if>
+      <if test="htmlMsg != null">
+        HTML_MSG,
+      </if>
+      <if test="plainMsg != null">
+        PLAIN_MSG,
+      </if>
+      <if test="warningset != null">
+        WARNINGSET,
+      </if>
+      <if test="triggerDate != null">
+        TRIGGER_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="taskId != null">
+        #{taskId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="relDate != null">
+        #{relDate,jdbcType=VARCHAR},
+      </if>
+      <if test="dueAction != null">
+        #{dueAction,jdbcType=VARCHAR},
+      </if>
+      <if test="dueScript != null">
+        #{dueScript,jdbcType=VARCHAR},
+      </if>
+      <if test="dueDate != null">
+        #{dueDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isSendMsg != null">
+        #{isSendMsg,jdbcType=DECIMAL},
+      </if>
+      <if test="msgSendDate != null">
+        #{msgSendDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="msgInterval != null">
+        #{msgInterval,jdbcType=DECIMAL},
+      </if>
+      <if test="msgCount != null">
+        #{msgCount,jdbcType=DECIMAL},
+      </if>
+      <if test="msgType != null">
+        #{msgType,jdbcType=VARCHAR},
+      </if>
+      <if test="htmlMsg != null">
+        #{htmlMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="plainMsg != null">
+        #{plainMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="warningset != null">
+        #{warningset,jdbcType=VARCHAR},
+      </if>
+      <if test="triggerDate != null">
+        #{triggerDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.minxc.emp.model.BpmTaskReminderEntity">
+    update YMMG_BPM_TASK_REMINDER
+    <set>
+      <if test="taskId != null">
+        TASK_ID = #{taskId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="relDate != null">
+        REL_DATE = #{relDate,jdbcType=VARCHAR},
+      </if>
+      <if test="dueAction != null">
+        DUE_ACTION = #{dueAction,jdbcType=VARCHAR},
+      </if>
+      <if test="dueScript != null">
+        DUE_SCRIPT = #{dueScript,jdbcType=VARCHAR},
+      </if>
+      <if test="dueDate != null">
+        DUE_DATE = #{dueDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isSendMsg != null">
+        IS_SEND_MSG = #{isSendMsg,jdbcType=DECIMAL},
+      </if>
+      <if test="msgSendDate != null">
+        MSG_SEND_DATE = #{msgSendDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="msgInterval != null">
+        MSG_INTERVAL = #{msgInterval,jdbcType=DECIMAL},
+      </if>
+      <if test="msgCount != null">
+        MSG_COUNT = #{msgCount,jdbcType=DECIMAL},
+      </if>
+      <if test="msgType != null">
+        MSG_TYPE = #{msgType,jdbcType=VARCHAR},
+      </if>
+      <if test="htmlMsg != null">
+        HTML_MSG = #{htmlMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="plainMsg != null">
+        PLAIN_MSG = #{plainMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="warningset != null">
+        WARNINGSET = #{warningset,jdbcType=VARCHAR},
+      </if>
+      <if test="triggerDate != null">
+        TRIGGER_DATE = #{triggerDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.minxc.emp.model.BpmTaskReminderEntity">
+    update YMMG_BPM_TASK_REMINDER
+    set TASK_ID = #{taskId,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR},
+      REL_DATE = #{relDate,jdbcType=VARCHAR},
+      DUE_ACTION = #{dueAction,jdbcType=VARCHAR},
+      DUE_SCRIPT = #{dueScript,jdbcType=VARCHAR},
+      DUE_DATE = #{dueDate,jdbcType=TIMESTAMP},
+      IS_SEND_MSG = #{isSendMsg,jdbcType=DECIMAL},
+      MSG_SEND_DATE = #{msgSendDate,jdbcType=TIMESTAMP},
+      MSG_INTERVAL = #{msgInterval,jdbcType=DECIMAL},
+      MSG_COUNT = #{msgCount,jdbcType=DECIMAL},
+      MSG_TYPE = #{msgType,jdbcType=VARCHAR},
+      HTML_MSG = #{htmlMsg,jdbcType=VARCHAR},
+      PLAIN_MSG = #{plainMsg,jdbcType=VARCHAR},
+      WARNINGSET = #{warningset,jdbcType=VARCHAR},
+      TRIGGER_DATE = #{triggerDate,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

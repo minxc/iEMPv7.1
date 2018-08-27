@@ -20,6 +20,7 @@ package com.minxc.emp.core.util;
 import com.google.common.collect.Lists;
 import org.minxc.emp.core.api.exception.BusinessException;
 
+import org.minxc.emp.core.api.status.CommonStatusCode;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -185,17 +186,17 @@ public class AppContextUtil implements ApplicationContextAware {
         Environment environment = _context.getEnvironment();
         String[] activeProfiles = environment.getActiveProfiles();
 
-        if (!ArrayUtil.isEmpty(activeProfiles)) {
+        if (BeanUtils.isNotEmpty(activeProfiles)) {
             currentProfiles = activeProfiles[0];
             return currentProfiles;
         }
 
         String[] defaultProfiles = environment.getDefaultProfiles();
-        if (!ArrayUtil.isEmpty(defaultProfiles)) {
+        if (BeanUtils.isNotEmpty(defaultProfiles)) {
             currentProfiles = defaultProfiles[0];
             return defaultProfiles[0];
         }
 
-        throw new BusinessException("查找不到正确的环境属性配置！", BaseStatusCode.SYSTEM_ERROR);
+        throw new BusinessException("查找不到正确的环境属性配置！", CommonStatusCode.SYSTEM_ERROR);
     }
 }

@@ -18,6 +18,7 @@
         <module>bpm</module>
         <module>system</module>
         <module>basis</module>
+        <module>idm</module>
     </modules>
 
 
@@ -35,7 +36,7 @@
         <commons-lang3-version>3.8</commons-lang3-version>
         <commons-math3> 3.6.1</commons-math3>
         <commons-codec>1.11</commons-codec>
-
+        <commons-beanutils>1.9.3</commons-beanutils>
 
         <lombok-version>1.18.2</lombok-version>
         <guava-version>26.0-jre</guava-version>
@@ -147,6 +148,12 @@
             </dependency>
 
             <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-web</artifactId>
+                <version>${spring-version}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
                 <version>${commons-lang3-version}</version>
@@ -231,6 +238,12 @@
                 <version>${commons-math3}</version>
             </dependency>
 
+            <dependency>
+                <groupId>commons-beanutils</groupId>
+                <artifactId>commons-beanutils</artifactId>
+                <version>${commons-beanutils}</version>
+            </dependency>
+
 
             <!-- https://mvnrepository.com/artifact/org.thymeleaf/thymeleaf -->
             <dependency>
@@ -291,6 +304,13 @@
                 <artifactId>jackson-annotations</artifactId>
                 <version>${jackson}</version>
             </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-jdbc</artifactId>
+                <version>${spring-version}</version>
+            </dependency>
+
 
         </dependencies>
     </dependencyManagement>

@@ -11,6 +11,10 @@
 
     <groupId>org.minxc.emp</groupId>
     <artifactId>basis</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>basis-db</module>
+    </modules>
 
 
 </project>

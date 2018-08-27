@@ -40,7 +40,7 @@ public class Pinyin4jUtil {
      * 将字符串转换成拼音数组
      * 
      * @param src
-     * @return
+     * @returnExceptionUtil
      */
     public static String[] stringToPinyin(String src, String separator) {
         return stringToPinyin(src, true, separator);
@@ -138,7 +138,7 @@ public class Pinyin4jUtil {
 
         String pinyingStr = "";
         try {
-            pinyingStr = PinyinHelper.toHanyuPinyinString(hanzi, defaultFormat, separator);
+            pinyingStr = PinyinHelper.toHanYuPinyinString(hanzi, defaultFormat, separator,false);
         } catch (BadHanyuPinyinOutputFormatCombination e) {
             e.printStackTrace();
         }
@@ -177,7 +177,6 @@ public class Pinyin4jUtil {
     /**
      * 将字符数组转换成字符串
      * 
-     * @param str
      * @param separator
      *            各个字符串之间的分隔符
      * @return
@@ -196,7 +195,6 @@ public class Pinyin4jUtil {
     /**
      * 将字符数组转换成字符串
      * 
-     * @param str
      * @return
      */
     public static String charArrayToString(char[] ch) {

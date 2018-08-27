@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.minxc.emp.dao.FormTemplateEntityMapper">
+  <resultMap id="BaseResultMap" type="org.minxc.emp.model.FormTemplateEntity">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="FORM_TYPE" jdbcType="VARCHAR" property="formType" />
+    <result column="TYPE" jdbcType="VARCHAR" property="type" />
+    <result column="DESCRIPTION" jdbcType="VARCHAR" property="description" />
+    <result column="EDITABLE" jdbcType="DECIMAL" property="editable" />
+    <result column="KEY" jdbcType="VARCHAR" property="key" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="org.minxc.emp.model.FormTemplateEntity">
+    <result column="HTML" jdbcType="CLOB" property="html" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, NAME, FORM_TYPE, TYPE, DESCRIPTION, EDITABLE, KEY
+  </sql>
+  <sql id="Blob_Column_List">
+    HTML
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from YMMG_FORM_TEMPLATE
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from YMMG_FORM_TEMPLATE
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="org.minxc.emp.model.FormTemplateEntity">
+    insert into YMMG_FORM_TEMPLATE (ID, NAME, FORM_TYPE, 
+      TYPE, DESCRIPTION, EDITABLE, 
+      KEY, HTML)
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{formType,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{editable,jdbcType=DECIMAL}, 
+      #{key,jdbcType=VARCHAR}, #{html,jdbcType=CLOB})
+  </insert>
+  <insert id="insertSelective" parameterType="org.minxc.emp.model.FormTemplateEntity">
+    insert into YMMG_FORM_TEMPLATE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="name != null">
+        NAME,
+      </if>
+      <if test="formType != null">
+        FORM_TYPE,
+      </if>
+      <if test="type != null">
+        TYPE,
+      </if>
+      <if test="description != null">
+        DESCRIPTION,
+      </if>
+      <if test="editable != null">
+        EDITABLE,
+      </if>
+      <if test="key != null">
+        KEY,
+      </if>
+      <if test="html != null">
+        HTML,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="formType != null">
+        #{formType,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="editable != null">
+        #{editable,jdbcType=DECIMAL},
+      </if>
+      <if test="key != null">
+        #{key,jdbcType=VARCHAR},
+      </if>
+      <if test="html != null">
+        #{html,jdbcType=CLOB},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.minxc.emp.model.FormTemplateEntity">
+    update YMMG_FORM_TEMPLATE
+    <set>
+      <if test="name != null">
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="formType != null">
+        FORM_TYPE = #{formType,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        TYPE = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        DESCRIPTION = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="editable != null">
+        EDITABLE = #{editable,jdbcType=DECIMAL},
+      </if>
+      <if test="key != null">
+        KEY = #{key,jdbcType=VARCHAR},
+      </if>
+      <if test="html != null">
+        HTML = #{html,jdbcType=CLOB},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="org.minxc.emp.model.FormTemplateEntity">
+    update YMMG_FORM_TEMPLATE
+    set NAME = #{name,jdbcType=VARCHAR},
+      FORM_TYPE = #{formType,jdbcType=VARCHAR},
+      TYPE = #{type,jdbcType=VARCHAR},
+      DESCRIPTION = #{description,jdbcType=VARCHAR},
+      EDITABLE = #{editable,jdbcType=DECIMAL},
+      KEY = #{key,jdbcType=VARCHAR},
+      HTML = #{html,jdbcType=CLOB}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.minxc.emp.model.FormTemplateEntity">
+    update YMMG_FORM_TEMPLATE
+    set NAME = #{name,jdbcType=VARCHAR},
+      FORM_TYPE = #{formType,jdbcType=VARCHAR},
+      TYPE = #{type,jdbcType=VARCHAR},
+      DESCRIPTION = #{description,jdbcType=VARCHAR},
+      EDITABLE = #{editable,jdbcType=DECIMAL},
+      KEY = #{key,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

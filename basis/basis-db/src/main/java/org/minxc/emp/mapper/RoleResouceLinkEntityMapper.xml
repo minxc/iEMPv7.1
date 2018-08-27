@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.minxc.emp.dao.RoleResouceLinkEntityMapper">
+  <resultMap id="BaseResultMap" type="org.minxc.emp.model.RoleResouceLinkEntity">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="SYSTEM_ID" jdbcType="VARCHAR" property="systemId" />
+    <result column="RES_ID" jdbcType="VARCHAR" property="resId" />
+    <result column="ROLE_ID" jdbcType="VARCHAR" property="roleId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, SYSTEM_ID, RES_ID, ROLE_ID
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from YMMG_ROLE_RESOURCE_LINK
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from YMMG_ROLE_RESOURCE_LINK
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="org.minxc.emp.model.RoleResouceLinkEntity">
+    insert into YMMG_ROLE_RESOURCE_LINK (ID, SYSTEM_ID, RES_ID, 
+      ROLE_ID)
+    values (#{id,jdbcType=VARCHAR}, #{systemId,jdbcType=VARCHAR}, #{resId,jdbcType=VARCHAR}, 
+      #{roleId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.minxc.emp.model.RoleResouceLinkEntity">
+    insert into YMMG_ROLE_RESOURCE_LINK
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="systemId != null">
+        SYSTEM_ID,
+      </if>
+      <if test="resId != null">
+        RES_ID,
+      </if>
+      <if test="roleId != null">
+        ROLE_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="systemId != null">
+        #{systemId,jdbcType=VARCHAR},
+      </if>
+      <if test="resId != null">
+        #{resId,jdbcType=VARCHAR},
+      </if>
+      <if test="roleId != null">
+        #{roleId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.minxc.emp.model.RoleResouceLinkEntity">
+    update YMMG_ROLE_RESOURCE_LINK
+    <set>
+      <if test="systemId != null">
+        SYSTEM_ID = #{systemId,jdbcType=VARCHAR},
+      </if>
+      <if test="resId != null">
+        RES_ID = #{resId,jdbcType=VARCHAR},
+      </if>
+      <if test="roleId != null">
+        ROLE_ID = #{roleId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.minxc.emp.model.RoleResouceLinkEntity">
+    update YMMG_ROLE_RESOURCE_LINK
+    set SYSTEM_ID = #{systemId,jdbcType=VARCHAR},
+      RES_ID = #{resId,jdbcType=VARCHAR},
+      ROLE_ID = #{roleId,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

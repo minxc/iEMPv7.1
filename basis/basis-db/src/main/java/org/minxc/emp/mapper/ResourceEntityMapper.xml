@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.minxc.emp.dao.ResourceEntityMapper">
+  <resultMap id="BaseResultMap" type="org.minxc.emp.model.ResourceEntity">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="APPLICATION_ID" jdbcType="VARCHAR" property="applicationId" />
+    <result column="ALIAS" jdbcType="VARCHAR" property="alias" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="DEFAULT_URL" jdbcType="VARCHAR" property="defaultUrl" />
+    <result column="ENABLE_MENU" jdbcType="DECIMAL" property="enableMenu" />
+    <result column="HAS_CHILDREN" jdbcType="DECIMAL" property="hasChildren" />
+    <result column="OPENED" jdbcType="DECIMAL" property="opened" />
+    <result column="ICON" jdbcType="VARCHAR" property="icon" />
+    <result column="NEW_WINDOW" jdbcType="DECIMAL" property="newWindow" />
+    <result column="SEQ" jdbcType="DECIMAL" property="seq" />
+    <result column="PARENT_ID" jdbcType="VARCHAR" property="parentId" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, APPLICATION_ID, ALIAS, NAME, DEFAULT_URL, ENABLE_MENU, HAS_CHILDREN, OPENED, 
+    ICON, NEW_WINDOW, SEQ, PARENT_ID, CREATE_TIME
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from YMMG_RESOURCE
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from YMMG_RESOURCE
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="org.minxc.emp.model.ResourceEntity">
+    insert into YMMG_RESOURCE (ID, APPLICATION_ID, ALIAS, 
+      NAME, DEFAULT_URL, ENABLE_MENU, 
+      HAS_CHILDREN, OPENED, ICON, 
+      NEW_WINDOW, SEQ, PARENT_ID, 
+      CREATE_TIME)
+    values (#{id,jdbcType=VARCHAR}, #{applicationId,jdbcType=VARCHAR}, #{alias,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{defaultUrl,jdbcType=VARCHAR}, #{enableMenu,jdbcType=DECIMAL}, 
+      #{hasChildren,jdbcType=DECIMAL}, #{opened,jdbcType=DECIMAL}, #{icon,jdbcType=VARCHAR}, 
+      #{newWindow,jdbcType=DECIMAL}, #{seq,jdbcType=DECIMAL}, #{parentId,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="org.minxc.emp.model.ResourceEntity">
+    insert into YMMG_RESOURCE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="applicationId != null">
+        APPLICATION_ID,
+      </if>
+      <if test="alias != null">
+        ALIAS,
+      </if>
+      <if test="name != null">
+        NAME,
+      </if>
+      <if test="defaultUrl != null">
+        DEFAULT_URL,
+      </if>
+      <if test="enableMenu != null">
+        ENABLE_MENU,
+      </if>
+      <if test="hasChildren != null">
+        HAS_CHILDREN,
+      </if>
+      <if test="opened != null">
+        OPENED,
+      </if>
+      <if test="icon != null">
+        ICON,
+      </if>
+      <if test="newWindow != null">
+        NEW_WINDOW,
+      </if>
+      <if test="seq != null">
+        SEQ,
+      </if>
+      <if test="parentId != null">
+        PARENT_ID,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="applicationId != null">
+        #{applicationId,jdbcType=VARCHAR},
+      </if>
+      <if test="alias != null">
+        #{alias,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultUrl != null">
+        #{defaultUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="enableMenu != null">
+        #{enableMenu,jdbcType=DECIMAL},
+      </if>
+      <if test="hasChildren != null">
+        #{hasChildren,jdbcType=DECIMAL},
+      </if>
+      <if test="opened != null">
+        #{opened,jdbcType=DECIMAL},
+      </if>
+      <if test="icon != null">
+        #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="newWindow != null">
+        #{newWindow,jdbcType=DECIMAL},
+      </if>
+      <if test="seq != null">
+        #{seq,jdbcType=DECIMAL},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.minxc.emp.model.ResourceEntity">
+    update YMMG_RESOURCE
+    <set>
+      <if test="applicationId != null">
+        APPLICATION_ID = #{applicationId,jdbcType=VARCHAR},
+      </if>
+      <if test="alias != null">
+        ALIAS = #{alias,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultUrl != null">
+        DEFAULT_URL = #{defaultUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="enableMenu != null">
+        ENABLE_MENU = #{enableMenu,jdbcType=DECIMAL},
+      </if>
+      <if test="hasChildren != null">
+        HAS_CHILDREN = #{hasChildren,jdbcType=DECIMAL},
+      </if>
+      <if test="opened != null">
+        OPENED = #{opened,jdbcType=DECIMAL},
+      </if>
+      <if test="icon != null">
+        ICON = #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="newWindow != null">
+        NEW_WINDOW = #{newWindow,jdbcType=DECIMAL},
+      </if>
+      <if test="seq != null">
+        SEQ = #{seq,jdbcType=DECIMAL},
+      </if>
+      <if test="parentId != null">
+        PARENT_ID = #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.minxc.emp.model.ResourceEntity">
+    update YMMG_RESOURCE
+    set APPLICATION_ID = #{applicationId,jdbcType=VARCHAR},
+      ALIAS = #{alias,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR},
+      DEFAULT_URL = #{defaultUrl,jdbcType=VARCHAR},
+      ENABLE_MENU = #{enableMenu,jdbcType=DECIMAL},
+      HAS_CHILDREN = #{hasChildren,jdbcType=DECIMAL},
+      OPENED = #{opened,jdbcType=DECIMAL},
+      ICON = #{icon,jdbcType=VARCHAR},
+      NEW_WINDOW = #{newWindow,jdbcType=DECIMAL},
+      SEQ = #{seq,jdbcType=DECIMAL},
+      PARENT_ID = #{parentId,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

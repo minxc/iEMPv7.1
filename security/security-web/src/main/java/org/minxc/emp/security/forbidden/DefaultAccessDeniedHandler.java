@@ -1,8 +1,8 @@
 package org.minxc.emp.security.forbidden;
 
-import com.alibaba.fastjson.JSONObject;
-import org.minxc.emp.base.api.constant.BaseStatusCode;
-import org.minxc.emp.base.api.response.impl.ResultMsg;
+import com.minxc.emp.core.util.JacksonUtil;
+import org.minxc.emp.core.api.response.impl.ResultMessage;
+import org.minxc.emp.core.api.status.CommonStatusCode;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
 
@@ -22,8 +22,8 @@ public class DefaultAccessDeniedHandler implements AccessDeniedHandler {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         response.setCharacterEncoding("UTF-8");
 
-        ResultMsg resultMsg = new ResultMsg(BaseStatusCode.NO_ACCESS, ex.getMessage());
-        response.getWriter().print(JSONObject.toJSONString(resultMsg));
+        ResultMessage resultMsg = new ResultMessage(CommonStatusCode.NO_ACCESS, ex.getMessage());
+        response.getWriter().print(JacksonUtil.pojo2Json(resultMsg));
         return;
     }
 

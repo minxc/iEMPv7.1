@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.minxc.emp.dao.FormDefEntityMapper">
+  <resultMap id="BaseResultMap" type="org.minxc.emp.model.FormDefEntity">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="TYPE" jdbcType="VARCHAR" property="type" />
+    <result column="KEY" jdbcType="VARCHAR" property="key" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="DESCRIPTION" jdbcType="VARCHAR" property="description" />
+    <result column="GROUP_ID" jdbcType="VARCHAR" property="groupId" />
+    <result column="GROUP_NAME" jdbcType="VARCHAR" property="groupName" />
+    <result column="BO_KEY" jdbcType="VARCHAR" property="boKey" />
+    <result column="BO_NAME" jdbcType="VARCHAR" property="boName" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="CREATE_BY" jdbcType="VARCHAR" property="createBy" />
+    <result column="CREATOR" jdbcType="VARCHAR" property="creator" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="UPDATE_BY" jdbcType="VARCHAR" property="updateBy" />
+    <result column="UPDATOR" jdbcType="VARCHAR" property="updator" />
+    <result column="VERSION" jdbcType="DECIMAL" property="version" />
+    <result column="IS_DELETE" jdbcType="DECIMAL" property="isDelete" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="org.minxc.emp.model.FormDefEntity">
+    <result column="HTML" jdbcType="CLOB" property="html" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, TYPE, KEY, NAME, DESCRIPTION, GROUP_ID, GROUP_NAME, BO_KEY, BO_NAME, CREATE_TIME, 
+    CREATE_BY, CREATOR, UPDATE_TIME, UPDATE_BY, UPDATOR, VERSION, IS_DELETE
+  </sql>
+  <sql id="Blob_Column_List">
+    HTML
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from YMMG_FORM_DEF
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from YMMG_FORM_DEF
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="org.minxc.emp.model.FormDefEntity">
+    insert into YMMG_FORM_DEF (ID, TYPE, KEY, 
+      NAME, DESCRIPTION, GROUP_ID, 
+      GROUP_NAME, BO_KEY, BO_NAME, 
+      CREATE_TIME, CREATE_BY, CREATOR, 
+      UPDATE_TIME, UPDATE_BY, UPDATOR, 
+      VERSION, IS_DELETE, HTML
+      )
+    values (#{id,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{key,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{groupId,jdbcType=VARCHAR}, 
+      #{groupName,jdbcType=VARCHAR}, #{boKey,jdbcType=VARCHAR}, #{boName,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, #{updator,jdbcType=VARCHAR}, 
+      #{version,jdbcType=DECIMAL}, #{isDelete,jdbcType=DECIMAL}, #{html,jdbcType=CLOB}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.minxc.emp.model.FormDefEntity">
+    insert into YMMG_FORM_DEF
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="type != null">
+        TYPE,
+      </if>
+      <if test="key != null">
+        KEY,
+      </if>
+      <if test="name != null">
+        NAME,
+      </if>
+      <if test="description != null">
+        DESCRIPTION,
+      </if>
+      <if test="groupId != null">
+        GROUP_ID,
+      </if>
+      <if test="groupName != null">
+        GROUP_NAME,
+      </if>
+      <if test="boKey != null">
+        BO_KEY,
+      </if>
+      <if test="boName != null">
+        BO_NAME,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="createBy != null">
+        CREATE_BY,
+      </if>
+      <if test="creator != null">
+        CREATOR,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+      <if test="updateBy != null">
+        UPDATE_BY,
+      </if>
+      <if test="updator != null">
+        UPDATOR,
+      </if>
+      <if test="version != null">
+        VERSION,
+      </if>
+      <if test="isDelete != null">
+        IS_DELETE,
+      </if>
+      <if test="html != null">
+        HTML,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="key != null">
+        #{key,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="groupId != null">
+        #{groupId,jdbcType=VARCHAR},
+      </if>
+      <if test="groupName != null">
+        #{groupName,jdbcType=VARCHAR},
+      </if>
+      <if test="boKey != null">
+        #{boKey,jdbcType=VARCHAR},
+      </if>
+      <if test="boName != null">
+        #{boName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updator != null">
+        #{updator,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=DECIMAL},
+      </if>
+      <if test="isDelete != null">
+        #{isDelete,jdbcType=DECIMAL},
+      </if>
+      <if test="html != null">
+        #{html,jdbcType=CLOB},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.minxc.emp.model.FormDefEntity">
+    update YMMG_FORM_DEF
+    <set>
+      <if test="type != null">
+        TYPE = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="key != null">
+        KEY = #{key,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        DESCRIPTION = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="groupId != null">
+        GROUP_ID = #{groupId,jdbcType=VARCHAR},
+      </if>
+      <if test="groupName != null">
+        GROUP_NAME = #{groupName,jdbcType=VARCHAR},
+      </if>
+      <if test="boKey != null">
+        BO_KEY = #{boKey,jdbcType=VARCHAR},
+      </if>
+      <if test="boName != null">
+        BO_NAME = #{boName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        CREATE_BY = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        CREATOR = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updator != null">
+        UPDATOR = #{updator,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null">
+        VERSION = #{version,jdbcType=DECIMAL},
+      </if>
+      <if test="isDelete != null">
+        IS_DELETE = #{isDelete,jdbcType=DECIMAL},
+      </if>
+      <if test="html != null">
+        HTML = #{html,jdbcType=CLOB},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="org.minxc.emp.model.FormDefEntity">
+    update YMMG_FORM_DEF
+    set TYPE = #{type,jdbcType=VARCHAR},
+      KEY = #{key,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR},
+      DESCRIPTION = #{description,jdbcType=VARCHAR},
+      GROUP_ID = #{groupId,jdbcType=VARCHAR},
+      GROUP_NAME = #{groupName,jdbcType=VARCHAR},
+      BO_KEY = #{boKey,jdbcType=VARCHAR},
+      BO_NAME = #{boName,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      CREATE_BY = #{createBy,jdbcType=VARCHAR},
+      CREATOR = #{creator,jdbcType=VARCHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+      UPDATOR = #{updator,jdbcType=VARCHAR},
+      VERSION = #{version,jdbcType=DECIMAL},
+      IS_DELETE = #{isDelete,jdbcType=DECIMAL},
+      HTML = #{html,jdbcType=CLOB}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.minxc.emp.model.FormDefEntity">
+    update YMMG_FORM_DEF
+    set TYPE = #{type,jdbcType=VARCHAR},
+      KEY = #{key,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR},
+      DESCRIPTION = #{description,jdbcType=VARCHAR},
+      GROUP_ID = #{groupId,jdbcType=VARCHAR},
+      GROUP_NAME = #{groupName,jdbcType=VARCHAR},
+      BO_KEY = #{boKey,jdbcType=VARCHAR},
+      BO_NAME = #{boName,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      CREATE_BY = #{createBy,jdbcType=VARCHAR},
+      CREATOR = #{creator,jdbcType=VARCHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+      UPDATOR = #{updator,jdbcType=VARCHAR},
+      VERSION = #{version,jdbcType=DECIMAL},
+      IS_DELETE = #{isDelete,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

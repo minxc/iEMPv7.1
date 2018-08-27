@@ -18,7 +18,6 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 /**
  * 实现UserDetailsService 接口获取UserDetails 接口实例对象。

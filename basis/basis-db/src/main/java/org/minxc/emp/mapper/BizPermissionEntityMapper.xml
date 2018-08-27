@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.minxc.emp.dao.BizPermissionEntityMapper">
+  <resultMap id="BaseResultMap" type="org.minxc.emp.model.BizPermissionEntity">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="BO_KEY" jdbcType="VARCHAR" property="boKey" />
+    <result column="OBJ_TYPE" jdbcType="VARCHAR" property="objType" />
+    <result column="OBJ_VAL" jdbcType="VARCHAR" property="objVal" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="org.minxc.emp.model.BizPermissionEntityWithBLOBs">
+    <result column="BUS_OBJ_MAP_JSON" jdbcType="CLOB" property="busObjMapJson" />
+    <result column="RIGHTS_JSON" jdbcType="CLOB" property="rightsJson" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, BO_KEY, OBJ_TYPE, OBJ_VAL
+  </sql>
+  <sql id="Blob_Column_List">
+    BUS_OBJ_MAP_JSON, RIGHTS_JSON
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from YMMG_BIZ_PERMISSION
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from YMMG_BIZ_PERMISSION
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="org.minxc.emp.model.BizPermissionEntityWithBLOBs">
+    insert into YMMG_BIZ_PERMISSION (ID, BO_KEY, OBJ_TYPE, 
+      OBJ_VAL, BUS_OBJ_MAP_JSON, RIGHTS_JSON
+      )
+    values (#{id,jdbcType=VARCHAR}, #{boKey,jdbcType=VARCHAR}, #{objType,jdbcType=VARCHAR}, 
+      #{objVal,jdbcType=VARCHAR}, #{busObjMapJson,jdbcType=CLOB}, #{rightsJson,jdbcType=CLOB}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.minxc.emp.model.BizPermissionEntityWithBLOBs">
+    insert into YMMG_BIZ_PERMISSION
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="boKey != null">
+        BO_KEY,
+      </if>
+      <if test="objType != null">
+        OBJ_TYPE,
+      </if>
+      <if test="objVal != null">
+        OBJ_VAL,
+      </if>
+      <if test="busObjMapJson != null">
+        BUS_OBJ_MAP_JSON,
+      </if>
+      <if test="rightsJson != null">
+        RIGHTS_JSON,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="boKey != null">
+        #{boKey,jdbcType=VARCHAR},
+      </if>
+      <if test="objType != null">
+        #{objType,jdbcType=VARCHAR},
+      </if>
+      <if test="objVal != null">
+        #{objVal,jdbcType=VARCHAR},
+      </if>
+      <if test="busObjMapJson != null">
+        #{busObjMapJson,jdbcType=CLOB},
+      </if>
+      <if test="rightsJson != null">
+        #{rightsJson,jdbcType=CLOB},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.minxc.emp.model.BizPermissionEntityWithBLOBs">
+    update YMMG_BIZ_PERMISSION
+    <set>
+      <if test="boKey != null">
+        BO_KEY = #{boKey,jdbcType=VARCHAR},
+      </if>
+      <if test="objType != null">
+        OBJ_TYPE = #{objType,jdbcType=VARCHAR},
+      </if>
+      <if test="objVal != null">
+        OBJ_VAL = #{objVal,jdbcType=VARCHAR},
+      </if>
+      <if test="busObjMapJson != null">
+        BUS_OBJ_MAP_JSON = #{busObjMapJson,jdbcType=CLOB},
+      </if>
+      <if test="rightsJson != null">
+        RIGHTS_JSON = #{rightsJson,jdbcType=CLOB},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="org.minxc.emp.model.BizPermissionEntityWithBLOBs">
+    update YMMG_BIZ_PERMISSION
+    set BO_KEY = #{boKey,jdbcType=VARCHAR},
+      OBJ_TYPE = #{objType,jdbcType=VARCHAR},
+      OBJ_VAL = #{objVal,jdbcType=VARCHAR},
+      BUS_OBJ_MAP_JSON = #{busObjMapJson,jdbcType=CLOB},
+      RIGHTS_JSON = #{rightsJson,jdbcType=CLOB}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.minxc.emp.model.BizPermissionEntity">
+    update YMMG_BIZ_PERMISSION
+    set BO_KEY = #{boKey,jdbcType=VARCHAR},
+      OBJ_TYPE = #{objType,jdbcType=VARCHAR},
+      OBJ_VAL = #{objVal,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

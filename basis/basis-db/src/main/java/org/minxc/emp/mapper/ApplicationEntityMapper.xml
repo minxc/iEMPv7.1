@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.minxc.emp.dao.ApplicationEntityMapper">
+  <resultMap id="BaseResultMap" type="org.minxc.emp.model.ApplicationEntity">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="ALIAS" jdbcType="VARCHAR" property="alias" />
+    <result column="LOGO" jdbcType="VARCHAR" property="logo" />
+    <result column="ENABLED" jdbcType="DECIMAL" property="enabled" />
+    <result column="HOME_URL" jdbcType="VARCHAR" property="homeUrl" />
+    <result column="BASE_URL" jdbcType="VARCHAR" property="baseUrl" />
+    <result column="TENANT" jdbcType="VARCHAR" property="tenant" />
+    <result column="NOTES" jdbcType="VARCHAR" property="notes" />
+    <result column="CREATOR_ID" jdbcType="VARCHAR" property="creatorId" />
+    <result column="CREATOR" jdbcType="VARCHAR" property="creator" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="IS_DEFAULT" jdbcType="DECIMAL" property="isDefault" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, NAME, ALIAS, LOGO, ENABLED, HOME_URL, BASE_URL, TENANT, NOTES, CREATOR_ID, CREATOR, 
+    CREATE_TIME, IS_DEFAULT
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from YMMG_APPLICATION
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from YMMG_APPLICATION
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="org.minxc.emp.model.ApplicationEntity">
+    insert into YMMG_APPLICATION (ID, NAME, ALIAS, 
+      LOGO, ENABLED, HOME_URL, 
+      BASE_URL, TENANT, NOTES, 
+      CREATOR_ID, CREATOR, CREATE_TIME, 
+      IS_DEFAULT)
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{alias,jdbcType=VARCHAR}, 
+      #{logo,jdbcType=VARCHAR}, #{enabled,jdbcType=DECIMAL}, #{homeUrl,jdbcType=VARCHAR}, 
+      #{baseUrl,jdbcType=VARCHAR}, #{tenant,jdbcType=VARCHAR}, #{notes,jdbcType=VARCHAR}, 
+      #{creatorId,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{isDefault,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="org.minxc.emp.model.ApplicationEntity">
+    insert into YMMG_APPLICATION
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="name != null">
+        NAME,
+      </if>
+      <if test="alias != null">
+        ALIAS,
+      </if>
+      <if test="logo != null">
+        LOGO,
+      </if>
+      <if test="enabled != null">
+        ENABLED,
+      </if>
+      <if test="homeUrl != null">
+        HOME_URL,
+      </if>
+      <if test="baseUrl != null">
+        BASE_URL,
+      </if>
+      <if test="tenant != null">
+        TENANT,
+      </if>
+      <if test="notes != null">
+        NOTES,
+      </if>
+      <if test="creatorId != null">
+        CREATOR_ID,
+      </if>
+      <if test="creator != null">
+        CREATOR,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="isDefault != null">
+        IS_DEFAULT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="alias != null">
+        #{alias,jdbcType=VARCHAR},
+      </if>
+      <if test="logo != null">
+        #{logo,jdbcType=VARCHAR},
+      </if>
+      <if test="enabled != null">
+        #{enabled,jdbcType=DECIMAL},
+      </if>
+      <if test="homeUrl != null">
+        #{homeUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="baseUrl != null">
+        #{baseUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="tenant != null">
+        #{tenant,jdbcType=VARCHAR},
+      </if>
+      <if test="notes != null">
+        #{notes,jdbcType=VARCHAR},
+      </if>
+      <if test="creatorId != null">
+        #{creatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDefault != null">
+        #{isDefault,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.minxc.emp.model.ApplicationEntity">
+    update YMMG_APPLICATION
+    <set>
+      <if test="name != null">
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="alias != null">
+        ALIAS = #{alias,jdbcType=VARCHAR},
+      </if>
+      <if test="logo != null">
+        LOGO = #{logo,jdbcType=VARCHAR},
+      </if>
+      <if test="enabled != null">
+        ENABLED = #{enabled,jdbcType=DECIMAL},
+      </if>
+      <if test="homeUrl != null">
+        HOME_URL = #{homeUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="baseUrl != null">
+        BASE_URL = #{baseUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="tenant != null">
+        TENANT = #{tenant,jdbcType=VARCHAR},
+      </if>
+      <if test="notes != null">
+        NOTES = #{notes,jdbcType=VARCHAR},
+      </if>
+      <if test="creatorId != null">
+        CREATOR_ID = #{creatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        CREATOR = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDefault != null">
+        IS_DEFAULT = #{isDefault,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.minxc.emp.model.ApplicationEntity">
+    update YMMG_APPLICATION
+    set NAME = #{name,jdbcType=VARCHAR},
+      ALIAS = #{alias,jdbcType=VARCHAR},
+      LOGO = #{logo,jdbcType=VARCHAR},
+      ENABLED = #{enabled,jdbcType=DECIMAL},
+      HOME_URL = #{homeUrl,jdbcType=VARCHAR},
+      BASE_URL = #{baseUrl,jdbcType=VARCHAR},
+      TENANT = #{tenant,jdbcType=VARCHAR},
+      NOTES = #{notes,jdbcType=VARCHAR},
+      CREATOR_ID = #{creatorId,jdbcType=VARCHAR},
+      CREATOR = #{creator,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      IS_DEFAULT = #{isDefault,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

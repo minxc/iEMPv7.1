@@ -1,8 +1,8 @@
 package org.minxc.emp.security.login.logout;
 
-import com.alibaba.fastjson.JSONObject;
-import org.minxc.emp.base.api.constant.BaseStatusCode;
-import org.minxc.emp.base.api.response.impl.ResultMsg;
+import com.minxc.emp.core.util.JacksonUtil;
+import org.minxc.emp.core.api.response.impl.ResultMessage;
+import org.minxc.emp.core.api.status.CommonStatusCode;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
@@ -18,8 +18,8 @@ public class DefaultLogoutSuccessHandler implements LogoutSuccessHandler {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         response.setCharacterEncoding("UTF-8");
 
-        ResultMsg resultMsg = new ResultMsg(BaseStatusCode.SUCCESS, "退出登录成功");
-        response.getWriter().print(JSONObject.toJSONString(resultMsg));
+        ResultMessage resultMsg = new ResultMessage(CommonStatusCode.SUCCESS, "退出登录成功");
+        response.getWriter().print(JacksonUtil.pojo2Json(resultMsg));
         return;
     }
 
