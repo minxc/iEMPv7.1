@@ -1,7 +1,7 @@
-package com.dstz.sys.excel.editor.font;
+package org.minxc.emp.basis.impl.excel.editor.font;
 
-import com.dstz.sys.excel.editor.IFontEditor;
-import com.dstz.sys.excel.style.font.Font;
+import org.minxc.emp.basis.impl.excel.editor.IFontEditor;
+import org.minxc.emp.basis.impl.excel.style.font.Font;
 
 /**
  * 实现一些常用的字体<br/>

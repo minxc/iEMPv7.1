@@ -1,6 +1,6 @@
-package com.dstz.sys.api2.service;
+package org.minxc.emp.system.api.service;
 
-import com.dstz.sys.api2.model.ISysDataSource;
+import org.minxc.emp.system.api.model.ISysDataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;

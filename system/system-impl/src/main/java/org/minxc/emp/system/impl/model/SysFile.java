@@ -1,17 +1,13 @@
-package com.dstz.sys2.model;
+package org.minxc.emp.system.impl.model;
 
-import com.dstz.base.core.model.BaseModel;
+import com.minxc.emp.core.impl.model.AbstractCommonModel;
 
 /**
- * <pre>
  * 描述：系统附件信息
- * 作者:aschs
- * 邮箱:aschs@qq.com
- * 日期:2018年6月7日
- * 版权:summer
- * </pre>
  */
-public class SysFile extends BaseModel {
+public class SysFile extends AbstractCommonModel {
+	
+	private static final long serialVersionUID = 1094360923381261339L;
 	/**
 	 * 附件名
 	 */

@@ -1,4 +1,4 @@
-package com.dstz.sys.rest.controller;
+package org.minxc.emp.system.rest.controller;
 
 
 import java.util.List;
@@ -7,21 +7,22 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
+import org.minxc.emp.basis.api.constant.SysStatusCode;
+import org.minxc.emp.basis.api.service.SerialNoService;
+import org.minxc.emp.basis.impl.core.manager.SerialNoManager;
+import org.minxc.emp.basis.impl.core.model.SerialNo;
+import org.minxc.emp.common.db.model.page.PageJson;
+import org.minxc.emp.common.rest.GenericController;
+import org.minxc.emp.common.rest.util.RequestUtil;
+import org.minxc.emp.core.api.aop.annotation.ErrorCatching;
+import org.minxc.emp.core.api.exception.BusinessException;
+import org.minxc.emp.core.api.query.QueryFilter;
+import org.minxc.emp.core.api.response.impl.ResultMessage;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.dstz.base.api.aop.annotion.CatchErr;
-import com.dstz.base.api.exception.BusinessException;
-import com.dstz.base.api.query.QueryFilter;
-import com.dstz.base.api.response.impl.ResultMsg;
-import com.dstz.base.core.util.StringUtil;
-import com.dstz.base.db.model.page.PageJson;
-import com.dstz.base.rest.GenericController;
-import com.dstz.base.rest.util.RequestUtil;
-import com.dstz.sys.api.constant.SysStatusCode;
-import com.dstz.sys.core.manager.SerialNoManager;
-import com.dstz.sys.core.model.SerialNo;
 import com.github.pagehelper.Page;
 
 /**
@@ -33,7 +34,7 @@ public class SysSerialNoController extends GenericController {
     @Resource
     SerialNoManager serialNoManager;
     @Resource
-    com.dstz.sys.api.service.SerialNoService serialNoService;
+    SerialNoService serialNoService;
 
 
     /**
@@ -65,7 +66,7 @@ public class SysSerialNoController extends GenericController {
      * @throws Exception
      */
     @RequestMapping("getById")
-    @CatchErr(write2response = true)
+    @ErrorCatching(writeErrorToResponse = true)
     public void getById(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String id = RequestUtil.getString(request, "id");
         SerialNo SerialNo = serialNoManager.get(id);
@@ -81,24 +82,24 @@ public class SysSerialNoController extends GenericController {
      * @throws Exception void
      */
     @RequestMapping("save")
-    @CatchErr
+    @ErrorCatching
     public void save(HttpServletRequest request, HttpServletResponse response, @RequestBody SerialNo SerialNo) throws Exception {
-        String resultMsg = null;
+        String ResultMessage = null;
 
         boolean rtn = serialNoManager.isAliasExisted(SerialNo.getId(), SerialNo.getAlias());
         if (rtn) {
             throw new BusinessException("别名已经存在!", SysStatusCode.SERIALNO_EXSIT);
         }
 
-        if (StringUtil.isEmpty(SerialNo.getId())) {
+        if (StringUtils.isEmpty(SerialNo.getId())) {
             serialNoManager.create(SerialNo);
-            resultMsg = "添加流水号生成成功";
+            ResultMessage = "添加流水号生成成功";
         } else {
             serialNoManager.update(SerialNo);
-            resultMsg = "更新流水号生成成功";
+            ResultMessage = "更新流水号生成成功";
         }
 
-        writeSuccessResult(response, resultMsg);
+        writeSuccessResult(response, ResultMessage);
     }
 
 
@@ -110,7 +111,7 @@ public class SysSerialNoController extends GenericController {
      * @throws Exception void
      */
     @RequestMapping("remove")
-    @CatchErr("删除流水号失败")
+    @ErrorCatching("删除流水号失败")
     public void remove(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String[] aryIds = RequestUtil.getStringAryByStr(request, "id");
 
@@ -157,7 +158,7 @@ public class SysSerialNoController extends GenericController {
      * @throws Exception
      */
     @RequestMapping("getNextIdByAlias")
-    public ResultMsg<String> getNextIdByAlias(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public ResultMessage<String> getNextIdByAlias(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String alias = RequestUtil.getString(request, "alias");
         if (serialNoManager.isAliasExisted(null, alias)) {
             String nextId = serialNoService.genNextNo(alias);

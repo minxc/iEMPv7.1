@@ -1,14 +1,12 @@
-package com.dstz.sys.core.manager;
-
-import com.dstz.base.manager.Manager;
-import com.dstz.sys.core.model.SysResource;
+package org.minxc.emp.basis.impl.core.manager;
 
 import java.util.List;
 
+import org.minxc.emp.basis.impl.core.model.SysResource;
+import org.minxc.emp.common.manager.Manager;
+
 /**
- * <pre>
- * 描述：子系统资源 处理接口
- * </pre>
+ *  子系统资源 处理接口
  */
 public interface SysResourceManager extends Manager<String, SysResource> {
 

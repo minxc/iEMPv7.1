@@ -1,8 +1,8 @@
-package com.dstz.sys.email;
-
-import com.dstz.sys.email.model.Mail;
+package org.minxc.emp.basis.impl.email;
 
 import javax.mail.Part;
+
+import org.minxc.emp.basis.impl.email.model.Mail;
 
 /**
  * <pre>

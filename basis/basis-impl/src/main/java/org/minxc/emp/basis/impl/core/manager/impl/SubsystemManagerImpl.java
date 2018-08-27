@@ -1,18 +1,18 @@
-package com.dstz.sys.core.manager.impl;
+package org.minxc.emp.basis.impl.core.manager.impl;
 
 import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.minxc.emp.basis.impl.core.dao.SubsystemDao;
+import org.minxc.emp.basis.impl.core.manager.SubsystemManager;
+import org.minxc.emp.basis.impl.core.model.Subsystem;
+import org.minxc.emp.basis.impl.util.ContextUtil;
+import org.minxc.emp.common.manager.impl.CommonManager;
+import org.minxc.emp.idm.api.model.User;
 import org.springframework.stereotype.Service;
 
-import com.dstz.base.core.util.BeanUtils;
-import com.dstz.base.manager.impl.BaseManager;
-import com.dstz.org.api.model.IUser;
-import com.dstz.sys.core.dao.SubsystemDao;
-import com.dstz.sys.core.manager.SubsystemManager;
-import com.dstz.sys.core.model.Subsystem;
-import com.dstz.sys.util.ContextUtil;
+import com.minxc.emp.core.util.BeanUtils;
 
 /**
  * <pre>
@@ -20,7 +20,7 @@ import com.dstz.sys.util.ContextUtil;
  * </pre>
  */
 @Service("subsystemManager")
-public class SubsystemManagerImpl extends BaseManager<String, Subsystem> implements SubsystemManager {
+public class SubsystemManagerImpl extends CommonManager<String, Subsystem> implements SubsystemManager {
     @Resource
     SubsystemDao subsystemDao;
 
@@ -60,7 +60,7 @@ public class SubsystemManagerImpl extends BaseManager<String, Subsystem> impleme
 
     @Override
     public List<Subsystem> getCuurentUserSystem() {
-        IUser user = ContextUtil.getCurrentUser();
+        User user = ContextUtil.getCurrentUser();
         if (ContextUtil.isAdmin(user)) {
             return subsystemDao.getList();
         }

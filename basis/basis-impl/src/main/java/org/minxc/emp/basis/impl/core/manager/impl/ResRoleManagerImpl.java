@@ -1,11 +1,9 @@
-package com.dstz.sys.core.manager.impl;
+package org.minxc.emp.basis.impl.core.manager.impl;
 
-import com.dstz.base.core.cache.ICache;
-import com.dstz.base.db.id.UniqueIdUtil;
-import com.dstz.base.manager.impl.BaseManager;
-import com.dstz.sys.core.dao.ResRoleDao;
-import com.dstz.sys.core.manager.ResRoleManager;
-import com.dstz.sys.core.model.ResRole;
+import org.minxc.emp.basis.impl.core.dao.ResRoleDao;
+import org.minxc.emp.basis.impl.core.manager.ResRoleManager;
+import org.minxc.emp.basis.impl.core.model.ResRole;
+import org.minxc.emp.common.manager.impl.CommonManager;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -17,8 +15,10 @@ import java.util.*;
  * </pre>
  */
 @Service("resRoleManager")
-public class ResRoleManagerImpl extends BaseManager<String, ResRole> implements ResRoleManager {
-    @Resource
+public class ResRoleManagerImpl extends CommonManager<String, ResRole> implements ResRoleManager {
+   
+	
+	@Resource
     ResRoleDao resRoleDao;
     @Resource
     ICache iCache;

@@ -1,15 +1,15 @@
-package com.dstz.sys.core.dao;
+package org.minxc.emp.basis.impl.core.dao;
 
-import org.mybatis.spring.annotation.MapperScan;
+import org.apache.ibatis.annotations.Mapper;
+import org.minxc.emp.basis.impl.core.model.LogErr;
+import org.minxc.emp.common.db.dao.CommonDao;
 
-import com.dstz.base.dao.BaseDao;
-import com.dstz.sys.core.model.LogErr;
 
 /**
  * <pre>
  * 描述：错误日志 DAO接口
  * </pre>
  */
-@MapperScan
-public interface LogErrDao extends BaseDao<String, LogErr> {
+@Mapper
+public interface LogErrDao extends CommonDao<String, LogErr> {
 }

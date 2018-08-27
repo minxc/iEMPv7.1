@@ -1,10 +1,10 @@
-package com.dstz.sys.simplemq.handler.msg;
+package org.minxc.emp.basis.impl.simplemq.handler.msg;
 
+import org.minxc.emp.basis.api.jms.model.msg.NotifyMessage;
+import org.minxc.emp.basis.impl.util.ContextUtil;
+import org.minxc.emp.idm.api.model.User;
 import org.springframework.stereotype.Component;
 
-import com.dstz.org.api.model.IUser;
-import com.dstz.sys.api.jms.model.msg.NotifyMessage;
-import com.dstz.sys.util.ContextUtil;
 
 /**
  * 内部消息处理器。
@@ -40,9 +40,7 @@ public class InnerHandler extends AbsNotifyMessageHandler<NotifyMessage> {
 	public boolean sendMessage(NotifyMessage message) {
 		  if (1 == 1) return false;
 		  
-	        IUser sender = ContextUtil.getCurrentUser();
-
-
+	        User sender = ContextUtil.getCurrentUser();
 	        return false;
 	}
 

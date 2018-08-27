@@ -1,15 +1,13 @@
-package com.dstz.sys.core.manager;
-
-import com.dstz.base.manager.Manager;
-import com.dstz.sys.core.model.SysProperties;
+package org.minxc.emp.basis.impl.core.manager;
 
 import java.util.List;
 import java.util.Map;
 
+import org.minxc.emp.basis.impl.core.model.SysProperties;
+import org.minxc.emp.common.manager.Manager;
+
 /**
- * <pre>
- * 描述：SYS_PROPERTIES 处理接口
- * </pre>
+ * SYS_PROPERTIES 处理接口
  */
 public interface SysPropertiesManager extends Manager<String, SysProperties> {
 

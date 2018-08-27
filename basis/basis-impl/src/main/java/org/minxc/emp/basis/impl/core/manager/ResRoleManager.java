@@ -1,11 +1,11 @@
-package com.dstz.sys.core.manager;
-
-import com.dstz.base.manager.Manager;
-import com.dstz.sys.core.model.ResRole;
+package org.minxc.emp.basis.impl.core.manager;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import org.minxc.emp.basis.impl.core.model.ResRole;
+import org.minxc.emp.common.manager.Manager;
 
 /**
  * <pre>

@@ -1,9 +1,9 @@
-package com.dstz.sys.core.manager;
-
-import com.dstz.base.manager.Manager;
-import com.dstz.sys.core.model.WorkbenchLayout;
+package org.minxc.emp.basis.impl.core.manager;
 
 import java.util.List;
+
+import org.minxc.emp.basis.impl.core.model.WorkbenchLayout;
+import org.minxc.emp.common.manager.Manager;
 
 public interface WorkbenchLayoutManager extends Manager<String, WorkbenchLayout> {
 

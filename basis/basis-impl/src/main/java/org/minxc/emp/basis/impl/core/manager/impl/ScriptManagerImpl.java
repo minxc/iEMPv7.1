@@ -1,19 +1,19 @@
-package com.dstz.sys.core.manager.impl;
+package org.minxc.emp.basis.impl.core.manager.impl;
 
 import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.minxc.emp.basis.impl.core.dao.ScriptDao;
+import org.minxc.emp.basis.impl.core.manager.ScriptManager;
+import org.minxc.emp.basis.impl.core.model.Script;
+import org.minxc.emp.common.manager.impl.CommonManager;
 import org.springframework.stereotype.Service;
-
-import com.dstz.base.manager.impl.BaseManager;
-import com.dstz.sys.core.dao.ScriptDao;
-import com.dstz.sys.core.manager.ScriptManager;
-import com.dstz.sys.core.model.Script;
 
 
 @Service("scriptManager")
-public class ScriptManagerImpl extends BaseManager<String, Script> implements ScriptManager {
+public class ScriptManagerImpl extends CommonManager<String, Script> implements ScriptManager {
+	
     @Resource
     private ScriptDao scriptDao;
 

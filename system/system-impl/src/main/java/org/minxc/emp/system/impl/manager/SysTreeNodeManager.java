@@ -1,16 +1,12 @@
-package com.dstz.sys2.manager;
+package org.minxc.emp.system.impl.manager;
 
 import java.util.List;
 
-import com.dstz.base.manager.Manager;
-import com.dstz.sys2.model.SysTreeNode;
+import org.minxc.emp.common.manager.Manager;
+import org.minxc.emp.system.impl.model.SysTreeNode;
 
 /**
  * 系统树节点 Manager处理接口
- *
- * @author aschs
- * @email aschs@qq.com
- * @time 2018-03-13 20:02:33
  */
 public interface SysTreeNodeManager extends Manager<String, SysTreeNode> {
 

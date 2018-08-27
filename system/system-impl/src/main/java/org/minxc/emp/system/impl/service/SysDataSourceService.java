@@ -1,8 +1,8 @@
-package com.dstz.sys2.service;
+package org.minxc.emp.system.impl.service;
 
-import com.dstz.sys.api2.model.ISysDataSource;
-import com.dstz.sys.api2.service.ISysDataSourceService;
-import com.dstz.sys2.manager.SysDataSourceManager;
+import org.minxc.emp.system.api.model.ISysDataSource;
+import org.minxc.emp.system.api.service.ISysDataSourceService;
+import org.minxc.emp.system.impl.manager.SysDataSourceManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
@@ -10,14 +10,9 @@ import org.springframework.stereotype.Service;
 import javax.sql.DataSource;
 
 /**
- * <pre>
  * 描述：系统数据源对其他模块的服务类
- * 作者:aschs
- * 邮箱:aschs@qq.com
- * 日期:2018年1月29日 上午10:42:46
- * 版权:summer
- * </pre>
  */
+
 @Service
 public class SysDataSourceService implements ISysDataSourceService {
     @Autowired

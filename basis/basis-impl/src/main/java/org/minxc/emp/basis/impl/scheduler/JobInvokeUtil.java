@@ -1,27 +1,23 @@
-package com.dstz.sys.scheduler;
+package org.minxc.emp.basis.impl.scheduler;
 
-import com.dstz.base.core.util.AppUtil;
-import com.dstz.sys.core.model.SysScheduleJob;
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.minxc.emp.basis.impl.core.model.SysScheduleJob;
 import org.springframework.beans.BeanUtils;
 import org.springframework.util.Assert;
-import org.springframework.util.PatternMatchUtils;
+
+import com.minxc.emp.core.util.AppContextUtil;
+
+import groovy.util.logging.Slf4j;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * 任务执行工具
- *
- * @author didi
  */
-class JobInvokeUtil {
+@Slf4j
+public class JobInvokeUtil {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(JobInvokeUtil.class);
 
     /**
      * 执行方法
@@ -47,7 +43,7 @@ class JobInvokeUtil {
     private static void invokeSpringBean(String invokeTarget) throws IllegalAccessException, InvocationTargetException {
         final String beanId = invokeTarget.substring(0, invokeTarget.indexOf("."));
         final String methodName = invokeTarget.substring(beanId.length() + 1);
-        Object bean = AppUtil.getApplicaitonContext().getBean(beanId);
+        Object bean = AppContextUtil.getApplicaitonContext().getBean(beanId);
         Method method = BeanUtils.findDeclaredMethodWithMinimalParameters(bean.getClass(), methodName);
         method.invoke(bean);
     }

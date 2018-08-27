@@ -8,6 +8,7 @@ import java.util.Set;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.StringUtils;
 import org.minxc.emp.security.IngoreChecker;
 import org.minxc.emp.security.util.SubSystemUtil;
 import org.springframework.security.access.ConfigAttribute;
@@ -15,7 +16,6 @@ import org.springframework.security.access.SecurityConfig;
 import org.springframework.security.web.FilterInvocation;
 import org.springframework.security.web.access.intercept.FilterInvocationSecurityMetadataSource;
 
-import org.minxc.emp.base.core.util.StringUtil;
 import org.minxc.emp.security.constant.PlatformSecurityConstants;
 import org.minxc.emp.system.api.service.SystemResourceService;
 
@@ -92,8 +92,8 @@ public class FilterInvocationSecurityMetadataSourceImpl extends IngoreChecker im
      */
     private static String removeWebContextPath(String url, String ctxPath) {
         url = url.trim();
-        if (StringUtil.isEmpty(ctxPath)) return url;
-        if (StringUtil.isEmpty(url)) return "";
+        if (StringUtils.isEmpty(ctxPath)) return url;
+        if (StringUtils.isEmpty(url)) return "";
         if (url.startsWith(ctxPath)) {
             url = url.replaceFirst(ctxPath, "");
         }

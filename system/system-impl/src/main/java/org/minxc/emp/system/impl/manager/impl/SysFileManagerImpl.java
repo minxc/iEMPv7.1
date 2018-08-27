@@ -1,28 +1,24 @@
-package com.dstz.sys2.manager.impl;
+package org.minxc.emp.system.impl.manager.impl;
 
 import java.io.InputStream;
 
 import javax.annotation.Resource;
 
+import org.minxc.emp.common.db.id.UniqueIdUtil;
+import org.minxc.emp.common.manager.impl.CommonManager;
+import org.minxc.emp.system.impl.dao.SysFileDao;
+import org.minxc.emp.system.impl.manager.SysFileManager;
+import org.minxc.emp.system.impl.model.SysFile;
+import org.minxc.emp.system.impl.upload.IUploader;
+import org.minxc.emp.system.impl.upload.UploaderFactory;
 import org.springframework.stereotype.Service;
 
-import com.dstz.base.db.id.UniqueIdUtil;
-import com.dstz.base.manager.impl.BaseManager;
-import com.dstz.sys2.dao.SysFileDao;
-import com.dstz.sys2.manager.SysFileManager;
-import com.dstz.sys2.model.SysFile;
-import com.dstz.sys2.upload.IUploader;
-import com.dstz.sys2.upload.UploaderFactory;
 
 /**
  * 系统附件 Manager处理实现类
- * 
- * @author aschs
- * @email aschs@qq.com
- * @time 2018-06-07 23:54:49
  */
 @Service("sysFileManager")
-public class SysFileManagerImpl extends BaseManager<String, SysFile> implements SysFileManager {
+public class SysFileManagerImpl extends CommonManager<String, SysFile> implements SysFileManager {
 	@Resource
 	SysFileDao sysFileDao;
 

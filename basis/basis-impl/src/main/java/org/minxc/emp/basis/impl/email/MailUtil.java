@@ -1,10 +1,5 @@
-package com.dstz.sys.email;
+package org.minxc.emp.basis.impl.email;
 
-import com.dstz.base.core.util.StringUtil;
-import com.dstz.sys.email.model.Mail;
-import com.dstz.sys.email.model.MailAddress;
-import com.dstz.sys.email.model.MailAttachment;
-import com.dstz.sys.email.model.MailSetting;
 import com.sun.mail.imap.IMAPFolder;
 
 import javax.activation.DataHandler;
@@ -17,6 +12,11 @@ import javax.mail.search.MessageIDTerm;
 import javax.mail.search.SearchTerm;
 import javax.mail.util.ByteArrayDataSource;
 
+import org.apache.commons.lang3.StringUtils;
+import org.minxc.emp.basis.impl.email.model.Mail;
+import org.minxc.emp.basis.impl.email.model.MailAddress;
+import org.minxc.emp.basis.impl.email.model.MailAttachment;
+import org.minxc.emp.basis.impl.email.model.MailSetting;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 import java.io.File;
@@ -594,7 +594,7 @@ public class MailUtil {
      * @see    RecipientType
      */
     private void addAddressInfo(Message message, String address, RecipientType recipientType) throws UnsupportedEncodingException, MessagingException {
-    	if (StringUtil.isEmpty(address)) return ;
+    	if (StringUtils.isEmpty(address)) return ;
     	
         MailAddress mailAddress = new MailAddress();
         List<MailAddress> addressList = new ArrayList<MailAddress>();

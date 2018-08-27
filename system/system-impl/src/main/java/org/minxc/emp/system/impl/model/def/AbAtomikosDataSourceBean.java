@@ -1,20 +1,16 @@
-package com.dstz.sys2.model.def;
+package org.minxc.emp.system.impl.model.def;
 
 import java.util.Properties;
 
 import com.atomikos.jdbc.AtomikosDataSourceBean;
 
 /**
- * <pre>
- * 描述：为了配合系统数据源的构造而做的AtomikosDataSourceBean
+ *  为了配合系统数据源的构造而做的AtomikosDataSourceBean
  * 有些必要参数在properties中，在页面很难设置，所以在这里提到了最外层配置
- * 作者:aschs
- * 邮箱:aschs@qq.com
- * 日期:2018年5月29日
- * 版权:summer
- * </pre>
  */
 public class AbAtomikosDataSourceBean extends AtomikosDataSourceBean {
+	
+	private static final long serialVersionUID = -5612937896080690391L;
 	private String url;
 	private String username;
 	private String password;

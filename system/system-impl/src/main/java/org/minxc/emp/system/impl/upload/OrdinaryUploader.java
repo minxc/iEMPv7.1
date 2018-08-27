@@ -1,26 +1,21 @@
-package com.dstz.sys2.upload;
+package org.minxc.emp.system.impl.upload;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 
+import org.minxc.emp.core.api.exception.BusinessException;
 import org.springframework.stereotype.Service;
 
-import com.dstz.base.api.exception.BusinessException;
-import com.dstz.base.core.util.FileUtil;
-import com.dstz.base.core.util.PropertyUtil;
-import com.dstz.base.core.util.time.DateUtil;
+import com.minxc.emp.core.util.FileUtil;
+import com.minxc.emp.core.util.PropertiesUtil;
+import com.minxc.emp.core.util.time.DateUtil;
+
 
 /**
- * <pre>
  * 描述：普通的上传器
  * 上传到服务器的某个文件夹中
  * 每次上传时会自动放在当前日期yyyyMMdd的目录下
- * 作者:aschs
- * 邮箱:aschs@qq.com
- * 日期:2018年6月1日
- * 版权:summer
- * </pre>
  */
 @Service
 public class OrdinaryUploader extends AbstractUploader {
@@ -52,7 +47,7 @@ public class OrdinaryUploader extends AbstractUploader {
 	}
 
 	private String getPath(String name) {
-		return PropertyUtil.getProperty("uploader.ordinary.path") + DateUtil.getCurrentTime("yyyyMMdd") + File.separator + name;
+		return PropertiesUtil.getProperty("uploader.ordinary.path") + DateUtil.getCurrentTime("yyyyMMdd") + File.separator + name;
 	}
 
 }

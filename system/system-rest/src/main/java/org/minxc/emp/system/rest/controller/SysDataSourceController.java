@@ -1,4 +1,4 @@
-package com.dstz.sys.rest.controller;
+package org.minxc.emp.system.rest.controller;
 
 import java.sql.Connection;
 import java.util.List;
@@ -7,30 +7,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
+import org.apache.commons.lang3.StringUtils;
+import org.minxc.emp.common.db.id.UniqueIdUtil;
+import org.minxc.emp.common.db.model.page.PageJson;
+import org.minxc.emp.common.rest.GenericController;
+import org.minxc.emp.common.rest.util.RequestUtil;
+import org.minxc.emp.core.api.aop.annotation.ErrorCatching;
+import org.minxc.emp.core.api.query.QueryFilter;
+import org.minxc.emp.system.impl.manager.SysDataSourceManager;
+import org.minxc.emp.system.impl.model.SysDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.dstz.base.api.aop.annotion.CatchErr;
-import com.dstz.base.api.query.QueryFilter;
-import com.dstz.base.core.util.StringUtil;
-import com.dstz.base.db.id.UniqueIdUtil;
-import com.dstz.base.db.model.page.PageJson;
-import com.dstz.base.rest.GenericController;
-import com.dstz.base.rest.util.RequestUtil;
-import com.dstz.sys2.manager.SysDataSourceManager;
-import com.dstz.sys2.model.SysDataSource;
-
 /**
- * <pre>
- * 描述：sysDataSource层的controller
- * 作者:aschs
- * 邮箱:aschs@qq.com
- * 日期:下午5:11:06
- * 版权:summer
- * </pre>
+ sysDataSource层的controller
  */
 @Controller
 @RequestMapping("/sys/sysDataSource/")
@@ -49,7 +42,7 @@ public class SysDataSourceController extends GenericController {
      * @throws Exception
      */
     @RequestMapping("checkConnection")
-    @CatchErr(write2response = true, value = "连接失败")
+    @ErrorCatching(writeErrorToResponse = true, value = "连接失败")
     public void checkConnection(HttpServletRequest request, HttpServletResponse response) throws Exception {
     	String key = RequestUtil.getString(request, "key");
     	boolean connectable = false;
@@ -75,9 +68,9 @@ public class SysDataSourceController extends GenericController {
      * @throws Exception
      */
     @RequestMapping("save")
-    @CatchErr(write2response = true, value = "保存数据源失败")
+    @ErrorCatching(writeErrorToResponse = true, value = "保存数据源失败")
     public void save(HttpServletRequest request, HttpServletResponse response, @RequestBody SysDataSource sysDataSource) throws Exception {
-        if (StringUtil.isEmpty(sysDataSource.getId())) {
+        if (StringUtils.isEmpty(sysDataSource.getId())) {
             sysDataSource.setId(UniqueIdUtil.getSuid());
             sysDataSourceManager.create(sysDataSource);
         } else {
@@ -98,11 +91,11 @@ public class SysDataSourceController extends GenericController {
      * @throws Exception
      */
     @RequestMapping("getObject")
-    @CatchErr(write2response = true, value = "获取sysDataSource异常")
+    @ErrorCatching(writeErrorToResponse = true, value = "获取sysDataSource异常")
     public void getObject(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String id = RequestUtil.getString(request, "id");
         SysDataSource sysDataSource = null;
-        if (StringUtil.isNotEmpty(id)) {
+        if (StringUtils.isNotEmpty(id)) {
             sysDataSource = sysDataSourceManager.get(id);
         }
         writeSuccessData(response, sysDataSource);
@@ -136,7 +129,7 @@ public class SysDataSourceController extends GenericController {
      * @throws Exception
      */
     @RequestMapping("remove")
-    @CatchErr(write2response = true, value = "删除数据源失败")
+    @ErrorCatching(writeErrorToResponse = true, value = "删除数据源失败")
     public void remove(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String[] aryIds = RequestUtil.getStringAryByStr(request, "id");
         sysDataSourceManager.removeByIds(aryIds);

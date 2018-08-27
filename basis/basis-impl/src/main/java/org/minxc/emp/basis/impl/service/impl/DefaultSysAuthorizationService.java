@@ -1,19 +1,19 @@
-package com.dstz.sys.service.impl;
+package org.minxc.emp.basis.impl.service.impl;
 
 import java.util.Map;
 import java.util.Set;
 
 import javax.annotation.Resource;
 
+import org.minxc.emp.basis.api.constant.RightsObjectConstants;
+import org.minxc.emp.basis.api.service.SysAuthorizationService;
+import org.minxc.emp.basis.impl.core.manager.SysAuthorizationManager;
 import org.springframework.stereotype.Service;
 
-import com.dstz.sys.api.constant.RightsObjectConstants;
-import com.dstz.sys.api.service.SysAuthorizationService;
-import com.dstz.sys.core.manager.SysAuthorizationManager;
 @Service
-public class DefaultSysAuthorizationService implements SysAuthorizationService{
-@Resource
-SysAuthorizationManager sysAuthorizationManager;
+public class DefaultSysAuthorizationService implements SysAuthorizationService {
+	@Resource
+	SysAuthorizationManager sysAuthorizationManager;
 
 	@Override
 	public Set<String> getUserRights(String userId) {

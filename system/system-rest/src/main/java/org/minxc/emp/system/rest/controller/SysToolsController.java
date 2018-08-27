@@ -1,21 +1,22 @@
-package com.dstz.sys.rest.controller;
+package org.minxc.emp.system.rest.controller;
 
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
+import org.minxc.emp.common.rest.GenericController;
+import org.minxc.emp.common.rest.util.RequestUtil;
+import org.minxc.emp.core.api.aop.annotation.ErrorCatching;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.dstz.base.api.aop.annotion.CatchErr;
-import com.dstz.base.core.util.AppUtil;
-import com.dstz.base.core.util.ConstantUtil;
-import com.dstz.base.core.util.EnumUtil;
-import com.dstz.base.core.util.PinyinUtil;
-import com.dstz.base.core.util.StringUtil;
-import com.dstz.base.rest.GenericController;
-import com.dstz.base.rest.util.RequestUtil;
+import com.minxc.emp.core.util.AppContextUtil;
+import com.minxc.emp.core.util.ConstantUtil;
+import com.minxc.emp.core.util.EnumUtil;
+import com.minxc.emp.core.util.PinyinUtil;
+
 
 /**
  * 系统工具类
@@ -61,18 +62,18 @@ public class SysToolsController extends GenericController {
 	public Object getConstant(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String classPath = RequestUtil.getString(request, "path");
 		String key = RequestUtil.getString(request, "key");
-		if (StringUtil.isEmpty(key)) {
+		if (StringUtils.isEmpty(key)) {
 			return ConstantUtil.get(classPath);
 		}
 		return ConstantUtil.get(classPath, key);
 	}
 
 	@RequestMapping("getInterFaceImpls")
-	@CatchErr
+	@ErrorCatching
 	public Object getInterFaceImpls(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String classPath = RequestUtil.getString(request, "classPath");
 		Class<?> clazz = Class.forName(classPath);
-		Map<String, ?> map = AppUtil.getImplInstance(clazz);
+		Map<String, ?> map = AppContextUtil.getImplInstance(clazz);
 		return map.values();
 	}
 

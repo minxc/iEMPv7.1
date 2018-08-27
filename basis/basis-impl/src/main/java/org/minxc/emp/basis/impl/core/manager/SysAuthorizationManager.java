@@ -1,12 +1,12 @@
-package com.dstz.sys.core.manager;
+package org.minxc.emp.basis.impl.core.manager;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.dstz.base.manager.Manager;
-import com.dstz.sys.api.constant.RightsObjectConstants;
-import com.dstz.sys.core.model.SysAuthorization;
+import org.minxc.emp.basis.api.constant.RightsObjectConstants;
+import org.minxc.emp.basis.impl.core.model.SysAuthorization;
+import org.minxc.emp.common.manager.Manager;
 
 
 public interface SysAuthorizationManager extends Manager<String, SysAuthorization> {

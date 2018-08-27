@@ -1,14 +1,13 @@
-package com.dstz.sys.core.manager;
+package org.minxc.emp.basis.impl.core.manager;
 
-import com.dstz.base.manager.Manager;
-import com.dstz.sys.core.model.RelResource;
 
 import java.util.List;
 
+import org.minxc.emp.basis.impl.core.model.RelResource;
+import org.minxc.emp.common.manager.Manager;
+
 /**
- * <pre>
- * 描述：关联资源 处理接口
- * </pre>
+ * 关联资源 处理接口
  */
 public interface RelResourceManager extends Manager<String, RelResource> {
     /**

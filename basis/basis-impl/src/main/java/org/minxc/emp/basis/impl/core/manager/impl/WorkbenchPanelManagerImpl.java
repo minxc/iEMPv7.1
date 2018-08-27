@@ -1,4 +1,4 @@
-package com.dstz.sys.core.manager.impl;
+package org.minxc.emp.basis.impl.core.manager.impl;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -8,30 +8,31 @@ import java.util.Random;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang3.StringUtils;
+import org.minxc.emp.basis.api.constant.RightsObjectConstants;
+import org.minxc.emp.basis.impl.core.dao.WorkbenchPanelDao;
+import org.minxc.emp.basis.impl.core.manager.SysAuthorizationManager;
+import org.minxc.emp.basis.impl.core.manager.WorkbenchLayoutManager;
+import org.minxc.emp.basis.impl.core.manager.WorkbenchPanelManager;
+import org.minxc.emp.basis.impl.core.model.WorkbenchLayout;
+import org.minxc.emp.basis.impl.core.model.WorkbenchPanel;
+import org.minxc.emp.basis.impl.util.ContextUtil;
+import org.minxc.emp.common.db.model.query.DefaultQueryFilter;
+import org.minxc.emp.common.manager.impl.CommonManager;
+import org.minxc.emp.core.api.exception.BusinessException;
+import org.minxc.emp.core.api.model.PageList;
+import org.minxc.emp.core.api.query.QueryFilter;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
-import com.dstz.base.api.exception.BusinessException;
-import com.dstz.base.api.model.PageList;
-import com.dstz.base.api.query.QueryFilter;
-import com.dstz.base.core.util.AppUtil;
-import com.dstz.base.core.util.BeanUtils;
-import com.dstz.base.core.util.StringUtil;
-import com.dstz.base.db.model.query.DefaultQueryFilter;
-import com.dstz.base.manager.impl.BaseManager;
-import com.dstz.sys.api.constant.RightsObjectConstants;
-import com.dstz.sys.core.dao.WorkbenchPanelDao;
-import com.dstz.sys.core.manager.SysAuthorizationManager;
-import com.dstz.sys.core.manager.WorkbenchLayoutManager;
-import com.dstz.sys.core.manager.WorkbenchPanelManager;
-import com.dstz.sys.core.model.WorkbenchLayout;
-import com.dstz.sys.core.model.WorkbenchPanel;
-import com.dstz.sys.util.ContextUtil;
+import com.minxc.emp.core.util.AppContextUtil;
+import com.minxc.emp.core.util.BeanUtils;
 
 
-@Service("workbenchPanelManager")
-public class WorkbenchPanelManagerImpl extends BaseManager<String, WorkbenchPanel> implements WorkbenchPanelManager {
+public class WorkbenchPanelManagerImpl extends CommonManager<String, WorkbenchPanel> implements WorkbenchPanelManager {
+	
+	
     @Resource
     WorkbenchPanelDao workbenchPanelDao;
     @Resource
@@ -66,7 +67,7 @@ public class WorkbenchPanelManagerImpl extends BaseManager<String, WorkbenchPane
     public List<WorkbenchPanel> getMyUsablePanels(QueryFilter query) {
         //获取默认的布局
         String layoutKey = (String) query.getParams().get("layoutKey");
-        if (StringUtil.isNotEmpty(layoutKey)) {
+        if (StringUtils.isNotEmpty(layoutKey)) {
             return workbenchPanelDao.query();
         }
 
@@ -100,7 +101,7 @@ public class WorkbenchPanelManagerImpl extends BaseManager<String, WorkbenchPane
         String method = aryHandler[1];
 
         // 触发该Bean下的业务方法
-        Object serviceBean = AppUtil.getBean(beanId);
+        Object serviceBean = AppContextUtil.getBean(beanId);
         if (serviceBean == null) return null;
         Object objct = null;
         try {
@@ -144,34 +145,7 @@ public class WorkbenchPanelManagerImpl extends BaseManager<String, WorkbenchPane
         return o;
     }
 
-    /**
-     * 测试用
-     *
-     * @return
-     */
-    public JSON getTestData() {
 
-        String json = "[[\"product\", \"纯牛奶\", \"咖啡\", \"矿泉水\"]," // 产品项
-                + "[\"2015\"," + getRandomInt() + ", " + getRandomInt() + ", " + getRandomInt() + "], [\"2016\", " + getRandomInt() + ", " + getRandomInt() + ", " + getRandomInt() + "],"
-                + "[\"2017\", " + getRandomInt() + ", " + getRandomInt() + ", " + getRandomInt() + "], [\"2018\"," + getRandomInt() + ", " + getRandomInt() + ", " + getRandomInt() + "]]";
-        JSONArray jsonArray = JSONArray.parseArray(json);
-
-        return jsonArray;
-    }
-
-    /**
-     * 测试用
-     *
-     * @return
-     */
-    public JSON getPieData() {
-        String json = "[[\"纯牛奶\"," + getRandomInt() + "]," // 产品项
-                + "[\"咖啡\"," + getRandomInt() + "],"
-                + "[\"矿泉水\"," + getRandomInt() + "],"
-                + "[\"碳酸饮料\"," + getRandomInt() + "]]";
-        JSONArray jsonArray = JSONArray.parseArray(json);
-        return jsonArray;
-    }
 
     private int getRandomInt() {
         Random rand = new Random();

@@ -1,39 +1,30 @@
-package com.dstz.sys.core.manager.impl;
+package org.minxc.emp.basis.impl.core.manager.impl;
 
 import java.util.List;
 
 import javax.annotation.Resource;
 
 import org.apache.ibatis.annotations.Update;
+import org.minxc.emp.basis.api.constant.SysStatusCode;
+import org.minxc.emp.basis.impl.core.dao.DataDictDao;
+import org.minxc.emp.basis.impl.core.manager.DataDictManager;
+import org.minxc.emp.basis.impl.core.model.DataDict;
+import org.minxc.emp.common.db.model.query.DefaultQueryFilter;
+import org.minxc.emp.common.manager.impl.CommonManager;
+import org.minxc.emp.core.api.exception.BusinessException;
+import org.minxc.emp.core.api.query.QueryFilter;
+import org.minxc.emp.core.api.query.QueryOperator;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.dstz.base.api.exception.BusinessException;
-import com.dstz.base.api.query.QueryFilter;
-import com.dstz.base.api.query.QueryOP;
-import com.dstz.base.core.util.StringUtil;
-import com.dstz.base.db.model.query.DefaultQueryField;
-import com.dstz.base.db.model.query.DefaultQueryFilter;
-import com.dstz.base.manager.impl.BaseManager;
-import com.dstz.sys.api.constant.SysStatusCode;
-import com.dstz.sys.core.dao.DataDictDao;
-import com.dstz.sys.core.model.DataDict;
-import com.dstz.sys2.dao.SysTreeDao;
-import com.dstz.sys2.dao.SysTreeNodeDao;
-import com.dstz.sys2.manager.SysTreeManager;
-import com.dstz.sys2.manager.SysTreeNodeManager;
-import com.dstz.sys2.model.SysTree;
-import com.dstz.sys2.model.SysTreeNode;
-import com.dstz.sys.core.manager.DataDictManager;
+
+
 /**
  * 数据字典 Manager处理实现类
- * @author aschs
- * @email aschs@qq.com
- * @time 2018-05-16 14:39:58
  */
 @Service("dataDictManager")
-public class DataDictManagerImpl extends BaseManager<String, DataDict> implements DataDictManager{
+public class DataDictManagerImpl extends CommonManager<String, DataDict> implements DataDictManager{
 	@Resource
 	DataDictDao dataDictDao;
 	@Resource
@@ -87,7 +78,7 @@ public class DataDictManagerImpl extends BaseManager<String, DataDict> implement
 	@Override
 	public JSONArray getDictTree() {
 		QueryFilter filter = new DefaultQueryFilter();
-		filter.addFilter("dict_type_", "dict", QueryOP.EQUAL);
+		filter.addFilter("dict_type_", "dict", QueryOperator.EQUAL);
 		
 		List<DataDict> dicts = dataDictDao.query(filter);
 		

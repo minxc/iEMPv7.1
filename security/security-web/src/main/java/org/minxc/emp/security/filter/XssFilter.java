@@ -1,9 +1,10 @@
 package org.minxc.emp.security.filter;
 
 import com.alibaba.fastjson.JSON;
-import org.minxc.emp.base.api.constant.BaseStatusCode;
-import org.minxc.emp.base.api.response.impl.ResultMsg;
-import org.minxc.emp.base.core.util.StringUtil;
+import com.minxc.emp.core.util.StringUtil;
+
+import org.minxc.emp.core.api.response.impl.ResultMessage;
+import org.minxc.emp.core.api.status.CommonStatusCode;
 import org.minxc.emp.security.IngoreChecker;
 
 import javax.servlet.*;
@@ -45,8 +46,8 @@ public class XssFilter extends IngoreChecker implements Filter {
             //检测是否有XSS攻击。
             boolean hasXss = checkXss(req);
             if (hasXss) {
-            	ResultMsg resultMsg = new ResultMsg<>(BaseStatusCode.PARAM_ILLEGAL, "检测到提交内容含HTML代码，被拦截！");
-                response.getWriter().print(JSON.toJSONString(resultMsg));
+            	ResultMessage ResultMessage = new ResultMessage<>(CommonStatusCode.PARAM_ILLEGAL, "检测到提交内容含HTML代码，被拦截！");
+                response.getWriter().print(JSON.toJSONString(ResultMessage));
             } else {
                 chain.doFilter(request, response);
             }

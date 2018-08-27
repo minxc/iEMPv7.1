@@ -1,8 +1,8 @@
-package com.dstz.sys.excel.editor;
+package org.minxc.emp.basis.impl.excel.editor;
 
-import com.dstz.sys.excel.ExcelContext;
-import com.dstz.sys.excel.editor.listener.CellValueListener;
-import com.dstz.sys.excel.util.ExcelUtil;
+import org.minxc.emp.basis.impl.excel.ExcelContext;
+import org.minxc.emp.basis.impl.excel.editor.listener.CellValueListener;
+import org.minxc.emp.basis.impl.excel.util.ExcelUtil;
 import org.apache.poi.hssf.usermodel.HSSFFooter;
 import org.apache.poi.hssf.usermodel.HSSFHeader;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -10,7 +10,6 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 /**
  * 表单编辑器，可设置表单的页眉、页脚、打印格式、表名、获取总行数等
  *
- * @author zxh
  */
 public class SheetEditor extends AbstractEditor {
 

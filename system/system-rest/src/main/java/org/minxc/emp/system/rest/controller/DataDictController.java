@@ -1,4 +1,4 @@
-package com.dstz.sys.rest.controller;
+package org.minxc.emp.system.rest.controller;
 
 import java.util.List;
 
@@ -6,20 +6,17 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
+import org.minxc.emp.basis.impl.core.manager.DataDictManager;
+import org.minxc.emp.basis.impl.core.model.DataDict;
+import org.minxc.emp.common.rest.CommonController;
+import org.minxc.emp.core.api.aop.annotation.ErrorCatching;
+import org.minxc.emp.core.api.query.QueryFilter;
+import org.minxc.emp.core.api.query.QueryOperator;
+import org.minxc.emp.core.api.response.impl.ResultMessage;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import com.dstz.base.rest.BaseController;
-import com.dstz.base.rest.util.RequestUtil;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
-import com.dstz.base.api.aop.annotion.CatchErr;
-import com.dstz.base.api.query.QueryFilter;
-import com.dstz.base.api.query.QueryOP;
-import com.dstz.base.api.response.impl.ResultMsg;
-import com.dstz.base.core.util.StringUtil;
-import com.dstz.sys.core.manager.DataDictManager;
-import com.dstz.sys.core.model.DataDict;
 
 
 /**
@@ -28,7 +25,7 @@ import com.dstz.sys.core.model.DataDict;
  */
 @RestController
 @RequestMapping("/sys/dataDict")
-public class DataDictController extends BaseController<DataDict>{
+public class DataDictController extends CommonController<DataDict>{
 	@Resource
 	DataDictManager dataDictManager;
 	
@@ -39,17 +36,17 @@ public class DataDictController extends BaseController<DataDict>{
 	}
 	
 	@RequestMapping("getDictData")
-	public ResultMsg<List<DataDict>> getByDictKey(@RequestParam String dictKey,@RequestParam(defaultValue="false") Boolean hasRoot) throws Exception{
-		if(StringUtil.isEmpty(dictKey)) return null;
+	public ResultMessage<List<DataDict>> getByDictKey(@RequestParam String dictKey,@RequestParam(defaultValue="false") Boolean hasRoot) throws Exception{
+		if(StringUtils.isEmpty(dictKey)) return null;
 		
 		List<DataDict> dict = dataDictManager.getDictNodeList(dictKey,hasRoot);
 		return getSuccessResult(dict);
 	}
 	
 	@RequestMapping("getDictList")
-	public ResultMsg<List<DataDict>> getDictList(HttpServletRequest request) throws Exception{
+	public ResultMessage<List<DataDict>> getDictList(HttpServletRequest request) throws Exception{
 		QueryFilter filter = getQueryFilter(request);
-		filter.addFilter("dict_type_", DataDict.TYPE_DICT, QueryOP.EQUAL);
+		filter.addFilter("dict_type_", DataDict.TYPE_DICT, QueryOperator.EQUAL);
 		filter.setPage(null);
 		
 		List<DataDict> dict = dataDictManager.query(filter);
@@ -63,8 +60,8 @@ public class DataDictController extends BaseController<DataDict>{
 	 * @throws Exception
 	 */
 	@RequestMapping("getDictTree")
-	@CatchErr("获取数据字典失败")
-	public ResultMsg<JSONArray> getDictTree() throws Exception{
+	@ErrorCatching("获取数据字典失败")
+	public ResultMessage<JSONArray> getDictTree() throws Exception{
 		JSONArray dict = dataDictManager.getDictTree();
 		return getSuccessResult(dict);
 	}

@@ -18,8 +18,8 @@ public class DefaultLogoutSuccessHandler implements LogoutSuccessHandler {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         response.setCharacterEncoding("UTF-8");
 
-        ResultMessage resultMsg = new ResultMessage(CommonStatusCode.SUCCESS, "退出登录成功");
-        response.getWriter().print(JacksonUtil.pojo2Json(resultMsg));
+        ResultMessage ResultMessage = new ResultMessage(CommonStatusCode.SUCCESS, "退出登录成功");
+        response.getWriter().print(JacksonUtil.pojo2Json(ResultMessage));
         return;
     }
 

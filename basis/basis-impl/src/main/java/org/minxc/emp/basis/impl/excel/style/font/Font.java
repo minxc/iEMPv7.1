@@ -1,6 +1,6 @@
-package com.dstz.sys.excel.style.font;
+package org.minxc.emp.basis.impl.excel.style.font;
 
-import com.dstz.sys.excel.style.Color;
+import org.minxc.emp.basis.impl.excel.style.Color;
 import org.apache.poi.hssf.usermodel.HSSFFont;
 
 /**

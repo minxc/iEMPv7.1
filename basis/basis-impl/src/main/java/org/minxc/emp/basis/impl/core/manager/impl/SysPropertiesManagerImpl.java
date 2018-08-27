@@ -1,4 +1,4 @@
-package com.dstz.sys.core.manager.impl;
+package org.minxc.emp.basis.impl.core.manager.impl;
 
 import java.util.HashMap;
 import java.util.List;
@@ -6,20 +6,19 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang3.StringUtils;
+import org.minxc.emp.basis.api.constant.EnvironmentConstant;
+import org.minxc.emp.basis.api.service.PropertyService;
+import org.minxc.emp.basis.impl.core.dao.SysPropertiesDao;
+import org.minxc.emp.basis.impl.core.manager.SysPropertiesManager;
+import org.minxc.emp.basis.impl.core.model.SysProperties;
+import org.minxc.emp.common.manager.impl.CommonManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import com.dstz.base.core.cache.ICache;
-import com.dstz.base.core.util.AppUtil;
-import com.dstz.base.core.util.BeanUtils;
-import com.dstz.base.core.util.StringUtil;
-import com.dstz.base.manager.impl.BaseManager;
-import com.dstz.sys.api.constant.EnvironmentConstant;
-import com.dstz.sys.api.service.PropertyService;
-import com.dstz.sys.core.dao.SysPropertiesDao;
-import com.dstz.sys.core.manager.SysPropertiesManager;
-import com.dstz.sys.core.model.SysProperties;
+import com.minxc.emp.core.util.AppContextUtil;
+import com.minxc.emp.core.util.BeanUtils;
 
 /**
  * <pre>
@@ -27,8 +26,9 @@ import com.dstz.sys.core.model.SysProperties;
  * </pre>
  */
 @Service("sysPropertiesManager")
-public class SysPropertiesManagerImpl extends BaseManager<String, SysProperties> implements SysPropertiesManager, PropertyService {
-    @Resource
+public class SysPropertiesManagerImpl extends CommonManager<String, SysProperties> implements SysPropertiesManager, PropertyService {
+
+@Resource
     SysPropertiesDao sysPropertiesDao;
     @Resource
     ICache cache;
@@ -81,7 +81,7 @@ public class SysPropertiesManagerImpl extends BaseManager<String, SysProperties>
             enviromentProps = reloadProperty();
         }
 
-        String currentEnviroment = AppUtil.getCtxEnvironment();
+        String currentEnviroment = AppContextUtil.getCtxEnvironment();
         //获取activeEnviroment中的属性
         if (enviromentProps.containsKey(currentEnviroment)) {
             Map<String, String> currentEnviromentProp = enviromentProps.get(currentEnviroment);
@@ -101,14 +101,14 @@ public class SysPropertiesManagerImpl extends BaseManager<String, SysProperties>
     @Override
     public String getByAlias(String alias, String defaultValue) {
         String val = getByAlias(alias);
-        if (StringUtil.isEmpty(val)) return defaultValue;
+        if (StringUtils.isEmpty(val)) return defaultValue;
         return val;
     }
 
     @Override
     public Integer getIntByAlias(String alias) {
         String val = getByAlias(alias);
-        if (StringUtil.isEmpty(val)) return 0;
+        if (StringUtils.isEmpty(val)) return 0;
         Integer rtn = Integer.parseInt(val);
         return rtn;
     }
@@ -116,7 +116,7 @@ public class SysPropertiesManagerImpl extends BaseManager<String, SysProperties>
     @Override
     public Integer getIntByAlias(String alias, Integer defaulValue) {
         String val = getByAlias(alias);
-        if (StringUtil.isEmpty(val)) return defaulValue;
+        if (StringUtils.isEmpty(val)) return defaulValue;
         Integer rtn = Integer.parseInt(val);
         return rtn;
     }
@@ -124,7 +124,7 @@ public class SysPropertiesManagerImpl extends BaseManager<String, SysProperties>
     @Override
     public Long getLongByAlias(String alias) {
         String val = getByAlias(alias);
-        if (StringUtil.isEmpty(val)) return 0L;
+        if (StringUtils.isEmpty(val)) return 0L;
         Long rtn = Long.parseLong(val);
         return rtn;
     }
@@ -138,7 +138,7 @@ public class SysPropertiesManagerImpl extends BaseManager<String, SysProperties>
     @Override
     public boolean getBooleanByAlias(String alias, boolean defaulValue) {
         String val = getByAlias(alias);
-        if (StringUtil.isEmpty(val)) return defaulValue;
+        if (StringUtils.isEmpty(val)) return defaulValue;
         if ("1".equals(val)) return true;
         return Boolean.parseBoolean(val);
     }

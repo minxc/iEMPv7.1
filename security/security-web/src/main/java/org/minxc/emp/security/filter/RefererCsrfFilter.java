@@ -1,8 +1,9 @@
 package org.minxc.emp.security.filter;
 
 import com.alibaba.fastjson.JSON;
-import org.minxc.emp.base.api.constant.BaseStatusCode;
-import org.minxc.emp.base.api.response.impl.ResultMsg;
+
+import org.minxc.emp.core.api.response.impl.ResultMessage;
+import org.minxc.emp.core.api.status.CommonStatusCode;
 import org.minxc.emp.security.IngoreChecker;
 
 import javax.servlet.*;
@@ -36,8 +37,8 @@ public class RefererCsrfFilter extends IngoreChecker implements Filter {
             if (isIngoreUrl) {
                 chain.doFilter(request, response);
             } else {
-            	 ResultMsg resultMsg = new ResultMsg<>(BaseStatusCode.PARAM_ILLEGAL,referer + "系统不支持当前域名的访问，请联系管理员！");
-                 response.getWriter().print(JSON.toJSONString(resultMsg));
+            	 ResultMessage ResultMessage = new ResultMessage<>(CommonStatusCode.PARAM_ILLEGAL,referer + "系统不支持当前域名的访问，请联系管理员！");
+                 response.getWriter().print(JSON.toJSONString(ResultMessage));
             }
         } else {
             chain.doFilter(request, response);

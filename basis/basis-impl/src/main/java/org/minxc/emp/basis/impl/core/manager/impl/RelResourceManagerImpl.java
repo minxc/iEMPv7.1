@@ -1,15 +1,14 @@
-package com.dstz.sys.core.manager.impl;
+package org.minxc.emp.basis.impl.core.manager.impl;
 
 import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.minxc.emp.basis.impl.core.dao.RelResourceDao;
+import org.minxc.emp.basis.impl.core.manager.RelResourceManager;
+import org.minxc.emp.basis.impl.core.model.RelResource;
+import org.minxc.emp.common.manager.impl.CommonManager;
 import org.springframework.stereotype.Service;
-
-import com.dstz.base.manager.impl.BaseManager;
-import com.dstz.sys.core.dao.RelResourceDao;
-import com.dstz.sys.core.manager.RelResourceManager;
-import com.dstz.sys.core.model.RelResource;
 
 /**
  * <pre>
@@ -17,7 +16,7 @@ import com.dstz.sys.core.model.RelResource;
  * </pre>
  */
 @Service("relResourceManager")
-public class RelResourceManagerImpl extends BaseManager<String, RelResource> implements RelResourceManager {
+public class RelResourceManagerImpl extends CommonManager<String, RelResource> implements RelResourceManager {
     @Resource
     RelResourceDao relResourceDao;
 

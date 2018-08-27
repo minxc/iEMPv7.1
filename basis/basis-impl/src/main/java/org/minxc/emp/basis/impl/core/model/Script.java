@@ -1,10 +1,11 @@
-package com.dstz.sys.core.model;
+package org.minxc.emp.basis.impl.core.model;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-import com.dstz.base.core.model.BaseModel;
+import com.minxc.emp.core.impl.model.AbstractCommonModel;
 
-public class Script extends BaseModel implements Cloneable {
+
+public class Script extends AbstractCommonModel implements Cloneable {
 
     private static final long serialVersionUID = 1L;
     protected String name;        /*名称*/

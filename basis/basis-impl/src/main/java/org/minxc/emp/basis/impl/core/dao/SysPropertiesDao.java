@@ -1,19 +1,19 @@
-package com.dstz.sys.core.dao;
+package org.minxc.emp.basis.impl.core.dao;
 
-import com.dstz.base.dao.BaseDao;
-import com.dstz.sys.core.model.SysProperties;
 
 import java.util.List;
 
-import org.mybatis.spring.annotation.MapperScan;
+import org.apache.ibatis.annotations.Mapper;
+import org.minxc.emp.basis.impl.core.model.SysProperties;
+import org.minxc.emp.common.db.dao.CommonDao;
+
 
 /**
- * <pre>
- * 描述：SYS_PROPERTIES DAO接口
- * </pre>
+ * SYS_PROPERTIES DAO接口
  */
-@MapperScan
-public interface SysPropertiesDao extends BaseDao<String, SysProperties> {
+@Mapper
+
+public interface SysPropertiesDao extends CommonDao<String, SysProperties> {
 
     /**
      * 分组列表。

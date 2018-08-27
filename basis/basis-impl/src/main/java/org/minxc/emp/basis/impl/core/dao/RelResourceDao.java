@@ -1,19 +1,17 @@
-package com.dstz.sys.core.dao;
+package org.minxc.emp.basis.impl.core.dao;
 
-import com.dstz.base.dao.BaseDao;
-import com.dstz.sys.core.model.RelResource;
 
 import java.util.List;
 
-import org.mybatis.spring.annotation.MapperScan;
+import org.apache.ibatis.annotations.Mapper;
+import org.minxc.emp.basis.impl.core.model.RelResource;
+import org.minxc.emp.common.db.dao.CommonDao;
 
 /**
- * <pre>
  * 描述：关联资源 DAO接口
- * </pre>
  */
-@MapperScan
-public interface RelResourceDao extends BaseDao<String, RelResource> {
+@Mapper
+public interface RelResourceDao extends CommonDao<String, RelResource> {
 
     List<RelResource> getByResourceId(String resId);
 

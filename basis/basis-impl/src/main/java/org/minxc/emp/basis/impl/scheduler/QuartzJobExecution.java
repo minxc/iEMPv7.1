@@ -1,12 +1,11 @@
-package com.dstz.sys.scheduler;
+package org.minxc.emp.basis.impl.scheduler;
 
-import com.dstz.sys.core.model.SysScheduleJob;
+import org.minxc.emp.basis.impl.core.model.SysScheduleJob;
 import org.quartz.JobExecutionContext;
 
 /**
  * quartz任务执行
  *
- * @author didi
  */
 public class QuartzJobExecution extends AbstractQuartzJob {
 

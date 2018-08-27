@@ -1,41 +1,35 @@
-package com.dstz.sys2.manager.impl;
+package org.minxc.emp.system.impl.manager.impl;
 
 import java.util.Map;
 
 import javax.sql.DataSource;
 
+import org.apache.commons.lang3.StringUtils;
+import org.minxc.emp.common.db.datasource.DataSourceUtil;
+import org.minxc.emp.common.db.model.query.DefaultQueryFilter;
+import org.minxc.emp.common.manager.impl.CommonManager;
+import org.minxc.emp.core.api.exception.BusinessException;
+import org.minxc.emp.core.api.query.QueryFilter;
+import org.minxc.emp.core.api.query.QueryOperator;
+import org.minxc.emp.core.api.status.CommonStatusCode;
+import org.minxc.emp.system.impl.dao.SysDataSourceDao;
+import org.minxc.emp.system.impl.manager.SysDataSourceManager;
+import org.minxc.emp.system.impl.model.SysDataSource;
+import org.minxc.emp.system.impl.model.def.SysDataSourceDefAttribute;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
-import com.dstz.base.api.constant.BaseStatusCode;
-import com.dstz.base.api.exception.BusinessException;
-import com.dstz.base.api.query.QueryFilter;
-import com.dstz.base.api.query.QueryOP;
-import com.dstz.base.core.util.AppUtil;
-import com.dstz.base.core.util.BeanUtils;
-import com.dstz.base.core.util.StringUtil;
-import com.dstz.base.db.datasource.DataSourceUtil;
-import com.dstz.base.db.model.query.DefaultQueryFilter;
-import com.dstz.base.manager.impl.BaseManager;
-import com.dstz.sys2.dao.SysDataSourceDao;
-import com.dstz.sys2.manager.SysDataSourceManager;
-import com.dstz.sys2.model.SysDataSource;
-import com.dstz.sys2.model.def.SysDataSourceDefAttribute;
+import com.minxc.emp.core.util.AppContextUtil;
+import com.minxc.emp.core.util.BeanUtils;
 
 /**
- * <pre>
  * 描述：数据源 Manager处理实现类
- * 构建组：白日梦团体
- * 作者:aschs
- * 邮箱:aschs@qq.com
- * 日期:2018-01-08 21:14:05
- * 版权：summer
- * </pre>
  */
 @Service
-public class SysDataSourceManagerImpl extends BaseManager<String, SysDataSource> implements SysDataSourceManager {
-    @Autowired
+public class SysDataSourceManagerImpl extends CommonManager<String, SysDataSource> implements SysDataSourceManager {
+   
+	@Autowired
     SysDataSourceDao sysDataSourceDao;
 
     @Override
@@ -46,7 +40,7 @@ public class SysDataSourceManagerImpl extends BaseManager<String, SysDataSource>
 
             // 设置值
             for (SysDataSourceDefAttribute attribute : sysDataSource.getAttributes()) {
-                if (StringUtil.isEmpty(attribute.getValue())) {
+                if (StringUtils.isEmpty(attribute.getValue())) {
                     continue;
                 }
                 Object value = BeanUtils.getValue(attribute.getType(), attribute.getValue());
@@ -61,7 +55,7 @@ public class SysDataSourceManagerImpl extends BaseManager<String, SysDataSource>
     @Override
     public SysDataSource getByKey(String key) {
         QueryFilter filter = new DefaultQueryFilter();
-        filter.addFilter("key_", key, QueryOP.EQUAL);
+        filter.addFilter("key_", key, QueryOperator.EQUAL);
         return this.queryOne(filter);
     }
 
@@ -81,7 +75,7 @@ public class SysDataSourceManagerImpl extends BaseManager<String, SysDataSource>
                 DataSourceUtil.addDataSource(key, dataSource, sysDataSource.getDbType(), true);
             }
         }
-        throw new BusinessException("在系统中找不到key为[" + key + "]的数据源", BaseStatusCode.SYSTEM_ERROR);
+        throw new BusinessException("在系统中找不到key为[" + key + "]的数据源", CommonStatusCode.SYSTEM_ERROR);
     }
 
     @Override
@@ -93,7 +87,7 @@ public class SysDataSourceManagerImpl extends BaseManager<String, SysDataSource>
     public JdbcTemplate getJdbcTemplateByKey(String key) {
     	//本地数据源 拿系统配置的jdbc 为了事务保护 哎 处理好jta事务就没这种问题了，nnd
     	if(DataSourceUtil.DEFAULT_DATASOURCE.equals(key)) {
-    		return AppUtil.getBean(JdbcTemplate.class);
+    		return AppContextUtil.getBean(JdbcTemplate.class);
     	}
         return new JdbcTemplate(getDataSourceByKey(key));
     }

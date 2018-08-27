@@ -11,6 +11,11 @@
 
     <groupId>org.minxc.emp</groupId>
     <artifactId>biz</artifactId>
+	<packaging>pom</packaging>
 
-
+	<modules>
+		<module>biz-api</module>
+		<module>biz-impl</module>
+		<module>biz-rest</module>
+	</modules>
 </project>

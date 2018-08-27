@@ -24,8 +24,8 @@ public class DefualtAuthenticationEntryPoint implements AuthenticationEntryPoint
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         response.setCharacterEncoding("UTF-8");
 
-        ResultMessage resultMsg = new ResultMessage(CommonStatusCode.TIMEOUT, authException.getMessage());
-        response.getWriter().print(JacksonUtil.pojo2Json(resultMsg));
+        ResultMessage ResultMessage = new ResultMessage(CommonStatusCode.TIMEOUT, authException.getMessage());
+        response.getWriter().print(JacksonUtil.pojo2Json(ResultMessage));
         return;
     }
 

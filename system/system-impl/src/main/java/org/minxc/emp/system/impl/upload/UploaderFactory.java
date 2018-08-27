@@ -1,20 +1,15 @@
-package com.dstz.sys2.upload;
+package org.minxc.emp.system.impl.upload;
 
 import java.util.Map;
 import java.util.Map.Entry;
 
-import com.dstz.base.api.exception.BusinessException;
-import com.dstz.base.core.util.AppUtil;
-import com.dstz.base.core.util.PropertyUtil;
+import org.minxc.emp.core.api.exception.BusinessException;
+
+import com.minxc.emp.core.util.AppContextUtil;
+import com.minxc.emp.core.util.PropertiesUtil;
 
 /**
- * <pre>
  * 描述：上传器工厂
- * 作者:aschs
- * 邮箱:aschs@qq.com
- * 日期:2018年6月6日
- * 版权:summer
- * </pre>
  */
 public class UploaderFactory {
 	private UploaderFactory() {
@@ -30,7 +25,7 @@ public class UploaderFactory {
 	 * @return
 	 */
 	public static IUploader getUploader(String type) {
-		Map<String, IUploader> map = AppUtil.getImplInstance(IUploader.class);
+		Map<String, IUploader> map = AppContextUtil.getImplInstance(IUploader.class);
 		for (Entry<String, IUploader> entry : map.entrySet()) {
 			if (entry.getValue().type().equals(type)) {
 				return entry.getValue();
@@ -47,6 +42,6 @@ public class UploaderFactory {
 	 * @return
 	 */
 	public static IUploader getDefault() {
-		return getUploader(PropertyUtil.getProperty("uploader.default"));
+		return getUploader(PropertiesUtil.getProperty("uploader.default"));
 	}
 }

@@ -1,17 +1,21 @@
-package com.dstz.sys.simplemq.handler.msg;
+package org.minxc.emp.basis.impl.simplemq.handler.msg;
 
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+import org.minxc.emp.basis.api.jms.model.msg.NotifyMessage;
+import org.minxc.emp.idm.api.model.User;
 import org.springframework.stereotype.Component;
 
-import com.dstz.base.core.util.BeanUtils;
-import com.dstz.base.core.util.StringUtil;
-import com.dstz.org.api.model.IUser;
-import com.dstz.sys.api.jms.model.msg.NotifyMessage;
+import com.minxc.emp.core.util.BeanUtils;
+
+import lombok.extern.slf4j.Slf4j;
+
 
 /**
  * 短消息发送处理器。
  */
+@Slf4j
 @Component
 public class SmsHandler extends AbsNotifyMessageHandler<NotifyMessage> {
 
@@ -24,15 +28,15 @@ public class SmsHandler extends AbsNotifyMessageHandler<NotifyMessage> {
     public boolean sendMessage(NotifyMessage message) {
     	
         // 调用阿里大于
-        List<IUser> recievers =null; message.getReceivers();
+        List<User> recievers =null; message.getReceivers();
         String content = message.getTextContent();
         String templateCode = null;//message.getSmsTemplateNo();
 
-        if (StringUtil.isEmpty(content) || BeanUtils.isEmpty(recievers)) return false;
+        if (StringUtils.isEmpty(content) || BeanUtils.isEmpty(recievers)) return false;
 
 
-        for (IUser user : recievers) {
-            if (StringUtil.isEmpty(user.getMobile())) continue;
+        for (User user : recievers) {
+            if (StringUtils.isEmpty(user.getMobile())) continue;
 			
 	/*		AlibabaAliqinFcSmsNumSendRequest req = new AlibabaAliqinFcSmsNumSendRequest();
 			req.setExtend(alidayuSetting.getExtend());

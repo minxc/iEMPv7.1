@@ -1,4 +1,4 @@
-package com.dstz.sys.excel.editor;
+package org.minxc.emp.basis.impl.excel.editor;
 
 import org.apache.poi.hssf.usermodel.HSSFPrintSetup;
 

@@ -1,13 +1,14 @@
-package com.dstz.sys.redis;
+package org.minxc.emp.basis.impl.redis;
 
-import com.dstz.base.core.util.SerializeUtil;
-import com.dstz.sys.api.redis.IRedisService;
+import org.minxc.emp.basis.api.redis.IRedisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+
+import com.minxc.emp.core.util.SerializeUtil;
 
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;

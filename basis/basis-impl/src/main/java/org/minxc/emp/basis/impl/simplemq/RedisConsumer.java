@@ -1,20 +1,19 @@
-package com.dstz.sys.simplemq;
+package org.minxc.emp.basis.impl.simplemq;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.minxc.emp.basis.api.jms.consumer.JmsConsumer;
+import org.minxc.emp.basis.api.jms.model.JmsDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.dstz.base.core.util.AppUtil;
-import com.dstz.base.core.util.BeanUtils;
-import com.dstz.sys.api.jms.consumer.JmsConsumer;
-import com.dstz.sys.api.jms.model.JmsDTO;
+import com.minxc.emp.core.util.AppContextUtil;
+import com.minxc.emp.core.util.BeanUtils;
 
 /**
  * 获取消息的具体消费者并交给该处理着处理消息
- * @author Jeff
  */
 public class RedisConsumer {
 	protected  Logger LOG = LoggerFactory.getLogger(getClass());
@@ -38,7 +37,7 @@ public class RedisConsumer {
 	private synchronized void  InitConsumer() {
 		if(BeanUtils.isNotEmpty(jmsConsumerMap)) return ;
 		
-		Map<String, JmsConsumer> jmsConsumerImpls = AppUtil.getImplInstance(JmsConsumer.class);
+		Map<String, JmsConsumer> jmsConsumerImpls = AppContextUtil.getImplInstance(JmsConsumer.class);
 		
 		jmsConsumerMap = new HashMap<>();
 		for(Entry<String, JmsConsumer> consumer : jmsConsumerImpls.entrySet()) {

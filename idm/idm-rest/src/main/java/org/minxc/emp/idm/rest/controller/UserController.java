@@ -5,6 +5,7 @@ import com.minxc.emp.core.util.CryptoUtil;
 
 
 import org.apache.commons.lang3.StringUtils;
+import org.minxc.emp.basis.impl.util.ContextUtil;
 import org.minxc.emp.common.db.id.UniqueIdUtil;
 import org.minxc.emp.common.db.model.page.PageJson;
 import org.minxc.emp.common.rest.CommonController;
@@ -27,9 +28,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * <pre>
  * 描述：用户表 控制器类
- * </pre>
  */
 @RestController
 @RequestMapping("/org/user")
@@ -86,7 +85,7 @@ public class UserController extends CommonController<UserEntity> {
     @Override
     @ErrorCatching(writeErrorToResponse = true, value = "操作用户失败！")
     public ResultMessage<String> save( @RequestBody UserEntity user) throws Exception {
-        String resultMsg = null;
+        String ResultMessage = null;
         boolean isExist = userManager.isUserExist(user);
         if (isExist) {
             throw new BusinessException("用户在系统中已存在!");
@@ -107,13 +106,13 @@ public class UserController extends CommonController<UserEntity> {
                 orgUserManager.create(orgUser);
             }
             userManager.create(user);
-            resultMsg = "添加用户成功!";
+            ResultMessage = "添加用户成功!";
         } else {
             userManager.update(user);
-            resultMsg = "更新用户成功";
+            ResultMessage = "更新用户成功";
         }
         
-        return getSuccessResult(user.getId(), resultMsg);
+        return getSuccessResult(user.getId(), ResultMessage);
     }
 
 
@@ -148,7 +147,7 @@ public class UserController extends CommonController<UserEntity> {
         String orgId = RequestUtil.getString(request, "orgId");
         String relId = RequestUtil.getString(request, "relId");
         queryFilter.addFilter("orguser.org_id_", orgId, QueryOperator.EQUAL);
-        if (StringUtil.isNotEmpty(relId)) {
+        if (StringUtils.isNotEmpty(relId)) {
             queryFilter.addFilter("orguser.rel_id_", relId, QueryOperator.EQUAL);
         }
         Page orgUserList = (Page) orgUserManager.getUserByGroup(queryFilter);

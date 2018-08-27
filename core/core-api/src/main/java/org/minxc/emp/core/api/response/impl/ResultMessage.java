@@ -10,7 +10,7 @@ import java.util.Map;
 
 /**
  * 项目名称：base-intf
- * 类名称：ResultMsg
+ * 类名称：ResultMessage
  * 类描述：回结果
  * 创建人：Xianchang.min
  * 创建时间：2018年8月21日 下午11:02:33
@@ -21,9 +21,15 @@ import java.util.Map;
  * @version 1.0
  */
 public class ResultMessage<T> extends BaseResult {
-
-
-    private static final long serialVersionUID = 2299392167452381897L;
+    
+    @Deprecated
+    public static final int SUCCESS = 1;
+    @Deprecated
+    public static final int FAIL = 0;
+    @Deprecated
+    public static final int ERROR = -1;
+    @Deprecated
+    public static final int TIMEOUT = 2;
 
     private T data = null; // 返回数据
 
@@ -48,7 +54,11 @@ public class ResultMessage<T> extends BaseResult {
         this.setStatusCode(code);
         this.setMessage(msg);
     }
-
+    @Deprecated
+    public ResultMessage(int code, String msg) {
+        this.setSuccess(code == SUCCESS);
+        this.setMessage(msg);
+    }
 
     public T getData() {
         return data;

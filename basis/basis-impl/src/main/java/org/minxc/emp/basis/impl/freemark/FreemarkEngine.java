@@ -1,11 +1,13 @@
-package com.dstz.sys.freemark;
+package org.minxc.emp.basis.impl.freemark;
 
-import com.dstz.base.core.util.PropertyUtil;
-import com.dstz.sys.api.freemark.IFreemarkEngine;
+import com.minxc.emp.core.util.PropertiesUtil;
+
 import freemarker.cache.StringTemplateLoader;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+
+import org.minxc.emp.basis.api.freemark.IFreemarkEngine;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
@@ -20,7 +22,7 @@ public class FreemarkEngine implements IFreemarkEngine {
 
     public Configuration getFormTemplateConfiguration() throws IOException {
         if (formTemplateConfig == null) {
-            String templatePath = PropertyUtil.getProperty("formTemplateUrl", "src/main/resources/templates");
+            String templatePath = PropertiesUtil.getProperty("formTemplateUrl", "src/main/resources/templates");
             formTemplateConfig = new Configuration();
             formTemplateConfig.setDefaultEncoding("UTF-8");
             formTemplateConfig.setDirectoryForTemplateLoading(new File(templatePath));

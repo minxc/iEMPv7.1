@@ -1,28 +1,24 @@
-package com.dstz.sys2.manager.impl;
+package org.minxc.emp.system.impl.manager.impl;
 
 import javax.annotation.Resource;
 
+import org.minxc.emp.common.db.model.query.DefaultQueryFilter;
+import org.minxc.emp.common.manager.impl.CommonManager;
+import org.minxc.emp.core.api.query.QueryFilter;
+import org.minxc.emp.core.api.query.QueryOperator;
+import org.minxc.emp.system.impl.dao.SysTreeDao;
+import org.minxc.emp.system.impl.manager.SysTreeManager;
+import org.minxc.emp.system.impl.manager.SysTreeNodeManager;
+import org.minxc.emp.system.impl.model.SysTree;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.dstz.base.api.query.QueryFilter;
-import com.dstz.base.api.query.QueryOP;
-import com.dstz.base.db.model.query.DefaultQueryFilter;
-import com.dstz.base.manager.impl.BaseManager;
-import com.dstz.sys2.dao.SysTreeDao;
-import com.dstz.sys2.manager.SysTreeManager;
-import com.dstz.sys2.manager.SysTreeNodeManager;
-import com.dstz.sys2.model.SysTree;
 
 /**
  * 系统树 Manager处理实现类
- *
- * @author aschs
- * @email aschs@qq.com
- * @time 2018-03-13 19:58:28
  */
 @Service("sysTreeManager")
-public class SysTreeManagerImpl extends BaseManager<String, SysTree> implements SysTreeManager {
+public class SysTreeManagerImpl extends CommonManager<String, SysTree> implements SysTreeManager {
     @Resource
     SysTreeDao sysTreeDao;
     @Autowired
@@ -31,7 +27,7 @@ public class SysTreeManagerImpl extends BaseManager<String, SysTree> implements 
     @Override
     public SysTree getByKey(String key) {
         QueryFilter filter = new DefaultQueryFilter();
-        filter.addFilter("key_", key, QueryOP.EQUAL);
+        filter.addFilter("key_", key, QueryOperator.EQUAL);
         return this.queryOne(filter);
     }
 

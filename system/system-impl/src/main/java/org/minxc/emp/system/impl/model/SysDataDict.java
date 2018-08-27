@@ -1,22 +1,22 @@
-package com.dstz.sys2.model;
+package org.minxc.emp.system.impl.model;
 
-import com.dstz.base.api.model.Tree;
-import org.hibernate.validator.constraints.NotEmpty;
 
 import java.io.Serializable;
 import java.util.List;
 
+import javax.validation.constraints.NotEmpty;
+import org.minxc.emp.core.api.model.TreeModel;
+
+
 /**
- * <pre>
  * 描述：系统
- * 作者:aschs
- * 邮箱:aschs@qq.com
- * 日期:2018年3月13日 下午5:36:18
- * 版权:summer
- * </pre>
  */
-public class SysDataDict implements Tree<SysDataDict>, Serializable {
+public class SysDataDict implements TreeModel<SysDataDict>, Serializable {
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4009402647439940554L;
+	/**
      * 主键
      */
     @NotEmpty

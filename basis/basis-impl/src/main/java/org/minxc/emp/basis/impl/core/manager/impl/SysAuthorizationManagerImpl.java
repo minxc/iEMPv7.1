@@ -1,4 +1,4 @@
-package com.dstz.sys.core.manager.impl;
+package org.minxc.emp.basis.impl.core.manager.impl;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -9,23 +9,24 @@ import java.util.Set;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang3.StringUtils;
+import org.minxc.emp.basis.api.constant.RightsObjectConstants;
+import org.minxc.emp.basis.impl.core.dao.SysAuthorizationDao;
+import org.minxc.emp.basis.impl.core.manager.SysAuthorizationManager;
+import org.minxc.emp.basis.impl.core.model.SysAuthorization;
+import org.minxc.emp.basis.impl.util.ContextUtil;
+import org.minxc.emp.common.manager.impl.CommonManager;
+import org.minxc.emp.idm.api.model.Group;
+import org.minxc.emp.idm.api.service.GroupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.dstz.base.core.util.BeanUtils;
-import com.dstz.base.core.util.StringUtil;
-import com.dstz.base.manager.impl.BaseManager;
-import com.dstz.org.api.model.IGroup;
-import com.dstz.org.api.service.GroupService;
-import com.dstz.sys.api.constant.RightsObjectConstants;
-import com.dstz.sys.core.dao.SysAuthorizationDao;
-import com.dstz.sys.core.manager.SysAuthorizationManager;
-import com.dstz.sys.core.model.SysAuthorization;
-import com.dstz.sys.util.ContextUtil;
+import com.minxc.emp.core.util.BeanUtils;
+
 
 
 @Service("sysAuthorizationManager")
-public class SysAuthorizationManagerImpl extends BaseManager<String, SysAuthorization> implements SysAuthorizationManager {
+public class SysAuthorizationManagerImpl extends CommonManager<String, SysAuthorization> implements SysAuthorizationManager {
 
     @Resource
     private SysAuthorizationDao sysAuthorizationDao;
@@ -39,7 +40,7 @@ public class SysAuthorizationManagerImpl extends BaseManager<String, SysAuthoriz
      */
     @Override
     public Set<String> getUserRights(String userId) {
-        List<IGroup> list = userGroupService.getGroupsByUserId(userId);
+        List<Group> list = userGroupService.getGroupsByUserId(userId);
 
         Set<String> rights = new HashSet<String>();
         rights.add(String.format("%s-%s", userId, SysAuthorization.RIGHT_TYPE_USER));
@@ -48,7 +49,7 @@ public class SysAuthorizationManagerImpl extends BaseManager<String, SysAuthoriz
 
         if (BeanUtils.isEmpty(list)) return rights;
 
-        for (IGroup group : list) {
+        for (Group group : list) {
             rights.add(String.format("%s-%s", group.getGroupId(), group.getGroupType()));
         }
 
@@ -64,7 +65,7 @@ public class SysAuthorizationManagerImpl extends BaseManager<String, SysAuthoriz
      */
     @Override
     public Map<String, Object> getUserRightsSql(RightsObjectConstants rightsObject, String userId, String targetKey) {
-        if (StringUtil.isEmpty(targetKey)) {
+        if (StringUtils.isEmpty(targetKey)) {
             targetKey = "id_";
         }
 
@@ -102,7 +103,7 @@ public class SysAuthorizationManagerImpl extends BaseManager<String, SysAuthoriz
 
         for (SysAuthorization authorization : sysAuthorizationList) {
             authorization.setRightsPermissionCode(String.format("%s-%s", authorization.getRightsIdentity(), authorization.getRightsType()));
-            if (StringUtil.isEmpty(authorization.getRightsObject())) {
+            if (StringUtils.isEmpty(authorization.getRightsObject())) {
                 authorization.setRightsObject(targetObject);
             }
             authorization.setRightsCreateBy(ContextUtil.getCurrentUserId());

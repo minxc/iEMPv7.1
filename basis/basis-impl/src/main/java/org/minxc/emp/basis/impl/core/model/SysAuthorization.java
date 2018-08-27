@@ -1,15 +1,14 @@
-package com.dstz.sys.core.model;
+package org.minxc.emp.basis.impl.core.model;
 
-import com.dstz.base.core.model.BaseModel;
+import com.minxc.emp.core.impl.model.AbstractCommonModel;
+
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 
-/**
- * @author jeff
- */
-public class SysAuthorization extends BaseModel {
+public class SysAuthorization extends AbstractCommonModel {
 
-    public static final String RIGHT_TYPE_USER = "user";
+	private static final long serialVersionUID = -9041027522795386765L;
+	public static final String RIGHT_TYPE_USER = "user";
     public static final String RIGHT_TYPE_ALL = "all";
 
     /**

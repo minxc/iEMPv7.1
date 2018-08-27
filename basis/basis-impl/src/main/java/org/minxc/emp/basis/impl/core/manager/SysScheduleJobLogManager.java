@@ -1,11 +1,12 @@
-package com.dstz.sys.core.manager;
+package org.minxc.emp.basis.impl.core.manager;
 
-import com.dstz.base.manager.Manager;
-import com.dstz.sys.core.model.SysScheduleJobLog;
+import org.minxc.emp.basis.impl.core.model.SysScheduleJobLog;
+import org.minxc.emp.common.manager.Manager;
 
 /**
+ * 
+ * @author Xianchang.min
  *
- * @author didi
  */
 public interface SysScheduleJobLogManager extends Manager<String, SysScheduleJobLog> {
 

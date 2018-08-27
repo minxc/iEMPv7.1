@@ -1,9 +1,9 @@
-package com.dstz.sys.core.manager.impl;
+package org.minxc.emp.basis.impl.core.manager.impl;
 
-import com.dstz.base.manager.impl.BaseManager;
-import com.dstz.sys.core.dao.SysScheduleJobLogDao;
-import com.dstz.sys.core.manager.SysScheduleJobLogManager;
-import com.dstz.sys.core.model.SysScheduleJobLog;
+import org.minxc.emp.basis.impl.core.dao.SysScheduleJobLogDao;
+import org.minxc.emp.basis.impl.core.manager.SysScheduleJobLogManager;
+import org.minxc.emp.basis.impl.core.model.SysScheduleJobLog;
+import org.minxc.emp.common.manager.impl.CommonManager;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -12,7 +12,7 @@ import javax.annotation.Resource;
  * @author didi
  */
 @Service("sysScheduleJobLogManager")
-public class SysScheduleJobLogManagerImpl extends BaseManager<String, SysScheduleJobLog> implements SysScheduleJobLogManager {
+public class SysScheduleJobLogManagerImpl extends CommonManager<String, SysScheduleJobLog> implements SysScheduleJobLogManager {
 
     @Resource
     private SysScheduleJobLogDao sysScheduleJobLogDao;

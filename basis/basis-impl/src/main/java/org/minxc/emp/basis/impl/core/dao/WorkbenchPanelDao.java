@@ -1,16 +1,17 @@
-package com.dstz.sys.core.dao;
+package org.minxc.emp.basis.impl.core.dao;
 
-import com.dstz.base.api.query.QueryFilter;
-import com.dstz.base.dao.BaseDao;
-import com.dstz.sys.core.model.WorkbenchPanel;
 
 import java.util.List;
 import java.util.Map;
 
-import org.mybatis.spring.annotation.MapperScan;
+import org.apache.ibatis.annotations.Mapper;
+import org.minxc.emp.basis.impl.core.model.WorkbenchPanel;
+import org.minxc.emp.common.db.dao.CommonDao;
+import org.minxc.emp.core.api.query.QueryFilter;
 
-@MapperScan
-public interface WorkbenchPanelDao extends BaseDao<String, WorkbenchPanel> {
+
+@Mapper
+public interface WorkbenchPanelDao extends CommonDao<String, WorkbenchPanel> {
     /**
      * 获取用户可用的
      *

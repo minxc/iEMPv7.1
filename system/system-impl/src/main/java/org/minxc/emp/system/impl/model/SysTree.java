@@ -1,21 +1,17 @@
-package com.dstz.sys2.model;
-
-import com.dstz.base.core.model.BaseModel;
-import org.hibernate.validator.constraints.NotEmpty;
+package org.minxc.emp.system.impl.model;
 
 import java.util.List;
 
+import javax.validation.constraints.NotEmpty;
+
+import com.minxc.emp.core.impl.model.AbstractCommonModel;
+
 /**
- * <pre>
  * 描述：系统树
- * 作者:aschs
- * 邮箱:aschs@qq.com
- * 日期:2018年3月13日 下午6:43:24
- * 版权:summer
- * </pre>
  */
-public class SysTree extends BaseModel {
-    /**
+public class SysTree extends AbstractCommonModel {
+	private static final long serialVersionUID = 7359943904089818902L;
+	/**
      * 别名
      */
     @NotEmpty

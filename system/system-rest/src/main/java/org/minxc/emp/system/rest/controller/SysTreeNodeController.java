@@ -1,33 +1,27 @@
-package com.dstz.sys.rest.controller;
+package org.minxc.emp.system.rest.controller;
 
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
+import org.minxc.emp.common.db.id.UniqueIdUtil;
+import org.minxc.emp.common.rest.GenericController;
+import org.minxc.emp.common.rest.util.RequestUtil;
+import org.minxc.emp.core.api.aop.annotation.ErrorCatching;
+import org.minxc.emp.system.impl.manager.SysTreeManager;
+import org.minxc.emp.system.impl.manager.SysTreeNodeManager;
+import org.minxc.emp.system.impl.model.SysTreeNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.dstz.base.api.aop.annotion.CatchErr;
-import com.dstz.base.core.util.StringUtil;
-import com.dstz.base.db.id.UniqueIdUtil;
-import com.dstz.base.rest.GenericController;
-import com.dstz.base.rest.util.RequestUtil;
-import com.dstz.sys2.manager.SysTreeManager;
-import com.dstz.sys2.manager.SysTreeNodeManager;
-import com.dstz.sys2.model.SysTreeNode;
 
 /**
- * <pre>
- * 描述：sysTreeNode层的controller
- * 作者:aschs
- * 邮箱:aschs@qq.com
- * 日期:下午5:11:06
- * 版权:summer
- * </pre>
+ * sysTreeNode层的controller
  */
 @Controller
 @RequestMapping("/sys/sysTreeNode/")
@@ -49,9 +43,9 @@ public class SysTreeNodeController extends GenericController {
      * @throws Exception
      */
     @RequestMapping("save")
-    @CatchErr(write2response = true, value = "保存系统树节点失败")
+    @ErrorCatching(writeErrorToResponse = true, value = "保存系统树节点失败")
     public void save(HttpServletRequest request, HttpServletResponse response, @RequestBody SysTreeNode sysTreeNode) throws Exception {
-        if (StringUtil.isEmpty(sysTreeNode.getId())) {
+        if (StringUtils.isEmpty(sysTreeNode.getId())) {
             sysTreeNode.setId(UniqueIdUtil.getSuid());
             handleNewSysTreeNode(sysTreeNode);
             sysTreeNodeManager.create(sysTreeNode);
@@ -78,14 +72,14 @@ public class SysTreeNodeController extends GenericController {
         String treeId = RequestUtil.getString(request, "treeId");
         String key = RequestUtil.getString(request, "nodeKey");
         String treeKey = RequestUtil.getString(request, "treeKey");
-        if (StringUtil.isNotEmpty(treeKey) && StringUtil.isEmpty(treeId)) {
+        if (StringUtils.isNotEmpty(treeKey) && StringUtils.isEmpty(treeId)) {
             treeId = sysTreeManager.getByKey(treeKey).getId();
         }
 
-        if (StringUtil.isNotEmpty(key) && StringUtil.isNotEmpty(treeId)) {
+        if (StringUtils.isNotEmpty(key) && StringUtils.isNotEmpty(treeId)) {
             SysTreeNode node = sysTreeNodeManager.getByTreeIdAndKey(treeId, key);
             nodes = sysTreeNodeManager.getStartWithPath(node.getPath());
-        } else if (StringUtil.isNotEmpty(treeId)) {
+        } else if (StringUtils.isNotEmpty(treeId)) {
             nodes = sysTreeNodeManager.getByTreeId(treeId);
         }
         return nodes;
@@ -101,7 +95,7 @@ public class SysTreeNodeController extends GenericController {
      * @throws Exception
      */
     @RequestMapping("remove")
-    @CatchErr(write2response = true, value = "删除系统树节点失败")
+    @ErrorCatching(writeErrorToResponse = true, value = "删除系统树节点失败")
     public void remove(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String[] aryIds = RequestUtil.getStringAryByStr(request, "id");
         for (String id : aryIds) {
@@ -120,7 +114,7 @@ public class SysTreeNodeController extends GenericController {
      */
     private void handleNewSysTreeNode(SysTreeNode sysTreeNode) {
         // 新增时处理一下path
-        if (StringUtil.isNotEmpty(sysTreeNode.getPath())) {
+        if (StringUtils.isNotEmpty(sysTreeNode.getPath())) {
             sysTreeNode.setPath(sysTreeNode.getPath() + sysTreeNode.getId() + ".");
         } else {
             sysTreeNode.setPath(sysTreeNode.getId() + ".");

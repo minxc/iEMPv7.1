@@ -1,20 +1,13 @@
-package com.dstz.sys2.manager;
-
-import com.dstz.base.manager.Manager;
-import com.dstz.sys2.model.SysDataSourceDef;
-import com.dstz.sys2.model.def.SysDataSourceDefAttribute;
+package org.minxc.emp.system.impl.manager;
 
 import java.util.List;
 
+import org.minxc.emp.common.manager.Manager;
+import org.minxc.emp.system.impl.model.SysDataSourceDef;
+import org.minxc.emp.system.impl.model.def.SysDataSourceDefAttribute;
+
 /**
- * <pre>
- * 描述：数据源模板 Manager处理接口
- * 构建组：白日梦团体
- * 作者:aschs
- * 邮箱:aschs@qq.com
- * 日期:2018-01-03 18:04:15
- * 版权：summer
- * </pre>
+ * 数据源模板 Manager处理接口
  */
 public interface SysDataSourceDefManager extends Manager<String, SysDataSourceDef> {
 

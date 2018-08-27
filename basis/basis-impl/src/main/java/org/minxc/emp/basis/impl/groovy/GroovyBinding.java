@@ -1,4 +1,4 @@
-package com.dstz.sys.groovy;
+package org.minxc.emp.basis.impl.groovy;
 
 import groovy.lang.Binding;
 

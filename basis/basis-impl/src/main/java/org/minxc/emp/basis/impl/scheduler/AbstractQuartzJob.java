@@ -1,27 +1,26 @@
-package com.dstz.sys.scheduler;
+package org.minxc.emp.basis.impl.scheduler;
 
-import com.dstz.base.core.util.AppUtil;
-import com.dstz.base.core.util.ExceptionUtil;
-import com.dstz.sys.core.manager.SysScheduleJobLogManager;
-import com.dstz.sys.core.model.SysScheduleJob;
-import com.dstz.sys.core.model.SysScheduleJobLog;
+import org.minxc.emp.basis.impl.core.manager.SysScheduleJobLogManager;
+import org.minxc.emp.basis.impl.core.model.SysScheduleJob;
+import org.minxc.emp.basis.impl.core.model.SysScheduleJobLog;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import com.minxc.emp.core.util.AppContextUtil;
+import com.minxc.emp.core.util.ExceptionUtil;
+
+import groovy.util.logging.Slf4j;
 
 import java.util.Date;
 
 /**
  * 抽象quartz调用
  *
- * @author didi
  */
+
+@Slf4j
 public abstract class AbstractQuartzJob implements Job {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractQuartzJob.class);
-
 
     /**
      * 线程本地变量
@@ -75,7 +74,7 @@ public abstract class AbstractQuartzJob implements Job {
         }
 
         //异步写入数据库当中
-        AppUtil.getBean(SysScheduleJobLogManager.class).insertSelective(sysScheduleJobLog);
+        AppContextUtil.getBean(SysScheduleJobLogManager.class).insertSelective(sysScheduleJobLog);
     }
 
     /**

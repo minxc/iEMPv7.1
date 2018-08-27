@@ -1,20 +1,18 @@
-package com.dstz.sys.core.dao;
+package org.minxc.emp.basis.impl.core.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.mybatis.spring.annotation.MapperScan;
+import org.minxc.emp.basis.impl.core.model.ResRole;
+import org.minxc.emp.common.db.dao.CommonDao;
 
-import com.dstz.base.dao.BaseDao;
-import com.dstz.sys.core.model.ResRole;
 
 /**
- * <pre>
- * 描述：角色资源分配 DAO接口
- * </pre>
+ * 角色资源分配 DAO接口
  */
-@MapperScan
-public interface ResRoleDao extends BaseDao<String, ResRole> {
+@Mapper
+public interface ResRoleDao extends CommonDao<String, ResRole> {
 
     List<ResRole> getByRoleId(String roleId);
 

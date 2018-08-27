@@ -1,16 +1,10 @@
-package com.dstz.sys2.permission.impl.group;
+package org.minxc.emp.system.impl.permission.impl.group;
 
+import org.minxc.emp.system.impl.permission.impl.GroupPermissionCalculator;
 import org.springframework.stereotype.Service;
 
-import com.dstz.sys2.permission.impl.GroupPermissionCalculator;
 /**
- * <pre>
  * 描述：岗位
- * 作者:aschs
- * 邮箱:aschs@qq.com
- * 日期:2018年7月12日
- * 版权:summer
- * </pre>
  */
 @Service
 public class PostPermissionCalculator extends GroupPermissionCalculator {

@@ -1,4 +1,4 @@
-package com.dstz.sys2.manager.impl;
+package org.minxc.emp.system.impl.manager.impl;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
@@ -7,26 +7,20 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.minxc.emp.common.manager.impl.CommonManager;
+import org.minxc.emp.system.impl.dao.SysDataSourceDefDao;
+import org.minxc.emp.system.impl.manager.SysDataSourceDefManager;
+import org.minxc.emp.system.impl.model.SysDataSourceDef;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSON;
-import com.dstz.base.api.exception.BusinessException;
-import com.dstz.base.core.util.StringUtil;
-import com.dstz.base.manager.impl.BaseManager;
-import com.dstz.sys2.dao.SysDataSourceDefDao;
-import com.dstz.sys2.manager.SysDataSourceDefManager;
-import com.dstz.sys2.model.SysDataSourceDef;
-import com.dstz.sys2.model.def.SysDataSourceDefAttribute;
 
 /**
- * @author aschs
  * @description 数据源模板 Manager处理实现类
- * @group dayDream
- * @email aschs@qq.com
  */
 @Service
-public class SysDataSourceDefManagerImpl extends BaseManager<String, SysDataSourceDef> implements SysDataSourceDefManager {
+public class SysDataSourceDefManagerImpl extends CommonManager<String, SysDataSourceDef> implements SysDataSourceDefManager {
     @Autowired
     SysDataSourceDefDao sysDataSourceDefDao;
 

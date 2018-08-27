@@ -1,13 +1,13 @@
-package com.dstz.sys.groovy;
+package org.minxc.emp.basis.impl.groovy;
 
 import javax.annotation.Resource;
 
+import org.minxc.emp.basis.api.groovy.IScript;
+import org.minxc.emp.basis.api.service.SerialNoService;
+import org.minxc.emp.basis.impl.util.ContextUtil;
+import org.minxc.emp.idm.api.model.User;
 import org.springframework.stereotype.Component;
 
-import com.dstz.org.api.model.IUser;
-import com.dstz.sys.api.groovy.IScript;
-import com.dstz.sys.api.service.SerialNoService;
-import com.dstz.sys.util.ContextUtil;
 
 /**
  * 系统脚本
@@ -28,10 +28,7 @@ public class SysScript implements IScript {
 	}
 	
 	
-	public IUser getCuurentUser() {
+	public User getCuurentUser() {
 		return ContextUtil.getCurrentUser();
 	}
-	
-	
-	
 }

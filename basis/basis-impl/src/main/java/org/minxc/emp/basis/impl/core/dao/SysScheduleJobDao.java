@@ -1,20 +1,17 @@
-package com.dstz.sys.core.dao;
-
-import com.dstz.base.dao.BaseDao;
-import com.dstz.sys.core.model.SysScheduleJob;
+package org.minxc.emp.basis.impl.core.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.mybatis.spring.annotation.MapperScan;
+import org.minxc.emp.basis.impl.core.model.SysScheduleJob;
+import org.minxc.emp.common.db.dao.CommonDao;
 
 /**
  * 系统计划任务数据操作
- *
- * @author didi
  */
-@MapperScan
-public interface SysScheduleJobDao  extends BaseDao<String, SysScheduleJob> {
+@Mapper
+public interface SysScheduleJobDao  extends CommonDao<String, SysScheduleJob> {
 
 
     /**

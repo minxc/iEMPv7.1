@@ -1,4 +1,4 @@
-package com.dstz.sys.groovy;
+package org.minxc.emp.basis.impl.groovy;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -7,24 +7,25 @@ import java.util.Set;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.minxc.emp.basis.api.groovy.IGroovyScriptEngine;
+import org.minxc.emp.basis.api.groovy.IScript;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 
-import com.dstz.base.core.util.AppUtil;
-import com.dstz.sys.api.groovy.IGroovyScriptEngine;
-import com.dstz.sys.api.groovy.IScript;
+import com.minxc.emp.core.util.AppContextUtil;
 
 import groovy.lang.GroovyShell;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * 脚本引擎用于执行groovy脚本。<br/>
  * 实现了IScript接口的类。 可以在脚本中使用。
  */
+@Slf4j
 @Component
 public class GroovyScriptEngine implements IGroovyScriptEngine, ApplicationListener{
 
-    private Log logger = LogFactory.getLog(GroovyScriptEngine.class);
     private GroovyBinding groovyBinding = new GroovyBinding();
     
     @Override
@@ -63,9 +64,9 @@ public class GroovyScriptEngine implements IGroovyScriptEngine, ApplicationListe
         //在执行时清除流程变量。
         groovyBinding.clearVariables();
         
-        if(logger.isDebugEnabled()) {
-        	logger.debug("执行:" + script);
-        	logger.debug("variables:" +vars+"");
+        if(log.isDebugEnabled()) {
+        	log.debug("执行:" + script);
+        	log.debug("variables:" +vars+"");
         }
         GroovyShell shell = new GroovyShell(groovyBinding);
         this.setParameters(shell, vars);
@@ -95,7 +96,7 @@ public class GroovyScriptEngine implements IGroovyScriptEngine, ApplicationListe
     
     @Override
     public void onApplicationEvent(ApplicationEvent arg0) {
-    	Map<String, IScript> scirptImpls =	AppUtil.getImplInstance(IScript.class);
+    	Map<String, IScript> scirptImpls =	AppContextUtil.getImplInstance(IScript.class);
     	for(Entry<String, IScript> scriptMap : scirptImpls.entrySet()) {
     		groovyBinding.setProperty(scriptMap.getKey(), scriptMap.getValue());
     	}

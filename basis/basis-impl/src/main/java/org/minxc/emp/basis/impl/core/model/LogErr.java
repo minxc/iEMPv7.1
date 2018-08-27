@@ -1,17 +1,22 @@
-package com.dstz.sys.core.model;
+package org.minxc.emp.basis.impl.core.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.minxc.emp.core.api.model.IdModel;
 
-import com.dstz.base.api.model.IDModel;
 
 
 /**
  *  错误日志 实体对象
  */
-public class LogErr implements IDModel {
-    protected String id; /* 主键 */
+public class LogErr implements IdModel, Serializable {
+    
+	private static final long serialVersionUID = -2444398634104398692L;
+	
+	
+	protected String id; /* 主键 */
     protected String account; /* 登录帐号 */
     protected String ip; /* IP地址 */
     protected String url; /* URL地址 */

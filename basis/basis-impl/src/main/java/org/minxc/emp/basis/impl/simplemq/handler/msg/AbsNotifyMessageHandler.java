@@ -1,20 +1,23 @@
-package com.dstz.sys.simplemq.handler.msg;
+package org.minxc.emp.basis.impl.simplemq.handler.msg;
 
 import java.io.Serializable;
 
+import org.minxc.emp.basis.api.jms.consumer.JmsConsumer;
+import org.minxc.emp.basis.api.jms.model.JmsDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.dstz.sys.api.jms.consumer.JmsConsumer;
-import com.dstz.sys.api.jms.model.JmsDTO;
+import lombok.extern.slf4j.Slf4j;
+
+
 
 /**
  * 做消息类型的公共逻辑 ：如日志等
- * @author Jeff
  * @param <T>
  */
+
+@Slf4j
 public abstract class AbsNotifyMessageHandler<T extends Serializable> implements JmsConsumer<T>{
-	protected Logger LOG = LoggerFactory.getLogger(this.getClass());
 
 	
 	public abstract String getTitle();

@@ -1,20 +1,17 @@
-package com.dstz.sys2.model.def;
+package org.minxc.emp.system.impl.model.def;
 
-import org.hibernate.validator.constraints.NotEmpty;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotEmpty;
+
 /**
- * <pre>
  * 描述：SysDataSourceDef的属性字段，SysDataSource也直接复用了
- * 作者:aschs
- * 邮箱:aschs@qq.com
- * 日期:下午3:25:25
- * 版权:summer
- * </pre>
  */
 public class SysDataSourceDefAttribute implements Serializable {
-    /**
+	
+	private static final long serialVersionUID = -7787597296676685099L;
+	/**
      * 名字
      */
     @NotEmpty

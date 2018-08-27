@@ -1,4 +1,4 @@
-package com.dstz.sys.rest.controller;
+package org.minxc.emp.system.rest.controller;
 
 import java.util.HashMap;
 import java.util.List;
@@ -8,21 +8,20 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.minxc.emp.basis.api.groovy.IGroovyScriptEngine;
+import org.minxc.emp.basis.impl.core.manager.ScriptManager;
+import org.minxc.emp.basis.impl.core.model.Script;
+import org.minxc.emp.common.db.api.IdGenerator;
+import org.minxc.emp.common.rest.CommonController;
+import org.minxc.emp.common.rest.util.RequestUtil;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson.JSONObject;
-import com.dstz.base.db.api.IdGenerator;
-import com.dstz.base.manager.Manager;
-import com.dstz.base.rest.BaseController;
-import com.dstz.base.rest.util.RequestUtil;
-import com.dstz.sys.api.groovy.IGroovyScriptEngine;
-import com.dstz.sys.core.manager.ScriptManager;
-import com.dstz.sys.core.model.Script;
 
 @RestController
 @RequestMapping("/sys/script/")
-public class SysScriptController extends BaseController<Script> {
+public class SysScriptController extends CommonController<Script> {
 
     @Resource
     private ScriptManager scriptManager;

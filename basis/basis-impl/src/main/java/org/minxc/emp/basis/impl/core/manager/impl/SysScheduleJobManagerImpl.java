@@ -1,13 +1,13 @@
-package com.dstz.sys.core.manager.impl;
+package org.minxc.emp.basis.impl.core.manager.impl;
 
 import javax.annotation.Resource;
 
+import org.minxc.emp.basis.impl.core.dao.SysScheduleJobDao;
+import org.minxc.emp.basis.impl.core.manager.SysScheduleJobManager;
+import org.minxc.emp.basis.impl.core.model.SysScheduleJob;
+import org.minxc.emp.common.manager.impl.CommonManager;
 import org.springframework.stereotype.Service;
 
-import com.dstz.base.manager.impl.BaseManager;
-import com.dstz.sys.core.dao.SysScheduleJobDao;
-import com.dstz.sys.core.manager.SysScheduleJobManager;
-import com.dstz.sys.core.model.SysScheduleJob;
 
 /**
  * 系统执行计划通过处理
@@ -15,7 +15,7 @@ import com.dstz.sys.core.model.SysScheduleJob;
  * @author didi
  */
 @Service("sysScheduleJobManager")
-public class SysScheduleJobManagerImpl extends BaseManager<String, SysScheduleJob> implements SysScheduleJobManager {
+public class SysScheduleJobManagerImpl extends CommonManager<String, SysScheduleJob> implements SysScheduleJobManager {
 
     @Resource(name = "sysScheduleJobDao")
     private SysScheduleJobDao sysScheduleJobDao;

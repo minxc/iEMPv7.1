@@ -1,12 +1,7 @@
 package org.minxc.emp.security.login;
 
-import org.minxc.emp.base.core.util.BeanUtils;
-import org.minxc.emp.organization.api.model.User;
-import org.minxc.emp.organization.api.model.UserRole;
-import org.minxc.emp.organization.api.service.UserService;
 import org.minxc.emp.security.constant.PlatformSecurityConstants;
 import org.minxc.emp.security.login.model.LoginUser;
-import org.minxc.emp.system.util.ContextUtil;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

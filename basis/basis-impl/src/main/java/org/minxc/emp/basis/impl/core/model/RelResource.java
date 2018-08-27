@@ -1,16 +1,19 @@
-package com.dstz.sys.core.model;
+package org.minxc.emp.basis.impl.core.model;
+
+import java.io.Serializable;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
-
-import com.dstz.base.api.model.IDModel;
+import org.minxc.emp.core.api.model.IdModel;
 
 
 /**
  * 关联资源 实体对象
  */
-public class RelResource implements IDModel {
+public class RelResource implements IdModel,Serializable {
 
-    /**
+	private static final long serialVersionUID = -6628128792001831729L;
+
+	/**
      * 主键
      */
     protected String id;

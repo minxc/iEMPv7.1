@@ -1,15 +1,12 @@
-package com.dstz.sys2.manager;
+package org.minxc.emp.system.impl.manager;
 
 import java.io.InputStream;
 
-import com.dstz.base.manager.Manager;
-import com.dstz.sys2.model.SysFile;
+import org.minxc.emp.common.manager.Manager;
+import org.minxc.emp.system.impl.model.SysFile;
 
 /**
  * 系统附件 Manager处理接口
- * @author aschs
- * @email aschs@qq.com
- * @time 2018-06-07 23:54:49
  */
 public interface SysFileManager extends Manager<String, SysFile>{
 	

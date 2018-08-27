@@ -1,6 +1,5 @@
 package com.minxc.emp.core.util;
 
-
 import org.minxc.emp.core.api.exception.BusinessException;
 import org.minxc.emp.core.api.status.CommonStatusCode;
 

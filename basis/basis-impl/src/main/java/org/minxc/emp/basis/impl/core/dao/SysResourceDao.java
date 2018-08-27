@@ -1,20 +1,17 @@
-package com.dstz.sys.core.dao;
-
-import com.dstz.base.dao.BaseDao;
-import com.dstz.sys.core.model.SysResource;
+package org.minxc.emp.basis.impl.core.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.mybatis.spring.annotation.MapperScan;
+import org.minxc.emp.basis.impl.core.model.SysResource;
+import org.minxc.emp.common.db.dao.CommonDao;
 
 /**
- * <pre>
- * 描述：子系统资源 DAO接口
- * </pre>
+ * 子系统资源 DAO接口
  */
-@MapperScan
-public interface SysResourceDao extends BaseDao<String, SysResource> {
+@Mapper
+public interface SysResourceDao extends CommonDao<String, SysResource> {
     /**
      * 根据子系统ID取定义对象。
      *

@@ -1,28 +1,25 @@
-package com.dstz.sys.core.model;
+package org.minxc.emp.basis.impl.core.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.minxc.emp.core.api.model.IdModel;
+import org.minxc.emp.core.api.model.TreeModel;
 
-import com.dstz.base.api.model.IDModel;
-import com.dstz.base.api.model.Tree;
 
 
 /**
- * <pre>
- * 描述：子系统资源 实体对象
- * </pre>
+ * 	描述：子系统资源 实体对象
  */
-public class SysResource implements Tree, IDModel {
+public class SysResource implements TreeModel<SysResource>, IdModel, Serializable {
 
-    /**
-     *
-     */
-    private static final long serialVersionUID = 1717028148397030560L;
 
-    /**
+	private static final long serialVersionUID = 1858224430587897285L;
+
+	/**
      * 主键
      */
     protected String id;

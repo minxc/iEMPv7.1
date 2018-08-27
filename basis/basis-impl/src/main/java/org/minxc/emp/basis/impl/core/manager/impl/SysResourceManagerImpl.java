@@ -1,20 +1,20 @@
-package com.dstz.sys.core.manager.impl;
+package org.minxc.emp.basis.impl.core.manager.impl;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.minxc.emp.basis.impl.core.dao.RelResourceDao;
+import org.minxc.emp.basis.impl.core.dao.SysResourceDao;
+import org.minxc.emp.basis.impl.core.manager.SysResourceManager;
+import org.minxc.emp.basis.impl.core.model.RelResource;
+import org.minxc.emp.basis.impl.core.model.SysResource;
+import org.minxc.emp.common.db.id.UniqueIdUtil;
+import org.minxc.emp.common.manager.impl.CommonManager;
 import org.springframework.stereotype.Service;
 
-import com.dstz.base.core.util.BeanUtils;
-import com.dstz.base.db.id.UniqueIdUtil;
-import com.dstz.base.manager.impl.BaseManager;
-import com.dstz.sys.core.dao.RelResourceDao;
-import com.dstz.sys.core.dao.SysResourceDao;
-import com.dstz.sys.core.manager.SysResourceManager;
-import com.dstz.sys.core.model.RelResource;
-import com.dstz.sys.core.model.SysResource;
+import com.minxc.emp.core.util.BeanUtils;
 
 /**
  * <pre>
@@ -22,7 +22,7 @@ import com.dstz.sys.core.model.SysResource;
  * </pre>
  */
 @Service("sysResourceManager")
-public class SysResourceManagerImpl extends BaseManager<String, SysResource> implements SysResourceManager {
+public class SysResourceManagerImpl extends CommonManager<String, SysResource> implements SysResourceManager {
     @Resource
     SysResourceDao sysResourceDao;
 

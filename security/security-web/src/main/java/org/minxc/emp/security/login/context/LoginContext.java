@@ -3,18 +3,9 @@ package org.minxc.emp.security.login.context;
 import com.minxc.emp.core.util.AppContextUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.minxc.emp.base.core.cache.Cache;
-import org.minxc.emp.base.core.util.AppUtil;
-import org.minxc.emp.base.core.util.StringUtil;
-import org.minxc.emp.organization.api.context.CurrentContext;
-import org.minxc.emp.organization.api.model.Group;
-import org.minxc.emp.organization.api.model.User;
-import org.minxc.emp.organization.api.service.GroupService;
-import org.minxc.emp.organization.api.service.UserService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
-import sun.awt.AppContext;
 
 import javax.annotation.Resource;
 import java.util.Locale;

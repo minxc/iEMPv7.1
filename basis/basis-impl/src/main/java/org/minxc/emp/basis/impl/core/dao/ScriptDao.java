@@ -1,14 +1,14 @@
-package com.dstz.sys.core.dao;
+package org.minxc.emp.basis.impl.core.dao;
 
-import com.dstz.base.dao.BaseDao;
-import com.dstz.sys.core.model.Script;
 
 import java.util.List;
 
-import org.mybatis.spring.annotation.MapperScan;
+import org.apache.ibatis.annotations.Mapper;
+import org.minxc.emp.basis.impl.core.model.Script;
+import org.minxc.emp.common.db.dao.CommonDao;
 
-@MapperScan
-public interface ScriptDao extends BaseDao<String, Script> {
+@Mapper
+public interface ScriptDao extends CommonDao<String, Script> {
 
     /**
      * 返回所有脚本的分类

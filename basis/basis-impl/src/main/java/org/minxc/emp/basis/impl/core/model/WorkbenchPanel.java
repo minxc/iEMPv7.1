@@ -1,13 +1,11 @@
-package com.dstz.sys.core.model;
+package org.minxc.emp.basis.impl.core.model;
 
-import com.dstz.base.core.model.BaseModel;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import com.minxc.emp.core.impl.model.AbstractCommonModel;
 
-/**
- * @author jeff
- */
-public class WorkbenchPanel extends BaseModel {
+
+public class WorkbenchPanel extends AbstractCommonModel {
     public static final String DATA_TYPE_INTERFACE = "interface";
     public static final String DATA_TYPE_CUST_QUERY = "custQuery";
 

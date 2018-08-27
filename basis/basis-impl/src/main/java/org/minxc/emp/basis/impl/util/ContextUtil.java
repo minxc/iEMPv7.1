@@ -1,26 +1,24 @@
-package com.dstz.sys.util;
-
-import com.dstz.base.core.util.BeanUtils;
-import com.dstz.org.api.context.ICurrentContext;
-import com.dstz.org.api.model.IGroup;
-import com.dstz.org.api.model.IUser;
+package org.minxc.emp.basis.impl.util;
 
 import java.util.Locale;
+
+import org.minxc.emp.idm.api.context.CurrentContext;
+import org.minxc.emp.idm.api.model.Group;
+import org.minxc.emp.idm.api.model.User;
+
+import com.minxc.emp.core.util.BeanUtils;
 
 
 /**
  * 获取上下文数据对象的工具类。
- * <pre>
- *
- * </pre>
  */
 public class ContextUtil {
 
     private static ContextUtil contextUtil;
 
-    private ICurrentContext currentContext;
+    private CurrentContext currentContext;
 
-    public void setCurrentContext(ICurrentContext _currentContext) {
+    public void setCurrentContext(CurrentContext _currentContext) {
         contextUtil = this;
         contextUtil.currentContext = _currentContext;
     }
@@ -32,7 +30,7 @@ public class ContextUtil {
      * @throws
      * @since 1.0.0
      */
-    public static IUser getCurrentUser() {
+    public static User getCurrentUser() {
         return contextUtil.currentContext.getCurrentUser();
     }
 
@@ -43,7 +41,7 @@ public class ContextUtil {
     /**
      * 获取当前组织
      */
-    public static IGroup getCurrentGroup() {
+    public static Group getCurrentGroup() {
         return contextUtil.currentContext.getCurrentGroup();
     }
 
@@ -51,7 +49,7 @@ public class ContextUtil {
      * 获取当前组织Id。组织为空则返回空
      */
     public static String getCurrentGroupId() {
-        IGroup iGroup = getCurrentGroup();
+        Group iGroup = getCurrentGroup();
         if (BeanUtils.isNotEmpty(iGroup)) {
             return iGroup.getGroupId();
         } else {
@@ -89,7 +87,7 @@ public class ContextUtil {
      * @throws
      * @since 1.0.0
      */
-    public static void setCurrentUser(IUser user) {
+    public static void setCurrentUser(User user) {
         contextUtil.currentContext.setCurrentUser(user);
     }
 
@@ -106,7 +104,7 @@ public class ContextUtil {
      * @throws
      * @since 1.0.0
      */
-    public static void setCurrentOrg(IGroup group) {
+    public static void setCurrentOrg(Group group) {
         contextUtil.currentContext.setCurrentGroup(group);
     }
 
@@ -137,13 +135,13 @@ public class ContextUtil {
         clearCurrentUser();
     }
     
-    public static boolean isAdmin(IUser user) {
+    public static boolean isAdmin(User user) {
     	  String tmp = SysPropertyUtil.getByAlias("admin.account", "admin");
           return tmp.equals(user.getAccount());
     }
     
     public static boolean currentUserIsAdmin() {
-    	IUser user = getCurrentUser();
+    	User user = getCurrentUser();
     	
   	  	String tmp = SysPropertyUtil.getByAlias("admin.account", "admin");
         return tmp.equals(user.getAccount());

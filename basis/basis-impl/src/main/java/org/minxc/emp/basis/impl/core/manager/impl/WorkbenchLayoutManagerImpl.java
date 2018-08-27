@@ -1,20 +1,20 @@
-package com.dstz.sys.core.manager.impl;
+package org.minxc.emp.basis.impl.core.manager.impl;
 
 import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.minxc.emp.basis.impl.core.dao.WorkbenchLayoutDao;
+import org.minxc.emp.basis.impl.core.manager.WorkbenchLayoutManager;
+import org.minxc.emp.basis.impl.core.model.WorkbenchLayout;
+import org.minxc.emp.common.manager.impl.CommonManager;
 import org.springframework.stereotype.Service;
 
-import com.dstz.base.core.util.BeanUtils;
-import com.dstz.base.manager.impl.BaseManager;
-import com.dstz.sys.core.dao.WorkbenchLayoutDao;
-import com.dstz.sys.core.manager.WorkbenchLayoutManager;
-import com.dstz.sys.core.model.WorkbenchLayout;
+import com.minxc.emp.core.util.BeanUtils;
 
 
 @Service("workbenchLayoutManager")
-public class WorkbenchLayoutManagerImpl extends BaseManager<String, WorkbenchLayout> implements WorkbenchLayoutManager {
+public class WorkbenchLayoutManagerImpl extends CommonManager<String, WorkbenchLayout> implements WorkbenchLayoutManager {
     @Resource
     WorkbenchLayoutDao workbenchLayoutDao;
 

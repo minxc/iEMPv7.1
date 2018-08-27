@@ -11,6 +11,7 @@ import org.minxc.emp.common.rest.util.RequestUtil;
 import org.minxc.emp.core.api.aop.annotation.ErrorCatching;
 import org.minxc.emp.core.api.exception.BusinessException;
 import org.minxc.emp.core.api.response.impl.ResultMessage;
+import org.minxc.emp.idm.api.service.UserService;
 import org.springframework.security.authentication.AccountExpiredException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
@@ -22,12 +23,12 @@ import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import org.minxc.emp.organization.api.service.UserService;
 import org.minxc.emp.security.constant.PlatFormStatusCode;
 import org.minxc.emp.security.login.SecurityUtil;
 
 @RestController
 public class LoginController extends GenericController {
+	
     @Resource
     UserService userService;
     @Resource

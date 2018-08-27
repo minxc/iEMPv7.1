@@ -1,23 +1,25 @@
-package com.dstz.sys.core.model;
+package org.minxc.emp.basis.impl.core.model;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.minxc.emp.basis.api.constant.EnvironmentConstant;
 
-import com.dstz.base.core.encrypt.EncryptUtil;
-import com.dstz.base.core.model.BaseModel;
-import com.dstz.sys.api.constant.EnvironmentConstant;
+import com.minxc.emp.core.impl.model.AbstractCommonModel;
+import com.minxc.emp.core.util.CryptoUtil;
+
 
 
 /**
- * <pre>
  * 描述：SYS_PROPERTIES 实体对象
- * </pre>
  */
-public class SysProperties extends BaseModel{
+public class SysProperties extends AbstractCommonModel{
 
-    /**
+   
+	private static final long serialVersionUID = 971325618699701881L;
+
+	/**
      * 主键
      */
     protected String id;
@@ -133,7 +135,8 @@ public class SysProperties extends BaseModel{
      */
     public void setValByEncrypt() throws Exception {
         if (this.encrypt == 1) {
-            this.value = EncryptUtil.encrypt(this.value);
+//            this.value = EncryptUtil.encrypt(this.value);
+            this.value = CryptoUtil.encodeBASE64(this.value);
         }
     }
 
@@ -146,7 +149,8 @@ public class SysProperties extends BaseModel{
     public String getRealVal() {
         if (this.encrypt == 1) {
             try {
-                return EncryptUtil.decrypt(this.value);
+//                return EncryptUtil.decrypt(this.value);
+                return CryptoUtil.decodeBASE64(this.value);
             } catch (Exception e) {
                 return "";
             }

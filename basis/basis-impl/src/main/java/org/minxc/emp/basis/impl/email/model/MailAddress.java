@@ -1,4 +1,4 @@
-package com.dstz.sys.email.model;
+package org.minxc.emp.basis.impl.email.model;
 
 /**
  * <pre>

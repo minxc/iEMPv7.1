@@ -1,14 +1,19 @@
-package com.dstz.sys.core.model;
+package org.minxc.emp.basis.impl.core.model;
 
-import com.dstz.base.core.model.BaseModel;
+import com.minxc.emp.core.impl.model.AbstractCommonModel;
+
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-
 /**
- * @author jeff
+ * 
+ * @author Xianchang.min
+ *
  */
-public class WorkbenchLayout extends BaseModel {
-    public static final String DEFAULT_LAYOUT = "default_layout";
+public class WorkbenchLayout extends AbstractCommonModel {
+	
+	private static final long serialVersionUID = -4583834733326149488L;
+
+	public static final String DEFAULT_LAYOUT = "default_layout";
 
     /**
      * id_

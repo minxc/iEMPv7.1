@@ -1,18 +1,21 @@
-package com.dstz.sys.aop;
+package org.minxc.emp.basis.impl.aop;
 
 import com.alibaba.fastjson.JSON;
-import com.dstz.base.api.aop.annotion.ParamValidate;
-import com.dstz.base.api.response.impl.BaseResult;
-import com.dstz.base.api.response.impl.PageResult;
-import com.dstz.base.api.response.impl.ResultMsg;
-import com.dstz.base.core.util.StringUtil;
-import com.dstz.base.core.validate.ValidateUtil;
+import com.minxc.emp.core.util.JacksonUtil;
+//import com.dstz.base.api.aop.annotion.ParamValidate;
+import com.minxc.emp.core.util.ValidateUtil;
+
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.minxc.emp.core.api.aop.annotation.ParameterValidation;
+import org.minxc.emp.core.api.response.impl.BaseResult;
+import org.minxc.emp.core.api.response.impl.PageResult;
+import org.minxc.emp.core.api.response.impl.ResultMessage;
 import org.springframework.stereotype.Component;
 
 /**
@@ -28,13 +31,14 @@ public class ValidateParamAspect {
     private Log logger = LogFactory.getLog(ValidateParamAspect.class);
 
     @Around(value = "@annotation(paramValidate)")
-    public Object doAround(ProceedingJoinPoint pjp, ParamValidate paramValidate) throws Throwable {
+    public Object doAround(ProceedingJoinPoint pjp, ParameterValidation paramValidate) throws Throwable {
         Object result;
         Object[] objects = pjp.getArgs();
-        logger.debug("参数拦截开始=====" + JSON.toJSONString(objects));
+//        logger.debug("参数拦截开始=====" + JSON.toJSONString(objects));
+        logger.debug("参数拦截开始=====" + JacksonUtil.pojo2Json(objects));
         for (Object o : objects) {
             String msg = ValidateUtil.getValidateMsg(o);
-            if (StringUtil.isNotEmpty(msg)) {
+            if (StringUtils.isNotEmpty(msg)) {
                 logger.error("参数拦截信息" + msg);
                 return getResult(pjp, msg);
             }
@@ -54,10 +58,10 @@ public class ValidateParamAspect {
         if (PageResult.class.equals(returnType)) {
             res = new PageResult();
         } else {
-            res = new ResultMsg();
+            res = new ResultMessage();
         }
-        res.setIsOk(false);
-        res.setMsg(error);
+        res.setSuccess(false);
+        res.setMessage(error);
         return res;
     }
 

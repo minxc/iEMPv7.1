@@ -1,7 +1,7 @@
-package com.dstz.sys.core.manager;
+package org.minxc.emp.basis.impl.core.manager;
 
-import com.dstz.base.manager.Manager;
-import com.dstz.sys.core.model.LogErr;
+import org.minxc.emp.basis.impl.core.model.LogErr;
+import org.minxc.emp.common.manager.Manager;
 
 /**
  * 描述：错误日志 处理接口

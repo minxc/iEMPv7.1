@@ -1,6 +1,6 @@
-package com.dstz.sys.excel;
+package org.minxc.emp.basis.impl.excel;
 
-import com.dstz.sys.excel.style.*;
+import org.minxc.emp.basis.impl.excel.style.*;
 
 /**
  * 默认样式。当需要改变Excel文件的默认样式时，使用该类的一个对象来初始化Excel

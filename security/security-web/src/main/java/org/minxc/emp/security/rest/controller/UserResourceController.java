@@ -8,20 +8,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.minxc.emp.core.util.BeanUtils;
+
+import org.apache.commons.lang3.StringUtils;
+import org.minxc.emp.common.rest.GenericController;
+import org.minxc.emp.common.rest.util.RequestUtil;
 import org.minxc.emp.core.api.aop.annotation.ErrorCatching;
+import org.minxc.emp.core.api.exception.BusinessException;
+import org.minxc.emp.core.api.response.impl.ResultMessage;
+import org.minxc.emp.idm.api.model.Group;
+import org.minxc.emp.idm.api.service.GroupService;
 import org.minxc.emp.security.util.SubSystemUtil;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson.JSONObject;
-import org.minxc.emp.organization.api.constant.GroupTypeConstant;
-import org.minxc.emp.organization.api.model.Group;
-import org.minxc.emp.organization.api.model.User;
-import org.minxc.emp.organization.api.service.GroupService;
-import org.minxc.emp.system.api.model.system.Subsystem;
-import org.minxc.emp.system.api.model.system.SystemResource;
-import org.minxc.emp.system.api.service.SystemResourceService;
-import org.minxc.emp.system.util.ContextUtil;
 
 /**
  * 用户资源
@@ -38,7 +38,7 @@ public class UserResourceController extends GenericController {
 
     @RequestMapping("userResource/userMsg")
     @ErrorCatching
-    public ResultMsg<JSONObject> userMsg(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public ResultMessage<JSONObject> userMsg(HttpServletRequest request, HttpServletResponse response) throws Exception {
         List<Subsystem> subsystemList = SystemResourceService.getCurrentUserSystem();
         JSONObject mv = new JSONObject();
         if (BeanUtils.isEmpty(subsystemList)) {
@@ -48,7 +48,7 @@ public class UserResourceController extends GenericController {
         String systemId = SubSystemUtil.getSystemId(request);
         Subsystem currentSystem = null;
         //获取当前系统
-        if (StringUtil.isNotEmpty(systemId)) {
+        if (StringUtils.isNotEmpty(systemId)) {
             for (Subsystem system : subsystemList) {
                 if (system.getId().equals(systemId)) {
                     currentSystem = system;
@@ -82,7 +82,7 @@ public class UserResourceController extends GenericController {
     
     // 重新获取 userMsg
     @RequestMapping("userResource/changeSystem")
-    public ResultMsg changeSystem(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public ResultMessage changeSystem(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String id = RequestUtil.getString(request, "id");
         SubSystemUtil.setSystemId(request, response, id);
 
@@ -90,7 +90,7 @@ public class UserResourceController extends GenericController {
     }
     // 重新获取 userMsg
     @RequestMapping("userResource/changeOrg")
-    public ResultMsg changeOrg(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public ResultMessage changeOrg(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String id = RequestUtil.getString(request, "id");
         Group org = groupService.getById(GroupTypeConstant.ORG.key(), id);
         ContextUtil.setCurrentOrg(org);

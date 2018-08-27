@@ -1,12 +1,14 @@
-package com.dstz.sys.core.manager;
+package org.minxc.emp.basis.impl.core.manager;
 
 import com.alibaba.fastjson.JSON;
-import com.dstz.base.api.query.QueryFilter;
-import com.dstz.base.manager.Manager;
-import com.dstz.sys.core.model.WorkbenchPanel;
 
 import java.util.List;
 import java.util.Map;
+
+import org.minxc.emp.basis.impl.core.model.WorkbenchPanel;
+import org.minxc.emp.common.manager.Manager;
+import org.minxc.emp.core.api.query.QueryFilter;
+
 
 public interface WorkbenchPanelManager extends Manager<String, WorkbenchPanel> {
     /**

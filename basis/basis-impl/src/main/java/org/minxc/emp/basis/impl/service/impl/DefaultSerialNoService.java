@@ -1,11 +1,11 @@
-package com.dstz.sys.service.impl;
+package org.minxc.emp.basis.impl.service.impl;
 
 import javax.annotation.Resource;
 
+import org.minxc.emp.basis.api.service.SerialNoService;
+import org.minxc.emp.basis.impl.core.manager.SerialNoManager;
 import org.springframework.stereotype.Service;
 
-import com.dstz.sys.api.service.SerialNoService;
-import com.dstz.sys.core.manager.SerialNoManager;
 
 /**
  *  流水号 接口实现

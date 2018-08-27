@@ -1,18 +1,18 @@
-package com.dstz.sys.rest.controller;
+package org.minxc.emp.system.rest.controller;
 
-import com.dstz.base.api.aop.annotion.CatchErr;
-import com.dstz.base.api.constant.BaseStatusCode;
-import com.dstz.base.api.exception.BusinessException;
-import com.dstz.base.api.query.QueryFilter;
-import com.dstz.base.api.query.QueryOP;
-import com.dstz.base.api.response.impl.ResultMsg;
-import com.dstz.base.db.model.page.PageJson;
-import com.dstz.base.rest.GenericController;
-import com.dstz.sys.core.manager.SysScheduleJobLogManager;
-import com.dstz.sys.core.model.SysScheduleJob;
-import com.dstz.sys.core.model.SysScheduleJobLog;
-import com.dstz.sys.scheduler.QuartzManagerService;
 import org.apache.commons.lang3.StringUtils;
+import org.minxc.emp.basis.impl.core.manager.SysScheduleJobLogManager;
+import org.minxc.emp.basis.impl.core.model.SysScheduleJob;
+import org.minxc.emp.basis.impl.core.model.SysScheduleJobLog;
+import org.minxc.emp.basis.impl.scheduler.QuartzManagerService;
+import org.minxc.emp.common.db.model.page.PageJson;
+import org.minxc.emp.common.rest.GenericController;
+import org.minxc.emp.core.api.aop.annotation.ErrorCatching;
+import org.minxc.emp.core.api.exception.BusinessException;
+import org.minxc.emp.core.api.query.QueryFilter;
+import org.minxc.emp.core.api.query.QueryOperator;
+import org.minxc.emp.core.api.response.impl.ResultMessage;
+import org.minxc.emp.core.api.status.CommonStatusCode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
@@ -52,9 +52,9 @@ public class SysScheduleJobController extends GenericController {
      * @param id 执行计划ID
      */
     @RequestMapping("get")
-    public ResultMsg<SysScheduleJob> get(@RequestParam("id") String id) {
+    public ResultMessage<SysScheduleJob> get(@RequestParam("id") String id) {
         SysScheduleJob sysScheduleJob = quartzManagerService.getSysScheduleJobById(id);
-        return new ResultMsg<>(sysScheduleJob);
+        return new ResultMessage<>(sysScheduleJob);
     }
 
     /**
@@ -64,22 +64,22 @@ public class SysScheduleJobController extends GenericController {
      * @return
      */
     @PostMapping("edit")
-    public ResultMsg<String> edit(@RequestBody SysScheduleJob sysScheduleJob) {
+    public ResultMessage<String> edit(@RequestBody SysScheduleJob sysScheduleJob) {
         try {
             if (StringUtils.isEmpty(sysScheduleJob.getId())) {
                 quartzManagerService.addSysScheduleJob(sysScheduleJob);
             } else {
                 quartzManagerService.updateSysScheduleJob(sysScheduleJob);
             }
-            ResultMsg<String> resultMsg = new ResultMsg<>(sysScheduleJob.getId());
-            resultMsg.setMsg("操作成功");
-            return resultMsg;
+            ResultMessage<String> ResultMessage = new ResultMessage<>(sysScheduleJob.getId());
+            ResultMessage.setMessage("操作成功");
+            return ResultMessage;
         } catch (BusinessException e) {
 
-            return new ResultMsg<>(e.getStatusCode(), e.getMessage());
+            return new ResultMessage<>(e.getStatusCode(), e.getMessage());
         } catch (Exception e) {
             LOGGER.error(e.getMessage(), e);
-            return new ResultMsg<>(BaseStatusCode.SYSTEM_ERROR, BaseStatusCode.SYSTEM_ERROR.getDesc());
+            return new ResultMessage<>(CommonStatusCode.SYSTEM_ERROR, CommonStatusCode.SYSTEM_ERROR.getDescription());
         }
     }
 
@@ -104,9 +104,9 @@ public class SysScheduleJobController extends GenericController {
      * @return
      * @throws Exception
      */
-    @CatchErr(write2response = true)
+    @ErrorCatching(writeErrorToResponse = true)
     @RequestMapping("enable")
-    public ResultMsg<Void> enable(@RequestParam("id") String id, @RequestParam("enable") boolean enable) throws Exception {
+    public ResultMessage<Void> enable(@RequestParam("id") String id, @RequestParam("enable") boolean enable) throws Exception {
         SysScheduleJob sysScheduleJob = quartzManagerService.getSysScheduleJobById(id);
         if (enable) {
             quartzManagerService.enableSysScheduleJob(sysScheduleJob);
@@ -114,7 +114,7 @@ public class SysScheduleJobController extends GenericController {
             quartzManagerService.disableSysScheduleJob(sysScheduleJob);
         }
 
-        return new ResultMsg<>(null);
+        return new ResultMessage<>(null);
     }
 
     /**
@@ -125,11 +125,11 @@ public class SysScheduleJobController extends GenericController {
      * @throws Exception
      */
     @RequestMapping("runOnce")
-    @CatchErr(write2response = true)
-    public ResultMsg<?> runOnce(@RequestParam("id") String id) throws Exception {
+    @ErrorCatching(writeErrorToResponse = true)
+    public ResultMessage<?> runOnce(@RequestParam("id") String id) throws Exception {
         SysScheduleJob sysScheduleJob = quartzManagerService.getSysScheduleJobById(id);
         quartzManagerService.runOnce(sysScheduleJob);
-        return new ResultMsg<>();
+        return new ResultMessage<>();
     }
 
     /**
@@ -140,11 +140,11 @@ public class SysScheduleJobController extends GenericController {
      * @throws Exception
      */
     @RequestMapping("remove")
-    @CatchErr(write2response = true)
-    public ResultMsg<?> remove(@RequestParam("id") String id) throws Exception {
+    @ErrorCatching(writeErrorToResponse = true)
+    public ResultMessage<?> remove(@RequestParam("id") String id) throws Exception {
         SysScheduleJob sysScheduleJob = quartzManagerService.getSysScheduleJobById(id);
         quartzManagerService.removeSysScheduleJob(sysScheduleJob);
-        return new ResultMsg<>();
+        return new ResultMessage<>();
     }
 
     /**
@@ -155,10 +155,10 @@ public class SysScheduleJobController extends GenericController {
      * @return
      */
     @RequestMapping("log/list")
-    @CatchErr(write2response = true)
+    @ErrorCatching(writeErrorToResponse = true)
     public PageJson listSysScheduleJobLog(@RequestParam("jobId") String jobId, HttpServletRequest request) {
         QueryFilter queryFilter = getQueryFilter(request);
-        queryFilter.addFilter("job_id", jobId, QueryOP.EQUAL);
+        queryFilter.addFilter("job_id", jobId, QueryOperator.EQUAL);
         return new PageJson(sysScheduleJobLogManager.query(queryFilter));
     }
 
@@ -169,9 +169,9 @@ public class SysScheduleJobController extends GenericController {
      * @return
      */
     @RequestMapping("log/detail")
-    @CatchErr(write2response = true)
-    public ResultMsg<?> getLogDetail(@RequestParam("id")String id){
+    @ErrorCatching(writeErrorToResponse = true)
+    public ResultMessage<?> getLogDetail(@RequestParam("id")String id){
        SysScheduleJobLog sysScheduleJobLog = sysScheduleJobLogManager.get(id);
-       return new ResultMsg<>(sysScheduleJobLog);
+       return new ResultMessage<>(sysScheduleJobLog);
     }
 }

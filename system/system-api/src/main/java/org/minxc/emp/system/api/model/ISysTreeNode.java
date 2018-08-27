@@ -1,4 +1,4 @@
-package com.dstz.sys.api2.model;
+package org.minxc.emp.system.api.model;
 
 /**
  * <pre>

@@ -1,11 +1,19 @@
-package com.dstz.sys.core.model;
+package org.minxc.emp.basis.impl.core.model;
+
+import java.io.Serializable;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.minxc.emp.core.api.model.IdModel;
 
-import com.dstz.base.api.model.IDModel;
-
-public class SerialNo implements IDModel{
-    protected String id; /*主键*/
+/**
+ * 
+ * @author Xianchang.min
+ *
+ */
+public class SerialNo implements IdModel, Serializable{
+	
+	private static final long serialVersionUID = -2719000242073544956L;
+	protected String id; /*主键*/
     protected String name; /*名称*/
     protected String alias; /*别名*/
     protected String regulation; /*规则*/

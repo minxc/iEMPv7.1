@@ -1,19 +1,14 @@
-package com.dstz.sys2.dao;
+package org.minxc.emp.system.impl.dao;
 
-import org.mybatis.spring.annotation.MapperScan;
-
-import com.dstz.base.dao.BaseDao;
-import com.dstz.sys2.model.SysTreeNode;
+import org.apache.ibatis.annotations.Mapper;
+import org.minxc.emp.common.db.dao.CommonDao;
+import org.minxc.emp.system.impl.model.SysTreeNode;
 
 /**
  * 系统树节点 DAO接口
- *
- * @author aschs
- * @email aschs@qq.com
- * @time 2018-03-13 20:02:33
  */
-@MapperScan
-public interface SysTreeNodeDao extends BaseDao<String, SysTreeNode> {
+@Mapper
+public interface SysTreeNodeDao extends CommonDao<String, SysTreeNode> {
 
     /**
      * <pre>

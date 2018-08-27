@@ -1,26 +1,23 @@
-package com.dstz.sys2.model;
-
-import com.dstz.base.core.model.BaseModel;
-import com.dstz.base.core.util.JsonUtil;
-import com.dstz.sys.api2.model.ISysDataSource;
-import com.dstz.sys2.model.def.SysDataSourceDefAttribute;
-import org.hibernate.validator.constraints.NotEmpty;
+package org.minxc.emp.system.impl.model;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+
+import org.minxc.emp.system.api.model.ISysDataSource;
+import org.minxc.emp.system.impl.model.def.SysDataSourceDefAttribute;
+
+import com.minxc.emp.core.impl.model.AbstractCommonModel;
+
 import java.util.List;
 
 /**
- * <pre>
- * 描述：数据源对象
- * 作者:aschs
- * 邮箱:aschs@qq.com
- * 日期:2018年1月8日 下午8:51:30
- * 版权:summer
- * </pre>
+ * 数据源对象
  */
-public class SysDataSource extends BaseModel implements ISysDataSource {
-    /**
+public class SysDataSource extends AbstractCommonModel implements ISysDataSource {
+	
+	private static final long serialVersionUID = 3007721784206841377L;
+	/**
      * 数据源的别名
      */
     @NotEmpty

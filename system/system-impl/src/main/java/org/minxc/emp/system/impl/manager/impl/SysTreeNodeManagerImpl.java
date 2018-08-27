@@ -1,4 +1,4 @@
-package com.dstz.sys2.manager.impl;
+package org.minxc.emp.system.impl.manager.impl;
 
 import java.util.List;
 

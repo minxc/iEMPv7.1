@@ -22,8 +22,8 @@ public class DefaultAccessDeniedHandler implements AccessDeniedHandler {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         response.setCharacterEncoding("UTF-8");
 
-        ResultMessage resultMsg = new ResultMessage(CommonStatusCode.NO_ACCESS, ex.getMessage());
-        response.getWriter().print(JacksonUtil.pojo2Json(resultMsg));
+        ResultMessage ResultMessage = new ResultMessage(CommonStatusCode.NO_ACCESS, ex.getMessage());
+        response.getWriter().print(JacksonUtil.pojo2Json(ResultMessage));
         return;
     }
 

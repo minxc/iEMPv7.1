@@ -1,21 +1,15 @@
-package com.dstz.sys2.permission.impl;
+package org.minxc.emp.system.impl.permission.impl;
 
 import javax.annotation.Resource;
 
+import org.minxc.emp.basis.api.groovy.IGroovyScriptEngine;
+import org.minxc.emp.system.api.permission.IPermissionCalculator;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSONObject;
-import com.dstz.sys.api.groovy.IGroovyScriptEngine;
-import com.dstz.sys.api2.permission.IPermissionCalculator;
 
 /**
- * <pre>
  * 描述：脚本
- * 作者:aschs
- * 邮箱:aschs@qq.com
- * 日期:2018年5月8日
- * 版权:summer
- * </pre>
  */
 @Service
 public class ScriptPermissionCalculator implements IPermissionCalculator {

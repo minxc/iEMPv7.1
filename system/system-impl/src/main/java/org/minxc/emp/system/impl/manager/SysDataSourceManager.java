@@ -1,21 +1,13 @@
-package com.dstz.sys2.manager;
+package org.minxc.emp.system.impl.manager;
 
 import javax.sql.DataSource;
 
+import org.minxc.emp.common.manager.Manager;
+import org.minxc.emp.system.impl.model.SysDataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import com.dstz.base.manager.Manager;
-import com.dstz.sys2.model.SysDataSource;
-
 /**
- * <pre>
- * 描述：数据源 Manager处理接口
- * 构建组：白日梦团体
- * 作者:aschs
- * 邮箱:aschs@qq.com
- * 日期:2018-01-08 21:14:05
- * 版权：summer
- * </pre>
+ * 数据源 Manager处理接口
  */
 public interface SysDataSourceManager extends Manager<String, SysDataSource> {
 

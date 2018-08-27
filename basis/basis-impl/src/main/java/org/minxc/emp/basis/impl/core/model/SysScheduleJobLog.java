@@ -1,18 +1,20 @@
-package com.dstz.sys.core.model;
+package org.minxc.emp.basis.impl.core.model;
 
-import com.dstz.base.api.model.IBaseModel;
 
+import java.io.Serializable;
 import java.util.Date;
+
+import org.minxc.emp.core.api.model.CommonModel;
 
 /**
  * 任务计划日志
- * @author didi
  */
-public class SysScheduleJobLog implements IBaseModel {
+public class SysScheduleJobLog implements CommonModel,Serializable {
 
-    private static final long serialVersionUID = 8829250624466439265L;
 
-    /**
+	private static final long serialVersionUID = -3549154872559009680L;
+
+	/**
      * 编号
      */
     private String id;

@@ -1,21 +1,21 @@
-package com.dstz.sys.rest.controller;
+package org.minxc.emp.system.rest.controller;
 
-
-import com.dstz.base.api.aop.annotion.CatchErr;
-import com.dstz.base.api.exception.BusinessException;
-import com.dstz.base.api.query.QueryFilter;
-import com.dstz.base.api.response.impl.ResultMsg;
-import com.dstz.base.core.util.StringUtil;
-import com.dstz.base.db.id.UniqueIdUtil;
-import com.dstz.base.db.model.page.PageJson;
 import com.github.pagehelper.Page;
-import com.dstz.base.rest.GenericController;
-import com.dstz.base.rest.util.RequestUtil;
-import com.dstz.org.api.model.IUser;
-import com.dstz.sys.core.manager.SubsystemManager;
-import com.dstz.sys.core.model.Subsystem;
-import com.dstz.sys.core.model.Subsystem;
-import com.dstz.sys.util.ContextUtil;
+
+
+import org.apache.commons.lang3.StringUtils;
+import org.minxc.emp.basis.impl.core.manager.SubsystemManager;
+import org.minxc.emp.basis.impl.core.model.Subsystem;
+import org.minxc.emp.basis.impl.util.ContextUtil;
+import org.minxc.emp.common.db.id.UniqueIdUtil;
+import org.minxc.emp.common.db.model.page.PageJson;
+import org.minxc.emp.common.rest.GenericController;
+import org.minxc.emp.common.rest.util.RequestUtil;
+import org.minxc.emp.core.api.aop.annotation.ErrorCatching;
+import org.minxc.emp.core.api.exception.BusinessException;
+import org.minxc.emp.core.api.query.QueryFilter;
+import org.minxc.emp.core.api.response.impl.ResultMessage;
+import org.minxc.emp.idm.api.model.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -56,7 +56,7 @@ public class SysSubsystemController extends GenericController {
     }
 
     @RequestMapping("getUserSystem")
-    @CatchErr(write2response = true)
+    @ErrorCatching(writeErrorToResponse = true)
     public @ResponseBody
     void getUserSystem(HttpServletRequest request, HttpServletResponse response) throws Exception {
         if (!ContextUtil.currentUserIsAdmin()) {
@@ -79,7 +79,7 @@ public class SysSubsystemController extends GenericController {
     public @ResponseBody
     Subsystem getJson(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String id = RequestUtil.getString(request, "id");
-        if (StringUtil.isEmpty(id)) {
+        if (StringUtils.isEmpty(id)) {
             return null;
         }
         Subsystem subsystem = subsystemManager.get(id);
@@ -97,32 +97,32 @@ public class SysSubsystemController extends GenericController {
      */
     @RequestMapping("save")
     public void save(HttpServletRequest request, HttpServletResponse response, @RequestBody Subsystem subsystem) throws Exception {
-        String resultMsg = null;
+        String ResultMessage = null;
 
         boolean isExist = subsystemManager.isExist(subsystem);
         if (isExist) {
-            resultMsg = "别名子系统中已存在!";
-        //    writeResultMessage(response.getWriter(), resultMsg, ResultMsg.FAIL);
+            ResultMessage = "别名子系统中已存在!";
+        //    writeResultMessage(response.getWriter(), ResultMessage, ResultMessage.FAIL);
             return;
         }
 
         String id = subsystem.getId();
         try {
-            if (StringUtil.isEmpty(id)) {
+            if (StringUtils.isEmpty(id)) {
                 subsystem.setId(UniqueIdUtil.getSuid());
-                IUser user = ContextUtil.getCurrentUser();
+                User user = ContextUtil.getCurrentUser();
                 subsystem.setCreator(user.getFullname());
                 subsystem.setCreatorId(user.getUserId());
                 subsystemManager.create(subsystem);
-                resultMsg = "添加子系统定义成功";
+                ResultMessage = "添加子系统定义成功";
             } else {
                 subsystemManager.update(subsystem);
-                resultMsg = "更新子系统定义成功";
+                ResultMessage = "更新子系统定义成功";
             }
-      //      writeResultMessage(response.getWriter(), resultMsg, ResultMsg.SUCCESS);
+      //      writeResultMessage(response.getWriter(), ResultMessage, ResultMessage.SUCCESS);
         } catch (Exception e) {
-            resultMsg = "对子系统定义操作失败";
-    //        writeResultMessage(response.getWriter(), resultMsg, e.getMessage(), ResultMsg.FAIL);
+            ResultMessage = "对子系统定义操作失败";
+    //        writeResultMessage(response.getWriter(), ResultMessage, e.getMessage(), ResultMessage.FAIL);
         }
     }
 
@@ -136,13 +136,13 @@ public class SysSubsystemController extends GenericController {
      */
     @RequestMapping("remove")
     public void remove(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        ResultMsg message = null;
+        ResultMessage message = null;
         try {
             String[] aryIds = RequestUtil.getStringAryByStr(request, "id");
             subsystemManager.removeByIds(aryIds);
-            message = new ResultMsg(ResultMsg.SUCCESS, "删除子系统定义成功");
+            message = new ResultMessage(ResultMessage.SUCCESS, "删除子系统定义成功");
         } catch (Exception e) {
-            message = new ResultMsg(ResultMsg.FAIL, "删除子系统定义失败");
+            message = new ResultMessage(ResultMessage.FAIL, "删除子系统定义失败");
         }
         writeResultMessage(response.getWriter(), message);
     }

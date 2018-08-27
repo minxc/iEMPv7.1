@@ -1,14 +1,14 @@
-package com.dstz.sys.rest.controller;
+package org.minxc.emp.system.rest.controller;
 
-import com.dstz.base.api.aop.annotion.CatchErr;
-import com.dstz.base.api.query.QueryFilter;
-import com.dstz.base.core.util.StringUtil;
-import com.dstz.base.db.id.UniqueIdUtil;
-import com.dstz.base.db.model.page.PageJson;
-import com.dstz.base.rest.GenericController;
-import com.dstz.base.rest.util.RequestUtil;
-import com.dstz.sys2.manager.SysDataSourceDefManager;
-import com.dstz.sys2.model.SysDataSourceDef;
+import org.apache.commons.lang3.StringUtils;
+import org.minxc.emp.common.db.id.UniqueIdUtil;
+import org.minxc.emp.common.db.model.page.PageJson;
+import org.minxc.emp.common.rest.GenericController;
+import org.minxc.emp.common.rest.util.RequestUtil;
+import org.minxc.emp.core.api.aop.annotation.ErrorCatching;
+import org.minxc.emp.core.api.query.QueryFilter;
+import org.minxc.emp.system.impl.manager.SysDataSourceDefManager;
+import org.minxc.emp.system.impl.model.SysDataSourceDef;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,17 +20,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
- * <pre>
  * 描述：sysDataSourceDef层的controller
- * 作者:aschs
- * 邮箱:aschs@qq.com
- * 日期:下午5:11:06
- * 版权:summer
- * </pre>
  */
 @Controller
 @RequestMapping("/sys/sysDataSourceDef/")
 public class SysDataSourceDefController extends GenericController {
+	
     @Autowired
     SysDataSourceDefManager sysDataSourceDefManager;
 
@@ -44,7 +39,7 @@ public class SysDataSourceDefController extends GenericController {
      * @throws Exception
      */
     @RequestMapping("initAttributes")
-    @CatchErr(write2response = true, value = "初始化属性异常")
+    @ErrorCatching(writeErrorToResponse = true, value = "初始化属性异常")
     public void initAttributes(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String classPath = RequestUtil.getString(request, "classPath");
         writeSuccessData(response, sysDataSourceDefManager.initAttributes(classPath));
@@ -61,9 +56,9 @@ public class SysDataSourceDefController extends GenericController {
      * @throws Exception
      */
     @RequestMapping("save")
-    @CatchErr(write2response = true, value = "保存数据源模板失败")
+    @ErrorCatching(writeErrorToResponse = true, value = "保存数据源模板失败")
     public void save(HttpServletRequest request, HttpServletResponse response, @RequestBody SysDataSourceDef sysDataSourceDef) throws Exception {
-        if (StringUtil.isEmpty(sysDataSourceDef.getId())) {
+        if (StringUtils.isEmpty(sysDataSourceDef.getId())) {
             sysDataSourceDef.setId(UniqueIdUtil.getSuid());
             sysDataSourceDefManager.create(sysDataSourceDef);
         } else {
@@ -85,11 +80,11 @@ public class SysDataSourceDefController extends GenericController {
      * @throws Exception
      */
     @RequestMapping("getObject")
-    @CatchErr(write2response = true, value = "获取sysDataSourceDef异常")
+    @ErrorCatching(writeErrorToResponse = true, value = "获取sysDataSourceDef异常")
     public void getObject(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String id = RequestUtil.getString(request, "id");
         SysDataSourceDef sysDataSourceDef = null;
-        if (StringUtil.isNotEmpty(id)) {
+        if (StringUtils.isNotEmpty(id)) {
             sysDataSourceDef = sysDataSourceDefManager.get(id);
         }
         writeSuccessData(response, sysDataSourceDef);

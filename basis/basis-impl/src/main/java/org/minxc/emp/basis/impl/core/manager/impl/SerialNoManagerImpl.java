@@ -1,4 +1,4 @@
-package com.dstz.sys.core.manager.impl;
+package org.minxc.emp.basis.impl.core.manager.impl;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -7,16 +7,19 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.minxc.emp.basis.impl.core.dao.SerialNoDao;
+import org.minxc.emp.basis.impl.core.manager.SerialNoManager;
+import org.minxc.emp.basis.impl.core.model.SerialNo;
+import org.minxc.emp.common.manager.impl.CommonManager;
 import org.springframework.stereotype.Service;
 
-import com.dstz.base.core.util.time.DateFormatUtil;
-import com.dstz.base.manager.impl.BaseManager;
-import com.dstz.sys.core.dao.SerialNoDao;
-import com.dstz.sys.core.manager.SerialNoManager;
-import com.dstz.sys.core.model.SerialNo;
+import com.minxc.emp.core.util.time.DateFormatUtil;
+
 
 @Service("serialNoManager")
-public class SerialNoManagerImpl extends BaseManager<String, SerialNo> implements SerialNoManager {
+public class SerialNoManagerImpl extends CommonManager<String, SerialNo> implements SerialNoManager {
+	
+	
     @Resource
     SerialNoDao serialNoDao;
 

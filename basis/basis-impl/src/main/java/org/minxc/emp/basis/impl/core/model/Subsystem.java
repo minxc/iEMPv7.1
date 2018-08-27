@@ -1,19 +1,21 @@
-package com.dstz.sys.core.model;
+package org.minxc.emp.basis.impl.core.model;
+
+import java.io.Serializable;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.minxc.emp.basis.api.model.system.ISubsystem;
+import org.minxc.emp.core.api.model.IdModel;
 
-import com.dstz.base.api.model.IDModel;
-import com.dstz.sys.api.model.system.ISubsystem;
 
 
 /**
- * <pre>
- * 描述：子系统定义 实体对象
- * </pre>
+ *  子系统定义 实体对象
  */
-public class Subsystem implements IDModel,ISubsystem {
+public class Subsystem implements IdModel,ISubsystem,Serializable {
 
-    /**
+	private static final long serialVersionUID = -4935865196695965096L;
+
+	/**
      * 主键
      */
     protected String id;

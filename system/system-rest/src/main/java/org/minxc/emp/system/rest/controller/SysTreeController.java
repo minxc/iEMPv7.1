@@ -1,15 +1,15 @@
-package com.dstz.sys.rest.controller;
+package org.minxc.emp.system.rest.controller;
 
-import com.dstz.base.api.aop.annotion.CatchErr;
-import com.dstz.base.api.query.QueryFilter;
-import com.dstz.base.core.util.StringUtil;
-import com.dstz.base.db.id.UniqueIdUtil;
-import com.dstz.base.db.model.page.PageJson;
-import com.dstz.base.rest.GenericController;
-import com.dstz.base.rest.util.RequestUtil;
-import com.dstz.sys2.manager.SysTreeManager;
-import com.dstz.sys2.manager.SysTreeNodeManager;
-import com.dstz.sys2.model.SysTree;
+import org.apache.commons.lang3.StringUtils;
+import org.minxc.emp.common.db.id.UniqueIdUtil;
+import org.minxc.emp.common.db.model.page.PageJson;
+import org.minxc.emp.common.rest.GenericController;
+import org.minxc.emp.common.rest.util.RequestUtil;
+import org.minxc.emp.core.api.aop.annotation.ErrorCatching;
+import org.minxc.emp.core.api.query.QueryFilter;
+import org.minxc.emp.system.impl.manager.SysTreeManager;
+import org.minxc.emp.system.impl.manager.SysTreeNodeManager;
+import org.minxc.emp.system.impl.model.SysTree;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,17 +21,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
- * <pre>
- * 描述：sysTree层的controller
- * 作者:aschs
- * 邮箱:aschs@qq.com
- * 日期:下午5:11:06
- * 版权:summer
- * </pre>
+ * sysTree层的controller
  */
 @Controller
 @RequestMapping("/sys/sysTree/")
 public class SysTreeController extends GenericController {
+	
     @Autowired
     SysTreeManager sysTreeManager;
     @Autowired
@@ -48,9 +43,9 @@ public class SysTreeController extends GenericController {
      * @throws Exception
      */
     @RequestMapping("save")
-    @CatchErr(write2response = true, value = "保存系统树失败")
+    @ErrorCatching(writeErrorToResponse = true, value = "保存系统树失败")
     public void save(HttpServletRequest request, HttpServletResponse response, @RequestBody SysTree sysTree) throws Exception {
-        if (StringUtil.isEmpty(sysTree.getId())) {
+        if (StringUtils.isEmpty(sysTree.getId())) {
             sysTree.setId(UniqueIdUtil.getSuid());
             sysTreeManager.create(sysTree);
         } else {
@@ -70,14 +65,14 @@ public class SysTreeController extends GenericController {
      * @throws Exception
      */
     @RequestMapping("getObject")
-    @CatchErr(write2response = true, value = "获取sysTree异常")
+    @ErrorCatching(writeErrorToResponse = true, value = "获取sysTree异常")
     public void getObject(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String id = RequestUtil.getString(request, "id");
         String key = RequestUtil.getString(request, "key");
         SysTree sysTree = null;
-        if (StringUtil.isNotEmpty(id)) {
+        if (StringUtils.isNotEmpty(id)) {
             sysTree = sysTreeManager.get(id);
-        } else if (StringUtil.isNotEmpty(key)) {
+        } else if (StringUtils.isNotEmpty(key)) {
             sysTree = sysTreeManager.getByKey(key);
         }
         writeSuccessData(response, sysTree);
@@ -111,7 +106,7 @@ public class SysTreeController extends GenericController {
      * @throws Exception
      */
     @RequestMapping("remove")
-    @CatchErr(write2response = true, value = "删除系统树失败")
+    @ErrorCatching(writeErrorToResponse = true, value = "删除系统树失败")
     public void remove(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String[] aryIds = RequestUtil.getStringAryByStr(request, "id");
         for (String id : aryIds) {

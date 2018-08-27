@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.minxc.emp</groupId>
+    <artifactId>bpm</artifactId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+  <artifactId>bpm-rest</artifactId>
+  <name>bpm-rest</name>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <dependencies>
+  	<dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${spring-version}</version>
+        </dependency>
+
+       <dependency>
+			<groupId>org.flowable</groupId>
+			<artifactId>flowable-engine</artifactId>
+			<version>5.23.0</version>
+		</dependency>
+
+
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+       <!--  <dependency>
+            <groupId>org.minxc.emp</groupId>
+            <artifactId>base-intf</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+        <groupId>org.minxc.emp</groupId>
+        <artifactId>base-core</artifactId>
+        <version>1.0-SNAPSHOT</version>
+        </dependency> -->
+
+        <dependency>
+            <groupId>org.minxc.emp</groupId>
+            <artifactId>common-db</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.minxc.emp</groupId>
+            <artifactId>common-rest</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.minxc.emp</groupId>
+            <artifactId>form-api</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.minxc.emp</groupId>
+            <artifactId>bpm-api</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+        </dependency>
+
+  	
+  </dependencies>
+</project>

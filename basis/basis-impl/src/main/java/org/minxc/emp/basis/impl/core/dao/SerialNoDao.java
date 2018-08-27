@@ -1,13 +1,13 @@
-package com.dstz.sys.core.dao;
+package org.minxc.emp.basis.impl.core.dao;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.mybatis.spring.annotation.MapperScan;
+import org.minxc.emp.basis.impl.core.model.SerialNo;
+import org.minxc.emp.common.db.dao.CommonDao;
 
-import com.dstz.base.dao.BaseDao;
-import com.dstz.sys.core.model.SerialNo;
 
-@MapperScan
-public interface SerialNoDao extends BaseDao<String, SerialNo> {
+@Mapper
+public interface SerialNoDao extends CommonDao<String, SerialNo> {
 
 
     /**

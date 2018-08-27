@@ -1,17 +1,14 @@
-package com.dstz.sys.scheduler;
+package org.minxc.emp.basis.impl.scheduler;
 
-/**
- * @author didi
- */
 public enum SysScheduleJobState {
 
-    /**
-     * 启用
-     */
-    ENABLE,
+	/**
+	 * 启用
+	 */
+	ENABLE,
 
-    /**
-     * 禁用
-     */
-    DISABLE
+	/**
+	 * 禁用
+	 */
+	DISABLE
 }

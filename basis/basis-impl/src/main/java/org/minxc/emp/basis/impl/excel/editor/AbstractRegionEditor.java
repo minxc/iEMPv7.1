@@ -1,9 +1,13 @@
-package com.dstz.sys.excel.editor;
+package org.minxc.emp.basis.impl.excel.editor;
 
-import com.dstz.sys.excel.ExcelContext;
-import com.dstz.sys.excel.style.*;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.ss.util.CellRangeAddress;
+import org.minxc.emp.basis.impl.excel.ExcelContext;
+import org.minxc.emp.basis.impl.excel.style.Align;
+import org.minxc.emp.basis.impl.excel.style.BorderStyle;
+import org.minxc.emp.basis.impl.excel.style.Color;
+import org.minxc.emp.basis.impl.excel.style.FillPattern;
+import org.minxc.emp.basis.impl.excel.style.VAlign;
 
 /**
  * 区域编辑器（如行、列、区域）的基类

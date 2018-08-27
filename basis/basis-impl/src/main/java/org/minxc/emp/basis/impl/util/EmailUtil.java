@@ -1,15 +1,17 @@
-package com.dstz.sys.util;
+package org.minxc.emp.basis.impl.util;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
 
 import javax.mail.MessagingException;
 
-import com.dstz.base.core.util.AppUtil;
-import com.dstz.base.core.util.StringUtil;
-import com.dstz.sys.email.MailUtil;
-import com.dstz.sys.email.model.Mail;
-import com.dstz.sys.email.model.MailSetting;
+import org.apache.commons.lang3.StringUtils;
+import org.minxc.emp.basis.impl.email.MailUtil;
+import org.minxc.emp.basis.impl.email.model.Mail;
+import org.minxc.emp.basis.impl.email.model.MailSetting;
+
+import com.minxc.emp.core.util.AppContextUtil;
+
 
 /**
  * 这个类用于发送邮件。
@@ -35,18 +37,18 @@ public class EmailUtil {
      * @throws MessagingException void
      */
     public static void sendEmail(String to, String cc, String bcc, String from, String subject, String content) throws MessagingException {
-        MailUtil mailSender = (MailUtil) AppUtil.getBean("mailSender");
+        MailUtil mailSender = (MailUtil) AppContextUtil.getBean("mailSender");
         Mail mail = new Mail();
         mail.setSubject(subject);
         mail.setSenderName(from);
         mail.setContent(content);
         mail.setReceiverAddresses(to);
         mail.setSenderAddress(from);
-        if (StringUtil.isNotEmpty(cc)) {
+        if (StringUtils.isNotEmpty(cc)) {
             mail.setCopyToAddresses(cc);
         }
 
-        if (StringUtil.isNotEmpty(bcc)) {
+        if (StringUtils.isNotEmpty(bcc)) {
             mail.setBcCAddresses(bcc);
         }
         mail.setSendDate(new Date());
@@ -73,7 +75,7 @@ public class EmailUtil {
      * @throws MessagingException void
      */
     public static void sendEmail(String to, String subject, String content) throws MessagingException {
-        MailUtil mailSender = (MailUtil) AppUtil.getBean("mailSender");
+        MailUtil mailSender = (MailUtil) AppContextUtil.getBean("mailSender");
         Mail mail = new Mail();
         mail.setSubject(subject);
         mail.setContent(content);

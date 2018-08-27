@@ -1,10 +1,9 @@
-package com.dstz.sys.scheduler;
+package org.minxc.emp.basis.impl.scheduler;
 
 /**
  *
  * 常量定义
  *
- * @author didi
  */
 interface SchedulerConstants {
 

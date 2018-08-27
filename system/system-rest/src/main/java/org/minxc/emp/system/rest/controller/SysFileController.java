@@ -1,4 +1,4 @@
-package com.dstz.sys.rest.controller;
+package org.minxc.emp.system.rest.controller;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -6,8 +6,16 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.compress.archivers.zip.ZipFile;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+import org.minxc.emp.common.db.model.page.PageJson;
+import org.minxc.emp.common.rest.GenericController;
+import org.minxc.emp.core.api.aop.annotation.ErrorCatching;
+import org.minxc.emp.core.api.query.QueryFilter;
+import org.minxc.emp.core.api.response.impl.ResultMessage;
+import org.minxc.emp.system.impl.manager.SysFileManager;
+import org.minxc.emp.system.impl.model.SysFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -19,32 +27,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.dstz.base.api.aop.annotion.CatchErr;
-import com.dstz.base.api.query.QueryFilter;
-import com.dstz.base.api.response.impl.ResultMsg;
-import com.dstz.base.core.util.FileUtil;
-import com.dstz.base.core.util.ZipUtil;
-import com.dstz.base.core.util.time.DateUtil;
-import com.dstz.base.db.model.page.PageJson;
-import com.dstz.base.rest.GenericController;
-import com.dstz.sys2.manager.SysFileManager;
-import com.dstz.sys2.model.SysFile;
 import com.github.pagehelper.Page;
+import com.minxc.emp.core.util.FileUtil;
+import com.minxc.emp.core.util.ZipUtil;
+import com.minxc.emp.core.util.time.DateUtil;
 
-import net.lingala.zip4j.core.ZipFile;
+//import net.lingala.zip4j.core.ZipFile;
 
 /**
- * <pre>
  * 描述：上传附件的controller
- * 作者:aschs
- * 邮箱:aschs@qq.com
- * 日期:2018年6月4日
- * 版权:summer
- * </pre>
  */
 @RestController
 @RequestMapping("/sys/sysFile/")
 public class SysFileController extends GenericController {
+	
 	@Autowired
 	SysFileManager sysFileManager;
 
@@ -57,8 +53,8 @@ public class SysFileController extends GenericController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "upload", method = RequestMethod.POST)
-	@CatchErr(value = "上传失败")
-	public ResultMsg<String> upload(@RequestParam("file") MultipartFile file) throws Exception {
+	@ErrorCatching(value = "上传失败")
+	public ResultMessage<String> upload(@RequestParam("file") MultipartFile file) throws Exception {
 		SysFile sysFile = sysFileManager.upload(file.getInputStream(), file.getOriginalFilename());
 		return getSuccessResult(sysFile.getId(), "上传成功");
 	}
@@ -73,7 +69,7 @@ public class SysFileController extends GenericController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "download", method = RequestMethod.GET)
-	@CatchErr(value = "下载失败")
+	@ErrorCatching(value = "下载失败")
 	public ResponseEntity<byte[]> download(@RequestParam("fileId") String fileId) throws Exception {
 		SysFile sysFile = sysFileManager.get(fileId);
 
@@ -85,7 +81,7 @@ public class SysFileController extends GenericController {
 	}
 
 	@RequestMapping(value = "zip", method = RequestMethod.GET)
-	@CatchErr(value = "打包失败")
+	@ErrorCatching(value = "打包失败")
 	public ResponseEntity<byte[]> zip(@RequestParam("fileIds") String fileIds) throws Exception {
 		ArrayList<File> sourceFileList = new ArrayList<>();
 		for (String id : fileIds.split(",")) {
@@ -105,8 +101,8 @@ public class SysFileController extends GenericController {
 	}
 
 	@RequestMapping(value = "del")
-	@CatchErr(value = "删除失败")
-	public ResultMsg<String> del(@RequestParam("fileId") String fileId) throws Exception {
+	@ErrorCatching(value = "删除失败")
+	public ResultMessage<String> del(@RequestParam("fileId") String fileId) throws Exception {
 		sysFileManager.delete(fileId);
 		return getSuccessResult("删除成功");
 	}

@@ -1,17 +1,18 @@
-package com.dstz.sys.scheduler;
+package org.minxc.emp.basis.impl.scheduler;
 
-import com.dstz.base.api.constant.BaseStatusCode;
-import com.dstz.base.api.exception.BusinessException;
-import com.dstz.base.api.query.QueryFilter;
-import com.dstz.sys.api.constant.SysStatusCode;
-import com.dstz.sys.core.dao.SysScheduleJobDao;
-import com.dstz.sys.core.dao.SysScheduleJobLogDao;
-import com.dstz.sys.core.model.SysScheduleJob;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+
+import lombok.extern.slf4j.Slf4j;
+
+import org.minxc.emp.basis.api.constant.SysStatusCode;
+import org.minxc.emp.basis.impl.core.dao.SysScheduleJobDao;
+import org.minxc.emp.basis.impl.core.dao.SysScheduleJobLogDao;
+import org.minxc.emp.basis.impl.core.model.SysScheduleJob;
+import org.minxc.emp.core.api.exception.BusinessException;
+import org.minxc.emp.core.api.query.QueryFilter;
+import org.minxc.emp.core.api.status.CommonStatusCode;
 import org.quartz.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,11 +22,10 @@ import java.util.List;
 /**
  * quartz管理业务
  *
- * @author didi
  */
-public class QuartzManagerService implements InitializingBean {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(QuartzManagerService.class);
+@Slf4j
+public class QuartzManagerService implements InitializingBean {
 
     @Resource
     private SysScheduleJobDao sysScheduleJobDao;
@@ -40,7 +40,7 @@ public class QuartzManagerService implements InitializingBean {
     @SuppressWarnings("unchecked")
     @Override
     public void afterPropertiesSet() throws Exception {
-        LOGGER.info("==> 初始化加载系统执行计划 begin");
+        log.info("==> 初始化加载系统执行计划 begin");
         int maxPage = 0, pageNum = 1;
         do {
             PageHelper.startPage(pageNum, 50);
@@ -53,7 +53,7 @@ public class QuartzManagerService implements InitializingBean {
                 refreshScheduleJob(sysScheduleJob);
             }
         } while (++pageNum <= maxPage);
-        LOGGER.info("==> 初始化加载系统执行计划 end");
+        log.info("==> 初始化加载系统执行计划 end");
     }
 
     public List<SysScheduleJob> selectList(QueryFilter queryFilter) {
@@ -196,7 +196,7 @@ public class QuartzManagerService implements InitializingBean {
         //如果旧的分组与新的分组不一样
         if (!oldSysScheduleJob.getGroup().equals(sysScheduleJob.getGroup())) {
             if (sysScheduleJobDao.exists(sysScheduleJob.getName(), sysScheduleJob.getGroup())) {
-                throw new BusinessException("修改分组后的任务名称冲突，请更换名称", BaseStatusCode.DATA_EXISTS);
+                throw new BusinessException("修改分组后的任务名称冲突，请更换名称", CommonStatusCode.DATA_EXISTS);
             }
         }
 
@@ -215,7 +215,7 @@ public class QuartzManagerService implements InitializingBean {
     public void runOnce(SysScheduleJob sysScheduleJob) throws SchedulerException {
         JobKey jobKey = new JobKey(sysScheduleJob.getName(), sysScheduleJob.getGroup());
         if (!scheduler.checkExists(jobKey)) {
-            throw new BusinessException("执行计划未启用", BaseStatusCode.PARAM_ILLEGAL);
+            throw new BusinessException("执行计划未启用", CommonStatusCode.PARAM_ILLEGAL);
         }
         scheduler.triggerJob(jobKey);
     }

@@ -1,17 +1,17 @@
-package com.dstz.sys.rest.listener;
+package org.minxc.emp.system.rest.listener;
 
-import com.dstz.base.db.api.table.DbType;
-import com.dstz.base.db.datasource.DataSourceUtil;
-import com.dstz.base.db.id.UniqueIdUtil;
-import com.dstz.sys2.manager.SysDataSourceManager;
-import com.dstz.sys2.model.SysDataSource;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.minxc.emp.common.db.api.table.DbTypeEnum;
+import org.minxc.emp.common.db.datasource.DataSourceUtil;
+import org.minxc.emp.common.db.id.UniqueIdUtil;
+import org.minxc.emp.system.impl.manager.SysDataSourceManager;
+import org.minxc.emp.system.impl.model.SysDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
+
+import lombok.extern.slf4j.Slf4j;
 
 import javax.sql.DataSource;
 import java.lang.reflect.Method;
@@ -19,21 +19,16 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 /**
- * <pre>
  * 在spring容器启动时加载数据源：
  * 从spring文件中做加载。 扫描系统spring 配置中数据源动态加入到系统的dataSourceMap数据源中，
- * </pre>
- *
- * <pre>
- * </pre>
  */
+@Slf4j
 @Component
 public class DataSourceInitListener implements ApplicationListener<ContextRefreshedEvent> {
 
     @Autowired
     private SysDataSourceManager sysDataSourceManager;
 
-    protected static final Logger LOGGER = LoggerFactory.getLogger(DataSourceInitListener.class);
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent ev) {
@@ -59,7 +54,7 @@ public class DataSourceInitListener implements ApplicationListener<ContextRefres
                 continue;
             }
             DataSourceUtil.addDataSource(sysDataSource.getKey(), sysDataSourceManager.tranform2DataSource(sysDataSource), sysDataSource.getDbType(), false);
-            LOGGER.debug("add datasource " + sysDataSource.getKey());
+            log.debug("add datasource " + sysDataSource.getKey());
         }
     }
 
@@ -77,7 +72,7 @@ public class DataSourceInitListener implements ApplicationListener<ContextRefres
             }
             String dbType = getDbType(entry.getValue());
             DataSourceUtil.addDataSource(entry.getKey(), entry.getValue(), dbType, false);
-            LOGGER.debug("add datasource " + entry.getKey());
+            log.debug("add datasource " + entry.getKey());
             // 将其新增到系统配置的数据源中，供客户使用
             if (sysDataSourceManager.getByKey(entry.getKey()) == null) {
                 SysDataSource sysDataSource = new SysDataSource();
@@ -103,7 +98,7 @@ public class DataSourceInitListener implements ApplicationListener<ContextRefres
             Class<?> cls = dataSource.getClass();
             Method getDriverClassNameMethod = cls.getDeclaredMethod("getDriverClassName");
             String driverClassName = (String) getDriverClassNameMethod.invoke(dataSource);
-            for (DbType dbType : DbType.values()) {
+            for (DbTypeEnum dbType : DbTypeEnum.values()) {
                 if (driverClassName.contains(dbType.getKey())) {
                     return dbType.getKey();
                 }

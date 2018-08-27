@@ -1,7 +1,8 @@
-package com.dstz.sys.util;
+package org.minxc.emp.basis.impl.util;
 
-import com.dstz.base.core.util.AppUtil;
-import com.dstz.sys.api.service.PropertyService;
+import org.minxc.emp.basis.api.service.PropertyService;
+
+import com.minxc.emp.core.util.AppContextUtil;
 
 /**
  * 系统参数工具类。
@@ -17,7 +18,7 @@ public class SysPropertyUtil {
      * @return
      */
     public static String getByAlias(String alias) {
-        PropertyService service = AppUtil.getBean(PropertyService.class);
+        PropertyService service = AppContextUtil.getBean(PropertyService.class);
         return service.getByAlias(alias);
 
     }
@@ -30,7 +31,7 @@ public class SysPropertyUtil {
      * @return
      */
     public static String getByAlias(String alias, String defaultValue) {
-        PropertyService service = AppUtil.getBean(PropertyService.class);
+        PropertyService service = AppContextUtil.getBean(PropertyService.class);
         if (service == null) return defaultValue;
         return service.getByAlias(alias, defaultValue);
 
@@ -43,7 +44,7 @@ public class SysPropertyUtil {
      * @return
      */
     public static Integer getIntByAlias(String alias) {
-        PropertyService service = AppUtil.getBean(PropertyService.class);
+        PropertyService service = AppContextUtil.getBean(PropertyService.class);
         return service.getIntByAlias(alias);
 
     }
@@ -56,7 +57,7 @@ public class SysPropertyUtil {
      * @return
      */
     public static Integer getIntByAlias(String alias, Integer defaulValue) {
-        PropertyService service = AppUtil.getBean(PropertyService.class);
+        PropertyService service = AppContextUtil.getBean(PropertyService.class);
         return service.getIntByAlias(alias, defaulValue);
     }
 
@@ -67,7 +68,7 @@ public class SysPropertyUtil {
      * @return
      */
     public static Long getLongByAlias(String alias) {
-        PropertyService service = AppUtil.getBean(PropertyService.class);
+        PropertyService service = AppContextUtil.getBean(PropertyService.class);
         return service.getLongByAlias(alias);
 
     }
@@ -79,7 +80,7 @@ public class SysPropertyUtil {
      * @return
      */
     public static boolean getBooleanByAlias(String alias) {
-        PropertyService service = AppUtil.getBean(PropertyService.class);
+        PropertyService service = AppContextUtil.getBean(PropertyService.class);
         return service.getBooleanByAlias(alias);
 
     }
@@ -92,7 +93,7 @@ public class SysPropertyUtil {
      * @return
      */
     public static boolean getBooleanByAlias(String alias, boolean defaulValue) {
-        PropertyService service = AppUtil.getBean(PropertyService.class);
+        PropertyService service = AppContextUtil.getBean(PropertyService.class);
         return service.getBooleanByAlias(alias, defaulValue);
     }
 

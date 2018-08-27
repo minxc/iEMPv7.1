@@ -12,5 +12,10 @@
     <groupId>org.minxc.emp</groupId>
     <artifactId>form</artifactId>
 
-
+	<packaging>pom</packaging>
+	<modules>
+		<module>form-api</module>
+		<module>form-impl</module>
+		<module>form-rest</module>
+	</modules>
 </project>

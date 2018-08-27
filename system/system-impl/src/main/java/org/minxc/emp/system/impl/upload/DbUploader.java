@@ -1,4 +1,4 @@
-package com.dstz.sys2.upload;
+package org.minxc.emp.system.impl.upload;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -7,22 +7,15 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.io.IOUtils;
+import org.minxc.emp.common.db.id.UniqueIdUtil;
+import org.minxc.emp.core.api.exception.BusinessException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
-import com.dstz.base.api.exception.BusinessException;
-import com.dstz.base.db.id.UniqueIdUtil;
-
 /**
- * <pre>
  * 描述：数据库上传器
  * 把流转成bytes放到数据库中
- * 作者:aschs
- * 邮箱:aschs@qq.com
- * 日期:2018年6月8日
- * 版权:summer
- * </pre>
  */
 @Service
 public class DbUploader extends AbstractUploader {

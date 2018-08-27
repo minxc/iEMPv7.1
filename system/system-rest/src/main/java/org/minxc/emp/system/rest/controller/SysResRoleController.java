@@ -1,23 +1,23 @@
-package com.dstz.sys.rest.controller;
+package org.minxc.emp.system.rest.controller;
 
-
-import com.dstz.base.api.aop.annotion.CatchErr;
-import com.dstz.base.api.query.QueryFilter;
-import com.dstz.base.api.response.impl.ResultMsg;
-import com.dstz.base.core.util.BeanUtils;
-import com.dstz.base.core.util.StringUtil;
-import com.dstz.base.db.model.page.PageJson;
-import com.github.pagehelper.Page;
-import com.dstz.base.rest.GenericController;
-import com.dstz.base.rest.util.RequestUtil;
-import com.dstz.sys.core.manager.ResRoleManager;
-import com.dstz.sys.core.manager.SubsystemManager;
-import com.dstz.sys.core.manager.SysResourceManager;
-import com.dstz.sys.core.model.ResRole;
-import com.dstz.sys.core.model.SysResource;
+import org.apache.commons.lang3.StringUtils;
+import org.minxc.emp.basis.impl.core.manager.ResRoleManager;
+import org.minxc.emp.basis.impl.core.manager.SubsystemManager;
+import org.minxc.emp.basis.impl.core.manager.SysResourceManager;
+import org.minxc.emp.basis.impl.core.model.ResRole;
+import org.minxc.emp.basis.impl.core.model.SysResource;
+import org.minxc.emp.common.db.model.page.PageJson;
+import org.minxc.emp.common.rest.GenericController;
+import org.minxc.emp.common.rest.util.RequestUtil;
+import org.minxc.emp.core.api.aop.annotation.ErrorCatching;
+import org.minxc.emp.core.api.query.QueryFilter;
+import org.minxc.emp.core.api.response.impl.ResultMessage;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.github.pagehelper.Page;
+import com.minxc.emp.core.util.BeanUtils;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -34,6 +34,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/sys/resRole")
 public class SysResRoleController extends GenericController {
+	
     @Resource
     ResRoleManager resRoleManager;
 
@@ -73,7 +74,7 @@ public class SysResRoleController extends GenericController {
     public @ResponseBody
     ResRole getJson(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String id = RequestUtil.getString(request, "id");
-        if (StringUtil.isEmpty(id)) {
+        if (StringUtils.isEmpty(id)) {
             return null;
         }
         ResRole resRole = resRoleManager.get(id);
@@ -90,7 +91,7 @@ public class SysResRoleController extends GenericController {
      * @throws
      */
     @RequestMapping("save")
-    @CatchErr("对角色资源分配操作失败")
+    @ErrorCatching("对角色资源分配操作失败")
     public void save(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String roleId = RequestUtil.getString(request, "roleId");
         String systemId = RequestUtil.getString(request, "systemId");
@@ -110,13 +111,13 @@ public class SysResRoleController extends GenericController {
      */
     @RequestMapping("remove")
     public void remove(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        ResultMsg message = null;
+        ResultMessage message = null;
         try {
             String[] aryIds = RequestUtil.getStringAryByStr(request, "id");
             resRoleManager.removeByIds(aryIds);
-            message = new ResultMsg(ResultMsg.SUCCESS, "删除角色资源分配成功");
+            message = new ResultMessage(ResultMessage.SUCCESS, "删除角色资源分配成功");
         } catch (Exception e) {
-            message = new ResultMsg(ResultMsg.FAIL, "删除角色资源分配失败");
+            message = new ResultMessage(ResultMessage.FAIL, "删除角色资源分配失败");
         }
         writeResultMessage(response.getWriter(), message);
     }

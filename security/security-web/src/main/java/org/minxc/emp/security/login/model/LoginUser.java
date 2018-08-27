@@ -3,11 +3,11 @@ package org.minxc.emp.security.login.model;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import org.minxc.emp.idm.api.model.User;
+import org.minxc.emp.idm.api.model.dto.UserDto;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import org.minxc.emp.organization.api.model.User;
-import org.minxc.emp.organization.api.model.dto.UserDto;
 
 public class LoginUser extends UserDto implements UserDetails {
 

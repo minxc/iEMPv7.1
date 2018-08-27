@@ -1,22 +1,20 @@
-package com.dstz.sys2.model;
-
-import com.dstz.base.core.model.BaseModel;
-import com.dstz.sys.api2.model.ISysTreeNode;
-import org.hibernate.validator.constraints.NotEmpty;
+package org.minxc.emp.system.impl.model;
 
 import java.util.List;
 
+import javax.validation.constraints.NotEmpty;
+
+import org.minxc.emp.system.api.model.ISysTreeNode;
+
+import com.minxc.emp.core.impl.model.AbstractCommonModel;
+
 /**
- * <pre>
- * 描述：系统树节点
- * 作者:aschs
- * 邮箱:aschs@qq.com
- * 日期:2018年3月13日 下午6:44:47
- * 版权:summer
- * </pre>
+ * 系统树节点
  */
-public class SysTreeNode extends BaseModel implements ISysTreeNode {
-    /**
+public class SysTreeNode extends AbstractCommonModel implements ISysTreeNode {
+	
+	private static final long serialVersionUID = -5607022320036867439L;
+	/**
      * 别名
      */
     @NotEmpty

@@ -1,23 +1,26 @@
-package com.dstz.sys.simplemq.handler.msg;
+package org.minxc.emp.basis.impl.simplemq.handler.msg;
 
 import java.util.List;
 
 import javax.annotation.Resource;
 import javax.mail.MessagingException;
 
+import org.apache.commons.lang3.StringUtils;
+import org.minxc.emp.basis.api.jms.model.msg.NotifyMessage;
+import org.minxc.emp.basis.api.service.SysIdentityConvert;
+import org.minxc.emp.basis.impl.util.EmailUtil;
+import org.minxc.emp.idm.api.model.User;
 import org.springframework.stereotype.Component;
 
 import com.alibaba.fastjson.JSON;
-import com.dstz.base.core.util.PropertyUtil;
-import com.dstz.base.core.util.StringUtil;
-import com.dstz.org.api.model.IUser;
-import com.dstz.sys.api.jms.model.msg.NotifyMessage;
-import com.dstz.sys.api.service.SysIdentityConvert;
-import com.dstz.sys.util.EmailUtil;
+import com.minxc.emp.core.util.PropertiesUtil;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * 邮件消息处理器。
  */
+@Slf4j
 @Component
 public class MailHandler extends AbsNotifyMessageHandler<NotifyMessage> {
 	@Resource
@@ -42,21 +45,21 @@ public class MailHandler extends AbsNotifyMessageHandler<NotifyMessage> {
 
 	@Override
 	public boolean sendMessage(NotifyMessage notifMessage) {
-		String fromEmail = PropertyUtil.getProperty("mail.address");
+		String fromEmail = PropertiesUtil.getProperty("mail.address");
 	  
-        List<IUser> recievers = sysIdentityConvert.convert2Users(notifMessage.getReceivers());
+        List<User> recievers = sysIdentityConvert.convert2Users(notifMessage.getReceivers());
         
-        for (IUser reciver : recievers) {
+        for (User reciver : recievers) {
             String email = reciver.getEmail();
-            if (StringUtil.isEmpty(email)) continue;
+            if (StringUtils.isEmpty(email)) continue;
             try {
                 EmailUtil.sendEmail(email, "", "", fromEmail, notifMessage.getSubject(), notifMessage.getHtmlContent());
             } catch (MessagingException e) {
-            	LOG.error(JSON.toJSONString(notifMessage));
-            	LOG.error("发送邮件失败！",e);
+            	log.error(JSON.toJSONString(notifMessage));
+            	log.error("发送邮件失败！",e);
             }
         }
-        LOG.debug("发送邮件成功 ：{}",JSON.toJSONString(notifMessage));
+        log.debug("发送邮件成功 ：{}",JSON.toJSONString(notifMessage));
         return true;
 	}
 

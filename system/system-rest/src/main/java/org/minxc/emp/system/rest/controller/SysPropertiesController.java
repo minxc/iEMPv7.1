@@ -1,5 +1,4 @@
-package com.dstz.sys.rest.controller;
-
+package org.minxc.emp.system.rest.controller;
 
 import java.util.Date;
 import java.util.List;
@@ -8,21 +7,21 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
+import org.minxc.emp.basis.impl.core.manager.SysPropertiesManager;
+import org.minxc.emp.basis.impl.core.model.SysProperties;
+import org.minxc.emp.common.db.id.UniqueIdUtil;
+import org.minxc.emp.common.db.model.page.PageJson;
+import org.minxc.emp.common.rest.GenericController;
+import org.minxc.emp.common.rest.util.RequestUtil;
+import org.minxc.emp.core.api.aop.annotation.ErrorCatching;
+import org.minxc.emp.core.api.exception.BusinessException;
+import org.minxc.emp.core.api.query.QueryFilter;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.dstz.base.api.aop.annotion.CatchErr;
-import com.dstz.base.api.exception.BusinessException;
-import com.dstz.base.api.query.QueryFilter;
-import com.dstz.base.core.util.StringUtil;
-import com.dstz.base.db.id.UniqueIdUtil;
-import com.dstz.base.db.model.page.PageJson;
-import com.dstz.base.rest.GenericController;
-import com.dstz.base.rest.util.RequestUtil;
-import com.dstz.sys.core.manager.SysPropertiesManager;
-import com.dstz.sys.core.model.SysProperties;
 import com.github.pagehelper.Page;
 
 
@@ -32,6 +31,7 @@ import com.github.pagehelper.Page;
 @Controller
 @RequestMapping("/sys/sysProperties")
 public class SysPropertiesController extends GenericController {
+	
     @Resource
     SysPropertiesManager sysPropertiesManager;
 
@@ -51,12 +51,12 @@ public class SysPropertiesController extends GenericController {
      * 系统属性明细页面
      */
     @RequestMapping("getJson")
-    @CatchErr(write2response = true)
+    @ErrorCatching(writeErrorToResponse = true)
     public void getJson(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String id = RequestUtil.getString(request, "id");
         SysProperties sysProperties = new SysProperties();
         List<String> groups = sysPropertiesManager.getGroups();
-        if (StringUtil.isEmpty(id)) {
+        if (StringUtils.isEmpty(id)) {
             sysProperties.setCategorys(groups);
             writeSuccessData(response, sysProperties);
             return;
@@ -76,9 +76,9 @@ public class SysPropertiesController extends GenericController {
      * @throws
      */
     @RequestMapping("save")
-    @CatchErr("对系统属性操作失败")
+    @ErrorCatching("对系统属性操作失败")
     public void save(HttpServletRequest request, HttpServletResponse response, @RequestBody SysProperties sysProperties) throws Exception {
-        String resultMsg = null;
+        String ResultMessage = null;
 
         boolean isExist = sysPropertiesManager.isExist(sysProperties);
         if (isExist) {
@@ -88,25 +88,25 @@ public class SysPropertiesController extends GenericController {
         String id = sysProperties.getId();
         sysProperties.setValByEncrypt();
 
-        if (StringUtil.isEmpty(id)) {
+        if (StringUtils.isEmpty(id)) {
             sysProperties.setId(UniqueIdUtil.getSuid());
             sysProperties.setCreateTime(new Date());
             sysPropertiesManager.create(sysProperties);
-            resultMsg = "添加系统属性成功";
+            ResultMessage = "添加系统属性成功";
         } else {
             sysPropertiesManager.update(sysProperties);
-            resultMsg = "更新系统属性成功";
+            ResultMessage = "更新系统属性成功";
         }
 
         sysPropertiesManager.reloadProperty();
-        writeSuccessResult(response, resultMsg);
+        writeSuccessResult(response, ResultMessage);
     }
 
     /**
      * 批量删除系统属性记录
      */
     @RequestMapping("remove")
-    @CatchErr("删除系统属性失败")
+    @ErrorCatching("删除系统属性失败")
     public void remove(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String[] aryIds = RequestUtil.getStringAryByStr(request, "id");
 

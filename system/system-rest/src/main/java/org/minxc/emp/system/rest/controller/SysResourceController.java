@@ -1,5 +1,4 @@
-package com.dstz.sys.rest.controller;
-
+package org.minxc.emp.system.rest.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,27 +8,26 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
+import org.minxc.emp.basis.impl.core.manager.RelResourceManager;
+import org.minxc.emp.basis.impl.core.manager.SubsystemManager;
+import org.minxc.emp.basis.impl.core.manager.SysResourceManager;
+import org.minxc.emp.basis.impl.core.model.Subsystem;
+import org.minxc.emp.basis.impl.core.model.SysResource;
+import org.minxc.emp.common.db.model.page.PageJson;
+import org.minxc.emp.common.rest.GenericController;
+import org.minxc.emp.common.rest.util.RequestUtil;
+import org.minxc.emp.core.api.aop.annotation.ErrorCatching;
+import org.minxc.emp.core.api.exception.BusinessException;
+import org.minxc.emp.core.api.query.QueryFilter;
+import org.minxc.emp.core.api.response.impl.ResultMessage;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.dstz.base.api.aop.annotion.CatchErr;
-import com.dstz.base.api.exception.BusinessException;
-import com.dstz.base.api.query.QueryFilter;
-import com.dstz.base.api.response.impl.ResultMsg;
-import com.dstz.base.core.util.BeanUtils;
-import com.dstz.base.core.util.StringUtil;
-import com.dstz.base.db.model.page.PageJson;
-import com.dstz.base.rest.GenericController;
-import com.dstz.base.rest.util.RequestUtil;
-import com.dstz.sys.core.manager.RelResourceManager;
-import com.dstz.sys.core.manager.SubsystemManager;
-import com.dstz.sys.core.manager.SysResourceManager;
-import com.dstz.sys.core.model.Subsystem;
-import com.dstz.sys.core.model.SysResource;
 import com.github.pagehelper.Page;
-
+import com.minxc.emp.core.util.BeanUtils;
 
 /**
  * 子系统资源 控制器类
@@ -74,7 +72,7 @@ public class SysResourceController extends GenericController {
     @RequestMapping("getJson")
     public  void getJson(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String id = RequestUtil.getString(request, "id");
-        if (StringUtil.isEmpty(id)) {
+        if (StringUtils.isEmpty(id)) {
             String parentId = RequestUtil.getString(request, "parentId");
             String sysytemId = RequestUtil.getString(request, "systemId");
             SysResource sysResource = new SysResource();
@@ -101,25 +99,25 @@ public class SysResourceController extends GenericController {
      * @throws
      */
     @RequestMapping("save")
-    @CatchErr
-    public ResultMsg<String> save(@RequestBody SysResource sysResource) throws Exception {
-        String resultMsg = null;
+    @ErrorCatching
+    public ResultMessage<String> save(@RequestBody SysResource sysResource) throws Exception {
+        String ResultMessage = null;
         String id = sysResource.getId();
         boolean isExist = sysResourceManager.isExist(sysResource);
         if (isExist) {
            throw new BusinessException("资源已经存在,请修改重新添加!");
         }
         
-        if (StringUtil.isEmpty(id)) {
+        if (StringUtils.isEmpty(id)) {
             sysResource.setSn(System.currentTimeMillis());
             sysResourceManager.create(sysResource);
-            resultMsg = "添加子系统资源成功";
+            ResultMessage = "添加子系统资源成功";
         } else {
             sysResourceManager.update(sysResource);
-            resultMsg = "更新子系统资源成功";
+            ResultMessage = "更新子系统资源成功";
         }
         
-        return getSuccessResult(sysResource.getId(), resultMsg);
+        return getSuccessResult(sysResource.getId(), ResultMessage);
         
     }
 
@@ -133,13 +131,13 @@ public class SysResourceController extends GenericController {
      */
     @RequestMapping("remove")
     public void remove(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        ResultMsg message = null;
+        ResultMessage message = null;
         try {
             String id = RequestUtil.getString(request, "id");
             sysResourceManager.removeByResId(id);
-            message = new ResultMsg(ResultMsg.SUCCESS, "删除子系统资源成功");
+            message = new ResultMessage(ResultMessage.SUCCESS, "删除子系统资源成功");
         } catch (Exception e) {
-            message = new ResultMsg(ResultMsg.FAIL, "删除子系统资源失败");
+            message = new ResultMessage(ResultMessage.FAIL, "删除子系统资源失败");
         }
         writeResultMessage(response.getWriter(), message);
     }
@@ -160,7 +158,7 @@ public class SysResourceController extends GenericController {
 
 
     @RequestMapping("sysResourceGet")
-    @CatchErr(value = "获取资源失败", write2response = true)
+    @ErrorCatching(value = "获取资源失败", writeErrorToResponse = true)
     public void sysResourceGet(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String id = request.getParameter("id");
         SysResource sysResource = sysResourceManager.get(id);
@@ -176,7 +174,7 @@ public class SysResourceController extends GenericController {
 
 
     @RequestMapping("getTreeData")
-    @CatchErr
+    @ErrorCatching
     public List<SysResource> getTreeData(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String systemId = RequestUtil.getString(request, "systemId");
         Subsystem subsystem = subsystemManager.get(systemId);
@@ -199,7 +197,7 @@ public class SysResourceController extends GenericController {
 
     @RequestMapping("moveResource")
     public void moveResource(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        ResultMsg message = null;
+        ResultMessage message = null;
         try {
             String id = RequestUtil.getString(request, "id");
             SysResource sysResource = sysResourceManager.get(id);
@@ -212,9 +210,9 @@ public class SysResourceController extends GenericController {
             }
             sysResource.setParentId(parentId);
             sysResourceManager.update(sysResource);
-            message = new ResultMsg(ResultMsg.SUCCESS, "移动资源成功");
+            message = new ResultMessage(ResultMessage.SUCCESS, "移动资源成功");
         } catch (Exception e) {
-            message = new ResultMsg(ResultMsg.FAIL, "移动资源失败");
+            message = new ResultMessage(ResultMessage.FAIL, "移动资源失败");
         }
         writeResultMessage(response.getWriter(), message);
     }

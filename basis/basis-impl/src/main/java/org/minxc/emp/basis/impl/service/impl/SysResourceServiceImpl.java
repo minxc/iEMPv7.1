@@ -1,4 +1,4 @@
-package com.dstz.sys.service.impl;
+package org.minxc.emp.basis.impl.service.impl;
 
 import java.util.List;
 import java.util.Map;
@@ -6,18 +6,16 @@ import java.util.Set;
 
 import javax.annotation.Resource;
 
+import org.minxc.emp.basis.api.model.system.ISubsystem;
+import org.minxc.emp.basis.api.model.system.ISysResource;
+import org.minxc.emp.basis.api.service.SysResourceService;
+import org.minxc.emp.basis.impl.core.manager.ResRoleManager;
+import org.minxc.emp.basis.impl.core.manager.SubsystemManager;
+import org.minxc.emp.basis.impl.core.manager.SysResourceManager;
 import org.springframework.stereotype.Service;
-
-import com.dstz.sys.api.model.system.ISubsystem;
-import com.dstz.sys.api.model.system.ISysResource;
-import com.dstz.sys.api.service.SysResourceService;
-import com.dstz.sys.core.manager.ResRoleManager;
-import com.dstz.sys.core.manager.SubsystemManager;
-import com.dstz.sys.core.manager.SysResourceManager;
 
 /**
  * 用户系统资源服务接口
- * @author jeff
  */
 @Service
 public class SysResourceServiceImpl implements SysResourceService{

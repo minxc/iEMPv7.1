@@ -1,13 +1,12 @@
-package com.dstz.sys.excel.editor;
+package org.minxc.emp.basis.impl.excel.editor;
 
-import com.dstz.sys.excel.ExcelContext;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.ss.util.CellRangeAddress;
+import org.minxc.emp.basis.impl.excel.ExcelContext;
 
 /**
  * 行编辑器，可以设置一行的值、样式、数据格式和合并
  *
- * @author zxh
  */
 public class RowEditor extends AbstractRegionEditor<RowEditor> {
     private HSSFRow row;

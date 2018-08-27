@@ -1,19 +1,18 @@
-package com.dstz.sys.core.dao;
+package org.minxc.emp.basis.impl.core.dao;
 
 import java.util.List;
 
-import org.mybatis.spring.annotation.MapperScan;
+import org.apache.ibatis.annotations.Mapper;
+import org.minxc.emp.basis.impl.core.model.Subsystem;
+import org.minxc.emp.common.db.dao.CommonDao;
 
-import com.dstz.base.dao.BaseDao;
-import com.dstz.sys.core.model.Subsystem;
+
 
 /**
- * <pre>
- * 描述：子系统定义 DAO接口
- * </pre>
+ * 子系统定义 DAO接口
  */
-@MapperScan
-public interface SubsystemDao extends BaseDao<String, Subsystem> {
+@Mapper
+public interface SubsystemDao extends CommonDao<String, Subsystem> {
 
     /**
      * 判断别名是否存在

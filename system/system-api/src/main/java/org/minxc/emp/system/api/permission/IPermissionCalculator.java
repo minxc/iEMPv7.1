@@ -1,15 +1,10 @@
-package com.dstz.sys.api2.permission;
+package org.minxc.emp.system.api.permission;
 
-import com.alibaba.fastjson.JSONObject;
+//import com.alibaba.fastjson.JSONObject;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 /**
- * <pre>
  * 描述：系统内置权限
- * 作者:aschs
- * 邮箱:aschs@qq.com
- * 日期:2018年5月8日
- * 版权:summer
- * </pre>
  */
 public interface IPermissionCalculator {
 	/**
@@ -34,6 +29,7 @@ public interface IPermissionCalculator {
 	 * @param jsonObject
 	 * @return
 	 */
-	boolean haveRights(JSONObject json);
+//	boolean haveRights(JSONObject json);
+	boolean haveRights(ObjectNode json);
 	
 }
