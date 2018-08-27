@@ -8,6 +8,7 @@ import org.minxc.emp.system.api.model.ISysDataSource;
 import org.minxc.emp.system.impl.model.def.SysDataSourceDefAttribute;
 
 import com.minxc.emp.core.impl.model.AbstractCommonModel;
+import com.minxc.emp.core.util.JacksonUtil;
 
 import java.util.List;
 
@@ -106,7 +107,8 @@ public class SysDataSource extends AbstractCommonModel implements ISysDataSource
 
     public void setAttributesJson(String attributesJson) {
         this.attributesJson = attributesJson;
-        this.attributes = JsonUtil.parseArray(attributesJson, SysDataSourceDefAttribute.class);
+//        this.attributes = JsonUtil.parseArray(attributesJson, SysDataSourceDefAttribute.class);
+        this.attributes = JacksonUtil.jsonArray2PojoList(attributesJson, SysDataSourceDefAttribute.class);
     }
 
     public List<SysDataSourceDefAttribute> getAttributes() {
@@ -115,7 +117,8 @@ public class SysDataSource extends AbstractCommonModel implements ISysDataSource
 
     public void setAttributes(List<SysDataSourceDefAttribute> attributes) {
         this.attributes = attributes;
-        this.attributesJson = JsonUtil.toJSONString(attributes);
+//        this.attributesJson = JsonUtil.toJSONString(attributes);
+        this.attributesJson = JacksonUtil.listObject2Json(attributes);
     }
 
 }

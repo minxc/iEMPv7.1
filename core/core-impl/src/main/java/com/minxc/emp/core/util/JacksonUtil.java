@@ -211,6 +211,22 @@ public class JacksonUtil {
 	}
 
 	/**
+	 * listMap转json
+	 *
+	 * @param listMap listMap
+	 * @return
+	 */
+	public static String listObject2Json(List<?> list) {
+		String jsonStr = "";
+		try {
+			jsonStr = objectMapper.writeValueAsString(list);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		return jsonStr;
+	}
+	
+	/**
 	 * xml转pojo
 	 *
 	 * @param xmlStr xml字符串

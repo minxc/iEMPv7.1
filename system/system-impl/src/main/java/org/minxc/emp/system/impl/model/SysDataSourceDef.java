@@ -1,7 +1,7 @@
 package org.minxc.emp.system.impl.model;
 
 import com.minxc.emp.core.impl.model.AbstractCommonModel;
-
+import com.minxc.emp.core.util.JacksonUtil;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
@@ -64,7 +64,8 @@ public class SysDataSourceDef extends AbstractCommonModel {
 
     public void setAttributesJson(String attributesJson) {
         this.attributesJson = attributesJson;
-        this.attributes = JsonUtil.parseArray(attributesJson, SysDataSourceDefAttribute.class);
+//        this.attributes = JsonUtil.parseArray(attributesJson, SysDataSourceDefAttribute.class);
+        this.attributes = JacksonUtil.jsonArray2PojoList(attributesJson, SysDataSourceDefAttribute.class);
     }
 
     public List<SysDataSourceDefAttribute> getAttributes() {
@@ -73,7 +74,8 @@ public class SysDataSourceDef extends AbstractCommonModel {
 
     public void setAttributes(List<SysDataSourceDefAttribute> attributes) {
         this.attributes = attributes;
-        this.attributesJson = JsonUtil.toJSONString(attributes);
+//        this.attributesJson = JsonUtil.toJSONString(attributes);
+        this.attributesJson = JacksonUtil.listObject2Json(attributes);
     }
 
 }

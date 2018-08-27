@@ -8,13 +8,17 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.minxc.emp.common.manager.impl.CommonManager;
+import org.minxc.emp.core.api.exception.BusinessException;
 import org.minxc.emp.system.impl.dao.SysDataSourceDefDao;
 import org.minxc.emp.system.impl.manager.SysDataSourceDefManager;
 import org.minxc.emp.system.impl.model.SysDataSourceDef;
+import org.minxc.emp.system.impl.model.def.SysDataSourceDefAttribute;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.alibaba.fastjson.JSON;
+//import com.alibaba.fastjson.JSON;
+import com.minxc.emp.core.util.JacksonUtil;
+import com.minxc.emp.core.util.StringUtil;
 
 /**
  * @description 数据源模板 Manager处理实现类
@@ -55,6 +59,7 @@ public class SysDataSourceDefManagerImpl extends CommonManager<String, SysDataSo
         SysDataSourceDefManagerImpl impl = new SysDataSourceDefManagerImpl();
         //org.apache.commons.dbcp.BasicDataSource
         //com.alibaba.druid.pool.DruidDataSource
-        System.out.println(JSON.toJSONString(impl.initAttributes("org.apache.commons.dbcp.BasicDataSource")));
+//        System.out.println(JSON.toJSONString(impl.initAttributes("org.apache.commons.dbcp.BasicDataSource")));
+        System.out.println(JacksonUtil.pojo2Json(impl.initAttributes("org.apache.commons.dbcp.BasicDataSource")));
     }
 }

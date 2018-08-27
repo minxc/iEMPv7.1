@@ -1,11 +1,13 @@
 package org.minxc.emp.system.api.permission;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
 import org.minxc.emp.core.api.exception.BusinessException;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 //import com.alibaba.fastjson.JSONArray;
 //import com.alibaba.fastjson.JSONObject;
@@ -60,20 +62,39 @@ public class PermissionCalculatorFactory {
 //		}
 //		return false;
 //	}
-	public static boolean haveRights(ArrayNode jsonArray) {
+	
+	
+	public static boolean haveRights(JsonNode jsonArray) {
+		
 		if(jsonArray==null) {
 			return false;
 		}
-		for (Object obj : jsonArray) {
-			JSONObject json = (JSONObject) obj;
-			IPermissionCalculator permission = permissionMap().get(json.getString("type"));
+		Iterator<JsonNode> iter = jsonArray.elements();
+		
+		while(iter.hasNext()) {
+			JsonNode node  = iter.next();
+			IPermissionCalculator permission = permissionMap().get(node.get("type"));
 			if(permission==null) {
-				throw new BusinessException("权限类型["+json.getString("type")+"]找不到处理器");
+				throw new BusinessException("权限类型["+ node.get("type")+"]找不到处理器");
 			}
-			if (permission.haveRights(json)) {// 有一个满足就true
+			if (permission.haveRights(node)) {// 有一个满足就true
 				return true;
 			}
 		}
+		
 		return false;
+		
+		
+//		for (Object obj : jsonArray) {
+//			JSONObject json = (JSONObject) obj;
+//			IPermissionCalculator permission = permissionMap().get(json.getString("type"));
+//			if(permission==null) {
+//				throw new BusinessException("权限类型["+json.getString("type")+"]找不到处理器");
+//			}
+//			if (permission.haveRights(json)) {// 有一个满足就true
+//				return true;
+//			}
+//		}
+//		return false;
 	}
 }

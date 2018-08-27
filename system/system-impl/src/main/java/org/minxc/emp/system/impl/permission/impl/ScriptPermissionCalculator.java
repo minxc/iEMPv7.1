@@ -6,7 +6,9 @@ import org.minxc.emp.basis.api.groovy.IGroovyScriptEngine;
 import org.minxc.emp.system.api.permission.IPermissionCalculator;
 import org.springframework.stereotype.Service;
 
-import com.alibaba.fastjson.JSONObject;
+import com.fasterxml.jackson.databind.JsonNode;
+
+//import com.alibaba.fastjson.JSONObject;
 
 /**
  * 描述：脚本
@@ -27,8 +29,10 @@ public class ScriptPermissionCalculator implements IPermissionCalculator {
 	}
 
 	@Override
-	public boolean haveRights(JSONObject json) {
-		String script = json.getString("id");
+	public boolean haveRights(JsonNode json) {
+//		String script = json.getString("id");
+//		return groovyScriptEngine.executeBoolean(script, null);
+		String script = json.get("id").asText();
 		return groovyScriptEngine.executeBoolean(script, null);
 	}
 
