@@ -1,6 +1,5 @@
 package org.minxc.emp.basis.api.groovy;
 
-import java.util.List;
 import java.util.Map;
 
 public interface IGroovyScriptEngine {
