@@ -1,13 +1,12 @@
 package org.minxc.emp.idm.rest.controller;
 
-import com.dstz.base.api.aop.annotion.CatchErr;
-import com.dstz.base.api.exception.BusinessException;
-import com.dstz.base.api.response.impl.ResultMsg;
-import com.dstz.base.core.util.StringUtil;
-import com.dstz.base.manager.Manager;
-import com.dstz.base.rest.BaseController;
-import com.dstz.org.core.manager.RoleManager;
-import com.dstz.org.core.model.Role;
+
+import org.apache.commons.lang3.StringUtils;
+import org.minxc.emp.common.rest.CommonController;
+import org.minxc.emp.core.api.aop.annotation.ErrorCatching;
+import org.minxc.emp.core.api.exception.BusinessException;
+import org.minxc.emp.core.api.response.impl.ResultMessage;
+import org.minxc.emp.idm.impl.manager.RoleManager;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @RestController
 @RequestMapping("/org/role")
-public class RoleController extends BaseController<Role> {
+public class RoleController extends CommonController<Role> {
     @Resource
     RoleManager roleManager;
 
@@ -32,9 +31,9 @@ public class RoleController extends BaseController<Role> {
     }
 
     @Override
-    @CatchErr
-    public ResultMsg<String> save( @RequestBody Role role) throws Exception {
-        if (StringUtil.isEmpty(role.getId())) {
+    @ErrorCatching
+    public ResultMessage<String> save( @RequestBody Role role) throws Exception {
+        if (StringUtils.isEmpty(role.getId())) {
             boolean isExist = roleManager.isRoleExist(role);
             if (isExist) {
                 throw new BusinessException("角色在系统中已存在!");
