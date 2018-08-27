@@ -3,12 +3,14 @@ package org.minxc.emp.idm.rest.controller;
 import com.github.pagehelper.Page;
 
 import org.apache.commons.lang3.StringUtils;
+import org.minxc.emp.common.db.id.UniqueIdUtil;
 import org.minxc.emp.common.db.model.page.PageJson;
 import org.minxc.emp.common.rest.CommonController;
 import org.minxc.emp.common.rest.util.RequestUtil;
 import org.minxc.emp.core.api.aop.annotation.ErrorCatching;
 import org.minxc.emp.core.api.query.QueryFilter;
 import org.minxc.emp.idm.impl.manager.UserRoleManager;
+import org.minxc.emp.idm.impl.model.UserRoleEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 @RestController
 @RequestMapping("/org/userRole")
 public class UserRoleController extends CommonController<UserRoleEntity> {
+	
     @Resource
     UserRoleManager userRoleManager;
 
@@ -36,7 +39,7 @@ public class UserRoleController extends CommonController<UserRoleEntity> {
         if (StringUtils.isNotEmpty(userId)) {
             queryFilter.addParamsFilter("userId", userId);
         }
-        Page<UserRole> userRoleList = (Page<UserRole>) userRoleManager.query(queryFilter);
+        Page<UserRoleEntity> userRoleList = (Page<UserRoleEntity>) userRoleManager.query(queryFilter);
         return new PageJson(userRoleList);
     }
 
@@ -63,7 +66,7 @@ public class UserRoleController extends CommonController<UserRoleEntity> {
     private void addUserRole(String userId, String roleId) {
         if (userRoleManager.getByRoleIdUserId(roleId, userId) != null) return;
 
-        UserRole userRole = new UserRole();
+        UserRoleEntity userRole = new UserRoleEntity();
         userRole.setId(UniqueIdUtil.getSuid());
         userRole.setUserId(userId);
         userRole.setRoleId(roleId);
