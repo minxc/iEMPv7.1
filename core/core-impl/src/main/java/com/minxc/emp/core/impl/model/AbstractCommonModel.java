@@ -21,6 +21,8 @@ import lombok.*;
 import org.minxc.emp.core.api.model.CommonModel;
 
 import javax.validation.constraints.NotEmpty;
+
+import java.io.Serializable;
 import java.util.Date;
 
 /**      
@@ -40,7 +42,7 @@ import java.util.Date;
 @ToString
 @EqualsAndHashCode
 @NoArgsConstructor
-public abstract class AbstractCommonModel implements CommonModel {
+public abstract class AbstractCommonModel implements CommonModel,Serializable {
 
 	
 		private static final long serialVersionUID = -4468635720384821075L;
