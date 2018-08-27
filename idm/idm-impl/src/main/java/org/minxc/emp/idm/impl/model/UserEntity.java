@@ -2,7 +2,6 @@ package org.minxc.emp.idm.impl.model;
 
 import org.minxc.emp.idm.api.model.User;
 import org.minxc.emp.idm.api.model.IdentityType;
-import com.dstz.sys.util.SysPropertyUtil;
 import com.minxc.emp.core.impl.model.AbstractCommonModel;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
@@ -17,6 +16,11 @@ import java.util.Map;
 public class UserEntity extends AbstractCommonModel implements User {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4501798965220785640L;
+
+	/**
      * id_
      */
     protected String id;
