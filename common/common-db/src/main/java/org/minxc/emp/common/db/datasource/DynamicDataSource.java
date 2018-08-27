@@ -1,6 +1,6 @@
 package org.minxc.emp.common.db.datasource;
 
-import com.dstz.base.api.exception.BusinessException;
+import org.minxc.emp.core.api.exception.BusinessException;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 
 import javax.sql.DataSource;
