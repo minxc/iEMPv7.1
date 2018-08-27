@@ -5,21 +5,25 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.dstz.org.api.model.IUser;
-import com.dstz.sys.api.model.SysIdentity;
+import org.minxc.emp.basis.api.model.SysIdentity;
+import org.minxc.emp.idm.api.model.User;
+
 /**
  * 通知消息的DTO
  *
  */
 public class NotifyMessage implements Serializable{
-    private String subject;
+	
+	private static final long serialVersionUID = -7773676683448714903L;
+	
+	private String subject;
     private String htmlContent;
     private String textContent;
-    private IUser sender;
+    private User sender;
     private List<SysIdentity> receivers;
 
 
-    public NotifyMessage(String subject, String htmlContent, IUser sender, List<SysIdentity> receivers) {
+    public NotifyMessage(String subject, String htmlContent, User sender, List<SysIdentity> receivers) {
         this.subject = subject;
         this.sender = sender;
         this.receivers = receivers;
@@ -37,11 +41,11 @@ public class NotifyMessage implements Serializable{
     }
 
     
-    public IUser getSender() {
+    public User getSender() {
         return sender;
     }
 
-    public void setSender(IUser sender) {
+    public void setSender(User sender) {
         this.sender = sender;
     }
 
