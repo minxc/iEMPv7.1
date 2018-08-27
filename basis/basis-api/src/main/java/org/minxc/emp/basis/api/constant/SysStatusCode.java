@@ -16,15 +16,30 @@ public enum SysStatusCode implements StatusCode {
 
     private String code;
     private String desc;
-    private String system;
+    private String application;
+    private String tenant;
 
     SysStatusCode(String code, String description) {
         this.setCode(code);
         this.setDesc(description);
-        this.("SYS");
+        this.setApplication("SYS");
     }
 
-    public String getCode() {
+    /**
+	 * @param application the application to set
+	 */
+	public void setApplication(String application) {
+		this.application = application;
+	}
+
+	/**
+	 * @param tenant the tenant to set
+	 */
+	public void setTenant(String tenant) {
+		this.tenant = tenant;
+	}
+
+	public String getCode() {
         return code;
     }
 
@@ -44,18 +59,16 @@ public enum SysStatusCode implements StatusCode {
 	@Override
 	public String getDescription() {
 		// TODO Auto-generated method stub
-		return null;
+		return desc;
 	}
 
 	@Override
 	public String getApplication() {
-		// TODO Auto-generated method stub
-		return null;
+		return application;
 	}
-
+	
 	@Override
 	public String getTenant() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
