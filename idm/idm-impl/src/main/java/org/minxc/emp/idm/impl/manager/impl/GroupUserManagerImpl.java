@@ -4,14 +4,14 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang3.StringUtils;
 import org.minxc.emp.common.manager.impl.CommonManager;
+import org.minxc.emp.core.api.query.QueryFilter;
 import org.springframework.stereotype.Service;
 
-import com.dstz.base.api.query.QueryFilter;
 import com.dstz.base.core.cache.ICache;
-import com.dstz.base.core.util.BeanUtils;
-import com.dstz.base.core.util.StringUtil;
-import com.dstz.base.manager.impl.BaseManager;
+import com.minxc.emp.core.util.BeanUtils;
+
 import org.minxc.emp.idm.api.context.CurrentContext;
 import org.minxc.emp.idm.impl.dao.GroupUserDao;
 import org.minxc.emp.idm.impl.manager.GroupUserManager;
@@ -76,7 +76,7 @@ public class GroupUserManagerImpl extends CommonManager<String, GroupUserEntity>
     @Override
     public void saveGroupUserRel(String groupId, String[] userIds, String[] relIds) {
         for (String userId : userIds) {
-            if (StringUtil.isEmpty(userId)) continue;
+            if (StringUtils.isEmpty(userId)) continue;
             //没有选择岗位情况。仅仅加入组
             if (BeanUtils.isEmpty(relIds)) {
                 List<GroupUserEntity> list = groupUserDao.getListByGroupIdUserId(groupId, userId);
@@ -88,7 +88,7 @@ public class GroupUserManagerImpl extends CommonManager<String, GroupUserEntity>
             }
 
             for (String relId : relIds) {
-                if (StringUtil.isEmpty(relId)) continue;
+                if (StringUtils.isEmpty(relId)) continue;
 
                 GroupUserEntity groupUser = groupUserDao.getGroupUser(groupId, userId, relId);
                 if (groupUser != null) continue;
