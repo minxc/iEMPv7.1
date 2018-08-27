@@ -1,20 +1,19 @@
 package org.minxc.emp.idm.rest.controller;
 
-import com.dstz.base.api.aop.annotion.CatchErr;
-import com.dstz.base.api.query.QueryFilter;
-import com.dstz.base.api.query.QueryOP;
-import com.dstz.base.api.response.impl.ResultMsg;
-import com.dstz.base.core.util.BeanUtils;
-import com.dstz.base.core.util.StringUtil;
-import com.dstz.base.db.model.page.PageJson;
 import com.github.pagehelper.Page;
-import com.dstz.base.manager.Manager;
-import com.dstz.base.rest.BaseController;
-import com.dstz.base.rest.util.RequestUtil;
-import com.dstz.org.core.manager.GroupManager;
-import com.dstz.org.core.manager.UserManager;
-import com.dstz.org.core.model.Group;
-import com.dstz.org.core.model.OrgTree;
+import com.minxc.emp.core.util.BeanUtils;
+
+import org.apache.commons.lang3.StringUtils;
+import org.minxc.emp.common.db.model.page.PageJson;
+import org.minxc.emp.common.rest.CommonController;
+import org.minxc.emp.common.rest.util.RequestUtil;
+import org.minxc.emp.core.api.aop.annotation.ErrorCatching;
+import org.minxc.emp.core.api.query.QueryFilter;
+import org.minxc.emp.core.api.response.impl.ResultMessage;
+import org.minxc.emp.idm.api.model.Group;
+import org.minxc.emp.idm.impl.manager.GroupManager;
+import org.minxc.emp.idm.impl.manager.UserManager;
+import org.minxc.emp.idm.impl.model.OrgTreeEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,7 +29,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/org/group")
-public class GroupController extends BaseController<Group> {
+public class GroupController extends CommonController<Group> {
 
 
     @Resource
@@ -51,7 +50,7 @@ public class GroupController extends BaseController<Group> {
     public PageJson listJson(HttpServletRequest request, HttpServletResponse response) throws Exception {
         QueryFilter queryFilter = getQueryFilter(request);
         String parentId = request.getParameter("parentId");
-        if (StringUtil.isNotEmpty(parentId)) {
+        if (StringUtils.isNotEmpty(parentId)) {
             queryFilter.addFilter("parent_id_", parentId, QueryOP.EQUAL);
         }
         Page<Group> orgList = (Page<Group>) groupManager.query(queryFilter);
@@ -63,10 +62,10 @@ public class GroupController extends BaseController<Group> {
     public boolean isExist(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String oldCode = RequestUtil.getString(request, "oldCode");
         String code = RequestUtil.getString(request, "key");
-        if (oldCode.equals(code) && StringUtil.isNotEmpty(code)) {
+        if (oldCode.equals(code) && StringUtils.isNotEmpty(code)) {
             return false;
         }
-        if (StringUtil.isNotEmpty(code)) {
+        if (StringUtils.isNotEmpty(code)) {
             Group temp = groupManager.getByCode(code);
             return temp != null;
         }
@@ -84,7 +83,7 @@ public class GroupController extends BaseController<Group> {
     @RequestMapping("get")
     @Override
     @ErrorCatching
-    public ResultMsg<Group> get(@RequestParam String id) throws Exception {
+    public ResultMessage<Group> get(@RequestParam String id) throws Exception {
         Group group = groupManager.get(id);
         if (group != null && !group.getParentId().equals("0")) {
             String parentOrgName = groupManager.get(group.getParentId()).getName();
@@ -95,23 +94,23 @@ public class GroupController extends BaseController<Group> {
     }
     
     @RequestMapping("getTreeData")
-    public List<OrgTree> getTreeData(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        List<OrgTree> groupTreeList = getGroupTree();
+    public List<OrgTreeEntity> getTreeData(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        List<OrgTreeEntity> groupTreeList = getGroupTree();
         if (BeanUtils.isEmpty(groupTreeList)) {
-            groupTreeList = new ArrayList<OrgTree>();
+            groupTreeList = new ArrayList<OrgTreeEntity>();
         }
-        OrgTree rootGroup = new OrgTree();
+        OrgTreeEntity rootGroup = new OrgTreeEntity();
         rootGroup.setName("行政组织");
         rootGroup.setId("0"); // 根节点
         groupTreeList.add(rootGroup);
         return groupTreeList;
     }
 
-    private List<OrgTree> getGroupTree() {
-        List<OrgTree> groupTreeList = new ArrayList<OrgTree>();
+    private List<OrgTreeEntity> getGroupTree() {
+        List<OrgTreeEntity> groupTreeList = new ArrayList<OrgTreeEntity>();
         List<Group> groupList = groupManager.getAll();
         for (Group group : groupList) {
-            OrgTree groupTree = new OrgTree(group);
+            OrgTreeEntity groupTree = new OrgTreeEntity(group);
             groupTreeList.add(groupTree);
         }
         return groupTreeList;
