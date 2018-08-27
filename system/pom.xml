@@ -11,6 +11,11 @@
 
     <groupId>org.minxc.emp</groupId>
     <artifactId>system</artifactId>
+	<packaging>pom</packaging>
 
-
+	<modules>
+		<module>system-api</module>
+		<module>system-impl</module>
+		<module>system-rest</module>
+	</modules>
 </project>

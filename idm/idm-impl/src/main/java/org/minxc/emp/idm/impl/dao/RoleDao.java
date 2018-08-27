@@ -9,9 +9,7 @@ import org.apache.ibatis.annotations.Param;
 import org.minxc.emp.common.db.dao.CommonDao;
 
 /**
- * <pre>
  * 描述：角色管理 DAO接口
- * </pre>
  */
 @Mapper
 public interface RoleDao extends CommonDao<String, RoleEntity> {

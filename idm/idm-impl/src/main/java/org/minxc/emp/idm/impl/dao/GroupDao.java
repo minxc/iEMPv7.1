@@ -9,9 +9,7 @@ import org.minxc.emp.common.db.dao.CommonDao;
 
 
 /**
- * <pre>
  * 描述：组织架构 DAO接口
- * </pre>
  */
 @Mapper
 public interface GroupDao extends CommonDao<String, GroupEntity> {

@@ -9,196 +9,187 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.util.Map;
 
-
 /**
- * <pre>
- * 描述：组织架构 实体对象
- * </pre>
+ * 组织架构 实体对象
  */
 public class GroupEntity extends AbstractCommonModel implements Group {
 
-    /**
-     * 主键
-     */
-    protected String id;
+	private static final long serialVersionUID = 9058258883041062647L;
 
-    /**
-     * name_
-     */
-    protected String name;
+	/**
+	 * 主键
+	 */
+	protected String id;
 
-    /**
-     * prent_id_
-     */
-    protected String parentId;
+	/**
+	 * name_
+	 */
+	protected String name;
 
-    /**
-     * code_
-     */
-    protected String code;
+	/**
+	 * prent_id_
+	 */
+	protected String parentId;
 
-    /**
-     * 级别
-     */
-    protected String grade;
+	/**
+	 * code_
+	 */
+	protected String code;
 
+	/**
+	 * 级别
+	 */
+	protected String grade;
 
-    protected Long sn;
+	protected Long sn;
 
-    protected String desc;
-    ;
+	protected String desc;;
 
-    /**
-     * 上级组织名称
-     */
-    protected String parentOrgName;
+	/**
+	 * 上级组织名称
+	 */
+	protected String parentOrgName;
 
-    /**
-     * 是否主组织。
-     */
-    private int isMaster = 0;
+	/**
+	 * 是否主组织。
+	 */
+	private int isMaster = 0;
 
-    public void setParentOrgName(String parentOrgName) {
-        this.parentOrgName = parentOrgName;
-    }
+	public void setParentOrgName(String parentOrgName) {
+		this.parentOrgName = parentOrgName;
+	}
 
-    /**
-     * 返回 主键
-     *
-     * @return
-     */
-    public String getParentOrgName() {
-        return this.parentOrgName;
-    }
+	/**
+	 * 返回 主键
+	 *
+	 * @return
+	 */
+	public String getParentOrgName() {
+		return this.parentOrgName;
+	}
 
+	public void setId(String id) {
+		this.id = id;
+	}
 
-    public void setId(String id) {
-        this.id = id;
-    }
+	/**
+	 * 返回 主键
+	 *
+	 * @return
+	 */
+	public String getId() {
+		return this.id;
+	}
 
-    /**
-     * 返回 主键
-     *
-     * @return
-     */
-    public String getId() {
-        return this.id;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	/**
+	 * 返回 name_
+	 *
+	 * @return
+	 */
+	public String getName() {
+		return this.name;
+	}
 
-    /**
-     * 返回 name_
-     *
-     * @return
-     */
-    public String getName() {
-        return this.name;
-    }
+	public void setParentId(String parentId) {
+		this.parentId = parentId;
+	}
 
-    public void setParentId(String parentId) {
-        this.parentId = parentId;
-    }
+	/**
+	 * 返回 prent_id_
+	 *
+	 * @return
+	 */
+	public String getParentId() {
+		return this.parentId;
+	}
 
-    /**
-     * 返回 prent_id_
-     *
-     * @return
-     */
-    public String getParentId() {
-        return this.parentId;
-    }
+	public void setCode(String code) {
+		this.code = code;
+	}
 
-    public void setCode(String code) {
-        this.code = code;
-    }
+	/**
+	 * 返回 code_
+	 *
+	 * @return
+	 */
+	public String getCode() {
+		return this.code;
+	}
 
-    /**
-     * 返回 code_
-     *
-     * @return
-     */
-    public String getCode() {
-        return this.code;
-    }
+	public void setGrade(String grade) {
+		this.grade = grade;
+	}
 
-    public void setGrade(String grade) {
-        this.grade = grade;
-    }
+	/**
+	 * 返回 级别
+	 *
+	 * @return
+	 */
+	public String getGrade() {
+		return this.grade;
+	}
 
-    /**
-     * 返回 级别
-     *
-     * @return
-     */
-    public String getGrade() {
-        return this.grade;
-    }
+	/**
+	 * @see Object#toString()
+	 */
+	public String toString() {
+		return new ToStringBuilder(this).append("id", this.id).append("name", this.name)
+				.append("parentId", this.parentId).append("code", this.code).append("grade", this.grade).toString();
+	}
 
-    /**
-     * @see Object#toString()
-     */
-    public String toString() {
-        return new ToStringBuilder(this)
-                .append("id", this.id)
-                .append("name", this.name)
-                .append("parentId", this.parentId)
-                .append("code", this.code)
-                .append("grade", this.grade)
-                .toString();
-    }
+	public String getIdentityType() {
+		return IdentityType.GROUP;
+	}
 
-    public String getIdentityType() {
-        return IdentityType.GROUP;
-    }
+	public String getGroupId() {
+		return this.id;
+	}
 
-    public String getGroupId() {
-        return this.id;
-    }
+	public String getGroupCode() {
+		return this.code;
+	}
 
-    public String getGroupCode() {
-        return this.code;
-    }
+	public Long getSn() {
+		return sn;
+	}
 
-    public Long getSn() {
-        return sn;
-    }
+	public void setSn(Long sn) {
+		this.sn = sn;
+	}
 
-    public void setSn(Long sn) {
-        this.sn = sn;
-    }
+	public String getDesc() {
+		return desc;
+	}
 
-    public String getDesc() {
-        return desc;
-    }
+	public void setDesc(String desc) {
+		this.desc = desc;
+	}
 
-    public void setDesc(String desc) {
-        this.desc = desc;
-    }
+	public String getGroupType() {
+		return GroupTypeConstant.ORG.key();
+	}
 
-    public String getGroupType() {
-        return GroupTypeConstant.ORG.key();
-    }
+	public GroupStructEnum getStruct() {
+		return GroupStructEnum.TREE;
+	}
 
-    public GroupStructEnum getStruct() {
-        return GroupStructEnum.TREE;
-    }
+	public String getPath() {
+		return null;
+	}
 
-    public String getPath() {
-        return null;
-    }
+	public Map<String, Object> getParams() {
+		return null;
+	}
 
-    public Map<String, Object> getParams() {
-        return null;
-    }
+	public int getIsMaster() {
+		return isMaster;
+	}
 
-    public int getIsMaster() {
-        return isMaster;
-    }
-
-    public void setIsMaster(int isMaster) {
-        this.isMaster = isMaster;
-    }
+	public void setIsMaster(int isMaster) {
+		this.isMaster = isMaster;
+	}
 }

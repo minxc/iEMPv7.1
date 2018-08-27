@@ -7,9 +7,7 @@ import org.minxc.emp.core.api.query.QueryFilter;
 import java.util.List;
 
 /**
- * <pre>
- * 描述：组织关联关系 处理接口
- * </pre>
+ * 组织关联关系 处理接口
  */
 public interface GroupRelationManager extends Manager<String, GroupRelationEntity> {
     GroupRelationEntity getByCode(String code);

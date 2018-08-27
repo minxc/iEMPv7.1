@@ -14,6 +14,7 @@ import org.minxc.emp.core.api.query.QueryOperator;
 import org.minxc.emp.idm.impl.manager.GroupRelationManager;
 import org.minxc.emp.idm.impl.manager.GroupUserManager;
 import org.minxc.emp.idm.impl.manager.UserManager;
+import org.minxc.emp.idm.impl.model.GroupUserEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -58,13 +59,13 @@ public class GroupUserController extends GenericController {
      * 用户组织关系明细页面
      */
     @RequestMapping("getJson")
-    public GroupUser getJson(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public GroupUserEntity getJson(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String id = RequestUtil.getString(request, "id");
         if (StringUtils.isEmpty(id)) {
             return null;
         }
 
-        GroupUser GroupUser = groupUserManager.get(id);
+        GroupUserEntity GroupUser = groupUserManager.get(id);
         return GroupUser;
     }
 
@@ -93,7 +94,7 @@ public class GroupUserController extends GenericController {
      * @throws
      */
     @RequestMapping("remove")
-    @CatchErr
+    @ErrorCatching
     public void remove(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String[] aryIds = RequestUtil.getStringAryByStr(request, "id");
         groupUserManager.removeByIds(aryIds);
@@ -148,20 +149,20 @@ public class GroupUserController extends GenericController {
                 relId = relIds[i];
             }
 
-            GroupUser GroupUser = groupUserManager.getGroupUser(orgId, userId, relId);
-            if (GroupUser == null) {
-                GroupUser = groupUserManager.getGroupUser(orgId, userId, "");
-                if (GroupUser == null) {
-                    GroupUser = new GroupUser();
-                    GroupUser.setId(UniqueIdUtil.getSuid());
-                    GroupUser.setGroupId(orgId);
-                    GroupUser.setUserId(userId);
-                    GroupUser.setRelId(relId);
-                    GroupUser.setIsMaster(0);
-                    groupUserManager.create(GroupUser);
+            GroupUserEntity groupUser = groupUserManager.getGroupUser(orgId, userId, relId);
+            if (groupUser == null) {
+            	groupUser = groupUserManager.getGroupUser(orgId, userId, "");
+                if (groupUser == null) {
+                	groupUser = new GroupUserEntity();
+                	groupUser.setId(UniqueIdUtil.getSuid());
+                	groupUser.setGroupId(orgId);
+                	groupUser.setUserId(userId);
+                	groupUser.setRelId(relId);
+                	groupUser.setIsMaster(0);
+                    groupUserManager.create(groupUser);
                 } else {
-                    GroupUser.setRelId(relId);
-                    groupUserManager.update(GroupUser);
+                	groupUser.setRelId(relId);
+                    groupUserManager.update(groupUser);
                 }
             }
         }

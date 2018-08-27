@@ -11,13 +11,16 @@ import java.util.Map;
 
 
 /**
- * <pre>
- * 描述：角色管理 实体对象
- * </pre>
+ * 角色管理 实体对象
  */
 public class RoleEntity extends AbstractCommonModel implements Group {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = -3960835577784897473L;
+
+	/**
      * id_
      */
     protected String id;

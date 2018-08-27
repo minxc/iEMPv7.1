@@ -7,13 +7,13 @@ import org.minxc.emp.idm.api.model.UserRole;
 
 
 /**
- * <pre>
- * 描述：用户角色管理 实体对象
- * </pre>
+ * 用户角色管理 实体对象
  */
 public class UserRoleEntity extends AbstractCommonModel implements UserRole {
 
-    /**
+	private static final long serialVersionUID = -5985721994440075379L;
+
+	/**
      * role_id_
      */
     protected String roleId;

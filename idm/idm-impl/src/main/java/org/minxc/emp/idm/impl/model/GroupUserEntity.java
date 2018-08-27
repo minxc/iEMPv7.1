@@ -5,13 +5,13 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 
 /**
- * <pre>
- * 描述：用户组织关系 实体对象
- * </pre>
+ * 用户组织关系 实体对象
  */
 public class GroupUserEntity extends AbstractCommonModel {
 
-    /**
+	private static final long serialVersionUID = -3921358687321165230L;
+
+	/**
      * 主关系
      */
     public static final Integer MASTER_YES = 1;

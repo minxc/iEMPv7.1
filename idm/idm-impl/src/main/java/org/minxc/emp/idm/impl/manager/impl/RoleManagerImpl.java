@@ -14,33 +14,33 @@ import org.minxc.emp.idm.impl.manager.RoleManager;
 import org.minxc.emp.idm.impl.model.RoleEntity;
 
 /**
- * <pre>
- * 描述：角色管理 处理实现类
- * </pre>
+ * 角色管理 处理实现类
  */
 @Service("roleManager")
 public class RoleManagerImpl extends CommonManager<String, RoleEntity> implements RoleManager {
-    @Resource
-    RoleDao roleDao;
+	@Resource
+	RoleDao roleDao;
 
-    public RoleEntity getByAlias(String alias) {
-        return roleDao.getByAlias(alias);
-    }
+	public RoleEntity getByAlias(String alias) {
+		return roleDao.getByAlias(alias);
+	}
 
-    public List<RoleEntity> getListByUserId(String userId) {
-    	if(StringUtils.isEmpty(userId))return Collections.emptyList();
-        return roleDao.getList(userId, null);
-    }
+	public List<RoleEntity> getListByUserId(String userId) {
+		if (StringUtils.isEmpty(userId))
+			return Collections.emptyList();
+		return roleDao.getList(userId, null);
+	}
 
-    public List<RoleEntity> getListByAccount(String account) {
-    	if(StringUtils.isEmpty(account))return Collections.emptyList();
-    	
-        return roleDao.getList(null,account);
-    }
+	public List<RoleEntity> getListByAccount(String account) {
+		if (StringUtils.isEmpty(account))
+			return Collections.emptyList();
 
-    @Override
-    public boolean isRoleExist(RoleEntity role) {
-        return roleDao.isRoleExist(role) != 0;
-    }
+		return roleDao.getList(null, account);
+	}
+
+	@Override
+	public boolean isRoleExist(RoleEntity role) {
+		return roleDao.isRoleExist(role) != 0;
+	}
 
 }

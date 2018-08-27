@@ -7,6 +7,7 @@ import org.minxc.emp.core.api.aop.annotation.ErrorCatching;
 import org.minxc.emp.core.api.exception.BusinessException;
 import org.minxc.emp.core.api.response.impl.ResultMessage;
 import org.minxc.emp.idm.impl.manager.RoleManager;
+import org.minxc.emp.idm.impl.model.RoleEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @RestController
 @RequestMapping("/org/role")
-public class RoleController extends CommonController<Role> {
+public class RoleController extends CommonController<RoleEntity> {
     @Resource
     RoleManager roleManager;
 
@@ -32,7 +33,7 @@ public class RoleController extends CommonController<Role> {
 
     @Override
     @ErrorCatching
-    public ResultMessage<String> save( @RequestBody Role role) throws Exception {
+    public ResultMessage<String> save( @RequestBody RoleEntity role) throws Exception {
         if (StringUtils.isEmpty(role.getId())) {
             boolean isExist = roleManager.isRoleExist(role);
             if (isExist) {

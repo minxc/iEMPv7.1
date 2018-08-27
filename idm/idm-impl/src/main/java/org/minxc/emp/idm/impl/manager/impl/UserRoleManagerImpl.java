@@ -12,30 +12,28 @@ import org.minxc.emp.idm.impl.manager.UserRoleManager;
 import org.minxc.emp.idm.impl.model.UserRoleEntity;
 
 /**
- * <pre>
- * 描述：用户角色管理 处理实现类
- * </pre>
+ * 用户角色管理 处理实现类
  */
 @Service("userRoleManager")
 public class UserRoleManagerImpl extends CommonManager<String, UserRoleEntity> implements UserRoleManager {
-    @Resource
-    UserRoleDao userRoleDao;
+	@Resource
+	UserRoleDao userRoleDao;
 
-    public UserRoleEntity getByRoleIdUserId(String roleId, String userId) {
-        return userRoleDao.getByRoleIdUserId(roleId, userId);
-    }
+	public UserRoleEntity getByRoleIdUserId(String roleId, String userId) {
+		return userRoleDao.getByRoleIdUserId(roleId, userId);
+	}
 
-    // 这是什么鬼写法
-    public List<UserRoleEntity> getListByUserId(String userId) {
-    	return userRoleDao.queryByParams(null, userId, null);
-    }
+	// 这是什么鬼写法
+	public List<UserRoleEntity> getListByUserId(String userId) {
+		return userRoleDao.queryByParams(null, userId, null);
+	}
 
-    public List<UserRoleEntity> getListByRoleId(String roleId) {
-    	return userRoleDao.queryByParams(roleId, null, null);
-    }
+	public List<UserRoleEntity> getListByRoleId(String roleId) {
+		return userRoleDao.queryByParams(roleId, null, null);
+	}
 
-    public List<UserRoleEntity> getListByAlias(String alias) {
-    	
-    	return userRoleDao.queryByParams(null,null,alias);
-    }
+	public List<UserRoleEntity> getListByAlias(String alias) {
+
+		return userRoleDao.queryByParams(null, null, alias);
+	}
 }

@@ -1,10 +1,8 @@
 package org.minxc.emp.idm.rest.controller;
 
-import com.dstz.base.core.encrypt.EncryptUtil;
 import com.github.pagehelper.Page;
 import com.minxc.emp.core.util.CryptoUtil;
 
-import ch.qos.logback.core.util.ContextUtil;
 
 import org.apache.commons.lang3.StringUtils;
 import org.minxc.emp.common.db.id.UniqueIdUtil;
@@ -18,6 +16,8 @@ import org.minxc.emp.core.api.query.QueryOperator;
 import org.minxc.emp.core.api.response.impl.ResultMessage;
 import org.minxc.emp.idm.impl.manager.GroupUserManager;
 import org.minxc.emp.idm.impl.manager.UserManager;
+import org.minxc.emp.idm.impl.model.GroupUserEntity;
+import org.minxc.emp.idm.impl.model.UserEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,7 +33,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @RestController
 @RequestMapping("/org/user")
-public class UserController extends CommonController<User> {
+public class UserController extends CommonController<UserEntity> {
     @Resource
     UserManager userManager;
     @Resource
@@ -52,7 +52,7 @@ public class UserController extends CommonController<User> {
         QueryFilter queryFilter = getQueryFilter(request);
         String userId = RequestUtil.getString(request, "userId");
         queryFilter.addFilter("u.id_", userId, QueryOperator.EQUAL);
-        Page<User> userList = (Page<User>) userManager.queryOrgUser(queryFilter);
+        Page<UserEntity> userList = (Page<UserEntity>) userManager.queryOrgUser(queryFilter);
         return new PageJson(userList);
     }
 
@@ -85,7 +85,7 @@ public class UserController extends CommonController<User> {
     @RequestMapping("save")
     @Override
     @ErrorCatching(writeErrorToResponse = true, value = "操作用户失败！")
-    public ResultMessage<String> save( @RequestBody User user) throws Exception {
+    public ResultMessage<String> save( @RequestBody UserEntity user) throws Exception {
         String resultMsg = null;
         boolean isExist = userManager.isUserExist(user);
         if (isExist) {
@@ -99,9 +99,9 @@ public class UserController extends CommonController<User> {
             user.setPassword(password);
             //添加用户和组织的关系，默认为主关系。
             if (StringUtils.isNotEmpty(user.getGroupId())) {
-                GroupUser orgUser = new GroupUser();
+                GroupUserEntity orgUser = new GroupUserEntity();
                 orgUser.setId(UniqueIdUtil.getSuid());
-                orgUser.setIsMaster(GroupUser.MASTER_YES);
+                orgUser.setIsMaster(GroupUserEntity.MASTER_YES);
                 orgUser.setGroupId(user.getGroupId());
                 orgUser.setUserId(user.getUserId());
                 orgUserManager.create(orgUser);
@@ -119,7 +119,7 @@ public class UserController extends CommonController<User> {
 
     @RequestMapping("saveUserInfo")
     @ErrorCatching("更新失败")
-    public void saveUserInfo(HttpServletRequest request, HttpServletResponse response, @RequestBody User user) throws Exception {
+    public void saveUserInfo(HttpServletRequest request, HttpServletResponse response, @RequestBody UserEntity user) throws Exception {
         userManager.update(user);
         writeSuccessData(response, "更新用户成功");
     }
@@ -130,7 +130,7 @@ public class UserController extends CommonController<User> {
         String oldPassWorld = RequestUtil.getString(request, "oldPassWorld");
         String newPassword = RequestUtil.getString(request, "newPassword");
 
-        User user = userManager.get(ContextUtil.getCurrentUserId());
+        UserEntity user = userManager.get(ContextUtil.getCurrentUserId());
         if (!user.getPassword().equals(CryptoUtil.encodeSHA(oldPassWorld))) {
             throw new BusinessException("旧密码输入错误");
         }
@@ -147,9 +147,9 @@ public class UserController extends CommonController<User> {
         QueryFilter queryFilter = getQueryFilter(request);
         String orgId = RequestUtil.getString(request, "orgId");
         String relId = RequestUtil.getString(request, "relId");
-        queryFilter.addFilter("orguser.org_id_", orgId, QueryOP.EQUAL);
+        queryFilter.addFilter("orguser.org_id_", orgId, QueryOperator.EQUAL);
         if (StringUtil.isNotEmpty(relId)) {
-            queryFilter.addFilter("orguser.rel_id_", relId, QueryOP.EQUAL);
+            queryFilter.addFilter("orguser.rel_id_", relId, QueryOperator.EQUAL);
         }
         Page orgUserList = (Page) orgUserManager.getUserByGroup(queryFilter);
         return new PageJson(orgUserList);

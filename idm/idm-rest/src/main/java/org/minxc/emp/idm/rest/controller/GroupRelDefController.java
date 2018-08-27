@@ -7,6 +7,7 @@ import org.minxc.emp.core.api.aop.annotation.ErrorCatching;
 import org.minxc.emp.core.api.exception.BusinessException;
 import org.minxc.emp.core.api.response.impl.ResultMessage;
 import org.minxc.emp.idm.impl.manager.GroupRelDefManager;
+import org.minxc.emp.idm.impl.model.GroupRelDefEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,14 +24,14 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/org/groupRelDef")
-public class GroupRelDefController extends CommonController<GroupRelDef> {
+public class GroupRelDefController extends CommonController<GroupRelDefEntity> {
     @Resource
     GroupRelDefManager groupRelDefManager;
 
 
     @RequestMapping("getAllJson")
-    public List<GroupRelDef> getAllJson(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        List<GroupRelDef> orgReldefList = groupRelDefManager.getAll();
+    public List<GroupRelDefEntity> getAllJson(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        List<GroupRelDefEntity> orgReldefList = groupRelDefManager.getAll();
         return orgReldefList;
     }
 
@@ -47,10 +48,10 @@ public class GroupRelDefController extends CommonController<GroupRelDef> {
     @RequestMapping("save")
     @ErrorCatching
     @Override
-    public ResultMessage<String> save(@RequestBody GroupRelDef orgReldef) throws Exception {
+    public ResultMessage<String> save(@RequestBody GroupRelDefEntity orgReldef) throws Exception {
 
         if (StringUtils.isEmpty(orgReldef.getId())) {
-            GroupRelDef temp = groupRelDefManager.getByCode(orgReldef.getCode());
+        	GroupRelDefEntity temp = groupRelDefManager.getByCode(orgReldef.getCode());
             if (temp != null) throw new BusinessException("code已存在，不可重复");
         }
 
@@ -65,7 +66,7 @@ public class GroupRelDefController extends CommonController<GroupRelDef> {
         if (StringUtils.isNotEmpty(id))
             return false;
         if (StringUtils.isNotEmpty(code)) {
-            GroupRelDef temp = groupRelDefManager.getByCode(code);
+        	GroupRelDefEntity temp = groupRelDefManager.getByCode(code);
             return temp != null;
         }
         return false;

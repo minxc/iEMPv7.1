@@ -10,18 +10,15 @@ import org.minxc.emp.idm.impl.manager.GroupRelDefManager;
 import org.minxc.emp.idm.impl.model.GroupRelDefEntity;
 
 /**
- * <pre>
  * 描述：组织关系定义 处理实现类
- * </pre>
  */
 @Service("groupReldefManager")
 public class GroupRelDefManagerImpl extends CommonManager<String, GroupRelDefEntity> implements GroupRelDefManager {
-    @Resource
-    GroupRelDefDao groupRelDefDao;
+	@Resource
+	GroupRelDefDao groupRelDefDao;
 
-
-    public GroupRelDefEntity getByCode(String code) {
-        return groupRelDefDao.getByCode(code);
-    }
+	public GroupRelDefEntity getByCode(String code) {
+		return groupRelDefDao.getByCode(code);
+	}
 
 }

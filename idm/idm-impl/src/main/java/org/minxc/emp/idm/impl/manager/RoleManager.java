@@ -6,29 +6,26 @@ import org.minxc.emp.common.manager.Manager;
 import java.util.List;
 
 /**
- * <pre>
- * 描述：角色管理 处理接口
- * </pre>
+ * 角色管理 处理接口
  */
 public interface RoleManager extends Manager<String, RoleEntity> {
 
+	RoleEntity getByAlias(String alias);
 
-    RoleEntity getByAlias(String alias);
+	/**
+	 * 根据用户ID获取角色列表
+	 *
+	 * @param userId
+	 * @return
+	 */
+	List<RoleEntity> getListByUserId(String userId);
 
-    /**
-     * 根据用户ID获取角色列表
-     *
-     * @param userId
-     * @return
-     */
-    List<RoleEntity> getListByUserId(String userId);
-
-    /**
-     * 判断角色是否存在。
-     *
-     * @param role
-     * @return
-     */
-    boolean isRoleExist(RoleEntity role);
+	/**
+	 * 判断角色是否存在。
+	 *
+	 * @param role
+	 * @return
+	 */
+	boolean isRoleExist(RoleEntity role);
 
 }

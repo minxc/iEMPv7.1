@@ -10,19 +10,17 @@ import org.minxc.emp.common.db.dao.CommonDao;
 import org.minxc.emp.core.api.query.QueryFilter;
 
 /**
- * <pre>
  * 描述：组织关联关系 DAO接口
- * </pre>
  */
 @Mapper
 public interface GroupRelationDao extends CommonDao<String, GroupRelationEntity> {
-    GroupRelationEntity getByCode(String code);
+	GroupRelationEntity getByCode(String code);
 
-    List<GroupRelationEntity> getListByGroupId(String groupId);
+	List<GroupRelationEntity> getListByGroupId(String groupId);
 
-    List<GroupRelationEntity> queryInfoList(QueryFilter queryFilter);
+	List<GroupRelationEntity> queryInfoList(QueryFilter queryFilter);
 
-    GroupRelationEntity getByGroupIdRelDefId(String orgId, String relDefId);
+	GroupRelationEntity getByGroupIdRelDefId(String orgId, String relDefId);
 
-    List<GroupRelationEntity> getRelListByParam(@Param("account") String account, @Param("userId") String userId);
+	List<GroupRelationEntity> getRelListByParam(@Param("account") String account, @Param("userId") String userId);
 }

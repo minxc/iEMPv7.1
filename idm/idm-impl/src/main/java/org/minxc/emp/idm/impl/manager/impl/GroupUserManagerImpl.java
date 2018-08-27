@@ -19,90 +19,89 @@ import org.minxc.emp.idm.impl.manager.GroupUserManager;
 import org.minxc.emp.idm.impl.model.GroupUserEntity;
 
 /**
- * <pre>
- * 描述：用户组织关系 处理实现类
- * </pre>
+ * 用户组织关系 处理实现类
  */
 @Service("groupUserManager")
 public class GroupUserManagerImpl extends CommonManager<String, GroupUserEntity> implements GroupUserManager {
-	
-    @Resource
-    GroupUserDao groupUserDao;
+
+	@Resource
+	GroupUserDao groupUserDao;
 
 //    @Resource
 //    ICache iCache;
-    
-    @Resource
-    private CacheManager cacheManager;
-    
-    
-    public int updateUserPost(String id, String relId) {
-        return groupUserDao.updateUserPost(id, relId);
-    }
 
-    public GroupUserEntity getGroupUser(String orgId, String userId, String relId) {
-        return groupUserDao.getGroupUser(orgId, userId, relId);
-    }
+	@Resource
+	private CacheManager cacheManager;
 
-    public List<GroupUserEntity> getListByGroupIdUserId(String orgId, String userId) {
-        return groupUserDao.getListByGroupIdUserId(orgId, userId);
-    }
+	public int updateUserPost(String id, String relId) {
+		return groupUserDao.updateUserPost(id, relId);
+	}
 
-    public int removeByOrgIdUserId(String orgId, String userId) {
-        return groupUserDao.removeByGroupIdUserId(orgId, userId);
-    }
+	public GroupUserEntity getGroupUser(String orgId, String userId, String relId) {
+		return groupUserDao.getGroupUser(orgId, userId, relId);
+	}
 
-    public void setMaster(String id) {
-        GroupUserEntity orgUser = this.get(id);
-        if (orgUser.getIsMaster() == 0) {
-            groupUserDao.cancelUserMasterGroup(orgUser.getUserId());
-            groupUserDao.setMaster(id);
-        } else {
-            orgUser.setIsMaster(0);
-            groupUserDao.update(orgUser);
-        }
+	public List<GroupUserEntity> getListByGroupIdUserId(String orgId, String userId) {
+		return groupUserDao.getListByGroupIdUserId(orgId, userId);
+	}
 
-        //删除缓存。
-        String userKey = CurrentContext.CURRENT_ORG + orgUser.getUserId();
-        cacheManager.getCache("idm").evict(userKey);
+	public int removeByOrgIdUserId(String orgId, String userId) {
+		return groupUserDao.removeByGroupIdUserId(orgId, userId);
+	}
+
+	public void setMaster(String id) {
+		GroupUserEntity orgUser = this.get(id);
+		if (orgUser.getIsMaster() == 0) {
+			groupUserDao.cancelUserMasterGroup(orgUser.getUserId());
+			groupUserDao.setMaster(id);
+		} else {
+			orgUser.setIsMaster(0);
+			groupUserDao.update(orgUser);
+		}
+
+		// 删除缓存。
+		String userKey = CurrentContext.CURRENT_ORG + orgUser.getUserId();
+		cacheManager.getCache("idm").evict(userKey);
 //        iCache.delByKey(userKey);
-    }
+	}
 
+	public GroupUserEntity getGroupUserMaster(String userId) {
+		return groupUserDao.getGroupUserMaster(userId);
+	}
 
-    public GroupUserEntity getGroupUserMaster(String userId) {
-        return groupUserDao.getGroupUserMaster(userId);
-    }
+	@Override
+	public List getUserByGroup(QueryFilter queryFilter) {
+		return groupUserDao.getUserByGroup(queryFilter);
+	}
 
-    @Override
-    public List getUserByGroup(QueryFilter queryFilter) {
-        return groupUserDao.getUserByGroup(queryFilter);
-    }
+	@Override
+	public void saveGroupUserRel(String groupId, String[] userIds, String[] relIds) {
+		for (String userId : userIds) {
+			if (StringUtils.isEmpty(userId))
+				continue;
+			// 没有选择岗位情况。仅仅加入组
+			if (BeanUtils.isEmpty(relIds)) {
+				List<GroupUserEntity> list = groupUserDao.getListByGroupIdUserId(groupId, userId);
+				if (BeanUtils.isNotEmpty(list))
+					continue;
 
+				GroupUserEntity user = new GroupUserEntity(groupId, userId, null);
+				groupUserDao.create(user);
+				continue;
+			}
 
-    @Override
-    public void saveGroupUserRel(String groupId, String[] userIds, String[] relIds) {
-        for (String userId : userIds) {
-            if (StringUtils.isEmpty(userId)) continue;
-            //没有选择岗位情况。仅仅加入组
-            if (BeanUtils.isEmpty(relIds)) {
-                List<GroupUserEntity> list = groupUserDao.getListByGroupIdUserId(groupId, userId);
-                if (BeanUtils.isNotEmpty(list)) continue;
+			for (String relId : relIds) {
+				if (StringUtils.isEmpty(relId))
+					continue;
 
-                GroupUserEntity user = new GroupUserEntity(groupId, userId, null);
-                groupUserDao.create(user);
-                continue;
-            }
+				GroupUserEntity groupUser = groupUserDao.getGroupUser(groupId, userId, relId);
+				if (groupUser != null)
+					continue;
 
-            for (String relId : relIds) {
-                if (StringUtils.isEmpty(relId)) continue;
-
-                GroupUserEntity groupUser = groupUserDao.getGroupUser(groupId, userId, relId);
-                if (groupUser != null) continue;
-
-                groupUser = new GroupUserEntity(groupId, userId, relId);
-                groupUserDao.create(groupUser);
-            }
-        }
-    }
+				groupUser = new GroupUserEntity(groupId, userId, relId);
+				groupUserDao.create(groupUser);
+			}
+		}
+	}
 
 }

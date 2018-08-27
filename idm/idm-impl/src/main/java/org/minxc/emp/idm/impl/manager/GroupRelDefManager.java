@@ -4,9 +4,7 @@ import org.minxc.emp.idm.impl.model.GroupRelDefEntity;
 import org.minxc.emp.common.manager.Manager;
 
 /**
- * <pre>
- * 描述：组织关系定义 处理接口
- * </pre>
+ * 组织关系定义 处理接口
  */
 public interface GroupRelDefManager extends Manager<String, GroupRelDefEntity> {
     /**
