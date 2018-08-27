@@ -1,19 +1,19 @@
 package org.minxc.emp.idm.rest.controller;
 
-import com.dstz.base.api.aop.annotion.CatchErr;
-import com.dstz.base.api.query.QueryFilter;
-import com.dstz.base.api.query.QueryOP;
-import com.dstz.base.core.util.BeanUtils;
-import com.dstz.base.core.util.StringUtil;
-import com.dstz.base.db.id.UniqueIdUtil;
-import com.dstz.base.db.model.page.PageJson;
 import com.github.pagehelper.Page;
-import com.dstz.base.rest.GenericController;
-import com.dstz.base.rest.util.RequestUtil;
-import com.dstz.org.core.manager.GroupRelationManager;
-import com.dstz.org.core.manager.GroupUserManager;
-import com.dstz.org.core.manager.UserManager;
-import com.dstz.org.core.model.GroupUser;
+import com.minxc.emp.core.util.BeanUtils;
+
+import org.apache.commons.lang3.StringUtils;
+import org.minxc.emp.common.db.id.UniqueIdUtil;
+import org.minxc.emp.common.db.model.page.PageJson;
+import org.minxc.emp.common.rest.GenericController;
+import org.minxc.emp.common.rest.util.RequestUtil;
+import org.minxc.emp.core.api.aop.annotation.ErrorCatching;
+import org.minxc.emp.core.api.query.QueryFilter;
+import org.minxc.emp.core.api.query.QueryOperator;
+import org.minxc.emp.idm.impl.manager.GroupRelationManager;
+import org.minxc.emp.idm.impl.manager.GroupUserManager;
+import org.minxc.emp.idm.impl.manager.UserManager;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -44,9 +44,9 @@ public class GroupUserController extends GenericController {
         String relId = RequestUtil.getString(request, "relId");
 
         QueryFilter queryFilter = getQueryFilter(request);
-        queryFilter.addFilter("org.id_", groupId, QueryOP.EQUAL);
-        if (StringUtil.isNotEmpty(relId)) {
-            queryFilter.addFilter("rel.rel_id_", relId, QueryOP.EQUAL);
+        queryFilter.addFilter("org.id_", groupId, QueryOperator.EQUAL);
+        if (StringUtils.isNotEmpty(relId)) {
+            queryFilter.addFilter("rel.rel_id_", relId, QueryOperator.EQUAL);
         }
 
         Page<Map> userList = (Page<Map>) groupUserManager.getUserByGroup(queryFilter);
@@ -60,7 +60,7 @@ public class GroupUserController extends GenericController {
     @RequestMapping("getJson")
     public GroupUser getJson(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String id = RequestUtil.getString(request, "id");
-        if (StringUtil.isEmpty(id)) {
+        if (StringUtils.isEmpty(id)) {
             return null;
         }
 
@@ -73,7 +73,7 @@ public class GroupUserController extends GenericController {
      * 分配用户岗位
      */
     @RequestMapping("saveGroupUserRel")
-    @CatchErr
+    @ErrorCatching
     public void saveGroupUserRel(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String[] relIds = RequestUtil.getStringAryByStr(request, "relIds");
         String[] userId = RequestUtil.getStringAryByStr(request, "userIds");
@@ -104,7 +104,7 @@ public class GroupUserController extends GenericController {
      * 通过 组织用户删除关系
      */
     @RequestMapping("removeByOrgIdUserId")
-    @CatchErr
+    @ErrorCatching
     public void removeByOrgIdUserId(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String userId = RequestUtil.getString(request, "userId");
         String orgId = RequestUtil.getString(request, "orgId");
@@ -116,7 +116,7 @@ public class GroupUserController extends GenericController {
 
 
     @RequestMapping("setMaster")
-    @CatchErr
+    @ErrorCatching
     public void setMaster(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String id = RequestUtil.getString(request, "id");
         groupUserManager.setMaster(id);
@@ -133,7 +133,7 @@ public class GroupUserController extends GenericController {
      * @throws Exception
      */
     @RequestMapping("saveUserRels")
-    @CatchErr
+    @ErrorCatching
     public void saveUserPost(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String[] relIds = RequestUtil.getStringAryByStr(request, "relIds");
         String[] groupIds = RequestUtil.getStringAryByStr(request, "groupIds");
