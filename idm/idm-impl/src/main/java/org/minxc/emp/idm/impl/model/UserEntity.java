@@ -9,9 +9,7 @@ import java.util.Map;
 
 
 /**
- * <pre>
  * 描述：用户表 实体对象
- * </pre>
  */
 public class UserEntity extends AbstractCommonModel implements User {
 
