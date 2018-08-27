@@ -1,17 +1,14 @@
 package org.minxc.emp.idm.rest.controller;
 
-import com.dstz.base.api.aop.annotion.CatchErr;
-import com.dstz.base.api.query.QueryFilter;
-import com.dstz.base.api.response.impl.ResultMsg;
-import com.dstz.base.core.util.StringUtil;
-import com.dstz.base.db.id.UniqueIdUtil;
-import com.dstz.base.db.model.page.PageJson;
 import com.github.pagehelper.Page;
-import com.dstz.base.manager.Manager;
-import com.dstz.base.rest.BaseController;
-import com.dstz.base.rest.util.RequestUtil;
-import com.dstz.org.core.manager.UserRoleManager;
-import com.dstz.org.core.model.UserRole;
+
+import org.apache.commons.lang3.StringUtils;
+import org.minxc.emp.common.db.model.page.PageJson;
+import org.minxc.emp.common.rest.CommonController;
+import org.minxc.emp.common.rest.util.RequestUtil;
+import org.minxc.emp.core.api.aop.annotation.ErrorCatching;
+import org.minxc.emp.core.api.query.QueryFilter;
+import org.minxc.emp.idm.impl.manager.UserRoleManager;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @RequestMapping("/org/userRole")
-public class UserRoleController extends BaseController<UserRole> {
+public class UserRoleController extends CommonController<UserRoleEntity> {
     @Resource
     UserRoleManager userRoleManager;
 
@@ -33,10 +30,10 @@ public class UserRoleController extends BaseController<UserRole> {
         String roleId = RequestUtil.getString(request, "roleId");
         String userId = RequestUtil.getString(request, "userId");
         QueryFilter queryFilter = getQueryFilter(request);
-        if (StringUtil.isNotEmpty(roleId)) {
+        if (StringUtils.isNotEmpty(roleId)) {
             queryFilter.addParamsFilter("roleId", roleId);
         }
-        if (StringUtil.isNotEmpty(userId)) {
+        if (StringUtils.isNotEmpty(userId)) {
             queryFilter.addParamsFilter("userId", userId);
         }
         Page<UserRole> userRoleList = (Page<UserRole>) userRoleManager.query(queryFilter);
@@ -55,7 +52,7 @@ public class UserRoleController extends BaseController<UserRole> {
         String roleId = RequestUtil.getString(request, "roleId");
         String[] aryIds = RequestUtil.getStringAryByStr(request, "userId");
 
-        if (StringUtil.isNotEmpty(roleId)) {
+        if (StringUtils.isNotEmpty(roleId)) {
             for (String userId : aryIds) {
                 addUserRole(userId, roleId);
             }
@@ -77,12 +74,12 @@ public class UserRoleController extends BaseController<UserRole> {
      * 保存用户角色
      */
     @RequestMapping("saveUserRole")
-    @CatchErr
+    @ErrorCatching
     public void saveUserRole(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String userId = RequestUtil.getString(request, "userId");
         String[] aryIds = RequestUtil.getStringAryByStr(request, "groupIds");
 
-        if (StringUtil.isNotEmpty(userId)) {
+        if (StringUtils.isNotEmpty(userId)) {
             for (String roleId : aryIds) {
                 addUserRole(userId, roleId);
             }
