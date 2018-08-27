@@ -1,14 +1,12 @@
 package org.minxc.emp.idm.rest.controller;
 
-import com.dstz.base.api.aop.annotion.CatchErr;
-import com.dstz.base.api.exception.BusinessException;
-import com.dstz.base.api.response.impl.ResultMsg;
-import com.dstz.base.core.util.StringUtil;
-import com.dstz.base.manager.Manager;
-import com.dstz.base.rest.BaseController;
-import com.dstz.base.rest.util.RequestUtil;
-import com.dstz.org.core.manager.GroupRelDefManager;
-import com.dstz.org.core.model.GroupRelDef;
+import org.apache.commons.lang3.StringUtils;
+import org.minxc.emp.common.rest.CommonController;
+import org.minxc.emp.common.rest.util.RequestUtil;
+import org.minxc.emp.core.api.aop.annotation.ErrorCatching;
+import org.minxc.emp.core.api.exception.BusinessException;
+import org.minxc.emp.core.api.response.impl.ResultMessage;
+import org.minxc.emp.idm.impl.manager.GroupRelDefManager;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,7 +23,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/org/groupRelDef")
-public class GroupRelDefController extends BaseController<GroupRelDef> {
+public class GroupRelDefController extends CommonController<GroupRelDef> {
     @Resource
     GroupRelDefManager groupRelDefManager;
 
@@ -47,11 +45,11 @@ public class GroupRelDefController extends BaseController<GroupRelDef> {
      * @throws
      */
     @RequestMapping("save")
-    @CatchErr
+    @ErrorCatching
     @Override
-    public ResultMsg<String> save(@RequestBody GroupRelDef orgReldef) throws Exception {
+    public ResultMessage<String> save(@RequestBody GroupRelDef orgReldef) throws Exception {
 
-        if (StringUtil.isEmpty(orgReldef.getId())) {
+        if (StringUtils.isEmpty(orgReldef.getId())) {
             GroupRelDef temp = groupRelDefManager.getByCode(orgReldef.getCode());
             if (temp != null) throw new BusinessException("code已存在，不可重复");
         }
@@ -64,9 +62,9 @@ public class GroupRelDefController extends BaseController<GroupRelDef> {
     public boolean isExist(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String id = RequestUtil.getString(request, "id");
         String code = RequestUtil.getString(request, "key");
-        if (StringUtil.isNotEmpty(id))
+        if (StringUtils.isNotEmpty(id))
             return false;
-        if (StringUtil.isNotEmpty(code)) {
+        if (StringUtils.isNotEmpty(code)) {
             GroupRelDef temp = groupRelDefManager.getByCode(code);
             return temp != null;
         }
