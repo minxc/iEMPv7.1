@@ -1,23 +1,23 @@
 package org.minxc.emp.idm.rest.controller;
 
-import com.dstz.base.api.aop.annotion.CatchErr;
-import com.dstz.base.api.exception.BusinessException;
-import com.dstz.base.api.query.QueryFilter;
-import com.dstz.base.api.query.QueryOP;
-import com.dstz.base.api.response.impl.ResultMsg;
 import com.dstz.base.core.encrypt.EncryptUtil;
-import com.dstz.base.core.util.StringUtil;
-import com.dstz.base.db.id.UniqueIdUtil;
-import com.dstz.base.db.model.page.PageJson;
 import com.github.pagehelper.Page;
-import com.dstz.base.manager.Manager;
-import com.dstz.base.rest.BaseController;
-import com.dstz.base.rest.util.RequestUtil;
-import com.dstz.org.core.manager.GroupUserManager;
-import com.dstz.org.core.manager.UserManager;
-import com.dstz.org.core.model.GroupUser;
-import com.dstz.org.core.model.User;
-import com.dstz.sys.util.ContextUtil;
+import com.minxc.emp.core.util.CryptoUtil;
+
+import ch.qos.logback.core.util.ContextUtil;
+
+import org.apache.commons.lang3.StringUtils;
+import org.minxc.emp.common.db.id.UniqueIdUtil;
+import org.minxc.emp.common.db.model.page.PageJson;
+import org.minxc.emp.common.rest.CommonController;
+import org.minxc.emp.common.rest.util.RequestUtil;
+import org.minxc.emp.core.api.aop.annotation.ErrorCatching;
+import org.minxc.emp.core.api.exception.BusinessException;
+import org.minxc.emp.core.api.query.QueryFilter;
+import org.minxc.emp.core.api.query.QueryOperator;
+import org.minxc.emp.core.api.response.impl.ResultMessage;
+import org.minxc.emp.idm.impl.manager.GroupUserManager;
+import org.minxc.emp.idm.impl.manager.UserManager;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,7 +33,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @RestController
 @RequestMapping("/org/user")
-public class UserController extends BaseController<User> {
+public class UserController extends CommonController<User> {
     @Resource
     UserManager userManager;
     @Resource
@@ -51,7 +51,7 @@ public class UserController extends BaseController<User> {
     public PageJson listUserOrgJson(HttpServletRequest request, HttpServletResponse response) throws Exception {
         QueryFilter queryFilter = getQueryFilter(request);
         String userId = RequestUtil.getString(request, "userId");
-        queryFilter.addFilter("u.id_", userId, QueryOP.EQUAL);
+        queryFilter.addFilter("u.id_", userId, QueryOperator.EQUAL);
         Page<User> userList = (Page<User>) userManager.queryOrgUser(queryFilter);
         return new PageJson(userList);
     }
@@ -68,7 +68,7 @@ public class UserController extends BaseController<User> {
     public PageJson listUserPostJson(HttpServletRequest request, HttpServletResponse response) throws Exception {
         QueryFilter queryFilter = getQueryFilter(request);
         String userId = RequestUtil.getString(request, "userId");
-        queryFilter.addFilter("orguser.user_id_", userId, QueryOP.EQUAL);
+        queryFilter.addFilter("orguser.user_id_", userId, QueryOperator.EQUAL);
         Page orgUserList = (Page) userManager.queryUserGroupRel(queryFilter);
         return new PageJson(orgUserList);
     }
@@ -84,8 +84,8 @@ public class UserController extends BaseController<User> {
      */
     @RequestMapping("save")
     @Override
-    @CatchErr(write2response = true, value = "操作用户失败！")
-    public ResultMsg<String> save( @RequestBody User user) throws Exception {
+    @ErrorCatching(writeErrorToResponse = true, value = "操作用户失败！")
+    public ResultMessage<String> save( @RequestBody User user) throws Exception {
         String resultMsg = null;
         boolean isExist = userManager.isUserExist(user);
         if (isExist) {
@@ -93,12 +93,12 @@ public class UserController extends BaseController<User> {
         }
 
         String id = user.getId();
-        if (StringUtil.isEmpty(id)) {
+        if (StringUtils.isEmpty(id)) {
             user.setId(UniqueIdUtil.getSuid());
-            String password = EncryptUtil.encryptSha256(user.getPassword());
+            String password = CryptoUtil.encodeSHA(user.getPassword());
             user.setPassword(password);
             //添加用户和组织的关系，默认为主关系。
-            if (StringUtil.isNotEmpty(user.getGroupId())) {
+            if (StringUtils.isNotEmpty(user.getGroupId())) {
                 GroupUser orgUser = new GroupUser();
                 orgUser.setId(UniqueIdUtil.getSuid());
                 orgUser.setIsMaster(GroupUser.MASTER_YES);
@@ -118,24 +118,24 @@ public class UserController extends BaseController<User> {
 
 
     @RequestMapping("saveUserInfo")
-    @CatchErr("更新失败")
+    @ErrorCatching("更新失败")
     public void saveUserInfo(HttpServletRequest request, HttpServletResponse response, @RequestBody User user) throws Exception {
         userManager.update(user);
         writeSuccessData(response, "更新用户成功");
     }
 
     @RequestMapping("updateUserPsw")
-    @CatchErr("更新密码失败")
+    @ErrorCatching("更新密码失败")
     public void updateUserPsw(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String oldPassWorld = RequestUtil.getString(request, "oldPassWorld");
         String newPassword = RequestUtil.getString(request, "newPassword");
 
         User user = userManager.get(ContextUtil.getCurrentUserId());
-        if (!user.getPassword().equals(EncryptUtil.encryptSha256(oldPassWorld))) {
+        if (!user.getPassword().equals(CryptoUtil.encodeSHA(oldPassWorld))) {
             throw new BusinessException("旧密码输入错误");
         }
 
-        user.setPassword(EncryptUtil.encryptSha256(newPassword));
+        user.setPassword(CryptoUtil.encodeSHA(newPassword));
         userManager.update(user);
         writeSuccessResult(response, "更新密码成功");
 
