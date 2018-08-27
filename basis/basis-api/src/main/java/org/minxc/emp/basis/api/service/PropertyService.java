@@ -1,4 +1,4 @@
-package com.dstz.sys.api.service;
+package org.minxc.emp.basis.api.service;
 
 /**
  * 属性服务接口。

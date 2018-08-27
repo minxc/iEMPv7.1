@@ -4,8 +4,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.dstz.sys.api.model.system.ISubsystem;
-import com.dstz.sys.api.model.system.ISysResource;
+import org.minxc.emp.basis.api.model.system.ISubsystem;
+import org.minxc.emp.basis.api.model.system.ISysResource;
+
 
 public interface SysResourceService {
 

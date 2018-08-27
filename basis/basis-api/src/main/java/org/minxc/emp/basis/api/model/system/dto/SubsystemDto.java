@@ -1,4 +1,4 @@
-package com.dstz.sys.api.model.system.dto;
+package org.minxc.emp.basis.api.model.system.dto;
 
 public class SubsystemDto {
 

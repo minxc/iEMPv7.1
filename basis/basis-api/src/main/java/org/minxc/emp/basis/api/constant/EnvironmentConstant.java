@@ -1,6 +1,7 @@
-package com.dstz.sys.api.constant;
+package org.minxc.emp.basis.api.constant;
 
-import com.dstz.base.core.util.StringUtil;
+import org.apache.commons.lang3.StringUtils;
+
 
 /**
  * 
@@ -40,7 +41,7 @@ public enum EnvironmentConstant {
     }
 
     public static boolean contain(String key) {
-        if (StringUtil.isEmpty(key)) return false;
+        if (StringUtils.isEmpty(key)) return false;
 
         for (EnvironmentConstant e : EnvironmentConstant.values()) {
             if (key.equals(e.key)) return true;

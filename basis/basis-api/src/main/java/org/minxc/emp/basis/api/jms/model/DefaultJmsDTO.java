@@ -1,11 +1,10 @@
-package com.dstz.sys.api.jms.model;
+package org.minxc.emp.basis.api.jms.model;
 
 import java.io.Serializable;
 
 /**
  * 默认的消息
  *
- * @param <T>
  */
 public class DefaultJmsDTO<T extends Serializable> implements JmsDTO{
 

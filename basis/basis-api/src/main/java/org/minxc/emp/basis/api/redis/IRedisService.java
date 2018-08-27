@@ -1,4 +1,4 @@
-package com.dstz.sys.api.redis;
+package org.minxc.emp.basis.api.redis;
 
 import java.util.Set;
 

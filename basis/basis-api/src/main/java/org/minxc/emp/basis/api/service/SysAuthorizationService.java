@@ -3,7 +3,8 @@ package org.minxc.emp.basis.api.service;
 import java.util.Map;
 import java.util.Set;
 
-import com.dstz.sys.api.constant.RightsObjectConstants;
+import org.minxc.emp.basis.api.constant.RightsObjectConstants;
+
 
 public interface SysAuthorizationService {
 	Set<String> getUserRights(String userId);

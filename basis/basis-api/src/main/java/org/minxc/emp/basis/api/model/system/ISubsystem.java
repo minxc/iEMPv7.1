@@ -1,4 +1,4 @@
-package com.dstz.sys.api.model.system;
+package org.minxc.emp.basis.api.model.system;
 
 
 public interface ISubsystem {

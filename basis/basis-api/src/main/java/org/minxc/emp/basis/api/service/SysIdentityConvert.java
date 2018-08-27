@@ -2,8 +2,9 @@ package org.minxc.emp.basis.api.service;
 
 import java.util.List;
 
+import org.minxc.emp.basis.api.model.SysIdentity;
+
 import com.dstz.org.api.model.IUser;
-import com.dstz.sys.api.model.SysIdentity;
 
 public interface SysIdentityConvert {
 	

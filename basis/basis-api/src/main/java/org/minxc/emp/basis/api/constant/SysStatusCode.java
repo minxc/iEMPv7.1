@@ -1,6 +1,6 @@
-package com.dstz.sys.api.constant;
+package org.minxc.emp.basis.api.constant;
 
-import com.dstz.base.api.constant.IStatusCode;
+import org.minxc.emp.core.api.status.StatusCode;
 
 public enum SysStatusCode implements StatusCode {
 
@@ -21,7 +21,7 @@ public enum SysStatusCode implements StatusCode {
     SysStatusCode(String code, String description) {
         this.setCode(code);
         this.setDesc(description);
-        this.setSystem("SYS");
+        this.("SYS");
     }
 
     public String getCode() {
@@ -40,12 +40,23 @@ public enum SysStatusCode implements StatusCode {
         this.desc = msg;
     }
 
-    public String getSystem() {
-        return system;
-    }
 
-    public void setSystem(String system) {
-        this.system = system;
-    }
+	@Override
+	public String getDescription() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getApplication() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getTenant() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

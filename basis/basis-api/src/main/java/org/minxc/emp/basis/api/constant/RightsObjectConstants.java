@@ -1,4 +1,4 @@
-package com.dstz.sys.api.constant;
+package org.minxc.emp.basis.api.constant;
 
 /**
  * 
