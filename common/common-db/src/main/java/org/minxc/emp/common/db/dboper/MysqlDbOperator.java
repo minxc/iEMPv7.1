@@ -7,22 +7,17 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.minxc.emp.common.db.api.table.DbTypeEnum;
+import org.minxc.emp.common.db.model.table.ColumnEntity;
+import org.minxc.emp.common.db.model.table.TableEntity;
+import org.minxc.emp.common.db.tableoper.JdbcTemplateUtil;
+import org.minxc.emp.core.api.constant.ColumnType;
+import org.minxc.emp.core.api.exception.BusinessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import com.dstz.base.api.constant.ColumnType;
-import com.dstz.base.api.exception.BusinessException;
-import com.dstz.base.db.api.table.DbType;
-import com.dstz.base.db.model.table.Column;
-import com.dstz.base.db.model.table.Table;
-import com.dstz.base.db.tableoper.JdbcTemplateUtil;
 
 /**
- * <pre>
  * 描述：mysql 的DbOperator实现类
- * 作者:aschs
- * 邮箱:aschs@qq.com
  * 日期:2018年1月22日 下午8:17:49
- * 版权:summer
  * </pre>
  */
 public class MysqlDbOperator extends DbOperator {
@@ -72,8 +67,8 @@ public class MysqlDbOperator extends DbOperator {
 	}
 
 	@Override
-	public Table<Column> getTable(String tableName) {
-		Table<Column> table = new Table<>();
+	public TableEntity<ColumnEntity> getTable(String tableName) {
+		TableEntity<ColumnEntity> table = new TableEntity<>();
 		Map<String, String> tableNames = getTableNames(tableName);
 		if (tableNames.isEmpty()) {
 			throw new BusinessException(String.format("根据表名[%s]获取不到表", tableName));
@@ -86,8 +81,8 @@ public class MysqlDbOperator extends DbOperator {
 	}
 
 	@Override
-	public Table<Column> getView(String viewName) {
-		Table<Column> table = new Table<>();
+	public TableEntity<ColumnEntity> getView(String viewName) {
+		TableEntity<ColumnEntity> table = new TableEntity<>();
 		List<String> viewNames = getViewNames(viewName);
 		if (viewNames.isEmpty()) {
 			throw new BusinessException(String.format("根据视图名[%s]获取不到视图", viewName));
@@ -107,18 +102,18 @@ public class MysqlDbOperator extends DbOperator {
 	 *            （表名/视图名）
 	 * @return
 	 */
-	private List<Column> getColumns(String name) {
+	private List<ColumnEntity> getColumns(String name) {
 		String sql = "SELECT * FROM  INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_SCHEMA=DATABASE() AND TABLE_NAME=?";
 		List<Map<String, Object>> list = jdbcTemplate.queryForList(sql, name);
-		List<Column> columns = new ArrayList<>();
+		List<ColumnEntity> columns = new ArrayList<>();
 		for (Map<String, Object> map : list) {
-			Column column = new Column();
+			ColumnEntity column = new ColumnEntity();
 			column.setComment(map.getOrDefault("COLUMN_COMMENT", "").toString());
 			column.setDefaultValue(map.get("COLUMN_DEFAULT") == null ? null : map.get("COLUMN_DEFAULT").toString());
 			column.setName(map.getOrDefault("COLUMN_NAME", "").toString());
 			column.setPrimary("PRI".equals(map.getOrDefault("COLUMN_KEY", "")));
 			column.setRequired("NO".equals(map.getOrDefault("IS_NULLABLE", "")));
-			column.setType(ColumnType.getByDbDataType(map.get("DATA_TYPE").toString()).getKey());
+			column.setType(ColumnType.getByDataBaseDataType(map.get("DATA_TYPE").toString()).getKey());
 			if (ColumnType.VARCHAR.equalsWithKey(column.getType())) {
 				column.setLength(Integer.parseInt(map.getOrDefault("CHARACTER_MAXIMUM_LENGTH", "0").toString()));
 			}
