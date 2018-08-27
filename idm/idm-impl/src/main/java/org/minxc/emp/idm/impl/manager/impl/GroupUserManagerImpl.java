@@ -7,9 +7,10 @@ import javax.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
 import org.minxc.emp.common.manager.impl.CommonManager;
 import org.minxc.emp.core.api.query.QueryFilter;
+import org.springframework.cache.CacheManager;
 import org.springframework.stereotype.Service;
 
-import com.dstz.base.core.cache.ICache;
+//import com.dstz.base.core.cache.ICache;
 import com.minxc.emp.core.util.BeanUtils;
 
 import org.minxc.emp.idm.api.context.CurrentContext;
@@ -24,13 +25,17 @@ import org.minxc.emp.idm.impl.model.GroupUserEntity;
  */
 @Service("groupUserManager")
 public class GroupUserManagerImpl extends CommonManager<String, GroupUserEntity> implements GroupUserManager {
+	
     @Resource
     GroupUserDao groupUserDao;
 
+//    @Resource
+//    ICache iCache;
+    
     @Resource
-    ICache iCache;
-
-
+    private CacheManager cacheManager;
+    
+    
     public int updateUserPost(String id, String relId) {
         return groupUserDao.updateUserPost(id, relId);
     }
@@ -59,7 +64,8 @@ public class GroupUserManagerImpl extends CommonManager<String, GroupUserEntity>
 
         //删除缓存。
         String userKey = CurrentContext.CURRENT_ORG + orgUser.getUserId();
-        iCache.delByKey(userKey);
+        cacheManager.getCache("idm").evict(userKey);
+//        iCache.delByKey(userKey);
     }
 
 
