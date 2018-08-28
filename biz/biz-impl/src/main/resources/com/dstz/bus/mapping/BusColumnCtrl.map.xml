@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.dstz.bus.dao.BusColumnCtrlDao">
-    <resultMap id="BusColumnCtrl" type="com.dstz.bus.model.BusColumnCtrl">
+<mapper namespace="org.minxc.emp.biz.core.dao.BusColumnCtrlDao">
+    <resultMap id="BusColumnCtrl" type="org.minxc.emp.biz.core.model.BusColumnCtrl">
         <id property="id" column="id_" jdbcType="VARCHAR"/>
         <result property="columnId" column="column_id_" jdbcType="VARCHAR"/>
         <result property="type" column="type_" jdbcType="VARCHAR"/>
@@ -9,7 +9,7 @@
         <result property="validRule" column="valid_rule_" jdbcType="VARCHAR"/>
     </resultMap>
 
-    <insert id="create" parameterType="com.dstz.bus.model.BusColumnCtrl">
+    <insert id="create" parameterType="org.minxc.emp.biz.core.model.BusColumnCtrl">
 		INSERT INTO bus_column_ctrl
 		(id_,column_id_,type_,config_,valid_rule_)
 		VALUES 
@@ -37,7 +37,7 @@
         </if>
     </select>
 
-    <update id="update" parameterType="com.dstz.bus.model.BusColumnCtrl">
+    <update id="update" parameterType="org.minxc.emp.biz.core.model.BusColumnCtrl">
 		UPDATE bus_column_ctrl SET
 		column_id_=#{columnId,jdbcType=VARCHAR},
 		type_=#{type,jdbcType=VARCHAR},
