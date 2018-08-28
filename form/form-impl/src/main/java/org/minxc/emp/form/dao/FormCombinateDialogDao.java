@@ -1,15 +1,14 @@
 package org.minxc.emp.form.dao;
 
+import org.minxc.emp.common.db.dao.CommonDao;
 import org.minxc.emp.form.model.FormCombinateDialog;
-import org.mybatis.spring.annotation.MapperScan;
-
-import org.minxc.emp.base.dao.BaseDao;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * <pre>
  * 描述：combinate_dialog DAO接口
  * </pre>
  */
-@MapperScan
-public interface FormCombinateDialogDao extends BaseDao<String, FormCombinateDialog> {
+@Mapper
+public interface FormCombinateDialogDao extends CommonDao<String, FormCombinateDialog> {
 }

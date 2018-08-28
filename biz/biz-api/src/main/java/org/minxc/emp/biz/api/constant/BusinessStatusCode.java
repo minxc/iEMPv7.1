@@ -1,6 +1,7 @@
 package org.minxc.emp.biz.api.constant;
 
-import org.minxc.emp.base.api.constant.StatusCode;
+import org.minxc.emp.core.api.status.StatusCode;
+
 
 /**
  * <pre>
@@ -14,28 +15,58 @@ public enum BusinessStatusCode implements StatusCode {
 
 	PARAM_ILLEGAL("100", "参数校验不通过");
 
-	private String code;
-	private String desc;
-	private String system;
+	
+	
 
-	private BusinessStatusCode(String code, String desc) {
+	private BusinessStatusCode(String code, String description) {
 		this.code = code;
-		this.desc = desc;
-		this.system = "BUS";
+		this.description = description;
+		this.application = "BIZ";
 	}
-
-	@Override
+	
+	private String code;
 	public String getCode() {
 		return code;
 	}
 
-	@Override
-	public String getDesc() {
-		return desc;
+
+	public void setCode(String code) {
+		this.code = code;
 	}
 
-	@Override
-	public String getSystem() {
-		return system;
+
+	public String getDescription() {
+		return description;
 	}
+
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+
+	public String getApplication() {
+		return application;
+	}
+
+
+	public void setApplication(String application) {
+		this.application = application;
+	}
+
+
+	public String getTenant() {
+		return tenant;
+	}
+
+
+	public void setTenant(String tenant) {
+		this.tenant = tenant;
+	}
+
+
+	private String description;
+	private String application;
+	private String tenant;
+
 }

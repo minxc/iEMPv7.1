@@ -17,7 +17,6 @@ import org.minxc.emp.business.api.model.BusinessColumn;
  * 自定义表单控件生成器<br>
  * input select radio dic 等等的生成<br>
  *
- * @author jeff
  */
 @Component
 public class PCFormElementGenerator extends AbsFormElementGenerator {

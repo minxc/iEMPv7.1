@@ -1,9 +1,8 @@
 package org.minxc.emp.form.dao;
 
 import org.minxc.emp.form.model.FormBusSet;
-import org.mybatis.spring.annotation.MapperScan;
-
-import org.minxc.emp.base.dao.BaseDao;
+import org.apache.ibatis.annotations.Mapper;
+import org.minxc.emp.common.db.dao.CommonDao;
 
 /**
  * 描述：表单业务数据保存设置 DAO

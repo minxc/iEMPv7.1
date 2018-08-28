@@ -1,10 +1,10 @@
 package org.minxc.emp.form.dao;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.minxc.emp.common.db.dao.CommonDao;
 import org.minxc.emp.form.model.FormTemplate;
-import org.mybatis.spring.annotation.MapperScan;
 
-import org.minxc.emp.base.dao.BaseDao;
 
-@MapperScan
-public interface FormTemplateDao extends BaseDao<String, FormTemplate> {
+@Mapper
+public interface FormTemplateDao extends CommonDao<String, FormTemplate> {
 }

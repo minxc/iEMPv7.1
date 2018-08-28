@@ -16,7 +16,6 @@ import org.minxc.emp.business.api.model.BusinessColumn;
 /**
  * 自定义表单控件生成器父类，提供生成表单通用公共方法<br>
  *
- * @author jeff
  */
 public abstract class AbsFormElementGenerator {
     public abstract String getGeneratorName();

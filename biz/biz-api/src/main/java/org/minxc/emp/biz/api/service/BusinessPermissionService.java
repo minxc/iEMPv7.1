@@ -4,12 +4,10 @@ import org.minxc.emp.biz.api.model.BusinessPermission;
 
 public interface BusinessPermissionService {
 	/**
-	 * <pre>
 	 * 以特定的bo为模板，根据objType和objVal返回权限
 	 * ps:
 	 * 因为有时候我们需要的是某个bo的权限，而不是数据库的权限
 	 * 数据库的权限可能是旧的，所以要返回特定bo的权限，以数据库的存在权限装载进去
-	 * </pre>
 	 * 
 	 * @param objType
 	 * @param objVal

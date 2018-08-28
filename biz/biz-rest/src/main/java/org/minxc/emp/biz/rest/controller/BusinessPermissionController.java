@@ -14,13 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * <pre>
  * 描述：businessPermission层的controller
  * 作者:min.xianchang
  * 邮箱:xianchangmin@126.com
  * 日期:下午5:11:06
- * 版权:summer
- * </pre>
  */
 @RestController
 @RequestMapping("/bus/businessPermission/")

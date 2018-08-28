@@ -1,9 +1,8 @@
 package org.minxc.emp.form.dao;
 
 import org.minxc.emp.form.model.FormCustDialog;
-import org.mybatis.spring.annotation.MapperScan;
-
-import org.minxc.emp.base.dao.BaseDao;
+import org.apache.ibatis.annotations.Mapper;
+import org.minxc.emp.common.db.dao.CommonDao;
 
 /**
  * form_cust_dialog DAO接口
@@ -12,7 +11,7 @@ import org.minxc.emp.base.dao.BaseDao;
  * @email xianchangmin@126.com
  * @time 2018-01-18 19:30:51
  */
-@MapperScan
-public interface FormCustDialogDao extends BaseDao<String, FormCustDialog> {
+@Mapper
+public interface FormCustDialogDao extends CommonDao<String, FormCustDialog> {
 
 }

@@ -1,11 +1,10 @@
-package org.minxc.emp.web.security.config;
+package org.minxc.emp.security.web.config;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
-import org.springframework.boot.autoconfigure.security.servlet.SecurityFilterAutoConfiguration;
 import org.springframework.context.annotation.Configuration;
-
+import org.minxc.emp.security.authentication.AccessDecisionManagerImpl;
+import org.minxc.emp.security.authentication.FilterInvocationSecurityMetadataSourceImpl;
+import org.minxc.emp.security.filter.SecurityRequestCsrfMatcher;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.access.AccessDecisionManager;
