@@ -11,9 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 
 /**
- * <pre>
- * 描述：抽象实体业务管理类实现
- * </pre>
+ * 抽象实体业务管理类实现
  */
 public abstract class CommonManager<PK extends Serializable, T extends Serializable> implements Manager<PK, T> {
     //获取基础类

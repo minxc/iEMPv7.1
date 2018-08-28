@@ -5,16 +5,15 @@ import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
 /**
- * <pre>
  * 描述：自定义对话框树形的配置信息
  * 作者:min.xianchang
  * 邮箱:xianchangmin@126.com
  * 日期:2018年1月17日 下午8:26:42
- * 版权:summer
- * </pre>
  */
 public class FormCustDialogTreeConfig implements Serializable {
-    /**
+	
+	private static final long serialVersionUID = 7545823987640977155L;
+	/**
      * 树的节点ID字段
      */
     @NotEmpty

@@ -1,25 +1,23 @@
 package org.minxc.emp.form.model;
 
-import org.minxc.emp.base.core.model.BaseModelImpl;
-import org.minxc.emp.base.core.util.JsonUtil;
-import org.minxc.emp.base.core.util.ToStringUtil;
 import org.minxc.emp.form.model.custdialog.*;
-import org.minxc.emp.form.model.custdialog.*;
+
+import com.minxc.emp.core.impl.model.AbstractCommonModel;
+import com.minxc.emp.core.util.JacksonUtil;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
 /**
- * <pre>
  * 描述：自定义对话框
  * 作者:min.xianchang
  * 邮箱:xianchangmin@126.com
  * 日期:2018年1月17日 下午5:05:55
- * 版权:summer
- * </pre>
  */
-public class FormCustDialog extends BaseModelImpl {
+public class FormCustDialog extends AbstractCommonModel {
+	private static final long serialVersionUID = -5310047789903060623L;
+
 	public static final String DATA_SOURCE_INTERFACE = "interface";
 
     /**
@@ -261,7 +259,8 @@ public class FormCustDialog extends BaseModelImpl {
     }
 
     public void setTreeConfigJson(String treeConfigJson) {
-        this.treeConfig = JsonUtil.parseObject(treeConfigJson, FormCustDialogTreeConfig.class);
+//        this.treeConfig = JacksonUtil.parseObject(treeConfigJson, FormCustDialogTreeConfig.class);
+        this.treeConfig = JacksonUtil.json2Pojo(treeConfigJson, FormCustDialogTreeConfig.class);
         this.treeConfigJson = treeConfigJson;
     }
 
@@ -270,7 +269,8 @@ public class FormCustDialog extends BaseModelImpl {
     }
 
     public void setDisplayFieldsJson(String displayFieldsJson) {
-        this.displayFields = JsonUtil.parseArray(displayFieldsJson, FormCustDialogDisplayField.class);
+//        this.displayFields = JacksonUtil.parseArray(displayFieldsJson, FormCustDialogDisplayField.class);
+        this.displayFields = JacksonUtil.jsonArray2PojoList(displayFieldsJson, FormCustDialogDisplayField.class);
         this.displayFieldsJson = displayFieldsJson;
     }
 
@@ -279,7 +279,8 @@ public class FormCustDialog extends BaseModelImpl {
     }
 
     public void setConditionFieldsJson(String conditionFieldsJson) {
-        this.conditionFields = JsonUtil.parseArray(conditionFieldsJson, FormCustDialogConditionField.class);
+//        this.conditionFields = JacksonUtil.parseArray(conditionFieldsJson, FormCustDialogConditionField.class);
+        this.conditionFields = JacksonUtil.jsonArray2PojoList(conditionFieldsJson, FormCustDialogConditionField.class);
         this.conditionFieldsJson = conditionFieldsJson;
     }
 
@@ -288,7 +289,8 @@ public class FormCustDialog extends BaseModelImpl {
     }
 
     public void setReturnFieldsJson(String returnFieldsJson) {
-        this.returnFields = JsonUtil.parseArray(returnFieldsJson, FormCustDialogReturnField.class);
+//        this.returnFields = JacksonUtil.parseArray(returnFieldsJson, FormCustDialogReturnField.class);
+        this.returnFields = JacksonUtil.jsonArray2PojoList(returnFieldsJson, FormCustDialogReturnField.class);
         this.returnFieldsJson = returnFieldsJson;
     }
 
@@ -297,7 +299,8 @@ public class FormCustDialog extends BaseModelImpl {
     }
 
     public void setSortFieldsJson(String sortFieldsJson) {
-        this.sortFields = JsonUtil.parseArray(sortFieldsJson, FormCustDialogSortField.class);
+//        this.sortFields = JacksonUtil.parseArray(sortFieldsJson, FormCustDialogSortField.class);
+        this.sortFields = JacksonUtil.jsonArray2PojoList(sortFieldsJson, FormCustDialogSortField.class);
         this.sortFieldsJson = sortFieldsJson;
     }
 
@@ -306,7 +309,7 @@ public class FormCustDialog extends BaseModelImpl {
     }
 
     public void setTreeConfig(FormCustDialogTreeConfig treeConfig) {
-        this.treeConfigJson = JsonUtil.toJSONString(treeConfig);
+        this.treeConfigJson = JacksonUtil.pojo2Json(treeConfig);
         this.treeConfig = treeConfig;
     }
 
@@ -315,7 +318,7 @@ public class FormCustDialog extends BaseModelImpl {
     }
 
     public void setDisplayFields(List<FormCustDialogDisplayField> displayFields) {
-        this.displayFieldsJson = JsonUtil.toJSONString(displayFields);
+        this.displayFieldsJson = JacksonUtil.listObject2Json(displayFields);
         this.displayFields = displayFields;
     }
 
@@ -324,7 +327,7 @@ public class FormCustDialog extends BaseModelImpl {
     }
 
     public void setConditionFields(List<FormCustDialogConditionField> conditionFields) {
-        this.conditionFieldsJson = JsonUtil.toJSONString(conditionFields);
+        this.conditionFieldsJson = JacksonUtil.listObject2Json(conditionFields);
         this.conditionFields = conditionFields;
     }
 
@@ -333,7 +336,7 @@ public class FormCustDialog extends BaseModelImpl {
     }
 
     public void setReturnFields(List<FormCustDialogReturnField> returnFields) {
-        this.returnFieldsJson = JsonUtil.toJSONString(returnFields);
+        this.returnFieldsJson = JacksonUtil.listObject2Json(returnFields);
         this.returnFields = returnFields;
     }
 
@@ -342,12 +345,8 @@ public class FormCustDialog extends BaseModelImpl {
     }
 
     public void setSortFields(List<FormCustDialogSortField> sortFields) {
-        this.sortFieldsJson = JsonUtil.toJSONString(sortFields);
+        this.sortFieldsJson = JacksonUtil.listObject2Json(sortFields);
         this.sortFields = sortFields;
     }
 
-    public static void main(String[] args) {
-        FormCustDialog dialog = new FormCustDialog();
-        System.out.println(ToStringUtil.toString(dialog));
-    }
 }

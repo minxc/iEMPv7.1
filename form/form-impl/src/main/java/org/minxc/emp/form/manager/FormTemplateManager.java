@@ -1,7 +1,8 @@
 package org.minxc.emp.form.manager;
 
 import com.alibaba.fastjson.JSONArray;
-import org.minxc.emp.base.manager.Manager;
+
+import org.minxc.emp.common.manager.Manager;
 import org.minxc.emp.form.model.FormTemplate;
 
 /**

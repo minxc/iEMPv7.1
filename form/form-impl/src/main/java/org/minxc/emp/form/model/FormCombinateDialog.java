@@ -1,17 +1,18 @@
 package org.minxc.emp.form.model;
 
-import org.minxc.emp.base.api.model.IDModel;
-import org.minxc.emp.base.core.util.AppUtil;
-import org.minxc.emp.base.core.util.StringUtil;
+import org.apache.commons.lang3.StringUtils;
+import org.minxc.emp.core.api.model.IdModel;
 import org.minxc.emp.form.manager.FormCustDialogManager;
 
+import com.minxc.emp.core.util.AppContextUtil;
+
 /**
- * <pre>
- * 描述：combinate_dialog 实体对象
- * </pre>
+ * combinate_dialog 实体对象
  */
-public class FormCombinateDialog implements IDModel {
-    protected String id; /* id_ */
+public class FormCombinateDialog implements IdModel {
+	
+	private static final long serialVersionUID = 5319756923326150236L;
+	protected String id; /* id_ */
     protected String name; /* name_ */
     protected String alias; /* alias_ */
     protected Integer width; /* width_ */
@@ -156,18 +157,18 @@ public class FormCombinateDialog implements IDModel {
     }
 
     public FormCustDialog getTreeDialog() {
-        if (StringUtil.isEmpty(treeDialogId)) {
+        if (StringUtils.isEmpty(treeDialogId)) {
             return null;
         }
-        treeDialog = AppUtil.getBean(FormCustDialogManager.class).get(treeDialogId);
+        treeDialog = AppContextUtil.getBean(FormCustDialogManager.class).get(treeDialogId);
         return treeDialog;
     }
 
     public FormCustDialog getListDialog() {
-        if (StringUtil.isEmpty(listDialogId)) {
+        if (StringUtils.isEmpty(listDialogId)) {
             return null;
         }
-        listDialog = AppUtil.getBean(FormCustDialogManager.class).get(listDialogId);
+        listDialog = AppContextUtil.getBean(FormCustDialogManager.class).get(listDialogId);
         return listDialog;
     }
 

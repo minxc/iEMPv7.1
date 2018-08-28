@@ -1,17 +1,17 @@
 package org.minxc.emp.form.generator;
 
+import org.apache.commons.lang3.StringUtils;
 import org.jsoup.nodes.Element;
+import org.minxc.emp.biz.api.constant.BusinessTableRelType;
+import org.minxc.emp.biz.api.model.BusinessColumn;
+import org.minxc.emp.biz.api.model.BusinessTableRel;
+import org.minxc.emp.core.api.exception.BusinessException;
 import org.springframework.stereotype.Component;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import org.minxc.emp.base.api.exception.BusinessException;
-import org.minxc.emp.base.core.util.StringUtil;
-import org.minxc.emp.base.core.util.ThreadMapUtil;
-import org.minxc.emp.business.api.constant.BusinessTableRelType;
-import org.minxc.emp.business.api.model.BusinessTableRel;
-import org.minxc.emp.business.api.model.BusinessColumn;
+import com.minxc.emp.core.util.ThreadMapUtil;
 
 /**
  * 自定义表单控件生成器<br>
@@ -54,7 +54,7 @@ public class PCFormElementGenerator extends AbsFormElementGenerator {
         handlePermission(element, column);
 
         String configStr = column.getCtrl().getConfig();
-        if (StringUtil.isEmpty(configStr)) {
+        if (StringUtils.isEmpty(configStr)) {
             throw new BusinessException(String.format("表【%s】日期字段  【%s】解析失败,配置信息不能为空", column.getTable().getKey(), column.getComment()));
         }
         element.attr("ab-date", JSON.parseObject(configStr).getString("format"));

@@ -2,7 +2,7 @@ package org.minxc.emp.form.api.service;
 
 import java.util.Set;
 
-import org.minxc.emp.form.api.model.FormDef;
+import org.minxc.emp.form.api.model.IFormDef;
 
 public interface FormService {
 
@@ -12,7 +12,7 @@ public interface FormService {
      * @param formKey
      * @return IFormDef
      */
-    FormDef getByFormKey(String formKey);
+    IFormDef getByFormKey(String formKey);
 
     /**
      * 根据表单ID取得表单对象。
@@ -20,7 +20,7 @@ public interface FormService {
      * @param formId
      * @return IFormDef
      */
-    FormDef getByFormId(String formId);
+    IFormDef getByFormId(String formId);
 
     /**
      * 根据formKey 导出表单

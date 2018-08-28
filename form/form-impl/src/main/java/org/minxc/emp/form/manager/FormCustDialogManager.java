@@ -1,9 +1,9 @@
 package org.minxc.emp.form.manager;
 
-import org.minxc.emp.base.api.query.QueryFilter;
-import org.minxc.emp.base.db.model.table.Column;
-import org.minxc.emp.base.db.model.table.Table;
-import org.minxc.emp.base.manager.Manager;
+import org.minxc.emp.common.db.model.table.ColumnEntity;
+import org.minxc.emp.common.db.model.table.TableEntity;
+import org.minxc.emp.common.manager.Manager;
+import org.minxc.emp.core.api.query.QueryFilter;
 import org.minxc.emp.form.model.FormCustDialog;
 
 import java.util.List;
@@ -46,7 +46,7 @@ public interface FormCustDialogManager extends Manager<String, FormCustDialog> {
      * @param formCustDialog
      * @return
      */
-    Table<Column> getTable(FormCustDialog formCustDialog);
+    TableEntity<ColumnEntity> getTable(FormCustDialog formCustDialog);
 
     /**
      * <pre>

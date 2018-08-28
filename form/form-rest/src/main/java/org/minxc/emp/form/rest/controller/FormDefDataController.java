@@ -12,26 +12,27 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson.JSONObject;
-import org.minxc.emp.base.api.aop.annotion.CatchError;
-import org.minxc.emp.base.api.query.QueryFilter;
-import org.minxc.emp.base.dao.CommonDao;
-import org.minxc.emp.base.db.datasource.DbContextHolder;
-import org.minxc.emp.base.db.model.page.PageJson;
-import org.minxc.emp.base.rest.GenericController;
-import org.minxc.emp.base.rest.util.RequestUtil;
-import org.minxc.emp.business.api.constant.BusinessPermissionObjectType;
-import org.minxc.emp.business.api.model.BusinessObject;
-import org.minxc.emp.business.api.model.BusinessPermission;
-import org.minxc.emp.business.api.model.BusinessTable;
-import org.minxc.emp.business.api.service.BusinessDataService;
-import org.minxc.emp.business.api.service.BusinessObjectService;
-import org.minxc.emp.business.api.service.BusinessPermissionService;
+
+import org.minxc.emp.biz.api.constant.BusinessPermissionObjectType;
+import org.minxc.emp.biz.api.model.BusinessObject;
+import org.minxc.emp.biz.api.model.BusinessPermission;
+import org.minxc.emp.biz.api.model.BusinessTable;
+import org.minxc.emp.biz.api.service.BusinessDataService;
+import org.minxc.emp.biz.api.service.BusinessObjectService;
+import org.minxc.emp.biz.api.service.BusinessPermissionService;
+import org.minxc.emp.common.db.dao.BasicDao;
+import org.minxc.emp.common.db.datasource.DbContextHolder;
+import org.minxc.emp.common.db.model.page.PageJson;
+import org.minxc.emp.common.rest.GenericController;
+import org.minxc.emp.common.rest.util.RequestUtil;
+import org.minxc.emp.core.api.aop.annotation.ErrorCatching;
+import org.minxc.emp.core.api.query.QueryFilter;
 import org.minxc.emp.form.manager.FormDefManager;
 import org.minxc.emp.form.model.FormDef;
 import org.minxc.emp.form.model.FormDefData;
 import org.minxc.emp.form.service.FormDefDataServiceImpl;
-import org.minxc.emp.system.api2.model.SystemDataSource;
-import org.minxc.emp.system.api2.service.SystemDataSourceService;
+import org.minxc.emp.system.api.model.ISysDataSource;
+import org.minxc.emp.system.api.service.ISysDataSourceService;
 
 /**
  * <pre>
@@ -53,9 +54,9 @@ public class FormDefDataController extends GenericController {
 	@Autowired
 	private BusinessObjectService businessObjectService;
 	@Autowired
-	private SystemDataSourceService sysDataSourceService;
+	private ISysDataSourceService sysDataSourceService;
 	@Autowired
-	private CommonDao<?> commonDao;
+	private BasicDao<?> commonDao;
 	@Autowired
 	private BusinessPermissionService businessPermissionService;
 	@Autowired
@@ -72,7 +73,7 @@ public class FormDefDataController extends GenericController {
 	 * @throws Exception
 	 */
 	@RequestMapping("getData")
-	@CatchError(write2response = true, value = "获取FormDefData异常")
+	@ErrorCatching(writeErrorToResponse = true, value = "获取FormDefData异常")
 	public void getFormDefData(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String key = RequestUtil.getString(request, "key");
 		String id = RequestUtil.getString(request, "id");
@@ -91,7 +92,7 @@ public class FormDefDataController extends GenericController {
 	 * @throws Exception
 	 */
 	@RequestMapping("saveData")
-	@CatchError(write2response = true, value = "保存formDef中的data数据异常")
+	@ErrorCatching(writeErrorToResponse = true, value = "保存formDef中的data数据异常")
 	public void saveData(HttpServletRequest request, HttpServletResponse response, @RequestBody JSONObject data) throws Exception {
 		String key = RequestUtil.getString(request, "key");
 		FormDef formDef = formDefManager.getByKey(key);
@@ -112,13 +113,13 @@ public class FormDefDataController extends GenericController {
 	 * @throws Exception
 	 */
 	@RequestMapping("getList_{boKey}")
-	@CatchError(write2response = true, value = "获取对话框的列表数据失败")
+	@ErrorCatching(writeErrorToResponse = true, value = "获取对话框的列表数据失败")
 	public PageJson getList(HttpServletRequest request, HttpServletResponse response, @PathVariable(value = "boKey") String boKey) throws Exception {
 		QueryFilter queryFilter = getQueryFilter(request);
 		// 页面来的参数
 		BusinessObject businessObject = businessObjectService.getFilledByKey(boKey);
 		BusinessTable businessTable = businessObject.getRelation().getTable();
-		SystemDataSource sysDataSource = sysDataSourceService.getByKey(businessTable.getDsKey());
+		ISysDataSource sysDataSource = sysDataSourceService.getByKey(businessTable.getDsKey());
 		// 切换数据源
 		DbContextHolder.setDataSource(sysDataSource.getKey(), sysDataSource.getDbType());
 		String sql = "select * from " + businessTable.getName();
@@ -127,7 +128,7 @@ public class FormDefDataController extends GenericController {
 	}
 
 	@RequestMapping("removeData")
-	@CatchError(write2response = true, value = "删除formDef中的data数据异常")
+	@ErrorCatching(writeErrorToResponse = true, value = "删除formDef中的data数据异常")
 	public void removeData(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String boKey = RequestUtil.getString(request, "boKey");
 		String key = RequestUtil.getString(request, "key");

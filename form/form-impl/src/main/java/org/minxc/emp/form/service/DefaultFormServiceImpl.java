@@ -7,8 +7,7 @@ import java.util.Set;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
-
-import org.minxc.emp.form.api.model.FormDef;
+import org.minxc.emp.form.api.model.IFormDef;
 import org.minxc.emp.form.api.service.FormService;
 import org.minxc.emp.form.manager.FormDefManager;
 
@@ -19,14 +18,14 @@ public class DefaultFormServiceImpl implements FormService {
     @Resource
     private FormDefManager formDefManager;
 
-    public FormDef getByFormKey(String formKey) {
-        FormDef form = formDefManager.getByKey(formKey);
+    public IFormDef getByFormKey(String formKey) {
+    	IFormDef form = formDefManager.getByKey(formKey);
         return form;
     }
 
 
     @Override
-    public FormDef getByFormId(String formId) {
+    public IFormDef getByFormId(String formId) {
         return formDefManager.get(formId);
     }
 

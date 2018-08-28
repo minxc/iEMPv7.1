@@ -17,29 +17,31 @@ import org.springframework.web.bind.annotation.RestController;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import org.minxc.emp.base.api.aop.annotion.CatchError;
-import org.minxc.emp.base.api.exception.BusinessException;
-import org.minxc.emp.base.api.query.QueryFilter;
-import org.minxc.emp.base.api.query.QueryOperation;
-import org.minxc.emp.base.api.response.impl.ResultMsg;
-import org.minxc.emp.base.core.util.AppUtil;
-import org.minxc.emp.base.core.util.PropertyUtil;
-import org.minxc.emp.base.core.util.StringUtil;
-import org.minxc.emp.base.db.model.page.PageJson;
-import org.minxc.emp.base.rest.BaseController;
-import org.minxc.emp.base.rest.util.RequestUtil;
-import org.minxc.emp.business.api.model.BusinessTableRel;
-import org.minxc.emp.business.api.model.BusinessObject;
-import org.minxc.emp.business.api.service.BusinessObjectService;
-import org.minxc.emp.business.api.service.BusinessTableService;
+
+import org.apache.commons.lang3.StringUtils;
+import org.minxc.emp.basis.impl.freemark.FreemarkEngine;
+import org.minxc.emp.biz.api.model.BusinessObject;
+import org.minxc.emp.biz.api.model.BusinessTableRel;
+import org.minxc.emp.biz.api.service.BusinessObjectService;
+import org.minxc.emp.biz.api.service.BusinessTableService;
+import org.minxc.emp.common.db.model.page.PageJson;
+import org.minxc.emp.common.rest.CommonController;
+import org.minxc.emp.common.rest.util.RequestUtil;
+import org.minxc.emp.core.api.aop.annotation.ErrorCatching;
+import org.minxc.emp.core.api.exception.BusinessException;
+import org.minxc.emp.core.api.query.QueryFilter;
+import org.minxc.emp.core.api.query.QueryOperator;
+import org.minxc.emp.core.api.response.impl.ResultMessage;
 import org.minxc.emp.form.api.constant.FormStatusCode;
+import org.minxc.emp.form.api.model.IFormDef;
 import org.minxc.emp.form.generator.AbsFormElementGenerator;
 import org.minxc.emp.form.manager.FormDefManager;
 import org.minxc.emp.form.manager.FormTemplateManager;
 import org.minxc.emp.form.model.FormDef;
 import org.minxc.emp.form.model.FormTemplate;
-import org.minxc.emp.system.api.freemark.FreemarkEngine;
 import com.github.pagehelper.Page;
+import com.minxc.emp.core.util.AppContextUtil;
+import com.minxc.emp.core.util.PropertiesUtil;
 
 
 /**
@@ -49,7 +51,7 @@ import com.github.pagehelper.Page;
 @Slf4j
 @RestController
 @RequestMapping("/form/formDef/")
-public class FormDefController extends BaseController<FormDef> {
+public class FormDefController extends CommonController<FormDef> {
 
 
 	@Autowired
@@ -68,7 +70,7 @@ public class FormDefController extends BaseController<FormDef> {
 	@RequestMapping("listJson")
 	public PageJson listJson(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		QueryFilter queryFilter = getQueryFilter(request);
-		queryFilter.addFilter("type_", "mobile", QueryOperation.NOT_EQUAL);
+		queryFilter.addFilter("type_", "mobile", QueryOperator.NOT_EQUAL);
 	    Page<FormDef> pageList = (Page<FormDef>) formDefManager.query(queryFilter);
 	      
         return new PageJson(pageList);
@@ -78,7 +80,7 @@ public class FormDefController extends BaseController<FormDef> {
 	@RequestMapping("mobileListJson")
 	public PageJson mobileListJson(HttpServletRequest request) throws Exception {
 		QueryFilter queryFilter = getQueryFilter(request);
-		queryFilter.addFilter("type_", "mobile", QueryOperation.EQUAL);
+		queryFilter.addFilter("type_", "mobile", QueryOperator.EQUAL);
 	    Page<FormDef> pageList = (Page<FormDef>) formDefManager.query(queryFilter);
 	      
         return new PageJson(pageList);
@@ -89,9 +91,9 @@ public class FormDefController extends BaseController<FormDef> {
 	 */
 	@RequestMapping("save")
 	@Override
-	@CatchError(write2response = true, value = "保存表单失败")
-	public ResultMsg<String> save(@RequestBody FormDef formDef) throws Exception {
-		ResultMsg<String> msg =super.save( formDef);
+	@ErrorCatching(writeErrorToResponse = true, value = "保存表单失败")
+	public ResultMessage<String> save(@RequestBody FormDef formDef) throws Exception {
+		ResultMessage<String> msg =super.save( formDef);
 		formDefManager.saveBackupHtml(formDef);
 		return msg;
 	}
@@ -108,20 +110,20 @@ public class FormDefController extends BaseController<FormDef> {
 	 * @throws Exception
 	 */
 	@RequestMapping("getObject")
-	@CatchError(write2response = true, value = "获取formDef异常")
+	@ErrorCatching(writeErrorToResponse = true, value = "获取formDef异常")
 	public void getObject(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String id = RequestUtil.getString(request, "id");
 		String key = RequestUtil.getString(request, "key");
-		FormDef formDef = null;
-		if (StringUtil.isNotEmpty(id)) {
+		IFormDef formDef = null;
+		if (StringUtils.isNotEmpty(id)) {
 			formDef = formDefManager.get(id);
-		} else if (StringUtil.isNotEmpty(key)) {
+		} else if (StringUtils.isNotEmpty(key)) {
 			formDef = formDefManager.getByKey(key);
 		}
 
 		JSONObject json = formDef == null ? new JSONObject() : (JSONObject) JSON.toJSON(formDef);
 		// 配置了备份路径则是开发者
-		json.put("isDeveloper", StringUtil.isNotEmpty(PropertyUtil.getFormDefBackupPath()));
+		json.put("isDeveloper", StringUtils.isNotEmpty(PropertiesUtil.getFormDefBackupPath()));
 
 		writeSuccessData(response, json);
 	}
@@ -137,14 +139,14 @@ public class FormDefController extends BaseController<FormDef> {
 	 * @throws Exception
 	 */
 	@RequestMapping("getBackupHtml")
-	@CatchError(write2response = true, value = "获取开发者备份html异常")
+	@ErrorCatching(writeErrorToResponse = true, value = "获取开发者备份html异常")
 	public void getBackupHtml(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String id = RequestUtil.getString(request, "id");
 		String key = RequestUtil.getString(request, "key");
 		FormDef formDef = null;
-		if (StringUtil.isNotEmpty(id)) {
+		if (StringUtils.isNotEmpty(id)) {
 			formDef = formDefManager.get(id);
-		} else if (StringUtil.isNotEmpty(key)) {
+		} else if (StringUtils.isNotEmpty(key)) {
 			formDef = formDefManager.getByKey(key);
 		}
 		writeSuccessData(response, formDefManager.getBackupHtml(formDef));
@@ -173,12 +175,12 @@ public class FormDefController extends BaseController<FormDef> {
 	 * @throws Exception
 	 */
 	@RequestMapping("templateData")
-	@CatchError(write2response = true, value = "根据bo获取表单模板信息异常")
-	public ResultMsg<JSONArray> templateData(@RequestParam String boKey, @RequestParam String type) throws Exception {
+	@ErrorCatching(writeErrorToResponse = true, value = "根据bo获取表单模板信息异常")
+	public ResultMessage<JSONArray> templateData(@RequestParam String boKey, @RequestParam String type) throws Exception {
 		
 		JSONArray array = formTemplateManager.templateData(boKey,type);
 		
-		return new ResultMsg<JSONArray>(array);
+		return new ResultMessage<JSONArray>(array);
 	}
 
 	/**
@@ -192,7 +194,7 @@ public class FormDefController extends BaseController<FormDef> {
 	 * @throws Exception
 	 */
 	@RequestMapping("createHtml")
-	@CatchError(write2response = true, value = "生成html异常")
+	@ErrorCatching(writeErrorToResponse = true, value = "生成html异常")
 	public void createHtml(HttpServletRequest request, HttpServletResponse response, @RequestBody JSONArray jsonArray) throws Exception {
 		String boKey = RequestUtil.getString(request, "boKey");
 		BusinessObject businessObject = businessObjectService.getFilledByKey(boKey);
@@ -208,7 +210,7 @@ public class FormDefController extends BaseController<FormDef> {
 			map.put("relation", relation);
 			
 			//将所有表单生成器的实现类注入到模板引擎中
-			for(AbsFormElementGenerator generator : AppUtil.getImplInstanceArray(AbsFormElementGenerator.class)) {
+			for(AbsFormElementGenerator generator : AppContextUtil.getImplInstanceArray(AbsFormElementGenerator.class)) {
 				map.put(generator.getGeneratorName(), generator);
 			}
 			

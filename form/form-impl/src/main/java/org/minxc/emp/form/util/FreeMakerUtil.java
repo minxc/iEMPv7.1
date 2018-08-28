@@ -3,9 +3,7 @@ package org.minxc.emp.form.util;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import org.minxc.emp.base.core.util.BeanUtils;
-import org.minxc.emp.base.core.util.JsonUtil;
-import org.minxc.emp.base.core.util.StringUtil;
+import com.minxc.emp.core.util.BeanUtils;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -67,7 +65,7 @@ public class FreeMakerUtil {
             }
 
             // eg: ht-number-format='{formatJson} '
-            if (StringUtil.isNotEmpty(attrStr)) {
+            if (StringUtils.isNotEmpty(attrStr)) {
                 sb.append(attr).append("='").append(attrStr).append("' ");
             }
         }

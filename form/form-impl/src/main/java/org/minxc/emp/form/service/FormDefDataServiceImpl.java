@@ -4,28 +4,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSONObject;
-import org.minxc.emp.business.api.constant.BusinessTableRelType;
-import org.minxc.emp.business.api.constant.BusinessPermissionObjectType;
-import org.minxc.emp.business.api.model.BusinessTableRel;
-import org.minxc.emp.business.api.model.BusinessObject;
-import org.minxc.emp.business.api.model.BusinessPermission;
-import org.minxc.emp.business.api.service.BusinessDataService;
-import org.minxc.emp.business.api.service.BusinessObjectService;
-import org.minxc.emp.business.api.service.BusinessPermissionService;
-import org.minxc.emp.business.api.service.BusinessTableService;
+
+import org.minxc.emp.biz.api.constant.BusinessPermissionObjectType;
+import org.minxc.emp.biz.api.model.BusinessObject;
+import org.minxc.emp.biz.api.model.BusinessPermission;
+import org.minxc.emp.biz.api.model.BusinessTableRel;
+import org.minxc.emp.biz.api.service.BusinessDataService;
+import org.minxc.emp.biz.api.service.BusinessObjectService;
+import org.minxc.emp.biz.api.service.BusinessPermissionService;
+import org.minxc.emp.biz.api.service.BusinessTableService;
 import org.minxc.emp.form.api.service.IFormDefDataService;
 import org.minxc.emp.form.manager.FormDefManager;
 import org.minxc.emp.form.model.FormDef;
 import org.minxc.emp.form.model.FormDefData;
 
 /**
- * <pre>
  * 描述：FormDefData的服务类
  * 作者:min.xianchang
  * 邮箱:xianchangmin@126.com
  * 日期:2018年4月17日 下午4:43:41
- * 版权:summer
- * </pre>
  */
 @Service
 public class FormDefDataServiceImpl implements IFormDefDataService {
@@ -53,19 +50,18 @@ public class FormDefDataServiceImpl implements IFormDefDataService {
 		FormDefData formDefData = new FormDefData();
 		FormDef formDef = formDefManager.getByKey(formDefKey);
 		formDefData.setHtml(formDef.getHtml());
-		
-		BusinessPermission businessPermission = businessPermissionService.getByObjTypeAndObjVal(BusinessPermissionObjectType.FORM.getKey(), formDef.getKey(), formDef.getBoKey(), true);
-		
+
+		BusinessPermission businessPermission = businessPermissionService.getByObjTypeAndObjVal(
+				BusinessPermissionObjectType.FORM.getKey(), formDef.getKey(), formDef.getBoKey(), true);
+
 		formDefData.setPermission(businessPermission.getPermission(false));
 		formDefData.setTablePermission(businessPermission.getTablePermission(false));
-		
+
 		handleInitData(formDef, formDefData);
-		handleData(formDef, id, formDefData,businessPermission);
+		handleData(formDef, id, formDefData, businessPermission);
 
 		return formDefData;
 	}
-
-	
 
 	/**
 	 * <pre>
@@ -88,7 +84,7 @@ public class FormDefDataServiceImpl implements IFormDefDataService {
 			initData.getJSONObject(formDef.getBoKey()).put(rel.getTableKey(), getInitData(rel));
 		}
 	}
-	
+
 	/**
 	 * <pre>
 	 * 获取初始化数据
@@ -116,12 +112,11 @@ public class FormDefDataServiceImpl implements IFormDefDataService {
 	 * </pre>
 	 * 
 	 * @param formDef
-	 * @param id
-	 *            bo对应数据的主键
-	 * @param formDefData
-	 *  businessPermission2
+	 * @param id          bo对应数据的主键
+	 * @param formDefData businessPermission2
 	 */
-	private void handleData(FormDef formDef, String id, FormDefData formDefData, BusinessPermission businessPermission) {
+	private void handleData(FormDef formDef, String id, FormDefData formDefData,
+			BusinessPermission businessPermission) {
 		if (formDefData.getData() == null) {
 			formDefData.setData(new JSONObject());
 		}

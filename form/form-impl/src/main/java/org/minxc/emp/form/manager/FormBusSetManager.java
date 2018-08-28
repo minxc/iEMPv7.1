@@ -1,6 +1,6 @@
 package org.minxc.emp.form.manager;
 
-import org.minxc.emp.base.manager.Manager;
+import org.minxc.emp.common.manager.Manager;
 import org.minxc.emp.form.model.FormBusSet;
 
 /**

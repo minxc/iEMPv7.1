@@ -1,21 +1,23 @@
 package org.minxc.emp.form.model;
 
+import java.io.Serializable;
+
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-import org.minxc.emp.base.api.model.IDModel;
+import org.minxc.emp.core.api.model.IdModel;
 
 
 /**
- * <pre>
- * 描述：form_bus_set 实体对象
- * </pre>
+ * form_bus_set 实体对象
  */
-public class FormBusSet implements IDModel {
+public class FormBusSet implements IdModel,Serializable {
 
-    /**
+	private static final long serialVersionUID = -1857286973819310117L;
+
+	/**
      * 主键
      */
     @XmlAttribute(name = "id")

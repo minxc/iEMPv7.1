@@ -5,23 +5,23 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang3.StringUtils;
+import org.minxc.emp.basis.impl.groovy.GroovyScriptEngine;
+import org.minxc.emp.biz.api.model.BusinessData;
+import org.minxc.emp.biz.api.service.BusinessDataService;
+import org.minxc.emp.form.manager.FormBusManager;
+import org.minxc.emp.form.manager.FormBusSetManager;
+import org.minxc.emp.form.manager.FormDefManager;
+import org.minxc.emp.form.model.FormBusSet;
+import org.minxc.emp.form.model.FormDef;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSONArray;
-import org.minxc.emp.base.core.util.BeanUtils;
-import org.minxc.emp.base.core.util.StringUtil;
-import org.minxc.emp.base.core.util.ThreadMsgUtil;
-import org.minxc.emp.business.api.model.BusinessData;
-import org.minxc.emp.business.api.service.BusinessDataService;
-import org.minxc.emp.form.api.model.FormDef;
-import org.minxc.emp.form.manager.FormBusManager;
-import org.minxc.emp.form.manager.FormBusSetManager;
-import org.minxc.emp.form.manager.FormDefManager;
-import org.minxc.emp.form.model.FormBusSet;
-import org.minxc.emp.system.api.groovy.GroovyScriptEngine;
+import com.minxc.emp.core.util.BeanUtils;
+import com.minxc.emp.core.util.ThreadMsgUtil;
 
 /**
  * <pre>
@@ -72,7 +72,7 @@ public class FormBusManagerImpl implements FormBusManager {
         param.put("bizData", bizData);
 
         // 前置脚本
-        if (busSet != null && StringUtil.isNotEmpty(busSet.getPreScript())) {
+        if (busSet != null && StringUtils.isNotEmpty(busSet.getPreScript())) {
             groovyScriptEngine.execute(busSet.getPreScript(), param);
         }
 
@@ -84,7 +84,7 @@ public class FormBusManagerImpl implements FormBusManager {
         // 保存
        // bizDataService.saveData(bizData);
         // 后置脚本
-        if (busSet != null && StringUtil.isNotEmpty(busSet.getAfterScript())) {
+        if (busSet != null && StringUtils.isNotEmpty(busSet.getAfterScript())) {
             groovyScriptEngine.execute(busSet.getAfterScript(), param);
         }
 

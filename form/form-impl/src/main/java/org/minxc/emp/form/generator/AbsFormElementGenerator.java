@@ -3,15 +3,14 @@ package org.minxc.emp.form.generator;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.minxc.emp.biz.api.constant.BusinessColumnControlType;
+import org.minxc.emp.biz.api.constant.BusinessTableRelType;
+import org.minxc.emp.biz.api.model.BusinessColumn;
+import org.minxc.emp.biz.api.model.BusinessTableRel;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import org.minxc.emp.base.core.util.StringUtil;
-import org.minxc.emp.base.core.util.ThreadMapUtil;
-import org.minxc.emp.business.api.constant.BusinessColumnControlType;
-import org.minxc.emp.business.api.constant.BusinessTableRelType;
-import org.minxc.emp.business.api.model.BusinessTableRel;
-import org.minxc.emp.business.api.model.BusinessColumn;
+import com.minxc.emp.core.util.ThreadMapUtil;
 
 /**
  * 自定义表单控件生成器父类，提供生成表单通用公共方法<br>

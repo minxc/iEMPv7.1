@@ -1,12 +1,12 @@
 package org.minxc.emp.form.rest.controller;
 
-import org.minxc.emp.base.api.aop.annotion.CatchError;
-import org.minxc.emp.base.api.query.QueryFilter;
-import org.minxc.emp.base.core.util.StringUtil;
-import org.minxc.emp.base.db.id.UniqueIdUtil;
-import org.minxc.emp.base.db.model.page.PageJson;
-import org.minxc.emp.base.rest.GenericController;
-import org.minxc.emp.base.rest.util.RequestUtil;
+import org.apache.commons.lang3.StringUtils;
+import org.minxc.emp.common.db.id.UniqueIdUtil;
+import org.minxc.emp.common.db.model.page.PageJson;
+import org.minxc.emp.common.rest.GenericController;
+import org.minxc.emp.common.rest.util.RequestUtil;
+import org.minxc.emp.core.api.aop.annotation.ErrorCatching;
+import org.minxc.emp.core.api.query.QueryFilter;
 import org.minxc.emp.form.manager.FormTemplateManager;
 import org.minxc.emp.form.model.FormTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,9 +41,9 @@ public class FormTemplateController extends GenericController {
      * @throws Exception
      */
     @RequestMapping("save")
-    @CatchError(write2response = true, value = "保存自定义对话框失败")
+    @ErrorCatching(writeErrorToResponse = true, value = "保存自定义对话框失败")
     public void save(HttpServletRequest request, HttpServletResponse response, @RequestBody FormTemplate formTemplate) throws Exception {
-        if (StringUtil.isEmpty(formTemplate.getId())) {
+        if (StringUtils.isEmpty(formTemplate.getId())) {
             formTemplate.setEditable(true);// 页面新增的能编辑
             formTemplate.setId(UniqueIdUtil.getSuid());
             formTemplateManager.create(formTemplate);
@@ -65,14 +65,14 @@ public class FormTemplateController extends GenericController {
      * @throws Exception
      */
     @RequestMapping("getObject")
-    @CatchError(write2response = true, value = "获取formTemplate异常")
+    @ErrorCatching(writeErrorToResponse = true, value = "获取formTemplate异常")
     public void getObject(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String id = RequestUtil.getString(request, "id");
         String key = RequestUtil.getString(request, "key");
         FormTemplate formTemplate = null;
-        if (StringUtil.isNotEmpty(id)) {
+        if (StringUtils.isNotEmpty(id)) {
             formTemplate = formTemplateManager.get(id);
-        } else if (StringUtil.isNotEmpty(key)) {
+        } else if (StringUtils.isNotEmpty(key)) {
             formTemplate = formTemplateManager.getByKey(key);
         }
 
@@ -107,7 +107,7 @@ public class FormTemplateController extends GenericController {
      * @throws Exception
      */
     @RequestMapping("remove")
-    @CatchError(write2response = true, value = "删除表单模板失败")
+    @ErrorCatching(writeErrorToResponse = true, value = "删除表单模板失败")
     public void remove(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String[] aryIds = RequestUtil.getStringAryByStr(request, "id");
         formTemplateManager.removeByIds(aryIds);
@@ -124,7 +124,7 @@ public class FormTemplateController extends GenericController {
      * @throws Exception
      */
     @RequestMapping("initTemplate")
-    @CatchError(write2response = true, value = "初始化模板失败")
+    @ErrorCatching(writeErrorToResponse = true, value = "初始化模板失败")
     public void initTemplate(HttpServletRequest request, HttpServletResponse response) throws Exception {
         formTemplateManager.initAllTemplate();
         writeSuccessResult(response, "初始化模板成功");

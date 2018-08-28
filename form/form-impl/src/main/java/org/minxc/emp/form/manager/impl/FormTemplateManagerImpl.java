@@ -15,18 +15,19 @@ import org.springframework.stereotype.Service;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import org.minxc.emp.base.api.exception.BusinessException;
-import org.minxc.emp.base.api.query.QueryFilter;
-import org.minxc.emp.base.api.query.QueryOperation;
-import org.minxc.emp.base.core.util.Dom4jUtil;
-import org.minxc.emp.base.core.util.FileUtil;
-import org.minxc.emp.base.db.id.UniqueIdUtil;
-import org.minxc.emp.base.db.model.query.DefaultQueryFilter;
-import org.minxc.emp.base.manager.impl.BaseManager;
-import org.minxc.emp.business.api.constant.BusinessTableRelType;
-import org.minxc.emp.business.api.model.BusinessTableRel;
-import org.minxc.emp.business.api.model.BusinessObject;
-import org.minxc.emp.business.api.service.BusinessObjectService;
+import com.minxc.emp.core.util.Dom4jUtil;
+import com.minxc.emp.core.util.FileUtil;
+
+import org.minxc.emp.biz.api.constant.BusinessTableRelType;
+import org.minxc.emp.biz.api.model.BusinessObject;
+import org.minxc.emp.biz.api.model.BusinessTableRel;
+import org.minxc.emp.biz.api.service.BusinessObjectService;
+import org.minxc.emp.common.db.id.UniqueIdUtil;
+import org.minxc.emp.common.db.model.query.DefaultQueryFilter;
+import org.minxc.emp.common.manager.impl.CommonManager;
+import org.minxc.emp.core.api.exception.BusinessException;
+import org.minxc.emp.core.api.query.QueryFilter;
+import org.minxc.emp.core.api.query.QueryOperator;
 import org.minxc.emp.form.dao.FormTemplateDao;
 import org.minxc.emp.form.manager.FormTemplateManager;
 import org.minxc.emp.form.model.FormTemplate;
@@ -41,7 +42,9 @@ import org.minxc.emp.form.model.FormTemplate;
  * </pre>
  */
 @Service
-public class FormTemplateManagerImpl extends BaseManager<String, FormTemplate> implements FormTemplateManager{
+public class FormTemplateManagerImpl extends CommonManager<String, FormTemplate> implements FormTemplateManager{
+	
+	
 	@Resource
 	FormTemplateDao formTemplateDao;
 	@Autowired
@@ -65,7 +68,7 @@ public class FormTemplateManagerImpl extends BaseManager<String, FormTemplate> i
 	@Override
 	public FormTemplate getByKey(String key) {
 		QueryFilter filter = new DefaultQueryFilter();
-		filter.addFilter("key_", key, QueryOperation.EQUAL);
+		filter.addFilter("key_", key, QueryOperator.EQUAL);
 		return this.queryOne(filter);
 	}
 
@@ -73,7 +76,7 @@ public class FormTemplateManagerImpl extends BaseManager<String, FormTemplate> i
 	public void initAllTemplate() {
 		// 删除不可编辑的（其实就是系统的）
 		QueryFilter filter = new DefaultQueryFilter();
-		filter.addFilter("editable_", false, QueryOperation.EQUAL);
+		filter.addFilter("editable_", false, QueryOperator.EQUAL);
 		for (FormTemplate template : this.query(filter)) {
 			this.remove(template.getId());
 		}
@@ -164,8 +167,8 @@ public class FormTemplateManagerImpl extends BaseManager<String, FormTemplate> i
 
 	public List<FormTemplate> getByType(String type, String formType) {
 		QueryFilter filter = new DefaultQueryFilter();
-		filter.addFilter("type_", type, QueryOperation.IN);
-		filter.addFilter("form_type_", formType, QueryOperation.EQUAL);
+		filter.addFilter("type_", type, QueryOperator.IN);
+		filter.addFilter("form_type_", formType, QueryOperator.EQUAL);
 		return this.query(filter);
 	}
 	

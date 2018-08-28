@@ -1,9 +1,9 @@
 package org.minxc.emp.form.api.service;
 
-import org.minxc.emp.form.api.model.FormDef;
+import org.minxc.emp.form.api.model.IFormDef;
 
 public interface FormDefService {
 
-	FormDef getByKey(String key);
+	IFormDef getByKey(String key);
 
 }

@@ -1,5 +1,7 @@
 package org.minxc.emp.core.api.model;
 
+import java.io.Serializable;
+
 /**
  * @version V1.0
  * @Title: IdModel
@@ -9,7 +11,7 @@ package org.minxc.emp.core.api.model;
  * @date 2018/8/24 22:53
  */
 
-public interface IdModel {
+public interface IdModel extends Serializable{
 
     public String getId();
 

@@ -5,40 +5,38 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
+import org.minxc.emp.common.db.dao.BasicDao;
+import org.minxc.emp.common.db.datasource.DbContextHolder;
+import org.minxc.emp.common.db.model.page.PageJson;
+import org.minxc.emp.common.rest.CommonController;
+import org.minxc.emp.common.rest.util.RequestUtil;
+import org.minxc.emp.core.api.aop.annotation.ErrorCatching;
+import org.minxc.emp.core.api.query.QueryFilter;
+import org.minxc.emp.form.manager.FormCustDialogManager;
+import org.minxc.emp.form.model.FormCustDialog;
+import org.minxc.emp.system.api.model.ISysDataSource;
+import org.minxc.emp.system.api.service.ISysDataSourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import org.minxc.emp.base.api.aop.annotion.CatchError;
-import org.minxc.emp.base.api.query.QueryFilter;
-import org.minxc.emp.base.core.util.StringUtil;
-import org.minxc.emp.base.dao.CommonDao;
-import org.minxc.emp.base.db.datasource.DbContextHolder;
-import org.minxc.emp.base.db.model.page.PageJson;
-import org.minxc.emp.base.rest.BaseController;
-import org.minxc.emp.base.rest.util.RequestUtil;
-import org.minxc.emp.form.manager.FormCustDialogManager;
-import org.minxc.emp.form.model.FormCustDialog;
-import org.minxc.emp.system.api2.model.SystemDataSource;
-import org.minxc.emp.system.api2.service.SystemDataSourceService;
 
 /**
- * <pre>
- * 描述：自定义对话框管理
- * </pre>
+ * 自定义对话框管理
  */
 @RestController
 @RequestMapping("/form/formCustDialog/")
-public class FormCustDialogController extends BaseController<FormCustDialog> {
+public class FormCustDialogController extends CommonController<FormCustDialog> {
     @Autowired
    private  FormCustDialogManager formCustDialogManager;
     @Autowired
-    private  CommonDao<?> commonDao;
+    private  BasicDao<?> commonDao;
     
     @Autowired
-    private SystemDataSourceService sysDataSourceService;
+    private ISysDataSourceService sysDataSourceService;
 
     /**
      * <pre>
@@ -52,14 +50,14 @@ public class FormCustDialogController extends BaseController<FormCustDialog> {
      * @throws Exception
      */
     @RequestMapping("getObject")
-    @CatchError(write2response = true, value = "获取formCustDialog异常")
+    @ErrorCatching(writeErrorToResponse = true, value = "获取formCustDialog异常")
     public void getObject(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String id = RequestUtil.getString(request, "id");
         String key = RequestUtil.getString(request, "key");
         FormCustDialog formCustDialog = null;
-        if (StringUtil.isNotEmpty(id)) {
+        if (StringUtils.isNotEmpty(id)) {
             formCustDialog = formCustDialogManager.get(id);
-        } else if (StringUtil.isNotEmpty(key)) {
+        } else if (StringUtils.isNotEmpty(key)) {
             formCustDialog = formCustDialogManager.getByKey(key);
         }
 
@@ -79,7 +77,7 @@ public class FormCustDialogController extends BaseController<FormCustDialog> {
      * @throws Exception
      */
     @RequestMapping("searchObjName")
-    @CatchError(write2response = true, value = "根据数据源获取objName信息失败")
+    @ErrorCatching(writeErrorToResponse = true, value = "根据数据源获取objName信息失败")
     public void searchObjName(HttpServletRequest request, HttpServletResponse response, @RequestBody FormCustDialog formCustDialog) throws Exception {
         writeSuccessData(response, formCustDialogManager.searchObjName(formCustDialog), "根据数据源获取objName信息成功");
     }
@@ -97,7 +95,7 @@ public class FormCustDialogController extends BaseController<FormCustDialog> {
      * @throws Exception
      */
     @RequestMapping("getTable")
-    @CatchError(write2response = true, value = "根据数据源获取objName的字段信息失败")
+    @ErrorCatching(writeErrorToResponse = true, value = "根据数据源获取objName的字段信息失败")
     public void getTable(HttpServletRequest request, HttpServletResponse response, @RequestBody FormCustDialog formCustDialog) throws Exception {
         writeSuccessData(response, formCustDialogManager.getTable(formCustDialog), "根据数据源获取objName的字段信息成功");
     }
@@ -114,12 +112,12 @@ public class FormCustDialogController extends BaseController<FormCustDialog> {
      * @throws Exception
      */
     @RequestMapping("listData_{key}")
-    @CatchError(write2response = true, value = "获取对话框的列表数据失败")
+    @ErrorCatching(writeErrorToResponse = true, value = "获取对话框的列表数据失败")
     public PageJson listData(HttpServletRequest request, HttpServletResponse response, @PathVariable(value = "key") String key) throws Exception {
         QueryFilter queryFilter = getQueryFilter(request);
         // 页面来的参数
         FormCustDialog formCustDialog = formCustDialogManager.getByKey(key);
-        SystemDataSource sysDataSource = sysDataSourceService.getByKey(formCustDialog.getDsKey());
+        ISysDataSource sysDataSource = sysDataSourceService.getByKey(formCustDialog.getDsKey());
         // 切换数据源
         DbContextHolder.setDataSource(sysDataSource.getKey(), sysDataSource.getDbType());
         List<?> list = formCustDialogManager.data(formCustDialog, queryFilter);
@@ -142,7 +140,7 @@ public class FormCustDialogController extends BaseController<FormCustDialog> {
         QueryFilter queryFilter = getQueryFilter(request);
         // 页面来的参数
         FormCustDialog formCustDialog = formCustDialogManager.getByKey(key);
-        SystemDataSource sysDataSource = sysDataSourceService.getByKey(formCustDialog.getDsKey());
+        ISysDataSource sysDataSource = sysDataSourceService.getByKey(formCustDialog.getDsKey());
         // 切换数据源
         DbContextHolder.setDataSource(sysDataSource.getKey(), sysDataSource.getDbType());
         return formCustDialogManager.data(formCustDialog, queryFilter);

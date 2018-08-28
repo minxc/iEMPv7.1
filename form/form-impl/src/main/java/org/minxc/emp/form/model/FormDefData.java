@@ -5,16 +5,16 @@ import java.io.Serializable;
 import com.alibaba.fastjson.JSONObject;
 
 /**
- * <pre>
  * 描述：表单定义的页面数据类
  * 当流程页时，请继承当前类，然后多一些字段，例如按钮数据什么的
  * 作者:min.xianchang
  * 邮箱:xianchangmin@126.com
  * 日期:2018年4月14日 下午5:38:51
- * 版权:summer
- * </pre>
  */
 public class FormDefData implements Serializable {
+	
+	
+	private static final long serialVersionUID = -6033369534891537351L;
 	/**
 	 * <pre>
 	 * 表单的数据
