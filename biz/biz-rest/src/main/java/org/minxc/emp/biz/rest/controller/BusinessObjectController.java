@@ -6,19 +6,26 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.minxc.emp.biz.api.model.BusinessObject;
-import org.minxc.emp.common.rest.CommonController;
-import org.minxc.emp.core.api.aop.annotation.ErrorCatching;
+
+import com.dstz.base.api.aop.annotion.CatchErr;
+import com.dstz.base.core.util.StringUtil;
+import com.dstz.base.rest.BaseController;
+import com.dstz.base.rest.util.RequestUtil;
+import com.dstz.bus.manager.BusinessObjectManager;
+import com.dstz.bus.model.BusinessObject;
 
 /**
+ * <pre>
  * 描述：businessObject层的controller
- * 作者:min.xianchang
- * 邮箱:xianchangmin@126.com
+ * 作者:aschs
+ * 邮箱:aschs@qq.com
  * 日期:下午5:11:06
+ * 版权:summer
+ * </pre>
  */
 @RestController
 @RequestMapping("/bus/businessObject/")
-public class BusinessObjectController extends CommonController<BusinessObject> {
+public class BusinessObjectController extends BaseController<BusinessObject> {
 	@Resource
 	BusinessObjectManager businessObjectManager;
 
@@ -34,7 +41,7 @@ public class BusinessObjectController extends CommonController<BusinessObject> {
 	 * @throws Exception
 	 */
 	@RequestMapping("getObject")
-	@ErrorCatching(writeErrorToResponse = true, value = "获取businessObject异常")
+	@CatchErr(write2response = true, value = "获取businessObject异常")
 	public void getObject(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String id = RequestUtil.getString(request, "id");
 		String key = RequestUtil.getString(request, "key");

@@ -1,12 +1,14 @@
 package org.minxc.emp.bpm.core.model;
 
-import com.dstz.base.api.model.IBaseModel;
+import com.minxc.emp.core.impl.model.AbstractCommonModel;
 
 import java.util.Date;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.minxc.emp.bpm.api.model.def.IBpmDefinition;
 
-public class BpmDefinition implements IBaseModel, IBpmDefinition {
+public class BpmDefinition extends AbstractCommonModel implements IBpmDefinition {
+	
+	private static final long serialVersionUID = -8566996877876849261L;
 	protected String id;
 	protected String name;
 	protected String key;

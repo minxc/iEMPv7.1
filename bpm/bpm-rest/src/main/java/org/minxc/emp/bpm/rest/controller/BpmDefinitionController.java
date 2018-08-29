@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import org.minxc.emp.base.api.query.QueryFilter;
 import org.minxc.emp.base.api.response.impl.ResultMsg;
-import org.minxc.emp.base.core.util.AppUtil;
+import com.minxc.emp.core.util.AppContextUtil;
 import org.minxc.emp.base.db.model.page.PageJson;
 import org.minxc.emp.base.rest.BaseController;
 import org.minxc.emp.bpm.core.manager.BpmDefinitionManager;

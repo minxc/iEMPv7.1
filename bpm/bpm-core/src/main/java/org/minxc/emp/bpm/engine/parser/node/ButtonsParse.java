@@ -2,7 +2,7 @@ package org.minxc.emp.bpm.engine.parser.node;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.dstz.base.core.util.BeanUtils;
+import com.minxc.emp.core.util.BeanUtils;
 
 import java.util.List;
 

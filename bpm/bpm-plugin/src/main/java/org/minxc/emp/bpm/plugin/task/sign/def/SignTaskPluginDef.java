@@ -1,6 +1,6 @@
 package org.minxc.emp.bpm.plugin.task.sign.def;
 
-import com.dstz.bpm.api.constant.ActionType;
+import org.minxc.emp.bpm.api.constant.ActionType;
 import com.dstz.bpm.engine.plugin.plugindef.AbstractBpmTaskPluginDef;
 
 import javax.validation.constraints.Min;

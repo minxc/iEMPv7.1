@@ -8,20 +8,20 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import org.minxc.emp.base.api.aop.annotion.CatchErr;
-import org.minxc.emp.base.api.response.impl.ResultMsg;
-import org.minxc.emp.base.core.util.StringUtil;
-import org.minxc.emp.base.db.tableoper.TableOperator;
-import org.minxc.emp.base.rest.BaseController;
-import org.minxc.emp.base.rest.util.RequestUtil;
-import org.minxc.emp.bus.manager.BusinessTableManager;
-import org.minxc.emp.bus.model.BusinessTable;
-import org.minxc.emp.bus.util.BusinessTableCacheUtil;
+import com.dstz.base.api.aop.annotion.CatchErr;
+import com.dstz.base.api.response.impl.ResultMsg;
+import com.dstz.base.core.util.StringUtil;
+import com.dstz.base.db.tableoper.TableOperator;
+import com.dstz.base.rest.BaseController;
+import com.dstz.base.rest.util.RequestUtil;
+import com.dstz.bus.manager.BusinessTableManager;
+import com.dstz.bus.model.BusinessTable;
+import com.dstz.bus.util.BusinessTableCacheUtil;
 
 /**
  * businessTable层的controller
  *
- * @author min.xianchang
+ * @author aschs
  */
 @RestController
 @RequestMapping("/bus/businessTable/")

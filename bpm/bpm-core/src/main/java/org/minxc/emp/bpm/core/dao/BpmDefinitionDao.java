@@ -1,15 +1,15 @@
 package org.minxc.emp.bpm.core.dao;
 
-import com.dstz.base.api.query.QueryFilter;
-import com.dstz.base.dao.BaseDao;
+import org.minxc.emp.common.db.dao.CommonDao;
+import org.minxc.emp.core.api.query.QueryFilter;
 
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.minxc.emp.bpm.core.model.BpmDefinition;
-import org.mybatis.spring.annotation.MapperScan;
+import org.apache.ibatis.annotations.Mapper;
 
-@MapperScan
-public interface BpmDefinitionDao extends BaseDao<String, BpmDefinition> {
+@Mapper
+public interface BpmDefinitionDao extends CommonDao<String, BpmDefinition> {
 	public BpmDefinition getMainByDefKey(String var1);
 
 	public void updateActResourceEntity(@Param(value = "deploymentId") String var1,

@@ -8,8 +8,8 @@ package org.minxc.emp.biz.api.constant;
  * 通常页面配置不会展示最后那个权限，因为当用户配置了权限，前面的权限都没有了，最后的就是权限了
  * 当用户没配置权限，则应该选择默认权限
  * 默认权限跟最后一个权限的概念是不一样的哦
- * 作者:min.xianchang
- * 邮箱:xianchangmin@126.com
+ * 作者:aschs
+ * 邮箱:aschs@qq.com
  * 日期:2018年4月14日 下午6:07:46
  * 版权:summer
  * </pre>

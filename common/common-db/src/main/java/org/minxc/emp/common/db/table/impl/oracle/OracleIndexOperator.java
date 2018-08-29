@@ -2,7 +2,7 @@ package org.minxc.emp.common.db.table.impl.oracle;
 
 import com.minxc.emp.core.util.AppContextUtil;
 import org.apache.commons.lang3.StringUtils;
-import org.minxc.emp.common.db.api.table.TableOperator;
+import org.minxc.emp.common.db.api.table.ITableOperator;
 import org.minxc.emp.common.db.api.table.model.Index;
 import org.minxc.emp.common.db.table.BaseIndexOperator;
 import org.minxc.emp.common.db.table.model.DefaultIndex;
@@ -216,12 +216,12 @@ public class OracleIndexOperator extends BaseIndexOperator {
 
     private Map<String, List<String>> getPKColumns(List<String> tableNames)
             throws SQLException {
-        TableOperator tableOperator = AppContextUtil.getBean(TableOperator.class);
+        ITableOperator tableOperator = AppContextUtil.getBean(ITableOperator.class);
         return tableOperator.getPKColumns(tableNames);
     }
 
     private List<String> getPKColumns(String tableName) throws SQLException {
-        TableOperator tableOperator = AppContextUtil.getBean(TableOperator.class);
+        ITableOperator tableOperator = AppContextUtil.getBean(ITableOperator.class);
         return tableOperator.getPKColumns(tableName);
     }
 

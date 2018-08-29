@@ -1,6 +1,6 @@
 package org.minxc.emp.bpm.engine.action.handler.instance;
 
-import com.dstz.base.api.exception.BusinessException;
+import org.minxc.emp.core.api.exception.BusinessException;
 import com.dstz.base.core.util.StringUtil;
 
 import java.io.Serializable;

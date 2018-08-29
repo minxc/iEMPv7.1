@@ -2,8 +2,8 @@ package org.minxc.emp.biz.api.constant;
 /**
  * <pre> 
  * 描述：BusinessObject中PersistenceType属性的枚举
- * 作者:min.xianchang
- * 邮箱:xianchangmin@126.com
+ * 作者:aschs
+ * 邮箱:aschs@qq.com
  * 日期:2018年2月26日 下午3:19:05
  * 版权:summer
  * </pre>

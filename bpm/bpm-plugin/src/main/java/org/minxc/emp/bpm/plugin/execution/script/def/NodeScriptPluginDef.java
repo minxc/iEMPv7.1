@@ -1,6 +1,6 @@
 package org.minxc.emp.bpm.plugin.execution.script.def;
 
-import com.dstz.bpm.api.constant.EventType;
+import org.minxc.emp.bpm.api.constant.EventType;
 import com.dstz.bpm.engine.plugin.plugindef.AbstractBpmExecutionPluginDef;
 import java.util.HashMap;
 import java.util.Map;

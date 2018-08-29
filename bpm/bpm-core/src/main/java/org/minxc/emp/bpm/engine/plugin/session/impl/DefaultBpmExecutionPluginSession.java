@@ -2,7 +2,7 @@ package org.minxc.emp.bpm.engine.plugin.session.impl;
 
 import com.dstz.bus.api.model.IBusinessData;
 import com.dstz.org.api.model.IUser;
-import com.dstz.sys.util.ContextUtil;
+import org.minxc.emp.basis.impl.util.ContextUtil;
 import java.util.HashMap;
 import java.util.Map;
 import org.activiti.engine.delegate.VariableScope;

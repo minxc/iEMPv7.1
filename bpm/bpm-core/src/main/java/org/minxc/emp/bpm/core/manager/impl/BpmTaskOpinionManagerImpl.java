@@ -1,10 +1,10 @@
 package org.minxc.emp.bpm.core.manager.impl;
 
-import com.dstz.base.core.util.BeanUtils;
-import com.dstz.base.manager.impl.BaseManager;
+import com.minxc.emp.core.util.BeanUtils;
+import org.minxc.emp.common.manager.impl.CommonManager;
 import com.dstz.org.api.model.IUser;
 import com.dstz.sys.api.model.SysIdentity;
-import com.dstz.sys.util.ContextUtil;
+import org.minxc.emp.basis.impl.util.ContextUtil;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -19,7 +19,7 @@ import org.minxc.emp.bpm.core.model.BpmTaskOpinion;
 import org.springframework.stereotype.Service;
 
 @Service(value = "bpmTaskOpinionManager")
-public class BpmTaskOpinionManagerImpl extends BaseManager<String, BpmTaskOpinion> implements BpmTaskOpinionManager {
+public class BpmTaskOpinionManagerImpl extends CommonManager<String, BpmTaskOpinion> implements BpmTaskOpinionManager {
 	@Resource
 	BpmTaskOpinionDao k;
 

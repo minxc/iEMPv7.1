@@ -1,9 +1,9 @@
 package org.minxc.emp.bpm.plugin.usercalc.samenode.runtime;
 
-import com.dstz.base.core.util.BeanUtils;
-import com.dstz.bpm.api.engine.plugin.def.BpmTaskPluginDef;
-import com.dstz.bpm.api.model.task.IBpmTask;
-import com.dstz.bpm.api.model.task.IBpmTaskOpinion;
+import com.minxc.emp.core.util.BeanUtils;
+import org.minxc.emp.bpm.api.engine.plugin.def.BpmTaskPluginDef;
+import org.minxc.emp.bpm.api.model.task.IBpmTask;
+import org.minxc.emp.bpm.api.model.task.IBpmTaskOpinion;
 import com.dstz.bpm.core.manager.BpmTaskOpinionManager;
 import com.dstz.bpm.engine.model.BpmIdentity;
 import com.dstz.bpm.engine.plugin.runtime.abstact.AbstractUserCalcPlugin;

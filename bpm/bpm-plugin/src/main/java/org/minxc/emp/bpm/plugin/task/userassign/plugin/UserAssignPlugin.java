@@ -1,10 +1,10 @@
 package org.minxc.emp.bpm.plugin.task.userassign.plugin;
 
 import com.alibaba.fastjson.JSON;
-import com.dstz.base.core.util.BeanUtils;
-import com.dstz.bpm.api.engine.action.cmd.TaskActionCmd;
-import com.dstz.bpm.api.engine.context.BpmContext;
-import com.dstz.bpm.api.engine.plugin.def.BpmTaskPluginDef;
+import com.minxc.emp.core.util.BeanUtils;
+import org.minxc.emp.bpm.api.engine.action.cmd.TaskActionCmd;
+import org.minxc.emp.bpm.api.engine.context.BpmContext;
+import org.minxc.emp.bpm.api.engine.plugin.def.BpmTaskPluginDef;
 import com.dstz.bpm.engine.plugin.factory.BpmPluginSessionFactory;
 import com.dstz.bpm.engine.plugin.runtime.abstact.AbstractBpmTaskPlugin;
 import com.dstz.bpm.engine.plugin.session.BpmPluginSession;

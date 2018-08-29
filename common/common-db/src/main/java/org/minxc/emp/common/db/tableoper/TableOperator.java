@@ -9,9 +9,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import com.minxc.emp.core.util.BeanUtils;
-import org.minxc.emp.common.db.api.table.model.Table;
 import lombok.extern.slf4j.Slf4j;
-import org.minxc.emp.common.db.api.table.model.Column;
 import org.minxc.emp.common.db.model.table.ColumnEntity;
 import org.minxc.emp.common.db.model.table.TableEntity;
 import org.springframework.jdbc.core.JdbcTemplate;

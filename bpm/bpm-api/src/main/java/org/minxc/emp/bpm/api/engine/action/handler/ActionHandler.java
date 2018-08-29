@@ -2,7 +2,7 @@ package org.minxc.emp.bpm.api.engine.action.handler;
 
 import org.minxc.emp.bpm.api.constant.ActionType;
 import org.minxc.emp.bpm.api.engine.action.cmd.ActionCmd;
-import org.minxc.emp.bpm.api.model.nodedef.BpmnNodeDef;
+import org.minxc.emp.bpm.api.model.nodedef.BpmNodeDef;
 
 /**
  * 动作执行处理器
@@ -39,7 +39,7 @@ public interface ActionHandler<T extends ActionCmd> {
      * @param nodeDef
      * @return
      */
-    Boolean isSupport(BpmnNodeDef nodeDef);
+    Boolean isSupport(BpmNodeDef nodeDef);
 
     /**
      * 是否默认展示

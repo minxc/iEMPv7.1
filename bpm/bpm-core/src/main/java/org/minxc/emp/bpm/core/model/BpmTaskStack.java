@@ -1,6 +1,6 @@
 package org.minxc.emp.bpm.core.model;
 
-import com.dstz.base.api.model.IBaseModel;
+import com.minxc.emp.core.impl.model.AbtractCommonModel;
 import java.util.Date;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 

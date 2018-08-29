@@ -1,13 +1,13 @@
 package org.minxc.emp.bpm.core.manager.impl;
 
 import com.dstz.base.api.constant.IStatusCode;
-import com.dstz.base.api.exception.BusinessException;
-import com.dstz.base.api.query.QueryFilter;
-import com.dstz.base.api.query.QueryOP;
-import com.dstz.base.core.util.BeanUtils;
+import org.minxc.emp.core.api.exception.BusinessException;
+import org.minxc.emp.core.api.query.QueryFilter;
+import org.minxc.emp.core.api.query.QueryOperator;
+import com.minxc.emp.core.util.BeanUtils;
 import com.dstz.base.core.util.StringUtil;
-import com.dstz.base.manager.impl.BaseManager;
-import com.dstz.sys.util.ContextUtil;
+import org.minxc.emp.common.manager.impl.CommonManager;
+import org.minxc.emp.basis.impl.util.ContextUtil;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;

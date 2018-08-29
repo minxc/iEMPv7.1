@@ -1,7 +1,7 @@
 package org.minxc.emp.bpm.api.model.def;
 
 import org.minxc.emp.bpm.api.engine.plugin.def.BpmnDef;
-import org.minxc.emp.bpm.api.model.nodedef.BpmnNodeDef;
+import org.minxc.emp.bpm.api.model.nodedef.BpmNodeDef;
 
 import java.util.List;
 
@@ -39,7 +39,7 @@ public interface BpmnProcessDef extends BpmnDef {
      *
      * @return List&lt;BpmNodeDef>
      */
-    List<BpmnNodeDef> getBpmnNodeDefs();
+    List<BpmNodeDef> getBpmnNodeDefs();
 
 
     /**
@@ -53,7 +53,7 @@ public interface BpmnProcessDef extends BpmnDef {
      *
      * @return BpmNodeDef
      */
-    BpmnNodeDef getStartEvent();
+    BpmNodeDef getStartEvent();
 
     /**
      * 获取第一个节点。
@@ -61,7 +61,7 @@ public interface BpmnProcessDef extends BpmnDef {
      *
      * @return List&lt;BpmNodeDef>
      */
-    List<BpmnNodeDef> getStartNodes();
+    List<BpmNodeDef> getStartNodes();
 
     /**
      * 获取流程的结束节点。
@@ -69,6 +69,6 @@ public interface BpmnProcessDef extends BpmnDef {
      * @param processDefId
      * @return List&lt;BpmNodeDef>
      */
-    List<BpmnNodeDef> getEndEvents();
+    List<BpmNodeDef> getEndEvents();
 
 }

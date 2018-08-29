@@ -1,9 +1,12 @@
 package org.minxc.emp.bpm.api.exception;
 
-import org.minxc.emp.base.api.constant.StatusCode;
+import org.minxc.emp.core.api.status.StatusCode;
+
 
 /**
- * @说明 流程组件状态码定义
+ * 	流程组件状态码定义
+ * @author Xianchang.min
+ *
  */
 public enum BpmnStatusCode implements StatusCode {
 
@@ -60,39 +63,52 @@ public enum BpmnStatusCode implements StatusCode {
     FLOW_BUS_DATA_LOSE("50101", "流程关联的业务数据丢失"),
 
     ERROR_UNKNOWN("30100", "未知异常");
+	
+	
 
     private String code;
-    private String desc;
-    private String system;
+    private String description;
+    private String application;
+    private String tenant;
 
     BpmnStatusCode(String code, String description) {
         this.setCode(code);
-        this.setDesc(description);
-        this.setSystem("BASE");
+        this.setDescription(description);
+        this.setApplication("BASE");
     }
 
-    public String getCode() {
-        return code;
-    }
+	public String getCode() {
+		return code;
+	}
 
-    public void setCode(String code) {
-        this.code = code;
-    }
+	public void setCode(String code) {
+		this.code = code;
+	}
 
-    public String getDesc() {
-        return desc;
-    }
+	public String getDescription() {
+		return description;
+	}
 
-    public void setDesc(String msg) {
-        this.desc = msg;
-    }
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
-    public String getSystem() {
-        return system;
-    }
+	public String getApplication() {
+		return application;
+	}
 
-    public void setSystem(String system) {
-        this.system = system;
-    }
+	public void setApplication(String application) {
+		this.application = application;
+	}
+
+	public String getTenant() {
+		return tenant;
+	}
+
+	public void setTenant(String tenant) {
+		this.tenant = tenant;
+	}
+
+   
 }
 	 

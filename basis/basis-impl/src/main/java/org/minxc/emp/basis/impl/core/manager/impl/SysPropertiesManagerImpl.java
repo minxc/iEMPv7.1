@@ -20,11 +20,15 @@ import org.springframework.stereotype.Service;
 import com.minxc.emp.core.util.AppContextUtil;
 import com.minxc.emp.core.util.BeanUtils;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * <pre>
  * 描述：SYS_PROPERTIES 处理实现类
  * </pre>
  */
+
+@Slf4j
 @Service("sysPropertiesManager")
 public class SysPropertiesManagerImpl extends CommonManager<String, SysProperties> implements SysPropertiesManager, PropertyService {
 
@@ -32,7 +36,6 @@ public class SysPropertiesManagerImpl extends CommonManager<String, SysPropertie
     SysPropertiesDao sysPropertiesDao;
     @Resource
     ICache cache;
-    protected Logger LOG = LoggerFactory.getLogger(getClass());
 
     private static final String PROPERTIES_CACHE_KEY = "PROPERTIES_CACHE_";
 
@@ -56,7 +59,7 @@ public class SysPropertiesManagerImpl extends CommonManager<String, SysPropertie
         for (SysProperties property : list) {
             String environment = property.getEnvironment();
             if (!EnvironmentConstant.contain(environment)) {
-                LOG.warn("当前系统属性的环境参数“{}”非系统定义参数{}请注意！", environment, EnvironmentConstant.getKes());
+                log.warn("当前系统属性的环境参数“{}”非系统定义参数{}请注意！", environment, EnvironmentConstant.getKes());
             }
 
             Map<String, String> proerties = propertiesCache.get(environment);

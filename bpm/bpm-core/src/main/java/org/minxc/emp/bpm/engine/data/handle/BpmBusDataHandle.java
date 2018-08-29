@@ -2,7 +2,7 @@ package org.minxc.emp.bpm.engine.data.handle;
 
 import com.dstz.base.api.constant.IStatusCode;
 import com.dstz.base.api.exception.SystemException;
-import com.dstz.base.core.util.BeanUtils;
+import com.minxc.emp.core.util.BeanUtils;
 import com.dstz.base.core.util.StringUtil;
 import com.dstz.base.db.dboper.DbOperator;
 import com.dstz.base.db.dboper.DbOperatorFactory;

@@ -1,15 +1,15 @@
 package org.minxc.emp.bpm.core.dao;
 
-import com.dstz.base.dao.BaseDao;
+import org.minxc.emp.common.db.dao.CommonDao;
 
 import java.util.List;
 import java.util.Set;
 import org.apache.ibatis.annotations.Param;
 import org.minxc.emp.bpm.core.model.TaskIdentityLink;
-import org.mybatis.spring.annotation.MapperScan;
+import org.apache.ibatis.annotations.Mapper;
 
-@MapperScan
-public interface TaskIdentityLinkDao extends BaseDao<String, TaskIdentityLink> {
+@Mapper
+public interface TaskIdentityLinkDao extends CommonDao<String, TaskIdentityLink> {
 	public void removeByInstanceId(String var1);
 
 	public void removeByTaskId(String var1);

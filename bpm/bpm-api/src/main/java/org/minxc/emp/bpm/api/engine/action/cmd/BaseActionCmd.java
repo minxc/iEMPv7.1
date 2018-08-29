@@ -10,7 +10,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import org.minxc.emp.base.api.exception.BusinessException;
-import org.minxc.emp.base.core.util.AppUtil;
+import com.minxc.emp.core.util.AppContextUtil;
 import org.minxc.emp.base.core.util.BeanUtils;
 import org.minxc.emp.base.core.util.JsonUtil;
 import org.minxc.emp.base.core.util.StringUtil;

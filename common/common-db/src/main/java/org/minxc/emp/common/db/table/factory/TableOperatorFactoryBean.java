@@ -3,7 +3,7 @@ package org.minxc.emp.common.db.table.factory;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import org.minxc.emp.common.db.api.table.TableOperator;
+import org.minxc.emp.common.db.api.table.ITableOperator;
 import org.minxc.emp.common.db.table.util.SQLConst;
 
 /**
@@ -19,16 +19,16 @@ import org.minxc.emp.common.db.table.util.SQLConst;
  *
  * @author ray
  */
-public class TableOperatorFactoryBean implements FactoryBean<TableOperator> {
+public class TableOperatorFactoryBean implements FactoryBean<ITableOperator> {
     // 表操作
-    private TableOperator tableOperator;
+    private ITableOperator tableOperator;
     // 数据库类型
     private String dbType = SQLConst.DB_MYSQL;
     // JdbcTemplate
     private JdbcTemplate jdbcTemplate;
 
     @Override
-    public TableOperator getObject() throws Exception {
+    public ITableOperator getObject() throws Exception {
         tableOperator = DatabaseFactory.getTableOperator(dbType);
         tableOperator.setJdbcTemplate(jdbcTemplate);
         return tableOperator;
@@ -55,7 +55,7 @@ public class TableOperatorFactoryBean implements FactoryBean<TableOperator> {
 
     @Override
     public Class<?> getObjectType() {
-        return TableOperator.class;
+        return ITableOperator.class;
     }
 
     @Override

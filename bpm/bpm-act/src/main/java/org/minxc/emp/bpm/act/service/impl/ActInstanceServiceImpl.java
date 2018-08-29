@@ -1,10 +1,10 @@
 package org.minxc.emp.bpm.act.service.impl;
 
-import com.dstz.bpm.api.model.def.IBpmDefinition;
-import com.dstz.bpm.api.model.nodedef.BpmNodeDef;
-import com.dstz.bpm.api.service.BpmProcessDefService;
+import org.minxc.emp.bpm.api.model.def.IBpmDefinition;
+import org.minxc.emp.bpm.api.model.nodedef.BpmNodeDef;
+import org.minxc.emp.bpm.api.service.BpmProcessDefService;
 import com.dstz.org.api.model.IUser;
-import com.dstz.sys.util.ContextUtil;
+import org.minxc.emp.basis.impl.util.ContextUtil;
 import java.util.Collection;
 import java.util.Map;
 import javax.annotation.Resource;

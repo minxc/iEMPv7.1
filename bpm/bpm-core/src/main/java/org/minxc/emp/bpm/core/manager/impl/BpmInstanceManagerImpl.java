@@ -1,11 +1,11 @@
 package org.minxc.emp.bpm.core.manager.impl;
 
-import com.dstz.base.api.query.QueryFilter;
+import org.minxc.emp.core.api.query.QueryFilter;
 import com.dstz.base.core.util.StringUtil;
-import com.dstz.base.db.id.UniqueIdUtil;
-import com.dstz.base.manager.impl.BaseManager;
+import org.minxc.emp.common.db.id.UniqueIdUtil;
+import org.minxc.emp.common.manager.impl.CommonManager;
 import com.dstz.org.api.model.IUser;
-import com.dstz.sys.util.ContextUtil;
+import org.minxc.emp.basis.impl.util.ContextUtil;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;

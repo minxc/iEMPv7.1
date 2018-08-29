@@ -1,12 +1,12 @@
 package org.minxc.emp.bpm.plugin.execution.nodemessage.plugin;
 
-import com.dstz.base.core.util.BeanUtils;
+import com.minxc.emp.core.util.BeanUtils;
 import com.dstz.base.core.util.StringUtil;
-import com.dstz.bpm.api.constant.EventType;
-import com.dstz.bpm.api.engine.action.cmd.BaseActionCmd;
-import com.dstz.bpm.api.engine.context.BpmContext;
-import com.dstz.bpm.api.engine.plugin.def.UserAssignRule;
-import com.dstz.bpm.api.service.BpmProcessDefService;
+import org.minxc.emp.bpm.api.constant.EventType;
+import org.minxc.emp.bpm.api.engine.action.cmd.BaseActionCmd;
+import org.minxc.emp.bpm.api.engine.context.BpmContext;
+import org.minxc.emp.bpm.api.engine.plugin.def.UserAssignRule;
+import org.minxc.emp.bpm.api.service.BpmProcessDefService;
 import com.dstz.bpm.engine.plugin.factory.BpmPluginSessionFactory;
 import com.dstz.bpm.engine.plugin.runtime.abstact.AbstractBpmExecutionPlugin;
 import com.dstz.bpm.engine.plugin.session.BpmExecutionPluginSession;
@@ -20,7 +20,7 @@ import com.dstz.sys.api.jms.model.JmsDTO;
 import com.dstz.sys.api.jms.model.msg.NotifyMessage;
 import com.dstz.sys.api.jms.producer.JmsProducer;
 import com.dstz.sys.api.model.SysIdentity;
-import com.dstz.sys.util.ContextUtil;
+import org.minxc.emp.basis.impl.util.ContextUtil;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;

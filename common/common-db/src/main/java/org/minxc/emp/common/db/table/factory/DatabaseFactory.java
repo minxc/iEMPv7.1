@@ -1,7 +1,7 @@
 package org.minxc.emp.common.db.table.factory;
 
 import org.minxc.emp.common.db.api.table.IndexOperator;
-import org.minxc.emp.common.db.api.table.TableOperator;
+import org.minxc.emp.common.db.api.table.ITableOperator;
 import org.minxc.emp.common.db.api.table.ViewOperator;
 import org.minxc.emp.common.db.table.BaseTableMeta;
 import org.minxc.emp.common.db.table.impl.db2.DB2IndexOperator;
@@ -46,9 +46,9 @@ public class DatabaseFactory {
      * @return
      * @throws Exception
      */
-    public static TableOperator getTableOperator(String dbType)
+    public static ITableOperator getTableOperator(String dbType)
             throws Exception {
-        TableOperator tableOperator = null;
+        ITableOperator tableOperator = null;
         if (dbType.equals(SQLConst.DB_ORACLE)) {
             tableOperator = new OracleTableOperator();
         } else if (dbType.equals(SQLConst.DB_MYSQL)) {

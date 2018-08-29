@@ -5,7 +5,7 @@ import java.util.List;
 import org.minxc.emp.bpm.api.constant.NodeType;
 import org.minxc.emp.bpm.api.model.def.BpmnProcessDef;
 import org.minxc.emp.bpm.api.model.def.BpmnDefinition;
-import org.minxc.emp.bpm.api.model.nodedef.BpmnNodeDef;
+import org.minxc.emp.bpm.api.model.nodedef.BpmNodeDef;
 
 /**
  * 描述：流程定义服务接口
@@ -29,7 +29,7 @@ public interface BpmnProcessDefService {
      * @param nodeId
      * @return BpmNodeDef
      */
-    BpmnNodeDef getBpmNodeDef(String defId, String nodeId);
+    BpmNodeDef getBpmNodeDef(String defId, String nodeId);
 
     /**
      * 通过流程定义ID获取流程定义的实体描述
@@ -45,7 +45,7 @@ public interface BpmnProcessDefService {
      * @param defId
      * @return List&lt;BpmNodeDef>
      */
-    List<BpmnNodeDef> getNodeDefs(String defId);
+    List<BpmNodeDef> getNodeDefs(String defId);
 
 
     /**
@@ -55,7 +55,7 @@ public interface BpmnProcessDefService {
      * @param nodeType
      * @return List&lt;BpmNodeDef>
      */
-    List<BpmnNodeDef> getNodesByType(String defId, NodeType nodeType);
+    List<BpmNodeDef> getNodesByType(String defId, NodeType nodeType);
 
 
     /**
@@ -65,7 +65,7 @@ public interface BpmnProcessDefService {
      * @param nodeType
      * @return List&lt;BpmNodeDef>
      */
-    List<BpmnNodeDef> getAllNodeDef(String defId);
+    List<BpmNodeDef> getAllNodeDef(String defId);
 
     /**
      * 根据流程定义ID删除缓存。
@@ -80,7 +80,7 @@ public interface BpmnProcessDefService {
      * @param defId
      * @return BpmNodeDef
      */
-    BpmnNodeDef getStartEvent(String processDefId);
+    BpmNodeDef getStartEvent(String processDefId);
 
     /**
      * 获取流程的结束节点。
@@ -88,7 +88,7 @@ public interface BpmnProcessDefService {
      * @param processDefId
      * @return List&lt;BpmNodeDef>
      */
-    List<BpmnNodeDef> getEndEvents(String processDefId);
+    List<BpmNodeDef> getEndEvents(String processDefId);
 
     /**
      * 获取第一个节点。
@@ -97,7 +97,7 @@ public interface BpmnProcessDefService {
      * @param processDefId
      * @return List&lt;BpmNodeDef>
      */
-    List<BpmnNodeDef> getStartNodes(String processDefId);
+    List<BpmNodeDef> getStartNodes(String processDefId);
 
 
     /**
@@ -136,7 +136,7 @@ public interface BpmnProcessDefService {
      * @param defId
      * @return
      */
-    List<BpmnNodeDef> getSignUserNode(String defId);
+    List<BpmNodeDef> getSignUserNode(String defId);
 
 
     BpmnProcessDef initBpmProcessDef(BpmnDefinition bpmDef);

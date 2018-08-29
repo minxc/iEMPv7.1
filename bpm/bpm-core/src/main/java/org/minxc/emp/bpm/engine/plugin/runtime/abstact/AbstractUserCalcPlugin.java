@@ -1,6 +1,6 @@
 package org.minxc.emp.bpm.engine.plugin.runtime.abstact;
 
-import com.dstz.base.core.util.BeanUtils;
+import com.minxc.emp.core.util.BeanUtils;
 import com.dstz.org.api.model.IUser;
 import com.dstz.org.api.service.UserService;
 import com.dstz.sys.api.model.SysIdentity;

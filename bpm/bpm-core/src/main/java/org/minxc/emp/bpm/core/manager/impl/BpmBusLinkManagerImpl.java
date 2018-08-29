@@ -1,6 +1,6 @@
 package org.minxc.emp.bpm.core.manager.impl;
 
-import com.dstz.base.manager.impl.BaseManager;
+import org.minxc.emp.common.manager.impl.CommonManager;
 
 import java.util.List;
 import javax.annotation.Resource;
@@ -11,7 +11,7 @@ import org.minxc.emp.bpm.core.model.BpmBusLink;
 import org.springframework.stereotype.Service;
 
 @Service(value = "bpmBusLinkManager")
-public class BpmBusLinkManagerImpl extends BaseManager<String, BpmBusLink> implements BpmBusLinkManager {
+public class BpmBusLinkManagerImpl extends CommonManager<String, BpmBusLink> implements BpmBusLinkManager {
 	@Resource
 	private BpmBusLinkDao bpmBusLinkDao;
 

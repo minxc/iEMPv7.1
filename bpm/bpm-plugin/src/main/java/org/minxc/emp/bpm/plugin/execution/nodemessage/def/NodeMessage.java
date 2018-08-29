@@ -1,6 +1,6 @@
 package org.minxc.emp.bpm.plugin.execution.nodemessage.def;
 
-import com.dstz.bpm.api.engine.plugin.def.UserAssignRule;
+import org.minxc.emp.bpm.api.engine.plugin.def.UserAssignRule;
 import com.dstz.bpm.engine.plugin.plugindef.AbstractBpmExecutionPluginDef;
 import java.util.List;
 import org.hibernate.validator.constraints.NotBlank;

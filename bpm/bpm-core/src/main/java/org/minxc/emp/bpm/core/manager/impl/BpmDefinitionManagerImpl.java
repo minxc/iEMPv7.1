@@ -1,18 +1,18 @@
 package org.minxc.emp.bpm.core.manager.impl;
 
-import com.dstz.base.api.exception.BusinessException;
-import com.dstz.base.api.query.QueryFilter;
-import com.dstz.base.api.query.QueryOP;
+import org.minxc.emp.core.api.exception.BusinessException;
+import org.minxc.emp.core.api.query.QueryFilter;
+import org.minxc.emp.core.api.query.QueryOperator;
 import com.dstz.base.core.util.AppUtil;
-import com.dstz.base.core.util.BeanUtils;
+import com.minxc.emp.core.util.BeanUtils;
 import com.dstz.base.core.util.StringUtil;
-import com.dstz.base.db.id.UniqueIdUtil;
+import org.minxc.emp.common.db.id.UniqueIdUtil;
 import com.dstz.base.db.model.query.DefaultQueryFilter;
-import com.dstz.base.manager.impl.BaseManager;
+import org.minxc.emp.common.manager.impl.CommonManager;
 import com.dstz.sys.api.constant.EnvironmentConstant;
 import com.dstz.sys.api.constant.RightsObjectConstants;
 import com.dstz.sys.api.service.SysAuthorizationService;
-import com.dstz.sys.util.ContextUtil;
+import org.minxc.emp.basis.impl.util.ContextUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;

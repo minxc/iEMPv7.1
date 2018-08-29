@@ -1,19 +1,19 @@
 package org.minxc.emp.bpm.plugin.execution.taskskip.plugin;
 
-import com.dstz.base.core.util.BeanUtils;
+import com.minxc.emp.core.util.BeanUtils;
 import com.dstz.base.core.util.StringUtil;
-import com.dstz.bpm.api.engine.action.cmd.TaskActionCmd;
-import com.dstz.bpm.api.engine.context.BpmContext;
-import com.dstz.bpm.api.model.nodedef.BpmNodeDef;
-import com.dstz.bpm.api.model.task.IBpmTask;
-import com.dstz.bpm.api.service.BpmProcessDefService;
+import org.minxc.emp.bpm.api.engine.action.cmd.TaskActionCmd;
+import org.minxc.emp.bpm.api.engine.context.BpmContext;
+import org.minxc.emp.bpm.api.model.nodedef.BpmNodeDef;
+import org.minxc.emp.bpm.api.model.task.IBpmTask;
+import org.minxc.emp.bpm.api.service.BpmProcessDefService;
 import com.dstz.bpm.engine.action.cmd.DefualtTaskActionCmd;
 import com.dstz.bpm.engine.constant.TaskSkipType;
 import com.dstz.bpm.engine.plugin.runtime.abstact.AbstractBpmExecutionPlugin;
 import com.dstz.bpm.engine.plugin.session.BpmExecutionPluginSession;
 import com.dstz.sys.api.groovy.IGroovyScriptEngine;
 import com.dstz.sys.api.model.SysIdentity;
-import com.dstz.sys.util.ContextUtil;
+import org.minxc.emp.basis.impl.util.ContextUtil;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.Resource;

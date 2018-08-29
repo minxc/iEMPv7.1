@@ -1,7 +1,7 @@
 package org.minxc.emp.bpm.core.manager.impl;
 
-import com.dstz.base.db.id.UniqueIdUtil;
-import com.dstz.base.manager.impl.BaseManager;
+import org.minxc.emp.common.db.id.UniqueIdUtil;
+import org.minxc.emp.common.manager.impl.CommonManager;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -14,7 +14,7 @@ import org.minxc.emp.bpm.core.model.BpmTaskStack;
 import org.springframework.stereotype.Service;
 
 @Service(value = "bpmExecutionStackManager")
-public class BpmTaskStackManagerImpl extends BaseManager<String, BpmTaskStack> implements BpmTaskStackManager {
+public class BpmTaskStackManagerImpl extends CommonManager<String, BpmTaskStack> implements BpmTaskStackManager {
 	@Resource
 	BpmTaskStackDao l;
 

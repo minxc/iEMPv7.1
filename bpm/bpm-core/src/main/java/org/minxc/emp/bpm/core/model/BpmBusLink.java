@@ -1,9 +1,13 @@
 package org.minxc.emp.bpm.core.model;
 
-import com.dstz.base.api.model.IDModel;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.minxc.emp.core.api.model.IdModel;
 
-public class BpmBusLink implements IDModel {
+
+
+public class BpmBusLink implements IdModel {
+	
+	private static final long serialVersionUID = -1336956872376220360L;
 	protected String id;
 	protected String defId;
 	protected String o;

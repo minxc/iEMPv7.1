@@ -1,13 +1,13 @@
 package org.minxc.emp.bpm.core.dao;
 
-import com.dstz.base.dao.BaseDao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.minxc.emp.bpm.core.model.BpmBusLink;
-import org.mybatis.spring.annotation.MapperScan;
+import org.minxc.emp.common.db.dao.CommonDao;
 
-@MapperScan
-public interface BpmBusLinkDao extends BaseDao<String, BpmBusLink> {
+@Mapper
+public interface BpmBusLinkDao extends CommonDao<String, BpmBusLink> {
 	public List<BpmBusLink> getByInstanceId(String var1);
 }

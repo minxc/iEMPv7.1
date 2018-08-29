@@ -7,11 +7,11 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
-import org.minxc.emp.base.core.util.AppUtil;
+import com.minxc.emp.core.util.AppContextUtil;
 import org.minxc.emp.bpm.api.constant.ActionType;
 import org.minxc.emp.bpm.api.engine.action.handler.ActionHandler;
 import org.minxc.emp.bpm.api.model.def.NodeProperties;
-import org.minxc.emp.bpm.api.model.nodedef.BpmnNodeDef;
+import org.minxc.emp.bpm.api.model.nodedef.BpmNodeDef;
 import org.minxc.emp.bpm.api.model.nodedef.Button;
 
 /**
@@ -27,12 +27,12 @@ public class ButtonFactory {
      * @return
      * @throws ClassNotFoundException
      */
-    public static List<Button> generateButtons(BpmnNodeDef nodeDef, boolean isDefault) throws ClassNotFoundException {
+    public static List<Button> generateButtons(BpmNodeDef nodeDef, boolean isDefault) throws ClassNotFoundException {
         NodeProperties prop = nodeDef.getNodeProperties();
 
         List<Button> btns = new ArrayList<Button>();
 
-        Map<String, ActionHandler> actionMap = AppUtil.getImplInstance(ActionHandler.class);
+        Map<String, ActionHandler> actionMap = AppContextUtil.getImplInstance(ActionHandler.class);
 
         List<ActionHandler> list = new ArrayList<ActionHandler>(actionMap.values());
         sortActionList(list);
@@ -70,7 +70,7 @@ public class ButtonFactory {
     public static List<Button> getInstanceButtons() {
         List<Button> btns = new ArrayList<Button>();
 
-        Map<String, ActionHandler> actionMap = AppUtil.getImplInstance(ActionHandler.class);
+        Map<String, ActionHandler> actionMap = AppContextUtil.getImplInstance(ActionHandler.class);
         List<ActionHandler> list = new ArrayList<ActionHandler>(actionMap.values());
 
         for (ActionHandler actionHandler : list) {

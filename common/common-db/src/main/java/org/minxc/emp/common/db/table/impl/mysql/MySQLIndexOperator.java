@@ -1,7 +1,7 @@
 package org.minxc.emp.common.db.table.impl.mysql;
 
 import com.minxc.emp.core.util.AppContextUtil;
-import org.minxc.emp.common.db.api.table.TableOperator;
+import org.minxc.emp.common.db.api.table.ITableOperator;
 import org.minxc.emp.common.db.api.table.model.Index;
 import org.minxc.emp.common.db.table.BaseIndexOperator;
 import org.minxc.emp.common.db.table.model.DefaultIndex;
@@ -185,7 +185,7 @@ public class MySQLIndexOperator extends BaseIndexOperator {
      * @throws SQLException
      */
     private Map<String, List<String>> getPKColumns(List<String> tableNames) throws SQLException {
-        TableOperator tableOperator = AppContextUtil.getBean(TableOperator.class);
+        ITableOperator tableOperator = AppContextUtil.getBean(ITableOperator.class);
         return tableOperator.getPKColumns(tableNames);
     }
 
@@ -197,7 +197,7 @@ public class MySQLIndexOperator extends BaseIndexOperator {
      * @throws SQLException
      */
     private List<String> getPKColumns(String tableName) throws SQLException {
-        TableOperator tableOperator = AppContextUtil.getBean(TableOperator.class);
+        ITableOperator tableOperator = AppContextUtil.getBean(ITableOperator.class);
         return tableOperator.getPKColumns(tableName);
     }
 

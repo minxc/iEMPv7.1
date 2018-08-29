@@ -1,7 +1,7 @@
 package org.minxc.emp.bpm.plugin.execution.script.plugin;
 
 import com.dstz.base.core.util.StringUtil;
-import com.dstz.bpm.api.constant.EventType;
+import org.minxc.emp.bpm.api.constant.EventType;
 import com.dstz.bpm.engine.plugin.runtime.abstact.AbstractBpmExecutionPlugin;
 import com.dstz.bpm.engine.plugin.session.BpmExecutionPluginSession;
 import com.dstz.sys.api.groovy.IGroovyScriptEngine;

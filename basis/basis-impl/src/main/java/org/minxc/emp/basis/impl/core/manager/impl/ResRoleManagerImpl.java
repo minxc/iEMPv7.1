@@ -3,6 +3,7 @@ package org.minxc.emp.basis.impl.core.manager.impl;
 import org.minxc.emp.basis.impl.core.dao.ResRoleDao;
 import org.minxc.emp.basis.impl.core.manager.ResRoleManager;
 import org.minxc.emp.basis.impl.core.model.ResRole;
+import org.minxc.emp.common.db.id.UniqueIdUtil;
 import org.minxc.emp.common.manager.impl.CommonManager;
 import org.springframework.stereotype.Service;
 
@@ -10,9 +11,17 @@ import javax.annotation.Resource;
 import java.util.*;
 
 /**
- * <pre>
- * 描述：角色资源分配 处理实现类
- * </pre>
+ * 
+* 项目名称：basis-impl   
+* 类名称：ResRoleManagerImpl   
+* 类描述： 角色资源分配 处理实现类  
+* 创建人：Xianchang.min   
+* 创建时间：2018年8月29日 下午8:16:48   
+* 修改人：Xianchang.min   
+* 修改时间：2018年8月29日 下午8:16:48   
+* 修改备注：   
+* @version  1.0  
+*
  */
 @Service("resRoleManager")
 public class ResRoleManagerImpl extends CommonManager<String, ResRole> implements ResRoleManager {

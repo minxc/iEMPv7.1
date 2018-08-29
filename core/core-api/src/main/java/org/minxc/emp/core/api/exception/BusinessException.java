@@ -70,6 +70,8 @@ public class BusinessException extends RuntimeException{
 		this.statusCode = errorCode;
 	}
 
+	
+
 	public String getStatuscode() {
 		if (statusCode == null)
 			return "";

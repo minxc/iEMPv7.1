@@ -1,11 +1,11 @@
 package org.minxc.emp.bpm.core.manager.impl;
 
 import com.dstz.base.api.constant.IStatusCode;
-import com.dstz.base.api.exception.BusinessException;
-import com.dstz.base.core.util.BeanUtils;
+import org.minxc.emp.core.api.exception.BusinessException;
+import com.minxc.emp.core.util.BeanUtils;
 import com.dstz.base.core.util.StringUtil;
-import com.dstz.base.db.id.UniqueIdUtil;
-import com.dstz.base.manager.impl.BaseManager;
+import org.minxc.emp.common.db.id.UniqueIdUtil;
+import org.minxc.emp.common.manager.impl.CommonManager;
 import com.dstz.org.api.model.IGroup;
 import com.dstz.org.api.service.GroupService;
 import com.dstz.sys.api.model.SysIdentity;

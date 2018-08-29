@@ -1,9 +1,9 @@
 package org.minxc.emp.bpm.plugin.usercalc.approver.runtime;
 
 import com.dstz.base.core.util.StringUtil;
-import com.dstz.bpm.api.engine.plugin.def.BpmTaskPluginDef;
-import com.dstz.bpm.api.model.task.IBpmTask;
-import com.dstz.bpm.api.model.task.IBpmTaskOpinion;
+import org.minxc.emp.bpm.api.engine.plugin.def.BpmTaskPluginDef;
+import org.minxc.emp.bpm.api.model.task.IBpmTask;
+import org.minxc.emp.bpm.api.model.task.IBpmTaskOpinion;
 import com.dstz.bpm.core.manager.BpmTaskOpinionManager;
 import com.dstz.bpm.core.model.BpmTaskOpinion;
 import com.dstz.bpm.engine.model.BpmIdentity;

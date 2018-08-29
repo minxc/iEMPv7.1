@@ -9,7 +9,7 @@ import org.minxc.emp.bpm.api.model.def.BpmnProcessDef;
 import org.minxc.emp.bpm.api.model.def.NodeInit;
 import org.minxc.emp.bpm.api.model.def.NodeProperties;
 import org.minxc.emp.bpm.api.model.form.BpmnForm;
-import org.minxc.emp.bpm.api.model.nodedef.BpmnNodeDef;
+import org.minxc.emp.bpm.api.model.nodedef.BpmNodeDef;
 import org.minxc.emp.bpm.api.model.nodedef.Button;
 
 import java.util.ArrayList;
@@ -18,15 +18,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class BaseBpmnNodeDef implements BpmnNodeDef {
+public class BaseBpmnNodeDef implements BpmNodeDef {
     private static final long serialVersionUID = -2044846605763777657L;
 
     private String nodeId;
     private String name;
     private NodeType type;
-    private BpmnNodeDef parentBpmNodeDef;
-    private List<BpmnNodeDef> incomeNodes = new ArrayList<BpmnNodeDef>();
-    private List<BpmnNodeDef> outcomeNodes = new ArrayList<BpmnNodeDef>();
+    private BpmNodeDef parentBpmNodeDef;
+    private List<BpmNodeDef> incomeNodes = new ArrayList<BpmNodeDef>();
+    private List<BpmNodeDef> outcomeNodes = new ArrayList<BpmNodeDef>();
 
     private List<BpmnPluginContext> bpmPluginContexts = new ArrayList<BpmnPluginContext>();
     private Map<String, String> attrMap = new HashMap<String, String>();
@@ -78,19 +78,19 @@ public class BaseBpmnNodeDef implements BpmnNodeDef {
         this.type = type;
     }
 
-    public List<BpmnNodeDef> getIncomeNodes() {
+    public List<BpmNodeDef> getIncomeNodes() {
         return incomeNodes;
     }
 
-    public void setIncomeNodes(List<BpmnNodeDef> incomeNodes) {
+    public void setIncomeNodes(List<BpmNodeDef> incomeNodes) {
         this.incomeNodes = incomeNodes;
     }
 
-    public List<BpmnNodeDef> getOutcomeNodes() {
+    public List<BpmNodeDef> getOutcomeNodes() {
         return outcomeNodes;
     }
 
-    public void setOutcomeNodes(List<BpmnNodeDef> outcomeNodes) {
+    public void setOutcomeNodes(List<BpmNodeDef> outcomeNodes) {
         this.outcomeNodes = outcomeNodes;
     }
 
@@ -117,29 +117,29 @@ public class BaseBpmnNodeDef implements BpmnNodeDef {
     }
 
     @Override
-    public void addIncomeNode(BpmnNodeDef bpmNodeDef) {
+    public void addIncomeNode(BpmNodeDef bpmNodeDef) {
         this.incomeNodes.add(bpmNodeDef);
     }
 
     @Override
-    public void addOutcomeNode(BpmnNodeDef bpmNodeDef) {
+    public void addOutcomeNode(BpmNodeDef bpmNodeDef) {
         this.outcomeNodes.add(bpmNodeDef);
 
     }
 
     @Override
-    public BpmnNodeDef getParentBpmNodeDef() {
+    public BpmNodeDef getParentBpmNodeDef() {
         return this.parentBpmNodeDef;
     }
 
-    public void setParentBpmNodeDef(BpmnNodeDef parentBpmNodeDef) {
+    public void setParentBpmNodeDef(BpmNodeDef parentBpmNodeDef) {
         this.parentBpmNodeDef = parentBpmNodeDef;
     }
 
     @Override
     public String getRealPath() {
         String id = this.getNodeId();
-        BpmnNodeDef parent = getParentBpmNodeDef();
+        BpmNodeDef parent = getParentBpmNodeDef();
         while (parent != null) {
             id = parent.getNodeId() + "/" + id;
             parent = parent.getParentBpmNodeDef();
@@ -167,19 +167,19 @@ public class BaseBpmnNodeDef implements BpmnNodeDef {
 
 
     @Override
-    public List<BpmnNodeDef> getOutcomeTaskNodes() {
+    public List<BpmNodeDef> getOutcomeTaskNodes() {
         return getNodeDefList(outcomeNodes);
     }
 
-    private List<BpmnNodeDef> getNodeDefList(List<BpmnNodeDef> bpmNodeDefs) {
-        List<BpmnNodeDef> bpmNodeList = new ArrayList<BpmnNodeDef>();
-        for (BpmnNodeDef def : bpmNodeDefs) {
+    private List<BpmNodeDef> getNodeDefList(List<BpmNodeDef> bpmNodeDefs) {
+        List<BpmNodeDef> bpmNodeList = new ArrayList<BpmNodeDef>();
+        for (BpmNodeDef def : bpmNodeDefs) {
             if (NodeType.USERTASK.equals(def.getType()) || NodeType.SIGNTASK.equals(def.getType())) {
                 bpmNodeList.add(def);
             } else if (NodeType.SUBPROCESS.equals(def.getType())) {
                 SubProcessNodeDef subProcessNodeDef = (SubProcessNodeDef) def;
                 // 取得子流程中的开始节点
-                BpmnNodeDef startNodeDef = subProcessNodeDef.getChildBpmProcessDef().getStartEvent();
+                BpmNodeDef startNodeDef = subProcessNodeDef.getChildBpmProcessDef().getStartEvent();
                 bpmNodeList.addAll(getNodeDefList(startNodeDef.getOutcomeNodes()));
             } else if (NodeType.END.equals(def.getType()) && def.getParentBpmNodeDef() != null && NodeType.SUBPROCESS.equals(def.getParentBpmNodeDef().getType())) {
                 SubProcessNodeDef subProcessNodeDef = (SubProcessNodeDef) def.getParentBpmNodeDef();
@@ -192,14 +192,14 @@ public class BaseBpmnNodeDef implements BpmnNodeDef {
     }
 
     @Override
-    public List<BpmnNodeDef> getInnerOutcomeTaskNodes(boolean includeSignTask) {
-        List<BpmnNodeDef> bpmNodeList = getInnerOutcomeTaskNodes(outcomeNodes, includeSignTask);
+    public List<BpmNodeDef> getInnerOutcomeTaskNodes(boolean includeSignTask) {
+        List<BpmNodeDef> bpmNodeList = getInnerOutcomeTaskNodes(outcomeNodes, includeSignTask);
         return bpmNodeList;
     }
 
-    private List<BpmnNodeDef> getInnerOutcomeTaskNodes(List<BpmnNodeDef> bpmNodeDefs, boolean includeSignTask) {
-        List<BpmnNodeDef> bpmNodeList = new ArrayList<BpmnNodeDef>();
-        for (BpmnNodeDef def : bpmNodeDefs) {
+    private List<BpmNodeDef> getInnerOutcomeTaskNodes(List<BpmNodeDef> bpmNodeDefs, boolean includeSignTask) {
+        List<BpmNodeDef> bpmNodeList = new ArrayList<BpmNodeDef>();
+        for (BpmNodeDef def : bpmNodeDefs) {
             if (NodeType.USERTASK.equals(def.getType()) || (includeSignTask && NodeType.SIGNTASK.equals(def.getType()))) {
                 bpmNodeList.add(def);
             } else if (NodeType.SUBPROCESS.equals(def.getType()) || NodeType.CALLACTIVITY.equals(def.getType()) || NodeType.END.equals(def.getType())) {

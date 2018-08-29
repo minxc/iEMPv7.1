@@ -1,15 +1,15 @@
 package org.minxc.emp.bpm.core.dao;
 
-import com.dstz.base.api.query.QueryFilter;
-import com.dstz.base.dao.BaseDao;
+import org.minxc.emp.common.db.dao.CommonDao;
+import org.minxc.emp.core.api.query.QueryFilter;
 
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.minxc.emp.bpm.core.model.BpmTask;
-import org.mybatis.spring.annotation.MapperScan;
+import org.apache.ibatis.annotations.Mapper;
 
-@MapperScan
-public interface BpmTaskDao extends BaseDao<String, BpmTask> {
+@Mapper
+public interface BpmTaskDao extends CommonDao<String, BpmTask> {
 	public List<BpmTask> getByInstIdNodeId(@Param(value = "instId") String var1, @Param(value = "nodeId") String var2);
 
 	public List<BpmTask> getTodoList(QueryFilter var1);

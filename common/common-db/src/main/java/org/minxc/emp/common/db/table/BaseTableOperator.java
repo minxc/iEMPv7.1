@@ -1,6 +1,6 @@
 package org.minxc.emp.common.db.table;
 
-import org.minxc.emp.common.db.api.table.TableOperator;
+import org.minxc.emp.common.db.api.table.ITableOperator;
 
 /**
  * 操作数据表基类。
@@ -8,7 +8,7 @@ import org.minxc.emp.common.db.api.table.TableOperator;
  * <pre>
  * </pre>
  */
-public abstract class BaseTableOperator extends BaseDbType implements TableOperator {
+public abstract class BaseTableOperator extends BaseDbType implements ITableOperator {
 
 
 }

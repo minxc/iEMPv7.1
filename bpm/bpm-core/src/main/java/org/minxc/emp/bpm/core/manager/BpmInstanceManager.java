@@ -1,6 +1,6 @@
 package org.minxc.emp.bpm.core.manager;
 
-import com.dstz.base.api.query.QueryFilter;
+import org.minxc.emp.core.api.query.QueryFilter;
 import com.dstz.base.manager.Manager;
 
 import java.util.List;
