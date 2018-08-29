@@ -1,15 +1,27 @@
 package org.minxc.emp.bpm.api.model.def;
 
-import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
+
+import javax.validation.constraints.NotBlank;
 
 
 /**
- * 节点初始化。
+ * 
+* 项目名称：bpm-api   
+* 类名称：NodeInit   
+* 类描述：节点初始化   
+* 创建人：Xianchang.min   
+* 创建时间：2018年8月29日 下午10:28:34   
+* 修改人：Xianchang.min   
+* 修改时间：2018年8月29日 下午10:28:34   
+* 修改备注：   
+* @version  1.0  
+*
  */
 public class NodeInit implements Serializable{
 
-    // 节点ID
+	private static final long serialVersionUID = 39841748991056717L;
+	// 节点ID
 	@NotBlank(message="节点不能为空")
     private String nodeId = "";
     //描述

@@ -5,6 +5,7 @@ import org.activiti.engine.ActivitiIllegalArgumentException;
 import org.activiti.engine.impl.interceptor.Command;
 import org.activiti.engine.impl.interceptor.CommandContext;
 import org.activiti.engine.impl.persistence.entity.ExecutionEntity;
+import org.activiti.engine.impl.persistence.entity.ExecutionEntityManager;
 
 public class GetExecutionVariableCmd implements Serializable, Command<Object> {
 	private static final long serialVersionUID = 1L;

@@ -2,8 +2,8 @@ package org.minxc.emp.bpm.service;
 
 import com.alibaba.fastjson.JSONObject;
 import com.dstz.base.api.constant.IStatusCode;
-import org.minxc.emp.core.api.exception.BusinessException;
-import com.minxc.emp.core.util.BeanUtils;
+import com.dstz.base.api.exception.BusinessException;
+import com.dstz.base.core.util.BeanUtils;
 import com.dstz.base.core.util.StringUtil;
 import com.dstz.bus.api.constant.BusinessPermissionObjType;
 import com.dstz.bus.api.model.IBusinessPermission;

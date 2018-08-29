@@ -1,9 +1,10 @@
 package org.minxc.emp.bpm.engine.model;
 
-import com.dstz.org.api.model.IUser;
-import com.dstz.sys.api.model.SysIdentity;
 import java.io.PrintStream;
 import java.util.LinkedHashSet;
+
+import org.minxc.emp.basis.api.model.SysIdentity;
+import org.minxc.emp.idm.api.model.User;
 
 public class BpmIdentity implements SysIdentity {
 	private static final long serialVersionUID = 4416404339210896051L;
@@ -20,7 +21,7 @@ public class BpmIdentity implements SysIdentity {
 		this.type = type;
 	}
 
-	public BpmIdentity(IUser user) {
+	public BpmIdentity(User user) {
 		this.id = user.getUserId();
 		this.name = user.getFullname();
 		this.type = "user";

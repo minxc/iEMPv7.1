@@ -1,7 +1,7 @@
 package org.minxc.emp.bpm.engine.plugin.context;
 
 import com.alibaba.fastjson.JSON;
-import com.minxc.emp.core.util.BeanUtils;
+import com.dstz.base.core.util.BeanUtils;
 import com.dstz.base.core.util.StringUtil;
 
 import org.minxc.emp.bpm.api.engine.plugin.context.BpmPluginContext;

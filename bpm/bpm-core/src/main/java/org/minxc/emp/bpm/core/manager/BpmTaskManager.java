@@ -1,11 +1,11 @@
 package org.minxc.emp.bpm.core.manager;
 
-import org.minxc.emp.core.api.query.QueryFilter;
-import com.dstz.base.manager.Manager;
 
 import java.util.List;
 
 import org.minxc.emp.bpm.core.model.BpmTask;
+import org.minxc.emp.common.manager.Manager;
+import org.minxc.emp.core.api.query.QueryFilter;
 
 public interface BpmTaskManager extends Manager<String, BpmTask> {
 	public List<BpmTask> getByInstIdNodeId(String var1, String var2);

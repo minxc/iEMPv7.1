@@ -1,29 +1,29 @@
 package org.minxc.emp.bpm.core.manager.impl;
 
-import com.dstz.base.api.constant.IStatusCode;
-import org.minxc.emp.core.api.exception.BusinessException;
-import com.minxc.emp.core.util.BeanUtils;
-import com.dstz.base.core.util.StringUtil;
-import org.minxc.emp.common.db.id.UniqueIdUtil;
-import org.minxc.emp.common.manager.impl.CommonManager;
-import com.dstz.org.api.model.IGroup;
-import com.dstz.org.api.service.GroupService;
-import com.dstz.sys.api.model.SysIdentity;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import javax.annotation.Resource;
 
+import org.minxc.emp.basis.api.model.SysIdentity;
 import org.minxc.emp.bpm.api.exception.BpmStatusCode;
 import org.minxc.emp.bpm.api.model.task.IBpmTask;
 import org.minxc.emp.bpm.core.dao.TaskIdentityLinkDao;
 import org.minxc.emp.bpm.core.manager.TaskIdentityLinkManager;
 import org.minxc.emp.bpm.core.model.TaskIdentityLink;
+import org.minxc.emp.common.db.id.UniqueIdUtil;
+import org.minxc.emp.common.manager.impl.CommonManager;
+import org.minxc.emp.core.api.exception.BusinessException;
+import org.minxc.emp.idm.api.model.Group;
+import org.minxc.emp.idm.api.service.GroupService;
 import org.springframework.stereotype.Service;
 
+import com.minxc.emp.core.util.BeanUtils;
+import com.minxc.emp.core.util.StringUtil;
+
 @Service(value = "taskIdentityLinkManager")
-public class TaskIdentityLinkManagerImpl extends BaseManager<String, TaskIdentityLink>
+public class TaskIdentityLinkManagerImpl extends CommonManager<String, TaskIdentityLink>
 		implements
 			TaskIdentityLinkManager {
 	@Resource
@@ -45,20 +45,20 @@ public class TaskIdentityLinkManagerImpl extends BaseManager<String, TaskIdentit
 
 	public Boolean checkUserOperatorPermission(String userId, String instanceId, String taskId) {
 		if (StringUtil.isEmpty((String) instanceId) && StringUtil.isEmpty((String) taskId)) {
-			throw new BusinessException("检查权限必须提供流程或者任务id", (IStatusCode) BpmStatusCode.PARAM_ILLEGAL);
+			throw new BusinessException("检查权限必须提供流程或者任务id",  BpmStatusCode.PARAM_ILLEGAL);
 		}
 		Set<String> rights = this.getUserRights(userId);
 		return this.m.checkUserOperatorPermission(rights, taskId, instanceId) > 0;
 	}
 
 	public Set<String> getUserRights(String userId) {
-		List<IGroup> list = this.n.getGroupsByUserId(userId);
+		List<Group> list = this.n.getGroupsByUserId(userId);
 		HashSet<String> rights = new HashSet<String>();
 		rights.add(String.format("%s-%s", userId, "user"));
 		if (BeanUtils.isEmpty((Object) list)) {
 			return rights;
 		}
-		for (IGroup group : list) {
+		for (Group group : list) {
 			rights.add(String.format("%s-%s", group.getGroupId(), group.getGroupType()));
 		}
 		return rights;

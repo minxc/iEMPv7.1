@@ -1,15 +1,13 @@
 package org.minxc.emp.bpm.api.constant;
 
-import org.minxc.emp.bpm.api.exception.BpmnStatusCode;
+import org.minxc.emp.bpm.api.exception.BpmStatusCode;
 import org.minxc.emp.core.api.exception.BusinessException;
 
-/*
-* @Title: 审批动作类型
-* @Description: 审批动作类型
 
-**/
+/**
+ * 审批动作类型。
+ */
 public enum ActionType {
-
     DRAFT("draft", "保存草稿", "instanceSaveActionHandler"),
     START("start", "启动", "instanceStartActionHandler"),
     AGREE("agree", "同意", "taskAgreeActionHandler"),
@@ -80,7 +78,7 @@ public enum ActionType {
             if (c.getKey().equalsIgnoreCase(key))
                 return c;
         }
-        throw new BusinessException(BpmnStatusCode.NO_TASK_ACTION);
+        throw new BusinessException(BpmStatusCode.NO_TASK_ACTION);
     }
 
 }

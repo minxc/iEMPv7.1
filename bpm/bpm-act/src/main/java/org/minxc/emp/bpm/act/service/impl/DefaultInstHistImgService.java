@@ -1,9 +1,9 @@
 package org.minxc.emp.bpm.act.service.impl;
 
 import com.dstz.base.api.constant.IStatusCode;
-import org.minxc.emp.core.api.exception.BusinessException;
+import com.dstz.base.api.exception.BusinessException;
 import com.dstz.base.core.util.StringUtil;
-import org.minxc.emp.bpm.api.exception.BpmStatusCode;
+
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Date;
@@ -30,6 +30,7 @@ import org.activiti.image.impl.DefaultProcessDiagramGenerator;
 import org.activiti.spring.ProcessEngineFactoryBean;
 import org.apache.commons.io.IOUtils;
 import org.minxc.emp.bpm.act.service.BpmImageService;
+import org.minxc.emp.bpm.api.exception.BpmStatusCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

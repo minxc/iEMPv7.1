@@ -1,10 +1,10 @@
 package org.minxc.emp.bpm.core.model;
 
 import com.alibaba.fastjson.JSONObject;
-import com.dstz.bus.api.model.IBusinessPermission;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.minxc.emp.biz.api.model.IBusinessPermission;
 import org.minxc.emp.bpm.core.model.BpmDefinition;
 
 public class BpmOverallView {

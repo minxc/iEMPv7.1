@@ -1,10 +1,7 @@
 package org.minxc.emp.bpm.act.service.impl;
 
-import org.minxc.emp.bpm.api.model.def.IBpmDefinition;
-import org.minxc.emp.bpm.api.model.nodedef.BpmNodeDef;
-import org.minxc.emp.bpm.api.service.BpmProcessDefService;
 import com.dstz.org.api.model.IUser;
-import org.minxc.emp.basis.impl.util.ContextUtil;
+import com.dstz.sys.util.ContextUtil;
 import java.util.Collection;
 import java.util.Map;
 import javax.annotation.Resource;
@@ -22,6 +19,9 @@ import org.minxc.emp.bpm.act.cmd.GetSuperVariableCmd;
 import org.minxc.emp.bpm.act.cmd.ProcessInstanceEndCmd;
 import org.minxc.emp.bpm.act.service.ActInstanceService;
 import org.minxc.emp.bpm.act.util.ActivitiUtil;
+import org.minxc.emp.bpm.api.model.def.IBpmDefinition;
+import org.minxc.emp.bpm.api.model.nodedef.BpmNodeDef;
+import org.minxc.emp.bpm.api.service.BpmProcessDefService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;

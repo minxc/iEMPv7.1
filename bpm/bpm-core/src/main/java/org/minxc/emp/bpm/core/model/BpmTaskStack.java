@@ -1,10 +1,10 @@
 package org.minxc.emp.bpm.core.model;
 
-import com.minxc.emp.core.impl.model.AbtractCommonModel;
 import java.util.Date;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.minxc.emp.core.api.model.CommonModel;
 
-public class BpmTaskStack implements IBaseModel {
+public class BpmTaskStack implements CommonModel {
 	/** 
 	
 	* @Fields serialVersionUID : TODO(用一句话描述这个变量表示什么) 

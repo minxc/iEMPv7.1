@@ -1,18 +1,5 @@
 package org.minxc.emp.bpm.core.manager.impl;
 
-import org.minxc.emp.core.api.exception.BusinessException;
-import org.minxc.emp.core.api.query.QueryFilter;
-import org.minxc.emp.core.api.query.QueryOperator;
-import com.dstz.base.core.util.AppUtil;
-import com.minxc.emp.core.util.BeanUtils;
-import com.dstz.base.core.util.StringUtil;
-import org.minxc.emp.common.db.id.UniqueIdUtil;
-import com.dstz.base.db.model.query.DefaultQueryFilter;
-import org.minxc.emp.common.manager.impl.CommonManager;
-import com.dstz.sys.api.constant.EnvironmentConstant;
-import com.dstz.sys.api.constant.RightsObjectConstants;
-import com.dstz.sys.api.service.SysAuthorizationService;
-import org.minxc.emp.basis.impl.util.ContextUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -63,6 +50,7 @@ import org.minxc.emp.bpm.core.manager.BpmInstanceManager;
 import org.minxc.emp.bpm.core.model.BpmDefinition;
 import org.minxc.emp.bpm.core.model.BpmInstance;
 import org.minxc.emp.bpm.engine.model.DefaultBpmProcessDef;
+import org.minxc.emp.common.manager.impl.CommonManager;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.stereotype.Service;
 import org.springframework.util.MultiValueMap;
@@ -82,7 +70,7 @@ import org.springframework.util.MultiValueMap;
 *
  */
 @Service(value = "bpmDefinitionManager")
-public class BpmDefinitionManagerImpl extends BaseManager<String, BpmDefinition> implements BpmDefinitionManager {
+public class BpmDefinitionManagerImpl extends CommonManager<String, BpmDefinition> implements BpmDefinitionManager {
 	@Resource
 	private BpmDefinitionDao bpmDefinitionDao;
 	@Resource

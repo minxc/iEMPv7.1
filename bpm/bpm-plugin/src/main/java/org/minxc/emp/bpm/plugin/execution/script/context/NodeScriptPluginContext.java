@@ -2,9 +2,9 @@ package org.minxc.emp.bpm.plugin.execution.script.context;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import org.minxc.emp.bpm.api.constant.EventType;
-import org.minxc.emp.bpm.api.engine.plugin.def.BpmPluginDef;
-import org.minxc.emp.bpm.api.engine.plugin.runtime.RunTimePlugin;
+import com.dstz.bpm.api.constant.EventType;
+import com.dstz.bpm.api.engine.plugin.def.BpmPluginDef;
+import com.dstz.bpm.api.engine.plugin.runtime.RunTimePlugin;
 import com.dstz.bpm.engine.plugin.context.AbstractBpmExecutionPluginContext;
 
 import java.util.ArrayList;

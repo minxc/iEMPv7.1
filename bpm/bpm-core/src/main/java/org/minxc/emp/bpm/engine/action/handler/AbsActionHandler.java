@@ -2,21 +2,18 @@ package org.minxc.emp.bpm.engine.action.handler;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.dstz.base.api.constant.IStatusCode;
-import org.minxc.emp.core.api.exception.BusinessException;
-import com.dstz.base.api.exception.SystemException;
-import com.minxc.emp.core.util.BeanUtils;
-import com.dstz.base.core.util.StringUtil;
-import com.dstz.bus.api.model.IBusinessData;
-import com.dstz.bus.api.service.IBusinessDataService;
-import com.dstz.org.api.model.IUser;
 import com.dstz.sys.api.groovy.IGroovyScriptEngine;
-import org.minxc.emp.basis.impl.util.ContextUtil;
+import com.minxc.emp.core.util.BeanUtils;
+import com.minxc.emp.core.util.StringUtil;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.Resource;
 
+import org.minxc.emp.basis.impl.util.ContextUtil;
+import org.minxc.emp.biz.api.model.IBusinessData;
+import org.minxc.emp.biz.api.service.IBusinessDataService;
 import org.minxc.emp.bpm.api.constant.ActionType;
 import org.minxc.emp.bpm.api.engine.action.cmd.ActionCmd;
 import org.minxc.emp.bpm.api.engine.action.cmd.BaseActionCmd;
@@ -43,6 +40,9 @@ import org.minxc.emp.bpm.engine.constant.TaskSkipType;
 import org.minxc.emp.bpm.engine.data.handle.BpmBusDataHandle;
 import org.minxc.emp.bpm.engine.model.DefaultBpmProcessDef;
 import org.minxc.emp.bpm.engine.util.HandlerUtil;
+import org.minxc.emp.core.api.exception.BusinessException;
+import org.minxc.emp.core.api.exception.SystemException;
+import org.minxc.emp.idm.api.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Transactional;
@@ -147,7 +147,7 @@ public abstract class AbsActionHandler<T extends BaseActionCmd> implements Actio
 			HandlerUtil.a(actionModel, (String) handler);
 			this.LOG.debug("执行URL表单处理器：{}", (Object) handler);
 		} catch (Exception ex) {
-			throw new WorkFlowException((IStatusCode) BpmStatusCode.HANDLER_ERROR, (Throwable) ex);
+			throw new WorkFlowException(BpmStatusCode.HANDLER_ERROR, (Throwable) ex);
 		}
 		if (StringUtil.isNotEmpty((String) actionModel.getBusinessKey())
 				&& StringUtil.isEmpty((String) instance.getBizKey())) {
@@ -159,14 +159,14 @@ public abstract class AbsActionHandler<T extends BaseActionCmd> implements Actio
 		IBpmTask task;
 		IBpmInstance instance = actionModel.getBpmInstance();
 		if (instance.getIsForbidden() == 1) {
-			throw new WorkFlowException("流程实例已经被禁止，请联系管理员", (IStatusCode) BpmStatusCode.DEF_FORBIDDEN);
+			throw new WorkFlowException("流程实例已经被禁止，请联系管理员", BpmStatusCode.DEF_FORBIDDEN);
 		}
 		DefaultBpmProcessDef def = (DefaultBpmProcessDef) this.a.getBpmProcessDef(instance.getDefId());
 		if ("forbidden".equals(def.getExtProperties().getStatus())) {
-			throw new WorkFlowException("流程定义已经被禁用，请联系管理员", (IStatusCode) BpmStatusCode.DEF_FORBIDDEN);
+			throw new WorkFlowException("流程定义已经被禁用，请联系管理员", BpmStatusCode.DEF_FORBIDDEN);
 		}
-		IUser user = ContextUtil.getCurrentUser();
-		if (ContextUtil.isAdmin((IUser) user)) {
+		User user = ContextUtil.getCurrentUser();
+		if (ContextUtil.isAdmin((User) user)) {
 			return;
 		}
 		String taskId = null;
@@ -186,7 +186,7 @@ public abstract class AbsActionHandler<T extends BaseActionCmd> implements Actio
 		instId = null;
 		Boolean hasPermission = this.i.checkUserOperatorPermission(user.getUserId(), instId, taskId);
 		if (!hasPermission.booleanValue()) {
-			throw new BusinessException("没有该任务的操作权限", (IStatusCode) BpmStatusCode.NO_PERMISSION);
+			throw new BusinessException("没有该任务的操作权限", BpmStatusCode.NO_PERMISSION);
 		}
 	}
 
@@ -227,7 +227,7 @@ public abstract class AbsActionHandler<T extends BaseActionCmd> implements Actio
 				this.av.execute(init.getWhenSave(), param);
 			} catch (Exception e) {
 				throw new SystemException(e.getMessage(),
-						(IStatusCode) BpmStatusCode.FLOW_DATA_EXECUTE_SHOWSCRIPT_ERROR, (Throwable) e);
+						BpmStatusCode.FLOW_DATA_EXECUTE_SHOWSCRIPT_ERROR, (Throwable) e);
 			}
 			this.LOG.debug("执行节点数据初始化脚本{}", (Object) init.getBeforeShow());
 		}

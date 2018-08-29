@@ -1,6 +1,5 @@
 package org.minxc.emp.bpm.engine.action.handler.instance;
 
-import com.dstz.base.core.util.StringUtil;
 
 import javax.annotation.Resource;
 
@@ -13,6 +12,8 @@ import org.minxc.emp.bpm.core.manager.BpmInstanceManager;
 import org.minxc.emp.bpm.core.model.BpmInstance;
 import org.minxc.emp.bpm.engine.action.cmd.DefaultInstanceActionCmd;
 import org.springframework.stereotype.Component;
+
+import com.minxc.emp.core.util.StringUtil;
 
 @Component
 public class InstanceStartActionHandler extends InstanceSaveActionHandler {

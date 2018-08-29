@@ -1,10 +1,26 @@
 package org.minxc.emp.bpm.api.model.form;
 
-import org.minxc.emp.base.core.util.StringUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.minxc.emp.form.api.model.FormCategory;
 
-public class DefaultForm  implements BpmnForm {
-    private String name;
+
+/**
+ * 
+* 项目名称：bpm-api   
+* 类名称：DefaultForm   
+* 类描述：   
+* 创建人：Xianchang.min   
+* 创建时间：2018年8月29日 下午10:29:12   
+* 修改人：Xianchang.min   
+* 修改时间：2018年8月29日 下午10:29:12   
+* 修改备注：   
+* @version  1.0  
+*
+ */
+public class DefaultForm  implements BpmForm {
+	
+	private static final long serialVersionUID = 450342472521698584L;
+	private String name;
     private FormCategory type;
     private String formValue;
     // url 表单 处理器
@@ -59,7 +75,7 @@ public class DefaultForm  implements BpmnForm {
     }
 
     public boolean isFormEmpty() {
-        boolean isEmpty = StringUtil.isEmpty(formValue);
+        boolean isEmpty = StringUtils.isEmpty(formValue);
         return isEmpty;
     }
 

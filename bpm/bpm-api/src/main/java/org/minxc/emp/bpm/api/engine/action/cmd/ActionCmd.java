@@ -1,11 +1,12 @@
 package org.minxc.emp.bpm.api.engine.action.cmd;
 
-import org.minxc.emp.basis.api.model.SysIdentity;
-import org.minxc.emp.biz.api.model.IBusinessData;
-import org.minxc.emp.bpm.api.model.inst.BpmInstance;
 
 import java.util.List;
 import java.util.Map;
+
+import org.minxc.emp.basis.api.model.SysIdentity;
+import org.minxc.emp.biz.api.model.IBusinessData;
+import org.minxc.emp.bpm.api.model.inst.IBpmInstance;
 
 /**
  * 任务操作处理基础接口
@@ -133,7 +134,7 @@ public interface ActionCmd {
 
     String getDefId();
 
-    public BpmInstance getBpmInstance();
+    public IBpmInstance getBpmInstance();
 
     String getDestination();
 

@@ -1,6 +1,6 @@
 package org.minxc.emp.bpm.plugin.task.userassign.def;
 
-import org.minxc.emp.bpm.api.engine.plugin.def.UserAssignRule;
+import com.dstz.bpm.api.engine.plugin.def.UserAssignRule;
 import com.dstz.bpm.engine.plugin.plugindef.AbstractBpmTaskPluginDef;
 import java.util.ArrayList;
 import java.util.List;

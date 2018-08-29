@@ -1,7 +1,7 @@
 package org.minxc.emp.bpm.engine.plugin.cmd;
 
 import com.dstz.base.api.constant.IStatusCode;
-import org.minxc.emp.core.api.exception.BusinessException;
+import com.dstz.base.api.exception.BusinessException;
 
 import java.util.List;
 import javax.annotation.Resource;

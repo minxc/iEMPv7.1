@@ -1,7 +1,7 @@
 package org.minxc.emp.bpm.plugin.usercalc.user.runtime;
 
-import org.minxc.emp.bpm.api.engine.plugin.def.BpmTaskPluginDef;
-import org.minxc.emp.bpm.api.model.task.IBpmTask;
+import com.dstz.bpm.api.engine.plugin.def.BpmTaskPluginDef;
+import com.dstz.bpm.api.model.task.IBpmTask;
 import com.dstz.bpm.core.manager.BpmTaskOpinionManager;
 import com.dstz.bpm.core.model.BpmTaskOpinion;
 import com.dstz.bpm.engine.model.BpmIdentity;
@@ -10,7 +10,7 @@ import com.dstz.bpm.engine.plugin.session.BpmUserCalcPluginSession;
 import com.dstz.org.api.model.IUser;
 import com.dstz.org.api.service.UserService;
 import com.dstz.sys.api.model.SysIdentity;
-import org.minxc.emp.basis.impl.util.ContextUtil;
+import com.dstz.sys.util.ContextUtil;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Resource;

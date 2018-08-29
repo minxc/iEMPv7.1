@@ -1,10 +1,8 @@
 package org.minxc.emp.bpm.engine.action.cmd;
 
 import com.alibaba.fastjson.JSONObject;
-import com.dstz.base.api.constant.IStatusCode;
-import org.minxc.emp.core.api.exception.BusinessException;
-import com.dstz.base.core.util.AppUtil;
-import com.dstz.base.core.util.StringUtil;
+import com.minxc.emp.core.util.AppContextUtil;
+import com.minxc.emp.core.util.StringUtil;
 
 import java.util.Map;
 import org.activiti.engine.delegate.DelegateTask;
@@ -17,8 +15,11 @@ import org.minxc.emp.bpm.api.model.task.IBpmTask;
 import org.minxc.emp.bpm.core.model.BpmTaskStack;
 import org.minxc.emp.bpm.engine.action.handler.AbsActionHandler;
 import org.minxc.emp.bpm.engine.constant.TaskSkipType;
+import org.minxc.emp.core.api.exception.BusinessException;
 
 public class DefualtTaskActionCmd extends BaseActionCmd implements TaskActionCmd {
+	
+	
 	private String taskId;
 	private IBpmTask ao;
 	private DelegateTask ap;
@@ -48,7 +49,7 @@ public class DefualtTaskActionCmd extends BaseActionCmd implements TaskActionCmd
 	public void initSpecialParam(JSONObject flowParam) {
 		String taskId = flowParam.getString("taskId");
 		if (StringUtil.isEmpty((String) taskId)) {
-			throw new BusinessException("taskId 不能为空", (IStatusCode) BpmStatusCode.TASK_NOT_FOUND);
+			throw new BusinessException("taskId 不能为空", BpmStatusCode.TASK_NOT_FOUND);
 		}
 		this.setTaskId(taskId);
 		String destination = flowParam.getString("destination");
@@ -106,28 +107,28 @@ public class DefualtTaskActionCmd extends BaseActionCmd implements TaskActionCmd
 
 	public void addVariable(String variableName, Object value) {
 		if (this.ap == null) {
-			throw new WorkFlowException((IStatusCode) BpmStatusCode.VARIABLES_NO_SYNC);
+			throw new WorkFlowException( BpmStatusCode.VARIABLES_NO_SYNC);
 		}
 		this.ap.setVariable(variableName, value);
 	}
 
 	public Object getVariable(String variableName) {
 		if (this.ap == null) {
-			throw new WorkFlowException((IStatusCode) BpmStatusCode.VARIABLES_NO_SYNC);
+			throw new WorkFlowException(BpmStatusCode.VARIABLES_NO_SYNC);
 		}
 		return this.ap.getVariable(variableName);
 	}
 
 	public boolean hasVariable(String variableName) {
 		if (this.ap == null) {
-			throw new WorkFlowException((IStatusCode) BpmStatusCode.VARIABLES_NO_SYNC);
+			throw new WorkFlowException( BpmStatusCode.VARIABLES_NO_SYNC);
 		}
 		return this.ap.hasVariable(variableName);
 	}
 
 	public void removeVariable(String variableName) {
 		if (this.ap == null) {
-			throw new WorkFlowException((IStatusCode) BpmStatusCode.VARIABLES_NO_SYNC);
+			throw new WorkFlowException(BpmStatusCode.VARIABLES_NO_SYNC);
 		}
 	}
 
@@ -138,14 +139,14 @@ public class DefualtTaskActionCmd extends BaseActionCmd implements TaskActionCmd
 	public synchronized String a() {
 		if (this.hasExecuted) {
 			throw new BusinessException("action cmd caonot be invoked twice",
-					(IStatusCode) BpmStatusCode.PARAM_ILLEGAL);
+					BpmStatusCode.PARAM_ILLEGAL);
 		}
 		this.hasExecuted = true;
 		ActionType actonType = ActionType.fromKey((String) this.getActionName());
-		AbsActionHandler handler = (AbsActionHandler) AppUtil.getBean((String) actonType.getBeanId());
+		AbsActionHandler handler = (AbsActionHandler) AppContextUtil.getBean((String) actonType.getBeanId());
 		if (handler == null) {
 			throw new BusinessException("action beanId cannot be found :" + actonType.getName(),
-					(IStatusCode) BpmStatusCode.NO_TASK_ACTION);
+					BpmStatusCode.NO_TASK_ACTION);
 		}
 		handler.g((BaseActionCmd) this);
 		return handler.getActionType().getName();

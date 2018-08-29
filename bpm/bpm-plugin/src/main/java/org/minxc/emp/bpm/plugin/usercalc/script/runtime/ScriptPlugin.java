@@ -1,8 +1,8 @@
 package org.minxc.emp.bpm.plugin.usercalc.script.runtime;
 
-import com.minxc.emp.core.util.BeanUtils;
+import com.dstz.base.core.util.BeanUtils;
 import com.dstz.base.core.util.StringUtil;
-import org.minxc.emp.bpm.api.engine.plugin.def.BpmTaskPluginDef;
+import com.dstz.bpm.api.engine.plugin.def.BpmTaskPluginDef;
 import com.dstz.bpm.engine.plugin.runtime.abstact.AbstractUserCalcPlugin;
 import com.dstz.bpm.engine.plugin.session.BpmUserCalcPluginSession;
 import com.dstz.sys.api.groovy.IGroovyScriptEngine;

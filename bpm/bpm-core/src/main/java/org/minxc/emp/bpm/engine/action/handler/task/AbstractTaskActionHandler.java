@@ -1,28 +1,22 @@
 package org.minxc.emp.bpm.engine.action.handler.task;
 
-import com.dstz.base.api.constant.IStatusCode;
-import org.minxc.emp.core.api.exception.BusinessException;
-import com.dstz.base.core.util.StringUtil;
 
-import java.io.Serializable;
 import javax.annotation.Resource;
 
 import org.minxc.emp.bpm.act.service.ActTaskService;
 import org.minxc.emp.bpm.api.constant.EventType;
 import org.minxc.emp.bpm.api.constant.NodeType;
-import org.minxc.emp.bpm.api.engine.action.cmd.BaseActionCmd;
-import org.minxc.emp.bpm.api.engine.action.cmd.TaskActionCmd;
 import org.minxc.emp.bpm.api.engine.plugin.cmd.TaskCommand;
 import org.minxc.emp.bpm.api.exception.BpmStatusCode;
 import org.minxc.emp.bpm.api.model.inst.IBpmInstance;
 import org.minxc.emp.bpm.api.model.nodedef.BpmNodeDef;
-import org.minxc.emp.bpm.api.model.task.IBpmTask;
-import org.minxc.emp.bpm.api.service.BpmProcessDefService;
-import org.minxc.emp.bpm.core.manager.BpmInstanceManager;
 import org.minxc.emp.bpm.core.manager.BpmTaskManager;
 import org.minxc.emp.bpm.core.model.BpmTask;
 import org.minxc.emp.bpm.engine.action.cmd.DefualtTaskActionCmd;
 import org.minxc.emp.bpm.engine.action.handler.AbsActionHandler;
+import org.minxc.emp.core.api.exception.BusinessException;
+
+import com.minxc.emp.core.util.StringUtil;
 
 public abstract class AbstractTaskActionHandler<T extends DefualtTaskActionCmd> extends AbsActionHandler<T> {
 	@Resource

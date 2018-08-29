@@ -2,10 +2,13 @@ package org.minxc.emp.bpm.engine.model;
 
 import org.minxc.emp.bpm.api.model.def.BpmVariableDef;
 
-import com.dstz.base.core.util.StringUtil;
-import com.dstz.base.core.util.time.DateFormatUtil;
+import com.minxc.emp.core.util.StringUtil;
+import com.minxc.emp.core.util.time.DateFormatUtil;
+
 
 public class DefaultBpmVariableDef implements BpmVariableDef {
+	
+	private static final long serialVersionUID = 672920299278313661L;
 	private String R = "";
 	private String name = "";
 	private String key = "";

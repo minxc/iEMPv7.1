@@ -1,9 +1,9 @@
 package org.minxc.emp.bpm.core.dao;
 
-import org.minxc.emp.common.db.dao.CommonDao;
 
-import org.minxc.emp.bpm.core.model.BpmTaskStack;
 import org.apache.ibatis.annotations.Mapper;
+import org.minxc.emp.bpm.core.model.BpmTaskStack;
+import org.minxc.emp.common.db.dao.CommonDao;
 
 @Mapper
 public interface BpmTaskStackDao extends CommonDao<String, BpmTaskStack> {

@@ -1,7 +1,6 @@
 package org.minxc.emp.bpm.engine.action.cmd;
 
 import com.alibaba.fastjson.JSONObject;
-import com.dstz.base.api.constant.IStatusCode;
 
 import java.util.Map;
 import org.activiti.engine.impl.persistence.entity.ExecutionEntity;
@@ -13,6 +12,8 @@ import org.minxc.emp.bpm.api.model.def.IBpmDefinition;
 import org.minxc.emp.bpm.api.model.inst.IBpmInstance;
 
 public class DefaultInstanceActionCmd extends BaseActionCmd implements InstanceActionCmd {
+	
+	
 	protected ExecutionEntity an;
 
 	public DefaultInstanceActionCmd(String flowParam) {
@@ -40,28 +41,28 @@ public class DefaultInstanceActionCmd extends BaseActionCmd implements InstanceA
 
 	public Object getVariable(String variableName) {
 		if (this.an == null) {
-			throw new WorkFlowException((IStatusCode) BpmStatusCode.VARIABLES_NO_SYNC);
+			throw new WorkFlowException(BpmStatusCode.VARIABLES_NO_SYNC);
 		}
 		return this.an.getVariable(variableName);
 	}
 
 	public boolean hasVariable(String variableName) {
 		if (this.an == null) {
-			throw new WorkFlowException((IStatusCode) BpmStatusCode.VARIABLES_NO_SYNC);
+			throw new WorkFlowException( BpmStatusCode.VARIABLES_NO_SYNC);
 		}
 		return this.an.hasVariable(variableName);
 	}
 
 	public void removeVariable(String variableName) {
 		if (this.an == null) {
-			throw new WorkFlowException((IStatusCode) BpmStatusCode.VARIABLES_NO_SYNC);
+			throw new WorkFlowException( BpmStatusCode.VARIABLES_NO_SYNC);
 		}
 		this.an.removeVariable(variableName);
 	}
 
 	public void addVariable(String name, Object value) {
 		if (this.an == null) {
-			throw new WorkFlowException((IStatusCode) BpmStatusCode.VARIABLES_NO_SYNC);
+			throw new WorkFlowException(BpmStatusCode.VARIABLES_NO_SYNC);
 		}
 		this.an.setVariable(name, value);
 	}

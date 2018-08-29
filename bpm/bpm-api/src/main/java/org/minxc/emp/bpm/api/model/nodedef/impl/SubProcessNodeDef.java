@@ -1,12 +1,12 @@
 package org.minxc.emp.bpm.api.model.nodedef.impl;
 
 import org.minxc.emp.bpm.api.constant.NodeType;
-import org.minxc.emp.bpm.api.model.def.BpmnProcessDef;
+import org.minxc.emp.bpm.api.model.def.BpmProcessDef;
 
 /**
  * 内部子流程节点定义扩展。
  */
-public class SubProcessNodeDef extends BaseBpmnNodeDef {
+public class SubProcessNodeDef extends BaseBpmNodeDef {
  
     private static final long serialVersionUID = -1165886168391484970L;
 
@@ -14,7 +14,7 @@ public class SubProcessNodeDef extends BaseBpmnNodeDef {
         setType(NodeType.SUBPROCESS);
     }
 
-    private BpmnProcessDef bpmChildProcessDef;
+    private BpmProcessDef bpmChildProcessDef;
 
     /**
      * 获得内部子流程的流程定义。
@@ -23,11 +23,11 @@ public class SubProcessNodeDef extends BaseBpmnNodeDef {
      * @throws
      * @since 1.0.0
      */
-    public BpmnProcessDef getChildBpmProcessDef() {
+    public BpmProcessDef getChildBpmProcessDef() {
         return bpmChildProcessDef;
     }
 
-    public void setChildBpmProcessDef(BpmnProcessDef bpmChildProcessDef) {
+    public void setChildBpmProcessDef(BpmProcessDef bpmChildProcessDef) {
         this.bpmChildProcessDef = bpmChildProcessDef;
     }
  

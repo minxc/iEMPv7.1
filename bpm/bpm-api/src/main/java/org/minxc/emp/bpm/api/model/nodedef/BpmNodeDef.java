@@ -1,19 +1,19 @@
 package org.minxc.emp.bpm.api.model.nodedef;
 
-import org.minxc.emp.bpm.api.constant.NodeType;
-import org.minxc.emp.bpm.api.engine.plugin.context.BpmnPluginContext;
-import org.minxc.emp.bpm.api.engine.plugin.def.BpmnDef;
-import org.minxc.emp.bpm.api.model.def.BpmnProcessDef;
-import org.minxc.emp.bpm.api.model.def.NodeProperties;
-import org.minxc.emp.bpm.api.model.form.BpmnForm;
-
 import java.io.Serializable;
 import java.util.List;
+
+import org.minxc.emp.bpm.api.constant.NodeType;
+import org.minxc.emp.bpm.api.engine.plugin.context.BpmPluginContext;
+import org.minxc.emp.bpm.api.engine.plugin.def.BpmDef;
+import org.minxc.emp.bpm.api.model.def.BpmProcessDef;
+import org.minxc.emp.bpm.api.model.def.NodeProperties;
+import org.minxc.emp.bpm.api.model.form.BpmForm;
 
 /**
  * 描述：流程任务节点
  */
-public interface BpmNodeDef extends Serializable, BpmnDef {
+public interface BpmNodeDef extends Serializable, BpmDef {
     /**
      * 取得节点的ID
      *
@@ -77,7 +77,7 @@ public interface BpmNodeDef extends Serializable, BpmnDef {
      *
      * @return List&lt;BpmNodePlugin>
      */
-    List<BpmnPluginContext> getBpmPluginContexts();
+    List<BpmPluginContext> getBpmPluginContexts();
 
 
     /**
@@ -87,7 +87,7 @@ public interface BpmNodeDef extends Serializable, BpmnDef {
      * @throws
      * @since 1.0.0
      */
-    BpmnProcessDef getBpmProcessDef();
+    BpmProcessDef getBpmProcessDef();
 
     /**
      * 获得属性
@@ -129,17 +129,17 @@ public interface BpmNodeDef extends Serializable, BpmnDef {
      *
      * @return BpmProcessDef
      */
-    BpmnProcessDef getRootProcessDef();
+    BpmProcessDef getRootProcessDef();
 
     /**
      * 获取表单定义。
      *
      * @return Form
      */
-    BpmnForm getForm();
+    BpmForm getForm();
 
 
-    BpmnForm getMobileForm();
+    BpmForm getMobileForm();
 
     /**
      * 根据插件类名获取插件实例上下文定义。

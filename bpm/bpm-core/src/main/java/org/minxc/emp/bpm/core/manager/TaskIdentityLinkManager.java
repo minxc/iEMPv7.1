@@ -1,12 +1,12 @@
 package org.minxc.emp.bpm.core.manager;
 
-import com.dstz.base.manager.Manager;
-import com.dstz.sys.api.model.SysIdentity;
 import java.util.List;
 import java.util.Set;
 
+import org.minxc.emp.basis.api.model.SysIdentity;
 import org.minxc.emp.bpm.api.model.task.IBpmTask;
 import org.minxc.emp.bpm.core.model.TaskIdentityLink;
+import org.minxc.emp.common.manager.Manager;
 
 public interface TaskIdentityLinkManager extends Manager<String, TaskIdentityLink> {
 	public void removeByTaskId(String var1);

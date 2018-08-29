@@ -6,18 +6,26 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
-
+import org.apache.commons.lang3.StringUtils;
 import org.minxc.emp.basis.api.model.SysIdentity;
+import org.minxc.emp.basis.impl.util.ContextUtil;
 import org.minxc.emp.biz.api.model.IBusinessData;
 import org.minxc.emp.bpm.api.constant.ActionType;
 import org.minxc.emp.bpm.api.engine.action.handler.ActionHandler;
-import org.minxc.emp.bpm.api.engine.context.BpmnContext;
-import org.minxc.emp.bpm.api.exception.BpmnStatusCode;
-import org.minxc.emp.bpm.api.model.def.BpmnDefinition;
-import org.minxc.emp.bpm.api.model.inst.BpmInstance;
+import org.minxc.emp.bpm.api.engine.context.BpmContext;
+import org.minxc.emp.bpm.api.exception.BpmStatusCode;
+import org.minxc.emp.bpm.api.model.def.IBpmDefinition;
+import org.minxc.emp.bpm.api.model.inst.IBpmInstance;
+import org.minxc.emp.core.api.exception.BusinessException;
+import org.minxc.emp.form.api.model.FormCategory;
+import org.minxc.emp.idm.api.model.User;
+import org.minxc.emp.idm.api.service.UserService;
+
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.minxc.emp.core.util.AppContextUtil;
+import com.minxc.emp.core.util.BeanUtils;
 
 /**
  * 实现ActionCmd基础实现接口。
@@ -94,11 +102,11 @@ public abstract class BaseActionCmd implements ActionCmd {
         this.setActionName(flowParam.getString("action"));
 
         String defId = flowParam.getString("defId");
-        if (StringUtil.isNotEmpty(defId)) {
+        if (StringUtils.isNotEmpty(defId)) {
             this.setDefId(defId);
         }
         String instanceId = flowParam.getString("instanceId");
-        if (StringUtil.isNotEmpty(instanceId)) {
+        if (StringUtils.isNotEmpty(instanceId)) {
             this.setInstanceId(instanceId);
         }
         //初始化特殊属性
@@ -133,11 +141,11 @@ public abstract class BaseActionCmd implements ActionCmd {
             for (Object userObj : users) {
                 JSONObject user = (JSONObject) userObj;
                 String id = user.getString("id");
-                if (StringUtil.isEmpty(id)) continue;
+                if (StringUtils.isEmpty(id)) continue;
 
                 SysIdentity bpmInentity = null;//TODO (BpmIdentity) DefaultBpmIdentity.getIdentityByUserId(id, user.getString("name"));
                 String type = user.getString("type");
-                if (StringUtil.isNotEmpty(type)) {
+                if (StringUtils.isNotEmpty(type)) {
                     bpmInentity.setType(type);
                 }
                 userList.add(bpmInentity);
@@ -278,7 +286,7 @@ public abstract class BaseActionCmd implements ActionCmd {
     }
 
     public String getInstanceId() {
-        if (StringUtil.isEmpty(instanceId) && this.bpmInstance != null) {
+        if (StringUtils.isEmpty(instanceId) && this.bpmInstance != null) {
             return bpmInstance.getId();
         }
         return instanceId;
@@ -290,7 +298,7 @@ public abstract class BaseActionCmd implements ActionCmd {
 
     @Override
     public String getDefId() {
-        if (StringUtil.isEmpty(defId) && this.bpmInstance != null) {
+        if (StringUtils.isEmpty(defId) && this.bpmInstance != null) {
             return bpmInstance.getDefId();
         }
 
@@ -325,8 +333,8 @@ public abstract class BaseActionCmd implements ActionCmd {
      *                   void
      */
     public void setCurAccount(String curAccount) {
-        UserService userService = AppUtil.getBean(UserService.class);
-        IUser user = userService.getUserByAccount(curAccount);
+        UserService userService = AppContextUtil.getBean(UserService.class);
+        User user = userService.getUserByAccount(curAccount);
         ContextUtil.setCurrentUser(user);
     }
 
@@ -370,7 +378,7 @@ public abstract class BaseActionCmd implements ActionCmd {
 
         ActionType actonType = ActionType.fromKey(this.getActionName());
 
-        ActionHandler handler = (ActionHandler) AppUtil.getBean(actonType.getBeanId());
+        ActionHandler handler = (ActionHandler) AppContextUtil.getBean(actonType.getBeanId());
         if (handler == null) {
             throw new BusinessException("action beanId cannot be found :" + actonType.getName(), BpmStatusCode.NO_TASK_ACTION);
         }

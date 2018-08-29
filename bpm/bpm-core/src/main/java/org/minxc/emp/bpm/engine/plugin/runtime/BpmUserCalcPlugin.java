@@ -1,8 +1,8 @@
 package org.minxc.emp.bpm.engine.plugin.runtime;
 
-import com.dstz.sys.api.model.SysIdentity;
 import java.util.List;
 
+import org.minxc.emp.basis.api.model.SysIdentity;
 import org.minxc.emp.bpm.api.engine.plugin.def.BpmPluginDef;
 import org.minxc.emp.bpm.api.engine.plugin.runtime.RunTimePlugin;
 import org.minxc.emp.bpm.engine.plugin.session.BpmUserCalcPluginSession;

@@ -3,7 +3,7 @@ package org.minxc.emp.bpm.api.model.nodedef.impl;
 /**
  * 外部子流程扩展。
  */
-public class CallActivityNodeDef extends BaseBpmnNodeDef {
+public class CallActivityNodeDef extends BaseBpmNodeDef	 {
 	private static final long serialVersionUID = -7321180599360290218L;
 	/**
      * 子流程流程定义KEY

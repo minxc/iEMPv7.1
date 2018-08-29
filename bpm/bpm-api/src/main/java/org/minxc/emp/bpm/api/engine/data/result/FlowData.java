@@ -1,16 +1,17 @@
 package org.minxc.emp.bpm.api.engine.data.result;
 
 import com.alibaba.fastjson.JSONObject;
-import org.minxc.emp.bpm.api.model.form.BpmnForm;
-import org.minxc.emp.bpm.api.model.nodedef.Button;
 
 import java.util.List;
+
+import org.minxc.emp.bpm.api.model.form.BpmForm;
+import org.minxc.emp.bpm.api.model.nodedef.Button;
 
 public interface FlowData {
 
     public abstract String getDefId();
 
-    public abstract BpmnForm getForm();
+    public abstract BpmForm getForm();
 
     public abstract JSONObject getData();
 

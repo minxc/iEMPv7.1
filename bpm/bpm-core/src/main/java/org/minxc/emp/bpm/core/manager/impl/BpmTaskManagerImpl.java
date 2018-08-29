@@ -1,13 +1,8 @@
 package org.minxc.emp.bpm.core.manager.impl;
 
-import com.dstz.base.api.constant.IStatusCode;
-import org.minxc.emp.core.api.exception.BusinessException;
-import org.minxc.emp.core.api.query.QueryFilter;
-import org.minxc.emp.core.api.query.QueryOperator;
 import com.minxc.emp.core.util.BeanUtils;
-import com.dstz.base.core.util.StringUtil;
-import org.minxc.emp.common.manager.impl.CommonManager;
-import org.minxc.emp.basis.impl.util.ContextUtil;
+import com.minxc.emp.core.util.StringUtil;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +10,7 @@ import java.util.Map;
 import java.util.Set;
 import javax.annotation.Resource;
 
+import org.minxc.emp.basis.impl.util.ContextUtil;
 import org.minxc.emp.bpm.api.constant.TaskStatus;
 import org.minxc.emp.bpm.api.exception.BpmStatusCode;
 import org.minxc.emp.bpm.core.dao.BpmTaskDao;
@@ -23,10 +19,14 @@ import org.minxc.emp.bpm.core.manager.BpmTaskManager;
 import org.minxc.emp.bpm.core.manager.TaskIdentityLinkManager;
 import org.minxc.emp.bpm.core.model.BpmTask;
 import org.minxc.emp.bpm.core.model.TaskIdentityLink;
+import org.minxc.emp.common.manager.impl.CommonManager;
+import org.minxc.emp.core.api.exception.BusinessException;
+import org.minxc.emp.core.api.query.QueryFilter;
+import org.minxc.emp.core.api.query.QueryOperator;
 import org.springframework.stereotype.Service;
 
 @Service(value = "bpmTaskManager")
-public class BpmTaskManagerImpl extends BaseManager<String, BpmTask> implements BpmTaskManager {
+public class BpmTaskManagerImpl extends CommonManager<String, BpmTask> implements BpmTaskManager {
 	@Resource
 	BpmTaskDao h;
 	@Resource
@@ -55,7 +55,7 @@ public class BpmTaskManagerImpl extends BaseManager<String, BpmTask> implements 
 		String type = (String) queryFilter.getParams().get("type");
 		String title = (String) queryFilter.getParams().get("subject");
 		if (StringUtil.isNotEmpty((String) title)) {
-			queryFilter.addFilter("subject_", (Object) title, QueryOP.LIKE);
+			queryFilter.addFilter("subject_", title, QueryOperator.LIKE);
 		}
 		if ("done".equals(type)) {
 			return this.j.getApproveHistoryList(userId, queryFilter);
@@ -68,7 +68,7 @@ public class BpmTaskManagerImpl extends BaseManager<String, BpmTask> implements 
 	public void assigneeTask(String taskId, String userId, String userName) {
 		BpmTask task = (BpmTask) this.get(taskId);
 		if (task == null) {
-			throw new BusinessException("任务可能已经被处理，请刷新。", (IStatusCode) BpmStatusCode.TASK_NOT_FOUND);
+			throw new BusinessException("任务可能已经被处理，请刷新。",  BpmStatusCode.TASK_NOT_FOUND);
 		}
 		task.setAssigneeId(userId);
 		task.setAssigneeNames(userName);

@@ -1,9 +1,9 @@
 package org.minxc.emp.bpm.api.model.nodedef.impl;
 
-import org.minxc.emp.bpm.api.engine.plugin.context.BpmnPluginContext;
-import org.minxc.emp.bpm.api.model.def.BpmnProcessDef;
-
 import java.util.List;
+
+import org.minxc.emp.bpm.api.engine.plugin.context.BpmPluginContext;
+import org.minxc.emp.bpm.api.model.def.BpmProcessDef;
 
 /**
  * 网关节点定义。
@@ -11,10 +11,10 @@ import java.util.List;
  * 描述：TODO
  * </pre>
  */
-public class GateWayBpmNodeDef extends BaseBpmnNodeDef {
+public class GateWayBpmNodeDef extends BaseBpmNodeDef {
 
     @Override
-    public List<BpmnPluginContext> getBpmPluginContexts() {
+    public List<BpmPluginContext> getBpmPluginContexts() {
         throw new RuntimeException("GateWayBpmNodeDef not support getBpmPluginContexts method");
     }
 
@@ -25,7 +25,7 @@ public class GateWayBpmNodeDef extends BaseBpmnNodeDef {
      * @throws
      * @since 1.0.0
      */
-    public BpmnProcessDef getChildBpmProcessDef() {
+    public BpmProcessDef getChildBpmProcessDef() {
         throw new RuntimeException("GateWayBpmNodeDef not support getChildBpmProcessDef method");
     }
 

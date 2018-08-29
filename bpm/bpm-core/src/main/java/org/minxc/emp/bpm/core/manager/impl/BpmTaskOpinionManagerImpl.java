@@ -1,22 +1,23 @@
 package org.minxc.emp.bpm.core.manager.impl;
 
-import com.minxc.emp.core.util.BeanUtils;
-import org.minxc.emp.common.manager.impl.CommonManager;
-import com.dstz.org.api.model.IUser;
-import com.dstz.sys.api.model.SysIdentity;
-import org.minxc.emp.basis.impl.util.ContextUtil;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.Resource;
 
+import org.minxc.emp.basis.api.model.SysIdentity;
+import org.minxc.emp.basis.impl.util.ContextUtil;
 import org.minxc.emp.bpm.api.engine.action.cmd.TaskActionCmd;
 import org.minxc.emp.bpm.api.model.inst.IBpmInstance;
 import org.minxc.emp.bpm.api.model.task.IBpmTask;
 import org.minxc.emp.bpm.core.dao.BpmTaskOpinionDao;
 import org.minxc.emp.bpm.core.manager.BpmTaskOpinionManager;
 import org.minxc.emp.bpm.core.model.BpmTaskOpinion;
+import org.minxc.emp.common.manager.impl.CommonManager;
+import org.minxc.emp.idm.api.model.User;
 import org.springframework.stereotype.Service;
+
+import com.minxc.emp.core.util.BeanUtils;
 
 @Service(value = "bpmTaskOpinionManager")
 public class BpmTaskOpinionManagerImpl extends CommonManager<String, BpmTaskOpinion> implements BpmTaskOpinionManager {
@@ -40,7 +41,7 @@ public class BpmTaskOpinionManagerImpl extends CommonManager<String, BpmTaskOpin
 		bpmTaskOpinion.setTaskKey(isCreateEvent ? "start" : "end");
 		bpmTaskOpinion.setTaskName(isCreateEvent ? "发起节点" : "终止节点");
 		bpmTaskOpinion.setFormId(formIdentity);
-		IUser user = ContextUtil.getCurrentUser();
+		User user = ContextUtil.getCurrentUser();
 		if (user != null) {
 			bpmTaskOpinion.setApprover(user.getUserId());
 			bpmTaskOpinion.setApproverName(user.getFullname());
@@ -65,7 +66,7 @@ public class BpmTaskOpinionManagerImpl extends CommonManager<String, BpmTaskOpin
 		bpmTaskOpinion.setTaskKey(task.getNodeId());
 		bpmTaskOpinion.setTaskName(task.getName());
 		bpmTaskOpinion.setFormId(taskActionModel.getFormId());
-		IUser user = ContextUtil.getCurrentUser();
+		User user = ContextUtil.getCurrentUser();
 		if (user != null) {
 			bpmTaskOpinion.setCreateBy(user.getUserId());
 			bpmTaskOpinion.setUpdateBy(user.getUserId());

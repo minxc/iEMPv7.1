@@ -1,9 +1,9 @@
 package org.minxc.emp.bpm.api.engine.plugin.context;
 
-import org.minxc.emp.bpm.api.engine.plugin.def.BpmnPluginDef;
-import org.minxc.emp.bpm.api.engine.plugin.runtime.RunTimePlugin;
-
 import java.io.Serializable;
+
+import org.minxc.emp.bpm.api.engine.plugin.def.BpmPluginDef;
+import org.minxc.emp.bpm.api.engine.plugin.runtime.RunTimePlugin;
 
 public interface PluginContext extends Serializable{
 
@@ -26,7 +26,7 @@ public interface PluginContext extends Serializable{
      * @throws
      * @since 1.0.0
      */
-    BpmnPluginDef getBpmPluginDef();
+    BpmPluginDef getBpmPluginDef();
 
     /**
      * 获取插件标题。

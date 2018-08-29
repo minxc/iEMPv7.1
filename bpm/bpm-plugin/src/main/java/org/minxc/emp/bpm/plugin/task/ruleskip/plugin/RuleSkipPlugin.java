@@ -1,10 +1,10 @@
 package org.minxc.emp.bpm.plugin.task.ruleskip.plugin;
 
-import com.minxc.emp.core.util.BeanUtils;
+import com.dstz.base.core.util.BeanUtils;
 import com.dstz.base.core.util.StringUtil;
-import org.minxc.emp.bpm.api.engine.action.cmd.TaskActionCmd;
-import org.minxc.emp.bpm.api.engine.context.BpmContext;
-import org.minxc.emp.bpm.api.model.task.IBpmTask;
+import com.dstz.bpm.api.engine.action.cmd.TaskActionCmd;
+import com.dstz.bpm.api.engine.context.BpmContext;
+import com.dstz.bpm.api.model.task.IBpmTask;
 import com.dstz.bpm.engine.plugin.runtime.abstact.AbstractBpmTaskPlugin;
 import com.dstz.bpm.engine.plugin.session.BpmTaskPluginSession;
 import com.dstz.sys.api.groovy.IGroovyScriptEngine;

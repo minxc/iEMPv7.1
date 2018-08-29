@@ -4,7 +4,6 @@ package org.minxc.emp.bpm.api.constant;
  * 任务状态
  */
 public enum TaskStatus {
-
     NORMAL("NORMAL", "普通", "普通订单"),
     SUSPEND("SUSPEND", "挂起", "超管挂起任务"),
     LOCK("LOCK", "锁定", "个人将任务锁定至个人名下"),

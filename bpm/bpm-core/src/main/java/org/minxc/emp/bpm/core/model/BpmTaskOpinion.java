@@ -1,12 +1,28 @@
 package org.minxc.emp.bpm.core.model;
 
-import com.minxc.emp.core.impl.model.AbtractCommonModel;
 
 import java.util.Date;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.minxc.emp.bpm.api.model.task.IBpmTaskOpinion;
+import org.minxc.emp.core.api.model.CommonModel;
 
-public class BpmTaskOpinion implements IBaseModel, IBpmTaskOpinion {
+/**
+ * 
+* 项目名称：bpm-core   
+* 类名称：BpmTaskOpinion   
+* 类描述:审批意见
+* 创建人：Xianchang.min   
+* 创建时间：2018年8月29日 下午10:39:39   
+* 修改人：Xianchang.min   
+* 修改时间：2018年8月29日 下午10:39:39   
+* 修改备注：   
+* @version  1.0  
+*
+ */
+public class BpmTaskOpinion implements CommonModel, IBpmTaskOpinion {
+	
+	
+	private static final long serialVersionUID = 1196124192596269050L;
 	protected String id;
 	protected String o;
 	protected String ac;

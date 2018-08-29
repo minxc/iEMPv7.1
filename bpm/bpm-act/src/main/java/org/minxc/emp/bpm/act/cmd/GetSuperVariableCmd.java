@@ -3,6 +3,7 @@ package org.minxc.emp.bpm.act.cmd;
 import org.activiti.engine.impl.interceptor.Command;
 import org.activiti.engine.impl.interceptor.CommandContext;
 import org.activiti.engine.impl.persistence.entity.ExecutionEntity;
+import org.activiti.engine.impl.persistence.entity.ExecutionEntityManager;
 
 public class GetSuperVariableCmd implements Command<Object> {
 	private String d = "";

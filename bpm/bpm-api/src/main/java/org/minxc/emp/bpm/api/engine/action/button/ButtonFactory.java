@@ -7,17 +7,19 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
-import com.minxc.emp.core.util.AppContextUtil;
 import org.minxc.emp.bpm.api.constant.ActionType;
 import org.minxc.emp.bpm.api.engine.action.handler.ActionHandler;
 import org.minxc.emp.bpm.api.model.def.NodeProperties;
 import org.minxc.emp.bpm.api.model.nodedef.BpmNodeDef;
 import org.minxc.emp.bpm.api.model.nodedef.Button;
 
+import com.minxc.emp.core.util.AppContextUtil;
+
+
 /**
  * 通过actionhandle生成默认可配置的 button
  *
- * @author min.xianchang
+ * @author Jeff
  */
 public class ButtonFactory {
     /**

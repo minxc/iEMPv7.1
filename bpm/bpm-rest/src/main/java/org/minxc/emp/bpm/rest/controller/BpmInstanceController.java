@@ -8,18 +8,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.IOUtils;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
-
-import org.minxc.emp.base.api.aop.annotion.CatchError;
+import org.minxc.emp.base.api.aop.annotion.CatchErr;
 import org.minxc.emp.base.api.query.QueryFilter;
 import org.minxc.emp.base.api.response.impl.ResultMsg;
 import org.minxc.emp.base.core.util.StringUtil;
 import org.minxc.emp.base.db.model.page.PageJson;
-import com.github.pagehelper.Page;
 import org.minxc.emp.base.rest.GenericController;
 import org.minxc.emp.base.rest.util.RequestUtil;
 import org.minxc.emp.bpm.act.service.BpmImageService;
@@ -35,6 +28,13 @@ import org.minxc.emp.bpm.core.model.BpmInstance;
 import org.minxc.emp.bpm.core.model.BpmTaskOpinion;
 import org.minxc.emp.bpm.engine.action.cmd.DefaultInstanceActionCmd;
 import org.minxc.emp.form.api.model.FormType;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.github.pagehelper.Page;
 
 
 /**
@@ -73,7 +73,7 @@ public class BpmInstanceController extends GenericController {
      * 流程实例明细页面
      */
     @RequestMapping("getById")
-    @CatchError
+    @CatchErr
     public ResultMsg<IBpmInstance> getBpmInstance(@RequestParam String id) throws Exception {
     	IBpmInstance bpmInstance = null;
     	if (StringUtil.isNotEmpty(id)) {
@@ -92,7 +92,7 @@ public class BpmInstanceController extends GenericController {
      * 
      */
     @RequestMapping("getInstanceData")
-    @CatchError
+    @CatchErr
     public ResultMsg<FlowData> getInstanceData(HttpServletRequest request) throws Exception {
         String instanceId = request.getParameter("instanceId");
         Boolean readonly = RequestUtil.getBoolean(request, "readonly",false);
@@ -112,7 +112,7 @@ public class BpmInstanceController extends GenericController {
      * @throws Exception void
      */
     @RequestMapping("doAction")
-    @CatchError
+    @CatchErr
     public ResultMsg<String> doAction(@RequestParam String flowData) throws Exception {
 
         DefaultInstanceActionCmd instanceCmd = new DefaultInstanceActionCmd(flowData);
@@ -124,7 +124,7 @@ public class BpmInstanceController extends GenericController {
 
     @RequestMapping("getInstanceOpinion")
     
-    @CatchError
+    @CatchErr
     public ResultMsg<List<BpmTaskOpinion>> getInstanceOpinion(@RequestParam String instId) throws Exception {
         List<BpmTaskOpinion> taskOpinion = bpmTaskOpinionManager.getByInstId(instId);
 
@@ -154,7 +154,7 @@ public class BpmInstanceController extends GenericController {
 
 
     @RequestMapping("toForbidden")
-    @CatchError("操作失败")
+    @CatchErr("操作失败")
     public ResultMsg<String> toForbidden(@RequestParam String id, @RequestParam Boolean forbidden) throws Exception {
         BpmInstance inst = bpmInstanceManager.get(id);
         String msg = "";

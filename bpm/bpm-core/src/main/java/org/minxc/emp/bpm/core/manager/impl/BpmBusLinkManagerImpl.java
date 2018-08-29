@@ -1,6 +1,5 @@
 package org.minxc.emp.bpm.core.manager.impl;
 
-import org.minxc.emp.common.manager.impl.CommonManager;
 
 import java.util.List;
 import javax.annotation.Resource;
@@ -8,6 +7,7 @@ import javax.annotation.Resource;
 import org.minxc.emp.bpm.core.dao.BpmBusLinkDao;
 import org.minxc.emp.bpm.core.manager.BpmBusLinkManager;
 import org.minxc.emp.bpm.core.model.BpmBusLink;
+import org.minxc.emp.common.manager.impl.CommonManager;
 import org.springframework.stereotype.Service;
 
 @Service(value = "bpmBusLinkManager")

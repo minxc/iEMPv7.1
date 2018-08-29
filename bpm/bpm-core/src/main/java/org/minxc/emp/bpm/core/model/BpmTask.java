@@ -1,12 +1,13 @@
 package org.minxc.emp.bpm.core.model;
 
-import com.minxc.emp.core.impl.model.AbtractCommonModel;
 
 import java.util.Date;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.minxc.emp.bpm.api.model.task.IBpmTask;
+import org.minxc.emp.core.api.model.CommonModel;
 
-public class BpmTask implements IBaseModel, IBpmTask {
+public class BpmTask implements CommonModel, IBpmTask {
+	private static final long serialVersionUID = -4071004161692814027L;
 	protected String id;
 	protected String name;
 	protected String subject;

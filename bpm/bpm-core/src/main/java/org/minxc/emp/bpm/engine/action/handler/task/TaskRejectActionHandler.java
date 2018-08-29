@@ -1,16 +1,12 @@
 package org.minxc.emp.bpm.engine.action.handler.task;
 
-import com.dstz.base.api.constant.IStatusCode;
-import org.minxc.emp.core.api.exception.BusinessException;
-import com.minxc.emp.core.util.BeanUtils;
-import com.dstz.base.core.util.StringUtil;
-import com.dstz.sys.api.model.SysIdentity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Resource;
 
+import org.minxc.emp.basis.api.model.SysIdentity;
 import org.minxc.emp.bpm.api.constant.ActionType;
 import org.minxc.emp.bpm.api.engine.action.cmd.BaseActionCmd;
 import org.minxc.emp.bpm.api.exception.BpmStatusCode;
@@ -28,9 +24,13 @@ import org.minxc.emp.bpm.core.model.BpmTaskStack;
 import org.minxc.emp.bpm.engine.action.cmd.DefualtTaskActionCmd;
 import org.minxc.emp.bpm.engine.action.handler.task.AbstractTaskActionHandler;
 import org.minxc.emp.bpm.engine.model.BpmIdentity;
+import org.minxc.emp.core.api.exception.BusinessException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+
+import com.minxc.emp.core.util.BeanUtils;
+import com.minxc.emp.core.util.StringUtil;
 
 @Component
 public class TaskRejectActionHandler extends AbstractTaskActionHandler<DefualtTaskActionCmd> {
@@ -49,7 +49,7 @@ public class TaskRejectActionHandler extends AbstractTaskActionHandler<DefualtTa
 			this.a(actionModel, destinationNode);
 		}
 		if ((task = actionModel.getBpmTask()).getNodeId().equals(destinationNode)) {
-			throw new BusinessException("目标节点不能为当前任务节点", (IStatusCode) BpmStatusCode.CANNOT_BACK_NODE);
+			throw new BusinessException("目标节点不能为当前任务节点", BpmStatusCode.CANNOT_BACK_NODE);
 		}
 		actionModel.setDestination(destinationNode);
 		log.info("任务【{}-{}】将驳回至节点{}", new Object[]{task.getName(), task.getId(), destinationNode});
@@ -79,11 +79,11 @@ public class TaskRejectActionHandler extends AbstractTaskActionHandler<DefualtTa
 		}
 		BpmTaskStack stack = this.aA.getByTaskId(actionModel.getTaskId());
 		if (StringUtil.isZeroEmpty((String) stack.getParentId())) {
-			throw new WorkFlowException((IStatusCode) BpmStatusCode.NO_BACK_TARGET);
+			throw new WorkFlowException(BpmStatusCode.NO_BACK_TARGET);
 		}
 		BpmTaskStack preStack = (BpmTaskStack) this.aA.get(stack.getParentId());
 		if (preStack == null) {
-			throw new WorkFlowException("上一步任务执行堆栈信息查找失败！", (IStatusCode) BpmStatusCode.NO_BACK_TARGET);
+			throw new WorkFlowException("上一步任务执行堆栈信息查找失败！", BpmStatusCode.NO_BACK_TARGET);
 		}
 		return preStack.getNodeId();
 	}
@@ -94,7 +94,7 @@ public class TaskRejectActionHandler extends AbstractTaskActionHandler<DefualtTa
 		if ("back".equals(nodeProperties.getBackMode())) {
 			List<BpmTask> tasks = this.ay.getByInstIdNodeId(actionModel.getInstanceId(), actionModel.getNodeId());
 			if (BeanUtils.isEmpty((Object) tasks)) {
-				throw new WorkFlowException("任务返回节点标记失败，待标记任务查找不到", (IStatusCode) BpmStatusCode.NO_BACK_TARGET);
+				throw new WorkFlowException("任务返回节点标记失败，待标记任务查找不到", BpmStatusCode.NO_BACK_TARGET);
 			}
 			boolean hasUpdated = false;
 			for (BpmTask task : tasks) {
@@ -102,14 +102,14 @@ public class TaskRejectActionHandler extends AbstractTaskActionHandler<DefualtTa
 						|| !StringUtil.isNotEmpty((String) task.getTaskId()))
 					continue;
 				if (hasUpdated) {
-					throw new WorkFlowException("任务返回节点标记失败，期望查找一条，但是出现多条", (IStatusCode) BpmStatusCode.NO_BACK_TARGET);
+					throw new WorkFlowException("任务返回节点标记失败，期望查找一条，但是出现多条", BpmStatusCode.NO_BACK_TARGET);
 				}
 				task.setBackNode(actionModel.getNodeId());
 				this.ay.update(task);
 				hasUpdated = true;
 			}
 			if (!hasUpdated) {
-				throw new WorkFlowException("任务返回节点标记失败，待标记任务查找不到", (IStatusCode) BpmStatusCode.NO_BACK_TARGET);
+				throw new WorkFlowException("任务返回节点标记失败，待标记任务查找不到", BpmStatusCode.NO_BACK_TARGET);
 			}
 		}
 	}

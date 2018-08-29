@@ -1,14 +1,13 @@
 package org.minxc.emp.bpm.core.model;
 
-import com.minxc.emp.core.impl.model.AbstractCommonModel;
 
 import java.util.Date;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.minxc.emp.bpm.api.model.def.IBpmDefinition;
+import org.minxc.emp.core.api.model.CommonModel;
 
-public class BpmDefinition extends AbstractCommonModel implements IBpmDefinition {
-	
-	private static final long serialVersionUID = -8566996877876849261L;
+public class BpmDefinition implements CommonModel, IBpmDefinition {
+	private static final long serialVersionUID = -1236992433504527231L;
 	protected String id;
 	protected String name;
 	protected String key;

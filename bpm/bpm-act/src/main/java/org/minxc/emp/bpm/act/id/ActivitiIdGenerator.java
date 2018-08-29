@@ -1,16 +1,15 @@
 package org.minxc.emp.bpm.act.id;
 
-import org.minxc.emp.common.db.api.IdGenerator;
+import com.dstz.base.db.api.IdGenerator;
 
 public class ActivitiIdGenerator implements org.activiti.engine.impl.cfg.IdGenerator {
-	
-	private IdGenerator idGenerator = null;
+	private IdGenerator f = null;
 
 	public void setIdGenerator(IdGenerator idGenerator) {
-		this.idGenerator = idGenerator;
+		this.f = idGenerator;
 	}
 
 	public String getNextId() {
-		return this.idGenerator.getSuid();
+		return this.f.getSuid();
 	}
 }

@@ -1,7 +1,7 @@
 package org.minxc.emp.bpm.plugin.usercalc.group.runtime;
 
 import com.dstz.base.core.util.StringUtil;
-import org.minxc.emp.bpm.api.engine.plugin.def.BpmTaskPluginDef;
+import com.dstz.bpm.api.engine.plugin.def.BpmTaskPluginDef;
 import com.dstz.bpm.engine.model.BpmIdentity;
 import com.dstz.bpm.engine.plugin.runtime.abstact.AbstractUserCalcPlugin;
 import com.dstz.bpm.engine.plugin.session.BpmUserCalcPluginSession;
