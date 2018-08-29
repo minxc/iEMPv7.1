@@ -4,15 +4,15 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
+import org.minxc.emp.biz.core.manager.BusinessObjectManager;
+import org.minxc.emp.biz.core.model.BusinessObject;
+import org.minxc.emp.common.rest.CommonController;
+import org.minxc.emp.common.rest.util.RequestUtil;
+import org.minxc.emp.core.api.aop.annotation.ErrorCatching;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.dstz.base.api.aop.annotion.CatchErr;
-import com.dstz.base.core.util.StringUtil;
-import com.dstz.base.rest.BaseController;
-import com.dstz.base.rest.util.RequestUtil;
-import com.dstz.bus.manager.BusinessObjectManager;
-import com.dstz.bus.model.BusinessObject;
 
 /**
  * <pre>
@@ -25,7 +25,7 @@ import com.dstz.bus.model.BusinessObject;
  */
 @RestController
 @RequestMapping("/bus/businessObject/")
-public class BusinessObjectController extends BaseController<BusinessObject> {
+public class BusinessObjectController extends CommonController<BusinessObject> {
 	@Resource
 	BusinessObjectManager businessObjectManager;
 
@@ -41,15 +41,15 @@ public class BusinessObjectController extends BaseController<BusinessObject> {
 	 * @throws Exception
 	 */
 	@RequestMapping("getObject")
-	@CatchErr(write2response = true, value = "获取businessObject异常")
+	@ErrorCatching(writeErrorToResponse = true, value = "获取businessObject异常")
 	public void getObject(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String id = RequestUtil.getString(request, "id");
 		String key = RequestUtil.getString(request, "key");
 		boolean fill = RequestUtil.getBoolean(request, "fill");// 是否要填充table
 		BusinessObject object = null;
-		if (StringUtil.isNotEmpty(id)) {
+		if (StringUtils.isNotEmpty(id)) {
 			object = businessObjectManager.get(id);
-		} else if (StringUtil.isNotEmpty(key)) {
+		} else if (StringUtils.isNotEmpty(key)) {
 			object = businessObjectManager.getByKey(key);
 		}
 		if (fill && object != null) {

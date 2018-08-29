@@ -1,13 +1,13 @@
 package org.minxc.emp.biz.core.dao;
 
-import com.dstz.base.dao.BaseDao;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.minxc.emp.biz.core.model.BusinessPermission;
-import org.mybatis.spring.annotation.MapperScan;
+import org.minxc.emp.common.db.dao.CommonDao;
 
-@MapperScan
-public interface BusinessPermissionDao extends BaseDao<String, BusinessPermission> {
+@Mapper
+public interface BusinessPermissionDao extends CommonDao<String, BusinessPermission> {
 	public BusinessPermission getByObjTypeAndObjVal(@Param(value = "objType") String objType,
 			@Param(value = "objVal") String objVal);
 }

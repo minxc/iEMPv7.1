@@ -17,9 +17,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class AssemblyValTypeExecutor extends AssemblyValExecuteChain {
 
-	public int getSn() {
-		return 0;
-	}
 
 	@Override
 	protected void run(AssemblyValParam param) {
@@ -34,5 +31,10 @@ public class AssemblyValTypeExecutor extends AssemblyValExecuteChain {
 				data.put(entry.getKey(), entry.getValue());
 			}
 		}
+	}
+
+	@Override
+	public int getSequanceNum() {
+		return 0;
 	}
 }

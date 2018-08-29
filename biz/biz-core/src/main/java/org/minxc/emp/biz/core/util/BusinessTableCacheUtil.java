@@ -15,7 +15,7 @@ public class BusinessTableCacheUtil {
 	}
 
 	public static void put(BusinessTable businessTable) {
-		HashMap<String, BusinessTable> map = (HashMap<String, BusinessTable>) AppUtil.getCache().getByKey(U);
+		HashMap<String, BusinessTable> map = (HashMap<String, BusinessTable>) AppContextUtil.getCache().getByKey(U);
 		if (map == null) {
 			map = new HashMap<String, BusinessTable>();
 		}

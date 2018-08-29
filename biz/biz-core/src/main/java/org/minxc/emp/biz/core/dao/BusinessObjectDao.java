@@ -1,10 +1,11 @@
 package org.minxc.emp.biz.core.dao;
 
-import com.dstz.base.dao.BaseDao;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.minxc.emp.biz.core.model.BusinessObject;
+import org.minxc.emp.common.db.dao.CommonDao;
 import org.mybatis.spring.annotation.MapperScan;
 
-@MapperScan
-public interface BusinessObjectDao extends BaseDao<String, BusinessObject> {
+@Mapper
+public interface BusinessObjectDao extends CommonDao<String, BusinessObject> {
 }

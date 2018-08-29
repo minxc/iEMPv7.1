@@ -4,19 +4,19 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
+import org.minxc.emp.biz.core.manager.BusinessTableManager;
+import org.minxc.emp.biz.core.model.BusinessTable;
+import org.minxc.emp.biz.core.util.BusinessTableCacheUtil;
+import org.minxc.emp.common.db.tableoper.TableOperator;
+import org.minxc.emp.common.rest.CommonController;
+import org.minxc.emp.common.rest.util.RequestUtil;
+import org.minxc.emp.core.api.aop.annotation.ErrorCatching;
+import org.minxc.emp.core.api.response.impl.ResultMessage;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.dstz.base.api.aop.annotion.CatchErr;
-import com.dstz.base.api.response.impl.ResultMsg;
-import com.dstz.base.core.util.StringUtil;
-import com.dstz.base.db.tableoper.TableOperator;
-import com.dstz.base.rest.BaseController;
-import com.dstz.base.rest.util.RequestUtil;
-import com.dstz.bus.manager.BusinessTableManager;
-import com.dstz.bus.model.BusinessTable;
-import com.dstz.bus.util.BusinessTableCacheUtil;
 
 /**
  * businessTable层的controller
@@ -25,7 +25,9 @@ import com.dstz.bus.util.BusinessTableCacheUtil;
  */
 @RestController
 @RequestMapping("/bus/businessTable/")
-public class BusinessTableController extends BaseController<BusinessTable> {
+public class BusinessTableController extends CommonController<BusinessTable> {
+	
+	
 	@Resource
 	BusinessTableManager businessTableManager;
 
@@ -41,8 +43,8 @@ public class BusinessTableController extends BaseController<BusinessTable> {
 	 */
 	@RequestMapping("save")
 	@Override
-	@CatchErr(value = "保存业务表失败")
-	public ResultMsg<String> save(@RequestBody BusinessTable businessTable) throws Exception {
+	@ErrorCatching(value = "保存业务表失败")
+	public ResultMessage<String> save(@RequestBody BusinessTable businessTable) throws Exception {
 		businessTableManager.save(businessTable);
 		return getSuccessResult("保存业务表成功");
 	}
@@ -59,15 +61,15 @@ public class BusinessTableController extends BaseController<BusinessTable> {
 	 * @throws Exception
 	 */
 	@RequestMapping("getObject")
-	@CatchErr(write2response = true, value = "获取BusinessTable异常")
+	@ErrorCatching(writeErrorToResponse = true, value = "获取BusinessTable异常")
 	public void getObject(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String id = RequestUtil.getString(request, "id");
 		String key = RequestUtil.getString(request, "key");
 		boolean fill = RequestUtil.getBoolean(request, "fill");// 是否要填充table
 		BusinessTable table = null;
-		if (StringUtil.isNotEmpty(id)) {
+		if (StringUtils.isNotEmpty(id)) {
 			table = businessTableManager.get(id);
-		} else if (StringUtil.isNotEmpty(key)) {
+		} else if (StringUtils.isNotEmpty(key)) {
 			table = businessTableManager.getByKey(key);
 		}
 		if (fill && table != null) {
@@ -88,7 +90,7 @@ public class BusinessTableController extends BaseController<BusinessTable> {
 	 * @throws Exception
 	 */
 	@RequestMapping("createTable")
-	@CatchErr(write2response = true, value = "建表失败")
+	@ErrorCatching(writeErrorToResponse = true, value = "建表失败")
 	public void createTable(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String id = RequestUtil.getString(request, "id");
 		BusinessTable businessTable = businessTableManager.get(id);

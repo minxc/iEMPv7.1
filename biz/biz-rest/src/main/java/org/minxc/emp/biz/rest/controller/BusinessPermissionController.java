@@ -7,17 +7,17 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.minxc.emp.biz.core.manager.BusinessObjectManager;
+import org.minxc.emp.biz.core.manager.BusinessPermissionManager;
+import org.minxc.emp.biz.core.model.BusinessObject;
+import org.minxc.emp.biz.core.model.BusinessPermission;
+import org.minxc.emp.common.rest.CommonController;
+import org.minxc.emp.common.rest.util.RequestUtil;
+import org.minxc.emp.core.api.aop.annotation.ErrorCatching;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.dstz.base.api.aop.annotion.CatchErr;
-import com.dstz.base.rest.BaseController;
-import com.dstz.base.rest.util.RequestUtil;
-import com.dstz.bus.manager.BusinessObjectManager;
-import com.dstz.bus.manager.BusinessPermissionManager;
-import com.dstz.bus.model.BusinessObject;
-import com.dstz.bus.model.BusinessPermission;
 
 /**
  * <pre>
@@ -30,7 +30,7 @@ import com.dstz.bus.model.BusinessPermission;
  */
 @RestController
 @RequestMapping("/bus/businessPermission/")
-public class BusinessPermissionController extends BaseController<BusinessPermission> {
+public class BusinessPermissionController extends CommonController<BusinessPermission> {
 	@Resource
 	BusinessObjectManager businessObjectManager;
 	@Autowired
@@ -47,7 +47,7 @@ public class BusinessPermissionController extends BaseController<BusinessPermiss
 	 * @throws Exception
 	 */
 	@RequestMapping("getObject")
-	@CatchErr(write2response = true, value = "获取businessPermission异常")
+	@ErrorCatching(writeErrorToResponse = true, value = "获取businessPermission异常")
 	public void getObject(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String objType = RequestUtil.getString(request, "objType");
 		String objVal = RequestUtil.getString(request, "objVal");
@@ -66,7 +66,7 @@ public class BusinessPermissionController extends BaseController<BusinessPermiss
 	 * @throws Exception
 	 */
 	@RequestMapping("getBo")
-	@CatchErr(write2response = true, value = "获取boo异常")
+	@ErrorCatching(writeErrorToResponse = true, value = "获取boo异常")
 	public void getBo(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String[] boKeys = RequestUtil.getStringAryByStr(request, "boKeys");
 		

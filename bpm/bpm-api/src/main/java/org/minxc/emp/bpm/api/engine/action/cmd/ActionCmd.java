@@ -1,8 +1,8 @@
 package org.minxc.emp.bpm.api.engine.action.cmd;
 
 import org.minxc.emp.basis.api.model.SysIdentity;
+import org.minxc.emp.biz.api.model.IBusinessData;
 import org.minxc.emp.bpm.api.model.inst.BpmInstance;
-import org.minxc.emp.business.api.model.BusinessData;
 
 import java.util.List;
 import java.util.Map;
@@ -144,7 +144,7 @@ public interface ActionCmd {
      *
      * @return
      */
-    public Map<String, BusinessData> getBizDataMap();
+    public Map<String, IBusinessData> getBizDataMap();
 
     public String executeCmd();
 }
