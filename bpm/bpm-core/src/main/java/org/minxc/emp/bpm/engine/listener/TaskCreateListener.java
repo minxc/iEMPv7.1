@@ -1,16 +1,12 @@
 package org.minxc.emp.bpm.engine.listener;
 
-import com.dstz.base.api.constant.IStatusCode;
-import com.dstz.base.api.exception.BusinessException;
-import com.dstz.base.core.util.BeanUtils;
-import com.dstz.base.core.util.StringUtil;
-import com.dstz.sys.api.model.SysIdentity;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.Resource;
 import org.activiti.engine.delegate.DelegateTask;
 import org.activiti.engine.impl.persistence.entity.TaskEntity;
+import org.minxc.emp.basis.api.model.SysIdentity;
 import org.minxc.emp.bpm.api.constant.ActionType;
 import org.minxc.emp.bpm.api.constant.EventType;
 import org.minxc.emp.bpm.api.constant.NodeType;
@@ -38,8 +34,12 @@ import org.minxc.emp.bpm.core.model.BpmTask;
 import org.minxc.emp.bpm.core.model.BpmTaskStack;
 import org.minxc.emp.bpm.engine.action.cmd.DefualtTaskActionCmd;
 import org.minxc.emp.bpm.engine.listener.AbstractTaskListener;
+import org.minxc.emp.core.api.exception.BusinessException;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Component;
+
+import com.minxc.emp.core.util.BeanUtils;
+import com.minxc.emp.core.util.StringUtil;
 
 @Component
 public class TaskCreateListener extends AbstractTaskListener<DefualtTaskActionCmd> {
@@ -90,7 +90,7 @@ public class TaskCreateListener extends AbstractTaskListener<DefualtTaskActionCm
 		List<SysIdentity> identityList = taskActionModel.getBpmIdentity(bpmTask.getNodeId());
 		BpmNodeDef nodeDef = this.a.getBpmNodeDef(bpmTask.getDefId(), bpmTask.getNodeId());
 		if (!nodeDef.getNodeProperties().isAllowExecutorEmpty() && BeanUtils.isEmpty((Object) identityList)) {
-			throw new WorkFlowException(bpmTask.getNodeId() + "任务候选人为空", (IStatusCode) BpmStatusCode.NO_ASSIGN_USER);
+			throw new WorkFlowException(bpmTask.getNodeId() + "任务候选人为空", BpmStatusCode.NO_ASSIGN_USER);
 		}
 		if (BeanUtils.isEmpty((Object) identityList)) {
 			return;

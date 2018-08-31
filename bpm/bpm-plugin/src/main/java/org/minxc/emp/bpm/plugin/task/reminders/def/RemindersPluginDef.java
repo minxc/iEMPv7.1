@@ -1,16 +1,18 @@
 package org.minxc.emp.bpm.plugin.task.reminders.def;
 
-import com.dstz.base.core.util.BeanUtils;
-import com.dstz.bpm.engine.plugin.plugindef.AbstractBpmTaskPluginDef;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import org.minxc.emp.bpm.engine.plugin.plugindef.AbstractBpmTaskPluginDef;
 import org.minxc.emp.bpm.plugin.task.reminders.def.Reminder;
 import org.minxc.emp.bpm.plugin.task.reminders.def.WarningSet;
 import org.minxc.emp.bpm.plugin.task.reminders.entity.Reminders;
 
+import com.minxc.emp.core.util.BeanUtils;
+
 public class RemindersPluginDef extends AbstractBpmTaskPluginDef {
+	private static final long serialVersionUID = -1286505173526465772L;
 	private List<Reminder> K;
 
 	public List<Reminder> getReminderList() {

@@ -1,8 +1,5 @@
 package org.minxc.emp.bpm.engine.listener;
 
-import com.dstz.base.core.util.BeanUtils;
-import com.dstz.org.api.model.IUser;
-import com.dstz.sys.util.ContextUtil;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Map;
@@ -10,6 +7,7 @@ import java.util.Set;
 import javax.annotation.Resource;
 import org.activiti.engine.delegate.DelegateTask;
 import org.activiti.engine.impl.persistence.entity.TaskEntity;
+import org.minxc.emp.basis.impl.util.ContextUtil;
 import org.minxc.emp.bpm.api.constant.ActionType;
 import org.minxc.emp.bpm.api.constant.EventType;
 import org.minxc.emp.bpm.api.constant.InstanceStatus;
@@ -29,8 +27,11 @@ import org.minxc.emp.bpm.core.model.BpmTaskOpinion;
 import org.minxc.emp.bpm.core.model.BpmTaskStack;
 import org.minxc.emp.bpm.engine.action.cmd.DefualtTaskActionCmd;
 import org.minxc.emp.bpm.engine.listener.AbstractTaskListener;
+import org.minxc.emp.idm.api.model.User;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Component;
+
+import com.minxc.emp.core.util.BeanUtils;
 
 @Component
 public class TaskCompleteListener extends AbstractTaskListener<DefualtTaskActionCmd> {
@@ -107,7 +108,7 @@ public class TaskCompleteListener extends AbstractTaskListener<DefualtTaskAction
 		bpmTaskOpinion.setDurMs(
 				Long.valueOf(bpmTaskOpinion.getApproveTime().getTime() - bpmTaskOpinion.getCreateTime().getTime()));
 		bpmTaskOpinion.setOpinion(taskActionModel.getOpinion());
-		IUser user = ContextUtil.getCurrentUser();
+		User user = ContextUtil.getCurrentUser();
 		if (user != null) {
 			bpmTaskOpinion.setApprover(user.getUserId());
 			bpmTaskOpinion.setApproverName(user.getFullname());

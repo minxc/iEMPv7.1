@@ -5,21 +5,13 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.alibaba.fastjson.JSONObject;
-
-import org.minxc.emp.biz.api.constant.BusinessPermissionObjectType;
-import org.minxc.emp.biz.api.model.BusinessObject;
-import org.minxc.emp.biz.api.model.BusinessPermission;
-import org.minxc.emp.biz.api.model.BusinessTable;
-import org.minxc.emp.biz.api.service.BusinessDataService;
-import org.minxc.emp.biz.api.service.BusinessObjectService;
-import org.minxc.emp.biz.api.service.BusinessPermissionService;
+import org.minxc.emp.biz.api.constant.BusinessPermissionObjType;
+import org.minxc.emp.biz.api.model.IBusinessObject;
+import org.minxc.emp.biz.api.model.IBusinessPermission;
+import org.minxc.emp.biz.api.model.IBusinessTable;
+import org.minxc.emp.biz.api.service.IBusinessDataService;
+import org.minxc.emp.biz.api.service.IBusinessObjectService;
+import org.minxc.emp.biz.api.service.IBusinessPermissionService;
 import org.minxc.emp.common.db.dao.BasicDao;
 import org.minxc.emp.common.db.datasource.DbContextHolder;
 import org.minxc.emp.common.db.model.page.PageJson;
@@ -27,46 +19,46 @@ import org.minxc.emp.common.rest.GenericController;
 import org.minxc.emp.common.rest.util.RequestUtil;
 import org.minxc.emp.core.api.aop.annotation.ErrorCatching;
 import org.minxc.emp.core.api.query.QueryFilter;
-import org.minxc.emp.form.manager.FormDefManager;
-import org.minxc.emp.form.model.FormDef;
-import org.minxc.emp.form.model.FormDefData;
-import org.minxc.emp.form.service.FormDefDataServiceImpl;
+import org.minxc.emp.form.core.manager.FormDefManager;
+import org.minxc.emp.form.core.model.FormDef;
+import org.minxc.emp.form.core.model.FormDefData;
+import org.minxc.emp.form.core.service.FormDefDataService;
 import org.minxc.emp.system.api.model.ISysDataSource;
 import org.minxc.emp.system.api.service.ISysDataSourceService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 
 /**
- * <pre>
  * 描述：表单数据的controller
- * 作者:min.xianchang
- * 邮箱:xianchangmin@126.com
  * 日期:2018年5月17日
- * 版权:summer
- * </pre>
  */
 @RestController
 @RequestMapping("/form/formDefData/")
 public class FormDefDataController extends GenericController {
-
 	@Autowired
-	private FormDefDataServiceImpl formDefDataService;
+	FormDefDataService formDefDataService;
 	@Autowired
-	private BusinessDataService businessDataService;
+	IBusinessDataService businessDataService;
 	@Autowired
-	private BusinessObjectService businessObjectService;
+	IBusinessObjectService businessObjectService;
 	@Autowired
-	private ISysDataSourceService sysDataSourceService;
+	ISysDataSourceService sysDataSourceService;
 	@Autowired
-	private BasicDao<?> commonDao;
+	BasicDao<?> commonDao;
 	@Autowired
-	private BusinessPermissionService businessPermissionService;
+	IBusinessPermissionService businessPermissionService;
 	@Autowired
-	private FormDefManager formDefManager;
+	FormDefManager formDefManager;
 
 	/**
 	 * <pre>
 	 * 获取FormDefData的后端
 	 * </pre>
-	 *
+	 * 
 	 * @param request
 	 * @param response
 	 * @return
@@ -85,7 +77,7 @@ public class FormDefDataController extends GenericController {
 	 * <pre>
 	 * 保存formDef中的data数据
 	 * </pre>
-	 *
+	 * 
 	 * @param request
 	 * @param response
 	 * @param data
@@ -96,7 +88,7 @@ public class FormDefDataController extends GenericController {
 	public void saveData(HttpServletRequest request, HttpServletResponse response, @RequestBody JSONObject data) throws Exception {
 		String key = RequestUtil.getString(request, "key");
 		FormDef formDef = formDefManager.getByKey(key);
-		BusinessPermission permission = businessPermissionService.getByObjTypeAndObjVal(BusinessPermissionObjectType.FORM.getKey(), key, formDef.getBoKey(), true);
+		IBusinessPermission permission = businessPermissionService.getByObjTypeAndObjVal(BusinessPermissionObjType.FORM.getKey(), key, formDef.getBoKey(), true);
 		businessDataService.saveFormDefData(data, permission);
 		writeSuccessResult(response, "保存数据成功");
 	}
@@ -105,10 +97,10 @@ public class FormDefDataController extends GenericController {
 	 * <pre>
 	 * 获取bo的数据列表
 	 * </pre>
-	 *
+	 * 
 	 * @param request
 	 * @param response
-	 * @param boKey
+	 * @param key
 	 * @return
 	 * @throws Exception
 	 */
@@ -117,8 +109,8 @@ public class FormDefDataController extends GenericController {
 	public PageJson getList(HttpServletRequest request, HttpServletResponse response, @PathVariable(value = "boKey") String boKey) throws Exception {
 		QueryFilter queryFilter = getQueryFilter(request);
 		// 页面来的参数
-		BusinessObject businessObject = businessObjectService.getFilledByKey(boKey);
-		BusinessTable businessTable = businessObject.getRelation().getTable();
+		IBusinessObject businessObject = businessObjectService.getFilledByKey(boKey);
+		IBusinessTable businessTable = businessObject.getRelation().getTable();
 		ISysDataSource sysDataSource = sysDataSourceService.getByKey(businessTable.getDsKey());
 		// 切换数据源
 		DbContextHolder.setDataSource(sysDataSource.getKey(), sysDataSource.getDbType());
@@ -134,8 +126,8 @@ public class FormDefDataController extends GenericController {
 		String key = RequestUtil.getString(request, "key");
 		String id = RequestUtil.getString(request, "id");
 		FormDef formDef = formDefManager.getByKey(key);
-		BusinessPermission permission = businessPermissionService.getByObjTypeAndObjVal(BusinessPermissionObjectType.FORM.getKey(), key,formDef.getBoKey(), true);
-		BusinessObject businessObject = businessObjectService.getFilledByKey(boKey);
+		IBusinessPermission permission = businessPermissionService.getByObjTypeAndObjVal(BusinessPermissionObjType.FORM.getKey(), key,formDef.getBoKey(), true);
+		IBusinessObject businessObject = businessObjectService.getFilledByKey(boKey);
 		businessObject.setPermission(permission.getBusObj(boKey));
 		businessDataService.removeData(businessObject, id);
 		writeSuccessResult(response, "删除数据成功");

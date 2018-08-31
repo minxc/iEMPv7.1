@@ -18,7 +18,6 @@ import org.activiti.engine.ActivitiException;
 import org.activiti.engine.RepositoryService;
 import org.activiti.engine.repository.Model;
 import org.apache.commons.lang3.StringUtils;
-import org.minxc.emp.base.core.util.StringUtil;
 import org.minxc.emp.bpm.api.model.def.BpmProcessDef;
 import org.minxc.emp.bpm.api.model.def.IBpmDefinition;
 import org.minxc.emp.bpm.api.service.BpmProcessDefService;

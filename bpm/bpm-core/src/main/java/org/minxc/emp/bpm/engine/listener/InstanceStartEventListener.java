@@ -1,12 +1,5 @@
 package org.minxc.emp.bpm.engine.listener;
 
-import com.dstz.base.api.constant.IStatusCode;
-import com.dstz.base.api.exception.BusinessException;
-import com.dstz.base.core.util.BeanUtils;
-import com.dstz.base.core.util.StringUtil;
-import com.dstz.base.core.util.time.DateUtil;
-import com.dstz.bus.api.model.IBusinessData;
-import com.dstz.sys.util.ContextUtil;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -15,6 +8,8 @@ import java.util.regex.Pattern;
 import javax.annotation.Resource;
 import org.activiti.engine.impl.persistence.entity.ExecutionEntity;
 import org.apache.commons.lang3.StringUtils;
+import org.minxc.emp.basis.impl.util.ContextUtil;
+import org.minxc.emp.biz.api.model.IBusinessData;
 import org.minxc.emp.bpm.api.constant.EventType;
 import org.minxc.emp.bpm.api.constant.ScriptType;
 import org.minxc.emp.bpm.api.engine.action.cmd.ActionCmd;
@@ -35,8 +30,13 @@ import org.minxc.emp.bpm.core.model.BpmInstance;
 import org.minxc.emp.bpm.engine.action.cmd.DefaultInstanceActionCmd;
 import org.minxc.emp.bpm.engine.listener.AbstractInstanceListener;
 import org.minxc.emp.bpm.engine.model.DefaultBpmProcessDef;
+import org.minxc.emp.core.api.exception.BusinessException;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Component;
+
+import com.minxc.emp.core.util.BeanUtils;
+import com.minxc.emp.core.util.StringUtil;
+import com.minxc.emp.core.util.time.DateUtil;
 
 @Component
 public class InstanceStartEventListener extends AbstractInstanceListener {
@@ -160,14 +160,14 @@ public class InstanceStartEventListener extends AbstractInstanceListener {
 		String preActionDefKey = preAction.getBpmInstance().getDefKey();
 		if (preAction instanceof InstanceActionCmd) {
 			if (!excutionEntity.getProcessDefinitionKey().equals(preActionDefKey)) {
-				throw new BusinessException("流程启动失败，错误的线程数据！", (IStatusCode) BpmStatusCode.ACTIONCMD_ERROR);
+				throw new BusinessException("流程启动失败，错误的线程数据！", BpmStatusCode.ACTIONCMD_ERROR);
 			}
 			return;
 		}
 		ExecutionEntity callActivityNode = excutionEntity.getSuperExecution();
 		if (preAction instanceof TaskActionCmd && (callActivityNode == null
 				|| !preAction.getBpmInstance().getActInstId().equals(callActivityNode.getProcessInstanceId()))) {
-			throw new BusinessException((IStatusCode) BpmStatusCode.ACTIONCMD_ERROR);
+			throw new BusinessException(BpmStatusCode.ACTIONCMD_ERROR);
 		}
 		BpmDefinition subDefinition = this.aP.getByKey(excutionEntity.getProcessDefinitionKey());
 		BpmInstance subInstance = this.f.genInstanceByDefinition((IBpmDefinition) subDefinition);

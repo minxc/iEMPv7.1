@@ -1,19 +1,19 @@
 package org.minxc.emp.bpm.plugin.usercalc.group.runtime;
 
-import com.dstz.base.core.util.StringUtil;
-import com.dstz.bpm.api.engine.plugin.def.BpmTaskPluginDef;
-import com.dstz.bpm.engine.model.BpmIdentity;
-import com.dstz.bpm.engine.plugin.runtime.abstact.AbstractUserCalcPlugin;
-import com.dstz.bpm.engine.plugin.session.BpmUserCalcPluginSession;
-import com.dstz.org.api.model.IGroup;
-import com.dstz.org.api.service.GroupService;
-import com.dstz.sys.api.model.SysIdentity;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Resource;
 
+import org.minxc.emp.basis.api.model.SysIdentity;
+import org.minxc.emp.bpm.engine.model.BpmIdentity;
+import org.minxc.emp.bpm.engine.plugin.runtime.abstact.AbstractUserCalcPlugin;
+import org.minxc.emp.bpm.engine.plugin.session.BpmUserCalcPluginSession;
 import org.minxc.emp.bpm.plugin.usercalc.group.def.GroupPluginDef;
+import org.minxc.emp.idm.api.model.Group;
+import org.minxc.emp.idm.api.service.GroupService;
 import org.springframework.stereotype.Component;
+
+import com.minxc.emp.core.util.StringUtil;
 
 @Component
 public class GroupPlugin extends AbstractUserCalcPlugin<GroupPluginDef> {
@@ -27,7 +27,7 @@ public class GroupPlugin extends AbstractUserCalcPlugin<GroupPluginDef> {
 		String groupType = def.getType();
 		ArrayList<SysIdentity> identityList = new ArrayList<SysIdentity>();
 		for (String key : def.getGroupKey().split(",")) {
-			IGroup group;
+			Group group;
 			if (StringUtil.isEmpty((String) key) || (group = this.ac.getByCode(groupType, key)) == null)
 				continue;
 			identityList.add((SysIdentity) new BpmIdentity(group.getGroupId(), group.getName(), group.getGroupType()));

@@ -1,14 +1,17 @@
 package org.minxc.emp.bpm.plugin.task.sign.def;
 
-import com.dstz.bpm.api.constant.ActionType;
-import com.dstz.bpm.engine.plugin.plugindef.AbstractBpmTaskPluginDef;
 
 import javax.validation.constraints.Min;
-import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.NotEmpty;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+
+import org.minxc.emp.bpm.api.constant.ActionType;
+import org.minxc.emp.bpm.engine.plugin.plugindef.AbstractBpmTaskPluginDef;
 import org.minxc.emp.bpm.plugin.task.sign.def.VoteType;
 
 public class SignTaskPluginDef extends AbstractBpmTaskPluginDef {
+	
+	private static final long serialVersionUID = 5996255881839450739L;
 	private Boolean T = false;
 	private VoteType U = VoteType.PERCENT;
 	private Boolean V = false;

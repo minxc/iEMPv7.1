@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+   <beans:beans xmlns="http://www.springframework.org/schema/security"
+       xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans  
+              http://www.springframework.org/schema/beans/spring-beans-3.0.xsd  
+              http://www.springframework.org/schema/security  
+            http://www.springframework.org/schema/security/spring-security.xsd">
+ 
+     <!-- 自定义Spring Security过滤链 -->
+     <beans:bean id="springSecurityFilterChain"
+         class="org.springframework.security.web.FilterChainProxy">
+         <beans:constructor-arg>
+             <beans:list>
+                 <filter-chain pattern="/resources/**" filters="channelProcessingFilter" />
+                 <filter-chain pattern="/login" filters="channelProcessingFilter" />
+ 16                 <filter-chain pattern="/" filters="channelProcessingFilter" />
+ 17                 <filter-chain pattern="/error" filters="channelProcessingFilter" />
+ 18                 <filter-chain pattern="/**"
+ 19                     filters="channelProcessingFilter,securityContextPersistenceFilter,concurrentSessionFilter,usernamePasswordAuthenticationFilter,
+ 20                     rememberMeAuthenticationFilter,logoutFilter,exceptionTranslationFilter,felicityFilterSecurityInterceptor" />
+ 21             </beans:list>
+ 22         </beans:constructor-arg>
+ 23     </beans:bean>
+ 24 
+ 25     <beans:bean id="authenticationManager"
+ 26         class="org.springframework.security.authentication.ProviderManager">
+ 27         <beans:property name="providers">
+ 28             <beans:list>
+ 29                 <beans:ref bean="authenticationProvider" />
+ 30                 <beans:ref bean="rememberMeAuthenticationProvider" />
+ 31             </beans:list>
+ 32         </beans:property>
+ 33         <beans:property name="eraseCredentialsAfterAuthentication" value="false"></beans:property>
+ 34     </beans:bean>
+ 35     <beans:bean id="authenticationProvider"
+ 36         class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
+ 37         <beans:property name="userDetailsService" ref="felicityUserDetailService" />
+ 38         <beans:property name="passwordEncoder" ref="passwordEncoder"></beans:property>
+ 39     </beans:bean>
+ 40 
+ 41     <beans:bean id="passwordEncoder"
+ 42         class="org.springframework.security.authentication.encoding.Md5PasswordEncoder" />
+ 43         
+ 44     <beans:bean id="felicityUserDetailService"
+ 45          class="com.sds.eci.security.FelicityUserDetailsService">
+ 46          <beans:property name="dataSource" ref="dataSource"></beans:property>
+ 47         <beans:property name="usersByUsernameQuery" value="select singleid as username, password, realname, userid, empno, ssoid, enabled from felicity_user where singleid = ?"></beans:property>
+ 48         <beans:property name="authoritiesByUsernameQuery" value="select u.singleid as username,ro.name as authority 
+ 49                                                                 from felicity_user u 
+ 50                                                                 right join felicity_userrole ur on u.userid=ur.userid
+ 51                                                                 right join felicity_role ro on ur.roleid=ro.roleid
+ 52                                                                 where u.singleid=?"></beans:property>
+ 53     </beans:bean>
+ 54     
+ 55     <!-- 信道拦截 -->
+ 56     <beans:bean id="channelProcessingFilter" class="org.springframework.security.web.access.channel.ChannelProcessingFilter">
+ 57         <beans:property name="channelDecisionManager" ref="channelDecisionManager"/>
+ 58             <beans:property name="securityMetadataSource">
+ 59             <filter-security-metadata-source>
+ 60                 <intercept-url pattern="/**" access="REQUIRES_SECURE_CHANNEL"/> 
+ 61                 <!-- <intercept-url pattern="/**" access="REQUIRES_INSECURE_CHANNEL"/>-->
+ 62             </filter-security-metadata-source>
+ 63         </beans:property>
+ 64     </beans:bean>
+ 65     <beans:bean id="channelDecisionManager" class="org.springframework.security.web.access.channel.ChannelDecisionManagerImpl">
+ 66       <beans:property name="channelProcessors">
+ 67           <beans:list>
+ 68           <beans:ref bean="secureChannelProcessor"/>
+ 69           <beans:ref bean="insecureChannelProcessor"/>
+ 70           </beans:list>
+ 71        </beans:property>
+ 72     </beans:bean>
+ 73     <beans:bean id="secureChannelProcessor" class="org.springframework.security.web.access.channel.SecureChannelProcessor">
+ 74        <beans:property name="entryPoint">
+ 75             <beans:bean class="org.springframework.security.web.access.channel.RetryWithHttpsEntryPoint">
+ 76                 <beans:property name="portMapper" ref="portMapper"></beans:property>
+ 77                 <beans:property name="portResolver" ref="portResolver"></beans:property>
+ 78             </beans:bean>
+ 79         </beans:property>
+ 80     </beans:bean>
+ 
+ 
+ 
+ 
+ 81     <beans:bean id="insecureChannelProcessor" class="org.springframework.security.web.access.channel.InsecureChannelProcessor">
+ 82         <beans:property name="entryPoint">
+ 83             <beans:bean class="org.springframework.security.web.access.channel.RetryWithHttpEntryPoint">
+ 84                 <beans:property name="portMapper" ref="portMapper"></beans:property>
+ 85                 <beans:property name="portResolver" ref="portResolver"></beans:property>
+ 86             </beans:bean>
+ 87         </beans:property>
+ 88     </beans:bean>
+ 89     <beans:bean id="portMapper" class="org.springframework.security.web.PortMapperImpl">
+ 90         <beans:property name="portMappings">
+ 91             <beans:map>
+ 92                 <beans:entry key="8080" value="443"></beans:entry>
+ 93                 <beans:entry key="80" value="443"></beans:entry>
+ 94                 <beans:entry key="9090" value="9443"></beans:entry>
+ 95             </beans:map>
+ 96         </beans:property>
+ 97     </beans:bean>
+ 98     <beans:bean id="portResolver" class="org.springframework.security.web.PortResolverImpl">
+ 99         <beans:property name="portMapper" ref="portMapper"></beans:property>
+     </beans:bean>
+     
+     <!-- securityContext拦截 -->
+     <beans:bean  id="securityContextPersistenceFilter" class="org.springframework.security.web.context.SecurityContextPersistenceFilter">
+         <beans:property name="securityContextRepository" ref="securityContextRepository" />  
+     </beans:bean>
+     <beans:bean id="securityContextRepository" class="org.springframework.security.web.context.HttpSessionSecurityContextRepository">  
+         <beans:property name="allowSessionCreation" value="true" />
+         <beans:property name="disableUrlRewriting" value="false" />
+     </beans:bean> 
+     
+     <!-- usernamePassword授权拦截 -->
+     <beans:bean id="usernamePasswordAuthenticationFilter" class="org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter">
+         <beans:property name="usernameParameter" value="username"></beans:property>
+         <beans:property name="passwordParameter" value="password"></beans:property>
+         <beans:property name="authenticationManager"  ref="authenticationManager"></beans:property>
+         <beans:property name="authenticationSuccessHandler" ref="authenticationSuccessHandler"></beans:property>
+         <beans:property name="authenticationFailureHandler">
+             <beans:bean class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
+                 <beans:property name="defaultFailureUrl" value="/login?para=loginfailure"></beans:property>
+             </beans:bean>
+         </beans:property>
+         <beans:property name="sessionAuthenticationStrategy" ref="sessionAuthenticationStrategy" />
+         <beans:property name="rememberMeServices" ref="rememberMeServices" />
+     </beans:bean>
+     
+     <beans:bean id="authenticationSuccessHandler" class="com.sds.eci.security.FelicityAuthenticationSuccessHandler">
+         <beans:property name="defaultTargetUrl" value="/questions"></beans:property>
+         <beans:property name="securityMetadataSource" ref="felicitysecurityMetadataSource" />
+     </beans:bean>
+     
+     <!-- 2注销过滤器 -->
+     <beans:bean id="logoutFilter"
+         class="org.springframework.security.web.authentication.logout.LogoutFilter">
+         <beans:constructor-arg value="/login" /><!-- 退出成功后处理URL -->
+         <beans:constructor-arg>
+             <beans:array>
+                 <beans:ref bean="logoutHandler" />
+                 <beans:ref bean="rememberMeServices" />
+             </beans:array>
+         </beans:constructor-arg>
+         <beans:property name="filterProcessesUrl" value="/j_spring_security_logout" /><!-- 退出处理URL -->
+     </beans:bean>
+     <!-- 注销监听器  -->
+     <beans:bean id="logoutHandler"
+         class="org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler">
+     </beans:bean>
+     
+     <!-- 7记住密码功能(COOKIE方式) -->
+     <beans:bean id="rememberMeAuthenticationFilter"
+         class="org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationFilter">
+         <beans:property name="rememberMeServices" ref="rememberMeServices" />
+         <beans:property name="authenticationManager" ref="authenticationManager" />
+         <beans:property name="authenticationSuccessHandler" ref="authenticationSuccessHandler"></beans:property>
+     </beans:bean>
+     <!-- rememberMe -->
+     <beans:bean id="rememberMeServices"
+         class="org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices">
+         <beans:constructor-arg name="key" value="springRocks"></beans:constructor-arg>
+         <beans:constructor-arg name="userDetailsService" ref="felicityUserDetailService"></beans:constructor-arg>
+         <!-- 默认时间604800秒(一个星期) -->
+         <beans:property name="tokenValiditySeconds" value="604800" />
+     </beans:bean>
+     <beans:bean id="rememberMeAuthenticationProvider"
+         class="org.springframework.security.authentication.RememberMeAuthenticationProvider">
+         <beans:property name="key" value="springRocks" />
+     </beans:bean>
+     
+     <!-- 用户的权限控制过滤器 -->
+     <beans:bean id="felicityFilterSecurityInterceptor" class="org.springframework.security.web.access.intercept.FilterSecurityInterceptor">
+         <beans:property name="rejectPublicInvocations" value="true"></beans:property>
+         <beans:property name="authenticationManager"  
+              ref="authenticationManager" />  
+         <beans:property name="accessDecisionManager"  
+              ref="felicityAccessDecisionManagerBean" />  
+         <beans:property name="securityMetadataSource"  
+              ref="felicitysecurityMetadataSource" />  
+     </beans:bean>
+     
+     <!-- 访问决策器，决定某个用户具有的角色，是否有足够的权限去访问某个资源 -->  
+     <beans:bean id="felicityAccessDecisionManagerBean"  
+          class="com.sds.eci.security.FelicityAccessDecisionManager">  
+     </beans:bean>  
+       
+     <!-- 资源源数据定义，即定义某一资源可以被哪些角色访问 -->  
+     <beans:bean id="felicitysecurityMetadataSource"
+          class="com.sds.eci.security.FelicitySecurityMetadataSource">
+         <beans:constructor-arg ref="dataSource"></beans:constructor-arg>
+         <beans:constructor-arg type="java.lang.String" value="select rce.url, r.name, rce.pid from felicity_role r inner join felicity_roleresource rrce on r.roleid = rrce.roleid inner join felicity_resource rce on rrce.resourceid = rce.resourceid order by pid, sort"></beans:constructor-arg>
+     </beans:bean>
+     
+     <!-- 页面标签权限功能依赖 -->
+     <beans:bean id="webInvocationFilter"
+        class="org.springframework.security.web.access.DefaultWebInvocationPrivilegeEvaluator">
+        <beans:constructor-arg ref="felicityFilterSecurityInterceptor" />
+     </beans:bean>
+     
+     <!-- 9异常处理过滤器 -->
+     <beans:bean id="exceptionTranslationFilter"
+         class="org.springframework.security.web.access.ExceptionTranslationFilter">
+         <beans:property name="authenticationEntryPoint" ref="authenticationEntryPoint" />
+         <beans:property name="accessDeniedHandler">
+             <!-- 拒绝未授权访问跳转 -->
+             <beans:bean
+                 class="com.sds.eci.security.FelicityAccessDeniedHandler">
+                 <beans:property name="errorPage" value="/403" />
+             </beans:bean>
+         </beans:property>
+     </beans:bean>
+     <beans:bean id="authenticationEntryPoint"
+         class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
+         <beans:property name="loginFormUrl" value="/login?para=errorauth"></beans:property>
+     </beans:bean>
+     
+     <!-- sessionManagementFilter -->
+     <beans:bean id="concurrentSessionFilter"
+         class="org.springframework.security.web.session.ConcurrentSessionFilter">
+         <beans:property name="sessionRegistry" ref="sessionRegistry" />
+         <beans:property name="expiredUrl" value="/login?para=multi" />
+     </beans:bean>
+     <beans:bean id="sessionAuthenticationStrategy"
+         class="org.springframework.security.web.authentication.session.ConcurrentSessionControlStrategy">
+         <beans:constructor-arg name="sessionRegistry" ref="sessionRegistry" />
+         <beans:property name="maximumSessions" value="1" />
+     </beans:bean>
+     <beans:bean id="sessionRegistry" class="org.springframework.security.core.session.SessionRegistryImpl" />
+ 
+ </beans:beans>

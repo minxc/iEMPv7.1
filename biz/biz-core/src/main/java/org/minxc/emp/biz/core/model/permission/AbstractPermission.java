@@ -8,22 +8,26 @@ import java.util.Map;
 import org.minxc.emp.biz.api.model.permission.IAbstractPermission;
 
 public abstract class AbstractPermission implements IAbstractPermission {
-	protected Map<String, JSONArray> P = new HashMap<String, JSONArray>();
-	protected String Q;
+	
+	private static final long serialVersionUID = 4633557074058674394L;
+	
+	
+	protected Map<String, JSONArray> rights = new HashMap<String, JSONArray>();
+	protected String result;
 
 	public String getResult() {
-		return this.Q;
+		return this.result;
 	}
 
 	public void setResult(String result) {
-		this.Q = result;
+		this.result = result;
 	}
 
 	public Map<String, JSONArray> getRights() {
-		return this.P;
+		return this.rights;
 	}
 
 	public void setRights(Map<String, JSONArray> rights) {
-		this.P = rights;
+		this.rights = rights;
 	}
 }

@@ -1,11 +1,12 @@
 package org.minxc.emp.bpm.engine.util;
 
-import com.dstz.base.core.util.AppUtil;
-import com.dstz.base.core.util.StringUtil;
 
 import java.lang.reflect.Method;
 
 import org.minxc.emp.bpm.api.engine.action.cmd.ActionCmd;
+
+import com.minxc.emp.core.util.AppContextUtil;
+import com.minxc.emp.core.util.StringUtil;
 
 public class HandlerUtil {
 	public static int h(String handler) {
@@ -21,7 +22,7 @@ public class HandlerUtil {
 				Object serviceBean = null;
 
 				try {
-					serviceBean = AppUtil.getBean(beanId);
+					serviceBean = AppContextUtil.getBean(beanId);
 				} catch (Exception var8) {
 					return -2;
 				}
@@ -48,7 +49,7 @@ public class HandlerUtil {
 			if (aryHandler != null && aryHandler.length == 2) {
 				String beanId = aryHandler[0];
 				String method = aryHandler[1];
-				Object serviceBean = AppUtil.getBean(beanId);
+				Object serviceBean = AppContextUtil.getBean(beanId);
 				if (serviceBean != null) {
 					Method invokeMethod = serviceBean.getClass().getDeclaredMethod(method, ActionCmd.class);
 					invokeMethod.invoke(serviceBean, actionModel);

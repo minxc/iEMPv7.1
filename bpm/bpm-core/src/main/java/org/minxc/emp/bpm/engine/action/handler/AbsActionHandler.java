@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import javax.annotation.Resource;
 
+import org.minxc.emp.basis.impl.groovy.GroovyScriptEngine;
 import org.minxc.emp.basis.impl.util.ContextUtil;
 import org.minxc.emp.biz.api.model.IBusinessData;
 import org.minxc.emp.biz.api.service.IBusinessDataService;
@@ -61,7 +62,7 @@ public abstract class AbsActionHandler<T extends BaseActionCmd> implements Actio
 	@Resource
 	protected IBusinessDataService au;
 	@Resource
-	protected IGroovyScriptEngine av;
+	protected GroovyScriptEngine av;
 
 	@Transactional
 	public void execute(T model) {

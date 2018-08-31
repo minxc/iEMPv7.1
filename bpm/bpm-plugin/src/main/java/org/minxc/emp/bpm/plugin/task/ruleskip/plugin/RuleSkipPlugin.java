@@ -1,21 +1,21 @@
 package org.minxc.emp.bpm.plugin.task.ruleskip.plugin;
 
-import com.dstz.base.core.util.BeanUtils;
-import com.dstz.base.core.util.StringUtil;
-import com.dstz.bpm.api.engine.action.cmd.TaskActionCmd;
-import com.dstz.bpm.api.engine.context.BpmContext;
-import com.dstz.bpm.api.model.task.IBpmTask;
-import com.dstz.bpm.engine.plugin.runtime.abstact.AbstractBpmTaskPlugin;
-import com.dstz.bpm.engine.plugin.session.BpmTaskPluginSession;
-import com.dstz.sys.api.groovy.IGroovyScriptEngine;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.Resource;
 
+import org.minxc.emp.basis.api.groovy.IGroovyScriptEngine;
+import org.minxc.emp.bpm.api.engine.action.cmd.TaskActionCmd;
+import org.minxc.emp.bpm.api.engine.context.BpmContext;
+import org.minxc.emp.bpm.engine.plugin.runtime.abstact.AbstractBpmTaskPlugin;
+import org.minxc.emp.bpm.engine.plugin.session.BpmTaskPluginSession;
 import org.minxc.emp.bpm.plugin.task.ruleskip.def.JumpRule;
 import org.minxc.emp.bpm.plugin.task.ruleskip.def.RuleSkipPluginDef;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Component;
+
+import com.minxc.emp.core.util.BeanUtils;
+import com.minxc.emp.core.util.StringUtil;
 
 @Component
 public class RuleSkipPlugin extends AbstractBpmTaskPlugin<BpmTaskPluginSession, RuleSkipPluginDef> {

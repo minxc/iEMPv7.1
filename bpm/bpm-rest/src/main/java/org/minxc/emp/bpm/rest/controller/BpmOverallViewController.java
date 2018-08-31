@@ -12,17 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;
 import org.dom4j.Document;
 import org.dom4j.Element;
-import org.minxc.emp.base.api.aop.annotion.CatchErr;
-import org.minxc.emp.base.api.response.impl.ResultMsg;
-import org.minxc.emp.base.core.util.BeanUtils;
-import org.minxc.emp.base.core.util.Dom4jUtil;
-import org.minxc.emp.base.core.util.FileUtil;
-import org.minxc.emp.base.core.util.StringUtil;
-import org.minxc.emp.base.core.util.ThreadMsgUtil;
-import org.minxc.emp.base.core.util.ZipUtil;
-import org.minxc.emp.base.rest.GenericController;
 import org.minxc.emp.bpm.core.manager.BpmDefOverallManager;
 import org.minxc.emp.bpm.core.model.BpmOverallView;
+import org.minxc.emp.common.rest.GenericController;
+import org.minxc.emp.core.api.aop.annotation.ErrorCatching;
+import org.minxc.emp.core.api.response.impl.ResultMessage;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,6 +25,12 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.alibaba.fastjson.JSON;
+import com.minxc.emp.core.util.BeanUtils;
+import com.minxc.emp.core.util.Dom4jUtil;
+import com.minxc.emp.core.util.FileUtil;
+import com.minxc.emp.core.util.StringUtil;
+import com.minxc.emp.core.util.ThreadMsgUtil;
+import com.minxc.emp.core.util.ZipUtil;
 
 
 /**
@@ -46,7 +46,7 @@ public class BpmOverallViewController extends GenericController {
 
     
 	@RequestMapping("getOverallView")
-	public ResultMsg<BpmOverallView> getOverallView(@RequestParam String defId)throws Exception {
+	public ResultMessage<BpmOverallView> getOverallView(@RequestParam String defId)throws Exception {
 		BpmOverallView ovrallView = bpmDefOverallManager.getBpmOverallView(defId);
 		
 		return getSuccessResult(ovrallView);
@@ -54,10 +54,9 @@ public class BpmOverallViewController extends GenericController {
     
 	
 	@RequestMapping("overallViewSave")
-	@CatchErr
+	@ErrorCatching
 	public void overallViewSave(@RequestBody BpmOverallView overAllView)throws Exception {
 		
-	//	bpmDefOverallParser.saveBpmOverallView(overAllView);
 		
 	}
     
@@ -73,8 +72,8 @@ public class BpmOverallViewController extends GenericController {
 	 * @throws Exception
 	 */
 	@RequestMapping("importPreview")
-	@CatchErr
-	public ResultMsg<Map<String, List<BpmOverallView>>> importPreview(MultipartHttpServletRequest request, HttpServletResponse response) throws Exception {
+	@ErrorCatching
+	public ResultMessage<Map<String, List<BpmOverallView>>> importPreview(MultipartHttpServletRequest request, HttpServletResponse response) throws Exception {
 		MultipartFile fileLoad = request.getFile("xmlFile");
 		String unZipFilePath = "";
 		
@@ -107,8 +106,8 @@ public class BpmOverallViewController extends GenericController {
 	}
 	
 	@RequestMapping("importSave")
-	@CatchErr
-	public ResultMsg<String> importSave(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	@ErrorCatching
+	public ResultMessage<String> importSave(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String str = FileUtil.inputStream2String(request.getInputStream());
 		List<BpmOverallView> overAllView = JSON.parseArray(str, BpmOverallView.class);
 		

@@ -1,8 +1,5 @@
 package org.minxc.emp.bpm.engine.listener;
 
-import com.dstz.base.api.constant.IStatusCode;
-import com.dstz.base.api.exception.BusinessException;
-import com.dstz.base.core.util.StringUtil;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -23,7 +20,10 @@ import org.minxc.emp.bpm.core.model.BpmDefinition;
 import org.minxc.emp.bpm.core.model.BpmInstance;
 import org.minxc.emp.bpm.core.model.BpmTaskStack;
 import org.minxc.emp.bpm.engine.action.cmd.DefualtTaskActionCmd;
+import org.minxc.emp.core.api.exception.BusinessException;
 import org.springframework.stereotype.Component;
+
+import com.minxc.emp.core.util.StringUtil;
 
 @Component
 public class ActivityComplatedListener implements ActEventListener {
@@ -48,12 +48,12 @@ public class ActivityComplatedListener implements ActEventListener {
 		BaseActionCmd actionCmd = (BaseActionCmd) BpmContext.getActionModel();
 		IBpmInstance childInstance = actionCmd.getBpmInstance();
 		if (StringUtil.isZeroEmpty((String) childInstance.getParentInstId())) {
-			throw new BusinessException("子流程提供的线程变量中，流程实例信息异常！", (IStatusCode) BpmStatusCode.ACTIONCMD_ERROR);
+			throw new BusinessException("子流程提供的线程变量中，流程实例信息异常！", BpmStatusCode.ACTIONCMD_ERROR);
 		}
 		BpmInstance bpmInstance = (BpmInstance) this.aM.get(childInstance.getParentInstId());
 		if (!bpmInstance.getActInstId().equals(activitEvent.getProcessInstanceId())) {
 			throw new BusinessException("子流程提供的父流程实例，与外部子流程ACTVITI actInstanceID 不一致！",
-					(IStatusCode) BpmStatusCode.ACTIONCMD_ERROR);
+					BpmStatusCode.ACTIONCMD_ERROR);
 		}
 		BpmTaskStack bpmTaskStack = this.c(activitEvent.getExecutionId());
 		BpmDefinition bpmDefinition = (BpmDefinition) this.c.get(bpmInstance.getDefId());

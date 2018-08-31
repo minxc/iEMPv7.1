@@ -15,11 +15,10 @@ package org.minxc.emp.activiti.rest.editor.model;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.activiti.editor.constants.ModelDataJsonConstants;
-import org.activiti.engine.ActivitiException;
 import org.activiti.engine.RepositoryService;
 import org.activiti.engine.repository.Model;
-import org.minxc.emp.base.api.aop.annotion.CatchErr;
 import org.minxc.emp.bpm.core.manager.BpmDefinitionManager;
+import org.minxc.emp.core.api.aop.annotation.ErrorCatching;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +46,7 @@ public class ModelSaveRestResource implements ModelDataJsonConstants {
 
     @RequestMapping(value = "/model/{modelId}/save", method = RequestMethod.PUT)
     @ResponseStatus(value = HttpStatus.OK)
-    @CatchErr
+    @ErrorCatching
     public void saveModel(HttpServletResponse response,@PathVariable String modelId, @RequestBody MultiValueMap<String, String> values) throws Exception {
         Model model = repositoryService.getModel(modelId);
         ObjectNode modelJson = (ObjectNode) objectMapper.readTree(model.getMetaInfo());

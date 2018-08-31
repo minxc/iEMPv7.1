@@ -2,21 +2,18 @@ package org.minxc.emp.bpm.rest.controller;
 
 
 import com.github.pagehelper.Page;
-import com.github.pagehelper.Page;
+import com.minxc.emp.core.util.StringUtil;
 
-import org.minxc.emp.base.api.aop.annotion.CatchErr;
-import org.minxc.emp.base.api.query.QueryFilter;
-import org.minxc.emp.base.api.response.impl.ResultMsg;
-import org.minxc.emp.base.core.util.StringUtil;
-import org.minxc.emp.base.db.id.UniqueIdUtil;
-import org.minxc.emp.base.db.model.page.PageJson;
-import org.minxc.emp.base.rest.GenericController;
-import org.minxc.emp.base.rest.util.RequestUtil;
 import org.minxc.emp.bpm.api.engine.data.BpmFlowDataAccessor;
 import org.minxc.emp.bpm.api.engine.data.result.FlowData;
 import org.minxc.emp.bpm.core.manager.BpmTaskManager;
 import org.minxc.emp.bpm.core.model.BpmTask;
 import org.minxc.emp.bpm.engine.action.cmd.DefualtTaskActionCmd;
+import org.minxc.emp.common.db.model.page.PageJson;
+import org.minxc.emp.common.rest.GenericController;
+import org.minxc.emp.core.api.aop.annotation.ErrorCatching;
+import org.minxc.emp.core.api.query.QueryFilter;
+import org.minxc.emp.core.api.response.impl.ResultMessage;
 import org.minxc.emp.form.api.model.FormType;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -60,8 +57,8 @@ public class BpmTaskController extends GenericController {
      * 流程任务明细页面
      */
     @RequestMapping("getBpmTask")
-    @CatchErr
-    public ResultMsg<BpmTask> getBpmTask(@RequestParam String id) throws Exception {
+    @ErrorCatching
+    public ResultMessage<BpmTask> getBpmTask(@RequestParam String id) throws Exception {
     	BpmTask bpmTask = null ;
         if (StringUtil.isNotEmpty(id)) {
         	bpmTask = bpmTaskManager.get(id);
@@ -74,8 +71,8 @@ public class BpmTaskController extends GenericController {
      * 批量删除流程任务记录
      */
     @RequestMapping("remove")
-    @CatchErr("删除流程任务失败")
-    public ResultMsg<String> remove(@RequestParam String id) throws Exception {
+    @ErrorCatching("删除流程任务失败")
+    public ResultMessage<String> remove(@RequestParam String id) throws Exception {
         String[] aryIds = StringUtil.getStringAryByStr(id);
 
         bpmTaskManager.removeByIds(aryIds);
@@ -85,8 +82,8 @@ public class BpmTaskController extends GenericController {
 
 
     @RequestMapping("getTaskData")
-    @CatchErr
-    public ResultMsg<FlowData> getTaskData(@RequestParam String taskId,@RequestParam(required=false) String formType) throws Exception {
+    @ErrorCatching
+    public ResultMessage<FlowData> getTaskData(@RequestParam String taskId,@RequestParam(required=false) String formType) throws Exception {
     	if(StringUtil.isEmpty(formType)) {
     		formType = FormType.PC.value();
     	}
@@ -103,8 +100,8 @@ public class BpmTaskController extends GenericController {
      * @throws Exception void
      */
     @RequestMapping("doAction")
-    @CatchErr
-    public ResultMsg<String> doAction(@RequestParam String flowData) throws Exception {
+    @ErrorCatching
+    public ResultMessage<String> doAction(@RequestParam String flowData) throws Exception {
         DefualtTaskActionCmd taskModel = new DefualtTaskActionCmd(flowData);
 
         String actionName = taskModel.executeCmd();
@@ -117,15 +114,15 @@ public class BpmTaskController extends GenericController {
     
  
     @RequestMapping("unLock")
-    @CatchErr
-    public ResultMsg<String> unLock(@RequestParam String taskId) throws Exception {
+    @ErrorCatching
+    public ResultMessage<String> unLock(@RequestParam String taskId) throws Exception {
         bpmTaskManager.unLockTask(taskId);
         return getSuccessResult("取消指派成功");
     }
     
     @RequestMapping("assignTask")
-    @CatchErr
-    public ResultMsg<String> assignTask(@RequestParam String taskId,@RequestParam String userName,@RequestParam String userId) throws Exception {
+    @ErrorCatching
+    public ResultMessage<String> assignTask(@RequestParam String taskId,@RequestParam String userName,@RequestParam String userId) throws Exception {
         bpmTaskManager.assigneeTask(taskId, userId, userName);
         return getSuccessResult("指派成功");
     }

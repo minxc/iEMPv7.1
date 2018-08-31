@@ -1,8 +1,9 @@
 package org.minxc.emp.bpm.plugin.execution.taskskip.def;
 
-import com.dstz.bpm.engine.plugin.plugindef.AbstractBpmExecutionPluginDef;
+import org.minxc.emp.bpm.engine.plugin.plugindef.AbstractBpmExecutionPluginDef;
 
 public class TaskSkipPluginDef extends AbstractBpmExecutionPluginDef {
+	private static final long serialVersionUID = -4003504624542764374L;
 	private String l;
 	private String script = "";
 

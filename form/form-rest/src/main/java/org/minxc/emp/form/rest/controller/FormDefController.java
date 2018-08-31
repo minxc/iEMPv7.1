@@ -6,7 +6,27 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import lombok.extern.slf4j.Slf4j;
+import org.minxc.emp.basis.api.freemark.IFreemarkEngine;
+import org.minxc.emp.biz.api.model.IBusTableRel;
+import org.minxc.emp.biz.api.model.IBusinessObject;
+import org.minxc.emp.biz.api.service.IBusinessObjectService;
+import org.minxc.emp.biz.api.service.IBusinessTableService;
+import org.minxc.emp.common.db.model.page.PageJson;
+import org.minxc.emp.common.rest.CommonController;
+import org.minxc.emp.common.rest.util.RequestUtil;
+import org.minxc.emp.core.api.aop.annotation.ErrorCatching;
+import org.minxc.emp.core.api.exception.BusinessException;
+import org.minxc.emp.core.api.query.QueryFilter;
+import org.minxc.emp.core.api.query.QueryOperator;
+import org.minxc.emp.core.api.response.impl.ResultMessage;
+import org.minxc.emp.form.api.constant.FormStatusCode;
+import org.minxc.emp.form.core.generator.AbsFormElementGenerator;
+import org.minxc.emp.form.core.generator.PcFormElementGenerator;
+import org.minxc.emp.form.core.generator.mobileFormElementGenerator;
+import org.minxc.emp.form.core.manager.FormDefManager;
+import org.minxc.emp.form.core.manager.FormTemplateManager;
+import org.minxc.emp.form.core.model.FormDef;
+import org.minxc.emp.form.core.model.FormTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,53 +37,32 @@ import org.springframework.web.bind.annotation.RestController;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-
-import org.apache.commons.lang3.StringUtils;
-import org.minxc.emp.basis.impl.freemark.FreemarkEngine;
-import org.minxc.emp.biz.api.model.BusinessObject;
-import org.minxc.emp.biz.api.model.BusinessTableRel;
-import org.minxc.emp.biz.api.service.BusinessObjectService;
-import org.minxc.emp.biz.api.service.BusinessTableService;
-import org.minxc.emp.common.db.model.page.PageJson;
-import org.minxc.emp.common.rest.CommonController;
-import org.minxc.emp.common.rest.util.RequestUtil;
-import org.minxc.emp.core.api.aop.annotation.ErrorCatching;
-import org.minxc.emp.core.api.exception.BusinessException;
-import org.minxc.emp.core.api.query.QueryFilter;
-import org.minxc.emp.core.api.query.QueryOperator;
-import org.minxc.emp.core.api.response.impl.ResultMessage;
-import org.minxc.emp.form.api.constant.FormStatusCode;
-import org.minxc.emp.form.api.model.IFormDef;
-import org.minxc.emp.form.generator.AbsFormElementGenerator;
-import org.minxc.emp.form.manager.FormDefManager;
-import org.minxc.emp.form.manager.FormTemplateManager;
-import org.minxc.emp.form.model.FormDef;
-import org.minxc.emp.form.model.FormTemplate;
 import com.github.pagehelper.Page;
 import com.minxc.emp.core.util.AppContextUtil;
 import com.minxc.emp.core.util.PropertiesUtil;
+import com.minxc.emp.core.util.StringUtil;
 
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * 表单管理
  * 
  */
-@Slf4j
 @RestController
 @RequestMapping("/form/formDef/")
+@Slf4j
 public class FormDefController extends CommonController<FormDef> {
-
-
+	
 	@Autowired
-	private FormDefManager formDefManager;
+	FormDefManager formDefManager;
 	@Autowired
-	private BusinessObjectService businessObjectService;
+	IBusinessObjectService businessObjectService;
 	@Autowired
-	private BusinessTableService businessTableService;
+	IBusinessTableService businessTableService;
 	@Autowired
-	private FormTemplateManager formTemplateManager;
+	FormTemplateManager formTemplateManager;
 	@Autowired
-	private FreemarkEngine freemarkEngine;
+	IFreemarkEngine freemarkEngine;
 
 	
 	@Override
@@ -114,16 +113,16 @@ public class FormDefController extends CommonController<FormDef> {
 	public void getObject(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String id = RequestUtil.getString(request, "id");
 		String key = RequestUtil.getString(request, "key");
-		IFormDef formDef = null;
-		if (StringUtils.isNotEmpty(id)) {
+		FormDef formDef = null;
+		if (StringUtil.isNotEmpty(id)) {
 			formDef = formDefManager.get(id);
-		} else if (StringUtils.isNotEmpty(key)) {
+		} else if (StringUtil.isNotEmpty(key)) {
 			formDef = formDefManager.getByKey(key);
 		}
 
 		JSONObject json = formDef == null ? new JSONObject() : (JSONObject) JSON.toJSON(formDef);
 		// 配置了备份路径则是开发者
-		json.put("isDeveloper", StringUtils.isNotEmpty(PropertiesUtil.getFormDefBackupPath()));
+		json.put("isDeveloper", StringUtil.isNotEmpty(PropertiesUtil.getFormDefBackupPath()));
 
 		writeSuccessData(response, json);
 	}
@@ -144,9 +143,9 @@ public class FormDefController extends CommonController<FormDef> {
 		String id = RequestUtil.getString(request, "id");
 		String key = RequestUtil.getString(request, "key");
 		FormDef formDef = null;
-		if (StringUtils.isNotEmpty(id)) {
+		if (StringUtil.isNotEmpty(id)) {
 			formDef = formDefManager.get(id);
-		} else if (StringUtils.isNotEmpty(key)) {
+		} else if (StringUtil.isNotEmpty(key)) {
 			formDef = formDefManager.getByKey(key);
 		}
 		writeSuccessData(response, formDefManager.getBackupHtml(formDef));
@@ -157,6 +156,8 @@ public class FormDefController extends CommonController<FormDef> {
 	 * boTree数据树
 	 * </pre>
 	 * 
+	 * @param request
+	 * @param response
 	 * @return
 	 * @throws Exception
 	 */
@@ -171,6 +172,8 @@ public class FormDefController extends CommonController<FormDef> {
 	 * 根据bo获取表单模板信息
 	 * </pre>
 	 * 
+	 * @param request
+	 * @param response
 	 * @return
 	 * @throws Exception
 	 */
@@ -190,18 +193,18 @@ public class FormDefController extends CommonController<FormDef> {
 	 * 
 	 * @param request
 	 * @param response
-	 * @param jsonArray
+	 * @param jsonObject
 	 * @throws Exception
 	 */
 	@RequestMapping("createHtml")
 	@ErrorCatching(writeErrorToResponse = true, value = "生成html异常")
 	public void createHtml(HttpServletRequest request, HttpServletResponse response, @RequestBody JSONArray jsonArray) throws Exception {
 		String boKey = RequestUtil.getString(request, "boKey");
-		BusinessObject businessObject = businessObjectService.getFilledByKey(boKey);
+		IBusinessObject businessObject = businessObjectService.getFilledByKey(boKey);
 		StringBuilder sb = new StringBuilder();
 		for (Object object : jsonArray) {
 			JSONObject jsonObject = (JSONObject) object;
-			BusinessTableRel relation = businessObject.getRelation().find(jsonObject.getString("tableKey"));
+			IBusTableRel relation = businessObject.getRelation().find(jsonObject.getString("tableKey"));
 			FormTemplate template = formTemplateManager.getByKey(jsonObject.getString("templateKey"));
 			if (template == null) {
 				continue;

@@ -4,6 +4,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.minxc.emp.core.util.AppContextUtil;
+import com.minxc.emp.core.util.BeanUtils;
+import com.minxc.emp.core.util.StringUtil;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -39,6 +43,10 @@ import org.activiti.image.ProcessDiagramGenerator;
 import org.apache.batik.transcoder.TranscoderInput;
 import org.apache.batik.transcoder.TranscoderOutput;
 import org.apache.batik.transcoder.image.PNGTranscoder;
+import org.minxc.emp.basis.api.constant.EnvironmentConstant;
+import org.minxc.emp.basis.api.constant.RightsObjectConstants;
+import org.minxc.emp.basis.api.service.SysAuthorizationService;
+import org.minxc.emp.basis.impl.util.ContextUtil;
 import org.minxc.emp.bpm.api.engine.event.BpmDefinitionUpdateEvent;
 import org.minxc.emp.bpm.api.model.def.BpmDefProperties;
 import org.minxc.emp.bpm.api.model.def.BpmProcessDef;
@@ -50,7 +58,12 @@ import org.minxc.emp.bpm.core.manager.BpmInstanceManager;
 import org.minxc.emp.bpm.core.model.BpmDefinition;
 import org.minxc.emp.bpm.core.model.BpmInstance;
 import org.minxc.emp.bpm.engine.model.DefaultBpmProcessDef;
+import org.minxc.emp.common.db.id.UniqueIdUtil;
+import org.minxc.emp.common.db.model.query.DefaultQueryFilter;
 import org.minxc.emp.common.manager.impl.CommonManager;
+import org.minxc.emp.core.api.exception.BusinessException;
+import org.minxc.emp.core.api.query.QueryFilter;
+import org.minxc.emp.core.api.query.QueryOperator;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.stereotype.Service;
 import org.springframework.util.MultiValueMap;
@@ -158,7 +171,7 @@ public class BpmDefinitionManagerImpl extends CommonManager<String, BpmDefinitio
 		this.repositoryService.addModelEditorSourceExtra(model.getId(), result);
 		DefaultBpmProcessDef def = (DefaultBpmProcessDef) this.bpmProcessDefService.initBpmProcessDef((IBpmDefinition) bpmDef);
 		if ("deploy".equals(bpmDef.getStatus()) && "deploy".equals(def.getExtProperties().getStatus())
-				&& !AppUtil.getCtxEnvironment().contains(EnvironmentConstant.PROD.key())) {
+				&& !AppContextUtil.getCtxEnvironment().contains(EnvironmentConstant.PROD.key())) {
 			throw new BusinessException("除了生产环境外，已发布状态的流程禁止修改！");
 		}
 		if (StringUtil.isEmpty((String) bpmDef.getStatus())
@@ -244,9 +257,9 @@ public class BpmDefinitionManagerImpl extends CommonManager<String, BpmDefinitio
 	private void c(BpmDefinition def) {
 		List<BpmDefinition> defList = this.bpmDefinitionDao.getByKey(def.getKey());
 		for (BpmDefinition defEntity : defList) {
-			AppUtil.publishEvent((ApplicationEvent) new BpmDefinitionUpdateEvent((IBpmDefinition) defEntity));
+			AppContextUtil.publishEvent((ApplicationEvent) new BpmDefinitionUpdateEvent((IBpmDefinition) defEntity));
 		}
-		AppUtil.publishEvent((ApplicationEvent) new BpmDefinitionUpdateEvent((IBpmDefinition) def));
+		AppContextUtil.publishEvent((ApplicationEvent) new BpmDefinitionUpdateEvent((IBpmDefinition) def));
 	}
 
 	public BpmDefinition getDefinitionByActDefId(String actDefId) {
@@ -270,7 +283,7 @@ public class BpmDefinitionManagerImpl extends CommonManager<String, BpmDefinitio
 		}
 		List<BpmDefinition> definitionList = this.bpmDefinitionDao.getByKey(definition.getKey());
 		for (BpmDefinition def : definitionList) {
-			AppUtil.publishEvent((ApplicationEvent) new BpmDefinitionUpdateEvent((IBpmDefinition) def));
+			AppContextUtil.publishEvent((ApplicationEvent) new BpmDefinitionUpdateEvent((IBpmDefinition) def));
 			this.bpmDefinitionDao.remove(def.getId());
 			if (!StringUtil.isNotEmpty((String) def.getActDeployId()))
 				continue;
@@ -283,7 +296,7 @@ public class BpmDefinitionManagerImpl extends CommonManager<String, BpmDefinitio
 
 	private boolean hasProcessInstance(String defId) {
 		DefaultQueryFilter query = new DefaultQueryFilter();
-		query.addFilter("def_id_", defId, QueryOP.EQUAL);
+		query.addFilter("def_id_", defId, QueryOperator.EQUAL);
 		List<BpmInstance> list = this.bpmInstanceManager.query(query);
 		return BeanUtils.isNotEmpty((Object) list);
 	}
@@ -292,7 +305,7 @@ public class BpmDefinitionManagerImpl extends CommonManager<String, BpmDefinitio
 		entity.setUpdateTime(new Date());
 		int updateRows = this.bpmDefinitionDao.update(entity);
 		if (updateRows == 0) {
-			AppUtil.publishEvent((ApplicationEvent) new BpmDefinitionUpdateEvent((IBpmDefinition) entity));
+			AppContextUtil.publishEvent((ApplicationEvent) new BpmDefinitionUpdateEvent((IBpmDefinition) entity));
 			throw new RuntimeException("流程定义更新失败，当前版本并非最新版本！已经刷新当前服务器缓存，请刷新页面重新修改提交。id:" + entity.getId() + "reversion:"
 					+ entity.getRev());
 		}

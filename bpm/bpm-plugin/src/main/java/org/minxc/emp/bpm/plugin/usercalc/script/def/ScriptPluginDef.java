@@ -1,9 +1,11 @@
 package org.minxc.emp.bpm.plugin.usercalc.script.def;
 
-import com.dstz.bpm.engine.plugin.plugindef.AbstractUserCalcPluginDef;
-import org.hibernate.validator.constraints.NotEmpty;
+import javax.validation.constraints.NotEmpty;
+
+import org.minxc.emp.bpm.engine.plugin.plugindef.AbstractUserCalcPluginDef;
 
 public class ScriptPluginDef extends AbstractUserCalcPluginDef {
+	private static final long serialVersionUID = 3971853142447396218L;
 	@NotEmpty(message = "脚本插件，脚本不能为空")
 	private String script = "";
 	@NotEmpty(message = "脚本插件，脚本描述不能为空")

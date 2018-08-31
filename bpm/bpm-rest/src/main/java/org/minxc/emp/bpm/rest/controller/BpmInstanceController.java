@@ -8,22 +8,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.IOUtils;
-import org.minxc.emp.base.api.aop.annotion.CatchErr;
-import org.minxc.emp.base.api.query.QueryFilter;
-import org.minxc.emp.base.api.response.impl.ResultMsg;
-import org.minxc.emp.base.core.util.StringUtil;
-import org.minxc.emp.base.db.model.page.PageJson;
-import org.minxc.emp.base.rest.GenericController;
-import org.minxc.emp.base.rest.util.RequestUtil;
+import org.minxc.emp.bpm.core.manager.BpmDefinitionManager;
+import org.minxc.emp.bpm.core.model.BpmDefinition;
+import org.minxc.emp.common.db.model.page.PageJson;
+import org.minxc.emp.common.rest.CommonController;
+import org.minxc.emp.common.rest.GenericController;
+import org.minxc.emp.common.rest.util.RequestUtil;
+import org.minxc.emp.core.api.aop.annotation.ErrorCatching;
+import org.minxc.emp.core.api.query.QueryFilter;
+import org.minxc.emp.core.api.query.QueryOperator;
+import org.minxc.emp.core.api.response.impl.ResultMessage;
 import org.minxc.emp.bpm.act.service.BpmImageService;
 import org.minxc.emp.bpm.api.engine.data.BpmFlowDataAccessor;
 import org.minxc.emp.bpm.api.engine.data.result.BpmFlowData;
 import org.minxc.emp.bpm.api.engine.data.result.FlowData;
 import org.minxc.emp.bpm.api.model.inst.IBpmInstance;
-import org.minxc.emp.bpm.core.manager.BpmDefinitionManager;
 import org.minxc.emp.bpm.core.manager.BpmInstanceManager;
 import org.minxc.emp.bpm.core.manager.BpmTaskOpinionManager;
-import org.minxc.emp.bpm.core.model.BpmDefinition;
 import org.minxc.emp.bpm.core.model.BpmInstance;
 import org.minxc.emp.bpm.core.model.BpmTaskOpinion;
 import org.minxc.emp.bpm.engine.action.cmd.DefaultInstanceActionCmd;
@@ -35,6 +36,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.github.pagehelper.Page;
+import com.minxc.emp.core.util.StringUtil;
 
 
 /**
@@ -73,8 +75,8 @@ public class BpmInstanceController extends GenericController {
      * 流程实例明细页面
      */
     @RequestMapping("getById")
-    @CatchErr
-    public ResultMsg<IBpmInstance> getBpmInstance(@RequestParam String id) throws Exception {
+    @ErrorCatching
+    public ResultMessage<IBpmInstance> getBpmInstance(@RequestParam String id) throws Exception {
     	IBpmInstance bpmInstance = null;
     	if (StringUtil.isNotEmpty(id)) {
             bpmInstance = bpmInstanceManager.get(id);
@@ -92,8 +94,8 @@ public class BpmInstanceController extends GenericController {
      * 
      */
     @RequestMapping("getInstanceData")
-    @CatchErr
-    public ResultMsg<FlowData> getInstanceData(HttpServletRequest request) throws Exception {
+    @ErrorCatching
+    public ResultMessage<FlowData> getInstanceData(HttpServletRequest request) throws Exception {
         String instanceId = request.getParameter("instanceId");
         Boolean readonly = RequestUtil.getBoolean(request, "readonly",false);
         
@@ -112,8 +114,8 @@ public class BpmInstanceController extends GenericController {
      * @throws Exception void
      */
     @RequestMapping("doAction")
-    @CatchErr
-    public ResultMsg<String> doAction(@RequestParam String flowData) throws Exception {
+    @ErrorCatching
+    public ResultMessage<String> doAction(@RequestParam String flowData) throws Exception {
 
         DefaultInstanceActionCmd instanceCmd = new DefaultInstanceActionCmd(flowData);
         String actionName = instanceCmd.executeCmd();
@@ -123,9 +125,8 @@ public class BpmInstanceController extends GenericController {
 
 
     @RequestMapping("getInstanceOpinion")
-    
-    @CatchErr
-    public ResultMsg<List<BpmTaskOpinion>> getInstanceOpinion(@RequestParam String instId) throws Exception {
+    @ErrorCatching
+    public ResultMessage<List<BpmTaskOpinion>> getInstanceOpinion(@RequestParam String instId) throws Exception {
         List<BpmTaskOpinion> taskOpinion = bpmTaskOpinionManager.getByInstId(instId);
 
         return getSuccessResult(taskOpinion, "获取流程意见成功");
@@ -154,8 +155,8 @@ public class BpmInstanceController extends GenericController {
 
 
     @RequestMapping("toForbidden")
-    @CatchErr("操作失败")
-    public ResultMsg<String> toForbidden(@RequestParam String id, @RequestParam Boolean forbidden) throws Exception {
+    @ErrorCatching("操作失败")
+    public ResultMessage<String> toForbidden(@RequestParam String id, @RequestParam Boolean forbidden) throws Exception {
         BpmInstance inst = bpmInstanceManager.get(id);
         String msg = "";
 

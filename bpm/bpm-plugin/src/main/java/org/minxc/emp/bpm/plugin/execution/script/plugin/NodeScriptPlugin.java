@@ -1,17 +1,19 @@
 package org.minxc.emp.bpm.plugin.execution.script.plugin;
 
-import com.dstz.base.core.util.StringUtil;
-import com.dstz.bpm.api.constant.EventType;
-import com.dstz.bpm.engine.plugin.runtime.abstact.AbstractBpmExecutionPlugin;
-import com.dstz.bpm.engine.plugin.session.BpmExecutionPluginSession;
-import com.dstz.sys.api.groovy.IGroovyScriptEngine;
 import java.util.Map;
 import javax.annotation.Resource;
 
+import org.minxc.emp.basis.api.groovy.IGroovyScriptEngine;
+import org.minxc.emp.bpm.engine.plugin.runtime.abstact.AbstractBpmExecutionPlugin;
+import org.minxc.emp.bpm.engine.plugin.session.BpmExecutionPluginSession;
 import org.minxc.emp.bpm.plugin.execution.script.def.NodeScriptPluginDef;
-import org.slf4j.Logger;
 import org.springframework.stereotype.Component;
 
+import com.minxc.emp.core.util.StringUtil;
+
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Component
 public class NodeScriptPlugin extends AbstractBpmExecutionPlugin<BpmExecutionPluginSession, NodeScriptPluginDef> {
 	@Resource
@@ -23,7 +25,7 @@ public class NodeScriptPlugin extends AbstractBpmExecutionPlugin<BpmExecutionPlu
 			return null;
 		}
 		this.groovyScriptEngine.execute(script, (Map) pluginSession);
-		this.LOG.info("节点{}执行了{}事件脚本", (Object) pluginDef.getNodeId(),
+		this.log.info("节点{}执行了{}事件脚本", (Object) pluginDef.getNodeId(),
 				(Object) pluginSession.getEventType().getValue());
 		return null;
 	}

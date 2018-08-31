@@ -1,10 +1,6 @@
 package org.minxc.emp.bpm.service;
 
 import com.alibaba.fastjson.JSONObject;
-import com.dstz.base.api.constant.IStatusCode;
-import com.dstz.base.api.exception.BusinessException;
-import com.dstz.base.api.exception.SerializeException;
-import com.dstz.base.core.cache.ICache;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -27,6 +23,7 @@ import org.minxc.emp.bpm.core.model.BpmDefinition;
 import org.minxc.emp.bpm.engine.model.DefaultBpmProcessDef;
 import org.minxc.emp.bpm.engine.parser.BpmDefNodeHandler;
 import org.minxc.emp.bpm.engine.parser.BpmProcessDefParser;
+import org.minxc.emp.core.api.exception.BusinessException;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -250,7 +247,7 @@ public class DefaultBpmProcessDefService implements BpmProcessDefService {
 			this.bP.delByKey("procdef_" + bpmDef.getId());
 			return def;
 		} catch (Exception e) {
-			throw new BusinessException(e.getMessage(), (IStatusCode) BpmStatusCode.PARSER_FLOW_ERROR, (Throwable) e);
+			throw new BusinessException(e.getMessage(), BpmStatusCode.PARSER_FLOW_ERROR, (Throwable) e);
 		}
 	}
 

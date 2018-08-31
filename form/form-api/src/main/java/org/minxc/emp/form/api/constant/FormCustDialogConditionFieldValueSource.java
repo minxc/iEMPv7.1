@@ -3,8 +3,8 @@ package org.minxc.emp.form.api.constant;
 /**
  * <pre>
  * 描述：FormCustDialogConditionField中的valueSource枚举
- * 作者:min.xianchang
- * 邮箱:xianchangmin@126.com
+ * 作者:aschs
+ * 邮箱:aschs@qq.com
  * 日期:2018年3月1日 下午4:29:12
  * 版权:summer
  * </pre>

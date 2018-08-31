@@ -1,12 +1,15 @@
 package org.minxc.emp.bpm.plugin.task.userassign.def;
 
-import com.dstz.bpm.api.engine.plugin.def.UserAssignRule;
-import com.dstz.bpm.engine.plugin.plugindef.AbstractBpmTaskPluginDef;
 import java.util.ArrayList;
 import java.util.List;
 import javax.validation.Valid;
 
+import org.minxc.emp.bpm.api.engine.plugin.def.UserAssignRule;
+import org.minxc.emp.bpm.engine.plugin.plugindef.AbstractBpmTaskPluginDef;
+
 public class UserAssignPluginDef extends AbstractBpmTaskPluginDef {
+	
+	private static final long serialVersionUID = 4198014798083213885L;
 	@Valid
 	List<UserAssignRule> ruleList = new ArrayList<UserAssignRule>();
 

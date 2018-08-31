@@ -1,11 +1,14 @@
 package org.minxc.emp.bpm.plugin.execution.nodemessage.def;
 
-import com.dstz.bpm.api.engine.plugin.def.UserAssignRule;
-import com.dstz.bpm.engine.plugin.plugindef.AbstractBpmExecutionPluginDef;
 import java.util.List;
-import org.hibernate.validator.constraints.NotBlank;
+
+import javax.validation.constraints.NotBlank;
+
+import org.minxc.emp.bpm.api.engine.plugin.def.UserAssignRule;
+import org.minxc.emp.bpm.engine.plugin.plugindef.AbstractBpmExecutionPluginDef;
 
 public class NodeMessage extends AbstractBpmExecutionPluginDef {
+	
 	private static final long serialVersionUID = 1L;
 	@NotBlank(message = "节点消息描述不能为空")
 	private String desc;

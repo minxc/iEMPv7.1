@@ -1,8 +1,8 @@
 package org.minxc.emp.bpm.engine.parser;
 
 import com.alibaba.fastjson.JSONObject;
-import com.dstz.base.core.util.AppUtil;
-import com.dstz.base.core.util.BeanUtils;
+import com.minxc.emp.core.util.AppContextUtil;
+import com.minxc.emp.core.util.BeanUtils;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -39,7 +39,7 @@ public class BpmProcessDefParser {
 		if (BeanUtils.isNotEmpty(bi)) {
 			return bi;
 		}
-		Map map = AppUtil.getImplInstance(AbsFlowParse.class);
+		Map map = AppContextUtil.getImplInstance(AbsFlowParse.class);
 		bi = new ArrayList(map.values());
 		return bi;
 	}
@@ -48,7 +48,7 @@ public class BpmProcessDefParser {
 		if (BeanUtils.isNotEmpty(bj)) {
 			return bj;
 		}
-		Map map = AppUtil.getImplInstance(AbsNodeParse.class);
+		Map map = AppContextUtil.getImplInstance(AbsNodeParse.class);
 		bj = new ArrayList(map.values());
 		return bj;
 	}

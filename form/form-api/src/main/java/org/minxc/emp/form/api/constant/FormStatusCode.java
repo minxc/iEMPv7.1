@@ -3,9 +3,11 @@ package org.minxc.emp.form.api.constant;
 import org.minxc.emp.core.api.status.StatusCode;
 
 /**
- * @说明 基础系统状态码定义
+ *  基础系统状态码定义
  */
 public enum FormStatusCode implements StatusCode {
+	
+	
 
 	FORM_ELEMENT_GENERATOR_ERROR("f10001","表单element解析失败"),
     /**
@@ -46,17 +48,20 @@ public enum FormStatusCode implements StatusCode {
     /**
      * 描述
      */
-    private String desc;
+    private String description;
 
     /**
      * 系统
      */
-    private String system;
+    private String application;
+    
+    
+    private String tenant;
 
     FormStatusCode(String code, String description) {
         this.code = code;
-        this.desc = description;
-        this.system = "FORM";
+        this.description = description;
+        this.application = "FORM";
     }
 
     @Override
@@ -64,25 +69,35 @@ public enum FormStatusCode implements StatusCode {
         return code;
     }
 
-
-	@Override
 	public String getDescription() {
-		// TODO Auto-generated method stub
-		return desc;
+		return description;
 	}
 
-	
-	
-	@Override
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 	public String getApplication() {
-		// TODO Auto-generated method stub
-		 return system;
+		return application;
 	}
 
-	@Override
-	public String getTenant() {
-		// TODO Auto-generated method stub
-		return null;
+	public void setApplication(String application) {
+		this.application = application;
 	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public String getTenant() {
+		return tenant;
+	}
+
+	public void setTenant(String tenant) {
+		this.tenant = tenant;
+	}
+
+
+   
 }
 	 

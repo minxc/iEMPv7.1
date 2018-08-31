@@ -1,6 +1,6 @@
 package org.minxc.emp.bpm.plugin.usercalc.user.def;
 
-import com.dstz.bpm.engine.plugin.plugindef.AbstractUserCalcPluginDef;
+import org.minxc.emp.bpm.engine.plugin.plugindef.AbstractUserCalcPluginDef;
 
 public class UserPluginDef extends AbstractUserCalcPluginDef {
 	private String source = "";

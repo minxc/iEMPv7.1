@@ -3,16 +3,11 @@ package org.minxc.emp.bpm.plugin.execution.nodemessage.context;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.dstz.base.core.util.AppUtil;
-import com.dstz.base.core.util.StringUtil;
-import com.dstz.bpm.api.constant.EventType;
-import com.dstz.bpm.api.engine.plugin.def.BpmPluginDef;
-import com.dstz.bpm.api.engine.plugin.runtime.RunTimePlugin;
-import com.dstz.bpm.engine.plugin.context.AbstractBpmExecutionPluginContext;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import org.minxc.emp.bpm.engine.plugin.context.AbstractBpmExecutionPluginContext;
 import org.minxc.emp.bpm.plugin.execution.nodemessage.def.NodeMessage;
 import org.minxc.emp.bpm.plugin.execution.nodemessage.def.NodeMessagePluginDef;
 import org.minxc.emp.bpm.plugin.execution.nodemessage.plugin.NodeMessagePlugin;

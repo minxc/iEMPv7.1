@@ -1,11 +1,10 @@
 package org.minxc.emp.bpm.engine.plugin.session.impl;
 
-import com.dstz.bus.api.model.IBusinessData;
-import com.dstz.org.api.model.IUser;
-import com.dstz.sys.util.ContextUtil;
 import java.util.HashMap;
 import java.util.Map;
 import org.activiti.engine.delegate.VariableScope;
+import org.minxc.emp.basis.impl.util.ContextUtil;
+import org.minxc.emp.biz.api.model.IBusinessData;
 import org.minxc.emp.bpm.api.constant.ActionType;
 import org.minxc.emp.bpm.api.constant.EventType;
 import org.minxc.emp.bpm.api.engine.action.cmd.BaseActionCmd;

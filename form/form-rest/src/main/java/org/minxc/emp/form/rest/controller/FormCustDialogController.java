@@ -13,8 +13,8 @@ import org.minxc.emp.common.rest.CommonController;
 import org.minxc.emp.common.rest.util.RequestUtil;
 import org.minxc.emp.core.api.aop.annotation.ErrorCatching;
 import org.minxc.emp.core.api.query.QueryFilter;
-import org.minxc.emp.form.manager.FormCustDialogManager;
-import org.minxc.emp.form.model.FormCustDialog;
+import org.minxc.emp.form.core.manager.FormCustDialogManager;
+import org.minxc.emp.form.core.model.FormCustDialog;
 import org.minxc.emp.system.api.model.ISysDataSource;
 import org.minxc.emp.system.api.service.ISysDataSourceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,12 +31,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/form/formCustDialog/")
 public class FormCustDialogController extends CommonController<FormCustDialog> {
     @Autowired
-   private  FormCustDialogManager formCustDialogManager;
+    FormCustDialogManager formCustDialogManager;
     @Autowired
-    private  BasicDao<?> commonDao;
+    BasicDao<?> commonDao;
     
     @Autowired
-    private ISysDataSourceService sysDataSourceService;
+    ISysDataSourceService sysDataSourceService;
 
     /**
      * <pre>
@@ -68,7 +68,7 @@ public class FormCustDialogController extends CommonController<FormCustDialog> {
      * <pre>
      * edit页面的searchObjName
      * 其他页面使用可以参数传一个json:
-     * {dsKey:"数据源key",objType:"枚举在 org.minxc.emp.form.api.model.FormCustDialogOBJTYPE ",objName:"要查询的名字"}
+     * {dsKey:"数据源key",objType:"枚举在 com.dstz.form.api.model.FormCustDialogOBJTYPE ",objName:"要查询的名字"}
      * </pre>
      *
      * @param request
@@ -86,7 +86,7 @@ public class FormCustDialogController extends CommonController<FormCustDialog> {
      * <pre>
      * 获取objName对象的信息
      * 其他页面使用可以参数传一个json:
-     * {dsKey:"数据源key",objType:"枚举在org.minxc.emp.form.model.FormCustDialog$OBJTYPE",objName:"要查询的名字"}
+     * {dsKey:"数据源key",objType:"枚举在com.dstz.form.model.FormCustDialog$OBJTYPE",objName:"要查询的名字"}
      * </pre>
      *
      * @param request

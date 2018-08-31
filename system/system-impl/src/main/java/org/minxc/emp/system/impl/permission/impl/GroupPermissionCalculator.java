@@ -18,10 +18,11 @@ import com.minxc.emp.core.util.ThreadMapUtil;
  * 描述：组 抽象类
  */
 public abstract class GroupPermissionCalculator implements IPermissionCalculator {
+	
 	/**
 	 * 线程变量ThreadMapUtil中关于当前权限解析器的线程变量
 	 */
-	private static String threadMapKey = "com.dstz.sys.permission.impl.GroupPermission";
+	private static String threadMapKey = " org.minxc.emp.system.impl.permission.impl.GroupPermission";
 
 //	@Override
 //	public boolean haveRights(JSONObject json) {
@@ -51,6 +52,7 @@ public abstract class GroupPermissionCalculator implements IPermissionCalculator
 	
 	@Override
 	public boolean haveRights(JsonNode json) {
+		
 		Map<String, List<Group>> allGroup = (Map<String, List<Group>>) ThreadMapUtil.get(threadMapKey);
 		if (allGroup == null) {
 			GroupService groupService = AppContextUtil.getBean(GroupService.class);
@@ -66,10 +68,7 @@ public abstract class GroupPermissionCalculator implements IPermissionCalculator
 		}
 		
 		for (Group group : groups) {
-			
 			JsonNode node  = json.get("id");
-			
-			
 			if (json.get("id").contains(group.getGroupId())) {
 				return true;
 			}

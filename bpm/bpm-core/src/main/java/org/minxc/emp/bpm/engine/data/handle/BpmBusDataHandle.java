@@ -1,19 +1,5 @@
 package org.minxc.emp.bpm.engine.data.handle;
 
-import com.dstz.base.api.constant.IStatusCode;
-import com.dstz.base.api.exception.SystemException;
-import com.dstz.base.core.util.BeanUtils;
-import com.dstz.base.core.util.StringUtil;
-import com.dstz.base.db.dboper.DbOperator;
-import com.dstz.base.db.dboper.DbOperatorFactory;
-import com.dstz.bus.api.model.IBusTableRel;
-import com.dstz.bus.api.model.IBusinessData;
-import com.dstz.bus.api.model.IBusinessObject;
-import com.dstz.bus.api.model.IBusinessPermission;
-import com.dstz.bus.api.model.permission.IBusObjPermission;
-import com.dstz.bus.api.service.IBusinessDataService;
-import com.dstz.bus.api.service.IBusinessObjectService;
-import com.dstz.bus.api.service.IBusinessPermissionService;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -22,6 +8,12 @@ import java.util.Map;
 import java.util.Set;
 import javax.annotation.Resource;
 
+import org.minxc.emp.biz.api.model.IBusinessData;
+import org.minxc.emp.biz.api.model.IBusinessObject;
+import org.minxc.emp.biz.api.model.IBusinessPermission;
+import org.minxc.emp.biz.api.service.IBusinessDataService;
+import org.minxc.emp.biz.api.service.IBusinessObjectService;
+import org.minxc.emp.biz.api.service.IBusinessPermissionService;
 import org.minxc.emp.bpm.api.engine.action.cmd.BaseActionCmd;
 import org.minxc.emp.bpm.api.exception.BpmStatusCode;
 import org.minxc.emp.bpm.api.model.def.BpmDataModel;
@@ -35,8 +27,14 @@ import org.minxc.emp.bpm.core.manager.BpmInstanceManager;
 import org.minxc.emp.bpm.core.model.BpmBusLink;
 import org.minxc.emp.bpm.core.model.BpmInstance;
 import org.minxc.emp.bpm.engine.model.DefaultBpmProcessDef;
+import org.minxc.emp.common.db.dboper.DbOperator;
+import org.minxc.emp.common.db.dboper.DbOperatorFactory;
+import org.minxc.emp.core.api.exception.SystemException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import com.minxc.emp.core.util.BeanUtils;
+import com.minxc.emp.core.util.StringUtil;
 
 @Component
 public class BpmBusDataHandle {
@@ -72,7 +70,7 @@ public class BpmBusDataHandle {
 				if (busData == null) {
 					throw new SystemException(
 							String.format("bizCode[%s] bizId[%s]", busLink.getBizCode(), busLink.getBizId()),
-							(IStatusCode) BpmStatusCode.FLOW_BUS_DATA_LOSE);
+							BpmStatusCode.FLOW_BUS_DATA_LOSE);
 				}
 				dataMap.put(busLink.getBizCode(), busData);
 			}
@@ -85,7 +83,7 @@ public class BpmBusDataHandle {
 			if (busData == null) {
 				throw new SystemException(
 						String.format("bizCode[%s] bizId[%s]", busLink.getBizCode(), busLink.getBizId()),
-						(IStatusCode) BpmStatusCode.FLOW_BUS_DATA_LOSE);
+						BpmStatusCode.FLOW_BUS_DATA_LOSE);
 			}
 			dataMap.put(busLink.getBizCode(), busData);
 		}

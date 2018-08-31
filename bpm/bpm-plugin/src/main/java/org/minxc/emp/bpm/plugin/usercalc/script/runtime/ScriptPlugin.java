@@ -1,12 +1,5 @@
 package org.minxc.emp.bpm.plugin.usercalc.script.runtime;
 
-import com.dstz.base.core.util.BeanUtils;
-import com.dstz.base.core.util.StringUtil;
-import com.dstz.bpm.api.engine.plugin.def.BpmTaskPluginDef;
-import com.dstz.bpm.engine.plugin.runtime.abstact.AbstractUserCalcPlugin;
-import com.dstz.bpm.engine.plugin.session.BpmUserCalcPluginSession;
-import com.dstz.sys.api.groovy.IGroovyScriptEngine;
-import com.dstz.sys.api.model.SysIdentity;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -15,8 +8,15 @@ import java.util.Map;
 import java.util.Set;
 import javax.annotation.Resource;
 
+import org.minxc.emp.basis.api.groovy.IGroovyScriptEngine;
+import org.minxc.emp.basis.api.model.SysIdentity;
+import org.minxc.emp.bpm.engine.plugin.runtime.abstact.AbstractUserCalcPlugin;
+import org.minxc.emp.bpm.engine.plugin.session.BpmUserCalcPluginSession;
 import org.minxc.emp.bpm.plugin.usercalc.script.def.ScriptPluginDef;
 import org.springframework.stereotype.Component;
+
+import com.minxc.emp.core.util.BeanUtils;
+import com.minxc.emp.core.util.StringUtil;
 
 @Component
 public class ScriptPlugin extends AbstractUserCalcPlugin<ScriptPluginDef> {

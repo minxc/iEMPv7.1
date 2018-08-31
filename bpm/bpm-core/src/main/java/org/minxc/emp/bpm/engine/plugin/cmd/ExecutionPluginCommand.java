@@ -1,7 +1,5 @@
 package org.minxc.emp.bpm.engine.plugin.cmd;
 
-import com.dstz.base.api.constant.IStatusCode;
-import com.dstz.base.api.exception.BusinessException;
 
 import java.util.List;
 import javax.annotation.Resource;
@@ -21,6 +19,7 @@ import org.minxc.emp.bpm.engine.plugin.factory.BpmPluginFactory;
 import org.minxc.emp.bpm.engine.plugin.factory.BpmPluginSessionFactory;
 import org.minxc.emp.bpm.engine.plugin.runtime.BpmExecutionPlugin;
 import org.minxc.emp.bpm.engine.plugin.session.BpmExecutionPluginSession;
+import org.minxc.emp.core.api.exception.BusinessException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -64,7 +63,7 @@ public class ExecutionPluginCommand implements ExecutionCommand {
 					this.LOG.debug("==>执行插件【{}】", (Object) bpmPluginContext.getTitle());
 				} catch (Exception e) {
 					this.LOG.error("执行插件【{}】出现异常:{}", new Object[]{bpmPluginContext.getTitle(), e.getMessage(), e});
-					throw new BusinessException(bpmPluginContext.getTitle(), (IStatusCode) BpmStatusCode.PLUGIN_ERROR,
+					throw new BusinessException(bpmPluginContext.getTitle(), BpmStatusCode.PLUGIN_ERROR,
 							(Throwable) e);
 				}
 			}

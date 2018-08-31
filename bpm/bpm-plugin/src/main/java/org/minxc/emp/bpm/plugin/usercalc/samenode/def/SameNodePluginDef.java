@@ -1,7 +1,8 @@
 package org.minxc.emp.bpm.plugin.usercalc.samenode.def;
 
-import com.dstz.bpm.engine.plugin.plugindef.AbstractUserCalcPluginDef;
-import org.hibernate.validator.constraints.NotEmpty;
+import javax.validation.constraints.NotEmpty;
+
+import org.minxc.emp.bpm.engine.plugin.plugindef.AbstractUserCalcPluginDef;
 
 public class SameNodePluginDef extends AbstractUserCalcPluginDef {
 	@NotEmpty(message = "人员插件相同节点执行人，节点ID不能为空")

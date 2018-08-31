@@ -2,12 +2,13 @@ package org.minxc.emp.bpm.rest.controller;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.minxc.emp.core.util.BeanUtils;
+import com.minxc.emp.core.util.StringUtil;
 
-import org.minxc.emp.base.api.aop.annotion.CatchErr;
-import org.minxc.emp.base.core.util.BeanUtils;
-import org.minxc.emp.base.core.util.StringUtil;
-import org.minxc.emp.base.rest.GenericController;
-import org.minxc.emp.base.rest.util.RequestUtil;
+import org.minxc.emp.biz.api.model.IBusinessColumn;
+import org.minxc.emp.biz.api.model.IBusinessObject;
+import org.minxc.emp.biz.api.service.IBusinessDataService;
+import org.minxc.emp.biz.api.service.IBusinessObjectService;
 import org.minxc.emp.bpm.api.constant.BpmConstants;
 import org.minxc.emp.bpm.api.engine.action.button.ButtonFactory;
 import org.minxc.emp.bpm.api.model.def.BpmDataModel;
@@ -18,11 +19,10 @@ import org.minxc.emp.bpm.api.service.BpmProcessDefService;
 import org.minxc.emp.bpm.core.manager.BpmDefinitionManager;
 import org.minxc.emp.bpm.core.model.BpmDefinition;
 import org.minxc.emp.bpm.engine.model.DefaultBpmProcessDef;
-import org.minxc.emp.bus.api.model.IBusinessColumn;
-import org.minxc.emp.bus.api.model.IBusinessObject;
-import org.minxc.emp.bus.api.service.IBusinessDataService;
-import org.minxc.emp.bus.api.service.IBusinessObjectService;
-import org.minxc.emp.org.api.service.GroupService;
+import org.minxc.emp.common.rest.GenericController;
+import org.minxc.emp.common.rest.util.RequestUtil;
+import org.minxc.emp.core.api.aop.annotation.ErrorCatching;
+import org.minxc.emp.idm.api.service.GroupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -123,7 +123,7 @@ public class BpmProcessDefController extends GenericController {
 
 
     @RequestMapping("getGroupTypes")
-    @CatchErr
+    @ErrorCatching
     public void getGroupTypes(HttpServletRequest request, HttpServletResponse response) throws Exception {
         writeSuccessData(response, userGroupService.getGroupTypes());
     }

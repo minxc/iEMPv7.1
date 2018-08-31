@@ -1,26 +1,6 @@
 package org.minxc.emp.bpm.plugin.execution.nodemessage.plugin;
 
-import com.dstz.base.core.util.BeanUtils;
-import com.dstz.base.core.util.StringUtil;
-import com.dstz.bpm.api.constant.EventType;
-import com.dstz.bpm.api.engine.action.cmd.BaseActionCmd;
-import com.dstz.bpm.api.engine.context.BpmContext;
-import com.dstz.bpm.api.engine.plugin.def.UserAssignRule;
-import com.dstz.bpm.api.service.BpmProcessDefService;
-import com.dstz.bpm.engine.plugin.factory.BpmPluginSessionFactory;
-import com.dstz.bpm.engine.plugin.runtime.abstact.AbstractBpmExecutionPlugin;
-import com.dstz.bpm.engine.plugin.session.BpmExecutionPluginSession;
-import com.dstz.bpm.engine.plugin.session.BpmPluginSession;
-import com.dstz.bpm.engine.plugin.session.BpmUserCalcPluginSession;
-import com.dstz.org.api.model.IUser;
-import com.dstz.sys.api.freemark.IFreemarkEngine;
-import com.dstz.sys.api.groovy.IGroovyScriptEngine;
-import com.dstz.sys.api.jms.model.DefaultJmsDTO;
-import com.dstz.sys.api.jms.model.JmsDTO;
-import com.dstz.sys.api.jms.model.msg.NotifyMessage;
-import com.dstz.sys.api.jms.producer.JmsProducer;
-import com.dstz.sys.api.model.SysIdentity;
-import com.dstz.sys.util.ContextUtil;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -28,6 +8,23 @@ import java.util.List;
 import java.util.Map;
 import javax.annotation.Resource;
 
+import org.minxc.emp.basis.api.freemark.IFreemarkEngine;
+import org.minxc.emp.basis.api.jms.model.DefaultJmsDTO;
+import org.minxc.emp.basis.api.jms.model.JmsDTO;
+import org.minxc.emp.basis.api.jms.model.msg.NotifyMessage;
+import org.minxc.emp.basis.api.jms.producer.JmsProducer;
+import org.minxc.emp.basis.api.model.SysIdentity;
+import org.minxc.emp.basis.impl.groovy.GroovyScriptEngine;
+import org.minxc.emp.basis.impl.util.ContextUtil;
+import org.minxc.emp.bpm.api.engine.action.cmd.BaseActionCmd;
+import org.minxc.emp.bpm.api.engine.context.BpmContext;
+import org.minxc.emp.bpm.api.engine.plugin.def.UserAssignRule;
+import org.minxc.emp.bpm.api.service.BpmProcessDefService;
+import org.minxc.emp.bpm.engine.plugin.factory.BpmPluginSessionFactory;
+import org.minxc.emp.bpm.engine.plugin.runtime.abstact.AbstractBpmExecutionPlugin;
+import org.minxc.emp.bpm.engine.plugin.session.BpmExecutionPluginSession;
+import org.minxc.emp.bpm.engine.plugin.session.BpmPluginSession;
+import org.minxc.emp.bpm.engine.plugin.session.BpmUserCalcPluginSession;
 import org.minxc.emp.bpm.plugin.execution.nodemessage.def.NodeMessage;
 import org.minxc.emp.bpm.plugin.execution.nodemessage.def.NodeMessagePluginDef;
 import org.minxc.emp.bpm.plugin.task.userassign.plugin.UserAssignRuleCalc;
@@ -35,10 +32,13 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.minxc.emp.core.util.BeanUtils;
+import com.minxc.emp.core.util.StringUtil;
+
 @Component
 public class NodeMessagePlugin extends AbstractBpmExecutionPlugin<BpmExecutionPluginSession, NodeMessagePluginDef> {
 	@Resource
-	private IGroovyScriptEngine g;
+	private GroovyScriptEngine g;
 	@Resource
 	private BpmProcessDefService h;
 	@Resource

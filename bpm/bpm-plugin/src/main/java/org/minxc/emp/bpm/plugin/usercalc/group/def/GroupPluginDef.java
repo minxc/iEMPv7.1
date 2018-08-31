@@ -1,9 +1,12 @@
 package org.minxc.emp.bpm.plugin.usercalc.group.def;
 
-import com.dstz.bpm.engine.plugin.plugindef.AbstractUserCalcPluginDef;
-import org.hibernate.validator.constraints.NotEmpty;
+import javax.validation.constraints.NotEmpty;
+
+import org.minxc.emp.bpm.engine.plugin.plugindef.AbstractUserCalcPluginDef;
 
 public class GroupPluginDef extends AbstractUserCalcPluginDef {
+
+	private static final long serialVersionUID = -7918828703071848183L;
 	@NotEmpty(message = "人员插件组类型不能为空")
 	private String type = "";
 	private String typeName = "";

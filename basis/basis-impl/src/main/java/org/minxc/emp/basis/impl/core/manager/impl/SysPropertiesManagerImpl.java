@@ -34,6 +34,7 @@ public class SysPropertiesManagerImpl extends CommonManager<String, SysPropertie
 
 @Resource
     SysPropertiesDao sysPropertiesDao;
+
     @Resource
     ICache cache;
 

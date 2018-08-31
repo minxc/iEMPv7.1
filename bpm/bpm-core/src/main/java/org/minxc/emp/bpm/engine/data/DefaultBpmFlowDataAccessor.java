@@ -1,19 +1,9 @@
 package org.minxc.emp.bpm.engine.data;
 
 import com.alibaba.fastjson.JSONObject;
-import com.dstz.base.api.constant.IStatusCode;
-import com.dstz.base.api.exception.BusinessException;
-import com.dstz.base.api.exception.SystemException;
-import com.dstz.base.core.util.BeanUtils;
-import com.dstz.base.core.util.StringUtil;
-import com.dstz.bus.api.model.IBusinessData;
-import com.dstz.bus.api.model.IBusinessPermission;
-import com.dstz.bus.api.service.IBusinessDataService;
-import com.dstz.form.api.model.FormCategory;
-import com.dstz.form.api.model.FormType;
-import com.dstz.form.api.model.IFormDef;
-import com.dstz.form.api.service.FormService;
-import com.dstz.sys.api.groovy.IGroovyScriptEngine;
+import com.minxc.emp.core.util.BeanUtils;
+import com.minxc.emp.core.util.StringUtil;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,6 +12,10 @@ import java.util.Map;
 import java.util.Set;
 import javax.annotation.Resource;
 
+import org.minxc.emp.basis.impl.groovy.GroovyScriptEngine;
+import org.minxc.emp.biz.api.model.IBusinessData;
+import org.minxc.emp.biz.api.model.IBusinessPermission;
+import org.minxc.emp.biz.api.service.IBusinessDataService;
 import org.minxc.emp.bpm.api.engine.action.button.ButtonFactory;
 import org.minxc.emp.bpm.api.engine.data.BpmFlowDataAccessor;
 import org.minxc.emp.bpm.api.engine.data.result.BpmFlowData;
@@ -44,12 +38,19 @@ import org.minxc.emp.bpm.core.manager.BpmTaskManager;
 import org.minxc.emp.bpm.core.model.BpmInstance;
 import org.minxc.emp.bpm.engine.data.handle.BpmBusDataHandle;
 import org.minxc.emp.bpm.engine.model.DefaultBpmProcessDef;
+import org.minxc.emp.core.api.exception.BusinessException;
+import org.minxc.emp.core.api.exception.SystemException;
+import org.minxc.emp.form.api.model.FormCategory;
+import org.minxc.emp.form.api.model.FormType;
+import org.minxc.emp.form.api.model.IFormDef;
+import org.minxc.emp.form.api.service.FormService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 @Component
 public class DefaultBpmFlowDataAccessor implements BpmFlowDataAccessor {
+	
 	protected Logger LOG = LoggerFactory.getLogger(this.getClass());
 	@Resource
 	private BpmInstanceManager aD;
@@ -68,7 +69,7 @@ public class DefaultBpmFlowDataAccessor implements BpmFlowDataAccessor {
 	@Resource
 	private BpmBusDataHandle aH;
 	@Resource
-	private IGroovyScriptEngine av;
+	private GroovyScriptEngine av;
 	@Resource
 	private IBusinessDataService businessDataService;
 
@@ -83,7 +84,7 @@ public class DefaultBpmFlowDataAccessor implements BpmFlowDataAccessor {
 
 	public BpmFlowData getStartFlowData(String defId, String instanceId, FormType formType, Boolean readonly) {
 		if (StringUtil.isEmpty((String) instanceId) && StringUtil.isEmpty((String) defId)) {
-			throw new BusinessException("获取发起流程数据失败!流程定义id或者实例id缺失", (IStatusCode) BpmStatusCode.PARAM_ILLEGAL);
+			throw new BusinessException("获取发起流程数据失败!流程定义id或者实例id缺失", BpmStatusCode.PARAM_ILLEGAL);
 		}
 		BpmFlowInstanceData data = new BpmFlowInstanceData();
 		if (StringUtil.isEmpty((String) instanceId)) {
@@ -104,7 +105,7 @@ public class DefaultBpmFlowDataAccessor implements BpmFlowDataAccessor {
 		BpmFlowTaskData taskData = new BpmFlowTaskData();
 		IBpmTask task = (IBpmTask) this.ay.get(taskId);
 		if (task == null) {
-			throw new BusinessException("任务可能已经办理完成", (IStatusCode) BpmStatusCode.TASK_NOT_FOUND);
+			throw new BusinessException("任务可能已经办理完成", BpmStatusCode.TASK_NOT_FOUND);
 		}
 		taskData.setTask(task);
 		this.a((BpmFlowData) taskData, task.getInstId(), task.getNodeId(), formType, false);
@@ -123,7 +124,7 @@ public class DefaultBpmFlowDataAccessor implements BpmFlowDataAccessor {
 			Map dataMap = this.aH.a(permission, defId);
 			IFormDef formDef = this.aF.getByFormKey(form.getFormValue());
 			if (formDef == null) {
-				throw new BusinessException(form.getFormValue(), (IStatusCode) BpmStatusCode.FLOW_FORM_LOSE);
+				throw new BusinessException(form.getFormValue(), BpmStatusCode.FLOW_FORM_LOSE);
 			}
 			form.setFormHtml(formDef.getHtml());
 			flowData.setDataMap(dataMap);
@@ -145,7 +146,7 @@ public class DefaultBpmFlowDataAccessor implements BpmFlowDataAccessor {
 			flowData.setDataMap(dataModel);
 			IFormDef formDef = this.aF.getByFormKey(form.getFormValue());
 			if (formDef == null) {
-				throw new BusinessException(form.getFormValue(), (IStatusCode) BpmStatusCode.FLOW_FORM_LOSE);
+				throw new BusinessException(form.getFormValue(), BpmStatusCode.FLOW_FORM_LOSE);
 			}
 			form.setFormHtml(formDef.getHtml());
 			this.a(flowData, nodeId);
@@ -172,7 +173,7 @@ public class DefaultBpmFlowDataAccessor implements BpmFlowDataAccessor {
 			try {
 				this.av.execute(init.getBeforeShow(), param);
 			} catch (Exception e) {
-				throw new SystemException("执行脚本初始化失败", (IStatusCode) BpmStatusCode.FLOW_DATA_EXECUTE_SHOWSCRIPT_ERROR,
+				throw new SystemException("执行脚本初始化失败", BpmStatusCode.FLOW_DATA_EXECUTE_SHOWSCRIPT_ERROR,
 						(Throwable) e);
 			}
 			this.LOG.debug("执行节点数据初始化脚本{}", (Object) init.getBeforeShow());
@@ -214,7 +215,7 @@ public class DefaultBpmFlowDataAccessor implements BpmFlowDataAccessor {
 						continue;
 					}
 				} catch (Exception e) {
-					throw new SystemException("按钮脚本执行失败", (IStatusCode) BpmStatusCode.FLOW_DATA_GET_BUTTONS_ERROR,
+					throw new SystemException("按钮脚本执行失败", BpmStatusCode.FLOW_DATA_GET_BUTTONS_ERROR,
 							(Throwable) e);
 				}
 			}

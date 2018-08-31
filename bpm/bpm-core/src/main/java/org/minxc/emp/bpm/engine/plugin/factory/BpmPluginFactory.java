@@ -1,6 +1,5 @@
 package org.minxc.emp.bpm.engine.plugin.factory;
 
-import com.dstz.base.core.util.AppUtil;
 
 import java.util.List;
 
@@ -8,6 +7,8 @@ import org.minxc.emp.bpm.api.constant.EventType;
 import org.minxc.emp.bpm.api.engine.plugin.context.BpmPluginContext;
 import org.minxc.emp.bpm.engine.plugin.runtime.BpmExecutionPlugin;
 import org.minxc.emp.bpm.engine.plugin.runtime.BpmTaskPlugin;
+
+import com.minxc.emp.core.util.AppContextUtil;
 
 public class BpmPluginFactory {
 	public static BpmExecutionPlugin buildExecutionPlugin(BpmPluginContext bpmPluginContext, EventType eventType) {
@@ -25,7 +26,7 @@ public class BpmPluginFactory {
 
 	public static BpmTaskPlugin buildTaskPlugin(BpmPluginContext bpmPluginContext, EventType eventType) {
 		if (bpmPluginContext.getEventTypes().contains((Object) eventType)) {
-			return (BpmTaskPlugin) AppUtil.getBean((Class) bpmPluginContext.getPluginClass());
+			return (BpmTaskPlugin) AppContextUtil.getBean((Class) bpmPluginContext.getPluginClass());
 		}
 		return null;
 	}

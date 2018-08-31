@@ -1,8 +1,5 @@
 package org.minxc.emp.bpm.engine.plugin.cmd;
 
-import com.dstz.base.api.constant.IStatusCode;
-import com.dstz.base.api.exception.BusinessException;
-import com.dstz.base.core.util.BeanUtils;
 
 import java.util.List;
 import javax.annotation.Resource;
@@ -26,9 +23,12 @@ import org.minxc.emp.bpm.engine.plugin.runtime.BpmExecutionPlugin;
 import org.minxc.emp.bpm.engine.plugin.runtime.BpmTaskPlugin;
 import org.minxc.emp.bpm.engine.plugin.session.BpmTaskPluginSession;
 import org.minxc.emp.bpm.engine.plugin.session.impl.DefaultBpmExecutionPluginSession;
+import org.minxc.emp.core.api.exception.BusinessException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+
+import com.minxc.emp.core.util.BeanUtils;
 
 @Service
 public class TaskPluginCommand implements TaskCommand {
@@ -59,7 +59,7 @@ public class TaskPluginCommand implements TaskCommand {
 					bpmTaskPlugin.execute((Object) bpmTaskSession, (Object) bpmTaskPluginDef);
 				} catch (Exception e) {
 					this.LOG.error("执行任务插件【{}】出现异常:{}", new Object[]{bpmPluginContext.getTitle(), e.getMessage(), e});
-					throw new BusinessException(bpmPluginContext.getTitle(), (IStatusCode) BpmStatusCode.PLUGIN_ERROR,
+					throw new BusinessException(bpmPluginContext.getTitle(), BpmStatusCode.PLUGIN_ERROR,
 							(Throwable) e);
 				}
 			}
@@ -71,7 +71,7 @@ public class TaskPluginCommand implements TaskCommand {
 				bpmExecutionPlugin.execute((Object) executionSession, (Object) bpmPluginContext.getBpmPluginDef());
 			} catch (Exception e) {
 				this.LOG.error("节点实例插件【{}】出现异常:{}", new Object[]{bpmPluginContext.getTitle(), e.getMessage(), e});
-				throw new BusinessException(bpmPluginContext.getTitle(), (IStatusCode) BpmStatusCode.PLUGIN_ERROR,
+				throw new BusinessException(bpmPluginContext.getTitle(), BpmStatusCode.PLUGIN_ERROR,
 						(Throwable) e);
 			}
 		}
@@ -87,7 +87,7 @@ public class TaskPluginCommand implements TaskCommand {
 			} catch (Exception e) {
 				this.LOG.error("【{}】节点执行全局插件【{}】出现异常:{}",
 						new Object[]{bpmNodeDef.getName(), globalCtx.getTitle(), e.getMessage(), e});
-				throw new BusinessException(globalCtx.getTitle(), (IStatusCode) BpmStatusCode.PLUGIN_ERROR,
+				throw new BusinessException(globalCtx.getTitle(), BpmStatusCode.PLUGIN_ERROR,
 						(Throwable) e);
 			}
 		}

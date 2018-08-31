@@ -1,8 +1,7 @@
 package org.minxc.emp.bpm.plugin.task.sign.plugin;
 
-import com.dstz.bpm.engine.plugin.runtime.abstact.AbstractBpmTaskPlugin;
-import com.dstz.bpm.engine.plugin.session.BpmTaskPluginSession;
-
+import org.minxc.emp.bpm.engine.plugin.runtime.abstact.AbstractBpmTaskPlugin;
+import org.minxc.emp.bpm.engine.plugin.session.BpmTaskPluginSession;
 import org.minxc.emp.bpm.plugin.task.sign.def.SignTaskPluginDef;
 import org.springframework.stereotype.Component;
 

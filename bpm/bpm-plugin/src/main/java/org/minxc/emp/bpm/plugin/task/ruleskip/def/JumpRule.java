@@ -1,9 +1,11 @@
 package org.minxc.emp.bpm.plugin.task.ruleskip.def;
 
 import java.io.Serializable;
-import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.validation.constraints.NotEmpty;
 
 public class JumpRule implements Serializable {
+	private static final long serialVersionUID = 4199465027887473103L;
 	@NotEmpty(message = "跳转规则名字不能为空")
 	private String name = "";
 	@NotEmpty(message = "跳转规则目标节点不能为空")
