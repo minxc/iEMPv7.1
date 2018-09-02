@@ -14,17 +14,27 @@ import org.minxc.emp.system.impl.dao.SysScheduleJobLogDao;
 import org.minxc.emp.system.impl.model.SysScheduleJob;
 import org.quartz.*;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
 
-/**
- * quartz管理业务
- *
+/*
+ * 
+* 项目名称：system-impl   
+* 类名称：QuartzManagerService   
+* 类描述： quartz管理业务  
+* 创建人：Xianchang.min   
+* 创建时间：2018年9月3日 上午12:21:32   
+* 修改人：Xianchang.min   
+* 修改时间：2018年9月3日 上午12:21:32   
+* 修改备注：   
+* @version  1.0  
+*
  */
-
 @Slf4j
+@Component
 public class QuartzManagerService implements InitializingBean {
 
     @Resource
@@ -125,7 +135,8 @@ public class QuartzManagerService implements InitializingBean {
             jobDataMap.put(SchedulerConstants.EXECUTION_TARGET_KEY, sysScheduleJob);
             jobBuilder.usingJobData(jobDataMap);
             JobDetail jobDetail = jobBuilder.build();
-            ScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule(sysScheduleJob.getCronExpression());
+            @SuppressWarnings("rawtypes")
+			ScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule(sysScheduleJob.getCronExpression());
             Trigger trigger = TriggerBuilder.newTrigger().forJob(jobDetail).withSchedule(scheduleBuilder).build();
             scheduler.scheduleJob(jobDetail, trigger);
 

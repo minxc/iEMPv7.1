@@ -7,13 +7,13 @@ import org.minxc.emp.idm.api.model.IdentityType;
 
 
 /**
- * <pre>
  * 描述：用户表 实体对象
- * </pre>
  */
 public class UserDto implements User {
 
-    /**
+	private static final long serialVersionUID = -8776546493486827681L;
+
+	/**
      * id_
      */
     protected String id;
