@@ -18,7 +18,8 @@
         <module>basis</module>
         <module>idm</module>
     <module>windows-service</module>
-  </modules>
+    <module>cache</module>
+    </modules>
 
 
     <properties>

@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.compress.archivers.zip.ZipFile;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.minxc.emp.common.db.model.page.PageJson;
@@ -31,6 +30,8 @@ import com.github.pagehelper.Page;
 import com.minxc.emp.core.util.FileUtil;
 import com.minxc.emp.core.util.ZipUtil;
 import com.minxc.emp.core.util.time.DateUtil;
+
+import net.lingala.zip4j.core.ZipFile;
 
 //import net.lingala.zip4j.core.ZipFile;
 

@@ -1,6 +1,6 @@
 package org.minxc.emp.security.filter;
 
-import com.alibaba.fastjson.JSON;
+import com.minxc.emp.core.util.JacksonUtil;
 import com.minxc.emp.core.util.StringUtil;
 
 import org.minxc.emp.core.api.response.impl.ResultMessage;
@@ -47,7 +47,8 @@ public class XssFilter extends IngoreChecker implements Filter {
             boolean hasXss = checkXss(req);
             if (hasXss) {
             	ResultMessage ResultMessage = new ResultMessage<>(CommonStatusCode.PARAM_ILLEGAL, "检测到提交内容含HTML代码，被拦截！");
-                response.getWriter().print(JSON.toJSONString(ResultMessage));
+//                response.getWriter().print(JSON.toJSONString(ResultMessage));
+                response.getWriter().print(JacksonUtil.pojo2Json(ResultMessage));
             } else {
                 chain.doFilter(request, response);
             }

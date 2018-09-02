@@ -28,8 +28,8 @@ public class SysResourceServiceImpl implements SysResourceService{
 	
 	
 	@Override
-	public List<ISubsystem> getCuurentUserSystem() {
-		return (List)sybSystemManager.getCuurentUserSystem();
+	public List<ISubsystem> getCurrentUserSystem() {
+		return (List)sybSystemManager.getCurrentUserSystem();
 	}
 
 	@Override

@@ -59,7 +59,7 @@ public class SubsystemManagerImpl extends CommonManager<String, Subsystem> imple
 
 
     @Override
-    public List<Subsystem> getCuurentUserSystem() {
+    public List<Subsystem> getCurrentUserSystem() {
         User user = ContextUtil.getCurrentUser();
         if (ContextUtil.isAdmin(user)) {
             return subsystemDao.getList();

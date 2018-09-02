@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
 import org.minxc.emp.common.rest.CommonController;
@@ -17,6 +16,8 @@ import org.minxc.emp.system.impl.model.DataDict;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.fasterxml.jackson.databind.node.ArrayNode;
 
 
 /**
@@ -61,8 +62,8 @@ public class DataDictController extends CommonController<DataDict>{
 	 */
 	@RequestMapping("getDictTree")
 	@ErrorCatching("获取数据字典失败")
-	public ResultMessage<JSONArray> getDictTree() throws Exception{
-		JSONArray dict = dataDictManager.getDictTree();
+	public ResultMessage<ArrayNode> getDictTree() throws Exception{
+		ArrayNode dict = dataDictManager.getDictTree();
 		return getSuccessResult(dict);
 	}
 	

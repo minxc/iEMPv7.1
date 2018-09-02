@@ -39,6 +39,6 @@ public interface SubsystemManager extends Manager<String, Subsystem> {
 	 */
 	void setDefaultSystem(String systemId);
 
-	List<Subsystem> getCuurentUserSystem();
+	List<Subsystem> getCurrentUserSystem();
 
 }

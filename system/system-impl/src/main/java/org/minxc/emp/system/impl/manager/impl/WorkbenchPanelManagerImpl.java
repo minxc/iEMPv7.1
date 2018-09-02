@@ -24,13 +24,14 @@ import org.minxc.emp.system.impl.model.WorkbenchPanel;
 import org.minxc.emp.system.util.ContextUtil;
 import org.springframework.stereotype.Service;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.minxc.emp.core.util.AppContextUtil;
 import com.minxc.emp.core.util.BeanUtils;
+import com.minxc.emp.core.util.StringUtil;
 
 
-public class WorkbenchPanelManagerImpl extends CommonManager<String, WorkbenchPanel> implements WorkbenchPanelManager {
+public class WorkbenchPanelManagerImpl{ /*
+          extends CommonManager<String, WorkbenchPanel> implements WorkbenchPanelManager {
 	
 	
     @Resource
@@ -95,7 +96,6 @@ public class WorkbenchPanelManagerImpl extends CommonManager<String, WorkbenchPa
 
         String[] aryHandler = dataSource.split("[.]");
         if (aryHandler == null || aryHandler.length != 2) throw new RuntimeException("自定义对话框数据服务接口格式不正确！" + dataSource);
-        ;
 
         String beanId = aryHandler[0];
         String method = aryHandler[1];
@@ -113,7 +113,7 @@ public class WorkbenchPanelManagerImpl extends CommonManager<String, WorkbenchPa
         if (objct instanceof PageList) {
         }
 
-        return (JSON) JSON.toJSON(objct);
+        return JSON.toJSON(objct);
     }
 
 
@@ -152,4 +152,6 @@ public class WorkbenchPanelManagerImpl extends CommonManager<String, WorkbenchPa
         return rand.nextInt(6000);
     }
 
+
+***/
 }

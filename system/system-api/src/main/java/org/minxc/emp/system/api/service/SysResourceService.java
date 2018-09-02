@@ -10,7 +10,7 @@ import org.minxc.emp.system.api.model.ISysResource;
 
 public interface SysResourceService {
 
-	List<ISubsystem> getCuurentUserSystem();
+	List<ISubsystem> getCurrentUserSystem();
 
 	ISubsystem getDefaultSystem(String currentUserId);
 

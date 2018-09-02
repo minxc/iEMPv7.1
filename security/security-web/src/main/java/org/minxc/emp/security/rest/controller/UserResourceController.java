@@ -2,6 +2,7 @@ package org.minxc.emp.security.rest.controller;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.minxc.emp.core.util.AppContextUtil;
 import com.minxc.emp.core.util.BeanUtils;
+import com.minxc.emp.core.util.JacksonUtil;
 
 import org.apache.commons.lang3.StringUtils;
 import org.minxc.emp.common.rest.GenericController;
@@ -18,6 +20,7 @@ import org.minxc.emp.core.api.exception.BusinessException;
 import org.minxc.emp.core.api.response.impl.ResultMessage;
 import org.minxc.emp.idm.api.constant.GroupTypeConstant;
 import org.minxc.emp.idm.api.model.Group;
+import org.minxc.emp.idm.api.model.User;
 import org.minxc.emp.idm.api.service.GroupService;
 import org.minxc.emp.security.util.SubSystemUtil;
 import org.minxc.emp.system.api.service.SysResourceService;
@@ -27,7 +30,7 @@ import org.minxc.emp.system.util.ContextUtil;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.alibaba.fastjson.JSONObject;
+import com.google.common.collect.Maps;
 
 /**
  * 用户资源
@@ -39,14 +42,16 @@ public class UserResourceController extends GenericController {
     @Resource
     private GroupService groupService;
     @Resource
-    SysResourceService SystemResourceService;
+    SysResourceService sysResourceService;
 
 
-    @RequestMapping("userResource/userMsg")
+    @SuppressWarnings("rawtypes")
+	@RequestMapping("userResource/userMsg")
     @ErrorCatching
-    public ResultMessage<JSONObject> userMsg(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        List<Subsystem> subsystemList = SystemResourceService.getCurrentUserSystem();
-        JSONObject mv = new JSONObject();
+    public ResultMessage<Map<String, Object>> userMsg(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        @SuppressWarnings("unchecked")
+		List<Subsystem> subsystemList = (List)sysResourceService.getCurrentUserSystem();
+      
         if (BeanUtils.isEmpty(subsystemList)) {
             throw new BusinessException("当前用户尚未分配任何资源权限！");
         }
@@ -63,7 +68,7 @@ public class UserResourceController extends GenericController {
             }
         } else {
             //获取默认系统
-            currentSystem = SystemResourceService.getDefaultSystem(ContextUtil.getCurrentUserId());
+            currentSystem = (Subsystem)sysResourceService.getDefaultSystem(ContextUtil.getCurrentUserId());
         }
 
         //没有之前使用的系统
@@ -74,7 +79,8 @@ public class UserResourceController extends GenericController {
 
         Group group = ContextUtil.getCurrentGroup();
         List<Group> orgList = groupService.getGroupsByGroupTypeUserId(GroupTypeConstant.ORG.key(), ContextUtil.getCurrentUserId());
-
+//        ObjectNode mv = JacksonUtil.jsonObject();
+        Map<String, Object> mv = Maps.newHashMap();
         mv.put("currentEnviroment",AppContextUtil.getCtxEnvironment());
         mv.put("subsystemList", subsystemList);
         mv.put("currentSystem", currentSystem);
@@ -87,15 +93,16 @@ public class UserResourceController extends GenericController {
 
     
     // 重新获取 userMsg
-    @RequestMapping("userResource/changeSystem")
+    @SuppressWarnings("rawtypes")
+	@RequestMapping("userResource/changeSystem")
     public ResultMessage changeSystem(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String id = RequestUtil.getString(request, "id");
         SubSystemUtil.setSystemId(request, response, id);
-
         return getSuccessResult("切换成功");
     }
     // 重新获取 userMsg
-    @RequestMapping("userResource/changeOrg")
+    @SuppressWarnings("rawtypes")
+	@RequestMapping("userResource/changeOrg")
     public ResultMessage changeOrg(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String id = RequestUtil.getString(request, "id");
         Group org = groupService.getById(GroupTypeConstant.ORG.key(), id);
@@ -104,16 +111,17 @@ public class UserResourceController extends GenericController {
         return getSuccessResult("切换成功");
     }
 
-    @RequestMapping("userResource/getResTree")
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+	@RequestMapping("userResource/getResTree")
     public List<SysResource> getSysResource(HttpServletRequest request, HttpServletResponse response) throws IOException {
         User user = ContextUtil.getCurrentUser();
         String systemId = SubSystemUtil.getSystemId(request);
         boolean isAdmin = ContextUtil.isAdmin(user);
-        List<SystemResource> list = null;
+        List<SysResource> list = null;
         if (isAdmin) {
-            list = SystemResourceService.getBySystemId(systemId);
+            list = (List)sysResourceService.getBySystemId(systemId);
         } else {
-            list = SystemResourceService.getBySystemAndUser(systemId, user.getUserId());
+            list = (List)sysResourceService.getBySystemAndUser(systemId, user.getUserId());
         }
 
         return BeanUtils.listToTree(list);

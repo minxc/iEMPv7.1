@@ -29,8 +29,8 @@ public class ResRoleManagerImpl extends CommonManager<String, ResRole> implement
 	
 	@Resource
     ResRoleDao resRoleDao;
-    @Resource
-    ICache iCache;
+//    @Resource
+//    ICache iCache;
 
     public final String RESOURCE_URL = "RES_URL_";
 
@@ -63,9 +63,9 @@ public class ResRoleManagerImpl extends CommonManager<String, ResRole> implement
     @Override
     public Map<String, Set<String>> getResRoleBySystem(String systemId) {
         String resStr = RESOURCE_RES + systemId;
-        if (iCache.containKey(resStr)) {
-            return (Map<String, Set<String>>) iCache.getByKey(resStr);
-        }
+//        if (iCache.containKey(resStr)) {
+//            return (Map<String, Set<String>>) iCache.getByKey(resStr);
+//        }
 
         List<ResRole> list = resRoleDao.getResRoleBySystemId(systemId);
         Map<String, Set<String>> map = new HashMap<String, Set<String>>();
@@ -81,16 +81,16 @@ public class ResRoleManagerImpl extends CommonManager<String, ResRole> implement
                 map.put(resAlias, set);
             }
         }
-        iCache.add(resStr, map);
+//        iCache.add(resStr, map);
         return map;
     }
 
     @Override
     public Map<String, Set<String>> getUrlRoleBySystem(String systemId) {
         String urlStr = RESOURCE_URL + systemId;
-        if (iCache.containKey(urlStr)) {
-            return (Map<String, Set<String>>) iCache.getByKey(urlStr);
-        }
+//        if (iCache.containKey(urlStr)) {
+//            return (Map<String, Set<String>>) iCache.getByKey(urlStr);
+//        }
 
         List<ResRole> list = resRoleDao.getResRoleBySystemId(systemId);
         List<ResRole> urlList = resRoleDao.getUrlRoleBySystemId(systemId);
@@ -111,7 +111,7 @@ public class ResRoleManagerImpl extends CommonManager<String, ResRole> implement
             }
         }
         //添加到缓存
-        iCache.add(urlStr, map);
+//        iCache.add(urlStr, map);
         return map;
     }
 
@@ -119,8 +119,8 @@ public class ResRoleManagerImpl extends CommonManager<String, ResRole> implement
     public void cleanResCache(String systemId) {
         String urlStr = RESOURCE_URL + systemId;
         String resStr = RESOURCE_RES + systemId;
-        iCache.delByKey(urlStr);
-        iCache.delByKey(resStr);
+//        iCache.delByKey(urlStr);
+//        iCache.delByKey(resStr);
     }
 
 

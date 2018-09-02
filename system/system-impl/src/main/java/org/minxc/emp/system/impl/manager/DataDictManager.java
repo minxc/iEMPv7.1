@@ -9,9 +9,17 @@ import org.minxc.emp.system.impl.model.DataDict;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 
 /**
- * 数据字典 Manager处理接口
  * 
- * @time 2018-05-16 14:39:58
+* 项目名称：system-impl   
+* 类名称：DataDictManager   
+* 类描述： 数据字典 Manager处理接口  
+* 创建人：Xianchang.min   
+* 创建时间：2018年9月2日 下午5:37:57   
+* 修改人：Xianchang.min   
+* 修改时间：2018年9月2日 下午5:37:57   
+* 修改备注：   
+* @version  1.0  
+*
  */
 public interface DataDictManager extends Manager<String, DataDict> {
 

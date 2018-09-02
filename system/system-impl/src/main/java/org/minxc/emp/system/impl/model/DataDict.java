@@ -14,6 +14,7 @@ public class DataDict extends AbstractCommonModel {
 	
 	public static final String TYPE_DICT = "dict";
 	public static final String TYPE_NODE = "node";
+	
 	/**
 	 * 上级id
 	 */

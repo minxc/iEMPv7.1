@@ -3,25 +3,29 @@ package org.minxc.emp.common.db.model.query;
 import org.minxc.emp.core.api.query.FieldSort;
 import org.minxc.emp.core.api.query.SortDirection;
 
+import com.google.common.collect.Lists;
+
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
-
 /**
- * 字段排序。
- * <pre>
- * </pre>
+ * 
+* 项目名称：common-db   
+* 类名称：DefaultFieldSort   
+* 类描述：  字段排序逻辑 
+* 创建人：Xianchang.min   
+* 创建时间：2018年9月2日 下午4:35:44   
+* 修改人：Xianchang.min   
+* 修改时间：2018年9月2日 下午4:35:44   
+* 修改备注：   
+* @version  1.0  
+*
  */
 public class DefaultFieldSort implements FieldSort, Serializable {
-    /**
-     * serialVersionUID:类的序号
-     *
-     * @since 1.0.0
-     */
 
     private static final long serialVersionUID = 5742164735225460363L;
+    
     private SortDirection direction;
     private String field;
 
@@ -68,16 +72,17 @@ public class DefaultFieldSort implements FieldSort, Serializable {
     }
 
     /**
-     * 将sql片段转化成排序对象。
+     *   将sql片段转化成排序对象。
      *
      * @param orderSegment ex: "id asc,code desc"
      */
     public static List<DefaultFieldSort> formString(String orderSegment) {
+    	
         if (orderSegment == null || orderSegment.trim().equals("")) {
-            return new ArrayList(0);
+            return Lists.newArrayListWithCapacity(0);
         }
 
-        List<DefaultFieldSort> results = new ArrayList();
+        List<DefaultFieldSort> results = Lists.newArrayList();
         String[] orderSegments = orderSegment.trim().split(",");
         for (int i = 0; i < orderSegments.length; i++) {
             String sortSegment = orderSegments[i];
@@ -91,7 +96,7 @@ public class DefaultFieldSort implements FieldSort, Serializable {
 
 
     private static DefaultFieldSort _formString(String orderSegment) {
-
+    	
         if (orderSegment == null || orderSegment.trim().equals("")) {
             return null;
         }

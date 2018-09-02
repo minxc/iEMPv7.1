@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.apache.ibatis.annotations.Update;
 import org.minxc.emp.basis.api.constant.SysStatusCode;
 import org.minxc.emp.common.db.model.query.DefaultQueryFilter;
 import org.minxc.emp.common.manager.impl.CommonManager;
@@ -20,88 +19,85 @@ import org.minxc.emp.system.impl.model.SysTree;
 import org.minxc.emp.system.impl.model.SysTreeNode;
 import org.springframework.stereotype.Service;
 
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
-
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.minxc.emp.core.util.JacksonUtil;
 
 /**
  * 数据字典 Manager处理实现类
  */
 @Service("dataDictManager")
-public class DataDictManagerImpl extends CommonManager<String, DataDict> implements DataDictManager{
+public class DataDictManagerImpl extends CommonManager<String, DataDict> implements DataDictManager {
+
 	@Resource
-	DataDictDao dataDictDao;
+	private DataDictDao dataDictDao;
 	@Resource
-	SysTreeNodeManager sysTreeNodeMananger;
+	private SysTreeNodeManager sysTreeNodeMananger;
 	@Resource
-	SysTreeManager sysTreeMananger;
-	
+	private SysTreeManager sysTreeMananger;
 
 	@Override
-	public List<DataDict> getDictNodeList(String dictKey,Boolean hasRoot) {
-		return dataDictDao.getDictNodeList(dictKey,hasRoot);
+	public List<DataDict> getDictNodeList(String dictKey, Boolean hasRoot) {
+		return dataDictDao.getDictNodeList(dictKey, hasRoot);
 	}
-	
-	
+
 	@Override
 	public void create(DataDict dataDict) {
-		Integer count = 0 ;
-		if(DataDict.TYPE_DICT.equals(dataDict.getDictType())) {
+		Integer count = 0;
+		if (DataDict.TYPE_DICT.equals(dataDict.getDictType())) {
 			dataDict.setDictKey(dataDict.getKey());
-			count = dataDictDao.isExistDict(dataDict.getKey(),null);
-		}else {
-			count = dataDictDao.isExistNode(dataDict.getDictKey(),dataDict.getKey() , null);
+			count = dataDictDao.isExistDict(dataDict.getKey(), null);
+		} else {
+			count = dataDictDao.isExistNode(dataDict.getDictKey(), dataDict.getKey(), null);
 		}
-		
-		if(count != 0) {
-			throw new BusinessException(dataDict.getKey()+"字典已经存在",SysStatusCode.PARAM_ILLEGAL);
+		if (count != 0) {
+			throw new BusinessException(dataDict.getKey() + "字典已经存在", SysStatusCode.PARAM_ILLEGAL);
 		}
-		
+
 		super.create(dataDict);
 	}
-	
-	
+
 	@Override
 	public void update(DataDict dataDict) {
-		int count = 0 ;
-		if(DataDict.TYPE_DICT.equals(dataDict.getDictType())) {
+		int count = 0;
+		if (DataDict.TYPE_DICT.equals(dataDict.getDictType())) {
 			dataDict.setDictKey(dataDict.getKey());
-			count = dataDictDao.isExistDict(dataDict.getKey(),dataDict.getId());
-		}else {
+			count = dataDictDao.isExistDict(dataDict.getKey(), dataDict.getId());
+		} else {
 			count = dataDictDao.isExistNode(dataDict.getKey(), dataDict.getDictKey(), dataDict.getId());
 		}
-		
-		if(count != 0) {
-			throw new BusinessException(dataDict.getKey()+"字典Key已经存在",SysStatusCode.PARAM_ILLEGAL);
+
+		if (count != 0) {
+			throw new BusinessException(dataDict.getKey() + "字典Key已经存在", SysStatusCode.PARAM_ILLEGAL);
 		}
-		
+
 		super.update(dataDict);
 	}
 
-
 	@Override
-	public JSONArray getDictTree() {
+	public ArrayNode getDictTree() {
+
 		QueryFilter filter = new DefaultQueryFilter();
 		filter.addFilter("dict_type_", "dict", QueryOperator.EQUAL);
-		
+
 		List<DataDict> dicts = dataDictDao.query(filter);
-		
+
 		SysTree sysTree = sysTreeMananger.getByKey("dict");
 		List<SysTreeNode> nodeList = sysTreeNodeMananger.getByTreeId(sysTree.getId());
-		JSONArray jsonArray = new JSONArray();
-		
-		for(SysTreeNode sysTreeNode : nodeList) {
-			JSONObject object = new JSONObject();
+		ArrayNode jsonArray = JacksonUtil.jsonArray();
+
+		for (SysTreeNode sysTreeNode : nodeList) {
+			ObjectNode object = JacksonUtil.jsonObject();
 			object.put("id", sysTreeNode.getId());
 			object.put("name", sysTreeNode.getName());
 			object.put("parentId", sysTreeNode.getParentId());
 			object.put("type", "type");
-			object.put("noclick",true);
+			object.put("noclick", true);
 			jsonArray.add(object);
 		}
-		
-		for(DataDict dict : dicts) {
-			JSONObject object = new JSONObject();
+
+		for (DataDict dict : dicts) {
+			ObjectNode object = JacksonUtil.jsonObject();
 			object.put("id", dict.getId());
 			object.put("name", dict.getName());
 			object.put("key", dict.getDictKey());
@@ -110,7 +106,7 @@ public class DataDictManagerImpl extends CommonManager<String, DataDict> impleme
 			object.put("type", "dict");
 			jsonArray.add(object);
 		}
-		
+
 		return jsonArray;
 	}
 

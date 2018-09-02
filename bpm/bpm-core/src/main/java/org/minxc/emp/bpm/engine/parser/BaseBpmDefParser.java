@@ -3,7 +3,7 @@ package org.minxc.emp.bpm.engine.parser;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.dstz.base.core.validate.ValidateUtil;
+import com.minxc.emp.core.util.ValidateUtil;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;

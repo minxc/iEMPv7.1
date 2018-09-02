@@ -89,11 +89,11 @@ public class LoginContext implements CurrentContext {
         }
         String userId = getCurrentUserId();
         //从缓存中取
-        Cache Cache = (Cache) AppContextUtil.getBean(Cache.class);
-        String userKey = CurrentContext.CURRENT_ORG + userId;
-        if (Cache.containKey(userKey)) {
-            return (Group) Cache.getByKey(userKey);
-        }
+//        Cache Cache = (Cache) AppContextUtil.getBean(Cache.class);
+//        String userKey = CurrentContext.CURRENT_ORG + userId;
+//        if (Cache.containKey(userKey)) {
+//            return (Group) Cache.getByKey(userKey);
+//        }
         //获取当前人的主部门
         Group group = groupService.getMainGroup(userId);
         if (group != null) setCurrentGroup(group);
@@ -107,9 +107,9 @@ public class LoginContext implements CurrentContext {
         currentOrg.set(group);
         //将当前人和组织放到缓存中。
         String userId = getCurrentUserId();
-        Cache Cache = (Cache) AppContextUtil.getBean(Cache.class);
-        String userKey = CurrentContext.CURRENT_ORG + userId;
-        Cache.add(userKey, group);
+//        Cache Cache = (Cache) AppContextUtil.getBean(Cache.class);
+//        String userKey = CurrentContext.CURRENT_ORG + userId;
+//        Cache.add(userKey, group);
     }
 
     /**

@@ -27,6 +27,8 @@ public class DefaultFieldLogic implements FieldLogic {
      * 查询字段组合列表
      */
     private List<WhereClause> whereClauses = new ArrayList<WhereClause>();
+    
+    
     /**
      * 字段关系
      */

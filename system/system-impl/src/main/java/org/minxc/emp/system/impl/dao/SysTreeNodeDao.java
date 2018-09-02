@@ -4,9 +4,21 @@ import org.apache.ibatis.annotations.Mapper;
 import org.minxc.emp.common.db.dao.CommonDao;
 import org.minxc.emp.system.impl.model.SysTreeNode;
 
+
 /**
- * 系统树节点 DAO接口
+ * 
+* 项目名称：system-impl   
+* 类名称：SysTreeNodeDao   
+* 类描述： 系统树节点 DAO接口  
+* 创建人：Xianchang.min   
+* 创建时间：2018年9月2日 下午4:49:05   
+* 修改人：Xianchang.min   
+* 修改时间：2018年9月2日 下午4:49:05   
+* 修改备注：   
+* @version  1.0  
+*
  */
+
 @Mapper
 public interface SysTreeNodeDao extends CommonDao<String, SysTreeNode> {
 

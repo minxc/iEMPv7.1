@@ -50,31 +50,33 @@ public abstract class GroupPermissionCalculator implements IPermissionCalculator
 //	}
 	
 	
+	//TODO: haveRights()目前只是做了一个空实现，需要对JSON参数进行转换
 	@Override
 	public boolean haveRights(JsonNode json) {
 		
-		Map<String, List<Group>> allGroup = (Map<String, List<Group>>) ThreadMapUtil.get(threadMapKey);
-		if (allGroup == null) {
-			GroupService groupService = AppContextUtil.getBean(GroupService.class);
-			allGroup = groupService.getAllGroupByUserId(ContextUtil.getCurrentUserId());
-			ThreadMapUtil.put(threadMapKey, allGroup);
-		}
+//		Map<String, List<Group>> allGroup = (Map<String, List<Group>>) ThreadMapUtil.get(threadMapKey);
+//		if (allGroup == null) {
+//			GroupService groupService = AppContextUtil.getBean(GroupService.class);
+//			allGroup = groupService.getAllGroupByUserId(ContextUtil.getCurrentUserId());
+//			ThreadMapUtil.put(threadMapKey, allGroup);
+//		}
+//		
+//		List<Group> groups;
+//		if ("post".equals(this.getType())) {// 岗位的命名不一致
+//			groups = allGroup.get("position");
+//		} else {
+//			groups = allGroup.get(this.getType());
+//		}
+//		
+//		for (Group group : groups) {
+//			JsonNode node  = json.get("id");
+//			if (json.get("id").contains(group.getGroupId())) {
+//				return true;
+//			}
+//		}
 		
-		List<Group> groups;
-		if ("post".equals(this.getType())) {// 岗位的命名不一致
-			groups = allGroup.get("position");
-		} else {
-			groups = allGroup.get(this.getType());
-		}
-		
-		for (Group group : groups) {
-			JsonNode node  = json.get("id");
-			if (json.get("id").contains(group.getGroupId())) {
-				return true;
-			}
-		}
-		
-		return false;
+//		return false;
+		return true;
 	}
 
 }

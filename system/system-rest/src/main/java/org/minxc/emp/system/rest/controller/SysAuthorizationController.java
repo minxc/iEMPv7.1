@@ -14,6 +14,8 @@ import org.minxc.emp.system.impl.manager.SysAuthorizationManager;
 import org.minxc.emp.system.impl.model.SysAuthorization;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.minxc.emp.core.util.JacksonUtil;
  
 @RestController
 @RequestMapping("/sys/authorization")
@@ -37,7 +39,8 @@ public class SysAuthorizationController extends GenericController{
 			
 		RightsObjectConstants.getByKey(targetObject);
 		
-		List<SysAuthorization> sysAuthorizationList = JSON.parseArray(authorizationJson, SysAuthorization.class);
+//		List<SysAuthorization> sysAuthorizationList = JSON.parseArray(authorizationJson, SysAuthorization.class);
+		List<SysAuthorization> sysAuthorizationList = JacksonUtil.jsonArray2PojoList(authorizationJson, SysAuthorization.class);
 		
 		sysAuthorizationManager.createAll(sysAuthorizationList,targetId,targetObject);
 		

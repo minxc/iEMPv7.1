@@ -17,7 +17,9 @@ import org.minxc.emp.system.impl.model.Script;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.alibaba.fastjson.JSONObject;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.minxc.emp.core.util.JacksonUtil;
+
 
 @RestController
 @RequestMapping("/sys/script/")
@@ -52,10 +54,13 @@ public class SysScriptController extends CommonController<Script> {
         String script = RequestUtil.getString(request, "script");
         String key = RequestUtil.getString(request, "key");
         Map<String, Object> map = new HashMap<String, Object>();
-        JSONObject jsonObject = new JSONObject();
+        
+         
+//        JSONObject jsonObject = new JSONObject();
+        ObjectNode jsonObject = JacksonUtil.jsonObject();
         try {
             Object obj = groovyScriptEngine.executeObject(script, map);
-            jsonObject.put("val", obj);
+            jsonObject.putPOJO("val", obj);
             jsonObject.put("success", true);
         } catch (Exception e) {
         	e.printStackTrace();
