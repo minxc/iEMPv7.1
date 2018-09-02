@@ -9,7 +9,6 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.minxc.emp</groupId>
     <artifactId>security-web</artifactId>
 
     <dependencies>
@@ -36,6 +35,11 @@
         <dependency>
             <groupId>org.minxc.emp</groupId>
             <artifactId>idm-api</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.minxc.emp</groupId>
+            <artifactId>system-impl</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>

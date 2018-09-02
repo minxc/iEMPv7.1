@@ -9,6 +9,16 @@ import java.util.Set;
 
 import javax.annotation.Resource;
 
+import org.minxc.emp.basis.api.groovy.IGroovyScriptEngine;
+import org.minxc.emp.common.db.dao.BasicDao;
+import org.minxc.emp.common.db.dboper.DbOperator;
+import org.minxc.emp.common.db.dboper.DbOperatorFactory;
+import org.minxc.emp.common.db.model.query.DefaultQueryFilter;
+import org.minxc.emp.common.db.model.table.ColumnEntity;
+import org.minxc.emp.common.db.model.table.TableEntity;
+import org.minxc.emp.common.manager.impl.CommonManager;
+import org.minxc.emp.core.api.query.QueryFilter;
+import org.minxc.emp.core.api.query.QueryOperator;
 import org.minxc.emp.form.api.constant.FormCustDialogConditionFieldValueSource;
 import org.minxc.emp.form.api.constant.FormCustDialogObjType;
 import org.minxc.emp.form.api.constant.FormCustDialogStyle;
@@ -19,25 +29,16 @@ import org.minxc.emp.form.core.model.custdialog.FormCustDialogConditionField;
 import org.minxc.emp.form.core.model.custdialog.FormCustDialogDisplayField;
 import org.minxc.emp.form.core.model.custdialog.FormCustDialogReturnField;
 import org.minxc.emp.form.core.model.custdialog.FormCustDialogSortField;
+import org.minxc.emp.system.api.model.ISysDataSource;
+import org.minxc.emp.system.api.service.ISysDataSourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
-import com.dstz.base.api.query.QueryFilter;
-import com.dstz.base.api.query.QueryOP;
-import com.dstz.base.core.util.AppUtil;
-import com.dstz.base.core.util.BeanUtils;
-import com.dstz.base.core.util.StringUtil;
-import com.dstz.base.dao.CommonDao;
-import com.dstz.base.db.dboper.DbOperator;
-import com.dstz.base.db.dboper.DbOperatorFactory;
-import com.dstz.base.db.model.query.DefaultQueryFilter;
-import com.dstz.base.db.model.table.Column;
-import com.dstz.base.db.model.table.Table;
-import com.dstz.base.manager.impl.BaseManager;
-import com.dstz.sys.api.groovy.IGroovyScriptEngine;
-import com.dstz.sys.api2.model.ISysDataSource;
-import com.dstz.sys.api2.service.ISysDataSourceService;
+import com.minxc.emp.core.util.AppContextUtil;
+import com.minxc.emp.core.util.BeanUtils;
+import com.minxc.emp.core.util.StringUtil;
+
 
 /**
  * form_cust_dialog Manager处理实现类
@@ -47,20 +48,20 @@ import com.dstz.sys.api2.service.ISysDataSourceService;
  * @time 2018-01-18 19:30:51
  */
 @Service("formCustDialogManager")
-public class FormCustDialogManagerImpl extends BaseManager<String, FormCustDialog> implements FormCustDialogManager {
+public class FormCustDialogManagerImpl extends CommonManager<String, FormCustDialog> implements FormCustDialogManager {
     @Resource
     FormCustDialogDao formCustDialogDao;
     @Autowired
     ISysDataSourceService sysDataSourceService;
     @Autowired
-    CommonDao<?> commonDao;
+    BasicDao<?> commonDao;
     @Autowired
     IGroovyScriptEngine groovyScriptEngine;
 
     @Override
     public FormCustDialog getByKey(String key) {
         QueryFilter filter = new DefaultQueryFilter();
-        filter.addFilter("key_", key, QueryOP.EQUAL);
+        filter.addFilter("key_", key, QueryOperator.EQUAL);
         return this.queryOne(filter);
     }
 
@@ -83,12 +84,12 @@ public class FormCustDialogManagerImpl extends BaseManager<String, FormCustDialo
     }
 
     @Override
-    public Table<Column> getTable(FormCustDialog formCustDialog) {
+    public TableEntity<ColumnEntity> getTable(FormCustDialog formCustDialog) {
         try {
             ISysDataSource sysDataSource = sysDataSourceService.getByKey(formCustDialog.getDsKey());
             JdbcTemplate jdbcTemplate = sysDataSourceService.getJdbcTemplateByKey(formCustDialog.getDsKey());
             DbOperator dbOperator = DbOperatorFactory.newOperator(sysDataSource.getDbType(), jdbcTemplate);
-            Table<Column> table = null;
+            TableEntity<ColumnEntity>  table = null;
             // 表
             if (FormCustDialogObjType.TABLE.equalsWithKey(formCustDialog.getObjType())) {
                 table = dbOperator.getTable(formCustDialog.getObjName());
@@ -131,7 +132,7 @@ public class FormCustDialogManagerImpl extends BaseManager<String, FormCustDialo
 		String beanId = aryHandler[0];
 		String method = aryHandler[1];
 		// 触发该Bean下的业务方法
-		Object serviceBean = AppUtil.getBean(beanId);
+		Object serviceBean = AppContextUtil.getBean(beanId);
 		if(serviceBean==null) return null;
 		try {
 			Method invokeMethod = serviceBean.getClass().getDeclaredMethod(method, new Class[] {QueryFilter.class});
@@ -197,12 +198,12 @@ public class FormCustDialogManagerImpl extends BaseManager<String, FormCustDialo
         //处理条件 固定值，和脚本参数
         for (FormCustDialogConditionField field : formCustDialog.getConditionFields()) {
             if (FormCustDialogConditionFieldValueSource.FIXED_VALUE.equalsWithKey(field.getValueSource())) {
-                Object value = BeanUtils.getValue(field.getDbType(), QueryOP.getByVal(field.getCondition()), field.getValue().getText());
-                queryFilter.addFilter(field.getColumnName(), value, QueryOP.getByVal(field.getCondition()));
+                Object value = BeanUtils.getValue(field.getDbType(), QueryOperator.getByVal(field.getCondition()), field.getValue().getText());
+                queryFilter.addFilter(field.getColumnName(), value, QueryOperator.getByVal(field.getCondition()));
             }
             if (FormCustDialogConditionFieldValueSource.SCRIPT.equalsWithKey(field.getValueSource())) {
                 Object value = groovyScriptEngine.executeObject(field.getValue().getText(), queryFilter.getParams());
-                queryFilter.addFilter(field.getColumnName(), value, QueryOP.getByVal(field.getCondition()));
+                queryFilter.addFilter(field.getColumnName(), value, QueryOperator.getByVal(field.getCondition()));
             }
         }
 

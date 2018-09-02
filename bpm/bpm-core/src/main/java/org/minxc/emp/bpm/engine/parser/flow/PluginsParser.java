@@ -2,8 +2,8 @@ package org.minxc.emp.bpm.engine.parser.flow;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.dstz.base.core.util.AppUtil;
-import com.dstz.base.core.validate.ValidateUtil;
+import com.minxc.emp.core.util.AppContextUtil;
+import com.minxc.emp.core.util.ValidateUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +25,7 @@ public class PluginsParser extends AbsFlowParse<BpmPluginContext> {
 		JSONObject plugins = JSON.parseObject((String) json);
 		ArrayList<BpmPluginContext> pluginContextList = new ArrayList<BpmPluginContext>();
 		for (String pluginName : plugins.keySet()) {
-			BpmPluginContext pluginContext = (BpmPluginContext) AppUtil
+			BpmPluginContext pluginContext = (BpmPluginContext) AppContextUtil
 					.getBean((String) (pluginName + "PluginContext"));
 			if (pluginContext instanceof BpmPluginContext) {
 				try {

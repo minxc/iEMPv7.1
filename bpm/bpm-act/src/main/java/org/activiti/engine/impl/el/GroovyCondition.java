@@ -1,17 +1,17 @@
 package org.activiti.engine.impl.el;
 
-import com.dstz.base.api.constant.IStatusCode;
-import com.dstz.base.api.exception.BusinessException;
-import com.dstz.base.core.util.AppUtil;
-import com.dstz.sys.api.groovy.IGroovyScriptEngine;
+import com.minxc.emp.core.util.AppContextUtil;
+
 import java.util.Map;
 import org.activiti.engine.delegate.DelegateExecution;
 import org.activiti.engine.impl.Condition;
+import org.minxc.emp.basis.api.groovy.IGroovyScriptEngine;
 import org.minxc.emp.bpm.api.constant.ActionType;
 import org.minxc.emp.bpm.api.engine.action.cmd.ActionCmd;
 import org.minxc.emp.bpm.api.engine.action.cmd.BaseActionCmd;
 import org.minxc.emp.bpm.api.engine.context.BpmContext;
 import org.minxc.emp.bpm.api.exception.BpmStatusCode;
+import org.minxc.emp.core.api.exception.BusinessException;
 
 public class GroovyCondition implements Condition {
 	private static final long serialVersionUID = -5577703954744892854L;
@@ -28,7 +28,7 @@ public class GroovyCondition implements Condition {
 		maps.putAll(cmd.getBizDataMap());
 		BaseActionCmd submitAction = (BaseActionCmd) BpmContext.submitActionModel();
 		maps.put("submitActionName", submitAction.getActionType().getKey());
-		IGroovyScriptEngine engine = (IGroovyScriptEngine) AppUtil.getBean(IGroovyScriptEngine.class);
+		IGroovyScriptEngine engine = (IGroovyScriptEngine) AppContextUtil.getBean(IGroovyScriptEngine.class);
 		try {
 			return engine.executeBoolean(this.script, maps);
 		} catch (Exception e) {
@@ -38,7 +38,7 @@ public class GroovyCondition implements Condition {
 			message.append("\n脚本：" + this.script);
 			message.append("\n异常：" + e.getMessage());
 			message.append("\n\n流程变量：" + maps.toString());
-			throw new BusinessException(message.toString(), (IStatusCode) BpmStatusCode.GATEWAY_ERROR, (Throwable) e);
+			throw new BusinessException(message.toString(), BpmStatusCode.GATEWAY_ERROR, (Throwable) e);
 		}
 	}
 }

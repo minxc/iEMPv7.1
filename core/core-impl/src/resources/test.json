@@ -1,0 +1,89 @@
+{
+	"Leave": {
+		"key": "Leave",
+		"name": "Leave",
+		"rights": {
+			"b": [{
+				"id": "1",
+				"type": "org",
+				"desc": "（组织）[敏捷工作流程]"
+			},
+			{
+				"id": "1",
+				"type": "user",
+				"desc": "（用户）[系统管理员]"
+			}],
+			"w": [{
+				"type": "everyone",
+				"desc": "所有人"
+			}]
+		},
+		"tableMap": {
+			"Leave": {
+				"columnMap": {
+					"approver": {
+						"comment": "审批人",
+						"key": "approver",
+						"rights": {
+							
+						}
+					},
+					"reason": {
+						"comment": "理由",
+						"key": "reason",
+						"rights": {
+							
+						}
+					},
+					"approval_comments": {
+						"comment": "审批意见",
+						"key": "approval_comments",
+						"rights": {
+							
+						}
+					},
+					"leave_type": {
+						"comment": "假期类型",
+						"key": "leave_type",
+						"rights": {
+							
+						}
+					},
+					"application_user": {
+						"comment": "申请人",
+						"key": "application_user",
+						"rights": {
+							
+						}
+					},
+					"end_time": {
+						"comment": "结束时间",
+						"key": "end_time",
+						"rights": {
+							
+						}
+					},
+					"begin_time": {
+						"comment": "开始时间",
+						"key": "begin_time",
+						"rights": {
+							
+						}
+					},
+					"half_day": {
+						"comment": "半天",
+						"key": "half_day",
+						"rights": {
+							
+						}
+					}
+				},
+				"comment": "Leave",
+				"key": "Leave",
+				"rights": {
+					
+				}
+			}
+		}
+	}
+}

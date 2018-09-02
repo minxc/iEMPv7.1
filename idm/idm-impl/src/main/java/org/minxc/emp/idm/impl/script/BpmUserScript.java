@@ -3,12 +3,11 @@ package org.minxc.emp.idm.impl.script;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
-
+import org.minxc.emp.basis.api.groovy.IScript;
 import org.minxc.emp.idm.impl.manager.GroupManager;
 import org.minxc.emp.idm.impl.manager.GroupUserManager;
 import org.minxc.emp.idm.impl.manager.RoleManager;
 import org.minxc.emp.idm.impl.manager.UserManager;
-import com.dstz.sys.api.groovy.IScript;
 
 /**
  * 人员脚本

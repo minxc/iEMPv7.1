@@ -7,13 +7,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
-import org.minxc.emp.basis.impl.core.manager.DataDictManager;
-import org.minxc.emp.basis.impl.core.model.DataDict;
 import org.minxc.emp.common.rest.CommonController;
 import org.minxc.emp.core.api.aop.annotation.ErrorCatching;
 import org.minxc.emp.core.api.query.QueryFilter;
 import org.minxc.emp.core.api.query.QueryOperator;
 import org.minxc.emp.core.api.response.impl.ResultMessage;
+import org.minxc.emp.system.impl.manager.DataDictManager;
+import org.minxc.emp.system.impl.model.DataDict;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;

@@ -7,11 +7,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.minxc.emp.basis.api.constant.RightsObjectConstants;
-import org.minxc.emp.basis.impl.core.manager.SysAuthorizationManager;
-import org.minxc.emp.basis.impl.core.model.SysAuthorization;
 import org.minxc.emp.common.rest.GenericController;
 import org.minxc.emp.common.rest.util.RequestUtil;
 import org.minxc.emp.core.api.aop.annotation.ErrorCatching;
+import org.minxc.emp.system.impl.manager.SysAuthorizationManager;
+import org.minxc.emp.system.impl.model.SysAuthorization;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
  

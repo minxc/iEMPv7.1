@@ -1,17 +1,17 @@
 package org.minxc.emp.system.rest.controller;
 
 import org.apache.commons.lang3.StringUtils;
-import org.minxc.emp.basis.impl.core.manager.ResRoleManager;
-import org.minxc.emp.basis.impl.core.manager.SubsystemManager;
-import org.minxc.emp.basis.impl.core.manager.SysResourceManager;
-import org.minxc.emp.basis.impl.core.model.ResRole;
-import org.minxc.emp.basis.impl.core.model.SysResource;
 import org.minxc.emp.common.db.model.page.PageJson;
 import org.minxc.emp.common.rest.GenericController;
 import org.minxc.emp.common.rest.util.RequestUtil;
 import org.minxc.emp.core.api.aop.annotation.ErrorCatching;
 import org.minxc.emp.core.api.query.QueryFilter;
 import org.minxc.emp.core.api.response.impl.ResultMessage;
+import org.minxc.emp.system.impl.manager.ResRoleManager;
+import org.minxc.emp.system.impl.manager.SubsystemManager;
+import org.minxc.emp.system.impl.manager.SysResourceManager;
+import org.minxc.emp.system.impl.model.ResRole;
+import org.minxc.emp.system.impl.model.SysResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;

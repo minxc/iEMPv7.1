@@ -5,7 +5,6 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.minxc.emp.basis.api.model.SysIdentity;
-import org.minxc.emp.basis.impl.util.ContextUtil;
 import org.minxc.emp.bpm.core.manager.BpmTaskOpinionManager;
 import org.minxc.emp.bpm.core.model.BpmTaskOpinion;
 import org.minxc.emp.bpm.engine.model.BpmIdentity;
@@ -14,6 +13,7 @@ import org.minxc.emp.bpm.engine.plugin.session.BpmUserCalcPluginSession;
 import org.minxc.emp.bpm.plugin.usercalc.user.def.UserPluginDef;
 import org.minxc.emp.idm.api.model.User;
 import org.minxc.emp.idm.api.service.UserService;
+import org.minxc.emp.system.util.ContextUtil;
 import org.springframework.stereotype.Component;
 
 @Component

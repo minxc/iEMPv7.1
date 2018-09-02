@@ -9,11 +9,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.minxc.emp.basis.api.groovy.IGroovyScriptEngine;
-import org.minxc.emp.basis.impl.core.manager.ScriptManager;
-import org.minxc.emp.basis.impl.core.model.Script;
 import org.minxc.emp.common.db.api.IdGenerator;
 import org.minxc.emp.common.rest.CommonController;
 import org.minxc.emp.common.rest.util.RequestUtil;
+import org.minxc.emp.system.impl.manager.ScriptManager;
+import org.minxc.emp.system.impl.model.Script;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

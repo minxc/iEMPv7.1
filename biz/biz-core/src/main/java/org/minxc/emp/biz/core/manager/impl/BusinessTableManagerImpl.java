@@ -19,6 +19,7 @@ import org.minxc.emp.common.db.model.query.DefaultQueryFilter;
 import org.minxc.emp.common.manager.impl.CommonManager;
 import org.minxc.emp.core.api.exception.BusinessException;
 import org.minxc.emp.core.api.query.QueryOperator;
+import org.minxc.emp.system.api.service.ISysDataSourceService;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 

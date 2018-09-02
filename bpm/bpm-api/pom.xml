@@ -43,7 +43,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.minxc.emp</groupId>
-			<artifactId>basis-impl</artifactId>
+			<artifactId>system-impl</artifactId>
 			<version>1.0-SNAPSHOT</version>
 		</dependency>
 	</dependencies>

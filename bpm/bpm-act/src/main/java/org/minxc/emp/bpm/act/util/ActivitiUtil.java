@@ -1,7 +1,5 @@
 package org.minxc.emp.bpm.act.util;
 
-import com.dstz.base.core.util.AppUtil;
-import com.dstz.base.core.util.FileUtil;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -20,16 +18,19 @@ import org.activiti.engine.impl.pvm.ReadOnlyProcessDefinition;
 import org.activiti.engine.impl.pvm.process.ActivityImpl;
 import org.activiti.engine.impl.pvm.process.TransitionImpl;
 
+import com.minxc.emp.core.util.AppContextUtil;
+import com.minxc.emp.core.util.FileUtil;
+
 public class ActivitiUtil {
 	public static CommandExecutor getCommandExecutor() {
-		ProcessEngineImpl engine = (ProcessEngineImpl) AppUtil.getBean(ProcessEngine.class);
+		ProcessEngineImpl engine = (ProcessEngineImpl) AppContextUtil.getBean(ProcessEngine.class);
 		CommandExecutor cmdExecutor = engine.getProcessEngineConfiguration().getCommandExecutor();
 		return cmdExecutor;
 	}
 
 	public static Map<String, Object> a(String actDefId, String nodeId, String[] aryDestination) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		RepositoryService repositoryService = (RepositoryService) AppUtil.getBean(RepositoryService.class);
+		RepositoryService repositoryService = (RepositoryService) AppContextUtil.getBean(RepositoryService.class);
 		ProcessDefinitionEntity processDefinition = (ProcessDefinitionEntity) ((RepositoryServiceImpl) repositoryService)
 				.getDeployedProcessDefinition(actDefId);
 		ActivityImpl curAct = processDefinition.findActivity(nodeId);

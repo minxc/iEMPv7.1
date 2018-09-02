@@ -9,6 +9,16 @@ import javax.annotation.Resource;
 import org.apache.commons.io.IOUtils;
 import org.dom4j.Document;
 import org.dom4j.Element;
+import org.minxc.emp.biz.api.constant.BusTableRelType;
+import org.minxc.emp.biz.api.model.IBusTableRel;
+import org.minxc.emp.biz.api.model.IBusinessObject;
+import org.minxc.emp.biz.api.service.IBusinessObjectService;
+import org.minxc.emp.common.db.id.UniqueIdUtil;
+import org.minxc.emp.common.db.model.query.DefaultQueryFilter;
+import org.minxc.emp.common.manager.impl.CommonManager;
+import org.minxc.emp.core.api.exception.BusinessException;
+import org.minxc.emp.core.api.query.QueryFilter;
+import org.minxc.emp.core.api.query.QueryOperator;
 import org.minxc.emp.form.core.dao.FormTemplateDao;
 import org.minxc.emp.form.core.manager.FormTemplateManager;
 import org.minxc.emp.form.core.model.FormTemplate;
@@ -18,18 +28,9 @@ import org.springframework.stereotype.Service;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.dstz.base.api.exception.BusinessException;
-import com.dstz.base.api.query.QueryFilter;
-import com.dstz.base.api.query.QueryOP;
-import com.dstz.base.core.util.Dom4jUtil;
-import com.dstz.base.core.util.FileUtil;
-import com.dstz.base.db.id.UniqueIdUtil;
-import com.dstz.base.db.model.query.DefaultQueryFilter;
-import com.dstz.base.manager.impl.BaseManager;
-import com.dstz.bus.api.constant.BusTableRelType;
-import com.dstz.bus.api.model.IBusTableRel;
-import com.dstz.bus.api.model.IBusinessObject;
-import com.dstz.bus.api.service.IBusinessObjectService;
+import com.minxc.emp.core.util.Dom4jUtil;
+import com.minxc.emp.core.util.FileUtil;
+
 
 /**
  * <pre>
@@ -41,7 +42,7 @@ import com.dstz.bus.api.service.IBusinessObjectService;
  * </pre>
  */
 @Service
-public class FormTemplateManagerImpl extends BaseManager<String, FormTemplate> implements FormTemplateManager{
+public class FormTemplateManagerImpl extends CommonManager<String, FormTemplate> implements FormTemplateManager{
 	@Resource
 	FormTemplateDao formTemplateDao;
 	@Autowired
@@ -65,7 +66,7 @@ public class FormTemplateManagerImpl extends BaseManager<String, FormTemplate> i
 	@Override
 	public FormTemplate getByKey(String key) {
 		QueryFilter filter = new DefaultQueryFilter();
-		filter.addFilter("key_", key, QueryOP.EQUAL);
+		filter.addFilter("key_", key, QueryOperator.EQUAL);
 		return this.queryOne(filter);
 	}
 
@@ -73,7 +74,7 @@ public class FormTemplateManagerImpl extends BaseManager<String, FormTemplate> i
 	public void initAllTemplate() {
 		// 删除不可编辑的（其实就是系统的）
 		QueryFilter filter = new DefaultQueryFilter();
-		filter.addFilter("editable_", false, QueryOP.EQUAL);
+		filter.addFilter("editable_", false, QueryOperator.EQUAL);
 		for (FormTemplate template : this.query(filter)) {
 			this.remove(template.getId());
 		}
@@ -164,8 +165,8 @@ public class FormTemplateManagerImpl extends BaseManager<String, FormTemplate> i
 
 	public List<FormTemplate> getByType(String type, String formType) {
 		QueryFilter filter = new DefaultQueryFilter();
-		filter.addFilter("type_", type, QueryOP.IN);
-		filter.addFilter("form_type_", formType, QueryOP.EQUAL);
+		filter.addFilter("type_", type, QueryOperator.IN);
+		filter.addFilter("form_type_", formType, QueryOperator.EQUAL);
 		return this.query(filter);
 	}
 	

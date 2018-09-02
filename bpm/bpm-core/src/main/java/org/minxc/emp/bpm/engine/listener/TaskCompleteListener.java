@@ -7,7 +7,6 @@ import java.util.Set;
 import javax.annotation.Resource;
 import org.activiti.engine.delegate.DelegateTask;
 import org.activiti.engine.impl.persistence.entity.TaskEntity;
-import org.minxc.emp.basis.impl.util.ContextUtil;
 import org.minxc.emp.bpm.api.constant.ActionType;
 import org.minxc.emp.bpm.api.constant.EventType;
 import org.minxc.emp.bpm.api.constant.InstanceStatus;
@@ -28,6 +27,7 @@ import org.minxc.emp.bpm.core.model.BpmTaskStack;
 import org.minxc.emp.bpm.engine.action.cmd.DefualtTaskActionCmd;
 import org.minxc.emp.bpm.engine.listener.AbstractTaskListener;
 import org.minxc.emp.idm.api.model.User;
+import org.minxc.emp.system.util.ContextUtil;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Component;
 

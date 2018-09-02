@@ -3,10 +3,14 @@ package org.minxc.emp.bpm.plugin.execution.nodemessage.context;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.minxc.emp.core.util.AppContextUtil;
+import com.minxc.emp.core.util.StringUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import org.minxc.emp.bpm.api.constant.EventType;
+import org.minxc.emp.bpm.api.engine.plugin.runtime.RunTimePlugin;
 import org.minxc.emp.bpm.engine.plugin.context.AbstractBpmExecutionPluginContext;
 import org.minxc.emp.bpm.plugin.execution.nodemessage.def.NodeMessage;
 import org.minxc.emp.bpm.plugin.execution.nodemessage.def.NodeMessagePluginDef;
@@ -41,7 +45,7 @@ public class NodeMessagePluginContext extends AbstractBpmExecutionPluginContext<
 			JSONObject msgJson = array.getJSONObject(i);
 			NodeMessage nodeMessage = (NodeMessage) JSON.toJavaObject((JSON) msgJson, NodeMessage.class);
 			if (StringUtil.isNotEmpty((String) msgJson.getString("userRules"))) {
-				UserAssignPluginContext userPluginContext = (UserAssignPluginContext) AppUtil
+				UserAssignPluginContext userPluginContext = (UserAssignPluginContext) AppContextUtil
 						.getBean(UserAssignPluginContext.class);
 				userPluginContext.parse(msgJson.getString("userRules"));
 				nodeMessage.setUserRules(((UserAssignPluginDef) userPluginContext.getBpmPluginDef()).getRuleList());

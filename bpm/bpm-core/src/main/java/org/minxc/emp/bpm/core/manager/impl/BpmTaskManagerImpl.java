@@ -10,7 +10,6 @@ import java.util.Map;
 import java.util.Set;
 import javax.annotation.Resource;
 
-import org.minxc.emp.basis.impl.util.ContextUtil;
 import org.minxc.emp.bpm.api.constant.TaskStatus;
 import org.minxc.emp.bpm.api.exception.BpmStatusCode;
 import org.minxc.emp.bpm.core.dao.BpmTaskDao;
@@ -23,6 +22,7 @@ import org.minxc.emp.common.manager.impl.CommonManager;
 import org.minxc.emp.core.api.exception.BusinessException;
 import org.minxc.emp.core.api.query.QueryFilter;
 import org.minxc.emp.core.api.query.QueryOperator;
+import org.minxc.emp.system.util.ContextUtil;
 import org.springframework.stereotype.Service;
 
 @Service(value = "bpmTaskManager")

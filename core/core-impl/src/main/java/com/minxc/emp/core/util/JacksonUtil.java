@@ -17,6 +17,7 @@
 
 package com.minxc.emp.core.util;
 
+import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -335,13 +336,17 @@ public class JacksonUtil {
 
 	public static void main(String[] args){
 
-		ObjectNode node = JsonNodeFactory.instance.objectNode();
-		node.put("min", "闵");
-		node.put("xc", "现畅");
 		ObjectMapper mapper = new ObjectMapper();
 		try {
-			mapper.writeValue(System.out, node);
+//			JsonNode node = mapper.readTree(new File("E:\\iEMP\\iEMPv7.1\\core\\core-impl\\src\\resources\\test.json"));
+//			JsonNode node = mapper.readTree(new File("E:\\iEMP\\iEMPv7.1\\core\\core-impl\\src\\resources\\biz_object_relation.json"));
+//			JsonNode node = mapper.readTree(new File("E:\\iEMP\\iEMPv7.1\\core\\core-impl\\src\\resources\\student.json"));
+			JsonNode node = mapper.readTree(new File("E:\\iEMP\\iEMPv7.1\\core\\core-impl\\src\\resources\\rights.json"));
+			System.out.println(node.getNodeType());
+			System.out.println(node.fieldNames());
+			System.out.println(node);
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -607,9 +612,6 @@ public class JacksonUtil {
 //        return JSON.toJSONString(obj);
 //    }
 
-//    public static void main(String[] args) {
-//        String str = JSON.toJSONString(null);
-//        System.out.println();
-//    }
+    
 
 }

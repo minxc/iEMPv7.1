@@ -12,7 +12,6 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.minxc.emp.basis.impl.groovy.GroovyScriptEngine;
-import org.minxc.emp.basis.impl.util.ContextUtil;
 import org.minxc.emp.biz.api.model.IBusinessData;
 import org.minxc.emp.biz.api.service.IBusinessDataService;
 import org.minxc.emp.bpm.api.constant.ActionType;
@@ -44,6 +43,7 @@ import org.minxc.emp.bpm.engine.util.HandlerUtil;
 import org.minxc.emp.core.api.exception.BusinessException;
 import org.minxc.emp.core.api.exception.SystemException;
 import org.minxc.emp.idm.api.model.User;
+import org.minxc.emp.system.util.ContextUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Transactional;

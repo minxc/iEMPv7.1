@@ -2,12 +2,12 @@ package org.minxc.emp.form.core.manager.impl;
 
 import javax.annotation.Resource;
 
+import org.minxc.emp.common.manager.impl.CommonManager;
 import org.minxc.emp.form.core.dao.FormBusSetDao;
 import org.minxc.emp.form.core.manager.FormBusSetManager;
 import org.minxc.emp.form.core.model.FormBusSet;
 import org.springframework.stereotype.Service;
 
-import com.dstz.base.manager.impl.BaseManager;
 
 /**
  * <pre>
@@ -15,7 +15,7 @@ import com.dstz.base.manager.impl.BaseManager;
  * </pre>
  */
 @Service("formBusSetManager")
-public class FormBusSetManagerImpl extends BaseManager<String, FormBusSet> implements FormBusSetManager {
+public class FormBusSetManagerImpl extends CommonManager<String, FormBusSet> implements FormBusSetManager {
     @Resource
     FormBusSetDao formBusSetDao;
 

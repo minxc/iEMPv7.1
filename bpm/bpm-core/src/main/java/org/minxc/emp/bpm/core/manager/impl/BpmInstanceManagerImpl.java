@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.List;
 import javax.annotation.Resource;
 
-import org.minxc.emp.basis.impl.util.ContextUtil;
 import org.minxc.emp.bpm.api.model.def.IBpmDefinition;
 import org.minxc.emp.bpm.core.dao.BpmInstanceDao;
 import org.minxc.emp.bpm.core.manager.BpmInstanceManager;
@@ -15,6 +14,7 @@ import org.minxc.emp.common.db.id.UniqueIdUtil;
 import org.minxc.emp.common.manager.impl.CommonManager;
 import org.minxc.emp.core.api.query.QueryFilter;
 import org.minxc.emp.idm.api.model.User;
+import org.minxc.emp.system.util.ContextUtil;
 import org.springframework.stereotype.Service;
 
 import com.minxc.emp.core.util.StringUtil;

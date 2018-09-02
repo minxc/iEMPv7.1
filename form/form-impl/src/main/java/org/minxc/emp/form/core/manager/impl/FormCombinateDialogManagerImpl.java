@@ -4,15 +4,15 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.minxc.emp.common.db.model.query.DefaultQueryFilter;
+import org.minxc.emp.common.manager.impl.CommonManager;
+import org.minxc.emp.core.api.query.QueryFilter;
+import org.minxc.emp.core.api.query.QueryOperator;
 import org.minxc.emp.form.core.dao.FormCombinateDialogDao;
 import org.minxc.emp.form.core.manager.FormCombinateDialogManager;
 import org.minxc.emp.form.core.model.FormCombinateDialog;
 import org.springframework.stereotype.Service;
 
-import com.dstz.base.api.query.QueryFilter;
-import com.dstz.base.api.query.QueryOP;
-import com.dstz.base.db.model.query.DefaultQueryFilter;
-import com.dstz.base.manager.impl.BaseManager;
 
 /**
  * <pre>
@@ -20,14 +20,14 @@ import com.dstz.base.manager.impl.BaseManager;
  * </pre>
  */
 @Service("combinateDialogManager")
-public class FormCombinateDialogManagerImpl extends BaseManager<String, FormCombinateDialog> implements FormCombinateDialogManager {
+public class FormCombinateDialogManagerImpl extends CommonManager<String, FormCombinateDialog> implements FormCombinateDialogManager {
     @Resource
     FormCombinateDialogDao combinateDialogDao;
 
     @Override
     public FormCombinateDialog getByAlias(String alias) {
         QueryFilter queryFilter = new DefaultQueryFilter();
-        queryFilter.addFilter("alias_", alias, QueryOP.EQUAL);
+        queryFilter.addFilter("alias_", alias, QueryOperator.EQUAL);
         List<FormCombinateDialog> combinateDialogs = query(queryFilter);
         if (combinateDialogs == null || combinateDialogs.isEmpty())
             return null;

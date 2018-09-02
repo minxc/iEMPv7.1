@@ -23,8 +23,7 @@ import org.minxc.emp.core.api.query.Page;
 import org.minxc.emp.core.api.query.QueryFilter;
 
 /**
- * 查询的切面逻辑
- * @author Jeff
+ * 查询切面逻辑
  *
  */
 @Intercepts(
@@ -59,7 +58,6 @@ public class QueryInterceptor  implements Interceptor{
 		}
 		
 		// 其他事情
-		
 		
 		 return invocation.proceed();
 	}

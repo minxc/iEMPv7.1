@@ -6,7 +6,6 @@ import javax.annotation.Resource;
 
 import org.minxc.emp.basis.api.groovy.IGroovyScriptEngine;
 import org.minxc.emp.basis.api.model.SysIdentity;
-import org.minxc.emp.basis.impl.util.ContextUtil;
 import org.minxc.emp.bpm.api.engine.action.cmd.TaskActionCmd;
 import org.minxc.emp.bpm.api.engine.context.BpmContext;
 import org.minxc.emp.bpm.api.model.nodedef.BpmNodeDef;
@@ -16,6 +15,7 @@ import org.minxc.emp.bpm.engine.constant.TaskSkipType;
 import org.minxc.emp.bpm.engine.plugin.runtime.abstact.AbstractBpmExecutionPlugin;
 import org.minxc.emp.bpm.engine.plugin.session.BpmExecutionPluginSession;
 import org.minxc.emp.bpm.plugin.execution.taskskip.def.TaskSkipPluginDef;
+import org.minxc.emp.system.util.ContextUtil;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Component;
 

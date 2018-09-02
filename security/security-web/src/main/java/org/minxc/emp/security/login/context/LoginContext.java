@@ -3,6 +3,11 @@ package org.minxc.emp.security.login.context;
 import com.minxc.emp.core.util.AppContextUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.minxc.emp.idm.api.context.CurrentContext;
+import org.minxc.emp.idm.api.model.Group;
+import org.minxc.emp.idm.api.model.User;
+import org.minxc.emp.idm.api.service.GroupService;
+import org.minxc.emp.idm.api.service.UserService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -102,7 +107,7 @@ public class LoginContext implements CurrentContext {
         currentOrg.set(group);
         //将当前人和组织放到缓存中。
         String userId = getCurrentUserId();
-        Cache Cache = (Cache) AppUtil.getBean(Cache.class);
+        Cache Cache = (Cache) AppContextUtil.getBean(Cache.class);
         String userKey = CurrentContext.CURRENT_ORG + userId;
         Cache.add(userKey, group);
     }

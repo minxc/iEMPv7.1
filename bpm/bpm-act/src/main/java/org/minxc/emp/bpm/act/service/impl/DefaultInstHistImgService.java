@@ -1,8 +1,5 @@
 package org.minxc.emp.bpm.act.service.impl;
 
-import com.dstz.base.api.constant.IStatusCode;
-import com.dstz.base.api.exception.BusinessException;
-import com.dstz.base.core.util.StringUtil;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -31,8 +28,11 @@ import org.activiti.spring.ProcessEngineFactoryBean;
 import org.apache.commons.io.IOUtils;
 import org.minxc.emp.bpm.act.service.BpmImageService;
 import org.minxc.emp.bpm.api.exception.BpmStatusCode;
+import org.minxc.emp.core.api.exception.BusinessException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.minxc.emp.core.util.StringUtil;
 
 @Service
 public class DefaultInstHistImgService implements BpmImageService {
@@ -52,7 +52,7 @@ public class DefaultInstHistImgService implements BpmImageService {
 	public InputStream draw(String actDefId, String actInstId) throws Exception {
 		InputStream imageStream = null;
 		if (StringUtil.isEmpty(actDefId)) {
-			throw new BusinessException("流程定义actDefId不能缺失", (IStatusCode) BpmStatusCode.PARAM_ILLEGAL);
+			throw new BusinessException("流程定义actDefId不能缺失", BpmStatusCode.PARAM_ILLEGAL);
 		}
 		if (StringUtil.isEmpty(actInstId)) {
 			return this.b(actDefId);

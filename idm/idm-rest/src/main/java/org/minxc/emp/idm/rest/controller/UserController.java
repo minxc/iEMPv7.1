@@ -5,7 +5,6 @@ import com.minxc.emp.core.util.CryptoUtil;
 
 
 import org.apache.commons.lang3.StringUtils;
-import org.minxc.emp.basis.impl.util.ContextUtil;
 import org.minxc.emp.common.db.id.UniqueIdUtil;
 import org.minxc.emp.common.db.model.page.PageJson;
 import org.minxc.emp.common.rest.CommonController;
@@ -19,6 +18,7 @@ import org.minxc.emp.idm.impl.manager.GroupUserManager;
 import org.minxc.emp.idm.impl.manager.UserManager;
 import org.minxc.emp.idm.impl.model.GroupUserEntity;
 import org.minxc.emp.idm.impl.model.UserEntity;
+import org.minxc.emp.system.util.ContextUtil;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

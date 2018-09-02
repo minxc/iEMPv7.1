@@ -3,6 +3,7 @@ package org.minxc.emp.biz.core.service;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.minxc.emp.core.impl.executor.ExecutorFactory;
+import com.minxc.emp.core.util.BeanUtils;
 
 import java.util.HashMap;
 import java.util.Iterator;

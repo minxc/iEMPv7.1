@@ -1,6 +1,5 @@
 package org.minxc.emp.bpm.act.listener;
 
-import com.dstz.base.core.util.AppUtil;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,6 +12,8 @@ import org.apache.commons.logging.LogFactory;
 import org.minxc.emp.bpm.act.listener.ActEventListener;
 import org.springframework.stereotype.Component;
 
+import com.minxc.emp.core.util.AppContextUtil;
+
 @Component
 public class GlobalEventListener implements ActivitiEventListener {
 	public Log logger = LogFactory.getLog(GlobalEventListener.class);
@@ -22,7 +23,7 @@ public class GlobalEventListener implements ActivitiEventListener {
 		String eventType = event.getType().name();
 		String eventHandlerBeanId = this.g.get(eventType);
 		if (eventHandlerBeanId != null) {
-			ActEventListener handler = (ActEventListener) AppUtil.getBean((String) eventHandlerBeanId);
+			ActEventListener handler = (ActEventListener) AppContextUtil.getBean((String) eventHandlerBeanId);
 			ActivitiEventImpl e = (ActivitiEventImpl) event;
 			handler.notify((ActivitiEvent) e);
 		} else {

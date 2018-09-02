@@ -10,16 +10,13 @@ import org.minxc.emp.form.core.model.FormDef;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.dstz.base.api.query.QueryFilter;
-import com.dstz.base.api.query.QueryOP;
-import com.dstz.base.core.util.FileUtil;
-import com.dstz.base.core.util.PropertyUtil;
-import com.dstz.base.core.util.StringUtil;
-import com.dstz.base.db.model.query.DefaultQueryFilter;
-import com.dstz.base.manager.impl.BaseManager;
-import com.dstz.sys.api2.model.ISysTreeNode;
-import com.dstz.sys.api2.service.ISysTreeNodeService;
+import org.minxc.emp.common.manager.impl.CommonManager;
+import org.minxc.emp.system.api.model.ISysTreeNode;
+import org.minxc.emp.system.api.service.ISysTreeNodeService;
 
+import com.minxc.emp.core.util.FileUtil;
+import com.minxc.emp.core.util.PropertiesUtil;
+import com.minxc.emp.core.util.StringUtil;
 /**
  * 表单 Manager处理实现类
  *
@@ -28,7 +25,7 @@ import com.dstz.sys.api2.service.ISysTreeNodeService;
  * @time 2018-03-19 20:30:46
  */
 @Service("formDefManager")
-public class FormDefManagerImpl extends BaseManager<String, FormDef> implements FormDefManager {
+public class FormDefManagerImpl extends CommonManager<String, FormDef> implements FormDefManager {
 	@Resource
 	FormDefDao formDefDao;
 	@Autowired
@@ -41,7 +38,7 @@ public class FormDefManagerImpl extends BaseManager<String, FormDef> implements 
 
 	@Override
 	public void saveBackupHtml(FormDef formDef) {
-		String formDefPath = PropertyUtil.getFormDefBackupPath();
+		String formDefPath = PropertiesUtil.getFormDefBackupPath();
 		if (StringUtil.isEmpty(formDefPath)) {
 			return;
 		}
@@ -53,7 +50,7 @@ public class FormDefManagerImpl extends BaseManager<String, FormDef> implements 
 
 	@Override
 	public String getBackupHtml(FormDef formDef) {
-		String formDefPath = PropertyUtil.getFormDefBackupPath();
+		String formDefPath = PropertiesUtil.getFormDefBackupPath();
 		if (StringUtil.isNotEmpty(formDefPath)) {
 			ISysTreeNode node = sysTreeNodeService.getById(formDef.getGroupId());
 			String fileName = formDefPath + File.separator + node.getKey() + File.separator + formDef.getKey() + ".html";
@@ -63,8 +60,8 @@ public class FormDefManagerImpl extends BaseManager<String, FormDef> implements 
 		return formDef.getHtml();
 	}
 
-	public static void main(String[] args) {
-		String str = FileUtil.readFile("D:\\projects\\dream\\agile-bpm\\modules\\agile-bpm-platform-new\\src\\main\\webapp\\form\\mrfl\\nh1.html");
-		System.out.println(str);
-	}
+//	public static void main(String[] args) {
+//		String str = FileUtil.readFile("D:\\projects\\dream\\agile-bpm\\modules\\agile-bpm-platform-new\\src\\main\\webapp\\form\\mrfl\\nh1.html");
+//		System.out.println(str);
+//	}
 }

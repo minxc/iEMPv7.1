@@ -16,8 +16,17 @@ import org.springframework.stereotype.Service;
 
 
 /**
- * 系统树节点 Manager处理实现类
- * @time 2018-03-13 20:02:33
+ * 
+* 项目名称：system-impl   
+* 类名称：SysTreeNodeManagerImpl   
+* 类描述： 系统树节点 Manager处理实现类  
+* 创建人：Xianchang.min   
+* 创建时间：2018年9月2日 下午4:07:05   
+* 修改人：Xianchang.min   
+* 修改时间：2018年9月2日 下午4:07:05   
+* 修改备注：   
+* @version  1.0  
+*
  */
 @Service("sysTreeNodeManager")
 public class SysTreeNodeManagerImpl extends CommonManager<String, SysTreeNode> implements SysTreeNodeManager {

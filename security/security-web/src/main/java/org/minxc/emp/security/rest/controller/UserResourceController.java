@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.minxc.emp.core.util.AppContextUtil;
 import com.minxc.emp.core.util.BeanUtils;
 
 import org.apache.commons.lang3.StringUtils;
@@ -15,9 +16,14 @@ import org.minxc.emp.common.rest.util.RequestUtil;
 import org.minxc.emp.core.api.aop.annotation.ErrorCatching;
 import org.minxc.emp.core.api.exception.BusinessException;
 import org.minxc.emp.core.api.response.impl.ResultMessage;
+import org.minxc.emp.idm.api.constant.GroupTypeConstant;
 import org.minxc.emp.idm.api.model.Group;
 import org.minxc.emp.idm.api.service.GroupService;
 import org.minxc.emp.security.util.SubSystemUtil;
+import org.minxc.emp.system.api.service.SysResourceService;
+import org.minxc.emp.system.impl.model.Subsystem;
+import org.minxc.emp.system.impl.model.SysResource;
+import org.minxc.emp.system.util.ContextUtil;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -33,7 +39,7 @@ public class UserResourceController extends GenericController {
     @Resource
     private GroupService groupService;
     @Resource
-    SystemResourceService SystemResourceService;
+    SysResourceService SystemResourceService;
 
 
     @RequestMapping("userResource/userMsg")
@@ -69,7 +75,7 @@ public class UserResourceController extends GenericController {
         Group group = ContextUtil.getCurrentGroup();
         List<Group> orgList = groupService.getGroupsByGroupTypeUserId(GroupTypeConstant.ORG.key(), ContextUtil.getCurrentUserId());
 
-        mv.put("currentEnviroment",AppUtil.getCtxEnvironment());
+        mv.put("currentEnviroment",AppContextUtil.getCtxEnvironment());
         mv.put("subsystemList", subsystemList);
         mv.put("currentSystem", currentSystem);
         mv.put("currentOrg", group);
@@ -99,7 +105,7 @@ public class UserResourceController extends GenericController {
     }
 
     @RequestMapping("userResource/getResTree")
-    public List<SystemResource> getSysResource(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public List<SysResource> getSysResource(HttpServletRequest request, HttpServletResponse response) throws IOException {
         User user = ContextUtil.getCurrentUser();
         String systemId = SubSystemUtil.getSystemId(request);
         boolean isAdmin = ContextUtil.isAdmin(user);

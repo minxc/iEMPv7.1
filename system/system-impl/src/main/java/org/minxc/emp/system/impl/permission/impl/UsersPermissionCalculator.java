@@ -1,10 +1,9 @@
 package org.minxc.emp.system.impl.permission.impl;
 
-import org.minxc.emp.basis.impl.util.ContextUtil;
 import org.minxc.emp.system.api.permission.IPermissionCalculator;
+import org.minxc.emp.system.util.ContextUtil;
 import org.springframework.stereotype.Service;
 
-//import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.databind.JsonNode;
 
 /**

@@ -2,6 +2,7 @@ package org.minxc.emp.bpm.plugin.usercalc.samenode.context;
 
 import com.alibaba.fastjson.JSONObject;
 
+import org.minxc.emp.bpm.api.engine.plugin.runtime.RunTimePlugin;
 import org.minxc.emp.bpm.engine.plugin.context.AbstractUserCalcPluginContext;
 import org.minxc.emp.bpm.plugin.usercalc.samenode.def.SameNodePluginDef;
 import org.minxc.emp.bpm.plugin.usercalc.samenode.runtime.SameNodePlugin;

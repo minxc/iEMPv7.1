@@ -3,23 +3,21 @@ package org.minxc.emp.bpm.plugin.task.userassign.context;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.dstz.base.core.util.AppUtil;
-import com.dstz.base.core.util.BeanUtils;
 import com.dstz.base.core.util.JsonUtil;
-import com.dstz.base.core.util.ThreadMsgUtil;
-import com.dstz.bpm.api.constant.EventType;
-import com.dstz.bpm.api.engine.plugin.context.UserCalcPluginContext;
-import com.dstz.bpm.api.engine.plugin.context.UserQueryPluginContext;
-import com.dstz.bpm.api.engine.plugin.def.BpmPluginDef;
-import com.dstz.bpm.api.engine.plugin.def.BpmUserCalcPluginDef;
-import com.dstz.bpm.api.engine.plugin.def.UserAssignRule;
-import com.dstz.bpm.api.engine.plugin.runtime.RunTimePlugin;
-import com.dstz.bpm.engine.plugin.context.AbstractBpmTaskPluginContext;
-import com.dstz.bpm.engine.plugin.context.AbstractUserCalcPluginContext;
+import com.minxc.emp.core.util.AppContextUtil;
+import com.minxc.emp.core.util.BeanUtils;
+import com.minxc.emp.core.util.ThreadMsgUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import org.minxc.emp.bpm.api.constant.EventType;
+import org.minxc.emp.bpm.api.engine.plugin.context.UserCalcPluginContext;
+import org.minxc.emp.bpm.api.engine.plugin.context.UserQueryPluginContext;
+import org.minxc.emp.bpm.api.engine.plugin.def.UserAssignRule;
+import org.minxc.emp.bpm.api.engine.plugin.runtime.RunTimePlugin;
+import org.minxc.emp.bpm.engine.plugin.context.AbstractBpmTaskPluginContext;
+import org.minxc.emp.bpm.engine.plugin.context.AbstractUserCalcPluginContext;
 import org.minxc.emp.bpm.plugin.task.userassign.def.UserAssignPluginDef;
 import org.minxc.emp.bpm.plugin.task.userassign.plugin.UserAssignPlugin;
 import org.slf4j.Logger;
@@ -81,7 +79,7 @@ public class UserAssignPluginContext extends AbstractBpmTaskPluginContext<UserAs
 				JSONObject calcObj = (JSONObject) obj;
 				String pluginContext = JsonUtil.getString((JSONObject) calcObj, (String) "pluginType")
 						+ "PluginContext";
-				AbstractUserCalcPluginContext ctx = (AbstractUserCalcPluginContext) AppUtil
+				AbstractUserCalcPluginContext ctx = (AbstractUserCalcPluginContext) AppContextUtil
 						.getBean((String) pluginContext);
 				if (ctx == null) {
 					this.LOG.warn("插件{}查找失败！", (Object) pluginContext);

@@ -1,8 +1,11 @@
 package org.minxc.emp.security.login;
 
+import org.minxc.emp.idm.api.model.User;
+import org.minxc.emp.idm.api.model.UserRole;
+import org.minxc.emp.idm.api.service.UserService;
 import org.minxc.emp.security.constant.PlatformSecurityConstants;
 import org.minxc.emp.security.login.model.LoginUser;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.minxc.emp.system.util.ContextUtil;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,9 +13,12 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.minxc.emp.core.util.BeanUtils;
+
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * 实现UserDetailsService 接口获取UserDetails 接口实例对象。

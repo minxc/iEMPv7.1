@@ -1,10 +1,9 @@
 package org.minxc.emp.bpm.engine.parser.flow;
 
 import com.alibaba.fastjson.JSONObject;
-import com.dstz.base.core.encrypt.EncryptUtil;
-import com.dstz.base.core.util.PropertyUtil;
-import com.dstz.base.core.util.StringUtil;
-import com.dstz.base.core.util.time.DateFormatUtil;
+import com.minxc.emp.core.util.PropertiesUtil;
+import com.minxc.emp.core.util.StringUtil;
+import com.minxc.emp.core.util.time.DateFormatUtil;
 
 import java.util.Date;
 
@@ -26,7 +25,7 @@ public class FlowVersionParse extends AbsFlowParse<DefaultBpmVariableDef> {
 			}
 			return;
 		}
-		String key = PropertyUtil.getProperty(String.format("%s.%s", "s", "k"));
+		String key = PropertiesUtil.getProperty(String.format("%s.%s", "s", "k"));
 		bE = this.f(key);
 		this.g(bE);
 		if (bE.equals("b")) {
@@ -56,12 +55,12 @@ public class FlowVersionParse extends AbsFlowParse<DefaultBpmVariableDef> {
 		}
 	}
 
-	public static void main(String[] args) throws Exception {
-		String code = "senior_agileBpm敏捷工作流_2019-5-13";
-		System.out.println(EncryptUtil.encrypt((String) code));
-		System.out.println(EncryptUtil.decrypt(
-				(String) "5392537a203272132719aad01638fc99d0258d67e6cb7c29b76672a4cb47c18f0a16f85c569009d02da55598643b4169"));
-	}
+//	public static void main(String[] args) throws Exception {
+//		String code = "senior_agileBpm敏捷工作流_2019-5-13";
+//		System.out.println(EncryptUtil.encrypt((String) code));
+//		System.out.println(EncryptUtil.decrypt(
+//				(String) "5392537a203272132719aad01638fc99d0258d67e6cb7c29b76672a4cb47c18f0a16f85c569009d02da55598643b4169"));
+//	}
 
 	private void a(JSONObject flowConf) {
 	}

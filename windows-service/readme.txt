@@ -1,0 +1,1 @@
+JavaService.exe -install ECService "%JAVA_HOME%/jre/bin/server/jvm.dll" -Xmx128m -Djava.class.path="%JAVA_HOME%/lib/tools.jar;c:/ECService/ec.jar" -start com.ecservice.ECService -method StartService -stop com.ecservice.ECService -method StopService -out "%CD%/out.log" -err "%CD%/err.log" -current "%CD%" -auto

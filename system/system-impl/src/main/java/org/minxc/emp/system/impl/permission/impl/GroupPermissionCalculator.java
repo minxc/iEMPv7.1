@@ -3,10 +3,10 @@ package org.minxc.emp.system.impl.permission.impl;
 import java.util.List;
 import java.util.Map;
 
-import org.minxc.emp.basis.impl.util.ContextUtil;
 import org.minxc.emp.idm.api.model.Group;
 import org.minxc.emp.idm.api.service.GroupService;
 import org.minxc.emp.system.api.permission.IPermissionCalculator;
+import org.minxc.emp.system.util.ContextUtil;
 
 //import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.databind.JsonNode;

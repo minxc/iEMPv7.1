@@ -1,8 +1,8 @@
 package org.minxc.emp.bpm.engine.model;
 
 import com.alibaba.fastjson.JSONObject;
-import com.dstz.base.core.util.BeanUtils;
-import com.dstz.base.core.util.StringUtil;
+import com.minxc.emp.core.util.BeanUtils;
+import com.minxc.emp.core.util.StringUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;

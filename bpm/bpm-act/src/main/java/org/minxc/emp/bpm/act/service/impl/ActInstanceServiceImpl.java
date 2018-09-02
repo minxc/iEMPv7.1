@@ -1,7 +1,5 @@
 package org.minxc.emp.bpm.act.service.impl;
 
-import com.dstz.org.api.model.IUser;
-import com.dstz.sys.util.ContextUtil;
 import java.util.Collection;
 import java.util.Map;
 import javax.annotation.Resource;
@@ -22,6 +20,8 @@ import org.minxc.emp.bpm.act.util.ActivitiUtil;
 import org.minxc.emp.bpm.api.model.def.IBpmDefinition;
 import org.minxc.emp.bpm.api.model.nodedef.BpmNodeDef;
 import org.minxc.emp.bpm.api.service.BpmProcessDefService;
+import org.minxc.emp.idm.api.model.User;
+import org.minxc.emp.system.util.ContextUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -58,7 +58,7 @@ public class ActInstanceServiceImpl implements ActInstanceService {
 
 	public String startProcessInstance(String actDefId, String businessKey, Map<String, Object> variables) {
 		try {
-			IUser user = ContextUtil.getCurrentUser();
+			User user = ContextUtil.getCurrentUser();
 			Authentication.setAuthenticatedUserId((String) user.getUserId());
 			ProcessInstance instance = this.runtimeService.startProcessInstanceById(actDefId, businessKey, variables);
 			String string = instance.getId();

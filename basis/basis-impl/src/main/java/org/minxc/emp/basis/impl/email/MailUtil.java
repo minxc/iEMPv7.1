@@ -17,7 +17,6 @@ import org.minxc.emp.basis.impl.email.model.Mail;
 import org.minxc.emp.basis.impl.email.model.MailAddress;
 import org.minxc.emp.basis.impl.email.model.MailAttachment;
 import org.minxc.emp.basis.impl.email.model.MailSetting;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 import java.io.File;
 import java.io.UnsupportedEncodingException;

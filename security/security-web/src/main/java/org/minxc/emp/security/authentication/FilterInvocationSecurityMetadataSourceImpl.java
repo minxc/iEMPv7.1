@@ -11,13 +11,13 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.lang3.StringUtils;
 import org.minxc.emp.security.IngoreChecker;
 import org.minxc.emp.security.util.SubSystemUtil;
+import org.minxc.emp.system.api.service.SysResourceService;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.access.SecurityConfig;
 import org.springframework.security.web.FilterInvocation;
 import org.springframework.security.web.access.intercept.FilterInvocationSecurityMetadataSource;
 
 import org.minxc.emp.security.constant.PlatformSecurityConstants;
-import org.minxc.emp.system.api.service.SystemResourceService;
 
 /*
 
@@ -29,7 +29,7 @@ import org.minxc.emp.system.api.service.SystemResourceService;
 public class FilterInvocationSecurityMetadataSourceImpl extends IngoreChecker implements FilterInvocationSecurityMetadataSource {
 
     @Resource
-    private SystemResourceService systemResourceService;
+    private SysResourceService systemResourceService;
 
     /**
 

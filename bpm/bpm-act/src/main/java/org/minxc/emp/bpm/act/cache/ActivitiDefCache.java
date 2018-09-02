@@ -1,14 +1,14 @@
 package org.minxc.emp.bpm.act.cache;
 
-import com.dstz.base.core.cache.ICache;
-import com.dstz.base.core.util.AppUtil;
-import com.dstz.base.core.util.FileUtil;
 import java.util.HashMap;
 import java.util.Map;
 import javax.annotation.Resource;
 import org.activiti.engine.impl.persistence.deploy.DeploymentCache;
 import org.activiti.engine.impl.persistence.entity.ProcessDefinitionEntity;
 import org.springframework.stereotype.Component;
+
+import com.minxc.emp.core.util.AppContextUtil;
+import com.minxc.emp.core.util.FileUtil;
 
 @Component
 public class ActivitiDefCache implements DeploymentCache<ProcessDefinitionEntity> {
@@ -18,13 +18,13 @@ public class ActivitiDefCache implements DeploymentCache<ProcessDefinitionEntity
 	ICache c;
 
 	public static void clearLocal() {
-		ActivitiDefCache cache = (ActivitiDefCache) AppUtil.getBean(ActivitiDefCache.class);
+		ActivitiDefCache cache = (ActivitiDefCache) AppContextUtil.getBean(ActivitiDefCache.class);
 		cache.clearProcessCache();
 	}
 
 	public static void clearByDefId(String actDefId) {
 		if (a == null) {
-			a = (ActivitiDefCache) AppUtil.getBean(ActivitiDefCache.class);
+			a = (ActivitiDefCache) AppContextUtil.getBean(ActivitiDefCache.class);
 		}
 		a.clearProcessDefinitionEntity(actDefId);
 		a.clearProcessCache();

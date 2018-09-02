@@ -8,8 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
-import org.minxc.emp.basis.impl.core.manager.SysPropertiesManager;
-import org.minxc.emp.basis.impl.core.model.SysProperties;
 import org.minxc.emp.common.db.id.UniqueIdUtil;
 import org.minxc.emp.common.db.model.page.PageJson;
 import org.minxc.emp.common.rest.GenericController;
@@ -17,6 +15,8 @@ import org.minxc.emp.common.rest.util.RequestUtil;
 import org.minxc.emp.core.api.aop.annotation.ErrorCatching;
 import org.minxc.emp.core.api.exception.BusinessException;
 import org.minxc.emp.core.api.query.QueryFilter;
+import org.minxc.emp.system.impl.manager.SysPropertiesManager;
+import org.minxc.emp.system.impl.model.SysProperties;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

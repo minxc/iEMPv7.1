@@ -1,0 +1,26 @@
+{
+	"children": [{
+		"children": [{
+			"children": [],
+			"fks": [{
+				"from": "classId",
+				"type": "parentField",
+				"value": "id"
+			}],
+			"tableComment": "学生",
+			"tableKey": "Student",
+			"type": "oneToMany"
+		}],
+		"fks": [{
+			"from": "schoolId",
+			"type": "parentField",
+			"value": "id"
+		}],
+		"tableComment": "班级",
+		"tableKey": "Class",
+		"type": "oneToMany"
+	}],
+	"tableComment": "学校",
+	"tableKey": "School",
+	"type": "main"
+}

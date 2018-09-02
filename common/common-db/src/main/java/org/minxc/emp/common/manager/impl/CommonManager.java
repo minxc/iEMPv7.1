@@ -38,7 +38,8 @@ public abstract class CommonManager<PK extends Serializable, T extends Serializa
     }
 
    
-    public void removeByIds(PK... ids) {
+    @SuppressWarnings("unchecked")
+	public void removeByIds(PK... ids) {
         if (ids != null) {
             for (PK pk : ids) {
                 remove(pk);
@@ -52,9 +53,7 @@ public abstract class CommonManager<PK extends Serializable, T extends Serializa
     }
 
     /**
-     * <pre>
-     * 根据QueryFilter获取唯一值
-     * </pre>
+     *  根据QueryFilter获取唯一值
      * @deprecated 请尽量写SQL。列表查询不会包含大数据文本 比如 form.html
      * @param queryFilter
      * @return

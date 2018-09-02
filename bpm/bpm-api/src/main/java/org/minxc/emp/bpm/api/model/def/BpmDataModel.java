@@ -7,7 +7,9 @@ import java.io.Serializable;
  */
 public class BpmDataModel implements Serializable{
 
-    /**
+	private static final long serialVersionUID = -5911787992273115737L;
+
+	/**
      * BO的名称
      */
     private String name = "";

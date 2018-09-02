@@ -4,9 +4,6 @@ import com.github.pagehelper.Page;
 
 
 import org.apache.commons.lang3.StringUtils;
-import org.minxc.emp.basis.impl.core.manager.SubsystemManager;
-import org.minxc.emp.basis.impl.core.model.Subsystem;
-import org.minxc.emp.basis.impl.util.ContextUtil;
 import org.minxc.emp.common.db.id.UniqueIdUtil;
 import org.minxc.emp.common.db.model.page.PageJson;
 import org.minxc.emp.common.rest.GenericController;
@@ -16,6 +13,9 @@ import org.minxc.emp.core.api.exception.BusinessException;
 import org.minxc.emp.core.api.query.QueryFilter;
 import org.minxc.emp.core.api.response.impl.ResultMessage;
 import org.minxc.emp.idm.api.model.User;
+import org.minxc.emp.system.impl.manager.SubsystemManager;
+import org.minxc.emp.system.impl.model.Subsystem;
+import org.minxc.emp.system.util.ContextUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

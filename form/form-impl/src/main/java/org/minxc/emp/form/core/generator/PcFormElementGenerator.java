@@ -1,7 +1,13 @@
 package org.minxc.emp.form.core.generator;
 
 import org.jsoup.nodes.Element;
+import org.minxc.emp.biz.api.constant.BusTableRelType;
+import org.minxc.emp.biz.api.model.IBusTableRel;
+import org.minxc.emp.biz.api.model.IBusinessColumn;
+import org.minxc.emp.core.api.exception.BusinessException;
 import org.springframework.stereotype.Component;
+
+import com.minxc.emp.core.util.StringUtil;
 
 /**
  * 自定义表单控件生成器<br>

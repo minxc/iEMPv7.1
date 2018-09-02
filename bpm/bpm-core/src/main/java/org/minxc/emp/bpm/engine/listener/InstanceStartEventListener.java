@@ -8,7 +8,6 @@ import java.util.regex.Pattern;
 import javax.annotation.Resource;
 import org.activiti.engine.impl.persistence.entity.ExecutionEntity;
 import org.apache.commons.lang3.StringUtils;
-import org.minxc.emp.basis.impl.util.ContextUtil;
 import org.minxc.emp.biz.api.model.IBusinessData;
 import org.minxc.emp.bpm.api.constant.EventType;
 import org.minxc.emp.bpm.api.constant.ScriptType;
@@ -31,6 +30,7 @@ import org.minxc.emp.bpm.engine.action.cmd.DefaultInstanceActionCmd;
 import org.minxc.emp.bpm.engine.listener.AbstractInstanceListener;
 import org.minxc.emp.bpm.engine.model.DefaultBpmProcessDef;
 import org.minxc.emp.core.api.exception.BusinessException;
+import org.minxc.emp.system.util.ContextUtil;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Component;
 

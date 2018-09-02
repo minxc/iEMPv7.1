@@ -1,0 +1,26 @@
+{
+	"children": [{
+		"children": [{
+			"children": [],
+			"fks": [{
+				"from": "id",
+				"type": "childField",
+				"value": "custId"
+			}],
+			"tableComment": "客户信息",
+			"tableKey": "Customer",
+			"type": "oneToOne"
+		}],
+		"fks": [{
+			"from": "orderId",
+			"type": "parentField",
+			"value": "id"
+		}],
+		"tableComment": "客户关系",
+		"tableKey": "CustomerRel",
+		"type": "oneToMany"
+	}],
+	"tableComment": "订单信息",
+	"tableKey": "ApplyOrder",
+	"type": "main"
+}
