@@ -10,7 +10,7 @@ import org.minxc.emp.core.api.query.QueryField;
 import org.minxc.emp.core.api.query.QueryOperator;
 
 /**
- * 默认条件接口实现类。
+ * 默认条件接口实现类
  */
 public class DefaultQueryField implements QueryField {
 
@@ -46,12 +46,13 @@ public class DefaultQueryField implements QueryField {
     }
 
     /**
-     * 针对in查询方式，根据传入的value的类型做不同的处理。 value 是 string，则分隔字符串，然后合并为符合in规范的字符串。
+     *  针对in查询方式，根据传入的value的类型做不同的处理。 value 是 string，则分隔字符串，然后合并为符合in规范的字符串。
      * value 是 list，则直接合并为符合in规范的字符串。
      *
      * @return
      */
-    private String getInValueSql() {
+    @SuppressWarnings("unchecked")
+	private String getInValueSql() {
         if (value instanceof String) { // 字符串形式，通过逗号分隔
             StringBuilder sb = new StringBuilder();
             sb.append("(");
@@ -177,7 +178,8 @@ public class DefaultQueryField implements QueryField {
     }
     
 
-    private String getBetweenSql() {
+    @SuppressWarnings({ "unused", "unchecked" })
+	private String getBetweenSql() {
         StringBuilder sb = new StringBuilder();
         sb.append(" between ");
         if (this.value instanceof List) {

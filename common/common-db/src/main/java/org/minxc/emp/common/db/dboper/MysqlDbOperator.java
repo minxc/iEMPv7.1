@@ -14,11 +14,9 @@ import org.minxc.emp.core.api.constant.ColumnType;
 import org.minxc.emp.core.api.exception.BusinessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-
 /**
- * 描述：mysql 的DbOperator实现类
- * 日期:2018年1月22日 下午8:17:49
- * </pre>
+ *  mysql 的DbOperator实现类 
+ *  日期:2018年1月22日 下午8:17:49
  */
 public class MysqlDbOperator extends DbOperator {
 
@@ -41,7 +39,7 @@ public class MysqlDbOperator extends DbOperator {
 		if (StringUtils.isNotEmpty(tableName)) {
 			sql += " AND TABLE_NAME LIKE ?";
 			list = jdbcTemplate.queryForList(sql, "%" + tableName + "%");
-		}else {
+		} else {
 			list = jdbcTemplate.queryForList(sql);
 		}
 
@@ -98,8 +96,7 @@ public class MysqlDbOperator extends DbOperator {
 	 * 根据name获取其字段信息
 	 * </pre>
 	 *
-	 * @param name
-	 *            （表名/视图名）
+	 * @param name （表名/视图名）
 	 * @return
 	 */
 	private List<ColumnEntity> getColumns(String name) {
@@ -145,7 +142,8 @@ public class MysqlDbOperator extends DbOperator {
 
 	@Override
 	public void createPartition(String tableName, String partName) {
-		String sql = "alter table " + tableName + " add partition (partition P_" + partName.toUpperCase() + " values in ('" + partName + "')) ";
+		String sql = "alter table " + tableName + " add partition (partition P_" + partName.toUpperCase()
+				+ " values in ('" + partName + "')) ";
 		JdbcTemplateUtil.executeWithTransaction(jdbcTemplate, sql);
 	}
 }

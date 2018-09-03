@@ -8,7 +8,6 @@ import org.minxc.emp.common.db.api.table.DbTypeEnum;
 /**
  * TableOperator的工厂类
  *
- * @author aschs
  */
 public class TableOperatorFactory {
 	private TableOperatorFactory() {

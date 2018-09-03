@@ -1,6 +1,8 @@
 package org.minxc.emp.model;
 
 public class ResourceLinkEntity {
+	
+	
     private String id;
 
     private String resId;

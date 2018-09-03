@@ -25,7 +25,7 @@ public class BasicDao<T> {
     @Resource
     protected SqlSessionTemplate sqlSessionTemplate;
 
-    private static final String NAME_SPACE = "org.minxc.emp.sql.common"; // mybatis命名空间
+    private static final String NAME_SPACE = "org.minxc.emp.common.db.dao"; // mybatis命名空间
 
     /**
      * 执行sql语句

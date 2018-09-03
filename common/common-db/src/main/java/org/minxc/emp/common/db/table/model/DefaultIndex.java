@@ -6,9 +6,6 @@ import java.util.List;
 
 /**
  * 默认的索引对象
- *
- * <pre>
- * </pre>
  */
 public class DefaultIndex implements Index {
 

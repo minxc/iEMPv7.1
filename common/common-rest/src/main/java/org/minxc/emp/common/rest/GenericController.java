@@ -93,7 +93,7 @@ public class GenericController {
     // ====================下面方法不在推荐使用=============================
 
     /**
-     * 向 response 中写入JSON数据
+     *  向 response 中写入JSON数据
      *
      * @param response
      * @param data

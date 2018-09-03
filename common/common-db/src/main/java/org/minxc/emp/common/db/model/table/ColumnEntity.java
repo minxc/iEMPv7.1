@@ -10,11 +10,8 @@ import java.io.Serializable;
 import javax.validation.constraints.NotEmpty;
 
 /**
- * <pre>
- * 对应数据库的列对象
- * </pre>
+ *   对应数据库的列对象
  *
- * @author aschs
  */
 public class ColumnEntity implements Serializable{
 

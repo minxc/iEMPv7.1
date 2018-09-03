@@ -25,7 +25,7 @@ import org.minxc.emp.idm.api.service.GroupService;
 import org.minxc.emp.security.util.SubSystemUtil;
 import org.minxc.emp.system.api.service.SysResourceService;
 import org.minxc.emp.system.impl.model.Subsystem;
-import org.minxc.emp.system.impl.model.SysResource;
+import org.minxc.emp.system.impl.model.SystemResourceEntity;
 import org.minxc.emp.system.util.ContextUtil;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -113,11 +113,11 @@ public class UserResourceController extends GenericController {
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
 	@RequestMapping("userResource/getResTree")
-    public List<SysResource> getSysResource(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public List<SystemResourceEntity> getSysResource(HttpServletRequest request, HttpServletResponse response) throws IOException {
         User user = ContextUtil.getCurrentUser();
         String systemId = SubSystemUtil.getSystemId(request);
         boolean isAdmin = ContextUtil.isAdmin(user);
-        List<SysResource> list = null;
+        List<SystemResourceEntity> list = null;
         if (isAdmin) {
             list = (List)sysResourceService.getBySystemId(systemId);
         } else {

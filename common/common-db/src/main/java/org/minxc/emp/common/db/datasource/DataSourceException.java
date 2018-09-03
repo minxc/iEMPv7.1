@@ -2,8 +2,6 @@ package org.minxc.emp.common.db.datasource;
 
 /**
  * 数据源异常。
- * <pre>
- * </pre>
  */
 public class DataSourceException extends RuntimeException {
 

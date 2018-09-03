@@ -10,8 +10,6 @@ import java.sql.SQLException;
 
 /**
  * DB2 RowMapper
- *
- * @author Raise
  */
 public class DB2ColumnMap implements RowMapper<Column> {
     @Override

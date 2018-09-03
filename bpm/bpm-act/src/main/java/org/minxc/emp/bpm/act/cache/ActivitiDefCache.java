@@ -12,8 +12,9 @@ import com.minxc.emp.core.util.FileUtil;
 
 @Component
 public class ActivitiDefCache implements DeploymentCache<ProcessDefinitionEntity> {
+	
 	public static ActivitiDefCache a = null;
-	private ThreadLocal<Map<String, ProcessDefinitionEntity>> b = new ThreadLocal();
+	private ThreadLocal<Map<String, ProcessDefinitionEntity>> b = new ThreadLocal<>();
 	@Resource
 	ICache c;
 

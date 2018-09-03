@@ -24,7 +24,6 @@ import org.minxc.emp.core.api.query.QueryFilter;
 
 /**
  * 查询切面逻辑
- *
  */
 @Intercepts(
 	    {

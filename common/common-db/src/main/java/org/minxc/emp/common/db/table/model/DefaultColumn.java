@@ -5,8 +5,6 @@ import org.apache.commons.lang3.StringUtils;
 
 /**
  * 默认列对象。 用于产生数据库列。
- *
- * </pre>
  */
 public class DefaultColumn implements Column {
 

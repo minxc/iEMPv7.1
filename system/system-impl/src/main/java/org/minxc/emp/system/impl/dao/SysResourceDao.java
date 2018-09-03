@@ -5,20 +5,20 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.minxc.emp.common.db.dao.CommonDao;
-import org.minxc.emp.system.impl.model.SysResource;
+import org.minxc.emp.system.impl.model.SystemResourceEntity;
 
 /**
  * 子系统资源 DAO接口
  */
 @Mapper
-public interface SysResourceDao extends CommonDao<String, SysResource> {
+public interface SysResourceDao extends CommonDao<String, SystemResourceEntity> {
     /**
      * 根据子系统ID取定义对象。
      *
      * @param id
      * @return
      */
-    List<SysResource> getBySystemId(String systemId);
+    List<SystemResourceEntity> getBySystemId(String systemId);
 
     /**
      * 根据角色和系统id获取资源。
@@ -27,7 +27,7 @@ public interface SysResourceDao extends CommonDao<String, SysResource> {
      * @param roleId
      * @return
      */
-    List<SysResource> getBySystemAndRole(@Param("systemId")String systemId, @Param("roleId")String roleId);
+    List<SystemResourceEntity> getBySystemAndRole(@Param("systemId")String systemId, @Param("roleId")String roleId);
 
     /**
      * 判断资源是否存在。
@@ -35,7 +35,7 @@ public interface SysResourceDao extends CommonDao<String, SysResource> {
      * @param resource
      * @return
      */
-    Integer isExist(SysResource resource);
+    Integer isExist(SystemResourceEntity resource);
 
     /**
      * 根据父ID获取下级节点。
@@ -43,7 +43,7 @@ public interface SysResourceDao extends CommonDao<String, SysResource> {
      * @param parentId
      * @return
      */
-    List<SysResource> getByParentId(String parentId);
+    List<SystemResourceEntity> getByParentId(String parentId);
 
     /**
      * 根据系统id和用户id获取资源列表。
@@ -52,6 +52,6 @@ public interface SysResourceDao extends CommonDao<String, SysResource> {
      * @param userId   用户id
      * @return
      */
-    List<SysResource> getBySystemAndUser(@Param("systemId")String systemId, @Param("userId")String userId);
+    List<SystemResourceEntity> getBySystemAndUser(@Param("systemId")String systemId, @Param("userId")String userId);
 
 }

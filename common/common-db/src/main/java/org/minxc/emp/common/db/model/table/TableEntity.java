@@ -7,22 +7,19 @@ import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 
-
 /**
- * 对应数据库的表对象
+ *  对应数据库的表对象
  *
- * @param <C>
- *            字段类型
- * @author aschs
+ *         字段类型
  */
-public class TableEntity<C extends ColumnEntity> implements Serializable{
-	/** 
-	
-	* @Fields serialVersionUID : TODO(用一句话描述这个变量表示什么) 
-	
-	*/ 
+public class TableEntity<C extends ColumnEntity> implements Serializable {
+	/**
+	 * 
+	 * @Fields serialVersionUID : TODO(用一句话描述这个变量表示什么)
+	 * 
+	 */
 	private static final long serialVersionUID = -6709530989653019184L;
-	
+
 	/**
 	 * 表名
 	 */
@@ -84,11 +81,12 @@ public class TableEntity<C extends ColumnEntity> implements Serializable{
 		}
 		return list.get(0);
 	}
-	
+
 	/**
 	 * <pre>
 	 * 根据name获取字段
-	 * </pre>	
+	 * </pre>
+	 * 
 	 * @param name
 	 * @return
 	 */

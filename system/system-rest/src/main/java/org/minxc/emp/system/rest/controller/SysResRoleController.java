@@ -11,7 +11,7 @@ import org.minxc.emp.system.impl.manager.ResRoleManager;
 import org.minxc.emp.system.impl.manager.SubsystemManager;
 import org.minxc.emp.system.impl.manager.SysResourceManager;
 import org.minxc.emp.system.impl.model.ResRole;
-import org.minxc.emp.system.impl.model.SysResource;
+import org.minxc.emp.system.impl.model.SystemResourceEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -125,20 +125,20 @@ public class SysResRoleController extends GenericController {
 
     @RequestMapping("getTreeData")
     @ResponseBody
-    public List<SysResource> getTreeData(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public List<SystemResourceEntity> getTreeData(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String roleId = RequestUtil.getString(request, "roleId");
         String systemId = RequestUtil.getString(request, "systemId");
-        List<SysResource> roleResourceList = sysResourceManager.getBySystemAndRole(systemId, roleId);
-        List<SysResource> resourceList = sysResourceManager.getBySystemId(systemId);
-        for (SysResource sysResource : resourceList) {
+        List<SystemResourceEntity> roleResourceList = sysResourceManager.getBySystemAndRole(systemId, roleId);
+        List<SystemResourceEntity> resourceList = sysResourceManager.getBySystemId(systemId);
+        for (SystemResourceEntity sysResource : resourceList) {
             if (roleResourceList.contains(sysResource)) {
                 sysResource.setChecked(true);
             }
         }
         if (BeanUtils.isEmpty(resourceList))
-            resourceList = new ArrayList<SysResource>();
+            resourceList = new ArrayList<SystemResourceEntity>();
 
-        SysResource rootRes = new SysResource();
+        SystemResourceEntity rootRes = new SystemResourceEntity();
         String rootName = subsystemManager.get(systemId).getName();
         rootRes.setName(rootName);
         rootRes.setId("0");

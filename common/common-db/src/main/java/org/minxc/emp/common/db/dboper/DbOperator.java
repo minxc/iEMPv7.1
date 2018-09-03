@@ -3,7 +3,6 @@ package org.minxc.emp.common.db.dboper;
 import java.util.List;
 import java.util.Map;
 
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import org.minxc.emp.common.db.model.table.ColumnEntity;
@@ -19,7 +18,6 @@ import org.minxc.emp.common.db.model.table.TableEntity;
  * ps:针对某个表的操作在TableOperator中实现了
  */
 
-@Slf4j
 public abstract class DbOperator {
     
     

@@ -1,6 +1,7 @@
 package org.minxc.emp.bpm.engine.parser.flow;
 
 import com.alibaba.fastjson.JSONObject;
+import com.minxc.emp.core.util.EncryptUtil;
 import com.minxc.emp.core.util.PropertiesUtil;
 import com.minxc.emp.core.util.StringUtil;
 import com.minxc.emp.core.util.time.DateFormatUtil;

@@ -15,9 +15,6 @@ import java.util.Map;
 
 /**
  * SQLServer 数据库表操作的实现。
- *
- * <pre>
- * </pre>
  */
 public class SQLServerTableOperator extends BaseTableOperator {
 

@@ -38,9 +38,7 @@ public class DataSourceUtil {
     }
 
     /**
-     * <pre>
      * 添加数据源 。
-     * </pre>
      *
      * @param key
      * @param dataSource
@@ -55,9 +53,7 @@ public class DataSourceUtil {
     }
 
     /**
-     * <pre>
      * 判断在环境中是否已存在别名key的数据源
-     * </pre>
      *
      * @param key
      * @return

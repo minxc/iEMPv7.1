@@ -9,7 +9,6 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import com.minxc.emp.core.util.BeanUtils;
-import lombok.extern.slf4j.Slf4j;
 import org.minxc.emp.common.db.model.table.ColumnEntity;
 import org.minxc.emp.common.db.model.table.TableEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -18,16 +17,12 @@ import org.minxc.emp.common.db.dboper.DbOperator;
 import org.minxc.emp.common.db.dboper.DbOperatorFactory;
 
 /**
- * <pre>
  * 针对一张表的操作者，系统表的操作有以下几种
  * 1 针对表本身的：建表，删表
  * 2 针对字段：增字段，改字段，删字段
  * 3 针对数据：增，删，查，改
- * </pre>
  *
- * @author aschs
  */
-@Slf4j
 public abstract class TableOperator {
 	/**
 	 * 表对象

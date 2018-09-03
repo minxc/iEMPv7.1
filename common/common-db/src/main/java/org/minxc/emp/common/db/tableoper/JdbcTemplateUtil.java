@@ -16,16 +16,11 @@ import javax.transaction.Transaction;
 
 
 /**
- * <pre>
  * 描述：jdbc的工具类
  * ps:
  * 目前主要是为了解决jta事务中ddl语句异常
  * executeWithTransaction
- * 作者:aschs
- * 邮箱:aschs@qq.com
  * 日期:2018年5月30日
- * 版权:summer
- * </pre>
  */
 public class JdbcTemplateUtil {
 	protected static Logger LOG = LoggerFactory.getLogger(JdbcTemplateUtil.class);

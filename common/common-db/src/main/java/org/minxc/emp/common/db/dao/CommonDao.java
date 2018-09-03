@@ -16,7 +16,7 @@ import java.util.List;
 
 public interface CommonDao<PK extends Serializable, T> {
     /**
-     * 创建实体对象
+     *  创建实体对象
      *
      * @param entity
      * @return
@@ -24,7 +24,7 @@ public interface CommonDao<PK extends Serializable, T> {
     public void create(T entity);
 
     /**
-     * 更新实体对象
+     *  更新实体对象
      *
      * @param entity
      * @return
@@ -32,7 +32,7 @@ public interface CommonDao<PK extends Serializable, T> {
     public Integer update(T entity);
 
     /**
-     * 按实体ID删除对象
+     *  按实体ID删除对象
      *
      * @param entityId
      */

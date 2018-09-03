@@ -12,8 +12,7 @@ import java.util.Map;
  * <p>
  * Spring配置， 可以配置多个数据源。
  *
- * <pre>
- * <bean id="dataSource" class="com.dstz.base.db.datasource.DynamicDataSource">
+ * <bean id="dataSource" class="org.minxc.emp.common.db.datasource.DynamicDataSource">
  * 	<property name="targetDataSources">
  * 		<map key-type="java.lang.String">
  * 			<entry key="1" value-ref="ds1" />
@@ -22,7 +21,6 @@ import java.util.Map;
  * 	&lt;/property>
  * 	<property name="defaultTargetDataSource" ref="ds1" />
  * &lt;/bean>
- * </pre>
  */
 public class DynamicDataSource extends AbstractRoutingDataSource {
 

@@ -11,7 +11,6 @@ import java.sql.SQLException;
 /**
  * ID Generator
  *
- * @author csx
  */
 public class DefaultIdGenerator implements IdGenerator, InitializingBean {
 

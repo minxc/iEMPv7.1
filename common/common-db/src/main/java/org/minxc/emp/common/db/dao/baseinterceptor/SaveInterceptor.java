@@ -16,8 +16,6 @@ import java.util.Properties;
 
 /**
  * 更新设置更新人
- * @author Jeff
- *
  */
 @Intercepts({
 	        @Signature(type= Executor.class,method = "update",args = {MappedStatement.class,Object.class})

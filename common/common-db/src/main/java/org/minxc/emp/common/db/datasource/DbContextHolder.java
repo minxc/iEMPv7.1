@@ -16,77 +16,73 @@ import org.apache.commons.lang3.StringUtils;
  * DbContextHolder.setDbType(&quot;dataSource_Default2&quot;);
  * manager.addOracle();
  *
- * DbContextHolder.setDefaultDbType();
- * manager.addMysql();
- * </pre>
+ * DbContextHolder.setDefaultDbType(); manager.addMysql();
  */
 public class DbContextHolder {
-    private static final ThreadLocal<String> contextHolderAlias = new ThreadLocal<String>();
-    private static Map<String, String> dataSourceDbType = new HashMap<String, String>();
+	private static final ThreadLocal<String> contextHolderAlias = new ThreadLocal<String>();
+	private static Map<String, String> dataSourceDbType = new HashMap<String, String>();
 
-    /**
-     * 设置当前数据库。
-     *
-     * @param dbAlias :数据源别名
-     * @param dbType  ：数据源的类型：oracle,mysql... void
-     */
-    public static void setDataSource(String dbAlias, String dbType) {
-        contextHolderAlias.set(dbAlias);
-        DbContextHolder.dataSourceDbType.put(dbAlias, dbType);
-    }
+	/**
+	 * 设置当前数据库。
+	 *
+	 * @param dbAlias :数据源别名
+	 * @param dbType  ：数据源的类型：oracle,mysql... void
+	 */
+	public static void setDataSource(String dbAlias, String dbType) {
+		contextHolderAlias.set(dbAlias);
+		DbContextHolder.dataSourceDbType.put(dbAlias, dbType);
+	}
 
-    public static void setDefaultDataSource() {
-        contextHolderAlias.set(DataSourceUtil.DEFAULT_DATASOURCE);
-    }
+	public static void setDefaultDataSource() {
+		contextHolderAlias.set(DataSourceUtil.DEFAULT_DATASOURCE);
+	}
 
-    /**
-     * 取得当前数据源。
-     *
-     * @return
-     */
-    public static String getDataSource() {
-        String str = (String) contextHolderAlias.get();
-        return str == null ? DataSourceUtil.DEFAULT_DATASOURCE : str;
-    }
+	/**
+	 * 取得当前数据源。
+	 *
+	 * @return
+	 */
+	public static String getDataSource() {
+		String str = (String) contextHolderAlias.get();
+		return str == null ? DataSourceUtil.DEFAULT_DATASOURCE : str;
+	}
 
-    public static String getDbType() {
-        String dataSourceAlias = contextHolderAlias.get();
-        if (StringUtils.isEmpty(dataSourceAlias)) {
-            dataSourceAlias = DataSourceUtil.DEFAULT_DATASOURCE;
-        }
+	public static String getDbType() {
+		String dataSourceAlias = contextHolderAlias.get();
+		if (StringUtils.isEmpty(dataSourceAlias)) {
+			dataSourceAlias = DataSourceUtil.DEFAULT_DATASOURCE;
+		}
 
-        String str = DbContextHolder.dataSourceDbType.get(contextHolderAlias.get());
-        return str;
-    }
+		String str = DbContextHolder.dataSourceDbType.get(contextHolderAlias.get());
+		return str;
+	}
 
-    /**
-     * 清除上下文数据
-     */
-    public static void clearDataSource() {
-        contextHolderAlias.remove();
-    }
+	/**
+	 * 清除上下文数据
+	 */
+	public static void clearDataSource() {
+		contextHolderAlias.remove();
+	}
 
-    /**
-     * <pre>
-     * 放置一个数据源的数据库类型到dataSourceDbType
-     * </pre>
-     *
-     * @param dsKey  数据源别名
-     * @param dbType 数据库类型
-     */
-    public static void putDataSourceDbType(String dsKey, String dbType) {
-        dataSourceDbType.put(dsKey, dbType);
-    }
+	/**
+	 * 放置一个数据源的数据库类型到dataSourceDbType
+	 *
+	 * @param dsKey  数据源别名
+	 * @param dbType 数据库类型
+	 */
+	public static void putDataSourceDbType(String dsKey, String dbType) {
+		dataSourceDbType.put(dsKey, dbType);
+	}
 
-    /**
-     * <pre>
-     * 从dataSourceDbType获取数据库类型
-     * </pre>
-     *
-     * @param dsKey 数据源别名
-     * @return
-     */
-    public static String getDataSourceDbType(String dsKey) {
-        return dataSourceDbType.get(dsKey);
-    }
+	/**
+	 * <pre>
+	 * 从dataSourceDbType获取数据库类型
+	 * </pre>
+	 *
+	 * @param dsKey 数据源别名
+	 * @return
+	 */
+	public static String getDataSourceDbType(String dsKey) {
+		return dataSourceDbType.get(dsKey);
+	}
 }

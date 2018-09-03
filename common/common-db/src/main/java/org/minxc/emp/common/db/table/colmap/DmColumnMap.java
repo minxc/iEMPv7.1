@@ -9,8 +9,6 @@ import java.sql.SQLException;
 
 /**
  * 达梦 列的元数据到columnmodel的映射。 用于从数据库元数据读取到列对象。
- *
- * @author ray
  */
 public class DmColumnMap implements RowMapper<Column> {
 

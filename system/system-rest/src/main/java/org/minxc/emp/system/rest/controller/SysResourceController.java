@@ -20,7 +20,7 @@ import org.minxc.emp.system.impl.manager.RelResourceManager;
 import org.minxc.emp.system.impl.manager.SubsystemManager;
 import org.minxc.emp.system.impl.manager.SysResourceManager;
 import org.minxc.emp.system.impl.model.Subsystem;
-import org.minxc.emp.system.impl.model.SysResource;
+import org.minxc.emp.system.impl.model.SystemResourceEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -56,7 +56,7 @@ public class SysResourceController extends GenericController {
     @RequestMapping("listJson")
     public  PageJson listJson(HttpServletRequest request, HttpServletResponse response) throws Exception {
         QueryFilter queryFilter = getQueryFilter(request);
-        Page<SysResource> sysResourceList = (Page<SysResource>) sysResourceManager.query(queryFilter);
+        Page<SystemResourceEntity> sysResourceList = (Page<SystemResourceEntity>) sysResourceManager.query(queryFilter);
         return new PageJson(sysResourceList);
     }
 
@@ -75,7 +75,7 @@ public class SysResourceController extends GenericController {
         if (StringUtils.isEmpty(id)) {
             String parentId = RequestUtil.getString(request, "parentId");
             String sysytemId = RequestUtil.getString(request, "systemId");
-            SysResource sysResource = new SysResource();
+            SystemResourceEntity sysResource = new SystemResourceEntity();
             sysResource.setSystemId(sysytemId);
             sysResource.setParentId(parentId);
             sysResource.setNewWindow(0);
@@ -84,7 +84,7 @@ public class SysResourceController extends GenericController {
             sysResource.setEnableMenu(1);
             writeSuccessData(response, sysResource);
         } else {
-            SysResource sysResource = sysResourceManager.getByResId(id);
+            SystemResourceEntity sysResource = sysResourceManager.getByResId(id);
             writeSuccessData(response, sysResource);
         }
     }
@@ -100,7 +100,7 @@ public class SysResourceController extends GenericController {
      */
     @RequestMapping("save")
     @ErrorCatching
-    public ResultMessage<String> save(@RequestBody SysResource sysResource) throws Exception {
+    public ResultMessage<String> save(@RequestBody SystemResourceEntity sysResource) throws Exception {
         String ResultMessage = null;
         String id = sysResource.getId();
         boolean isExist = sysResourceManager.isExist(sysResource);
@@ -161,7 +161,7 @@ public class SysResourceController extends GenericController {
     @ErrorCatching(value = "获取资源失败", writeErrorToResponse = true)
     public void sysResourceGet(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String id = request.getParameter("id");
-        SysResource sysResource = sysResourceManager.get(id);
+        SystemResourceEntity sysResource = sysResourceManager.get(id);
         writeSuccessData(response, sysResource);
     }
 	
@@ -175,13 +175,13 @@ public class SysResourceController extends GenericController {
 
     @RequestMapping("getTreeData")
     @ErrorCatching
-    public List<SysResource> getTreeData(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public List<SystemResourceEntity> getTreeData(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String systemId = RequestUtil.getString(request, "systemId");
         Subsystem subsystem = subsystemManager.get(systemId);
-        List<SysResource> groupList = getGroupTree(systemId);
+        List<SystemResourceEntity> groupList = getGroupTree(systemId);
         if (BeanUtils.isEmpty(groupList))
-            groupList = new ArrayList<SysResource>();
-        SysResource rootResource = new SysResource();
+            groupList = new ArrayList<SystemResourceEntity>();
+        SystemResourceEntity rootResource = new SystemResourceEntity();
         rootResource.setName(subsystem.getName());
         rootResource.setId("0");
         rootResource.setSystemId(systemId); // 根节点
@@ -190,8 +190,8 @@ public class SysResourceController extends GenericController {
         return groupList;
     }
 
-    private List<SysResource> getGroupTree(String systemId) {
-        List<SysResource> groupList = sysResourceManager.getBySystemId(systemId);
+    private List<SystemResourceEntity> getGroupTree(String systemId) {
+        List<SystemResourceEntity> groupList = sysResourceManager.getBySystemId(systemId);
         return groupList;
     }
 
@@ -200,10 +200,10 @@ public class SysResourceController extends GenericController {
         ResultMessage message = null;
         try {
             String id = RequestUtil.getString(request, "id");
-            SysResource sysResource = sysResourceManager.get(id);
+            SystemResourceEntity sysResource = sysResourceManager.get(id);
             String parentId = RequestUtil.getString(request, "parentId");
 
-            SysResource parentResource = sysResourceManager.get(parentId);
+            SystemResourceEntity parentResource = sysResourceManager.get(parentId);
             if (parentResource != null) {
                 parentResource.setHasChildren(1);
                 sysResourceManager.update(parentResource);

@@ -1,11 +1,8 @@
 package org.minxc.emp.common.db.api.table;
 
 /**
- * <pre>
  * 数据库类型的枚举
- * </pre>
  *
- * @author aschs
  */
 public enum DbTypeEnum {
     /**

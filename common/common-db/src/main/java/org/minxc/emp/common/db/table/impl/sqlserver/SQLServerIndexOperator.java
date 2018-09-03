@@ -17,9 +17,6 @@ import java.util.Map;
 
 /**
  * SQLServer 索引操作的实现
- *
- * <pre>
- * </pre>
  */
 public class SQLServerIndexOperator extends BaseIndexOperator {
 
@@ -78,13 +75,6 @@ public class SQLServerIndexOperator extends BaseIndexOperator {
         return sql.toString();
     }
 
-    /*
-     * (non-Javadoc) 刪除索引
-     *
-     * @see
-     * com.dstz.base.db.table.BaseIndexOperator#dropIndex(java.lang.String,
-     * java.lang.String)
-     */
     @Override
     public void dropIndex(String tableName, String indexName) {
         String sql = "DROP INDEX " + indexName + " ON " + tableName;

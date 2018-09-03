@@ -11,7 +11,7 @@ import org.minxc.emp.system.impl.dao.RelResourceDao;
 import org.minxc.emp.system.impl.dao.SysResourceDao;
 import org.minxc.emp.system.impl.manager.SysResourceManager;
 import org.minxc.emp.system.impl.model.RelResource;
-import org.minxc.emp.system.impl.model.SysResource;
+import org.minxc.emp.system.impl.model.SystemResourceEntity;
 import org.springframework.stereotype.Service;
 
 import com.minxc.emp.core.util.BeanUtils;
@@ -22,7 +22,7 @@ import com.minxc.emp.core.util.BeanUtils;
  * </pre>
  */
 @Service("sysResourceManager")
-public class SysResourceManagerImpl extends CommonManager<String, SysResource> implements SysResourceManager {
+public class SysResourceManagerImpl extends CommonManager<String, SystemResourceEntity> implements SysResourceManager {
     @Resource
     SysResourceDao sysResourceDao;
 
@@ -31,21 +31,21 @@ public class SysResourceManagerImpl extends CommonManager<String, SysResource> i
 
 
     @Override
-    public List<SysResource> getBySystemId(String id) {
-        List<SysResource> list = sysResourceDao.getBySystemId(id);
+    public List<SystemResourceEntity> getBySystemId(String id) {
+        List<SystemResourceEntity> list = sysResourceDao.getBySystemId(id);
 
         return list;
     }
 
     @Override
-    public SysResource getByResId(String id) {
-        SysResource sysResource = this.get(id);
+    public SystemResourceEntity getByResId(String id) {
+        SystemResourceEntity sysResource = this.get(id);
         sysResource.setRelResources(relResourceDao.getByResourceId(id));
         return sysResource;
     }
 
     @Override
-    public void create(SysResource sysResource) {
+    public void create(SystemResourceEntity sysResource) {
         String resId = UniqueIdUtil.getSuid();
         sysResource.setId(resId);
         //先删除
@@ -61,7 +61,7 @@ public class SysResourceManagerImpl extends CommonManager<String, SysResource> i
     }
 
     @Override
-    public void update(SysResource sysResource) {
+    public void update(SystemResourceEntity sysResource) {
         String resId = sysResource.getId();
         //先删除
         relResourceDao.removeByResId(resId);
@@ -76,20 +76,20 @@ public class SysResourceManagerImpl extends CommonManager<String, SysResource> i
     }
 
     @Override
-    public List<SysResource> getBySystemAndRole(String systemId, String roleId) {
+    public List<SystemResourceEntity> getBySystemAndRole(String systemId, String roleId) {
         return sysResourceDao.getBySystemAndRole(systemId, roleId);
     }
 
     @Override
-    public boolean isExist(SysResource resource) {
+    public boolean isExist(SystemResourceEntity resource) {
         boolean rtn = sysResourceDao.isExist(resource)>0;
         return rtn;
     }
 
     @Override
     public void removeByResId(String resId) {
-        List<SysResource> list = getRecursionById(resId);
-        for (SysResource resource : list) {
+        List<SystemResourceEntity> list = getRecursionById(resId);
+        for (SystemResourceEntity resource : list) {
             this.remove(resource.getId());
         }
     }
@@ -102,34 +102,34 @@ public class SysResourceManagerImpl extends CommonManager<String, SysResource> i
     }
 
     @Override
-    public List<SysResource> getRecursionById(String resId) {
-        List<SysResource> list = new ArrayList<SysResource>();
+    public List<SystemResourceEntity> getRecursionById(String resId) {
+        List<SystemResourceEntity> list = new ArrayList<SystemResourceEntity>();
 
-        SysResource resource = this.get(resId);
+        SystemResourceEntity resource = this.get(resId);
         list.add(resource);
 
-        List<SysResource> tmpList = sysResourceDao.getByParentId(resId);
+        List<SystemResourceEntity> tmpList = sysResourceDao.getByParentId(resId);
         if (BeanUtils.isEmpty(tmpList)) return list;
 
-        for (SysResource sysResource : tmpList) {
+        for (SystemResourceEntity sysResource : tmpList) {
             recursion(sysResource, list);
         }
         return list;
     }
 
-    private void recursion(SysResource sysResource, List<SysResource> list) {
+    private void recursion(SystemResourceEntity sysResource, List<SystemResourceEntity> list) {
         list.add(sysResource);
-        List<SysResource> tmpList = sysResourceDao.getByParentId(sysResource.getId());
+        List<SystemResourceEntity> tmpList = sysResourceDao.getByParentId(sysResource.getId());
         if (BeanUtils.isEmpty(tmpList)) return;
 
-        for (SysResource resource : tmpList) {
+        for (SystemResourceEntity resource : tmpList) {
             recursion(resource, list);
         }
     }
 
     @Override
-    public List<SysResource> getBySystemAndUser(String systemId, String userId) {
-        List<SysResource> list = sysResourceDao.getBySystemAndUser(systemId, userId);
+    public List<SystemResourceEntity> getBySystemAndUser(String systemId, String userId) {
+        List<SystemResourceEntity> list = sysResourceDao.getBySystemAndUser(systemId, userId);
         return list;
     }
 

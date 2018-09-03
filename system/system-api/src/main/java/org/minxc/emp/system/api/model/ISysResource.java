@@ -4,7 +4,6 @@ import java.util.List;
 
 public interface ISysResource {
 	
-	
    /**
      * 返回 主键
      *
@@ -16,7 +15,7 @@ public interface ISysResource {
      *
      * @return
      */
-    public String getSystemId() ;
+    public String getApplicationId() ;
     /**
      * 返回 资源别名
      *
@@ -40,19 +39,21 @@ public interface ISysResource {
      *
      * @return
      */
-    public Integer getEnableMenu();
+    public Long getEnableMenu();
     /**
      * 返回 是否有子节点
      *
      * @return
      */
-    public Integer getHasChildren();
+    public Long getHasChildren();
+    
+    
     /**
      * 返回 OPENED_
      *
      * @return
      */
-    public Integer getOpened() ;
+    public Long getOpened() ;
     /**
      * 返回 图标
      *
@@ -65,19 +66,20 @@ public interface ISysResource {
      *
      * @return
      */
-    public Integer getNewWindow();
+    public Long getNewWindow();
     /**
      * 返回 排序
      *
      * @return
      */
-    public Long getSn();
-
+    public Long getSeq();
 
     public String getParentId() ;
-    public List<IRelResource> getRelResources();
+    
+    
+    public List<? extends IRelResource> getRelResources();
  
-    public List getChildren();
+    public List<? extends ISysResource> getChildren();
 
   
 }

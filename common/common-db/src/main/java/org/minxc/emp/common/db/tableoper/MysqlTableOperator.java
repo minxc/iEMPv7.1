@@ -12,11 +12,8 @@ import org.minxc.emp.common.db.dboper.DbOperator;
 import org.minxc.emp.common.db.dboper.DbOperatorFactory;
 
 /**
- * <pre>
  * mysql的实现类
- * </pre>
  *
- * @author aschs
  */
 
 @Slf4j

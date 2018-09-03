@@ -1,6 +1,5 @@
 package org.minxc.emp.system.impl.model;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -8,13 +7,23 @@ import java.util.List;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.minxc.emp.core.api.model.IdModel;
 import org.minxc.emp.core.api.model.TreeModel;
-
-
+import org.minxc.emp.system.api.model.IRelResource;
+import org.minxc.emp.system.api.model.ISysResource;
 
 /**
- * 	描述：子系统资源 实体对象
+ * 
+* 项目名称：system-impl   
+* 类名称：SysResource   
+* 类描述：子系统资源 实体对象   
+* 创建人：Xianchang.min   
+* 创建时间：2018年9月3日 下午10:08:18   
+* 修改人：Xianchang.min   
+* 修改时间：2018年9月3日 下午10:08:18   
+* 修改备注：   
+* @version  1.0  
+*
  */
-public class SysResource implements TreeModel<SysResource>, IdModel, Serializable {
+public class SystemResourceEntity implements TreeModel<SystemResourceEntity>, IdModel,ISysResource {
 
 
 	private static final long serialVersionUID = 1858224430587897285L;
@@ -27,7 +36,7 @@ public class SysResource implements TreeModel<SysResource>, IdModel, Serializabl
     /**
      * 子系统ID
      */
-    protected String systemId;
+    protected String applicationId;
 
     /**
      * 资源别名
@@ -47,17 +56,17 @@ public class SysResource implements TreeModel<SysResource>, IdModel, Serializabl
     /**
      * 显示到菜单(1,显示,0 ,不显示)
      */
-    protected Integer enableMenu;
+    protected Long enableMenu;
 
     /**
      * 是否有子节点
      */
-    protected Integer hasChildren;
+    protected Long hasChildren;
 
     /**
      * OPENED_
      */
-    protected Integer opened;
+    protected Long opened;
 
     /**
      * 图标
@@ -67,12 +76,12 @@ public class SysResource implements TreeModel<SysResource>, IdModel, Serializabl
     /**
      * 打开新窗口
      */
-    protected Integer newWindow;
+    protected Long newWindow;
 
     /**
      * 排序
      */
-    protected Long sn;
+    protected Long seq;
 
     /**
      * 父资源ID
@@ -89,7 +98,7 @@ public class SysResource implements TreeModel<SysResource>, IdModel, Serializabl
      */
     protected List<RelResource> relResources = new ArrayList<RelResource>();
 
-    protected List<SysResource> children = new ArrayList<SysResource>();
+    protected List<SystemResourceEntity> children = new ArrayList<SystemResourceEntity>();
 
     /**
      * 是否已分配给角色
@@ -110,18 +119,7 @@ public class SysResource implements TreeModel<SysResource>, IdModel, Serializabl
         return this.id;
     }
 
-    public void setSystemId(String systemId) {
-        this.systemId = systemId;
-    }
 
-    /**
-     * 返回 子系统ID
-     *
-     * @return
-     */
-    public String getSystemId() {
-        return this.systemId;
-    }
 
     public void setAlias(String alias) {
         this.alias = alias;
@@ -162,7 +160,7 @@ public class SysResource implements TreeModel<SysResource>, IdModel, Serializabl
         return this.defaultUrl;
     }
 
-    public void setEnableMenu(Integer enableMenu) {
+    public void setEnableMenu(Long enableMenu) {
         this.enableMenu = enableMenu;
     }
 
@@ -171,11 +169,11 @@ public class SysResource implements TreeModel<SysResource>, IdModel, Serializabl
      *
      * @return
      */
-    public Integer getEnableMenu() {
+    public Long getEnableMenu() {
         return this.enableMenu;
     }
 
-    public void setHasChildren(Integer hasChildren) {
+    public void setHasChildren(Long hasChildren) {
         this.hasChildren = hasChildren;
     }
 
@@ -184,11 +182,11 @@ public class SysResource implements TreeModel<SysResource>, IdModel, Serializabl
      *
      * @return
      */
-    public Integer getHasChildren() {
+    public Long getHasChildren() {
         return this.hasChildren;
     }
 
-    public void setOpened(Integer opened) {
+    public void setOpened(Long opened) {
         this.opened = opened;
     }
 
@@ -197,7 +195,7 @@ public class SysResource implements TreeModel<SysResource>, IdModel, Serializabl
      *
      * @return
      */
-    public Integer getOpened() {
+    public Long getOpened() {
         return this.opened;
     }
 
@@ -214,7 +212,7 @@ public class SysResource implements TreeModel<SysResource>, IdModel, Serializabl
         return this.icon;
     }
 
-    public void setNewWindow(Integer newWindow) {
+    public void setNewWindow(Long newWindow) {
         this.newWindow = newWindow;
     }
 
@@ -223,22 +221,16 @@ public class SysResource implements TreeModel<SysResource>, IdModel, Serializabl
      *
      * @return
      */
-    public Integer getNewWindow() {
+    public Long getNewWindow() {
         return this.newWindow;
     }
 
-    public void setSn(Long sn) {
-        this.sn = sn;
-    }
 
     /**
      * 返回 排序
      *
      * @return
      */
-    public Long getSn() {
-        return this.sn;
-    }
 
 
     public String getParentId() {
@@ -249,9 +241,9 @@ public class SysResource implements TreeModel<SysResource>, IdModel, Serializabl
         this.parentId = parentId;
     }
 
-    public List<RelResource> getRelResources() {
-        return relResources;
-    }
+//    public List<RelResource> getRelResources() {
+//        return relResources;
+//    }
 
 
     public void setRelResources(List<RelResource> relResources) {
@@ -292,15 +284,13 @@ public class SysResource implements TreeModel<SysResource>, IdModel, Serializabl
         return result;
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#equals(java.lang.Object)
-     */
+   
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
         if (obj == null) return false;
         if (getClass() != obj.getClass()) return false;
-        SysResource other = (SysResource) obj;
+        SystemResourceEntity other = (SystemResourceEntity) obj;
         if (id.equals(other.id)) return true;
         return false;
     }
@@ -311,7 +301,7 @@ public class SysResource implements TreeModel<SysResource>, IdModel, Serializabl
     public String toString() {
         return new ToStringBuilder(this)
                 .append("id", this.id)
-                .append("systemId", this.systemId)
+                .append("applicationId", this.applicationId)
                 .append("alias", this.alias)
                 .append("name", this.name)
                 .append("defaultUrl", this.defaultUrl)
@@ -321,15 +311,31 @@ public class SysResource implements TreeModel<SysResource>, IdModel, Serializabl
                 .append("parentId", this.parentId)
                 .append("icon", this.icon)
                 .append("newWindow", this.newWindow)
-                .append("sn", this.sn)
+                .append("seq", this.seq)
                 .toString();
     }
-
-    public List getChildren() {
+    
+    @Override
+    public List<SystemResourceEntity> getChildren() {
         return children;
     }
 
-    public void setChildren(List children) {
+    public void setChildren(List<SystemResourceEntity> children) {
         this.children = children;
     }
+
+	@Override
+	public String getApplicationId() {
+		return this.applicationId;
+	}
+
+	@Override
+	public Long getSeq() {
+		return this.seq;
+	}
+
+	@Override
+	public List<? extends IRelResource> getRelResources() {
+		return null;
+	}
 }

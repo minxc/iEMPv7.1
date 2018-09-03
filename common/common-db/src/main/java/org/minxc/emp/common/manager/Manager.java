@@ -7,9 +7,17 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * <pre>
- * 描述：业务类管理实体类接口
- * </pre>
+ * 
+* 项目名称：common-db   
+* 类名称：Manager   
+* 类描述： 业务类管理实体类接口  
+* 创建人：Xianchang.min   
+* 创建时间：2018年9月3日 下午8:09:12   
+* 修改人：Xianchang.min   
+* 修改时间：2018年9月3日 下午8:09:12   
+* 修改备注：   
+* @version  1.0  
+*
  */
 public interface Manager<PK extends Serializable, T> {
     /**
@@ -47,7 +55,8 @@ public interface Manager<PK extends Serializable, T> {
      *
      * @param ids
      */
-    public void removeByIds(PK... ids);
+    @SuppressWarnings("unchecked")
+	public void removeByIds(PK... ids);
 
     /**
      * 查询实体对象

@@ -8,7 +8,6 @@ import java.util.concurrent.atomic.AtomicReference;
 /**
  * 雪花算法Id生成器
  *
- * @author wacxhs
  */
 public class SnowflakeIdGenerator implements IdGenerator {
 
