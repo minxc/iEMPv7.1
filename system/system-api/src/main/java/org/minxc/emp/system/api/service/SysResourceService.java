@@ -4,19 +4,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.minxc.emp.system.api.model.ISubsystem;
-import org.minxc.emp.system.api.model.ISysResource;
+import org.minxc.emp.system.api.model.Application;
+import org.minxc.emp.system.api.model.SystemResource;
 
 
 public interface SysResourceService {
 
-	List<ISubsystem> getCurrentUserSystem();
+	List<Application> getCurrentUserSystem();
 
-	ISubsystem getDefaultSystem(String currentUserId);
+	Application getDefaultSystem(String currentUserId);
 
-	List<ISysResource> getBySystemId(String systemId);
+	List<SystemResource> getBySystemId(String systemId);
 
-	List<ISysResource> getBySystemAndUser(String systemId, String userId);
+	List<SystemResource> getBySystemAndUser(String systemId, String userId);
 
 	Map<String, Set<String>> getUrlRoleBySystem(String systemId);
 

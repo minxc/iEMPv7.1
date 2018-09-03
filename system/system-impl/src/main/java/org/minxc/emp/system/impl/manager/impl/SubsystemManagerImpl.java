@@ -8,7 +8,7 @@ import org.minxc.emp.common.manager.impl.CommonManager;
 import org.minxc.emp.idm.api.model.User;
 import org.minxc.emp.system.impl.dao.SubsystemDao;
 import org.minxc.emp.system.impl.manager.SubsystemManager;
-import org.minxc.emp.system.impl.model.Subsystem;
+import org.minxc.emp.system.impl.model.ApplicationEntity;
 import org.minxc.emp.system.util.ContextUtil;
 import org.springframework.stereotype.Service;
 
@@ -20,26 +20,26 @@ import com.minxc.emp.core.util.BeanUtils;
  * </pre>
  */
 @Service("subsystemManager")
-public class SubsystemManagerImpl extends CommonManager<String, Subsystem> implements SubsystemManager {
+public class SubsystemManagerImpl extends CommonManager<String, ApplicationEntity> implements SubsystemManager {
     @Resource
     SubsystemDao subsystemDao;
 
     @Override
-    public boolean isExist(Subsystem subsystem) {
+    public boolean isExist(ApplicationEntity subsystem) {
         return subsystemDao.isExist(subsystem)>0;
     }
 
     @Override
-    public List<Subsystem> getList() {
+    public List<ApplicationEntity> getList() {
         return subsystemDao.getList();
     }
 
     @Override
-    public Subsystem getDefaultSystem(String userId) {
-        List<Subsystem> list = subsystemDao.getSystemByUser(userId);
+    public ApplicationEntity getDefaultSystem(String userId) {
+        List<ApplicationEntity> list = subsystemDao.getSystemByUser(userId);
         if (BeanUtils.isEmpty(list)) return null;
 
-        for (Subsystem system : list) {
+        for (ApplicationEntity system : list) {
             if (1 == system.getIsDefault()) return system;
         }
         return list.get(0);
@@ -47,7 +47,7 @@ public class SubsystemManagerImpl extends CommonManager<String, Subsystem> imple
 
     @Override
     public void setDefaultSystem(String systemId) {
-        Subsystem subSystem = subsystemDao.get(systemId);
+        ApplicationEntity subSystem = subsystemDao.get(systemId);
         if (subSystem.getIsDefault() == 1) {
             subSystem.setIsDefault(0);
         } else {
@@ -59,7 +59,7 @@ public class SubsystemManagerImpl extends CommonManager<String, Subsystem> imple
 
 
     @Override
-    public List<Subsystem> getCurrentUserSystem() {
+    public List<ApplicationEntity> getCurrentUserSystem() {
         User user = ContextUtil.getCurrentUser();
         if (ContextUtil.isAdmin(user)) {
             return subsystemDao.getList();

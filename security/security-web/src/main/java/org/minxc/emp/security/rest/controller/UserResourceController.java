@@ -24,7 +24,7 @@ import org.minxc.emp.idm.api.model.User;
 import org.minxc.emp.idm.api.service.GroupService;
 import org.minxc.emp.security.util.SubSystemUtil;
 import org.minxc.emp.system.api.service.SysResourceService;
-import org.minxc.emp.system.impl.model.Subsystem;
+import org.minxc.emp.system.impl.model.ApplicationEntity;
 import org.minxc.emp.system.impl.model.SystemResourceEntity;
 import org.minxc.emp.system.util.ContextUtil;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -50,17 +50,17 @@ public class UserResourceController extends GenericController {
     @ErrorCatching
     public ResultMessage<Map<String, Object>> userMsg(HttpServletRequest request, HttpServletResponse response) throws Exception {
         @SuppressWarnings("unchecked")
-		List<Subsystem> subsystemList = (List)sysResourceService.getCurrentUserSystem();
+		List<ApplicationEntity> subsystemList = (List)sysResourceService.getCurrentUserSystem();
       
         if (BeanUtils.isEmpty(subsystemList)) {
             throw new BusinessException("当前用户尚未分配任何资源权限！");
         }
 
         String systemId = SubSystemUtil.getSystemId(request);
-        Subsystem currentSystem = null;
+        ApplicationEntity currentSystem = null;
         //获取当前系统
         if (StringUtils.isNotEmpty(systemId)) {
-            for (Subsystem system : subsystemList) {
+            for (ApplicationEntity system : subsystemList) {
                 if (system.getId().equals(systemId)) {
                     currentSystem = system;
                     break;
@@ -68,7 +68,7 @@ public class UserResourceController extends GenericController {
             }
         } else {
             //获取默认系统
-            currentSystem = (Subsystem)sysResourceService.getDefaultSystem(ContextUtil.getCurrentUserId());
+            currentSystem = (ApplicationEntity)sysResourceService.getDefaultSystem(ContextUtil.getCurrentUserId());
         }
 
         //没有之前使用的系统

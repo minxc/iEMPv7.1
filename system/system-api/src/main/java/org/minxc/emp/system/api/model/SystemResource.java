@@ -2,7 +2,7 @@ package org.minxc.emp.system.api.model;
 
 import java.util.List;
 
-public interface ISysResource {
+public interface SystemResource {
 	
    /**
      * 返回 主键
@@ -79,7 +79,7 @@ public interface ISysResource {
     
     public List<? extends IRelResource> getRelResources();
  
-    public List<? extends ISysResource> getChildren();
+    public List<? extends SystemResource> getChildren();
 
   
 }

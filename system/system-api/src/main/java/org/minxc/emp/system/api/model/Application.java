@@ -1,7 +1,7 @@
 package org.minxc.emp.system.api.model;
 
 
-public interface ISubsystem {
+public interface Application {
 
 	/**
 	 * 返回 主键
@@ -36,7 +36,7 @@ public interface ISubsystem {
 	 *
 	 * @return
 	 */
-	Integer getEnabled();
+	Long getEnabled();
 
 	/**
 	 * 返回 主页地址

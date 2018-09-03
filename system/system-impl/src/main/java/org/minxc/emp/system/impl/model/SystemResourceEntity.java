@@ -8,7 +8,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.minxc.emp.core.api.model.IdModel;
 import org.minxc.emp.core.api.model.TreeModel;
 import org.minxc.emp.system.api.model.IRelResource;
-import org.minxc.emp.system.api.model.ISysResource;
+import org.minxc.emp.system.api.model.SystemResource;
 
 /**
  * 
@@ -23,7 +23,7 @@ import org.minxc.emp.system.api.model.ISysResource;
 * @version  1.0  
 *
  */
-public class SystemResourceEntity implements TreeModel<SystemResourceEntity>, IdModel,ISysResource {
+public class SystemResourceEntity implements TreeModel<SystemResourceEntity>, IdModel,SystemResource {
 
 
 	private static final long serialVersionUID = 1858224430587897285L;

@@ -6,8 +6,8 @@ import java.util.Set;
 
 import javax.annotation.Resource;
 
-import org.minxc.emp.system.api.model.ISubsystem;
-import org.minxc.emp.system.api.model.ISysResource;
+import org.minxc.emp.system.api.model.Application;
+import org.minxc.emp.system.api.model.SystemResource;
 import org.minxc.emp.system.api.service.SysResourceService;
 import org.minxc.emp.system.impl.manager.ResRoleManager;
 import org.minxc.emp.system.impl.manager.SubsystemManager;
@@ -28,22 +28,22 @@ public class SysResourceServiceImpl implements SysResourceService{
 	
 	
 	@Override
-	public List<ISubsystem> getCurrentUserSystem() {
+	public List<Application> getCurrentUserSystem() {
 		return (List)sybSystemManager.getCurrentUserSystem();
 	}
 
 	@Override
-	public ISubsystem getDefaultSystem(String currentUserId) {
+	public Application getDefaultSystem(String currentUserId) {
 		return sybSystemManager.getDefaultSystem(currentUserId);
 	}
 
 	@Override
-	public List<ISysResource> getBySystemId(String systemId) {
+	public List<SystemResource> getBySystemId(String systemId) {
 		return (List)sysResourceManager.getBySystemId(systemId);
 	}
 
 	@Override
-	public List<ISysResource> getBySystemAndUser(String systemId, String userId) {
+	public List<SystemResource> getBySystemAndUser(String systemId, String userId) {
 		return (List)sysResourceManager.getBySystemAndUser(systemId, userId);
 	}
 

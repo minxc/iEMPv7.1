@@ -1,17 +1,24 @@
 package org.minxc.emp.system.impl.model;
 
-import java.io.Serializable;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.minxc.emp.core.api.model.IdModel;
-import org.minxc.emp.system.api.model.ISubsystem;
-
-
+import org.minxc.emp.system.api.model.Application;
 
 /**
- *  子系统定义 实体对象
+ * 
+* 项目名称：system-impl   
+* 类名称：ApplicationEntity   
+* 类描述：子系统定义 实体对象   
+* 创建人：Xianchang.min   
+* 创建时间：2018年9月3日 下午10:36:00   
+* 修改人：Xianchang.min   
+* 修改时间：2018年9月3日 下午10:36:00   
+* 修改备注：   
+* @version  1.0  
+*
  */
-public class Subsystem implements IdModel,ISubsystem,Serializable {
+public class ApplicationEntity implements IdModel,Application {
 
 	private static final long serialVersionUID = -4935865196695965096L;
 
@@ -38,7 +45,7 @@ public class Subsystem implements IdModel,ISubsystem,Serializable {
     /**
      * 是否可用 1 可用，0 ，不可用
      */
-    protected Integer enabled = 1;
+    protected Long enabled = 1L;
 
     /**
      * 主页地址
@@ -133,7 +140,7 @@ public class Subsystem implements IdModel,ISubsystem,Serializable {
         return this.logo;
     }
 
-    public void setEnabled(Integer enabled) {
+    public void setEnabled(Long enabled) {
         this.enabled = enabled;
     }
 
@@ -142,7 +149,7 @@ public class Subsystem implements IdModel,ISubsystem,Serializable {
      *
      * @return
      */
-    public Integer getEnabled() {
+    public Long getEnabled() {
         return this.enabled;
     }
 
@@ -245,9 +252,6 @@ public class Subsystem implements IdModel,ISubsystem,Serializable {
         this.isDefault = isDefault;
     }
 
-    /**
-     * @see java.lang.Object#toString()
-     */
     public String toString() {
         return new ToStringBuilder(this)
                 .append("id", this.id)

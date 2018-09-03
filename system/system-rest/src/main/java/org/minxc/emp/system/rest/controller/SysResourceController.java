@@ -19,7 +19,7 @@ import org.minxc.emp.core.api.response.impl.ResultMessage;
 import org.minxc.emp.system.impl.manager.RelResourceManager;
 import org.minxc.emp.system.impl.manager.SubsystemManager;
 import org.minxc.emp.system.impl.manager.SysResourceManager;
-import org.minxc.emp.system.impl.model.Subsystem;
+import org.minxc.emp.system.impl.model.ApplicationEntity;
 import org.minxc.emp.system.impl.model.SystemResourceEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -177,7 +177,7 @@ public class SysResourceController extends GenericController {
     @ErrorCatching
     public List<SystemResourceEntity> getTreeData(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String systemId = RequestUtil.getString(request, "systemId");
-        Subsystem subsystem = subsystemManager.get(systemId);
+        ApplicationEntity subsystem = subsystemManager.get(systemId);
         List<SystemResourceEntity> groupList = getGroupTree(systemId);
         if (BeanUtils.isEmpty(groupList))
             groupList = new ArrayList<SystemResourceEntity>();

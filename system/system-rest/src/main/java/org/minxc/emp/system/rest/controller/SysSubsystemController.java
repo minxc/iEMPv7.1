@@ -14,7 +14,7 @@ import org.minxc.emp.core.api.query.QueryFilter;
 import org.minxc.emp.core.api.response.impl.ResultMessage;
 import org.minxc.emp.idm.api.model.User;
 import org.minxc.emp.system.impl.manager.SubsystemManager;
-import org.minxc.emp.system.impl.model.Subsystem;
+import org.minxc.emp.system.impl.model.ApplicationEntity;
 import org.minxc.emp.system.util.ContextUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -51,7 +51,7 @@ public class SysSubsystemController extends GenericController {
     public @ResponseBody
     PageJson listJson(HttpServletRequest request, HttpServletResponse response) throws Exception {
         QueryFilter queryFilter = getQueryFilter(request);
-        Page<Subsystem> subsystemList = (Page<Subsystem>) subsystemManager.query(queryFilter);
+        Page<ApplicationEntity> subsystemList = (Page<ApplicationEntity>) subsystemManager.query(queryFilter);
         return new PageJson(subsystemList);
     }
 
@@ -77,12 +77,12 @@ public class SysSubsystemController extends GenericController {
      */
     @RequestMapping("getJson")
     public @ResponseBody
-    Subsystem getJson(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    ApplicationEntity getJson(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String id = RequestUtil.getString(request, "id");
         if (StringUtils.isEmpty(id)) {
             return null;
         }
-        Subsystem subsystem = subsystemManager.get(id);
+        ApplicationEntity subsystem = subsystemManager.get(id);
         return subsystem;
     }
 
@@ -96,7 +96,7 @@ public class SysSubsystemController extends GenericController {
      * @throws
      */
     @RequestMapping("save")
-    public void save(HttpServletRequest request, HttpServletResponse response, @RequestBody Subsystem subsystem) throws Exception {
+    public void save(HttpServletRequest request, HttpServletResponse response, @RequestBody ApplicationEntity subsystem) throws Exception {
         String ResultMessage = null;
 
         boolean isExist = subsystemManager.isExist(subsystem);

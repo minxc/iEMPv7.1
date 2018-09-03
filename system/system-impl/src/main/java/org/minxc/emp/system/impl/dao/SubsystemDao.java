@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.minxc.emp.common.db.dao.CommonDao;
-import org.minxc.emp.system.impl.model.Subsystem;
+import org.minxc.emp.system.impl.model.ApplicationEntity;
 
 
 
@@ -12,7 +12,7 @@ import org.minxc.emp.system.impl.model.Subsystem;
  * 子系统定义 DAO接口
  */
 @Mapper
-public interface SubsystemDao extends CommonDao<String, Subsystem> {
+public interface SubsystemDao extends CommonDao<String, ApplicationEntity> {
 
     /**
      * 判断别名是否存在
@@ -20,14 +20,14 @@ public interface SubsystemDao extends CommonDao<String, Subsystem> {
      * @param subsystem
      * @return
      */
-	Integer isExist(Subsystem subsystem);
+	Integer isExist(ApplicationEntity subsystem);
 
     /**
      * 获取子系统列表。
      *
      * @return
      */
-    List<Subsystem> getList();
+    List<ApplicationEntity> getList();
 
     /**
      * 更新为默认。
@@ -41,5 +41,5 @@ public interface SubsystemDao extends CommonDao<String, Subsystem> {
      * @param userId
      * @return
      */
-    List<Subsystem> getSystemByUser(String userId);
+    List<ApplicationEntity> getSystemByUser(String userId);
 }
