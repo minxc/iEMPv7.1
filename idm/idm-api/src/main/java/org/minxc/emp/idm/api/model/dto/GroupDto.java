@@ -4,12 +4,18 @@ import org.minxc.emp.idm.api.model.GroupStructEnum;
 import org.minxc.emp.idm.api.model.Group;
 
 public class GroupDto implements Group {
-    String identityType;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -2367487383457356423L;
+	
+	
+	String identityType;
     String groupId;
     String name;
     String groupCode;
     GroupStructEnum groupStructEnum;
-    Long Sn;
+    Long seq;
     String groupType;
     String parentId;
     String path;
@@ -49,17 +55,18 @@ public class GroupDto implements Group {
     public GroupStructEnum getGroupStructEnum() {
         return groupStructEnum;
     }
+   
 
     public void setGroupStructEnum(GroupStructEnum groupStructEnum) {
-        this.groupStructEnum = groupStructEnum;
+	    this.groupStructEnum = groupStructEnum;
+	}
+
+	public Long getSeq() {
+        return this.seq;
     }
 
-    public Long getSn() {
-        return Sn;
-    }
-
-    public void setSn(Long sn) {
-        Sn = sn;
+    public void setSeq(Long seq) {
+    	this.seq = seq;
     }
 
     public String getGroupType() {

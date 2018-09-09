@@ -12,7 +12,7 @@ import org.minxc.emp.common.rest.util.RequestUtil;
 import org.minxc.emp.core.api.aop.annotation.ErrorCatching;
 import org.minxc.emp.system.impl.manager.SysTreeManager;
 import org.minxc.emp.system.impl.manager.SysTreeNodeManager;
-import org.minxc.emp.system.impl.model.SysTreeNode;
+import org.minxc.emp.system.impl.model.SystemTreeNodeEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -44,7 +44,7 @@ public class SysTreeNodeController extends GenericController {
      */
     @RequestMapping("save")
     @ErrorCatching(writeErrorToResponse = true, value = "保存系统树节点失败")
-    public void save(HttpServletRequest request, HttpServletResponse response, @RequestBody SysTreeNode sysTreeNode) throws Exception {
+    public void save(HttpServletRequest request, HttpServletResponse response, @RequestBody SystemTreeNodeEntity sysTreeNode) throws Exception {
         if (StringUtils.isEmpty(sysTreeNode.getId())) {
             sysTreeNode.setId(UniqueIdUtil.getSuid());
             handleNewSysTreeNode(sysTreeNode);
@@ -67,8 +67,8 @@ public class SysTreeNodeController extends GenericController {
      */
     @RequestMapping("getNodes")
     @ResponseBody
-    public List<SysTreeNode> getNodes(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        List<SysTreeNode> nodes = null;
+    public List<SystemTreeNodeEntity> getNodes(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        List<SystemTreeNodeEntity> nodes = null;
         String treeId = RequestUtil.getString(request, "treeId");
         String key = RequestUtil.getString(request, "nodeKey");
         String treeKey = RequestUtil.getString(request, "treeKey");
@@ -77,7 +77,7 @@ public class SysTreeNodeController extends GenericController {
         }
 
         if (StringUtils.isNotEmpty(key) && StringUtils.isNotEmpty(treeId)) {
-            SysTreeNode node = sysTreeNodeManager.getByTreeIdAndKey(treeId, key);
+            SystemTreeNodeEntity node = sysTreeNodeManager.getByTreeIdAndKey(treeId, key);
             nodes = sysTreeNodeManager.getStartWithPath(node.getPath());
         } else if (StringUtils.isNotEmpty(treeId)) {
             nodes = sysTreeNodeManager.getByTreeId(treeId);
@@ -99,7 +99,7 @@ public class SysTreeNodeController extends GenericController {
     public void remove(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String[] aryIds = RequestUtil.getStringAryByStr(request, "id");
         for (String id : aryIds) {
-        	SysTreeNode node = sysTreeNodeManager.get(id);
+        	SystemTreeNodeEntity node = sysTreeNodeManager.get(id);
             sysTreeNodeManager.removeByPath(node.getPath()+"%");
         }
         writeSuccessResult(response, "删除系统树节点成功");
@@ -112,7 +112,7 @@ public class SysTreeNodeController extends GenericController {
      *
      * @param sysTreeNode
      */
-    private void handleNewSysTreeNode(SysTreeNode sysTreeNode) {
+    private void handleNewSysTreeNode(SystemTreeNodeEntity sysTreeNode) {
         // 新增时处理一下path
         if (StringUtils.isNotEmpty(sysTreeNode.getPath())) {
             sysTreeNode.setPath(sysTreeNode.getPath() + sysTreeNode.getId() + ".");
@@ -122,7 +122,7 @@ public class SysTreeNodeController extends GenericController {
 
         // 新增处理sn
         // 获取同级节点
-        List<SysTreeNode> nodes = sysTreeNodeManager.getByParentId(sysTreeNode.getParentId());
+        List<SystemTreeNodeEntity> nodes = sysTreeNodeManager.getByParentId(sysTreeNode.getParentId());
         sysTreeNode.setSn(nodes.size() + 1);
     }
 }

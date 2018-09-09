@@ -29,7 +29,7 @@ import org.minxc.emp.form.core.model.custdialog.FormCustDialogConditionField;
 import org.minxc.emp.form.core.model.custdialog.FormCustDialogDisplayField;
 import org.minxc.emp.form.core.model.custdialog.FormCustDialogReturnField;
 import org.minxc.emp.form.core.model.custdialog.FormCustDialogSortField;
-import org.minxc.emp.system.api.model.ISysDataSource;
+import org.minxc.emp.system.api.model.SystemDataSource;
 import org.minxc.emp.system.api.service.ISysDataSourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -67,7 +67,7 @@ public class FormCustDialogManagerImpl extends CommonManager<String, FormCustDia
 
     @Override
     public Map<String, String> searchObjName(FormCustDialog formCustDialog) {
-        ISysDataSource sysDataSource = sysDataSourceService.getByKey(formCustDialog.getDsKey());
+        SystemDataSource sysDataSource = sysDataSourceService.getByKey(formCustDialog.getDsKey());
         JdbcTemplate jdbcTemplate = sysDataSourceService.getJdbcTemplateByKey(formCustDialog.getDsKey());
         Map<String, String> map = new HashMap<>();// Map<表/视图名,表/视图描述>
         DbOperator dbOperator = DbOperatorFactory.newOperator(sysDataSource.getDbType(), jdbcTemplate);
@@ -86,7 +86,7 @@ public class FormCustDialogManagerImpl extends CommonManager<String, FormCustDia
     @Override
     public TableEntity<ColumnEntity> getTable(FormCustDialog formCustDialog) {
         try {
-            ISysDataSource sysDataSource = sysDataSourceService.getByKey(formCustDialog.getDsKey());
+            SystemDataSource sysDataSource = sysDataSourceService.getByKey(formCustDialog.getDsKey());
             JdbcTemplate jdbcTemplate = sysDataSourceService.getJdbcTemplateByKey(formCustDialog.getDsKey());
             DbOperator dbOperator = DbOperatorFactory.newOperator(sysDataSource.getDbType(), jdbcTemplate);
             TableEntity<ColumnEntity>  table = null;

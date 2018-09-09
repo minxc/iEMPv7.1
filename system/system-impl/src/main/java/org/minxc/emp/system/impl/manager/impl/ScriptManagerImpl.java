@@ -7,12 +7,12 @@ import javax.annotation.Resource;
 import org.minxc.emp.common.manager.impl.CommonManager;
 import org.minxc.emp.system.impl.dao.ScriptDao;
 import org.minxc.emp.system.impl.manager.ScriptManager;
-import org.minxc.emp.system.impl.model.Script;
+import org.minxc.emp.system.impl.model.ScriptEntity;
 import org.springframework.stereotype.Service;
 
 
 @Service("scriptManager")
-public class ScriptManagerImpl extends CommonManager<String, Script> implements ScriptManager {
+public class ScriptManagerImpl extends CommonManager<String, ScriptEntity> implements ScriptManager {
 	
     @Resource
     private ScriptDao scriptDao;

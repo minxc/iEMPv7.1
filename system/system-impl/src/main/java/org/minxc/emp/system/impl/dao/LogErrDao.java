@@ -2,7 +2,7 @@ package org.minxc.emp.system.impl.dao;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.minxc.emp.common.db.dao.CommonDao;
-import org.minxc.emp.system.impl.model.LogErr;
+import org.minxc.emp.system.impl.model.SystemLogErrorEntity;
 
 
 /**
@@ -11,5 +11,5 @@ import org.minxc.emp.system.impl.model.LogErr;
  * </pre>
  */
 @Mapper
-public interface LogErrDao extends CommonDao<String, LogErr> {
+public interface LogErrDao extends CommonDao<String, SystemLogErrorEntity> {
 }

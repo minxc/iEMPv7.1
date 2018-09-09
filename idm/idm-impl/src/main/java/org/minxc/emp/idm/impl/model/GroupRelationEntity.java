@@ -102,7 +102,7 @@ public class GroupRelationEntity extends AbstractCommonModel implements Group {
 		return this.relCode;
 	}
 
-	public Long getSn() {
+	public Long getSeq() {
 		return Long.valueOf(0);
 	}
 
@@ -125,4 +125,6 @@ public class GroupRelationEntity extends AbstractCommonModel implements Group {
 	public Map<String, Object> getParams() {
 		return null;
 	}
+
+	
 }

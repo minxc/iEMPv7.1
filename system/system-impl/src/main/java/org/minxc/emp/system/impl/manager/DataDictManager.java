@@ -3,7 +3,7 @@ package org.minxc.emp.system.impl.manager;
 import java.util.List;
 
 import org.minxc.emp.common.manager.Manager;
-import org.minxc.emp.system.impl.model.DataDict;
+import org.minxc.emp.system.impl.model.DataDictEntity;
 
 //import com.alibaba.fastjson.JSONArray;
 import com.fasterxml.jackson.databind.node.ArrayNode;
@@ -21,9 +21,9 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 * @version  1.0  
 *
  */
-public interface DataDictManager extends Manager<String, DataDict> {
+public interface DataDictManager extends Manager<String, DataDictEntity> {
 
-	List<DataDict> getDictNodeList(String dictKey, Boolean hasRoot);
+	List<DataDictEntity> getDictNodeList(String dictKey, Boolean hasRoot);
 
 //	JSONArray getDictTree();  更改承载类为Jackson 
 	ArrayNode getDictTree();

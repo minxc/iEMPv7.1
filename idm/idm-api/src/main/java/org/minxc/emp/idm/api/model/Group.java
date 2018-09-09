@@ -1,13 +1,19 @@
 package org.minxc.emp.idm.api.model;
 
-import java.io.Serializable;
-
-
-
-/**
- * 描述：抽象用户组类型
+/*
+ * 
+* 项目名称：idm-api   
+* 类名称：Group   
+* 类描述： 抽象用户组类型 
+* 创建人：Xianchang.min   
+* 创建时间：2018年9月4日 下午11:43:26   
+* 修改人：Xianchang.min   
+* 修改时间：2018年9月4日 下午11:43:26   
+* 修改备注：   
+* @version  1.0  
+*
  */
-public interface Group extends IdentityType,Serializable {
+public interface Group extends IdentityType {
 
 
     /**
@@ -36,7 +42,7 @@ public interface Group extends IdentityType,Serializable {
      *
      * @return
      */
-    Long getSn();
+    Long getSeq();
 
     /**
      * 组织类型。

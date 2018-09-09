@@ -4,7 +4,7 @@ import org.minxc.emp.common.db.api.table.DbTypeEnum;
 import org.minxc.emp.common.db.datasource.DataSourceUtil;
 import org.minxc.emp.common.db.id.UniqueIdUtil;
 import org.minxc.emp.system.impl.manager.SysDataSourceManager;
-import org.minxc.emp.system.impl.model.SysDataSource;
+import org.minxc.emp.system.impl.model.SystemDataSourceEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
@@ -49,7 +49,7 @@ public class DataSourceInitListener implements ApplicationListener<ContextRefres
      * </pre>
      */
     private void loadDataSourceFromSysDataSource() {
-        for (SysDataSource sysDataSource : sysDataSourceManager.getAll()) {
+        for (SystemDataSourceEntity sysDataSource : sysDataSourceManager.getAll()) {
             if (DataSourceUtil.isDataSourceExist(sysDataSource.getKey())) {
                 continue;
             }
@@ -75,7 +75,7 @@ public class DataSourceInitListener implements ApplicationListener<ContextRefres
             log.debug("add datasource " + entry.getKey());
             // 将其新增到系统配置的数据源中，供客户使用
             if (sysDataSourceManager.getByKey(entry.getKey()) == null) {
-                SysDataSource sysDataSource = new SysDataSource();
+                SystemDataSourceEntity sysDataSource = new SystemDataSourceEntity();
                 sysDataSource.setKey(entry.getKey());
                 sysDataSource.setName(entry.getKey() + "数据源");
                 sysDataSource.setId(UniqueIdUtil.getSuid());

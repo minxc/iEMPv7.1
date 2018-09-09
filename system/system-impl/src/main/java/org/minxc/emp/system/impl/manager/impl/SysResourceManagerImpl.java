@@ -10,7 +10,7 @@ import org.minxc.emp.common.manager.impl.CommonManager;
 import org.minxc.emp.system.impl.dao.RelResourceDao;
 import org.minxc.emp.system.impl.dao.SysResourceDao;
 import org.minxc.emp.system.impl.manager.SysResourceManager;
-import org.minxc.emp.system.impl.model.RelResource;
+import org.minxc.emp.system.impl.model.ResourceLinkEntity;
 import org.minxc.emp.system.impl.model.SystemResourceEntity;
 import org.springframework.stereotype.Service;
 
@@ -51,8 +51,8 @@ public class SysResourceManagerImpl extends CommonManager<String, SystemResource
         //先删除
         relResourceDao.removeByResId(resId);
         //在添加
-        List<RelResource> relResources = sysResource.getRelResources();
-        for (RelResource relResource : relResources) {
+        List<ResourceLinkEntity> relResources = sysResource.getRelatedResources();
+        for (ResourceLinkEntity relResource : relResources) {
             relResource.setId(UniqueIdUtil.getSuid());
             relResource.setResId(resId);
             relResourceDao.create(relResource);
@@ -66,8 +66,8 @@ public class SysResourceManagerImpl extends CommonManager<String, SystemResource
         //先删除
         relResourceDao.removeByResId(resId);
         //在添加
-        List<RelResource> relResources = sysResource.getRelResources();
-        for (RelResource relResource : relResources) {
+        List<ResourceLinkEntity> relResources = sysResource.getRelatedResources();
+        for (ResourceLinkEntity relResource : relResources) {
             relResource.setId(UniqueIdUtil.getSuid());
             relResource.setResId(resId);
             relResourceDao.create(relResource);

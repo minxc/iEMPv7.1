@@ -3,11 +3,11 @@ package org.minxc.emp.system.impl.dao;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.minxc.emp.common.db.dao.CommonDao;
-import org.minxc.emp.system.impl.model.SerialNo;
+import org.minxc.emp.system.impl.model.SerialNoEntity;
 
 
 @Mapper
-public interface SerialNoDao extends CommonDao<String, SerialNo> {
+public interface SerialNoDao extends CommonDao<String, SerialNoEntity> {
 
 
     /**
@@ -25,7 +25,7 @@ public interface SerialNoDao extends CommonDao<String, SerialNo> {
      * @param alias
      * @return
      */
-    SerialNo getByAlias(String alias);
+    SerialNoEntity getByAlias(String alias);
 
 
     /**
@@ -33,5 +33,5 @@ public interface SerialNoDao extends CommonDao<String, SerialNo> {
      *
      * @param SerialNo void
      */
-    int updByAlias(SerialNo SerialNo);
+    int updByAlias(SerialNoEntity SerialNo);
 }

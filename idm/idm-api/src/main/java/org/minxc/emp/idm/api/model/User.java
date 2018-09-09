@@ -1,13 +1,13 @@
 package org.minxc.emp.idm.api.model;
 
-import java.io.Serializable;
 import java.util.Map;
 
 
 /**
  * 描述：用户实体接口
  */
-public interface User extends IdentityType ,Serializable{
+public interface User extends IdentityType{
+	
     /**
      * 男性=Male
      */

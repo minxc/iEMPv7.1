@@ -15,7 +15,7 @@ import org.minxc.emp.core.api.aop.annotation.ErrorCatching;
 import org.minxc.emp.core.api.query.QueryFilter;
 import org.minxc.emp.form.core.manager.FormCustDialogManager;
 import org.minxc.emp.form.core.model.FormCustDialog;
-import org.minxc.emp.system.api.model.ISysDataSource;
+import org.minxc.emp.system.api.model.SystemDataSource;
 import org.minxc.emp.system.api.service.ISysDataSourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -117,7 +117,7 @@ public class FormCustDialogController extends CommonController<FormCustDialog> {
         QueryFilter queryFilter = getQueryFilter(request);
         // 页面来的参数
         FormCustDialog formCustDialog = formCustDialogManager.getByKey(key);
-        ISysDataSource sysDataSource = sysDataSourceService.getByKey(formCustDialog.getDsKey());
+        SystemDataSource sysDataSource = sysDataSourceService.getByKey(formCustDialog.getDsKey());
         // 切换数据源
         DbContextHolder.setDataSource(sysDataSource.getKey(), sysDataSource.getDbType());
         List<?> list = formCustDialogManager.data(formCustDialog, queryFilter);
@@ -140,7 +140,7 @@ public class FormCustDialogController extends CommonController<FormCustDialog> {
         QueryFilter queryFilter = getQueryFilter(request);
         // 页面来的参数
         FormCustDialog formCustDialog = formCustDialogManager.getByKey(key);
-        ISysDataSource sysDataSource = sysDataSourceService.getByKey(formCustDialog.getDsKey());
+        SystemDataSource sysDataSource = sysDataSourceService.getByKey(formCustDialog.getDsKey());
         // 切换数据源
         DbContextHolder.setDataSource(sysDataSource.getKey(), sysDataSource.getDbType());
         return formCustDialogManager.data(formCustDialog, queryFilter);

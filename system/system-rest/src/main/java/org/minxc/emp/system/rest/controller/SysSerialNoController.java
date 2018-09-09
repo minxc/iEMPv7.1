@@ -18,7 +18,7 @@ import org.minxc.emp.core.api.query.QueryFilter;
 import org.minxc.emp.core.api.response.impl.ResultMessage;
 import org.minxc.emp.system.api.service.SerialNoService;
 import org.minxc.emp.system.impl.manager.SerialNoManager;
-import org.minxc.emp.system.impl.model.SerialNo;
+import org.minxc.emp.system.impl.model.SerialNoEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -49,7 +49,7 @@ public class SysSerialNoController extends GenericController {
     public 
     PageJson listJson(HttpServletRequest request, HttpServletResponse response) throws Exception {
         QueryFilter queryFilter = getQueryFilter(request);
-        Page<SerialNo> SerialNoList = (Page<SerialNo>) serialNoManager.query(queryFilter);
+        Page<SerialNoEntity> SerialNoList = (Page<SerialNoEntity>) serialNoManager.query(queryFilter);
         return new PageJson(SerialNoList);
     }
 
@@ -69,7 +69,7 @@ public class SysSerialNoController extends GenericController {
     @ErrorCatching(writeErrorToResponse = true)
     public void getById(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String id = RequestUtil.getString(request, "id");
-        SerialNo SerialNo = serialNoManager.get(id);
+        SerialNoEntity SerialNo = serialNoManager.get(id);
         writeSuccessData(response, SerialNo);
     }
 
@@ -83,7 +83,7 @@ public class SysSerialNoController extends GenericController {
      */
     @RequestMapping("save")
     @ErrorCatching
-    public void save(HttpServletRequest request, HttpServletResponse response, @RequestBody SerialNo SerialNo) throws Exception {
+    public void save(HttpServletRequest request, HttpServletResponse response, @RequestBody SerialNoEntity SerialNo) throws Exception {
         String ResultMessage = null;
 
         boolean rtn = serialNoManager.isAliasExisted(SerialNo.getId(), SerialNo.getAlias());
@@ -132,7 +132,7 @@ public class SysSerialNoController extends GenericController {
     public 
     PageJson showlist(HttpServletRequest request, HttpServletResponse response) throws Exception {
         QueryFilter queryFilter = getQueryFilter(request);
-        Page<SerialNo> SerialNoList = (Page<SerialNo>) serialNoManager.query(queryFilter);
+        Page<SerialNoEntity> SerialNoList = (Page<SerialNoEntity>) serialNoManager.query(queryFilter);
         return new PageJson(SerialNoList);
     }
 
@@ -143,10 +143,10 @@ public class SysSerialNoController extends GenericController {
      * @throws Exception
      */
     @RequestMapping("preview")
-    public List<SerialNo> preview(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public List<SerialNoEntity> preview(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
         String alias = RequestUtil.getString(request, "alias");
-        List<SerialNo> identities = serialNoManager.getPreviewIden(alias);
+        List<SerialNoEntity> identities = serialNoManager.getPreviewIden(alias);
 
         return identities;
     }

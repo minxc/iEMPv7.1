@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 import org.minxc.emp.common.db.dao.CommonDao;
-import org.minxc.emp.system.impl.model.DataDict;
+import org.minxc.emp.system.impl.model.DataDictEntity;
 
 
 /**
@@ -14,7 +14,7 @@ import org.minxc.emp.system.impl.model.DataDict;
  */
 
 
-public interface DataDictDao extends CommonDao<String, DataDict> {
+public interface DataDictDao extends CommonDao<String, DataDictEntity> {
 
 	/**
 	 * 通过dicKey获取字典项。若hasRoot则包含字典本身
@@ -23,7 +23,7 @@ public interface DataDictDao extends CommonDao<String, DataDict> {
 	 * @param hasRoot
 	 * @return
 	 */
-	List<DataDict> getDictNodeList(@Param("dictKey") String dictKey, @Param("hasRoot") Boolean hasRoot);
+	List<DataDictEntity> getDictNodeList(@Param("dictKey") String dictKey, @Param("hasRoot") Boolean hasRoot);
 
 	/**
 	 * 判断字典是否存在，

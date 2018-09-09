@@ -9,7 +9,7 @@ import org.minxc.emp.core.api.aop.annotation.ErrorCatching;
 import org.minxc.emp.core.api.query.QueryFilter;
 import org.minxc.emp.system.impl.manager.SysTreeManager;
 import org.minxc.emp.system.impl.manager.SysTreeNodeManager;
-import org.minxc.emp.system.impl.model.SysTree;
+import org.minxc.emp.system.impl.model.TreeEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -44,7 +44,7 @@ public class SysTreeController extends GenericController {
      */
     @RequestMapping("save")
     @ErrorCatching(writeErrorToResponse = true, value = "保存系统树失败")
-    public void save(HttpServletRequest request, HttpServletResponse response, @RequestBody SysTree sysTree) throws Exception {
+    public void save(HttpServletRequest request, HttpServletResponse response, @RequestBody TreeEntity sysTree) throws Exception {
         if (StringUtils.isEmpty(sysTree.getId())) {
             sysTree.setId(UniqueIdUtil.getSuid());
             sysTreeManager.create(sysTree);
@@ -69,7 +69,7 @@ public class SysTreeController extends GenericController {
     public void getObject(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String id = RequestUtil.getString(request, "id");
         String key = RequestUtil.getString(request, "key");
-        SysTree sysTree = null;
+        TreeEntity sysTree = null;
         if (StringUtils.isNotEmpty(id)) {
             sysTree = sysTreeManager.get(id);
         } else if (StringUtils.isNotEmpty(key)) {
@@ -92,7 +92,7 @@ public class SysTreeController extends GenericController {
     @ResponseBody
     public PageJson listJson(HttpServletRequest request, HttpServletResponse response) throws Exception {
         QueryFilter queryFilter = getQueryFilter(request);
-        List<SysTree> list = sysTreeManager.query(queryFilter);
+        List<TreeEntity> list = sysTreeManager.query(queryFilter);
         return new PageJson(list);
     }
 

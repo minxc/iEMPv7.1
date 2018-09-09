@@ -10,14 +10,14 @@ import javax.annotation.Resource;
 import org.minxc.emp.common.manager.impl.CommonManager;
 import org.minxc.emp.system.impl.dao.SerialNoDao;
 import org.minxc.emp.system.impl.manager.SerialNoManager;
-import org.minxc.emp.system.impl.model.SerialNo;
+import org.minxc.emp.system.impl.model.SerialNoEntity;
 import org.springframework.stereotype.Service;
 
 import com.minxc.emp.core.util.time.DateFormatUtil;
 
 
 @Service("serialNoManager")
-public class SerialNoManagerImpl extends CommonManager<String, SerialNo> implements SerialNoManager {
+public class SerialNoManagerImpl extends CommonManager<String, SerialNoEntity> implements SerialNoManager {
 	
 	
     @Resource
@@ -25,7 +25,7 @@ public class SerialNoManagerImpl extends CommonManager<String, SerialNo> impleme
 
 
     @Override
-    public void create(SerialNo entity) {
+    public void create(SerialNoEntity entity) {
         entity.setCurDate(getCurDate());
         super.create(entity);
     }
@@ -50,10 +50,10 @@ public class SerialNoManagerImpl extends CommonManager<String, SerialNo> impleme
      * @return
      */
     public String getCurIdByAlias(String alias) {
-        SerialNo SerialNo = this.serialNoDao.getByAlias(alias);
-        Integer curValue = SerialNo.getCurValue();
-        if (curValue == null) curValue = SerialNo.getInitValue();
-        String rtn = getByRule(SerialNo.getRegulation(), SerialNo.getNoLength(), curValue);
+        SerialNoEntity serialNo = this.serialNoDao.getByAlias(alias);
+        Integer curValue = serialNo.getCurValue();
+        if (curValue == null) curValue = serialNo.getInitValue();
+        String rtn = getByRule(serialNo.getRule(), serialNo.getNoLength(), curValue);
         return rtn;
     }
 
@@ -65,7 +65,7 @@ public class SerialNoManagerImpl extends CommonManager<String, SerialNo> impleme
      * @param curValue 流水号的当前值。
      * @return
      */
-    private String getByRule(String rule, int length, int curValue) {
+    private String getByRule(String rule, Integer length, Integer curValue) {
         Calendar c = Calendar.getInstance();
         int year = c.get(Calendar.YEAR);
         int month = c.get(Calendar.MONTH) + 1;
@@ -101,9 +101,9 @@ public class SerialNoManagerImpl extends CommonManager<String, SerialNo> impleme
      * @param length   显示的长度。
      * @return
      */
-    private static String getSeqNo(String rule, int curValue, int length) {
+    private static String getSeqNo(String rule, Integer curValue, Integer length) {
         String tmp = curValue + "";
-        int len = 0;
+        Integer len = 0;
         if (rule.indexOf("no") > -1) {
             len = length;
         } else {
@@ -163,7 +163,7 @@ public class SerialNoManagerImpl extends CommonManager<String, SerialNo> impleme
      * @return
      */
     public synchronized String nextId(String alias) {
-        SerialNo SerialNo = serialNoDao.getByAlias(alias);
+        SerialNoEntity SerialNo = serialNoDao.getByAlias(alias);
         if (SerialNo == null) throw new RuntimeException("流水号【" + alias + "】缺失！请联系系统管理员！");
 
         Result result = genResult(SerialNo);
@@ -184,8 +184,8 @@ public class SerialNoManagerImpl extends CommonManager<String, SerialNo> impleme
         return result.getIdNo();
     }
 
-    public Result genResult(SerialNo SerialNo) {
-        String rule = SerialNo.getRegulation();
+    public Result genResult(SerialNoEntity SerialNo) {
+        String rule = SerialNo.getRule();
         int step = SerialNo.getStep();
         int genEveryDay = SerialNo.getGenType();
 
@@ -238,16 +238,16 @@ public class SerialNoManagerImpl extends CommonManager<String, SerialNo> impleme
      * @param alias
      * @return
      */
-    public List<SerialNo> getPreviewIden(String alias) {
+    public List<SerialNoEntity> getPreviewIden(String alias) {
         int genNum = 10;
-        SerialNo SerialNo = serialNoDao.getByAlias(alias);
-        String rule = SerialNo.getRegulation();
+        SerialNoEntity SerialNo = serialNoDao.getByAlias(alias);
+        String rule = SerialNo.getRule();
         int step = SerialNo.getStep();
         Integer curValue = SerialNo.getCurValue();
         if (curValue == null) curValue = SerialNo.getInitValue();
-        List<SerialNo> tempList = new ArrayList<SerialNo>();
+        List<SerialNoEntity> tempList = new ArrayList<SerialNoEntity>();
         for (int i = 0; i < genNum; i++) {
-            SerialNo SerialNotemp = new SerialNo();
+            SerialNoEntity SerialNotemp = new SerialNoEntity();
             if (i > 0) {
                 curValue += step;
             }

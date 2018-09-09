@@ -14,7 +14,7 @@ import org.minxc.emp.core.api.aop.annotation.ErrorCatching;
 import org.minxc.emp.core.api.query.QueryFilter;
 import org.minxc.emp.core.api.response.impl.ResultMessage;
 import org.minxc.emp.system.impl.manager.SysFileManager;
-import org.minxc.emp.system.impl.model.SysFile;
+import org.minxc.emp.system.impl.model.UploadedFileEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -56,7 +56,7 @@ public class SysFileController extends GenericController {
 	@RequestMapping(value = "upload", method = RequestMethod.POST)
 	@ErrorCatching(value = "上传失败")
 	public ResultMessage<String> upload(@RequestParam("file") MultipartFile file) throws Exception {
-		SysFile sysFile = sysFileManager.upload(file.getInputStream(), file.getOriginalFilename());
+		UploadedFileEntity sysFile = sysFileManager.upload(file.getInputStream(), file.getOriginalFilename());
 		return getSuccessResult(sysFile.getId(), "上传成功");
 	}
 
@@ -72,7 +72,7 @@ public class SysFileController extends GenericController {
 	@RequestMapping(value = "download", method = RequestMethod.GET)
 	@ErrorCatching(value = "下载失败")
 	public ResponseEntity<byte[]> download(@RequestParam("fileId") String fileId) throws Exception {
-		SysFile sysFile = sysFileManager.get(fileId);
+		UploadedFileEntity sysFile = sysFileManager.get(fileId);
 
 		HttpHeaders headers = new HttpHeaders();
 		String downloadFileName = new String(sysFile.getName().getBytes("UTF-8"), "iso-8859-1");
@@ -86,7 +86,7 @@ public class SysFileController extends GenericController {
 	public ResponseEntity<byte[]> zip(@RequestParam("fileIds") String fileIds) throws Exception {
 		ArrayList<File> sourceFileList = new ArrayList<>();
 		for (String id : fileIds.split(",")) {
-			SysFile sysFile = sysFileManager.get(id);
+			UploadedFileEntity sysFile = sysFileManager.get(id);
 			sourceFileList.add(FileUtil.inputstream2file(sysFileManager.download(id),new File(sysFile.getName())));
 		}
 
@@ -111,7 +111,7 @@ public class SysFileController extends GenericController {
     @RequestMapping("listJson")
     public PageJson listJson(HttpServletRequest request, HttpServletResponse response) throws Exception {
         QueryFilter queryFilter = getQueryFilter(request);
-        Page<SysFile> pageList = (Page<SysFile>) sysFileManager.query(queryFilter);
+        Page<UploadedFileEntity> pageList = (Page<UploadedFileEntity>) sysFileManager.query(queryFilter);
         return new PageJson(pageList);
     }
 }

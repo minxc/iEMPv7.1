@@ -1,7 +1,7 @@
 package org.minxc.emp.system.impl.scheduler;
 
 import org.apache.commons.lang3.StringUtils;
-import org.minxc.emp.system.impl.model.SysScheduleJob;
+import org.minxc.emp.system.impl.model.SystemScheduleJobEntity;
 import org.springframework.beans.BeanUtils;
 import org.springframework.util.Assert;
 
@@ -24,7 +24,7 @@ public class JobInvokeUtil {
      *
      * @param sysScheduleJob 系统任务
      */
-    public static void invokeMethod(SysScheduleJob sysScheduleJob) throws Exception {
+    public static void invokeMethod(SystemScheduleJobEntity sysScheduleJob) throws Exception {
         final String invokeTarget = sysScheduleJob.getInvokeTarget();
         Assert.notNull(invokeTarget, "执行目标方法为空");
         //如果类名超过两个调用视为静态方法

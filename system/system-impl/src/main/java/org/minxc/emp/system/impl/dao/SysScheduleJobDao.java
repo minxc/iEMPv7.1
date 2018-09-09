@@ -5,13 +5,13 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.minxc.emp.common.db.dao.CommonDao;
-import org.minxc.emp.system.impl.model.SysScheduleJob;
+import org.minxc.emp.system.impl.model.SystemScheduleJobEntity;
 
 /**
  * 系统计划任务数据操作
  */
 @Mapper
-public interface SysScheduleJobDao  extends CommonDao<String, SysScheduleJob> {
+public interface SysScheduleJobDao  extends CommonDao<String, SystemScheduleJobEntity> {
 
 
     /**
@@ -21,7 +21,7 @@ public interface SysScheduleJobDao  extends CommonDao<String, SysScheduleJob> {
      *          实体
      * @return
      */
-    int insertSelective(SysScheduleJob entity);
+    int insertSelective(SystemScheduleJobEntity entity);
 
     /**
      * 选择性更新
@@ -30,7 +30,7 @@ public interface SysScheduleJobDao  extends CommonDao<String, SysScheduleJob> {
      *          实体
      * @return
      */
-    int updateByPrimaryKeySelective(SysScheduleJob entity);
+    int updateByPrimaryKeySelective(SystemScheduleJobEntity entity);
 
     /**
      * 是否存在

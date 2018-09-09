@@ -14,9 +14,9 @@ import org.minxc.emp.system.impl.dao.DataDictDao;
 import org.minxc.emp.system.impl.manager.DataDictManager;
 import org.minxc.emp.system.impl.manager.SysTreeManager;
 import org.minxc.emp.system.impl.manager.SysTreeNodeManager;
-import org.minxc.emp.system.impl.model.DataDict;
-import org.minxc.emp.system.impl.model.SysTree;
-import org.minxc.emp.system.impl.model.SysTreeNode;
+import org.minxc.emp.system.impl.model.DataDictEntity;
+import org.minxc.emp.system.impl.model.TreeEntity;
+import org.minxc.emp.system.impl.model.SystemTreeNodeEntity;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.node.ArrayNode;
@@ -27,7 +27,7 @@ import com.minxc.emp.core.util.JacksonUtil;
  * 数据字典 Manager处理实现类
  */
 @Service("dataDictManager")
-public class DataDictManagerImpl extends CommonManager<String, DataDict> implements DataDictManager {
+public class DataDictManagerImpl extends CommonManager<String, DataDictEntity> implements DataDictManager {
 
 	@Resource
 	private DataDictDao dataDictDao;
@@ -37,14 +37,14 @@ public class DataDictManagerImpl extends CommonManager<String, DataDict> impleme
 	private SysTreeManager sysTreeMananger;
 
 	@Override
-	public List<DataDict> getDictNodeList(String dictKey, Boolean hasRoot) {
+	public List<DataDictEntity> getDictNodeList(String dictKey, Boolean hasRoot) {
 		return dataDictDao.getDictNodeList(dictKey, hasRoot);
 	}
 
 	@Override
-	public void create(DataDict dataDict) {
+	public void create(DataDictEntity dataDict) {
 		Integer count = 0;
-		if (DataDict.TYPE_DICT.equals(dataDict.getDictType())) {
+		if (DataDictEntity.TYPE_DICT.equals(dataDict.getDictType())) {
 			dataDict.setDictKey(dataDict.getKey());
 			count = dataDictDao.isExistDict(dataDict.getKey(), null);
 		} else {
@@ -58,9 +58,9 @@ public class DataDictManagerImpl extends CommonManager<String, DataDict> impleme
 	}
 
 	@Override
-	public void update(DataDict dataDict) {
+	public void update(DataDictEntity dataDict) {
 		int count = 0;
-		if (DataDict.TYPE_DICT.equals(dataDict.getDictType())) {
+		if (DataDictEntity.TYPE_DICT.equals(dataDict.getDictType())) {
 			dataDict.setDictKey(dataDict.getKey());
 			count = dataDictDao.isExistDict(dataDict.getKey(), dataDict.getId());
 		} else {
@@ -80,13 +80,13 @@ public class DataDictManagerImpl extends CommonManager<String, DataDict> impleme
 		QueryFilter filter = new DefaultQueryFilter();
 		filter.addFilter("dict_type_", "dict", QueryOperator.EQUAL);
 
-		List<DataDict> dicts = dataDictDao.query(filter);
+		List<DataDictEntity> dicts = dataDictDao.query(filter);
 
-		SysTree sysTree = sysTreeMananger.getByKey("dict");
-		List<SysTreeNode> nodeList = sysTreeNodeMananger.getByTreeId(sysTree.getId());
+		TreeEntity sysTree = sysTreeMananger.getByKey("dict");
+		List<SystemTreeNodeEntity> nodeList = sysTreeNodeMananger.getByTreeId(sysTree.getId());
 		ArrayNode jsonArray = JacksonUtil.jsonArray();
 
-		for (SysTreeNode sysTreeNode : nodeList) {
+		for (SystemTreeNodeEntity sysTreeNode : nodeList) {
 			ObjectNode object = JacksonUtil.jsonObject();
 			object.put("id", sysTreeNode.getId());
 			object.put("name", sysTreeNode.getName());
@@ -96,7 +96,7 @@ public class DataDictManagerImpl extends CommonManager<String, DataDict> impleme
 			jsonArray.add(object);
 		}
 
-		for (DataDict dict : dicts) {
+		for (DataDictEntity dict : dicts) {
 			ObjectNode object = JacksonUtil.jsonObject();
 			object.put("id", dict.getId());
 			object.put("name", dict.getName());

@@ -1,6 +1,6 @@
 package org.minxc.emp.system.impl.service;
 
-import org.minxc.emp.system.api.model.ISysTreeNode;
+import org.minxc.emp.system.api.model.SystemTreeNode;
 import org.minxc.emp.system.api.service.ISysTreeNodeService;
 import org.minxc.emp.system.impl.manager.SysTreeNodeManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,7 @@ public class SysTreeNodeService implements ISysTreeNodeService {
     SysTreeNodeManager sysTreeNodeManager;
 
     @Override
-    public ISysTreeNode getById(String id) {
+    public SystemTreeNode getById(String id) {
         return sysTreeNodeManager.get(id);
     }
 }

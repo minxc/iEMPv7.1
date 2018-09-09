@@ -4,12 +4,12 @@ import java.util.List;
 import java.util.Map;
 
 import org.minxc.emp.common.manager.Manager;
-import org.minxc.emp.system.impl.model.SysProperties;
+import org.minxc.emp.system.impl.model.SystemPropertiesEntity;
 
 /**
  * SYS_PROPERTIES 处理接口
  */
-public interface SysPropertiesManager extends Manager<String, SysProperties> {
+public interface SysPropertiesManager extends Manager<String, SystemPropertiesEntity> {
 
 
     /**
@@ -25,7 +25,7 @@ public interface SysPropertiesManager extends Manager<String, SysProperties> {
      * @param sysProperties
      * @return
      */
-    boolean isExist(SysProperties sysProperties);
+    boolean isExist(SystemPropertiesEntity sysProperties);
 
 
     /**

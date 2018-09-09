@@ -2,14 +2,14 @@ package org.minxc.emp.system.impl.dao;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.minxc.emp.common.db.dao.CommonDao;
-import org.minxc.emp.system.impl.model.SysScheduleJobLog;
+import org.minxc.emp.system.impl.model.SystemScheduleJobLogEntity;
 
 /**
  * 任务计划日志持久化
  */
 
 @Mapper
-public interface SysScheduleJobLogDao extends CommonDao<String, SysScheduleJobLog> {
+public interface SysScheduleJobLogDao extends CommonDao<String, SystemScheduleJobLogEntity> {
 
 	/**
 	 * 选择性插入
@@ -17,7 +17,7 @@ public interface SysScheduleJobLogDao extends CommonDao<String, SysScheduleJobLo
 	 * @param entity 实体
 	 * @return
 	 */
-	int insertSelective(SysScheduleJobLog entity);
+	int insertSelective(SystemScheduleJobLogEntity entity);
 
 	/**
 	 * 选择性更新
@@ -25,7 +25,7 @@ public interface SysScheduleJobLogDao extends CommonDao<String, SysScheduleJobLo
 	 * @param entity 更新
 	 * @return
 	 */
-	int updateByPrimaryKeySelective(SysScheduleJobLog entity);
+	int updateByPrimaryKeySelective(SystemScheduleJobLogEntity entity);
 
 	/**
 	 * 根据任务计划ID移除

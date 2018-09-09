@@ -3,9 +3,9 @@ package org.minxc.emp.system.impl.manager;
 import java.util.List;
 
 import org.minxc.emp.common.manager.Manager;
-import org.minxc.emp.system.impl.model.SerialNo;
+import org.minxc.emp.system.impl.model.SerialNoEntity;
 
-public interface SerialNoManager extends Manager<String, SerialNo> {
+public interface SerialNoManager extends Manager<String, SerialNoEntity> {
 	/**
 	 * 判读流水号别名是否已经存在
 	 *
@@ -37,6 +37,6 @@ public interface SerialNoManager extends Manager<String, SerialNo> {
 	 * @param alias
 	 * @return
 	 */
-	public List<SerialNo> getPreviewIden(String alias);
+	public List<SerialNoEntity> getPreviewIden(String alias);
 
 }

@@ -1,14 +1,14 @@
 package org.minxc.emp.system.impl.manager;
 
 import org.minxc.emp.common.manager.Manager;
-import org.minxc.emp.system.impl.model.SysScheduleJobLog;
+import org.minxc.emp.system.impl.model.SystemScheduleJobLogEntity;
 
 /**
  * 
  * @author Xianchang.min
  *
  */
-public interface SysScheduleJobLogManager extends Manager<String, SysScheduleJobLog> {
+public interface SysScheduleJobLogManager extends Manager<String, SystemScheduleJobLogEntity> {
 
     /**
      * 选择性插入
@@ -16,7 +16,7 @@ public interface SysScheduleJobLogManager extends Manager<String, SysScheduleJob
      *          实体
      * @return
      */
-    int insertSelective(SysScheduleJobLog entity);
+    int insertSelective(SystemScheduleJobLogEntity entity);
 
     /**
      * 选择性更新
@@ -25,7 +25,7 @@ public interface SysScheduleJobLogManager extends Manager<String, SysScheduleJob
      *          更新
      * @return
      */
-    int updateByPrimaryKeySelective(SysScheduleJobLog entity);
+    int updateByPrimaryKeySelective(SystemScheduleJobLogEntity entity);
 
 
 }

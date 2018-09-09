@@ -10,16 +10,22 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import java.util.Map;
 
 /**
- * 组织架构 实体对象
+ * 
+* 项目名称：idm-impl   
+* 类名称：GroupEntity   
+* 类描述：组织架构 实体对象   
+* 创建人：Xianchang.min   
+* 创建时间：2018年9月9日 下午9:40:12   
+* 修改人：Xianchang.min   
+* 修改时间：2018年9月9日 下午9:40:12   
+* 修改备注：   
+* @version  1.0  
+*
  */
 public class GroupEntity extends AbstractCommonModel implements Group {
 
 	private static final long serialVersionUID = 9058258883041062647L;
 
-	/**
-	 * 主键
-	 */
-	protected String id;
 
 	/**
 	 * name_
@@ -41,7 +47,7 @@ public class GroupEntity extends AbstractCommonModel implements Group {
 	 */
 	protected String grade;
 
-	protected Long sn;
+	protected Long seq;
 
 	protected String desc;;
 
@@ -59,18 +65,6 @@ public class GroupEntity extends AbstractCommonModel implements Group {
 		this.parentOrgName = parentOrgName;
 	}
 
-	/**
-	 * 返回 主键
-	 *
-	 * @return
-	 */
-	public String getParentOrgName() {
-		return this.parentOrgName;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
 
 	/**
 	 * 返回 主键
@@ -153,12 +147,12 @@ public class GroupEntity extends AbstractCommonModel implements Group {
 		return this.code;
 	}
 
-	public Long getSn() {
-		return sn;
+	public Long getSeq() {
+		return seq;
 	}
 
-	public void setSn(Long sn) {
-		this.sn = sn;
+	public void setSn(Long seq) {
+		this.seq = seq;
 	}
 
 	public String getDesc() {

@@ -15,7 +15,7 @@ import org.minxc.emp.common.rest.util.RequestUtil;
 import org.minxc.emp.core.api.aop.annotation.ErrorCatching;
 import org.minxc.emp.core.api.query.QueryFilter;
 import org.minxc.emp.system.impl.manager.SysDataSourceManager;
-import org.minxc.emp.system.impl.model.SysDataSource;
+import org.minxc.emp.system.impl.model.SystemDataSourceEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -69,7 +69,7 @@ public class SysDataSourceController extends GenericController {
      */
     @RequestMapping("save")
     @ErrorCatching(writeErrorToResponse = true, value = "保存数据源失败")
-    public void save(HttpServletRequest request, HttpServletResponse response, @RequestBody SysDataSource sysDataSource) throws Exception {
+    public void save(HttpServletRequest request, HttpServletResponse response, @RequestBody SystemDataSourceEntity sysDataSource) throws Exception {
         if (StringUtils.isEmpty(sysDataSource.getId())) {
             sysDataSource.setId(UniqueIdUtil.getSuid());
             sysDataSourceManager.create(sysDataSource);
@@ -94,7 +94,7 @@ public class SysDataSourceController extends GenericController {
     @ErrorCatching(writeErrorToResponse = true, value = "获取sysDataSource异常")
     public void getObject(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String id = RequestUtil.getString(request, "id");
-        SysDataSource sysDataSource = null;
+        SystemDataSourceEntity sysDataSource = null;
         if (StringUtils.isNotEmpty(id)) {
             sysDataSource = sysDataSourceManager.get(id);
         }
@@ -115,7 +115,7 @@ public class SysDataSourceController extends GenericController {
     @ResponseBody
     public PageJson listJson(HttpServletRequest request, HttpServletResponse response) throws Exception {
         QueryFilter queryFilter = getQueryFilter(request);
-        List<SysDataSource> list = sysDataSourceManager.query(queryFilter);
+        List<SystemDataSourceEntity> list = sysDataSourceManager.query(queryFilter);
         return new PageJson(list);
     }
 

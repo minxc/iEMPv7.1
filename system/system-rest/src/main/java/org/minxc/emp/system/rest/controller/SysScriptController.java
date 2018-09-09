@@ -13,7 +13,7 @@ import org.minxc.emp.common.db.api.IdGenerator;
 import org.minxc.emp.common.rest.CommonController;
 import org.minxc.emp.common.rest.util.RequestUtil;
 import org.minxc.emp.system.impl.manager.ScriptManager;
-import org.minxc.emp.system.impl.model.Script;
+import org.minxc.emp.system.impl.model.ScriptEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,7 +23,7 @@ import com.minxc.emp.core.util.JacksonUtil;
 
 @RestController
 @RequestMapping("/sys/script/")
-public class SysScriptController extends CommonController<Script> {
+public class SysScriptController extends CommonController<ScriptEntity> {
 
     @Resource
     private ScriptManager scriptManager;

@@ -1,8 +1,8 @@
 package org.minxc.emp.system.impl.scheduler;
 
 import org.minxc.emp.system.impl.manager.SysScheduleJobLogManager;
-import org.minxc.emp.system.impl.model.SysScheduleJob;
-import org.minxc.emp.system.impl.model.SysScheduleJobLog;
+import org.minxc.emp.system.impl.model.SystemScheduleJobEntity;
+import org.minxc.emp.system.impl.model.SystemScheduleJobLogEntity;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -29,7 +29,7 @@ public abstract class AbstractQuartzJob implements Job {
 
     @Override
     public void execute(JobExecutionContext context) throws JobExecutionException {
-        SysScheduleJob sysScheduleJob = (SysScheduleJob) context.getMergedJobDataMap().get(SchedulerConstants.EXECUTION_TARGET_KEY);
+        SystemScheduleJobEntity sysScheduleJob = (SystemScheduleJobEntity) context.getMergedJobDataMap().get(SchedulerConstants.EXECUTION_TARGET_KEY);
         try {
             before(context, sysScheduleJob);
             if (sysScheduleJob != null) {
@@ -47,7 +47,7 @@ public abstract class AbstractQuartzJob implements Job {
      * @param context        工作执行上下文对象
      * @param sysScheduleJob 系统计划任务
      */
-    protected void before(JobExecutionContext context, SysScheduleJob sysScheduleJob) {
+    protected void before(JobExecutionContext context, SystemScheduleJobEntity sysScheduleJob) {
         threadLocal.set(new Date());
     }
 
@@ -57,11 +57,11 @@ public abstract class AbstractQuartzJob implements Job {
      * @param context        工作执行上下文对象
      * @param sysScheduleJob 系统计划任务
      */
-    protected void after(JobExecutionContext context, SysScheduleJob sysScheduleJob, Exception e) {
+    protected void after(JobExecutionContext context, SystemScheduleJobEntity sysScheduleJob, Exception e) {
         Date startTime = threadLocal.get();
         threadLocal.remove();
 
-        final SysScheduleJobLog sysScheduleJobLog = new SysScheduleJobLog();
+        final SystemScheduleJobLogEntity sysScheduleJobLog = new SystemScheduleJobLogEntity();
         sysScheduleJobLog.setJobId(sysScheduleJob.getId());
         sysScheduleJobLog.setStartTime(startTime);
         sysScheduleJobLog.setEndTime(new Date());
@@ -84,5 +84,5 @@ public abstract class AbstractQuartzJob implements Job {
      * @param sysScheduleJob 系统计划任务
      * @throws Exception 执行过程中的异常
      */
-    protected abstract void doExecute(JobExecutionContext context, SysScheduleJob sysScheduleJob) throws Exception;
+    protected abstract void doExecute(JobExecutionContext context, SystemScheduleJobEntity sysScheduleJob) throws Exception;
 }

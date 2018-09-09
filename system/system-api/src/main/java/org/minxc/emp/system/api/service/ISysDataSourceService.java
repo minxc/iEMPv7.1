@@ -1,6 +1,6 @@
 package org.minxc.emp.system.api.service;
 
-import org.minxc.emp.system.api.model.ISysDataSource;
+import org.minxc.emp.system.api.model.SystemDataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
@@ -23,7 +23,7 @@ public interface ISysDataSourceService {
      * @param key
      * @return
      */
-    ISysDataSource getByKey(String key);
+    SystemDataSource getByKey(String key);
 
     /**
      * <pre>

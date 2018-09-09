@@ -3,9 +3,17 @@ package org.minxc.emp.idm.api.model;
 import java.io.Serializable;
 
 /**
- * <pre>
- * 描述：用户标识类型
- * </pre>
+ * 
+* 项目名称：idm-api   
+* 类名称：IdentityType   
+* 类描述：  用户标识类型
+* 创建人：Xianchang.min   
+* 创建时间：2018年9月4日 下午11:42:56   
+* 修改人：Xianchang.min   
+* 修改时间：2018年9月4日 下午11:42:56   
+* 修改备注：   
+* @version  1.0  
+*
  */
 public interface IdentityType extends Serializable {
 

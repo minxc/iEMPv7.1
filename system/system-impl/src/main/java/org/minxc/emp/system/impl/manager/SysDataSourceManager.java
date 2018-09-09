@@ -3,13 +3,13 @@ package org.minxc.emp.system.impl.manager;
 import javax.sql.DataSource;
 
 import org.minxc.emp.common.manager.Manager;
-import org.minxc.emp.system.impl.model.SysDataSource;
+import org.minxc.emp.system.impl.model.SystemDataSourceEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 /**
  * 数据源 Manager处理接口
  */
-public interface SysDataSourceManager extends Manager<String, SysDataSource> {
+public interface SysDataSourceManager extends Manager<String, SystemDataSourceEntity> {
 
     /**
      * <pre>
@@ -19,7 +19,7 @@ public interface SysDataSourceManager extends Manager<String, SysDataSource> {
      * @param sysDataSource
      * @return
      */
-    DataSource tranform2DataSource(SysDataSource sysDataSource);
+    DataSource tranform2DataSource(SystemDataSourceEntity sysDataSource);
 
     /**
      * <pre>
@@ -29,7 +29,7 @@ public interface SysDataSourceManager extends Manager<String, SysDataSource> {
      * @param key
      * @return
      */
-    SysDataSource getByKey(String key);
+    SystemDataSourceEntity getByKey(String key);
 
     /**
      * <pre>

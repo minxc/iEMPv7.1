@@ -4,7 +4,7 @@ import org.minxc.emp.common.db.id.UniqueIdUtil;
 import org.minxc.emp.common.manager.impl.CommonManager;
 import org.minxc.emp.system.impl.dao.ResRoleDao;
 import org.minxc.emp.system.impl.manager.ResRoleManager;
-import org.minxc.emp.system.impl.model.ResRole;
+import org.minxc.emp.system.impl.model.RoleResouceLinkEntity;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -24,7 +24,7 @@ import java.util.*;
 *
  */
 @Service("resRoleManager")
-public class ResRoleManagerImpl extends CommonManager<String, ResRole> implements ResRoleManager {
+public class ResRoleManagerImpl extends CommonManager<String, RoleResouceLinkEntity> implements ResRoleManager {
    
 	
 	@Resource
@@ -37,7 +37,7 @@ public class ResRoleManagerImpl extends CommonManager<String, ResRole> implement
     public final String RESOURCE_RES = "SYS_RES_";
 
     @Override
-    public List<ResRole> getAllByRoleId(String roleId) {
+    public List<RoleResouceLinkEntity> getAllByRoleId(String roleId) {
 
         return resRoleDao.getByRoleId(roleId);
     }
@@ -50,7 +50,7 @@ public class ResRoleManagerImpl extends CommonManager<String, ResRole> implement
         String[] aryRes = resIds.split(",");
         for (String resId : aryRes) {
             if ("0".equals(resId)) continue;
-            ResRole resRole = new ResRole();
+            RoleResouceLinkEntity resRole = new RoleResouceLinkEntity();
             resRole.setId(UniqueIdUtil.getSuid());
             resRole.setRoleId(roleId);
             resRole.setSystemId(systemId);
@@ -67,10 +67,10 @@ public class ResRoleManagerImpl extends CommonManager<String, ResRole> implement
 //            return (Map<String, Set<String>>) iCache.getByKey(resStr);
 //        }
 
-        List<ResRole> list = resRoleDao.getResRoleBySystemId(systemId);
+        List<RoleResouceLinkEntity> list = resRoleDao.getResRoleBySystemId(systemId);
         Map<String, Set<String>> map = new HashMap<String, Set<String>>();
 
-        for (ResRole res : list) {
+        for (RoleResouceLinkEntity res : list) {
             String resAlias = res.getResAlias();
             if (map.containsKey(resAlias)) {
                 Set<String> set = map.get(resAlias);
@@ -92,14 +92,14 @@ public class ResRoleManagerImpl extends CommonManager<String, ResRole> implement
 //            return (Map<String, Set<String>>) iCache.getByKey(urlStr);
 //        }
 
-        List<ResRole> list = resRoleDao.getResRoleBySystemId(systemId);
-        List<ResRole> urlList = resRoleDao.getUrlRoleBySystemId(systemId);
+        List<RoleResouceLinkEntity> list = resRoleDao.getResRoleBySystemId(systemId);
+        List<RoleResouceLinkEntity> urlList = resRoleDao.getUrlRoleBySystemId(systemId);
 
         urlList.addAll(list);
 
         Map<String, Set<String>> map = new HashMap<String, Set<String>>();
 
-        for (ResRole res : list) {
+        for (RoleResouceLinkEntity res : list) {
             String url = res.getUrl();
             if (map.containsKey(url)) {
                 Set<String> set = map.get(url);

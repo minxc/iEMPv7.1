@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import org.minxc.emp.common.manager.impl.CommonManager;
-import org.minxc.emp.system.api.model.ISysTreeNode;
+import org.minxc.emp.system.api.model.SystemTreeNode;
 import org.minxc.emp.system.api.service.ISysTreeNodeService;
 
 import com.minxc.emp.core.util.FileUtil;
@@ -43,7 +43,7 @@ public class FormDefManagerImpl extends CommonManager<String, FormDef> implement
 			return;
 		}
 
-		ISysTreeNode node = sysTreeNodeService.getById(formDef.getGroupId());
+		SystemTreeNode node = sysTreeNodeService.getById(formDef.getGroupId());
 		String fileName = formDefPath + File.separator + node.getKey() + File.separator + formDef.getKey() + ".html";
 		FileUtil.writeFile(fileName, formDef.getHtml());
 	}
@@ -52,7 +52,7 @@ public class FormDefManagerImpl extends CommonManager<String, FormDef> implement
 	public String getBackupHtml(FormDef formDef) {
 		String formDefPath = PropertiesUtil.getFormDefBackupPath();
 		if (StringUtil.isNotEmpty(formDefPath)) {
-			ISysTreeNode node = sysTreeNodeService.getById(formDef.getGroupId());
+			SystemTreeNode node = sysTreeNodeService.getById(formDef.getGroupId());
 			String fileName = formDefPath + File.separator + node.getKey() + File.separator + formDef.getKey() + ".html";
 			formDef.setHtml(FileUtil.readFile(fileName));
 		}

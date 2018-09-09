@@ -11,7 +11,7 @@ import org.minxc.emp.core.api.query.QueryFilter;
 import org.minxc.emp.core.api.status.CommonStatusCode;
 import org.minxc.emp.system.impl.dao.SysScheduleJobDao;
 import org.minxc.emp.system.impl.dao.SysScheduleJobLogDao;
-import org.minxc.emp.system.impl.model.SysScheduleJob;
+import org.minxc.emp.system.impl.model.SystemScheduleJobEntity;
 import org.quartz.*;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;
@@ -54,19 +54,19 @@ public class QuartzManagerService implements InitializingBean {
         int maxPage = 0, pageNum = 1;
         do {
             PageHelper.startPage(pageNum, 50);
-            List<SysScheduleJob> sysScheduleJobs = sysScheduleJobDao.query();
+            List<SystemScheduleJobEntity> sysScheduleJobs = sysScheduleJobDao.query();
             //第一次加载
             if (maxPage == 0) {
                 maxPage = new PageInfo<>(sysScheduleJobs).getPages();
             }
-            for (SysScheduleJob sysScheduleJob : sysScheduleJobs) {
+            for (SystemScheduleJobEntity sysScheduleJob : sysScheduleJobs) {
                 refreshScheduleJob(sysScheduleJob);
             }
         } while (++pageNum <= maxPage);
         log.info("==> 初始化加载系统执行计划 end");
     }
 
-    public List<SysScheduleJob> selectList(QueryFilter queryFilter) {
+    public List<SystemScheduleJobEntity> selectList(QueryFilter queryFilter) {
 
         return sysScheduleJobDao.query(queryFilter);
     }
@@ -77,7 +77,7 @@ public class QuartzManagerService implements InitializingBean {
      * @param id 执行计划ID
      * @return 执行计划实体类
      */
-    public SysScheduleJob getSysScheduleJobById(String id) {
+    public SystemScheduleJobEntity getSysScheduleJobById(String id) {
 
         return sysScheduleJobDao.get(id);
     }
@@ -88,7 +88,7 @@ public class QuartzManagerService implements InitializingBean {
      * @param sysScheduleJob 执行计划
      * @return 具体执行任务类
      */
-    private Class<? extends Job> getQuartzJobClass(SysScheduleJob sysScheduleJob) {
+    private Class<? extends Job> getQuartzJobClass(SystemScheduleJobEntity sysScheduleJob) {
 
         return sysScheduleJob.getConcurrent() ? QuartzJobExecution.class : QuartzDisallowConcurrentExecution.class;
     }
@@ -101,7 +101,7 @@ public class QuartzManagerService implements InitializingBean {
      * @throws SchedulerException 计划执行异常
      */
     @Transactional(rollbackFor = Exception.class)
-    public void addSysScheduleJob(SysScheduleJob sysScheduleJob) throws SchedulerException {
+    public void addSysScheduleJob(SystemScheduleJobEntity sysScheduleJob) throws SchedulerException {
         if (sysScheduleJobDao.exists(sysScheduleJob.getName(), sysScheduleJob.getGroup())) {
             throw new BusinessException("请勿重复添加", SysStatusCode.PARAM_ILLEGAL);
         }
@@ -118,7 +118,7 @@ public class QuartzManagerService implements InitializingBean {
      * @param sysScheduleJob 系统执行计划
      */
     @SuppressWarnings("unchecked")
-    private void refreshScheduleJob(SysScheduleJob sysScheduleJob) throws SchedulerException {
+    private void refreshScheduleJob(SystemScheduleJobEntity sysScheduleJob) throws SchedulerException {
         JobKey jobKey = new JobKey(sysScheduleJob.getName(), sysScheduleJob.getGroup());
         //判断是添加还是更新
         if (scheduler.checkExists(jobKey)) {
@@ -150,7 +150,7 @@ public class QuartzManagerService implements InitializingBean {
      * @throws SchedulerException 执行计划异常
      */
     @Transactional(rollbackFor = Exception.class)
-    public void removeSysScheduleJob(SysScheduleJob sysScheduleJob) throws SchedulerException {
+    public void removeSysScheduleJob(SystemScheduleJobEntity sysScheduleJob) throws SchedulerException {
         sysScheduleJobLogDao.removeByJobId(sysScheduleJob.getId());
         sysScheduleJobDao.remove(sysScheduleJob.getId());
         JobKey jobKey = new JobKey(sysScheduleJob.getName(), sysScheduleJob.getGroup());
@@ -166,8 +166,8 @@ public class QuartzManagerService implements InitializingBean {
      * @throws SchedulerException 执行计划异常
      */
     @Transactional(rollbackFor = Exception.class)
-    public void disableSysScheduleJob(SysScheduleJob sysScheduleJob) throws SchedulerException {
-        SysScheduleJob entity = new SysScheduleJob();
+    public void disableSysScheduleJob(SystemScheduleJobEntity sysScheduleJob) throws SchedulerException {
+        SystemScheduleJobEntity entity = new SystemScheduleJobEntity();
         entity.setId(sysScheduleJob.getId());
         entity.setRunningState(SysScheduleJobState.DISABLE.name());
         sysScheduleJobDao.updateByPrimaryKeySelective(entity);
@@ -185,8 +185,8 @@ public class QuartzManagerService implements InitializingBean {
      * @throws SchedulerException 执行计划异常
      */
     @Transactional(rollbackFor = Exception.class)
-    public void enableSysScheduleJob(SysScheduleJob sysScheduleJob) throws SchedulerException {
-        SysScheduleJob entity = new SysScheduleJob();
+    public void enableSysScheduleJob(SystemScheduleJobEntity sysScheduleJob) throws SchedulerException {
+        SystemScheduleJobEntity entity = new SystemScheduleJobEntity();
         entity.setId(sysScheduleJob.getId());
         entity.setRunningState(SysScheduleJobState.ENABLE.name());
         sysScheduleJobDao.updateByPrimaryKeySelective(entity);
@@ -202,8 +202,8 @@ public class QuartzManagerService implements InitializingBean {
      * @throws SchedulerException 执行计划异常
      */
     @Transactional(rollbackFor = Exception.class)
-    public void updateSysScheduleJob(SysScheduleJob sysScheduleJob) throws SchedulerException {
-        SysScheduleJob oldSysScheduleJob = sysScheduleJobDao.get(sysScheduleJob.getId());
+    public void updateSysScheduleJob(SystemScheduleJobEntity sysScheduleJob) throws SchedulerException {
+        SystemScheduleJobEntity oldSysScheduleJob = sysScheduleJobDao.get(sysScheduleJob.getId());
         //如果旧的分组与新的分组不一样
         if (!oldSysScheduleJob.getGroup().equals(sysScheduleJob.getGroup())) {
             if (sysScheduleJobDao.exists(sysScheduleJob.getName(), sysScheduleJob.getGroup())) {
@@ -223,7 +223,7 @@ public class QuartzManagerService implements InitializingBean {
      * @param sysScheduleJob 执行计划
      * @throws SchedulerException 执行计划异常
      */
-    public void runOnce(SysScheduleJob sysScheduleJob) throws SchedulerException {
+    public void runOnce(SystemScheduleJobEntity sysScheduleJob) throws SchedulerException {
         JobKey jobKey = new JobKey(sysScheduleJob.getName(), sysScheduleJob.getGroup());
         if (!scheduler.checkExists(jobKey)) {
             throw new BusinessException("执行计划未启用", CommonStatusCode.PARAM_ILLEGAL);

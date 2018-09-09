@@ -6,7 +6,7 @@ import org.minxc.emp.common.manager.impl.CommonManager;
 import org.minxc.emp.core.api.aop.annotation.ErrorCatching;
 import org.minxc.emp.system.impl.dao.LogErrDao;
 import org.minxc.emp.system.impl.manager.LogErrManager;
-import org.minxc.emp.system.impl.model.LogErr;
+import org.minxc.emp.system.impl.model.SystemLogErrorEntity;
 import org.springframework.stereotype.Service;
 
 /**
@@ -25,7 +25,7 @@ import org.springframework.stereotype.Service;
 
 
 @Service("sysLogErrManager")
-public class LogErrManagerImpl extends CommonManager<String, LogErr> implements LogErrManager {
+public class LogErrManagerImpl extends CommonManager<String, SystemLogErrorEntity> implements LogErrManager {
     @Resource
     LogErrDao sysLogErrDao;
 

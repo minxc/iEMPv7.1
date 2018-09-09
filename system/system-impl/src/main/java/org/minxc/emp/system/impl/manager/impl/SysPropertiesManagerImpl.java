@@ -12,7 +12,7 @@ import org.minxc.emp.common.manager.impl.CommonManager;
 import org.minxc.emp.system.api.service.PropertyService;
 import org.minxc.emp.system.impl.dao.SysPropertiesDao;
 import org.minxc.emp.system.impl.manager.SysPropertiesManager;
-import org.minxc.emp.system.impl.model.SysProperties;
+import org.minxc.emp.system.impl.model.SystemPropertiesEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.Cacheable;
@@ -31,7 +31,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service("sysPropertiesManager")
-public class SysPropertiesManagerImpl extends CommonManager<String, SysProperties>
+public class SysPropertiesManagerImpl extends CommonManager<String, SystemPropertiesEntity>
 		implements SysPropertiesManager, PropertyService {
 
 	@Resource
@@ -49,7 +49,7 @@ public class SysPropertiesManagerImpl extends CommonManager<String, SysPropertie
 	}
 
 	@Override
-	public boolean isExist(SysProperties sysProperties) {
+	public boolean isExist(SystemPropertiesEntity sysProperties) {
 		return sysPropertiesDao.isExist(sysProperties) > 0;
 	}
 
@@ -58,10 +58,10 @@ public class SysPropertiesManagerImpl extends CommonManager<String, SysPropertie
 	 */
 
 	public Map<String, Map<String, String>> reloadProperty() {
-		List<SysProperties> list = this.getAll();
+		List<SystemPropertiesEntity> list = this.getAll();
 
 		Map<String, Map<String, String>> propertiesCache = new HashMap<String, Map<String, String>>();
-		for (SysProperties property : list) {
+		for (SystemPropertiesEntity property : list) {
 			String environment = property.getEnvironment();
 			if (!EnvironmentConstant.contain(environment)) {
 				log.warn("当前系统属性的环境参数“{}”非系统定义参数{}请注意！", environment, EnvironmentConstant.getKes());

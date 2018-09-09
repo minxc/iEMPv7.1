@@ -11,7 +11,7 @@ import org.minxc.emp.common.rest.GenericController;
 import org.minxc.emp.common.rest.util.RequestUtil;
 import org.minxc.emp.core.api.aop.annotation.ErrorCatching;
 import org.minxc.emp.system.impl.manager.SysAuthorizationManager;
-import org.minxc.emp.system.impl.model.SysAuthorization;
+import org.minxc.emp.system.impl.model.BizAuthorizationEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -40,7 +40,7 @@ public class SysAuthorizationController extends GenericController{
 		RightsObjectConstants.getByKey(targetObject);
 		
 //		List<SysAuthorization> sysAuthorizationList = JSON.parseArray(authorizationJson, SysAuthorization.class);
-		List<SysAuthorization> sysAuthorizationList = JacksonUtil.jsonArray2PojoList(authorizationJson, SysAuthorization.class);
+		List<BizAuthorizationEntity> sysAuthorizationList = JacksonUtil.jsonArray2PojoList(authorizationJson, BizAuthorizationEntity.class);
 		
 		sysAuthorizationManager.createAll(sysAuthorizationList,targetId,targetObject);
 		
@@ -59,7 +59,7 @@ public class SysAuthorizationController extends GenericController{
 		String rightsTarget = request.getParameter("rightsTarget");
 		String rightsTargetObject = RequestUtil.getString(request, "rightsObject");
 		
-		List<SysAuthorization> list = sysAuthorizationManager.getByTarget(RightsObjectConstants.valueOf(rightsTargetObject), rightsTarget);
+		List<BizAuthorizationEntity> list = sysAuthorizationManager.getByTarget(RightsObjectConstants.valueOf(rightsTargetObject), rightsTarget);
 		 
 		writeSuccessData(response, list);
 	}

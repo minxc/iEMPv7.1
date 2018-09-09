@@ -1,9 +1,17 @@
 package org.minxc.emp.idm.api.model;
 
 /**
- * 组织类型。
- *
- * @author ray
+ * 
+* 项目名称：idm-api   
+* 类名称：GroupType   
+* 类描述：组织类型   
+* 创建人：Xianchang.min   
+* 创建时间：2018年9月4日 下午11:44:45   
+* 修改人：Xianchang.min   
+* 修改时间：2018年9月4日 下午11:44:45   
+* 修改备注：   
+* @version  1.0  
+*
  */
 public class GroupType {
 

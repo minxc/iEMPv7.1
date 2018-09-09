@@ -1,6 +1,6 @@
 package org.minxc.emp.system.impl.scheduler;
 
-import org.minxc.emp.system.impl.model.SysScheduleJob;
+import org.minxc.emp.system.impl.model.SystemScheduleJobEntity;
 import org.quartz.JobExecutionContext;
 
 /**
@@ -10,7 +10,7 @@ import org.quartz.JobExecutionContext;
 public class QuartzJobExecution extends AbstractQuartzJob {
 
     @Override
-    protected void doExecute(JobExecutionContext context, SysScheduleJob sysScheduleJob)throws Exception {
+    protected void doExecute(JobExecutionContext context, SystemScheduleJobEntity sysScheduleJob)throws Exception {
         JobInvokeUtil.invokeMethod(sysScheduleJob);
     }
 }

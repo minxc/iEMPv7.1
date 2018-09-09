@@ -5,16 +5,16 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.minxc.emp.common.db.dao.CommonDao;
-import org.minxc.emp.system.impl.model.ResRole;
+import org.minxc.emp.system.impl.model.RoleResouceLinkEntity;
 
 
 /**
  * 角色资源分配 DAO接口
  */
 @Mapper
-public interface ResRoleDao extends CommonDao<String, ResRole> {
+public interface ResRoleDao extends CommonDao<String, RoleResouceLinkEntity> {
 
-    List<ResRole> getByRoleId(String roleId);
+    List<RoleResouceLinkEntity> getByRoleId(String roleId);
 
     void removeByRoleAndSystem(@Param("roleId")String roleId,@Param("systemId")String systemId);
 
@@ -24,7 +24,7 @@ public interface ResRoleDao extends CommonDao<String, ResRole> {
      * @param systemId
      * @return
      */
-    List<ResRole> getUrlRoleBySystemId(String systemId);
+    List<RoleResouceLinkEntity> getUrlRoleBySystemId(String systemId);
 
     /**
      * 根据系统Id获取资源和角色的映射关系。
@@ -32,5 +32,5 @@ public interface ResRoleDao extends CommonDao<String, ResRole> {
      * @param systemId
      * @return
      */
-    List<ResRole> getResRoleBySystemId(String systemId);
+    List<RoleResouceLinkEntity> getResRoleBySystemId(String systemId);
 }

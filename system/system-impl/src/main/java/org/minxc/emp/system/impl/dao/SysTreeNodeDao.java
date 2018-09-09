@@ -2,7 +2,7 @@ package org.minxc.emp.system.impl.dao;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.minxc.emp.common.db.dao.CommonDao;
-import org.minxc.emp.system.impl.model.SysTreeNode;
+import org.minxc.emp.system.impl.model.SystemTreeNodeEntity;
 
 
 /**
@@ -20,7 +20,7 @@ import org.minxc.emp.system.impl.model.SysTreeNode;
  */
 
 @Mapper
-public interface SysTreeNodeDao extends CommonDao<String, SysTreeNode> {
+public interface SysTreeNodeDao extends CommonDao<String, SystemTreeNodeEntity> {
 
     /**
      * <pre>

@@ -1,7 +1,7 @@
 package org.minxc.emp.system.impl.manager;
 
 import org.minxc.emp.common.manager.Manager;
-import org.minxc.emp.system.impl.model.SysScheduleJob;
+import org.minxc.emp.system.impl.model.SystemScheduleJobEntity;
 
 /**
  *  系统执行计划通用处理
@@ -9,6 +9,6 @@ import org.minxc.emp.system.impl.model.SysScheduleJob;
  * @author Xianchang.min
  *
  */
-public interface SysScheduleJobManager extends Manager<String, SysScheduleJob> {
+public interface SysScheduleJobManager extends Manager<String, SystemScheduleJobEntity> {
 
 }

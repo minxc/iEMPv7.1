@@ -39,13 +39,13 @@ public interface SystemResource {
      *
      * @return
      */
-    public Long getEnableMenu();
+    public Integer getEnableMenu();
     /**
      * 返回 是否有子节点
      *
      * @return
      */
-    public Long getHasChildren();
+    public Integer getHasChildren();
     
     
     /**
@@ -53,7 +53,7 @@ public interface SystemResource {
      *
      * @return
      */
-    public Long getOpened() ;
+    public Integer getOpened() ;
     /**
      * 返回 图标
      *
@@ -66,7 +66,7 @@ public interface SystemResource {
      *
      * @return
      */
-    public Long getNewWindow();
+    public Integer getNewWindow();
     /**
      * 返回 排序
      *
@@ -77,7 +77,7 @@ public interface SystemResource {
     public String getParentId() ;
     
     
-    public List<? extends IRelResource> getRelResources();
+    public List<? extends ResourceLink> getRelatedResources();
  
     public List<? extends SystemResource> getChildren();
 

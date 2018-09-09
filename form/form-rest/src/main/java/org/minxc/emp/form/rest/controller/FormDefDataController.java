@@ -23,7 +23,7 @@ import org.minxc.emp.form.core.manager.FormDefManager;
 import org.minxc.emp.form.core.model.FormDef;
 import org.minxc.emp.form.core.model.FormDefData;
 import org.minxc.emp.form.core.service.FormDefDataService;
-import org.minxc.emp.system.api.model.ISysDataSource;
+import org.minxc.emp.system.api.model.SystemDataSource;
 import org.minxc.emp.system.api.service.ISysDataSourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -111,7 +111,7 @@ public class FormDefDataController extends GenericController {
 		// 页面来的参数
 		IBusinessObject businessObject = businessObjectService.getFilledByKey(boKey);
 		IBusinessTable businessTable = businessObject.getRelation().getTable();
-		ISysDataSource sysDataSource = sysDataSourceService.getByKey(businessTable.getDsKey());
+		SystemDataSource sysDataSource = sysDataSourceService.getByKey(businessTable.getDsKey());
 		// 切换数据源
 		DbContextHolder.setDataSource(sysDataSource.getKey(), sysDataSource.getDbType());
 		String sql = "select * from " + businessTable.getName();

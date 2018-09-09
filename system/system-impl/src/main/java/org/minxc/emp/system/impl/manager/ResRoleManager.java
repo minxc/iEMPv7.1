@@ -5,16 +5,16 @@ import java.util.Map;
 import java.util.Set;
 
 import org.minxc.emp.common.manager.Manager;
-import org.minxc.emp.system.impl.model.ResRole;
+import org.minxc.emp.system.impl.model.RoleResouceLinkEntity;
 
 /**
  * <pre>
  * 描述：角色资源分配 处理接口
  * </pre>
  */
-public interface ResRoleManager extends Manager<String, ResRole> {
+public interface ResRoleManager extends Manager<String, RoleResouceLinkEntity> {
 
-    List<ResRole> getAllByRoleId(String roleId);
+    List<RoleResouceLinkEntity> getAllByRoleId(String roleId);
 
     /**
      * 分配角色资源。

@@ -15,6 +15,7 @@ import org.minxc.emp.idm.impl.manager.UserManager;
  */
 @Service
 public class BpmUserScript implements IScript {
+	
     @Resource
     RoleManager roleManager;
     @Resource

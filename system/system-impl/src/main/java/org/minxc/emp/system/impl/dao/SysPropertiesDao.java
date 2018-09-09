@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.minxc.emp.common.db.dao.CommonDao;
-import org.minxc.emp.system.impl.model.SysProperties;
+import org.minxc.emp.system.impl.model.SystemPropertiesEntity;
 
 
 /**
@@ -13,7 +13,7 @@ import org.minxc.emp.system.impl.model.SysProperties;
  */
 @Mapper
 
-public interface SysPropertiesDao extends CommonDao<String, SysProperties> {
+public interface SysPropertiesDao extends CommonDao<String, SystemPropertiesEntity> {
 
     /**
      * 分组列表。
@@ -29,5 +29,5 @@ public interface SysPropertiesDao extends CommonDao<String, SysProperties> {
      * @param sysProperties
      * @return
      */
-    Integer isExist(SysProperties sysProperties);
+    Integer isExist(SystemPropertiesEntity sysProperties);
 }

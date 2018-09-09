@@ -5,10 +5,10 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.minxc.emp.common.db.dao.CommonDao;
-import org.minxc.emp.system.impl.model.Script;
+import org.minxc.emp.system.impl.model.ScriptEntity;
 
 @Mapper
-public interface ScriptDao extends CommonDao<String, Script> {
+public interface ScriptDao extends CommonDao<String, ScriptEntity> {
 
     /**
      * 返回所有脚本的分类

@@ -123,7 +123,7 @@ public class RoleEntity extends AbstractCommonModel implements Group {
         return this.alias;
     }
 
-    public Long getSn() {
+    public Long getSeq() {
         return Long.valueOf(1);
     }
 

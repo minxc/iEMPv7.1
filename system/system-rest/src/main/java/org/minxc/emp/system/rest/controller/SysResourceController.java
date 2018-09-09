@@ -74,9 +74,9 @@ public class SysResourceController extends GenericController {
         String id = RequestUtil.getString(request, "id");
         if (StringUtils.isEmpty(id)) {
             String parentId = RequestUtil.getString(request, "parentId");
-            String sysytemId = RequestUtil.getString(request, "systemId");
+            String applicationId = RequestUtil.getString(request, "applicationId");
             SystemResourceEntity sysResource = new SystemResourceEntity();
-            sysResource.setSystemId(sysytemId);
+            sysResource.setApplicationId(applicationId);
             sysResource.setParentId(parentId);
             sysResource.setNewWindow(0);
             sysResource.setHasChildren(1);
@@ -109,7 +109,7 @@ public class SysResourceController extends GenericController {
         }
         
         if (StringUtils.isEmpty(id)) {
-            sysResource.setSn(System.currentTimeMillis());
+            sysResource.setSeq(System.currentTimeMillis());
             sysResourceManager.create(sysResource);
             ResultMessage = "添加子系统资源成功";
         } else {
@@ -176,15 +176,15 @@ public class SysResourceController extends GenericController {
     @RequestMapping("getTreeData")
     @ErrorCatching
     public List<SystemResourceEntity> getTreeData(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        String systemId = RequestUtil.getString(request, "systemId");
-        ApplicationEntity subsystem = subsystemManager.get(systemId);
-        List<SystemResourceEntity> groupList = getGroupTree(systemId);
+        String applicationId = RequestUtil.getString(request, "applicationId");
+        ApplicationEntity subsystem = subsystemManager.get(applicationId);
+        List<SystemResourceEntity> groupList = getGroupTree(applicationId);
         if (BeanUtils.isEmpty(groupList))
             groupList = new ArrayList<SystemResourceEntity>();
         SystemResourceEntity rootResource = new SystemResourceEntity();
         rootResource.setName(subsystem.getName());
         rootResource.setId("0");
-        rootResource.setSystemId(systemId); // 根节点
+        rootResource.setApplicationId(applicationId); // 根节点
         rootResource.setHasChildren(1);
         groupList.add(rootResource);
         return groupList;

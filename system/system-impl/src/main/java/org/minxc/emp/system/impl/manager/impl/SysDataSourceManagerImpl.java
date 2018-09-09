@@ -14,7 +14,7 @@ import org.minxc.emp.core.api.query.QueryOperator;
 import org.minxc.emp.core.api.status.CommonStatusCode;
 import org.minxc.emp.system.impl.dao.SysDataSourceDao;
 import org.minxc.emp.system.impl.manager.SysDataSourceManager;
-import org.minxc.emp.system.impl.model.SysDataSource;
+import org.minxc.emp.system.impl.model.SystemDataSourceEntity;
 import org.minxc.emp.system.impl.model.def.SysDataSourceDefAttribute;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -27,13 +27,13 @@ import com.minxc.emp.core.util.BeanUtils;
  * 描述：数据源 Manager处理实现类
  */
 @Service
-public class SysDataSourceManagerImpl extends CommonManager<String, SysDataSource> implements SysDataSourceManager {
+public class SysDataSourceManagerImpl extends CommonManager<String, SystemDataSourceEntity> implements SysDataSourceManager {
    
 	@Autowired
     SysDataSourceDao sysDataSourceDao;
 
     @Override
-    public DataSource tranform2DataSource(SysDataSource sysDataSource) {
+    public DataSource tranform2DataSource(SystemDataSourceEntity sysDataSource) {
         try {
             Class<?> cls = Class.forName(sysDataSource.getClassPath());// 拿到类路径
             DataSource dataSource = (DataSource) cls.newInstance();// 初始化一个对象
@@ -53,7 +53,7 @@ public class SysDataSourceManagerImpl extends CommonManager<String, SysDataSourc
     }
 
     @Override
-    public SysDataSource getByKey(String key) {
+    public SystemDataSourceEntity getByKey(String key) {
         QueryFilter filter = new DefaultQueryFilter();
         filter.addFilter("key_", key, QueryOperator.EQUAL);
         return this.queryOne(filter);
@@ -68,7 +68,7 @@ public class SysDataSourceManagerImpl extends CommonManager<String, SysDataSourc
             return dataSource;
         }
         // 2 从系统配置中取
-        SysDataSource sysDataSource = getByKey(key);
+        SystemDataSourceEntity sysDataSource = getByKey(key);
         if (sysDataSource != null) {
             dataSource = tranform2DataSource(sysDataSource);
             if (add) {

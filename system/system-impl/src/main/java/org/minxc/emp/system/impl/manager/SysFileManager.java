@@ -3,12 +3,12 @@ package org.minxc.emp.system.impl.manager;
 import java.io.InputStream;
 
 import org.minxc.emp.common.manager.Manager;
-import org.minxc.emp.system.impl.model.SysFile;
+import org.minxc.emp.system.impl.model.UploadedFileEntity;
 
 /**
  * 系统附件 Manager处理接口
  */
-public interface SysFileManager extends Manager<String, SysFile>{
+public interface SysFileManager extends Manager<String, UploadedFileEntity>{
 	
 	/**
 	 * <pre>
@@ -18,7 +18,7 @@ public interface SysFileManager extends Manager<String, SysFile>{
 	 * @param fileName
 	 * @return
 	 */
-	SysFile upload(InputStream is, String fileName);
+	UploadedFileEntity upload(InputStream is, String fileName);
 	
 	/**
 	 * <pre>

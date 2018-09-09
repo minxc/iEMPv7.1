@@ -1,6 +1,6 @@
 package org.minxc.emp.system.impl.service;
 
-import org.minxc.emp.system.api.model.ISysDataSource;
+import org.minxc.emp.system.api.model.SystemDataSource;
 import org.minxc.emp.system.api.service.ISysDataSourceService;
 import org.minxc.emp.system.impl.manager.SysDataSourceManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ public class SysDataSourceService implements ISysDataSourceService {
     SysDataSourceManager sysDataSourceManager;
 
     @Override
-    public ISysDataSource getByKey(String key) {
+    public SystemDataSource getByKey(String key) {
         return sysDataSourceManager.getByKey(key);
     }
 

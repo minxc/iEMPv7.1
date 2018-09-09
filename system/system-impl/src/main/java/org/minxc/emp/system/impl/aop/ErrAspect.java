@@ -17,7 +17,7 @@ import org.minxc.emp.core.api.response.impl.ResultMessage;
 import org.minxc.emp.core.api.status.CommonStatusCode;
 import org.minxc.emp.idm.api.model.User;
 import org.minxc.emp.system.impl.manager.LogErrManager;
-import org.minxc.emp.system.impl.model.LogErr;
+import org.minxc.emp.system.impl.model.SystemLogErrorEntity;
 import org.minxc.emp.system.util.ContextUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -138,7 +138,7 @@ public class ErrAspect {
             account = sysUser.getAccount();
         }
         String id = UniqueIdUtil.getSuid();
-        LogErr logErr = new LogErr();
+        SystemLogErrorEntity logErr = new SystemLogErrorEntity();
         logErr.setId(id);
         logErr.setAccount(account);
         //	logErr.setIp(ip);

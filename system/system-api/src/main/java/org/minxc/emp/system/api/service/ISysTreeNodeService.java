@@ -1,6 +1,6 @@
 package org.minxc.emp.system.api.service;
 
-import org.minxc.emp.system.api.model.ISysTreeNode;
+import org.minxc.emp.system.api.model.SystemTreeNode;
 
 /**
  * <pre>
@@ -20,6 +20,6 @@ public interface ISysTreeNodeService {
      * @param id
      * @return
      */
-    ISysTreeNode getById(String id);
+    SystemTreeNode getById(String id);
 
 }

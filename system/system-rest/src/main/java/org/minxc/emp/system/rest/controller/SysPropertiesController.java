@@ -16,7 +16,7 @@ import org.minxc.emp.core.api.aop.annotation.ErrorCatching;
 import org.minxc.emp.core.api.exception.BusinessException;
 import org.minxc.emp.core.api.query.QueryFilter;
 import org.minxc.emp.system.impl.manager.SysPropertiesManager;
-import org.minxc.emp.system.impl.model.SysProperties;
+import org.minxc.emp.system.impl.model.SystemPropertiesEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,7 +42,7 @@ public class SysPropertiesController extends GenericController {
     public @ResponseBody
     PageJson listJson(HttpServletRequest request, HttpServletResponse response) throws Exception {
         QueryFilter queryFilter = getQueryFilter(request);
-        Page<SysProperties> sysPropertiesList = (Page<SysProperties>) sysPropertiesManager.query(queryFilter);
+        Page<SystemPropertiesEntity> sysPropertiesList = (Page<SystemPropertiesEntity>) sysPropertiesManager.query(queryFilter);
         return new PageJson(sysPropertiesList);
     }
 
@@ -54,7 +54,7 @@ public class SysPropertiesController extends GenericController {
     @ErrorCatching(writeErrorToResponse = true)
     public void getJson(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String id = RequestUtil.getString(request, "id");
-        SysProperties sysProperties = new SysProperties();
+        SystemPropertiesEntity sysProperties = new SystemPropertiesEntity();
         List<String> groups = sysPropertiesManager.getGroups();
         if (StringUtils.isEmpty(id)) {
             sysProperties.setCategorys(groups);
@@ -77,7 +77,7 @@ public class SysPropertiesController extends GenericController {
      */
     @RequestMapping("save")
     @ErrorCatching("对系统属性操作失败")
-    public void save(HttpServletRequest request, HttpServletResponse response, @RequestBody SysProperties sysProperties) throws Exception {
+    public void save(HttpServletRequest request, HttpServletResponse response, @RequestBody SystemPropertiesEntity sysProperties) throws Exception {
         String ResultMessage = null;
 
         boolean isExist = sysPropertiesManager.isExist(sysProperties);

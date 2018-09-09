@@ -3,12 +3,12 @@ package org.minxc.emp.system.impl.manager;
 import java.util.List;
 
 import org.minxc.emp.common.manager.Manager;
-import org.minxc.emp.system.impl.model.SysTreeNode;
+import org.minxc.emp.system.impl.model.SystemTreeNodeEntity;
 
 /**
  * 系统树节点 Manager处理接口
  */
-public interface SysTreeNodeManager extends Manager<String, SysTreeNode> {
+public interface SysTreeNodeManager extends Manager<String, SystemTreeNodeEntity> {
 
     /**
      * <pre>
@@ -19,7 +19,7 @@ public interface SysTreeNodeManager extends Manager<String, SysTreeNode> {
      * @param treeId
      * @return
      */
-    List<SysTreeNode> getByTreeId(String treeId);
+    List<SystemTreeNodeEntity> getByTreeId(String treeId);
 
     /**
      * <pre>
@@ -30,7 +30,7 @@ public interface SysTreeNodeManager extends Manager<String, SysTreeNode> {
      * @param key
      * @return
      */
-    SysTreeNode getByTreeIdAndKey(String treeId, String key);
+    SystemTreeNodeEntity getByTreeIdAndKey(String treeId, String key);
 
     /**
      * <pre>
@@ -41,7 +41,7 @@ public interface SysTreeNodeManager extends Manager<String, SysTreeNode> {
      * @param parentId
      * @return
      */
-    List<SysTreeNode> getByParentId(String parentId);
+    List<SystemTreeNodeEntity> getByParentId(String parentId);
 
     /**
      * <pre>
@@ -51,7 +51,7 @@ public interface SysTreeNodeManager extends Manager<String, SysTreeNode> {
      * @param path
      * @return
      */
-    List<SysTreeNode> getStartWithPath(String path);
+    List<SystemTreeNodeEntity> getStartWithPath(String path);
 
     /**
      * <pre>

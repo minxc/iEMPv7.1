@@ -11,7 +11,7 @@ import org.minxc.emp.core.api.query.QueryOperator;
 import org.minxc.emp.core.api.query.SortDirection;
 import org.minxc.emp.system.impl.dao.SysTreeNodeDao;
 import org.minxc.emp.system.impl.manager.SysTreeNodeManager;
-import org.minxc.emp.system.impl.model.SysTreeNode;
+import org.minxc.emp.system.impl.model.SystemTreeNodeEntity;
 import org.springframework.stereotype.Service;
 
 
@@ -29,12 +29,12 @@ import org.springframework.stereotype.Service;
 *
  */
 @Service("sysTreeNodeManager")
-public class SysTreeNodeManagerImpl extends CommonManager<String, SysTreeNode> implements SysTreeNodeManager {
+public class SysTreeNodeManagerImpl extends CommonManager<String, SystemTreeNodeEntity> implements SysTreeNodeManager {
     @Resource
     SysTreeNodeDao sysTreeNodeDao;
 
     @Override
-    public List<SysTreeNode> getByTreeId(String treeId) {
+    public List<SystemTreeNodeEntity> getByTreeId(String treeId) {
         QueryFilter filter = new DefaultQueryFilter();
         filter.addFilter("tree_id_", treeId, QueryOperator.EQUAL);
         filter.addFieldSort("sn_", SortDirection.ASC.getKey());
@@ -42,7 +42,7 @@ public class SysTreeNodeManagerImpl extends CommonManager<String, SysTreeNode> i
     }
 
     @Override
-    public SysTreeNode getByTreeIdAndKey(String treeId, String key) {
+    public SystemTreeNodeEntity getByTreeIdAndKey(String treeId, String key) {
         QueryFilter filter = new DefaultQueryFilter();
         filter.addFilter("tree_id_", treeId, QueryOperator.EQUAL);
         filter.addFilter("key_", key, QueryOperator.EQUAL);
@@ -50,14 +50,14 @@ public class SysTreeNodeManagerImpl extends CommonManager<String, SysTreeNode> i
     }
 
     @Override
-    public List<SysTreeNode> getByParentId(String parentId) {
+    public List<SystemTreeNodeEntity> getByParentId(String parentId) {
         QueryFilter filter = new DefaultQueryFilter();
         filter.addFilter("parent_id_", parentId, QueryOperator.EQUAL);
         return this.query(filter);
     }
 
     @Override
-    public List<SysTreeNode> getStartWithPath(String path) {
+    public List<SystemTreeNodeEntity> getStartWithPath(String path) {
         QueryFilter filter = new DefaultQueryFilter();
         filter.addFilter("path_", path , QueryOperator.RIGHT_LIKE);
         return this.query(filter);

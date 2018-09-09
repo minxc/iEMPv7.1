@@ -47,10 +47,10 @@ public class OrgTreeEntity extends GroupEntity {
 	}
 
 	public OrgTreeEntity(GroupEntity group) {
-		this.id = group.id;
-		this.name = group.name;
+		this.id = group.getId();
+		this.name = group.getName();
 		this.code = group.code;
-		this.sn = group.sn;
+		this.sn = group.getSeq();
 		this.parentId = group.parentId;
 		if (!this.name.contains("style=")) {
 			this.title = name;

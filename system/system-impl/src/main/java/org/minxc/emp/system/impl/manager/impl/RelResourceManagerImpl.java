@@ -7,7 +7,7 @@ import javax.annotation.Resource;
 import org.minxc.emp.common.manager.impl.CommonManager;
 import org.minxc.emp.system.impl.dao.RelResourceDao;
 import org.minxc.emp.system.impl.manager.RelResourceManager;
-import org.minxc.emp.system.impl.model.RelResource;
+import org.minxc.emp.system.impl.model.ResourceLinkEntity;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,12 +16,12 @@ import org.springframework.stereotype.Service;
  * </pre>
  */
 @Service("relResourceManager")
-public class RelResourceManagerImpl extends CommonManager<String, RelResource> implements RelResourceManager {
+public class RelResourceManagerImpl extends CommonManager<String, ResourceLinkEntity> implements RelResourceManager {
     @Resource
     RelResourceDao relResourceDao;
 
     @Override
-    public List<RelResource> getByResourceId(String resId) {
+    public List<ResourceLinkEntity> getByResourceId(String resId) {
         return relResourceDao.getByResourceId(resId);
     }
 

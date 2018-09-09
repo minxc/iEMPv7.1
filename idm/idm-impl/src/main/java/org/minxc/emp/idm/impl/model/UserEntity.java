@@ -12,12 +12,9 @@ import java.util.Map;
  */
 public class UserEntity extends AbstractCommonModel implements User {
 
+	
 	private static final long serialVersionUID = 4501798965220785640L;
 
-	/**
-	 * id_
-	 */
-	protected String id;
 
 	/**
 	 * 姓名
@@ -49,10 +46,6 @@ public class UserEntity extends AbstractCommonModel implements User {
 	 */
 	protected String weixin;
 
-	/**
-	 * 创建时间
-	 */
-	protected java.util.Date createTime;
 
 	/**
 	 * 地址
@@ -84,18 +77,6 @@ public class UserEntity extends AbstractCommonModel implements User {
 	 */
 	protected String groupId = "";
 
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	/**
-	 * 返回 id_
-	 *
-	 * @return
-	 */
-	public String getId() {
-		return this.id;
-	}
 
 	public void setFullname(String fullname) {
 		this.fullname = fullname;

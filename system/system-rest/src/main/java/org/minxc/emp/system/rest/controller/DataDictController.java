@@ -12,7 +12,7 @@ import org.minxc.emp.core.api.query.QueryFilter;
 import org.minxc.emp.core.api.query.QueryOperator;
 import org.minxc.emp.core.api.response.impl.ResultMessage;
 import org.minxc.emp.system.impl.manager.DataDictManager;
-import org.minxc.emp.system.impl.model.DataDict;
+import org.minxc.emp.system.impl.model.DataDictEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,7 +26,7 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
  */
 @RestController
 @RequestMapping("/sys/dataDict")
-public class DataDictController extends CommonController<DataDict>{
+public class DataDictController extends CommonController<DataDictEntity>{
 	@Resource
 	DataDictManager dataDictManager;
 	
@@ -37,20 +37,20 @@ public class DataDictController extends CommonController<DataDict>{
 	}
 	
 	@RequestMapping("getDictData")
-	public ResultMessage<List<DataDict>> getByDictKey(@RequestParam String dictKey,@RequestParam(defaultValue="false") Boolean hasRoot) throws Exception{
+	public ResultMessage<List<DataDictEntity>> getByDictKey(@RequestParam String dictKey,@RequestParam(defaultValue="false") Boolean hasRoot) throws Exception{
 		if(StringUtils.isEmpty(dictKey)) return null;
 		
-		List<DataDict> dict = dataDictManager.getDictNodeList(dictKey,hasRoot);
+		List<DataDictEntity> dict = dataDictManager.getDictNodeList(dictKey,hasRoot);
 		return getSuccessResult(dict);
 	}
 	
 	@RequestMapping("getDictList")
-	public ResultMessage<List<DataDict>> getDictList(HttpServletRequest request) throws Exception{
+	public ResultMessage<List<DataDictEntity>> getDictList(HttpServletRequest request) throws Exception{
 		QueryFilter filter = getQueryFilter(request);
-		filter.addFilter("dict_type_", DataDict.TYPE_DICT, QueryOperator.EQUAL);
+		filter.addFilter("dict_type_", DataDictEntity.TYPE_DICT, QueryOperator.EQUAL);
 		filter.setPage(null);
 		
-		List<DataDict> dict = dataDictManager.query(filter);
+		List<DataDictEntity> dict = dataDictManager.query(filter);
 		return getSuccessResult(dict);
 	}
 	
