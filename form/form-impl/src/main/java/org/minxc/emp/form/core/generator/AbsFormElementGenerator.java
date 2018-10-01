@@ -9,6 +9,8 @@ import org.minxc.emp.biz.api.constant.BusTableRelType;
 import org.minxc.emp.biz.api.model.IBusTableRel;
 import org.minxc.emp.biz.api.model.IBusinessColumn;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.minxc.emp.core.util.ThreadMapUtil;
 
 /**

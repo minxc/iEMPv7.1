@@ -1,7 +1,6 @@
 package org.minxc.emp.system.api.permission;
 
-import com.fasterxml.jackson.databind.JsonNode;
-//import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.JSONObject;
 
 /**
  * 描述：系统内置权限
@@ -29,7 +28,6 @@ public interface IPermissionCalculator {
 	 * @param jsonObject
 	 * @return
 	 */
-//	boolean haveRights(JSONObject json);
-	boolean haveRights(JsonNode json);
+	boolean haveRights(JSONObject json);
 	
 }

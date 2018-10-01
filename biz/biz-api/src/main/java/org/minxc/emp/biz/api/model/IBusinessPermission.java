@@ -1,9 +1,7 @@
 package org.minxc.emp.biz.api.model;
 
 import java.util.Map;
-
 import org.minxc.emp.biz.api.model.permission.IBusObjPermission;
-
 import com.alibaba.fastjson.JSONObject;
 
 public interface IBusinessPermission {

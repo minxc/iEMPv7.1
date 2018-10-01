@@ -1,5 +1,6 @@
 package org.minxc.emp.common.rest;
 
+import com.alibaba.fastjson.JSON;
 import com.minxc.emp.core.util.JacksonUtil;
 import com.minxc.emp.core.util.StringUtil;
 import org.apache.ibatis.session.RowBounds;
@@ -105,8 +106,7 @@ public class GenericController {
         ResultMessage ResultMessage = new ResultMessage();
         ResultMessage.setSuccess(true);
         ResultMessage.setData(data);
-//        response.getWriter().print(JSON.toJSONString(ResultMessage));
-        response.getWriter().print(JacksonUtil.pojo2Json(ResultMessage));
+        response.getWriter().print(JSON.toJSONString(ResultMessage));
     }
 
     @Deprecated
@@ -115,8 +115,7 @@ public class GenericController {
         ResultMessage.setSuccess(true);
         ResultMessage.setMessage(msg);
         ResultMessage.setData(data);
-//        response.getWriter().print(JSON.toJSONString(ResultMessage));
-        response.getWriter().print(JacksonUtil.pojo2Json(ResultMessage));
+        response.getWriter().print(JSON.toJSONString(ResultMessage));
     }
 
     @Deprecated
@@ -124,8 +123,7 @@ public class GenericController {
         ResultMessage ResultMessage = new ResultMessage();
         ResultMessage.setSuccess(true);
         ResultMessage.setMessage(msg);
-//        response.getWriter().print(JSON.toJSONString(ResultMessage));
-        response.getWriter().print(JacksonUtil.pojo2Json(ResultMessage));
+        response.getWriter().print(JSON.toJSONString(ResultMessage));
     }
 
     /**
@@ -136,8 +134,7 @@ public class GenericController {
      */
     @Deprecated
     protected void writeResultMessage(PrintWriter writer, ResultMessage ResultMessage) {
-//        writer.print(JSON.toJSONString(ResultMessage));
-        writer.print(JacksonUtil.pojo2Json(ResultMessage));
+        writer.print(JSON.toJSONString(ResultMessage));
     }
 
 }

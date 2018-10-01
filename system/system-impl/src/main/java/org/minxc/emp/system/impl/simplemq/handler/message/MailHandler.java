@@ -13,6 +13,7 @@ import org.minxc.emp.idm.api.model.User;
 import org.minxc.emp.system.api.service.SysIdentityConvert;
 import org.springframework.stereotype.Component;
 
+import com.alibaba.fastjson.JSON;
 import com.minxc.emp.core.util.JacksonUtil;
 import com.minxc.emp.core.util.PropertiesUtil;
 
@@ -56,11 +57,11 @@ public class MailHandler extends AbsNotifyMessageHandler<NotifyMessage> {
             try {
                 EmailUtil.sendEmail(email, "", "", fromEmail, notifMessage.getSubject(), notifMessage.getHtmlContent());
             } catch (MessagingException e) {
-            	log.error(JacksonUtil.pojo2Json(notifMessage));
+            	log.error(JSON.toJSONString(notifMessage));
             	log.error("发送邮件失败！",e);
             }
         }
-        log.debug("发送邮件成功 ：{}",JacksonUtil.pojo2Json(notifMessage));
+        log.debug("发送邮件成功 ：{}",JSON.toJSONString(notifMessage));
         return true;
 	}
 

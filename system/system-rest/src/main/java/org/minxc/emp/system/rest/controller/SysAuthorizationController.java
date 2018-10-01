@@ -15,6 +15,7 @@ import org.minxc.emp.system.impl.model.BizAuthorizationEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.alibaba.fastjson.JSON;
 import com.minxc.emp.core.util.JacksonUtil;
  
 @RestController
@@ -39,8 +40,8 @@ public class SysAuthorizationController extends GenericController{
 			
 		RightsObjectConstants.getByKey(targetObject);
 		
-//		List<SysAuthorization> sysAuthorizationList = JSON.parseArray(authorizationJson, SysAuthorization.class);
-		List<BizAuthorizationEntity> sysAuthorizationList = JacksonUtil.jsonArray2PojoList(authorizationJson, BizAuthorizationEntity.class);
+		List<BizAuthorizationEntity> sysAuthorizationList = JSON.parseArray(authorizationJson, BizAuthorizationEntity.class);
+//		List<BizAuthorizationEntity> sysAuthorizationList = JacksonUtil.jsonArray2PojoList(authorizationJson, BizAuthorizationEntity.class);
 		
 		sysAuthorizationManager.createAll(sysAuthorizationList,targetId,targetObject);
 		

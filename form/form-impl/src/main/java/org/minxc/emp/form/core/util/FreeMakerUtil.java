@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.minxc.emp.core.util.BeanUtils;
+import com.minxc.emp.core.util.JsonUtil;
 import com.minxc.emp.core.util.StringUtil;
 
 import org.apache.commons.lang3.ArrayUtils;

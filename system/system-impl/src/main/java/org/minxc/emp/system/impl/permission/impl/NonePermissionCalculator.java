@@ -3,8 +3,7 @@ package org.minxc.emp.system.impl.permission.impl;
 import org.minxc.emp.system.api.permission.IPermissionCalculator;
 import org.springframework.stereotype.Service;
 
-//import com.alibaba.fastjson.JSONObject;
-import com.fasterxml.jackson.databind.JsonNode;
+import com.alibaba.fastjson.JSONObject;
 /**
  * 描述：无人
  */
@@ -22,7 +21,7 @@ public class NonePermissionCalculator implements IPermissionCalculator {
 	}
 
 	@Override
-	public boolean haveRights(JsonNode json) {
+	public boolean haveRights(JSONObject json) {
 		return false;
 	}
 

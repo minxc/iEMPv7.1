@@ -1,6 +1,7 @@
 package org.minxc.emp.system.impl.aop;
 
 
+import com.alibaba.fastjson.JSON;
 import com.minxc.emp.core.util.JacksonUtil;
 import com.minxc.emp.core.util.ValidateUtil;
 
@@ -31,8 +32,7 @@ public class ValidateParamAspect {
     public Object doAround(ProceedingJoinPoint pjp, ParameterValidation paramValidate) throws Throwable {
         Object result;
         Object[] objects = pjp.getArgs();
-//        logger.debug("参数拦截开始=====" + JSON.toJSONString(objects));
-        log.debug("参数拦截开始=====" + JacksonUtil.pojo2Json(objects));
+        log.debug("参数拦截开始=====" + JSON.toJSONString(objects));
         for (Object o : objects) {
             String msg = ValidateUtil.getValidateMsg(o);
             if (StringUtils.isNotEmpty(msg)) {

@@ -4,10 +4,11 @@ import org.minxc.emp.system.api.permission.IPermissionCalculator;
 import org.minxc.emp.system.util.ContextUtil;
 import org.springframework.stereotype.Service;
 
-import com.fasterxml.jackson.databind.JsonNode;
+import com.alibaba.fastjson.JSONObject;
+
 
 /**
- * 描述：用户
+ *  用户
  */
 @Service
 public class UsersPermissionCalculator implements IPermissionCalculator {
@@ -22,26 +23,17 @@ public class UsersPermissionCalculator implements IPermissionCalculator {
 		return "user";
 	}
 
-//	@Override
-//	public boolean haveRights(JSONObject json) {
-//		for(String id :json.getString("id").split(",")) {
-//			if(id.equals(ContextUtil.getCurrentUserId())) {
-//				return true;
-//			}
-//		}
-//		return false;
-//	}
-	
-	
-	
 	@Override
-	public boolean haveRights(JsonNode json) {
-		for(String id :json.get("id").asText().split(",")) {
+	public boolean haveRights(JSONObject json) {
+		for(String id :json.getString("id").split(",")) {
 			if(id.equals(ContextUtil.getCurrentUserId())) {
 				return true;
 			}
 		}
 		return false;
 	}
+	
+	
+	
 
 }

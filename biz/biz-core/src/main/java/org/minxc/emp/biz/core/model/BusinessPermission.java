@@ -2,6 +2,7 @@ package org.minxc.emp.biz.core.model;
 
 import com.alibaba.fastjson.JSONObject;
 import com.minxc.emp.core.impl.model.AbstractCommonModel;
+import com.minxc.emp.core.util.JsonUtil;
 
 import java.util.HashMap;
 import java.util.Map;

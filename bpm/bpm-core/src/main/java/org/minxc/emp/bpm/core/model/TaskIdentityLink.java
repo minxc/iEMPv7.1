@@ -2,6 +2,8 @@ package org.minxc.emp.bpm.core.model;
 
 import java.io.Serializable;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 public class TaskIdentityLink implements Serializable {
 	/** 
 	

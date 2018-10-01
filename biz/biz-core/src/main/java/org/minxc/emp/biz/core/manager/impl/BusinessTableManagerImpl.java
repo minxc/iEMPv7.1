@@ -16,8 +16,11 @@ import org.minxc.emp.common.db.api.table.ITableOperator;
 import org.minxc.emp.common.db.datasource.DbContextHolder;
 import org.minxc.emp.common.db.id.UniqueIdUtil;
 import org.minxc.emp.common.db.model.query.DefaultQueryFilter;
+import org.minxc.emp.common.db.tableoper.TableOperator;
+import org.minxc.emp.common.db.tableoper.TableOperatorFactory;
 import org.minxc.emp.common.manager.impl.CommonManager;
 import org.minxc.emp.core.api.exception.BusinessException;
+import org.minxc.emp.core.api.query.QueryFilter;
 import org.minxc.emp.core.api.query.QueryOperator;
 import org.minxc.emp.system.api.service.ISysDataSourceService;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -77,7 +80,7 @@ public class BusinessTableManagerImpl extends CommonManager<String, BusinessTabl
 
 	
 
-	public ITableOperator newTableOperator(BusinessTable businessTable) {
+	public TableOperator newTableOperator(BusinessTable businessTable) {
 		JdbcTemplate dataSourceJdbcTemplate = this.sysDataSourceService.getJdbcTemplateByKey(businessTable.getDsKey());
 		return TableOperatorFactory.newOperator( DbContextHolder.getDataSourceDbType(businessTable.getDsKey()), businessTable,
 				 dataSourceJdbcTemplate);
@@ -105,7 +108,7 @@ public class BusinessTableManagerImpl extends CommonManager<String, BusinessTabl
 			column.setTable(businessTable);
 		}
 		businessTable.setColumns(columns);
-		ITableOperator tableOperator = this.newTableOperator(businessTable);
+		TableOperator tableOperator = this.newTableOperator(businessTable);
 		businessTable.setCreatedTable(tableOperator.isTableCreated());
 	}
 	

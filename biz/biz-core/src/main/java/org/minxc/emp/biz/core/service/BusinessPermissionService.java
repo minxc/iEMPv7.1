@@ -2,6 +2,7 @@ package org.minxc.emp.biz.core.service;
 
 import com.alibaba.fastjson.JSONArray;
 import com.minxc.emp.core.util.BeanUtils;
+import com.minxc.emp.core.util.StringUtil;
 
 import java.util.Map;
 import java.util.Set;

@@ -1,13 +1,11 @@
 package org.minxc.emp.common.rest.util;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.minxc.emp.core.util.BeanUtils;
 import com.minxc.emp.core.util.CryptoUtil;
-import com.minxc.emp.core.util.JacksonUtil;
 import com.minxc.emp.core.util.time.DateFormatUtil;
-import jdk.nashorn.internal.ir.ObjectNode;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
 
@@ -15,10 +13,8 @@ import org.minxc.emp.common.db.model.query.DefaultFieldLogic;
 import org.minxc.emp.common.db.model.query.DefaultQueryField;
 import org.minxc.emp.common.db.model.query.DefaultQueryFilter;
 import org.minxc.emp.core.api.constant.ColumnType;
-import org.minxc.emp.core.api.exception.BusinessException;
 import org.minxc.emp.core.api.query.FieldLogic;
 import org.minxc.emp.core.api.query.FieldRelation;
-import org.minxc.emp.core.api.query.QueryFilter;
 import org.minxc.emp.core.api.query.QueryOperator;
 
 import javax.servlet.http.HttpServletRequest;
@@ -33,7 +29,6 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-@Slf4j
 public class RequestUtil {
 
     public static final String RETURNURL = "returnUrl";
@@ -858,24 +853,20 @@ public class RequestUtil {
 
 
     /**
+     * <pre>
+     * 获取JSONObject对象
      * 如果为空时，返回一个空的json={}（不是null）
+     * </pre>
+     *
      * @param request
      * @param key
      * @return
      */
-    public static JsonNode getJSONObject(HttpServletRequest request, String key) {
+    public static JSONObject getJSONObject(HttpServletRequest request, String key) {
         String json = getString(request, key, "{}", false);
-
-        JsonNode jsonNode = JacksonUtil.jsonObject();
-        try {
-            jsonNode = JacksonUtil.parseToJsonObject(json);
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new BusinessException("JSON请求参数转换失败，请检查。", e.getCause());
-        }
-
-        return  jsonNode;
+        return JSON.parseObject(json);
     }
+
     /**
      * <pre>
      * 获取JSONArray对象
@@ -886,12 +877,9 @@ public class RequestUtil {
      * @param key
      * @return
      */
-//    public static JSONArray getJSONArray(HttpServletRequest request, String key) {
-//        String json = getString(request, key, "[]", false);
-//        ObjectMapper objectMapper = new ObjectMapper();
-//
-//        JacksonUtil.jsonArray2PojoList(json);
-//        return JSON.parseArray(json);
-//    }
+    public static JSONArray getJSONArray(HttpServletRequest request, String key) {
+        String json = getString(request, key, "[]", false);
+        return JSON.parseArray(json);
+    }
 
 }

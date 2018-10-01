@@ -17,6 +17,7 @@ import org.minxc.emp.system.impl.model.ScriptEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.minxc.emp.core.util.JacksonUtil;
 
@@ -56,12 +57,11 @@ public class SysScriptController extends CommonController<ScriptEntity> {
         Map<String, Object> map = new HashMap<String, Object>();
         
          
-//        JSONObject jsonObject = new JSONObject();
-        ObjectNode jsonObject = JacksonUtil.jsonObject();
+        JSONObject jsonObject = new JSONObject();
         try {
-            Object obj = groovyScriptEngine.executeObject(script, map);
-            jsonObject.putPOJO("val", obj);
-            jsonObject.put("success", true);
+        	 Object obj = groovyScriptEngine.executeObject(script, map);
+             jsonObject.put("val", obj);
+             jsonObject.put("success", true);
         } catch (Exception e) {
         	e.printStackTrace();
             jsonObject.put("val", "出错了" + e.getMessage());

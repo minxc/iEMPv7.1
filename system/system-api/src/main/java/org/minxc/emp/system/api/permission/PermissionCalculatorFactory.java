@@ -7,10 +7,8 @@ import java.util.Map.Entry;
 
 import org.minxc.emp.core.api.exception.BusinessException;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.ArrayNode;
-//import com.alibaba.fastjson.JSONArray;
-//import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.minxc.emp.core.util.AppContextUtil;
 
 /**
@@ -46,55 +44,22 @@ public class PermissionCalculatorFactory {
 	 *            :[{type:"user",id:"a,b,.."},{type:"org",id:"a,b,..."}]
 	 * @return
 	 */
-//	public static boolean haveRights(JSONArray jsonArray) {
-//		if(jsonArray==null) {
-//			return false;
-//		}
-//		for (Object obj : jsonArray) {
-//			JSONObject json = (JSONObject) obj;
-//			IPermissionCalculator permission = permissionMap().get(json.getString("type"));
-//			if(permission==null) {
-//				throw new BusinessException("权限类型["+json.getString("type")+"]找不到处理器");
-//			}
-//			if (permission.haveRights(json)) {// 有一个满足就true
-//				return true;
-//			}
-//		}
-//		return false;
-//	}
-	
-	
-	public static boolean haveRights(JsonNode jsonArray) {
-		
+	public static boolean haveRights(JSONArray jsonArray) {
 		if(jsonArray==null) {
 			return false;
 		}
-		Iterator<JsonNode> iter = jsonArray.elements();
-		
-		while(iter.hasNext()) {
-			JsonNode node  = iter.next();
-			IPermissionCalculator permission = permissionMap().get(node.get("type"));
+		for (Object obj : jsonArray) {
+			JSONObject json = (JSONObject) obj;
+			IPermissionCalculator permission = permissionMap().get(json.getString("type"));
 			if(permission==null) {
-				throw new BusinessException("权限类型["+ node.get("type")+"]找不到处理器");
+				throw new BusinessException("权限类型["+json.getString("type")+"]找不到处理器");
 			}
-			if (permission.haveRights(node)) {// 有一个满足就true
+			if (permission.haveRights(json)) {// 有一个满足就true
 				return true;
 			}
 		}
-		
 		return false;
-		
-		
-//		for (Object obj : jsonArray) {
-//			JSONObject json = (JSONObject) obj;
-//			IPermissionCalculator permission = permissionMap().get(json.getString("type"));
-//			if(permission==null) {
-//				throw new BusinessException("权限类型["+json.getString("type")+"]找不到处理器");
-//			}
-//			if (permission.haveRights(json)) {// 有一个满足就true
-//				return true;
-//			}
-//		}
-//		return false;
 	}
+	
+	
 }

@@ -19,6 +19,8 @@ import org.minxc.emp.system.impl.model.TreeEntity;
 import org.minxc.emp.system.impl.model.SystemTreeNodeEntity;
 import org.springframework.stereotype.Service;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.minxc.emp.core.util.JacksonUtil;
@@ -75,7 +77,7 @@ public class DataDictManagerImpl extends CommonManager<String, DataDictEntity> i
 	}
 
 	@Override
-	public ArrayNode getDictTree() {
+	public JSONArray getDictTree() {
 
 		QueryFilter filter = new DefaultQueryFilter();
 		filter.addFilter("dict_type_", "dict", QueryOperator.EQUAL);
@@ -84,10 +86,10 @@ public class DataDictManagerImpl extends CommonManager<String, DataDictEntity> i
 
 		TreeEntity sysTree = sysTreeMananger.getByKey("dict");
 		List<SystemTreeNodeEntity> nodeList = sysTreeNodeMananger.getByTreeId(sysTree.getId());
-		ArrayNode jsonArray = JacksonUtil.jsonArray();
+		JSONArray jsonArray = new JSONArray();
 
 		for (SystemTreeNodeEntity sysTreeNode : nodeList) {
-			ObjectNode object = JacksonUtil.jsonObject();
+			JSONObject object = new JSONObject();
 			object.put("id", sysTreeNode.getId());
 			object.put("name", sysTreeNode.getName());
 			object.put("parentId", sysTreeNode.getParentId());

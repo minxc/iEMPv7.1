@@ -18,6 +18,8 @@
 package com.minxc.emp.core.util;
 
 import com.google.common.collect.Lists;
+
+import org.minxc.core.cache.Cache;
 import org.minxc.emp.core.api.exception.BusinessException;
 
 import org.minxc.emp.core.api.status.CommonStatusCode;
@@ -147,14 +149,14 @@ public class AppContextUtil implements ApplicationContextAware {
     	return list;
     }
 
-//    /**
-//     * 获取系统中的ICache实现类。
-//     *
-//     * @return
-//     */
-//    public static Cache getCache() {
-//        return (Cache) getBean("iCache");
-//    }
+    /**
+     * 获取系统中的ICache实现类。
+     *
+     * @return
+     */
+    public static Cache getCache() {
+        return (Cache) getBean("iCache");
+    }
 
 
     /**
@@ -199,4 +201,6 @@ public class AppContextUtil implements ApplicationContextAware {
 
         throw new BusinessException("查找不到正确的环境属性配置！", CommonStatusCode.SYSTEM_ERROR);
     }
+
+
 }

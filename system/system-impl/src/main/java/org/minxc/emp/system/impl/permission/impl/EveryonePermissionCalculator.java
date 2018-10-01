@@ -4,8 +4,7 @@ package org.minxc.emp.system.impl.permission.impl;
 import org.minxc.emp.system.api.permission.IPermissionCalculator;
 import org.springframework.stereotype.Service;
 
-//import com.alibaba.fastjson.JSONObject;
-import com.fasterxml.jackson.databind.JsonNode;
+import com.alibaba.fastjson.JSONObject;
 
 /**
  * 描述：所有人
@@ -23,12 +22,8 @@ public class EveryonePermissionCalculator implements IPermissionCalculator {
 		return "所有人";
 	}
 
-//	@Override
-//	public boolean haveRights(JSONObject json) {
-//		return true;
-//	}
 	@Override
-	public boolean haveRights(JsonNode json) {
+	public boolean haveRights(JSONObject json) {
 		return true;
 	}
 

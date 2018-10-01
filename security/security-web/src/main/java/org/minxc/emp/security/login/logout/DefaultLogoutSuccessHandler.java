@@ -1,6 +1,7 @@
 package org.minxc.emp.security.login.logout;
 
-import com.minxc.emp.core.util.JacksonUtil;
+import com.minxc.emp.core.util.JsonUtil;
+
 import org.minxc.emp.core.api.response.impl.ResultMessage;
 import org.minxc.emp.core.api.status.CommonStatusCode;
 import org.springframework.security.core.Authentication;
@@ -18,8 +19,8 @@ public class DefaultLogoutSuccessHandler implements LogoutSuccessHandler {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         response.setCharacterEncoding("UTF-8");
 
-        ResultMessage ResultMessage = new ResultMessage(CommonStatusCode.SUCCESS, "退出登录成功");
-        response.getWriter().print(JacksonUtil.pojo2Json(ResultMessage));
+        ResultMessage resultMessage = new ResultMessage(CommonStatusCode.SUCCESS, "退出登录成功");
+        response.getWriter().print(JsonUtil.toJSONString(resultMessage));
         return;
     }
 

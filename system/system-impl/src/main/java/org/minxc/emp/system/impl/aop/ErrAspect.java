@@ -24,6 +24,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Component;
 
+import com.alibaba.fastjson.JSON;
 //import com.alibaba.fastjson.JSON;
 import com.minxc.emp.core.util.BeanUtils;
 import com.minxc.emp.core.util.ExceptionUtil;
@@ -122,8 +123,7 @@ public class ErrAspect {
         }
 
         if (response != null) {
-//            response.getWriter().write(JSON.toJSONString(ResultMessage));
-            response.getWriter().write(JacksonUtil.pojo2Json(ResultMessage));
+            response.getWriter().write(JSON.toJSONString(ResultMessage));
         }
     }
 

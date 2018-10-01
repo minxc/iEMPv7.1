@@ -7,7 +7,6 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import javax.annotation.Resource;
 
-import org.activiti.engine.identity.User;
 import org.minxc.emp.basis.api.model.SysIdentity;
 import org.minxc.emp.bpm.api.constant.ExtractType;
 import org.minxc.emp.bpm.api.engine.plugin.def.BpmTaskPluginDef;
@@ -15,6 +14,7 @@ import org.minxc.emp.bpm.engine.model.BpmIdentity;
 import org.minxc.emp.bpm.engine.plugin.plugindef.AbstractUserCalcPluginDef;
 import org.minxc.emp.bpm.engine.plugin.runtime.BpmUserCalcPlugin;
 import org.minxc.emp.bpm.engine.plugin.session.BpmUserCalcPluginSession;
+import org.minxc.emp.idm.api.model.User;
 import org.minxc.emp.idm.api.service.UserService;
 
 import com.minxc.emp.core.util.BeanUtils;

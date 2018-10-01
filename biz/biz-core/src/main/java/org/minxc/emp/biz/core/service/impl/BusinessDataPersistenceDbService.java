@@ -6,8 +6,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.function.Function;
 
 import org.minxc.emp.biz.api.constant.BusTableRelFkType;
 import org.minxc.emp.biz.api.constant.BusTableRelType;
@@ -19,14 +17,13 @@ import org.minxc.emp.biz.api.model.IBusinessData;
 import org.minxc.emp.biz.core.manager.BusinessObjectManager;
 import org.minxc.emp.biz.core.manager.BusinessTableManager;
 import org.minxc.emp.biz.core.model.BusTableRel;
-import org.minxc.emp.biz.core.model.BusTableRelFk;
 import org.minxc.emp.biz.core.model.BusinessColumn;
 import org.minxc.emp.biz.core.model.BusinessData;
 import org.minxc.emp.biz.core.model.BusinessObject;
 import org.minxc.emp.biz.core.model.BusinessTable;
 import org.minxc.emp.biz.core.service.BusinessDataPersistenceService;
-import org.minxc.emp.common.db.api.table.ITableOperator;
 import org.minxc.emp.common.db.id.UniqueIdUtil;
+import org.minxc.emp.common.db.tableoper.TableOperator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -60,7 +57,7 @@ public class BusinessDataPersistenceDbService implements BusinessDataPersistence
 
 	public void saveData(BusinessData businessData) {
 		Object id;
-		ITableOperator tableOperator = this.businessTableManager.newTableOperator((BusinessTable) businessData.getBusTableRel().getTable());
+		TableOperator tableOperator = this.businessTableManager.newTableOperator((BusinessTable) businessData.getBusTableRel().getTable());
 		String busTableRelType = businessData.getBusTableRel().getType();
 		if (!businessData.getBusTableRel().getBusObj()
 				.haveTableDbEditRights(businessData.getBusTableRel().getTableKey())) {
@@ -108,7 +105,7 @@ public class BusinessDataPersistenceDbService implements BusinessDataPersistence
 		for (IBusTableRel rel : businessData.getBusTableRel().getChildren()) {
 			if (!rel.getBusObj().haveTableDbEditRights(rel.getTableKey()))
 				continue;
-			ITableOperator tableOperator = this.businessTableManager.newTableOperator((BusinessTable)rel.getTable());
+			TableOperator tableOperator = this.businessTableManager.newTableOperator((BusinessTable)rel.getTable());
 			if (!BusTableRelType.ONE_TO_MANY.equalsWithKey(rel.getType())
 					&& !BusTableRelType.ONE_TO_ONE.equalsWithKey(rel.getType()))
 				continue;

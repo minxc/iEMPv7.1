@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.alibaba.fastjson.JSONArray;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 
 
@@ -62,8 +63,8 @@ public class DataDictController extends CommonController<DataDictEntity>{
 	 */
 	@RequestMapping("getDictTree")
 	@ErrorCatching("获取数据字典失败")
-	public ResultMessage<ArrayNode> getDictTree() throws Exception{
-		ArrayNode dict = dataDictManager.getDictTree();
+	public ResultMessage<JSONArray> getDictTree() throws Exception{
+		JSONArray dict = dataDictManager.getDictTree();
 		return getSuccessResult(dict);
 	}
 	

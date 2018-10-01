@@ -5,6 +5,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 import org.activiti.engine.impl.persistence.deploy.DeploymentCache;
 import org.activiti.engine.impl.persistence.entity.ProcessDefinitionEntity;
+import org.minxc.core.cache.Cache;
 import org.springframework.stereotype.Component;
 
 import com.minxc.emp.core.util.AppContextUtil;
@@ -16,7 +17,7 @@ public class ActivitiDefCache implements DeploymentCache<ProcessDefinitionEntity
 	public static ActivitiDefCache a = null;
 	private ThreadLocal<Map<String, ProcessDefinitionEntity>> b = new ThreadLocal<>();
 	@Resource
-	ICache c;
+	Cache c;
 
 	public static void clearLocal() {
 		ActivitiDefCache cache = (ActivitiDefCache) AppContextUtil.getBean(ActivitiDefCache.class);

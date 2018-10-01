@@ -55,11 +55,4 @@ public class SysDataSourceDefManagerImpl extends CommonManager<String, SysDataSo
         }
     }
 
-    public static void main(String[] args) {
-        SysDataSourceDefManagerImpl impl = new SysDataSourceDefManagerImpl();
-        //org.apache.commons.dbcp.BasicDataSource
-        //com.alibaba.druid.pool.DruidDataSource
-//        System.out.println(JSON.toJSONString(impl.initAttributes("org.apache.commons.dbcp.BasicDataSource")));
-        System.out.println(JacksonUtil.pojo2Json(impl.initAttributes("org.apache.commons.dbcp.BasicDataSource")));
-    }
 }

@@ -13,6 +13,7 @@
 package org.minxc.emp.activiti.rest.editor.model;
 
 import com.alibaba.fastjson.JSONObject;
+import com.minxc.emp.core.util.StringUtil;
 
 import org.activiti.engine.ActivitiException;
 import org.activiti.engine.RepositoryService;

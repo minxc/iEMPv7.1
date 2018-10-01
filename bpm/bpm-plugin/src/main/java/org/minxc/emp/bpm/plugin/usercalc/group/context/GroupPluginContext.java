@@ -1,6 +1,7 @@
 package org.minxc.emp.bpm.plugin.usercalc.group.context;
 
 import com.alibaba.fastjson.JSONObject;
+import com.minxc.emp.core.util.JsonUtil;
 
 import org.minxc.emp.bpm.api.engine.plugin.def.BpmUserCalcPluginDef;
 import org.minxc.emp.bpm.api.engine.plugin.runtime.RunTimePlugin;

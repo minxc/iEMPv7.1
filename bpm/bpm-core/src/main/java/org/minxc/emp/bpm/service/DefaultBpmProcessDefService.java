@@ -10,6 +10,7 @@ import javax.annotation.Resource;
 import org.activiti.bpmn.model.BpmnModel;
 import org.activiti.bpmn.model.Process;
 import org.activiti.engine.RepositoryService;
+import org.minxc.core.cache.Cache;
 import org.minxc.emp.bpm.api.constant.NodeType;
 import org.minxc.emp.bpm.api.engine.context.BpmContext;
 import org.minxc.emp.bpm.api.exception.BpmStatusCode;
@@ -24,12 +25,13 @@ import org.minxc.emp.bpm.engine.model.DefaultBpmProcessDef;
 import org.minxc.emp.bpm.engine.parser.BpmDefNodeHandler;
 import org.minxc.emp.bpm.engine.parser.BpmProcessDefParser;
 import org.minxc.emp.core.api.exception.BusinessException;
+import org.minxc.emp.core.api.exception.SerializationException;
 import org.springframework.stereotype.Component;
 
 @Component
 public class DefaultBpmProcessDefService implements BpmProcessDefService {
 	@Resource
-	ICache<DefaultBpmProcessDef> bP;
+	Cache<DefaultBpmProcessDef> bP;
 	@Resource
 	private BpmDefinitionManager c;
 	@Resource
@@ -159,7 +161,7 @@ public class DefaultBpmProcessDefService implements BpmProcessDefService {
 		if (isCache.booleanValue()) {
 			try {
 				bpmProcessDef = (DefaultBpmProcessDef) this.bP.getByKey("procdef_" + processDefinitionId);
-			} catch (SerializeException e) {
+			} catch (SerializationException e) {
 				this.bP.delByKey("procdef_" + processDefinitionId);
 				bpmProcessDef = null;
 			}

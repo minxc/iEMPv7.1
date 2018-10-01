@@ -1,5 +1,6 @@
 package com.minxc.emp.core.util;
 
+import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import java.lang.reflect.Field;
@@ -29,8 +30,8 @@ public class ConstantUtil {
      * @param key
      * @return 返回json:{key:"字段名",value:"字段值",type:"字段的类型"}
      */
-    public static ObjectNode get(String classPath, String key) {
-        ObjectNode json = get(classPath).get(key);
+    public static JSONObject get(String classPath, String key) {
+        JSONObject json = get(classPath).get(key);
         if (json != null) {
             return json;
         }
@@ -43,20 +44,20 @@ public class ConstantUtil {
      * </pre>
      *
      * @param classPath
+     * @param key
      * @return 返回map:{key:{key:"字段名",value:"字段值",type:"字段的类型"},key1:{key:"字段名1",value:"字段值1",type:"字段的类型1"}}
      */
-    public static Map<String, ObjectNode> get(String classPath) {
+    public static Map<String, JSONObject> get(String classPath) {
         try {
-            Map<String, ObjectNode> map = new HashMap<>();
+            Map<String, JSONObject> map = new HashMap<>();
             Class<?> clazz = Class.forName(classPath);
             Field[] fileds = clazz.getFields();
             for (Field f : fileds) {
                 if (Modifier.isPublic(f.getModifiers()) && Modifier.isFinal(f.getModifiers()) && Modifier.isStatic(f.getModifiers())) {
-
-                    ObjectNode  json  = JacksonUtil.jsonObject();
+                    JSONObject json = new JSONObject();
                     json.put("key", f.getName());
-                    json.putPOJO("value", f.get(clazz));
-                    json.putPOJO("type", f.getType());
+                    json.put("value", f.get(clazz));
+                    json.put("type", f.getType());
                     map.put(f.getName(), json);
                 }
             }

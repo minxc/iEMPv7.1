@@ -2,6 +2,7 @@ package org.minxc.emp.biz.core.model;
 
 import com.minxc.emp.core.impl.model.AbstractCommonModel;
 import com.minxc.emp.core.util.JacksonUtil;
+import com.minxc.emp.core.util.JsonUtil;
 
 import javax.validation.constraints.NotEmpty;
 
@@ -69,7 +70,7 @@ public class BusinessObject extends AbstractCommonModel implements IBusinessObje
 
 	public void setRelationJson(String relationJson) {
 		this.relationJson = relationJson;
-		this.relation = (BusTableRel) JacksonUtil.json2Pojo(relationJson, BusTableRel.class);
+		this.relation = (BusTableRel) JsonUtil.parseObject(relationJson, BusTableRel.class);
 	}
 
 	public String getGroupId() {
@@ -102,7 +103,7 @@ public class BusinessObject extends AbstractCommonModel implements IBusinessObje
 
 	public void setRelation(BusTableRel relation) {
 		this.relation = relation;
-		this.relationJson = JacksonUtil.pojo2Json(relation);
+		this.relationJson = JsonUtil.toJSONString(relation);
 	}
 
 	public BusObjPermission getPermission() {

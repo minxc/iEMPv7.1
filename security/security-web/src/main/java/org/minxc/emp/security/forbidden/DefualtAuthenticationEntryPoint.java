@@ -1,5 +1,6 @@
 package org.minxc.emp.security.forbidden;
 
+import com.alibaba.fastjson.JSONObject;
 import com.minxc.emp.core.util.JacksonUtil;
 import org.minxc.emp.core.api.response.impl.ResultMessage;
 import org.minxc.emp.core.api.status.CommonStatusCode;
@@ -24,8 +25,8 @@ public class DefualtAuthenticationEntryPoint implements AuthenticationEntryPoint
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         response.setCharacterEncoding("UTF-8");
 
-        ResultMessage ResultMessage = new ResultMessage(CommonStatusCode.TIMEOUT, authException.getMessage());
-        response.getWriter().print(JacksonUtil.pojo2Json(ResultMessage));
+        ResultMessage resultMessage = new ResultMessage(CommonStatusCode.TIMEOUT, authException.getMessage());
+        response.getWriter().print(JSONObject.toJSONString(resultMessage));
         return;
     }
 
