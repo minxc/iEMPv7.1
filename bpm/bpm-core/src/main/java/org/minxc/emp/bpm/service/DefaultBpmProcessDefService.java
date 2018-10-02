@@ -10,7 +10,6 @@ import javax.annotation.Resource;
 import org.activiti.bpmn.model.BpmnModel;
 import org.activiti.bpmn.model.Process;
 import org.activiti.engine.RepositoryService;
-import org.minxc.core.cache.Cache;
 import org.minxc.emp.bpm.api.constant.NodeType;
 import org.minxc.emp.bpm.api.engine.context.BpmContext;
 import org.minxc.emp.bpm.api.exception.BpmStatusCode;
@@ -26,6 +25,7 @@ import org.minxc.emp.bpm.engine.parser.BpmDefNodeHandler;
 import org.minxc.emp.bpm.engine.parser.BpmProcessDefParser;
 import org.minxc.emp.core.api.exception.BusinessException;
 import org.minxc.emp.core.api.exception.SerializationException;
+import org.minxc.emp.core.cache.Cache;
 import org.springframework.stereotype.Component;
 
 @Component

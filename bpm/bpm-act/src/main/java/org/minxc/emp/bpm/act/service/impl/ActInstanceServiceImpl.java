@@ -7,7 +7,6 @@ import org.activiti.engine.ProcessEngine;
 import org.activiti.engine.RepositoryService;
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.impl.ProcessEngineImpl;
-import org.activiti.engine.impl.cfg.ProcessEngineConfigurationImpl;
 import org.activiti.engine.impl.cmd.GetExecutionVariableCmd;
 import org.activiti.engine.impl.identity.Authentication;
 import org.activiti.engine.impl.interceptor.Command;
@@ -17,7 +16,6 @@ import org.minxc.emp.bpm.act.cmd.GetSuperVariableCmd;
 import org.minxc.emp.bpm.act.cmd.ProcessInstanceEndCmd;
 import org.minxc.emp.bpm.act.service.ActInstanceService;
 import org.minxc.emp.bpm.act.util.ActivitiUtil;
-import org.minxc.emp.bpm.api.model.def.IBpmDefinition;
 import org.minxc.emp.bpm.api.model.nodedef.BpmNodeDef;
 import org.minxc.emp.bpm.api.service.BpmProcessDefService;
 import org.minxc.emp.idm.api.model.User;
@@ -113,7 +111,7 @@ public class ActInstanceServiceImpl implements ActInstanceService {
 	public Object getVariableLocal(String executionId, String variableName) {
 		CommandExecutor executor = ActivitiUtil.getCommandExecutor();
 		GetExecutionVariableCmd cmd = new GetExecutionVariableCmd(executionId, variableName, true);
-		return executor.execute((Command) cmd);
+		return executor.execute(cmd);
 	}
 
 	public boolean hasVariable(String executionId, String variableName) {
@@ -139,7 +137,7 @@ public class ActInstanceServiceImpl implements ActInstanceService {
 	public void endProcessInstance(String bpmnInstanceId) {
 		ProcessEngineImpl engine = (ProcessEngineImpl) this.processEngine;
 		CommandExecutor cmdExecutor = engine.getProcessEngineConfiguration().getCommandExecutor();
-		cmdExecutor.execute((Command) new ProcessInstanceEndCmd(bpmnInstanceId));
+		cmdExecutor.execute(new ProcessInstanceEndCmd(bpmnInstanceId));
 	}
 
 	public void activateProcessInstanceById(String bpmnInstanceId) {
@@ -157,6 +155,6 @@ public class ActInstanceServiceImpl implements ActInstanceService {
 	public Object getSuperVariable(String bpmnId, String varName) {
 		CommandExecutor executor = ActivitiUtil.getCommandExecutor();
 		GetSuperVariableCmd cmd = new GetSuperVariableCmd(bpmnId, varName);
-		return executor.execute((Command) cmd);
+		return executor.execute(cmd);
 	}
 }

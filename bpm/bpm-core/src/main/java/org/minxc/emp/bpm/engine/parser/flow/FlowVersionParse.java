@@ -1,16 +1,16 @@
 package org.minxc.emp.bpm.engine.parser.flow;
 
 import com.alibaba.fastjson.JSONObject;
-import com.minxc.emp.core.util.EncryptUtil;
-import com.minxc.emp.core.util.PropertiesUtil;
-import com.minxc.emp.core.util.StringUtil;
-import com.minxc.emp.core.util.time.DateFormatUtil;
 
 import java.util.Date;
 
 import org.minxc.emp.bpm.engine.model.DefaultBpmProcessDef;
 import org.minxc.emp.bpm.engine.model.DefaultBpmVariableDef;
 import org.minxc.emp.bpm.engine.parser.flow.AbsFlowParse;
+import org.minxc.emp.core.util.EncryptUtil;
+import org.minxc.emp.core.util.PropertiesUtil;
+import org.minxc.emp.core.util.StringUtil;
+import org.minxc.emp.core.util.time.DateFormatUtil;
 import org.springframework.stereotype.Component;
 
 @Component

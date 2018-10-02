@@ -2,7 +2,6 @@ package org.minxc.emp.bpm.rest.controller;
 
 
 import com.github.pagehelper.Page;
-import com.minxc.emp.core.util.StringUtil;
 
 import org.minxc.emp.bpm.api.engine.data.BpmFlowDataAccessor;
 import org.minxc.emp.bpm.api.engine.data.result.FlowData;
@@ -14,6 +13,7 @@ import org.minxc.emp.common.rest.GenericController;
 import org.minxc.emp.core.api.aop.annotation.ErrorCatching;
 import org.minxc.emp.core.api.query.QueryFilter;
 import org.minxc.emp.core.api.response.impl.ResultMessage;
+import org.minxc.emp.core.util.StringUtil;
 import org.minxc.emp.form.api.model.FormType;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

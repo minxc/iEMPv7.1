@@ -10,6 +10,7 @@ import org.minxc.emp.common.manager.impl.CommonManager;
 import org.minxc.emp.core.api.exception.BusinessException;
 import org.minxc.emp.core.api.query.QueryFilter;
 import org.minxc.emp.core.api.query.QueryOperator;
+import org.minxc.emp.core.util.JacksonUtil;
 import org.minxc.emp.system.impl.dao.DataDictDao;
 import org.minxc.emp.system.impl.manager.DataDictManager;
 import org.minxc.emp.system.impl.manager.SysTreeManager;
@@ -23,7 +24,6 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.minxc.emp.core.util.JacksonUtil;
 
 /**
  * 数据字典 Manager处理实现类

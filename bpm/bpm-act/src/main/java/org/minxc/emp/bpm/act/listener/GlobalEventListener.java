@@ -1,18 +1,15 @@
 package org.minxc.emp.bpm.act.listener;
 
-
 import java.util.HashMap;
 import java.util.Map;
 import org.activiti.engine.delegate.event.ActivitiEvent;
 import org.activiti.engine.delegate.event.ActivitiEventListener;
-import org.activiti.engine.delegate.event.ActivitiEventType;
 import org.activiti.engine.delegate.event.impl.ActivitiEventImpl;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.minxc.emp.bpm.act.listener.ActEventListener;
+import org.minxc.emp.core.util.AppContextUtil;
 import org.springframework.stereotype.Component;
-
-import com.minxc.emp.core.util.AppContextUtil;
 
 @Component
 public class GlobalEventListener implements ActivitiEventListener {

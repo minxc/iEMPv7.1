@@ -1,11 +1,11 @@
 package org.minxc.emp.common.db.table.impl.sqlserver;
 
-import com.minxc.emp.core.util.BeanUtils;
 import org.minxc.emp.common.db.api.table.model.Column;
 import org.minxc.emp.common.db.api.table.model.Table;
 import org.minxc.emp.common.db.table.BaseTableMeta;
 import org.minxc.emp.common.db.table.colmap.SQLServerColumnMap;
 import org.minxc.emp.common.db.table.model.DefaultTable;
+import org.minxc.emp.core.util.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.jdbc.core.RowMapper;
 

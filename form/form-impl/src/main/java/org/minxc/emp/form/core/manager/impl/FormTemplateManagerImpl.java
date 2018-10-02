@@ -19,6 +19,8 @@ import org.minxc.emp.common.manager.impl.CommonManager;
 import org.minxc.emp.core.api.exception.BusinessException;
 import org.minxc.emp.core.api.query.QueryFilter;
 import org.minxc.emp.core.api.query.QueryOperator;
+import org.minxc.emp.core.util.Dom4jUtil;
+import org.minxc.emp.core.util.FileUtil;
 import org.minxc.emp.form.core.dao.FormTemplateDao;
 import org.minxc.emp.form.core.manager.FormTemplateManager;
 import org.minxc.emp.form.core.model.FormTemplate;
@@ -28,8 +30,6 @@ import org.springframework.stereotype.Service;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.minxc.emp.core.util.Dom4jUtil;
-import com.minxc.emp.core.util.FileUtil;
 
 
 /**

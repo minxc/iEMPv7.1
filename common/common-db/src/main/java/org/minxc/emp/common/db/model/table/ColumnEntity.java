@@ -1,7 +1,7 @@
 package org.minxc.emp.common.db.model.table;
 
-import com.minxc.emp.core.util.EnumUtil;
 import org.minxc.emp.core.api.constant.ColumnType;
+import org.minxc.emp.core.util.EnumUtil;
 
 import java.io.Serializable;
 

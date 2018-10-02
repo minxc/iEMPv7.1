@@ -9,11 +9,10 @@ import org.minxc.emp.bpm.engine.model.BpmIdentity;
 import org.minxc.emp.bpm.engine.plugin.runtime.abstact.AbstractUserCalcPlugin;
 import org.minxc.emp.bpm.engine.plugin.session.BpmUserCalcPluginSession;
 import org.minxc.emp.bpm.plugin.usercalc.group.def.GroupPluginDef;
+import org.minxc.emp.core.util.StringUtil;
 import org.minxc.emp.idm.api.model.Group;
 import org.minxc.emp.idm.api.service.GroupService;
 import org.springframework.stereotype.Component;
-
-import com.minxc.emp.core.util.StringUtil;
 
 @Component
 public class GroupPlugin extends AbstractUserCalcPlugin<GroupPluginDef> {

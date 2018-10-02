@@ -1,5 +1,6 @@
 package org.minxc.emp.common.db.dao;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.minxc.emp.common.db.model.query.DefaultQueryFilter;
 import org.minxc.emp.core.api.query.Page;
 import org.minxc.emp.core.api.query.QueryFilter;
@@ -20,6 +21,7 @@ import java.util.Map;
  * @date 2018/8/25 19:06
  */
 
+@Mapper
 public class BasicDao<T> {
 
     @Resource

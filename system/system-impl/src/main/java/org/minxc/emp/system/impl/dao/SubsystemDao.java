@@ -6,8 +6,6 @@ import org.apache.ibatis.annotations.Mapper;
 import org.minxc.emp.common.db.dao.CommonDao;
 import org.minxc.emp.system.impl.model.ApplicationEntity;
 
-
-
 /**
  * 子系统定义 DAO接口
  */

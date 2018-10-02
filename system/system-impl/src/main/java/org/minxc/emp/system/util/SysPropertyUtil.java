@@ -1,8 +1,7 @@
 package org.minxc.emp.system.util;
 
+import org.minxc.emp.core.util.AppContextUtil;
 import org.minxc.emp.system.api.service.PropertyService;
-
-import com.minxc.emp.core.util.AppContextUtil;
 
 /**
  * 系统参数工具类。

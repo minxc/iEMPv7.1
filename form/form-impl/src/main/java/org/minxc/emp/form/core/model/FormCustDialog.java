@@ -1,8 +1,7 @@
 package org.minxc.emp.form.core.model;
 
-import com.minxc.emp.core.impl.model.AbstractCommonModel;
-import com.minxc.emp.core.util.JsonUtil;
-
+import org.minxc.emp.core.impl.model.AbstractCommonModel;
+import org.minxc.emp.core.util.JsonUtil;
 import org.minxc.emp.form.core.model.custdialog.*;
 
 import javax.validation.Valid;

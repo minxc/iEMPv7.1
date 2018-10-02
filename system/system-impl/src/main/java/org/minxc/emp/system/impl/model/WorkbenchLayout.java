@@ -1,8 +1,7 @@
 package org.minxc.emp.system.impl.model;
 
-import com.minxc.emp.core.impl.model.AbstractCommonModel;
-
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.minxc.emp.core.impl.model.AbstractCommonModel;
 
 /**
  * 

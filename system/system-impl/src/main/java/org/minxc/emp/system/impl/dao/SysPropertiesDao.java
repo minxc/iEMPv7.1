@@ -1,6 +1,5 @@
 package org.minxc.emp.system.impl.dao;
 
-
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;

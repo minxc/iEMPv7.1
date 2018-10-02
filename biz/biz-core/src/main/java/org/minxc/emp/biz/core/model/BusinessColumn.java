@@ -2,7 +2,6 @@ package org.minxc.emp.biz.core.model;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.minxc.emp.core.util.time.DateFormatUtil;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -17,6 +16,7 @@ import org.minxc.emp.biz.core.model.BusinessTable;
 import org.minxc.emp.common.db.model.table.ColumnEntity;
 import org.minxc.emp.core.api.constant.ColumnType;
 import org.minxc.emp.core.api.model.CommonModel;
+import org.minxc.emp.core.util.time.DateFormatUtil;
 
 public class BusinessColumn extends ColumnEntity implements CommonModel, IBusinessColumn {
 	/** 

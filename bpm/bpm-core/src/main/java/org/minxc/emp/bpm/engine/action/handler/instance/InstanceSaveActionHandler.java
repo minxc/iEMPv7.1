@@ -16,9 +16,8 @@ import org.minxc.emp.bpm.core.model.BpmInstance;
 import org.minxc.emp.bpm.engine.action.cmd.DefaultInstanceActionCmd;
 import org.minxc.emp.bpm.engine.action.handler.AbsActionHandler;
 import org.minxc.emp.core.api.exception.BusinessException;
+import org.minxc.emp.core.util.StringUtil;
 import org.springframework.stereotype.Component;
-
-import com.minxc.emp.core.util.StringUtil;
 
 @Component
 public class InstanceSaveActionHandler extends AbsActionHandler<DefaultInstanceActionCmd> {

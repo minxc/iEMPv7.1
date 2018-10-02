@@ -6,13 +6,12 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.minxc.emp.basis.api.model.SysIdentity;
+import org.minxc.emp.core.util.BeanUtils;
 import org.minxc.emp.idm.api.model.User;
 import org.minxc.emp.idm.api.service.GroupService;
 import org.minxc.emp.idm.api.service.UserService;
 import org.minxc.emp.system.api.service.SysIdentityConvert;
 import org.springframework.stereotype.Component;
-
-import com.minxc.emp.core.util.BeanUtils;
 
 
 @Component

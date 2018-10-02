@@ -13,7 +13,6 @@
 package org.minxc.emp.activiti.rest.editor.model;
 
 import com.alibaba.fastjson.JSONObject;
-import com.minxc.emp.core.util.StringUtil;
 
 import org.activiti.engine.ActivitiException;
 import org.activiti.engine.RepositoryService;
@@ -25,6 +24,7 @@ import org.minxc.emp.bpm.api.service.BpmProcessDefService;
 import org.minxc.emp.bpm.core.manager.BpmDefinitionManager;
 import org.minxc.emp.bpm.core.model.BpmDefinition;
 import org.minxc.emp.bpm.engine.model.DefaultBpmProcessDef;
+import org.minxc.emp.core.util.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

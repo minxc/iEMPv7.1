@@ -8,16 +8,15 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.minxc.emp.core.util.AppContextUtil;
-import com.minxc.emp.core.util.BeanUtils;
-import com.minxc.emp.core.util.JacksonUtil;
-
 import org.apache.commons.lang3.StringUtils;
 import org.minxc.emp.common.rest.GenericController;
 import org.minxc.emp.common.rest.util.RequestUtil;
 import org.minxc.emp.core.api.aop.annotation.ErrorCatching;
 import org.minxc.emp.core.api.exception.BusinessException;
 import org.minxc.emp.core.api.response.impl.ResultMessage;
+import org.minxc.emp.core.util.AppContextUtil;
+import org.minxc.emp.core.util.BeanUtils;
+import org.minxc.emp.core.util.JacksonUtil;
 import org.minxc.emp.idm.api.constant.GroupTypeConstant;
 import org.minxc.emp.idm.api.model.Group;
 import org.minxc.emp.idm.api.model.User;

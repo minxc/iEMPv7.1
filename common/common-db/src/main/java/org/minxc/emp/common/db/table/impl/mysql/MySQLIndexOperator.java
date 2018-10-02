@@ -1,10 +1,10 @@
 package org.minxc.emp.common.db.table.impl.mysql;
 
-import com.minxc.emp.core.util.AppContextUtil;
 import org.minxc.emp.common.db.api.table.ITableOperator;
 import org.minxc.emp.common.db.api.table.model.Index;
 import org.minxc.emp.common.db.table.BaseIndexOperator;
 import org.minxc.emp.common.db.table.model.DefaultIndex;
+import org.minxc.emp.core.util.AppContextUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.jdbc.core.RowMapper;
 

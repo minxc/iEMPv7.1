@@ -5,8 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.minxc.emp.biz.core.model.BusinessTable;
-
-import com.minxc.emp.core.util.AppContextUtil;
+import org.minxc.emp.core.util.AppContextUtil;
 
 public class BusinessTableCacheUtil {
 	private static String U = "businessTableMap";

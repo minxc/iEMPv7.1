@@ -10,13 +10,13 @@ import org.minxc.emp.basis.api.constant.RightsObjectConstants;
 import org.minxc.emp.common.rest.GenericController;
 import org.minxc.emp.common.rest.util.RequestUtil;
 import org.minxc.emp.core.api.aop.annotation.ErrorCatching;
+import org.minxc.emp.core.util.JacksonUtil;
 import org.minxc.emp.system.impl.manager.SysAuthorizationManager;
 import org.minxc.emp.system.impl.model.BizAuthorizationEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson.JSON;
-import com.minxc.emp.core.util.JacksonUtil;
  
 @RestController
 @RequestMapping("/sys/authorization")

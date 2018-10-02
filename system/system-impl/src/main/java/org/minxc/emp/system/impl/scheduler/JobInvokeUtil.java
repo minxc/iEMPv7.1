@@ -1,11 +1,10 @@
 package org.minxc.emp.system.impl.scheduler;
 
 import org.apache.commons.lang3.StringUtils;
+import org.minxc.emp.core.util.AppContextUtil;
 import org.minxc.emp.system.impl.model.SystemScheduleJobEntity;
 import org.springframework.beans.BeanUtils;
 import org.springframework.util.Assert;
-
-import com.minxc.emp.core.util.AppContextUtil;
 
 import groovy.util.logging.Slf4j;
 

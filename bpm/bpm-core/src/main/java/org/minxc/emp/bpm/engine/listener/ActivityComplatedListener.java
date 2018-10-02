@@ -21,9 +21,8 @@ import org.minxc.emp.bpm.core.model.BpmInstance;
 import org.minxc.emp.bpm.core.model.BpmTaskStack;
 import org.minxc.emp.bpm.engine.action.cmd.DefualtTaskActionCmd;
 import org.minxc.emp.core.api.exception.BusinessException;
+import org.minxc.emp.core.util.StringUtil;
 import org.springframework.stereotype.Component;
-
-import com.minxc.emp.core.util.StringUtil;
 
 @Component
 public class ActivityComplatedListener implements ActEventListener {

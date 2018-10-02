@@ -12,6 +12,7 @@ import javax.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
 import org.minxc.emp.basis.api.constant.RightsObjectConstants;
 import org.minxc.emp.common.manager.impl.CommonManager;
+import org.minxc.emp.core.util.BeanUtils;
 import org.minxc.emp.idm.api.model.Group;
 import org.minxc.emp.idm.api.service.GroupService;
 import org.minxc.emp.system.impl.dao.SysAuthorizationDao;
@@ -20,8 +21,6 @@ import org.minxc.emp.system.impl.model.BizAuthorizationEntity;
 import org.minxc.emp.system.util.ContextUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.minxc.emp.core.util.BeanUtils;
 
 
 

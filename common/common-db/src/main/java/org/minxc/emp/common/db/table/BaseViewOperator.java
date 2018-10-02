@@ -7,10 +7,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
-import com.minxc.emp.core.util.AppContextUtil;
 import org.minxc.emp.common.db.dao.BasicDao;
 import org.minxc.emp.core.api.query.Page;
 import org.minxc.emp.core.api.query.QueryFilter;
+import org.minxc.emp.core.util.AppContextUtil;
 import org.springframework.jdbc.core.RowMapper;
 
 import org.minxc.emp.common.db.api.table.ViewOperator;

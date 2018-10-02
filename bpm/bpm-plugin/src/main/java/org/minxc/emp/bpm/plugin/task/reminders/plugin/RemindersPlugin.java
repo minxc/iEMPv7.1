@@ -9,8 +9,7 @@ import org.minxc.emp.bpm.engine.plugin.runtime.abstact.AbstractBpmTaskPlugin;
 import org.minxc.emp.bpm.engine.plugin.session.BpmTaskPluginSession;
 import org.minxc.emp.bpm.plugin.task.reminders.def.Reminder;
 import org.minxc.emp.bpm.plugin.task.reminders.def.RemindersPluginDef;
-
-import com.minxc.emp.core.util.StringUtil;
+import org.minxc.emp.core.util.StringUtil;
 
 public class RemindersPlugin extends AbstractBpmTaskPlugin<BpmTaskPluginSession, RemindersPluginDef> {
 	@Resource

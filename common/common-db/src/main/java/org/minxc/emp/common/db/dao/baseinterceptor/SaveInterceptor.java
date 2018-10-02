@@ -1,7 +1,5 @@
 package org.minxc.emp.common.db.dao.baseinterceptor;
 
-import com.minxc.emp.core.impl.model.AbstractCommonModel;
-import com.minxc.emp.core.util.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.executor.Executor;
 import org.apache.ibatis.mapping.MappedStatement;
@@ -10,6 +8,8 @@ import org.minxc.emp.common.db.id.UniqueIdUtil;
 import org.minxc.emp.core.api.model.CommonModel;
 import org.minxc.emp.core.api.model.IdModel;
 import org.minxc.emp.core.api.model.NewOrUpdateModel;
+import org.minxc.emp.core.impl.model.AbstractCommonModel;
+import org.minxc.emp.core.util.BeanUtils;
 
 import java.util.Date;
 import java.util.Properties;

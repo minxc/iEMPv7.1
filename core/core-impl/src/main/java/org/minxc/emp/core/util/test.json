@@ -1,0 +1,138 @@
+{
+	"Demo": {
+		"key": "Demo",
+		"name": "Demo",
+		"rights": {
+			"r": [
+				{
+					"type": "everyone",
+					"desc": "所有人"
+				}
+			],
+			"w": [
+				{
+					"type": "none",
+					"desc": "无"
+				}
+			]
+		},
+		"tableMap": {
+			"Demo": {
+				"columnMap": {
+					"zjlx": {
+						"comment": "证件类型",
+						"key": "zjlx",
+						"rights": {
+							
+						}
+					},
+					"zd1": {
+						"comment": "字段1",
+						"key": "zd1",
+						"rights": {
+							
+						}
+					},
+					"ah": {
+						"comment": "爱好",
+						"key": "ah",
+						"rights": {
+							
+						}
+					},
+					"bmId": {
+						"comment": "部门ID",
+						"key": "bmId",
+						"rights": {
+							
+						}
+					},
+					"zd2": {
+						"comment": "字段2",
+						"key": "zd2",
+						"rights": {
+							
+						}
+					},
+					"xb": {
+						"comment": "性别",
+						"key": "xb",
+						"rights": {
+							
+						}
+					},
+					"bm": {
+						"comment": "部门",
+						"key": "bm",
+						"rights": {
+							
+						}
+					},
+					"mz": {
+						"comment": "名字",
+						"key": "mz",
+						"rights": {
+							
+						}
+					},
+					"nl": {
+						"comment": "年龄",
+						"key": "nl",
+						"rights": {
+							
+						}
+					}
+				},
+				"comment": "案例",
+				"key": "Demo",
+				"rights": {
+					
+				}
+			},
+			"DemoSub": {
+				"columnMap": {
+					"fk": {
+						"comment": "外键",
+						"key": "fk",
+						"rights": {
+							
+						}
+					},
+					"ms": {
+						"comment": "描述",
+						"key": "ms",
+						"rights": {
+							
+						}
+					},
+					"zd1": {
+						"comment": "字段1",
+						"key": "zd1",
+						"rights": {
+							
+						}
+					},
+					"zd2": {
+						"comment": "字段2",
+						"key": "zd2",
+						"rights": {
+							
+						}
+					},
+					"mz": {
+						"comment": "名字",
+						"key": "mz",
+						"rights": {
+							
+						}
+					}
+				},
+				"comment": "Demo子表",
+				"key": "DemoSub",
+				"rights": {
+					
+				}
+			}
+		}
+	}
+}

@@ -22,11 +22,10 @@ import org.minxc.emp.common.manager.impl.CommonManager;
 import org.minxc.emp.core.api.exception.BusinessException;
 import org.minxc.emp.core.api.query.QueryFilter;
 import org.minxc.emp.core.api.query.QueryOperator;
+import org.minxc.emp.core.util.BeanUtils;
 import org.minxc.emp.system.api.service.ISysDataSourceService;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
-
-import com.minxc.emp.core.util.BeanUtils;
 
 @Service
 public class BusinessTableManagerImpl extends CommonManager<String, BusinessTable> implements BusinessTableManager {

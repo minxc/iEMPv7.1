@@ -15,12 +15,11 @@ import org.minxc.emp.bpm.engine.constant.TaskSkipType;
 import org.minxc.emp.bpm.engine.plugin.runtime.abstact.AbstractBpmExecutionPlugin;
 import org.minxc.emp.bpm.engine.plugin.session.BpmExecutionPluginSession;
 import org.minxc.emp.bpm.plugin.execution.taskskip.def.TaskSkipPluginDef;
+import org.minxc.emp.core.util.BeanUtils;
+import org.minxc.emp.core.util.StringUtil;
 import org.minxc.emp.system.util.ContextUtil;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Component;
-
-import com.minxc.emp.core.util.BeanUtils;
-import com.minxc.emp.core.util.StringUtil;
 
 @Component
 public class TaskSkipPlugin extends AbstractBpmExecutionPlugin<BpmExecutionPluginSession, TaskSkipPluginDef> {

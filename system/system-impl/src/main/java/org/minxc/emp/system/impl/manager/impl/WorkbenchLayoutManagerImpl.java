@@ -5,12 +5,11 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.minxc.emp.common.manager.impl.CommonManager;
+import org.minxc.emp.core.util.BeanUtils;
 import org.minxc.emp.system.impl.dao.WorkbenchLayoutDao;
 import org.minxc.emp.system.impl.manager.WorkbenchLayoutManager;
 import org.minxc.emp.system.impl.model.WorkbenchLayout;
 import org.springframework.stereotype.Service;
-
-import com.minxc.emp.core.util.BeanUtils;
 
 
 @Service("workbenchLayoutManager")

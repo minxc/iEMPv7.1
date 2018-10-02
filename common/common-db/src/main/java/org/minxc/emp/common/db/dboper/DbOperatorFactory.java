@@ -1,8 +1,8 @@
 package org.minxc.emp.common.db.dboper;
 
-import com.minxc.emp.core.util.AppContextUtil;
-import com.minxc.emp.core.util.PropertiesUtil;
 import org.minxc.emp.common.db.api.table.DbTypeEnum;
+import org.minxc.emp.core.util.AppContextUtil;
+import org.minxc.emp.core.util.PropertiesUtil;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 /**

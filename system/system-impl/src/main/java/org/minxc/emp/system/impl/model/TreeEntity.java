@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.validation.constraints.NotEmpty;
 
-import com.minxc.emp.core.impl.model.AbstractCommonModel;
+import org.minxc.emp.core.impl.model.AbstractCommonModel;
 
 /**
  * 描述：系统树

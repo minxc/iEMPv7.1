@@ -1,9 +1,8 @@
 package org.minxc.emp.security.login.logout;
 
-import com.minxc.emp.core.util.JsonUtil;
-
 import org.minxc.emp.core.api.response.impl.ResultMessage;
 import org.minxc.emp.core.api.status.CommonStatusCode;
+import org.minxc.emp.core.util.JsonUtil;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 

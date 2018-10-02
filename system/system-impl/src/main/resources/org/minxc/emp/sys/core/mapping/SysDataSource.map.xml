@@ -1,31 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.dstz.sys2.dao.SysDataSourceDao">
-    <resultMap id="SysDataSource" type="com.dstz.sys2.model.SysDataSource">
-        <id property="id" column="id_" jdbcType="VARCHAR"/>
-        <result property="key" column="key_" jdbcType="VARCHAR"/>
-        <result property="name" column="name_" jdbcType="VARCHAR"/>
-        <result property="desc" column="desc_" jdbcType="VARCHAR"/>
-        <result property="dbType" column="db_type_" jdbcType="VARCHAR"/>
-        <result property="classPath" column="class_path_" jdbcType="VARCHAR"/>
-        <result property="attributesJson" column="attributes_json_" jdbcType="CLOB"/>
+<mapper namespace="org.minxc.emp.system.impl.dao.SysDataSourceDao">
+    <resultMap id="SysDataSource" type="org.minxc.emp.system.impl.model.SystemDataSourceEntity">
+        <id column="ID" jdbcType="VARCHAR" property="id" />
+	    <result column="KEY" jdbcType="VARCHAR" property="key" />
+	    <result column="NAME" jdbcType="VARCHAR" property="name" />
+	    <result column="DESCRIPTION" jdbcType="VARCHAR" property="description" />
+	    <result column="DB_TYPE" jdbcType="VARCHAR" property="dbType" />
+	    <result column="CLASS_PATH" jdbcType="VARCHAR" property="classPath" />
+	    <result column="ATTRIBUTES_JSON" jdbcType="CLOB" property="attributesJson" />
     </resultMap>
 
-    <insert id="create" parameterType="com.dstz.sys2.model.SysDataSource">
-		INSERT INTO sys_data_source
-		(id_,key_,name_,desc_,db_type_,class_path_,attributes_json_)
+    <insert id="create" parameterType="org.minxc.emp.system.impl.model.SystemDataSourceEntity">
+		INSERT INTO YMMG_DATA_SOURCE
+		(ID, KEY, NAME, DESCRIPTION, DB_TYPE, CLASS_PATH, ATTRIBUTES_JSON)
 		VALUES 
-		(#{id,jdbcType=VARCHAR}, #{key,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{desc,jdbcType=VARCHAR}, #{dbType,jdbcType=VARCHAR}, #{classPath,jdbcType=VARCHAR}, #{attributesJson,jdbcType=CLOB})
+		(#{id,jdbcType=VARCHAR}, #{key,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR}, #{dbType,jdbcType=VARCHAR}, #{classPath,jdbcType=VARCHAR}, 
+      #{attributesJson,jdbcType=CLOB})
 	</insert>
 
     <select id="get" parameterType="java.lang.String" resultMap="SysDataSource">
-		SELECT * FROM sys_data_source 
+		SELECT * FROM YMMG_DATA_SOURCE 
 		WHERE 
-		id_=#{id}
+		ID=#{id}
 	</select>
 
     <select id="query" parameterType="java.util.Map" resultMap="SysDataSource">
-        SELECT * FROM sys_data_source
+        SELECT * FROM YMMG_DATA_SOURCE
         <where>
             <if test="whereSql!=null">
                 ${whereSql}
@@ -35,26 +37,25 @@
             ORDER BY ${orderBySql}
         </if>
         <if test="orderBySql==null">
-            ORDER BY id_ DESC
+            ORDER BY ID DESC
         </if>
     </select>
 
-    <update id="update" parameterType="com.dstz.sys2.model.SysDataSource">
-		UPDATE sys_data_source SET
-		key_=#{key,jdbcType=VARCHAR},
-		name_=#{name,jdbcType=VARCHAR},
-		desc_=#{desc,jdbcType=VARCHAR},
-		db_type_=#{dbType,jdbcType=VARCHAR},
-		class_path_=#{classPath,jdbcType=VARCHAR},
-		attributes_json_=#{attributesJson,jdbcType=CLOB}
-		WHERE
-		id_=#{id}
+    <update id="update" parameterType="org.minxc.emp.system.impl.model.SystemDataSourceEntity">
+		 update YMMG_DATA_SOURCE
+    set KEY = #{key,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR},
+      DESCRIPTION = #{description,jdbcType=VARCHAR},
+      DB_TYPE = #{dbType,jdbcType=VARCHAR},
+      CLASS_PATH = #{classPath,jdbcType=VARCHAR},
+      ATTRIBUTES_JSON = #{attributesJson,jdbcType=CLOB}
+    where ID = #{id,jdbcType=VARCHAR}
 	</update>
 
     <delete id="remove" parameterType="java.lang.String">
-		DELETE FROM sys_data_source 
+		DELETE FROM YMMG_DATA_SOURCE 
 		WHERE
-		id_=#{id}
+		ID=#{id}
 	</delete>
 
 

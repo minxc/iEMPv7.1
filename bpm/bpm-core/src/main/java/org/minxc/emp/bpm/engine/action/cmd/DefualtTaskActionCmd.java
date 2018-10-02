@@ -1,8 +1,6 @@
 package org.minxc.emp.bpm.engine.action.cmd;
 
 import com.alibaba.fastjson.JSONObject;
-import com.minxc.emp.core.util.AppContextUtil;
-import com.minxc.emp.core.util.StringUtil;
 
 import java.util.Map;
 import org.activiti.engine.delegate.DelegateTask;
@@ -16,6 +14,8 @@ import org.minxc.emp.bpm.core.model.BpmTaskStack;
 import org.minxc.emp.bpm.engine.action.handler.AbsActionHandler;
 import org.minxc.emp.bpm.engine.constant.TaskSkipType;
 import org.minxc.emp.core.api.exception.BusinessException;
+import org.minxc.emp.core.util.AppContextUtil;
+import org.minxc.emp.core.util.StringUtil;
 
 public class DefualtTaskActionCmd extends BaseActionCmd implements TaskActionCmd {
 	

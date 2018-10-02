@@ -41,7 +41,6 @@ public class QuartzManagerService implements InitializingBean {
     private SysScheduleJobDao sysScheduleJobDao;
 
     @Resource
-
     private SysScheduleJobLogDao sysScheduleJobLogDao;
 
     @Resource

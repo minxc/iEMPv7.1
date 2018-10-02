@@ -1,34 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.dstz.sys2.dao.SysFileDao">
-	<resultMap id="SysFile" type="com.dstz.sys2.model.SysFile">
-		<id property="id" column="id_" jdbcType="VARCHAR"/>
-		<result property="name" column="name_" jdbcType="VARCHAR"/>
-		<result property="uploader" column="uploader_" jdbcType="VARCHAR"/>
-		<result property="path" column="path_" jdbcType="VARCHAR"/>
-		<result property="createTime" column="create_time_" jdbcType="TIMESTAMP"/>
-		<result property="createBy" column="create_by_" jdbcType="VARCHAR"/>
-		<result property="updateTime" column="update_time_" jdbcType="TIMESTAMP"/>
-		<result property="updateBy" column="update_by_" jdbcType="VARCHAR"/>
-		<result property="version" column="version_" jdbcType="NUMERIC"/>
-		<result property="delete" column="delete_" jdbcType="NUMERIC"/>
+<mapper namespace="org.minxc.emp.system.impl.dao.SysFileDao">
+	<resultMap id="SysFile" type="org.minxc.emp.system.impl.model.UploadedFileEntity">
+		<id column="ID" jdbcType="VARCHAR" property="id" />
+	    <result column="NAME" jdbcType="VARCHAR" property="name" />
+	    <result column="UPLOADER" jdbcType="VARCHAR" property="uploader" />
+	    <result column="PATH" jdbcType="VARCHAR" property="path" />
+	    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+	    <result column="CREATE_BY" jdbcType="VARCHAR" property="createBy" />
+	    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+	    <result column="UPDATE_BY" jdbcType="VARCHAR" property="updateBy" />
+	    <result column="VERSION" jdbcType="DECIMAL" property="version" />
+	    <result column="IS_DELETE" jdbcType="DECIMAL" property="isDelete" />
 	</resultMap>
 	
-	<insert id="create" parameterType="com.dstz.sys2.model.SysFile">
-		INSERT INTO sys_file
-		(id_,name_,uploader_,path_,create_time_,create_by_,update_time_,update_by_,version_,delete_)
+	 <sql id="Base_Column_List">
+    ID, NAME, UPLOADER, PATH, CREATE_TIME, CREATE_BY, UPDATE_TIME, UPDATE_BY, VERSION, 
+    IS_DELETE
+  </sql>
+	
+	<insert id="create" parameterType="org.minxc.emp.system.impl.model.UploadedFileEntity">
+		INSERT INTO YMMG_FILE
+		 <include refid="Base_Column_List" />
 		VALUES 
-		(#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{uploader,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, #{version,jdbcType=NUMERIC}, #{delete,jdbcType=NUMERIC})
-	</insert>
+		 values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{uploader,jdbcType=VARCHAR}, 
+      #{path,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, #{version,jdbcType=DECIMAL}, 
+      #{isDelete,jdbcType=DECIMAL})
+      </insert>
 	
 	<select id="get"   parameterType="java.lang.String" resultMap="SysFile">
-		SELECT * FROM sys_file 
+		SELECT * FROM YMMG_FILE 
 		WHERE 
-		id_=#{id}
+		ID=#{id}
 	</select>
 	
 	<select id="query" parameterType="java.util.Map" resultMap="SysFile">
-		SELECT * FROM sys_file
+		SELECT * FROM YMMG_FILE
 		<where>
 			<if test="whereSql!=null">
 				${whereSql}
@@ -38,29 +46,28 @@
 			ORDER BY ${orderBySql}
 		</if>
 		<if test="orderBySql==null">
-			ORDER BY id_ DESC
+			ORDER BY ID DESC
 		</if>
 	</select>
 	
-	<update id="update" parameterType="com.dstz.sys2.model.SysFile">
-		UPDATE sys_file SET
-		name_=#{name,jdbcType=VARCHAR},
-		uploader_=#{uploader,jdbcType=VARCHAR},
-		path_=#{path,jdbcType=VARCHAR},
-		create_time_=#{createTime,jdbcType=TIMESTAMP},
-		create_by_=#{createBy,jdbcType=VARCHAR},
-		update_time_=#{updateTime,jdbcType=TIMESTAMP},
-		update_by_=#{updateBy,jdbcType=VARCHAR},
-		version_=#{version,jdbcType=NUMERIC},
-		delete_=#{delete,jdbcType=NUMERIC}
-		WHERE
-		id_=#{id}
+	<update id="update" parameterType="org.minxc.emp.system.impl.model.UploadedFileEntity">
+		UPDATE YMMG_FILE SET
+		NAME = #{name,jdbcType=VARCHAR},
+      UPLOADER = #{uploader,jdbcType=VARCHAR},
+      PATH = #{path,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      CREATE_BY = #{createBy,jdbcType=VARCHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+      VERSION = #{version,jdbcType=DECIMAL},
+      IS_DELETE = #{isDelete,jdbcType=DECIMAL}
+   	  WHERE ID = #{id,jdbcType=VARCHAR}
 	</update>
 	
 	<delete id="remove" parameterType="java.lang.String">
-		DELETE FROM sys_file 
+		DELETE FROM YMMG_FILE 
 		WHERE
-		id_=#{id}
+		ID = #{id}
 	</delete>
 	
 	

@@ -1,28 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.dstz.sys2.dao.SysDataSourceDefDao">
-    <resultMap id="SysDataSourceDef" type="com.dstz.sys2.model.SysDataSourceDef">
-        <id property="id" column="id_" jdbcType="VARCHAR"/>
-        <result property="name" column="name_" jdbcType="VARCHAR"/>
-        <result property="classPath" column="class_path_" jdbcType="VARCHAR"/>
-        <result property="attributesJson" column="attributes_json_" jdbcType="CLOB"/>
+<mapper namespace="org.minxc.emp.system.impl.dao.SysDataSourceDefDao">
+    <resultMap id="SysDataSourceDef" type="org.minxc.emp.system.impl.model.SysDataSourceDef">
+        <id column="ID" jdbcType="VARCHAR" property="id" />
+    	<result column="NAME" jdbcType="VARCHAR" property="name" />
+	    <result column="CLASS_PATH" jdbcType="VARCHAR" property="classPath" />
+	    <result column="ATTRIBUTES_JSON" jdbcType="CLOB" property="attributesJson" />
     </resultMap>
 
-    <insert id="create" parameterType="com.dstz.sys2.model.SysDataSourceDef">
-		INSERT INTO sys_data_source_def
-		(id_,name_,class_path_,attributes_json_)
+    <insert id="create" parameterType="org.minxc.emp.system.impl.model.SysDataSourceDef">
+		INSERT INTO YMMG_DATA_SOURCE_DEF
+		( ID, NAME, CLASS_PATH, ATTRIBUTES_JSON)
 		VALUES 
-		(#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{classPath,jdbcType=VARCHAR}, #{attributesJson,jdbcType=CLOB})
+		  (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{classPath,jdbcType=VARCHAR}, 
+      #{attributesJson,jdbcType=CLOB})
 	</insert>
 
     <select id="get" parameterType="java.lang.String" resultMap="SysDataSourceDef">
-		SELECT * FROM sys_data_source_def 
+		SELECT * FROM YMMG_DATA_SOURCE_DEF 
 		WHERE 
-		id_=#{id}
+		ID=#{id}
 	</select>
 
     <select id="query" parameterType="java.util.Map" resultMap="SysDataSourceDef">
-        SELECT * FROM sys_data_source_def
+        SELECT * FROM YMMG_DATA_SOURCE_DEF
         <where>
             <if test="whereSql!=null">
                 ${whereSql}
@@ -32,23 +33,22 @@
             ORDER BY ${orderBySql}
         </if>
         <if test="orderBySql==null">
-            ORDER BY id_ DESC
+            ORDER BY ID DESC
         </if>
     </select>
 
-    <update id="update" parameterType="com.dstz.sys2.model.SysDataSourceDef">
-		UPDATE sys_data_source_def SET
-		name_=#{name,jdbcType=VARCHAR},
-		class_path_=#{classPath,jdbcType=VARCHAR},
-		attributes_json_=#{attributesJson,jdbcType=CLOB}
-		WHERE
-		id_=#{id}
+    <update id="update" parameterType="org.minxc.emp.system.impl.model.SysDataSourceDef">
+		 update YMMG_DATA_SOURCE_DEF
+    set NAME = #{name,jdbcType=VARCHAR},
+      CLASS_PATH = #{classPath,jdbcType=VARCHAR},
+      ATTRIBUTES_JSON = #{attributesJson,jdbcType=CLOB}
+    where ID = #{id,jdbcType=VARCHAR}
 	</update>
 
     <delete id="remove" parameterType="java.lang.String">
-		DELETE FROM sys_data_source_def 
+		DELETE FROM YMMG_DATA_SOURCE_DEF 
 		WHERE
-		id_=#{id}
+		ID=#{id}
 	</delete>
 
 

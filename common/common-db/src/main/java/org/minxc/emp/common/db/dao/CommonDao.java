@@ -1,5 +1,6 @@
 package org.minxc.emp.common.db.dao;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.minxc.emp.core.api.query.QueryFilter;
 
 import java.io.Serializable;
@@ -13,6 +14,7 @@ import java.util.List;
  * @author: Xianchang.min
  * @date 2018/8/26 20:09
  */
+
 
 public interface CommonDao<PK extends Serializable, T> {
     /**
@@ -52,6 +54,7 @@ public interface CommonDao<PK extends Serializable, T> {
      * @return
      */
     public List<T> query(QueryFilter queryFilter);
+    
 
     /**
      * 取得所有查询对象

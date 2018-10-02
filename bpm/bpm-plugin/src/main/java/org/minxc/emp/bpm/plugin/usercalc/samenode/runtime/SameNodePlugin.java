@@ -11,9 +11,8 @@ import org.minxc.emp.bpm.engine.model.BpmIdentity;
 import org.minxc.emp.bpm.engine.plugin.runtime.abstact.AbstractUserCalcPlugin;
 import org.minxc.emp.bpm.engine.plugin.session.BpmUserCalcPluginSession;
 import org.minxc.emp.bpm.plugin.usercalc.samenode.def.SameNodePluginDef;
+import org.minxc.emp.core.util.BeanUtils;
 import org.springframework.stereotype.Component;
-
-import com.minxc.emp.core.util.BeanUtils;
 
 @Component
 public class SameNodePlugin extends AbstractUserCalcPlugin<SameNodePluginDef> {

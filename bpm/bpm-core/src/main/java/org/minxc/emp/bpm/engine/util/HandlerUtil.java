@@ -4,9 +4,8 @@ package org.minxc.emp.bpm.engine.util;
 import java.lang.reflect.Method;
 
 import org.minxc.emp.bpm.api.engine.action.cmd.ActionCmd;
-
-import com.minxc.emp.core.util.AppContextUtil;
-import com.minxc.emp.core.util.StringUtil;
+import org.minxc.emp.core.util.AppContextUtil;
+import org.minxc.emp.core.util.StringUtil;
 
 public class HandlerUtil {
 	public static int h(String handler) {

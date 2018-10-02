@@ -1,8 +1,6 @@
 package org.minxc.emp.bpm.engine.model;
 
 import com.alibaba.fastjson.JSONObject;
-import com.minxc.emp.core.util.BeanUtils;
-import com.minxc.emp.core.util.StringUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,6 +15,8 @@ import org.minxc.emp.bpm.api.model.def.BpmVariableDef;
 import org.minxc.emp.bpm.api.model.def.NodeInit;
 import org.minxc.emp.bpm.api.model.form.BpmForm;
 import org.minxc.emp.bpm.api.model.nodedef.BpmNodeDef;
+import org.minxc.emp.core.util.BeanUtils;
+import org.minxc.emp.core.util.StringUtil;
 
 public class DefaultBpmProcessDef implements BpmProcessDef {
 	private static final long serialVersionUID = 1L;

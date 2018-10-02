@@ -1,9 +1,10 @@
 package org.minxc.emp.security.forbidden;
 
 import com.alibaba.fastjson.JSONObject;
-import com.minxc.emp.core.util.JacksonUtil;
+
 import org.minxc.emp.core.api.response.impl.ResultMessage;
 import org.minxc.emp.core.api.status.CommonStatusCode;
+import org.minxc.emp.core.util.JacksonUtil;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 

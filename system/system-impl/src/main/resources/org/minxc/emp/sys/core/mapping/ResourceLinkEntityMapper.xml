@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.minxc.emp.system.impl.dao.RelResourceDao">
+    <resultMap id="RelResource" type="org.minxc.emp.system.impl.model.ResourceLinkEntity">
+         <id column="ID" jdbcType="VARCHAR" property="id" />
+	    <result column="RES_ID" jdbcType="VARCHAR" property="resId" />
+	    <result column="NAME" jdbcType="VARCHAR" property="name" />
+	    <result column="RES_URL" jdbcType="VARCHAR" property="resUrl" />
+    </resultMap>
+
+    <insert id="create" parameterType="org.minxc.emp.system.impl.model.ResourceLinkEntity">
+		INSERT INTO YMMG_RESOURCE_LINK (ID, RES_ID, NAME, 
+      RES_URL)
+   	 values (#{id,jdbcType=VARCHAR}, #{resId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{resUrl,jdbcType=VARCHAR})
+	</insert>
+
+    <select id="get" parameterType="java.lang.String" resultMap="RelResource">
+		SELECT * FROM YMMG_RESOURCE_LINK 
+		WHERE 
+		ID = #{id}
+	</select>
+
+    <select id="getByResourceId" parameterType="java.lang.String" resultMap="RelResource">
+		SELECT * FROM YMMG_RESOURCE_LINK 
+		WHERE 
+		RES_ID =#{resId}
+		ORDER BY ID DESC
+	</select>
+
+    <select id="query" parameterType="java.util.Map" resultMap="RelResource">
+        SELECT * FROM YMMG_RESOURCE_LINK
+        <where>
+            <if test="whereSql!=null">
+                ${whereSql}
+            </if>
+        </where>
+        <if test="orderBySql!=null">
+            ORDER BY ${orderBySql}
+        </if>
+        <if test="orderBySql==null">
+            ORDER BY ID DESC
+        </if>
+    </select>
+
+    <update id="update" parameterType="org.minxc.emp.system.impl.model.ResourceLinkEntity">
+		UPDATE YMMG_RESOURCE_LINK SET
+		RES_ID = #{resId,jdbcType=VARCHAR},
+		NAME = #{name,jdbcType=VARCHAR},
+		RES_URL = #{resUrl,jdbcType=VARCHAR}
+		WHERE
+		ID = #{id}
+	</update>
+
+    <delete id="remove" parameterType="java.lang.String">
+		DELETE FROM YMMG_RESOURCE_LINK 
+		WHERE
+		ID = #{id}
+	</delete>
+
+
+    <delete id="removeByResId" parameterType="java.lang.String">
+		DELETE FROM YMMG_RESOURCE_LINK 
+		WHERE
+		RES_ID = #{resId}
+	</delete>
+
+</mapper>

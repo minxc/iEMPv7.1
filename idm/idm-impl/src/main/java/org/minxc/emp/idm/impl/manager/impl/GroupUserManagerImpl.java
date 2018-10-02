@@ -7,12 +7,9 @@ import javax.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
 import org.minxc.emp.common.manager.impl.CommonManager;
 import org.minxc.emp.core.api.query.QueryFilter;
-import org.springframework.cache.CacheManager;
+import org.minxc.emp.core.cache.Cache;
+import org.minxc.emp.core.util.BeanUtils;
 import org.springframework.stereotype.Service;
-
-//import com.dstz.base.core.cache.ICache;
-import com.minxc.emp.core.util.BeanUtils;
-
 import org.minxc.emp.idm.api.context.CurrentContext;
 import org.minxc.emp.idm.impl.dao.GroupUserDao;
 import org.minxc.emp.idm.impl.manager.GroupUserManager;
@@ -27,11 +24,11 @@ public class GroupUserManagerImpl extends CommonManager<String, GroupUserEntity>
 	@Resource
 	GroupUserDao groupUserDao;
 
-//    @Resource
-//    ICache iCache;
+    @Resource
+    Cache iCache;
 
-	@Resource
-	private CacheManager cacheManager;
+//	@Resource
+//	private CacheManager cacheManager;
 
 	public int updateUserPost(String id, String relId) {
 		return groupUserDao.updateUserPost(id, relId);
@@ -61,8 +58,8 @@ public class GroupUserManagerImpl extends CommonManager<String, GroupUserEntity>
 
 		// 删除缓存。
 		String userKey = CurrentContext.CURRENT_ORG + orgUser.getUserId();
-		cacheManager.getCache("idm").evict(userKey);
-//        iCache.delByKey(userKey);
+//		cacheManager.getCache("idm").evict(userKey);
+        iCache.delByKey(userKey);
 	}
 
 	public GroupUserEntity getGroupUserMaster(String userId) {

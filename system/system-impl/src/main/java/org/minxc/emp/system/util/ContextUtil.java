@@ -2,11 +2,10 @@ package org.minxc.emp.system.util;
 
 import java.util.Locale;
 
+import org.minxc.emp.core.util.BeanUtils;
 import org.minxc.emp.idm.api.context.CurrentContext;
 import org.minxc.emp.idm.api.model.Group;
 import org.minxc.emp.idm.api.model.User;
-
-import com.minxc.emp.core.util.BeanUtils;
 
 
 /**

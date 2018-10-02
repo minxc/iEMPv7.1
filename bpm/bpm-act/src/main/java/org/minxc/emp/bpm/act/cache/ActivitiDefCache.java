@@ -5,11 +5,10 @@ import java.util.Map;
 import javax.annotation.Resource;
 import org.activiti.engine.impl.persistence.deploy.DeploymentCache;
 import org.activiti.engine.impl.persistence.entity.ProcessDefinitionEntity;
-import org.minxc.core.cache.Cache;
+import org.minxc.emp.core.cache.Cache;
+import org.minxc.emp.core.util.AppContextUtil;
+import org.minxc.emp.core.util.FileUtil;
 import org.springframework.stereotype.Component;
-
-import com.minxc.emp.core.util.AppContextUtil;
-import com.minxc.emp.core.util.FileUtil;
 
 @Component
 public class ActivitiDefCache implements DeploymentCache<ProcessDefinitionEntity> {

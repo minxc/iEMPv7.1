@@ -1,7 +1,6 @@
 package org.minxc.emp.bpm.plugin.task.userassign.plugin;
 
 import com.alibaba.fastjson.JSON;
-import com.minxc.emp.core.util.BeanUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +18,7 @@ import org.minxc.emp.bpm.engine.plugin.session.BpmTaskPluginSession;
 import org.minxc.emp.bpm.engine.plugin.session.BpmUserCalcPluginSession;
 import org.minxc.emp.bpm.plugin.task.userassign.def.UserAssignPluginDef;
 import org.minxc.emp.bpm.plugin.task.userassign.plugin.UserAssignRuleCalc;
+import org.minxc.emp.core.util.BeanUtils;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Component;
 

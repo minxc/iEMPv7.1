@@ -10,8 +10,7 @@ import org.minxc.emp.biz.api.model.IBusTableRel;
 import org.minxc.emp.biz.api.model.IBusinessObject;
 import org.minxc.emp.biz.api.model.IBusinessTable;
 import org.minxc.emp.biz.core.model.BusTableRelFk;
-
-import com.minxc.emp.core.util.BeanUtils;
+import org.minxc.emp.core.util.BeanUtils;
 
 public class BusTableRel implements IBusTableRel, Serializable {
 	

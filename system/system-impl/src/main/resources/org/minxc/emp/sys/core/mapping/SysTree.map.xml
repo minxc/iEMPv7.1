@@ -1,29 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.dstz.sys2.dao.SysTreeDao">
-    <resultMap id="SysTree" type="com.dstz.sys2.model.SysTree">
-        <id property="id" column="id_" jdbcType="VARCHAR"/>
-        <result property="key" column="key_" jdbcType="VARCHAR"/>
-        <result property="name" column="name_" jdbcType="VARCHAR"/>
-        <result property="desc" column="desc_" jdbcType="VARCHAR"/>
-        <result property="system" column="system_" jdbcType="NUMERIC"/>
+<mapper namespace="org.minxc.emp.system.impl.dao.SysTreeDao">
+    <resultMap id="SysTree" type="org.minxc.emp.system.impl.model.TreeEntity">
+        <id column="ID" jdbcType="VARCHAR" property="id" />
+	    <result column="KEY" jdbcType="VARCHAR" property="key" />
+	    <result column="NAME" jdbcType="VARCHAR" property="name" />
+	    <result column="DESCRIPTION" jdbcType="VARCHAR" property="description" />
+	    <result column="IS_SYSTEM" jdbcType="DECIMAL" property="isSystem" />
     </resultMap>
 
-    <insert id="create" parameterType="com.dstz.sys2.model.SysTree">
-		INSERT INTO sys_tree
-		(id_,key_,name_,desc_,system_)
-		VALUES 
-		(#{id,jdbcType=VARCHAR}, #{key,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{desc,jdbcType=VARCHAR}, #{system,jdbcType=NUMERIC})
-	</insert>
+    <insert id="create" parameterType="org.minxc.emp.system.impl.model.TreeEntity">
+	insert into YMMG_TREE (ID, KEY, NAME,
+		DESCRIPTION, IS_SYSTEM)
+		values (#{id,jdbcType=VARCHAR}, #{key,jdbcType=VARCHAR},
+		#{name,jdbcType=VARCHAR},
+		#{description,jdbcType=VARCHAR}, #{isSystem,jdbcType=DECIMAL})
+		</insert>
 
     <select id="get" parameterType="java.lang.String" resultMap="SysTree">
-		SELECT * FROM sys_tree 
+		SELECT * FROM YMMG_TREE 
 		WHERE 
-		id_=#{id}
+		ID=#{id}
 	</select>
 
     <select id="query" parameterType="java.util.Map" resultMap="SysTree">
-        SELECT * FROM sys_tree
+        SELECT * FROM YMMG_TREE
         <where>
             <if test="whereSql!=null">
                 ${whereSql}
@@ -33,24 +34,23 @@
             ORDER BY ${orderBySql}
         </if>
         <if test="orderBySql==null">
-            ORDER BY id_ DESC
+            ORDER BY ID DESC
         </if>
     </select>
 
-    <update id="update" parameterType="com.dstz.sys2.model.SysTree">
-		UPDATE sys_tree SET
-		key_=#{key,jdbcType=VARCHAR},
-		name_=#{name,jdbcType=VARCHAR},
-		desc_=#{desc,jdbcType=VARCHAR},
-		system_=#{system,jdbcType=NUMERIC}
-		WHERE
-		id_=#{id}
+    <update id="update" parameterType="org.minxc.emp.system.impl.model.TreeEntity">
+		 update YMMG_TREE
+    	set KEY = #{key,jdbcType=VARCHAR},
+	      NAME = #{name,jdbcType=VARCHAR},
+	      DESCRIPTION = #{description,jdbcType=VARCHAR},
+	      IS_SYSTEM = #{isSystem,jdbcType=DECIMAL}
+	    where ID = #{id,jdbcType=VARCHAR}
 	</update>
 
     <delete id="remove" parameterType="java.lang.String">
-		DELETE FROM sys_tree 
+		DELETE FROM YMMG_TREE 
 		WHERE
-		id_=#{id}
+		ID=#{id}
 	</delete>
 
 

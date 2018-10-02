@@ -1,7 +1,7 @@
 package org.minxc.emp.common.db.datasource;
 
-import com.minxc.emp.core.util.AppContextUtil;
 import org.apache.commons.lang3.StringUtils;
+import org.minxc.emp.core.util.AppContextUtil;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;

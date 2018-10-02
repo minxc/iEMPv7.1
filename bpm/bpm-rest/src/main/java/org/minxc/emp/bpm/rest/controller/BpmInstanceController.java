@@ -18,6 +18,7 @@ import org.minxc.emp.core.api.aop.annotation.ErrorCatching;
 import org.minxc.emp.core.api.query.QueryFilter;
 import org.minxc.emp.core.api.query.QueryOperator;
 import org.minxc.emp.core.api.response.impl.ResultMessage;
+import org.minxc.emp.core.util.StringUtil;
 import org.minxc.emp.bpm.act.service.BpmImageService;
 import org.minxc.emp.bpm.api.engine.data.BpmFlowDataAccessor;
 import org.minxc.emp.bpm.api.engine.data.result.BpmFlowData;
@@ -36,7 +37,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.github.pagehelper.Page;
-import com.minxc.emp.core.util.StringUtil;
 
 
 /**

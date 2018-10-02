@@ -1,8 +1,6 @@
 package org.minxc.emp.bpm.service;
 
 import com.alibaba.fastjson.JSONObject;
-import com.minxc.emp.core.util.BeanUtils;
-import com.minxc.emp.core.util.StringUtil;
 
 import java.util.Set;
 import javax.annotation.Resource;
@@ -19,6 +17,8 @@ import org.minxc.emp.bpm.api.service.BpmProcessDefService;
 import org.minxc.emp.bpm.api.service.BpmRightsFormService;
 import org.minxc.emp.bpm.engine.model.DefaultBpmProcessDef;
 import org.minxc.emp.core.api.exception.BusinessException;
+import org.minxc.emp.core.util.BeanUtils;
+import org.minxc.emp.core.util.StringUtil;
 import org.minxc.emp.form.api.model.FormCategory;
 import org.minxc.emp.form.api.model.FormType;
 import org.springframework.stereotype.Component;

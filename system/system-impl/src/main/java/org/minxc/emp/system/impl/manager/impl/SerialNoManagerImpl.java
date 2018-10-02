@@ -8,12 +8,11 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.minxc.emp.common.manager.impl.CommonManager;
+import org.minxc.emp.core.util.time.DateFormatUtil;
 import org.minxc.emp.system.impl.dao.SerialNoDao;
 import org.minxc.emp.system.impl.manager.SerialNoManager;
 import org.minxc.emp.system.impl.model.SerialNoEntity;
 import org.springframework.stereotype.Service;
-
-import com.minxc.emp.core.util.time.DateFormatUtil;
 
 
 @Service("serialNoManager")

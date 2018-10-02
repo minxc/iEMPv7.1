@@ -6,10 +6,10 @@ import org.minxc.emp.bpm.api.engine.plugin.context.PluginParse;
 import org.minxc.emp.bpm.api.engine.plugin.context.UserCalcPluginContext;
 import org.minxc.emp.bpm.api.engine.plugin.def.BpmPluginDef;
 import org.minxc.emp.bpm.api.engine.plugin.def.BpmUserCalcPluginDef;
+import org.minxc.emp.core.util.StringUtil;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.minxc.emp.core.util.StringUtil;
 
 public abstract class AbstractUserCalcPluginContext<T extends BpmUserCalcPluginDef>
 		implements

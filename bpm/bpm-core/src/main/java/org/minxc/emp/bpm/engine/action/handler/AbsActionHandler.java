@@ -2,8 +2,6 @@ package org.minxc.emp.bpm.engine.action.handler;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.minxc.emp.core.util.BeanUtils;
-import com.minxc.emp.core.util.StringUtil;
 
 import java.util.HashMap;
 import java.util.List;
@@ -37,6 +35,8 @@ import org.minxc.emp.bpm.engine.model.DefaultBpmProcessDef;
 import org.minxc.emp.bpm.engine.util.HandlerUtil;
 import org.minxc.emp.core.api.exception.BusinessException;
 import org.minxc.emp.core.api.exception.SystemException;
+import org.minxc.emp.core.util.BeanUtils;
+import org.minxc.emp.core.util.StringUtil;
 import org.minxc.emp.idm.api.model.User;
 import org.minxc.emp.system.util.ContextUtil;
 import org.slf4j.Logger;

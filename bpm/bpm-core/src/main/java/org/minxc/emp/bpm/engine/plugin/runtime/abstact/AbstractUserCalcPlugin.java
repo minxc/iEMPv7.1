@@ -14,10 +14,9 @@ import org.minxc.emp.bpm.engine.model.BpmIdentity;
 import org.minxc.emp.bpm.engine.plugin.plugindef.AbstractUserCalcPluginDef;
 import org.minxc.emp.bpm.engine.plugin.runtime.BpmUserCalcPlugin;
 import org.minxc.emp.bpm.engine.plugin.session.BpmUserCalcPluginSession;
+import org.minxc.emp.core.util.BeanUtils;
 import org.minxc.emp.idm.api.model.User;
 import org.minxc.emp.idm.api.service.UserService;
-
-import com.minxc.emp.core.util.BeanUtils;
 
 public abstract class AbstractUserCalcPlugin<M extends BpmTaskPluginDef> implements BpmUserCalcPlugin<M> {
 	@Resource

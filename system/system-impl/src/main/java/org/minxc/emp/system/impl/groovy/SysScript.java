@@ -13,8 +13,10 @@ import org.springframework.stereotype.Component;
  * 系统脚本
  * 常用的系统功能的脚本
  */
+
 @Component
 public class SysScript implements IScript {
+	
 	@Resource
 	SerialNoService serialNoService;
 	
@@ -28,7 +30,7 @@ public class SysScript implements IScript {
 	}
 	
 	
-	public User getCuurentUser() {
+	public User getCurrentUser() {
 		return ContextUtil.getCurrentUser();
 	}
 }

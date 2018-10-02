@@ -1,6 +1,6 @@
 package org.minxc.emp.system.impl.manager;
 
-//import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSON;
 
 import java.util.List;
 import java.util.Map;
@@ -28,9 +28,9 @@ public interface WorkbenchPanelManager  extends Manager<String, WorkbenchPanel> 
      * @return
      */
 
-//    JSON getPanelData(Map<String, String> requstParam);
-//
-//    JSON getDataByInterFace(QueryFilter filter, String dataSource);
+    JSON getPanelData(Map<String, String> requstParam);
+
+    JSON getDataByInterFace(QueryFilter filter, String dataSource);
 
     /**
      * 获取可用的日程

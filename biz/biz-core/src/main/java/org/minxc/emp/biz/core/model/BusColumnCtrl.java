@@ -1,10 +1,9 @@
 package org.minxc.emp.biz.core.model;
 
-import com.minxc.emp.core.impl.model.AbstractCommonModel;
-
 import javax.validation.constraints.NotEmpty;
 
 import org.minxc.emp.biz.api.model.IBusColumnCtrl;
+import org.minxc.emp.core.impl.model.AbstractCommonModel;
 
 public class BusColumnCtrl extends AbstractCommonModel implements IBusColumnCtrl {
 	/**

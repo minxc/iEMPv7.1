@@ -3,8 +3,6 @@ package org.minxc.emp.bpm.plugin.execution.nodemessage.context;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.minxc.emp.core.util.AppContextUtil;
-import com.minxc.emp.core.util.StringUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +15,8 @@ import org.minxc.emp.bpm.plugin.execution.nodemessage.def.NodeMessagePluginDef;
 import org.minxc.emp.bpm.plugin.execution.nodemessage.plugin.NodeMessagePlugin;
 import org.minxc.emp.bpm.plugin.task.userassign.context.UserAssignPluginContext;
 import org.minxc.emp.bpm.plugin.task.userassign.def.UserAssignPluginDef;
+import org.minxc.emp.core.util.AppContextUtil;
+import org.minxc.emp.core.util.StringUtil;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 

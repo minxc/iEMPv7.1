@@ -1,6 +1,4 @@
 package org.minxc.emp.system.impl.dao;
-
-
 import java.util.List;
 import java.util.Map;
 

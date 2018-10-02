@@ -1,17 +1,15 @@
 package org.activiti.engine.impl.el;
 
-import com.minxc.emp.core.util.AppContextUtil;
-
 import java.util.Map;
 import org.activiti.engine.delegate.DelegateExecution;
 import org.activiti.engine.impl.Condition;
 import org.minxc.emp.basis.api.groovy.IGroovyScriptEngine;
-import org.minxc.emp.bpm.api.constant.ActionType;
 import org.minxc.emp.bpm.api.engine.action.cmd.ActionCmd;
 import org.minxc.emp.bpm.api.engine.action.cmd.BaseActionCmd;
 import org.minxc.emp.bpm.api.engine.context.BpmContext;
 import org.minxc.emp.bpm.api.exception.BpmStatusCode;
 import org.minxc.emp.core.api.exception.BusinessException;
+import org.minxc.emp.core.util.AppContextUtil;
 
 public class GroovyCondition implements Condition {
 	private static final long serialVersionUID = -5577703954744892854L;
@@ -22,7 +20,7 @@ public class GroovyCondition implements Condition {
 	}
 
 	public boolean evaluate(String arg0, DelegateExecution execution) {
-		Map maps = execution.getVariables();
+		Map<String, Object> maps = execution.getVariables();
 		maps.put("variableScope", execution);
 		ActionCmd cmd = BpmContext.getActionModel();
 		maps.putAll(cmd.getBizDataMap());

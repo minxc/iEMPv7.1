@@ -4,10 +4,9 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 import org.minxc.emp.basis.api.jms.model.msg.NotifyMessage;
+import org.minxc.emp.core.util.BeanUtils;
 import org.minxc.emp.idm.api.model.User;
 import org.springframework.stereotype.Component;
-
-import com.minxc.emp.core.util.BeanUtils;
 
 import lombok.extern.slf4j.Slf4j;
 

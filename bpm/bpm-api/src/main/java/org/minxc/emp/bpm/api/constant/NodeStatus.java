@@ -1,10 +1,7 @@
 package org.minxc.emp.bpm.api.constant;
 
 /**
- * 节点状态。
- * <pre>
- * 描述：流程节点状态。
- * </pre>
+ * 流程节点状态。
  */
 public enum NodeStatus {
 

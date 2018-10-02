@@ -1,6 +1,8 @@
 package org.minxc.emp.idm.adaptor;
 
 
+import org.minxc.emp.core.util.BeanCopierUtils;
+import org.minxc.emp.core.util.BeanUtils;
 import org.minxc.emp.idm.api.constant.GroupTypeConstant;
 import org.minxc.emp.idm.api.model.Group;
 import org.minxc.emp.idm.api.model.GroupType;
@@ -17,8 +19,6 @@ import org.springframework.stereotype.Service;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.minxc.emp.core.util.BeanCopierUtils;
-import com.minxc.emp.core.util.BeanUtils;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;

@@ -2,8 +2,6 @@ package org.minxc.emp.bpm.api.constant;
 
 /**
  * 审批状态
- * <pre>
- * </pre>
  */
 public enum OpinionStatus {
     /**

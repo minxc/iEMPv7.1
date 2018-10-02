@@ -2,6 +2,7 @@ package org.minxc.emp.system.impl.manager.impl;
 
 import org.minxc.emp.common.db.id.UniqueIdUtil;
 import org.minxc.emp.common.manager.impl.CommonManager;
+import org.minxc.emp.core.cache.Cache;
 import org.minxc.emp.system.impl.dao.ResRoleDao;
 import org.minxc.emp.system.impl.manager.ResRoleManager;
 import org.minxc.emp.system.impl.model.RoleResouceLinkEntity;
@@ -25,103 +26,99 @@ import java.util.*;
  */
 @Service("resRoleManager")
 public class ResRoleManagerImpl extends CommonManager<String, RoleResouceLinkEntity> implements ResRoleManager {
-   
+
+	@Resource
+	private ResRoleDao resRoleDao;
 	
 	@Resource
-    ResRoleDao resRoleDao;
-//    @Resource
-//    ICache iCache;
+	private Cache cache;    //内控缓存，生存周期是和应用服务器启动维持一致
 
-    public final String RESOURCE_URL = "RES_URL_";
+	public final String RESOURCE_URL = "RES_URL_";
 
-    public final String RESOURCE_RES = "SYS_RES_";
+	public final String RESOURCE_RES = "SYS_RES_";
 
-    @Override
-    public List<RoleResouceLinkEntity> getAllByRoleId(String roleId) {
+	@Override
+	public List<RoleResouceLinkEntity> getAllByRoleId(String roleId) {
+		return resRoleDao.getByRoleId(roleId);
+	}
 
-        return resRoleDao.getByRoleId(roleId);
-    }
+	@Override
+	public void assignResByRoleSys(String resIds, String applicationId, String roleId) {
+		resRoleDao.removeByRoleAndApplicationId(roleId, applicationId);
+		String[] aryRes = resIds.split(",");
+		for (String resId : aryRes) {
+			if ("0".equals(resId))
+				continue;
+			RoleResouceLinkEntity resRole = new RoleResouceLinkEntity();
+			resRole.setId(UniqueIdUtil.getSuid());
+			resRole.setRoleId(roleId);
+			resRole.setApplicationId(applicationId);
+			resRole.setResId(resId);
+			resRoleDao.create(resRole);
+		}
 
+	}
 
-    @Override
-    public void assignResByRoleSys(String resIds, String systemId, String roleId) {
-        resRoleDao.removeByRoleAndSystem(roleId, systemId);
+	@Override
+	public Map<String, Set<String>> getResRoleBySystem(String applicationId) {
+		String resStr = RESOURCE_RES + applicationId;
+		if (cache.containKey(resStr)) {
+			return (Map<String, Set<String>>) cache.getByKey(resStr);
+		}
 
-        String[] aryRes = resIds.split(",");
-        for (String resId : aryRes) {
-            if ("0".equals(resId)) continue;
-            RoleResouceLinkEntity resRole = new RoleResouceLinkEntity();
-            resRole.setId(UniqueIdUtil.getSuid());
-            resRole.setRoleId(roleId);
-            resRole.setSystemId(systemId);
-            resRole.setResId(resId);
-            resRoleDao.create(resRole);
-        }
+		List<RoleResouceLinkEntity> list = resRoleDao.getResRoleByApplicationId(applicationId);
+		Map<String, Set<String>> map = new HashMap<String, Set<String>>();
 
-    }
+		for (RoleResouceLinkEntity res : list) {
+			String resAlias = res.getResAlias();
+			if (map.containsKey(resAlias)) {
+				Set<String> set = map.get(resAlias);
+				set.add(res.getRoleAlias());
+			} else {
+				Set<String> set = new HashSet<String>();
+				set.add(res.getRoleAlias());
+				map.put(resAlias, set);
+			}
+		}
+		cache.add(resStr, map);
+		return map;
+	}
 
-    @Override
-    public Map<String, Set<String>> getResRoleBySystem(String systemId) {
-        String resStr = RESOURCE_RES + systemId;
-//        if (iCache.containKey(resStr)) {
-//            return (Map<String, Set<String>>) iCache.getByKey(resStr);
-//        }
+	@Override
+	public Map<String, Set<String>> getUrlRoleBySystem(String applicationId) {
+		String urlStr = RESOURCE_URL + applicationId;
+		if (cache.containKey(urlStr)) {
+			return (Map<String, Set<String>>) cache.getByKey(urlStr);
+		}
 
-        List<RoleResouceLinkEntity> list = resRoleDao.getResRoleBySystemId(systemId);
-        Map<String, Set<String>> map = new HashMap<String, Set<String>>();
+		List<RoleResouceLinkEntity> list = resRoleDao.getResRoleByApplicationId(applicationId);
+		List<RoleResouceLinkEntity> urlList = resRoleDao.getUrlRoleByApplicationId(applicationId);
 
-        for (RoleResouceLinkEntity res : list) {
-            String resAlias = res.getResAlias();
-            if (map.containsKey(resAlias)) {
-                Set<String> set = map.get(resAlias);
-                set.add(res.getRoleAlias());
-            } else {
-                Set<String> set = new HashSet<String>();
-                set.add(res.getRoleAlias());
-                map.put(resAlias, set);
-            }
-        }
-//        iCache.add(resStr, map);
-        return map;
-    }
+		urlList.addAll(list);
 
-    @Override
-    public Map<String, Set<String>> getUrlRoleBySystem(String systemId) {
-        String urlStr = RESOURCE_URL + systemId;
-//        if (iCache.containKey(urlStr)) {
-//            return (Map<String, Set<String>>) iCache.getByKey(urlStr);
-//        }
+		Map<String, Set<String>> map = new HashMap<String, Set<String>>();
 
-        List<RoleResouceLinkEntity> list = resRoleDao.getResRoleBySystemId(systemId);
-        List<RoleResouceLinkEntity> urlList = resRoleDao.getUrlRoleBySystemId(systemId);
+		for (RoleResouceLinkEntity res : list) {
+			String url = res.getUrl();
+			if (map.containsKey(url)) {
+				Set<String> set = map.get(url);
+				set.add(res.getRoleAlias());
+			} else {
+				Set<String> set = new HashSet<String>();
+				set.add(res.getRoleAlias());
+				map.put(url, set);
+			}
+		}
+		// 添加到缓存
+		cache.add(urlStr, map);
+		return map;
+	}
 
-        urlList.addAll(list);
-
-        Map<String, Set<String>> map = new HashMap<String, Set<String>>();
-
-        for (RoleResouceLinkEntity res : list) {
-            String url = res.getUrl();
-            if (map.containsKey(url)) {
-                Set<String> set = map.get(url);
-                set.add(res.getRoleAlias());
-            } else {
-                Set<String> set = new HashSet<String>();
-                set.add(res.getRoleAlias());
-                map.put(url, set);
-            }
-        }
-        //添加到缓存
-//        iCache.add(urlStr, map);
-        return map;
-    }
-
-    @Override
-    public void cleanResCache(String systemId) {
-        String urlStr = RESOURCE_URL + systemId;
-        String resStr = RESOURCE_RES + systemId;
-//        iCache.delByKey(urlStr);
-//        iCache.delByKey(resStr);
-    }
-
-
+	@Override
+	public void cleanResCache(String systemId) {
+		String urlStr = RESOURCE_URL + systemId;
+		String resStr = RESOURCE_RES + systemId;
+		cache.delByKey(urlStr);
+		cache.delByKey(resStr);
+	}
 }

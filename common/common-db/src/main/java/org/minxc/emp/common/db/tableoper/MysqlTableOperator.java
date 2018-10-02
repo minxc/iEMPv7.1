@@ -1,10 +1,10 @@
 package org.minxc.emp.common.db.tableoper;
 
-import com.minxc.emp.core.util.StringUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.minxc.emp.common.db.model.table.ColumnEntity;
 import org.minxc.emp.common.db.model.table.TableEntity;
 import org.minxc.emp.core.api.constant.ColumnType;
+import org.minxc.emp.core.util.StringUtil;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import org.minxc.emp.common.db.api.table.DbTypeEnum;

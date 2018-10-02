@@ -2,8 +2,6 @@ package org.minxc.emp.bpm.engine.parser.flow;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.minxc.emp.core.util.AppContextUtil;
-import com.minxc.emp.core.util.ValidateUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +12,8 @@ import org.minxc.emp.bpm.api.engine.plugin.def.BpmDef;
 import org.minxc.emp.bpm.api.engine.plugin.def.BpmPluginDef;
 import org.minxc.emp.bpm.engine.model.DefaultBpmProcessDef;
 import org.minxc.emp.bpm.engine.parser.flow.AbsFlowParse;
+import org.minxc.emp.core.util.AppContextUtil;
+import org.minxc.emp.core.util.ValidateUtil;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Component;
 

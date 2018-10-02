@@ -11,11 +11,10 @@ import org.minxc.emp.bpm.engine.plugin.runtime.abstact.AbstractBpmTaskPlugin;
 import org.minxc.emp.bpm.engine.plugin.session.BpmTaskPluginSession;
 import org.minxc.emp.bpm.plugin.task.ruleskip.def.JumpRule;
 import org.minxc.emp.bpm.plugin.task.ruleskip.def.RuleSkipPluginDef;
+import org.minxc.emp.core.util.BeanUtils;
+import org.minxc.emp.core.util.StringUtil;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Component;
-
-import com.minxc.emp.core.util.BeanUtils;
-import com.minxc.emp.core.util.StringUtil;
 
 @Component
 public class RuleSkipPlugin extends AbstractBpmTaskPlugin<BpmTaskPluginSession, RuleSkipPluginDef> {

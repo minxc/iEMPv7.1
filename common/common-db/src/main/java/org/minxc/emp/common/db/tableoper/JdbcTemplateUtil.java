@@ -3,9 +3,8 @@ package org.minxc.emp.common.db.tableoper;
 import java.sql.Connection;
 import java.sql.Statement;
 
-
-import com.minxc.emp.core.util.AppContextUtil;
 import org.minxc.emp.core.api.exception.BusinessException;
+import org.minxc.emp.core.util.AppContextUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;

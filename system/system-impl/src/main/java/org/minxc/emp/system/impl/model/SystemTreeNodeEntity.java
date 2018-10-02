@@ -4,9 +4,8 @@ import java.util.List;
 
 import javax.validation.constraints.NotEmpty;
 
+import org.minxc.emp.core.impl.model.AbstractCommonModel;
 import org.minxc.emp.system.api.model.SystemTreeNode;
-
-import com.minxc.emp.core.impl.model.AbstractCommonModel;
 
 /**
  * 系统树节点

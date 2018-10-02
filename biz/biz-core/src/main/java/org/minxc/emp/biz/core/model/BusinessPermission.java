@@ -1,8 +1,6 @@
 package org.minxc.emp.biz.core.model;
 
 import com.alibaba.fastjson.JSONObject;
-import com.minxc.emp.core.impl.model.AbstractCommonModel;
-import com.minxc.emp.core.util.JsonUtil;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,6 +13,8 @@ import org.minxc.emp.biz.api.model.permission.IBusColumnPermission;
 import org.minxc.emp.biz.api.model.permission.IBusObjPermission;
 import org.minxc.emp.biz.api.model.permission.IBusTablePermission;
 import org.minxc.emp.biz.core.model.permission.BusObjPermission;
+import org.minxc.emp.core.impl.model.AbstractCommonModel;
+import org.minxc.emp.core.util.JsonUtil;
 
 public class BusinessPermission extends AbstractCommonModel implements IBusinessPermission {
 	/** 

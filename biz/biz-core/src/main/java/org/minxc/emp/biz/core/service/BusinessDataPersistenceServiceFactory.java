@@ -7,8 +7,7 @@ import org.minxc.emp.biz.core.model.BusinessData;
 import org.minxc.emp.biz.core.model.BusinessObject;
 import org.minxc.emp.biz.core.service.BusinessDataPersistenceService;
 import org.minxc.emp.core.api.exception.BusinessException;
-
-import com.minxc.emp.core.util.AppContextUtil;
+import org.minxc.emp.core.util.AppContextUtil;
 
 public class BusinessDataPersistenceServiceFactory {
 	private BusinessDataPersistenceServiceFactory() {

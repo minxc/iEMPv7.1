@@ -1,11 +1,11 @@
 package org.minxc.emp.common.db.table.util;
 
-import com.minxc.emp.core.util.AppContextUtil;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import org.minxc.emp.common.db.api.table.ViewOperator;
 import org.minxc.emp.common.db.table.BaseTableMeta;
 import org.minxc.emp.common.db.table.factory.DatabaseFactory;
+import org.minxc.emp.core.util.AppContextUtil;
 
 public class MetaDataUtil {
 

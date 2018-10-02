@@ -12,8 +12,7 @@ import org.minxc.emp.bpm.api.engine.action.handler.ActionHandler;
 import org.minxc.emp.bpm.api.model.def.NodeProperties;
 import org.minxc.emp.bpm.api.model.nodedef.BpmNodeDef;
 import org.minxc.emp.bpm.api.model.nodedef.Button;
-
-import com.minxc.emp.core.util.AppContextUtil;
+import org.minxc.emp.core.util.AppContextUtil;
 
 
 /**

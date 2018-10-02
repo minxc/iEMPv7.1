@@ -24,11 +24,10 @@ import org.minxc.emp.bpm.engine.plugin.runtime.BpmTaskPlugin;
 import org.minxc.emp.bpm.engine.plugin.session.BpmTaskPluginSession;
 import org.minxc.emp.bpm.engine.plugin.session.impl.DefaultBpmExecutionPluginSession;
 import org.minxc.emp.core.api.exception.BusinessException;
+import org.minxc.emp.core.util.BeanUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-
-import com.minxc.emp.core.util.BeanUtils;
 
 @Service
 public class TaskPluginCommand implements TaskCommand {

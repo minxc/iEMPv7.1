@@ -30,11 +30,10 @@ import org.minxc.emp.bpm.engine.model.DefaultBpmProcessDef;
 import org.minxc.emp.common.db.dboper.DbOperator;
 import org.minxc.emp.common.db.dboper.DbOperatorFactory;
 import org.minxc.emp.core.api.exception.SystemException;
+import org.minxc.emp.core.util.BeanUtils;
+import org.minxc.emp.core.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import com.minxc.emp.core.util.BeanUtils;
-import com.minxc.emp.core.util.StringUtil;
 
 @Component
 public class BpmBusDataHandle {

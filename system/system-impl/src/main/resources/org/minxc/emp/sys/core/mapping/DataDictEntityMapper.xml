@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.minxc.emp.system.impl.dao.DataDictDao">
+	<resultMap id="DataDict" type="org.minxc.emp.system.impl.model.DataDictEntity">
+		<id column="ID" jdbcType="VARCHAR" property="id" />
+	    <result column="PARENT_ID" jdbcType="VARCHAR" property="parentId" />
+	    <result column="KEY" jdbcType="VARCHAR" property="key" />
+	    <result column="NAME" jdbcType="VARCHAR" property="name" />
+	    <result column="DICT_KEY" jdbcType="VARCHAR" property="dictKey" />
+	    <result column="TYPE_ID" jdbcType="VARCHAR" property="typeId" />
+	    <result column="SEQ" jdbcType="DECIMAL" property="seq" />
+	    <result column="DICT_TYPE" jdbcType="VARCHAR" property="dictType" />
+	    <result column="IS_DELETE" jdbcType="VARCHAR" property="isDelete" />
+	    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+	</resultMap>
+	
+	<insert id="create" parameterType="org.minxc.emp.system.impl.model.DataDictEntity">
+	insert into YMMG_DATA_DICT (ID, PARENT_ID, KEY, 
+      NAME, DICT_KEY, TYPE_ID, 
+      SEQ, DICT_TYPE, IS_DELETE, 
+      CREATE_TIME)
+    values (#{id,jdbcType=VARCHAR}, #{parentId,jdbcType=VARCHAR}, #{key,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{dictKey,jdbcType=VARCHAR}, #{typeId,jdbcType=VARCHAR}, 
+      #{seq,jdbcType=DECIMAL}, #{dictType,jdbcType=VARCHAR}, #{isDelete,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP})
+	</insert>
+	
+	<select id="get"   parameterType="java.lang.String" resultMap="DataDict">
+		SELECT * FROM YMMG_DATA_DICT 
+		WHERE 
+		ID=#{id}
+	</select>
+	
+	<select id="query" parameterType="java.util.Map" resultMap="DataDict">
+		SELECT * FROM YMMG_DATA_DICT
+		<where>
+			<if test="whereSql!=null">
+				${whereSql}
+			</if>
+		</where>
+		<if test="orderBySql!=null">
+			ORDER BY ${orderBySql}
+		</if>
+		<if test="orderBySql==null">
+			ORDER BY ID DESC
+		</if>
+	</select>
+	
+	<update id="update" parameterType="org.minxc.emp.system.impl.model.DataDictEntity">
+		update YMMG_DATA_DICT
+    <set>
+      <if test="parentId != null">
+        PARENT_ID = #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="key != null">
+        KEY = #{key,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="dictKey != null">
+        DICT_KEY = #{dictKey,jdbcType=VARCHAR},
+      </if>
+      <if test="typeId != null">
+        TYPE_ID = #{typeId,jdbcType=VARCHAR},
+      </if>
+      <if test="seq != null">
+        SEQ = #{seq,jdbcType=DECIMAL},
+      </if>
+      <if test="dictType != null">
+        DICT_TYPE = #{dictType,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null">
+        IS_DELETE = #{isDelete,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+	</update>
+	
+	<delete id="remove" parameterType="java.lang.String">
+		DELETE FROM YMMG_DATA_DICT 
+		WHERE
+		ID = #{id}
+	</delete>
+	
+	<select id="getDictNodeList"   parameterType="java.util.Map" resultMap="DataDict">
+		SELECT * FROM YMMG_DATA_DICT  WHERE  DICT_KEY = #{dictKey} 
+		<if test="!hasRoot">and DICT_TYPE = 'node'</if> ;
+	</select>
+	
+	<select id="isExistDict"   parameterType="java.util.Map" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM YMMG_DATA_DICT  WHERE KEY = #{key} and DICT_TYPE = 'dict'
+		<if test="id!=null"> and ID != #{id}</if> ;
+	</select>
+	
+	<select id="isExistNode"   parameterType="java.util.Map" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM YMMG_DATA_DICT  WHERE  DICT_KEY = #{dictKey} and KEY = #{key} and DICT_TYPE = 'node'
+		<if test="id!=null"> and ID != #{id}</if>;
+	</select>
+	
+</mapper>

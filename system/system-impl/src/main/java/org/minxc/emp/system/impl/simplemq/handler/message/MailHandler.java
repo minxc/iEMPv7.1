@@ -9,13 +9,13 @@ import org.apache.commons.lang3.StringUtils;
 import org.minxc.emp.basis.api.jms.model.msg.NotifyMessage;
 import org.minxc.emp.basis.impl.simplemq.handler.msg.AbsNotifyMessageHandler;
 import org.minxc.emp.basis.impl.util.EmailUtil;
+import org.minxc.emp.core.util.JacksonUtil;
+import org.minxc.emp.core.util.PropertiesUtil;
 import org.minxc.emp.idm.api.model.User;
 import org.minxc.emp.system.api.service.SysIdentityConvert;
 import org.springframework.stereotype.Component;
 
 import com.alibaba.fastjson.JSON;
-import com.minxc.emp.core.util.JacksonUtil;
-import com.minxc.emp.core.util.PropertiesUtil;
 
 import lombok.extern.slf4j.Slf4j;
 

@@ -8,10 +8,10 @@ import org.minxc.emp.biz.api.constant.BusColumnCtrlType;
 import org.minxc.emp.biz.api.constant.BusTableRelType;
 import org.minxc.emp.biz.api.model.IBusTableRel;
 import org.minxc.emp.biz.api.model.IBusinessColumn;
+import org.minxc.emp.core.util.ThreadMapUtil;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.minxc.emp.core.util.ThreadMapUtil;
 
 /**
  * 自定义表单控件生成器父类，提供生成表单通用公共方法<br>

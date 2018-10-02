@@ -1,7 +1,6 @@
 package org.minxc.emp.idm.rest.controller;
 
 import com.github.pagehelper.Page;
-import com.minxc.emp.core.util.BeanUtils;
 
 import org.apache.commons.lang3.StringUtils;
 import org.minxc.emp.common.db.model.page.PageJson;
@@ -11,6 +10,7 @@ import org.minxc.emp.core.api.aop.annotation.ErrorCatching;
 import org.minxc.emp.core.api.query.QueryFilter;
 import org.minxc.emp.core.api.query.QueryOperator;
 import org.minxc.emp.core.api.response.impl.ResultMessage;
+import org.minxc.emp.core.util.BeanUtils;
 import org.minxc.emp.idm.api.model.Group;
 import org.minxc.emp.idm.impl.manager.GroupManager;
 import org.minxc.emp.idm.impl.manager.UserManager;

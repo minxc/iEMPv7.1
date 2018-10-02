@@ -15,8 +15,7 @@ import org.minxc.emp.bpm.core.model.BpmTask;
 import org.minxc.emp.bpm.engine.action.cmd.DefualtTaskActionCmd;
 import org.minxc.emp.bpm.engine.action.handler.AbsActionHandler;
 import org.minxc.emp.core.api.exception.BusinessException;
-
-import com.minxc.emp.core.util.StringUtil;
+import org.minxc.emp.core.util.StringUtil;
 
 public abstract class AbstractTaskActionHandler<T extends DefualtTaskActionCmd> extends AbsActionHandler<T> {
 	@Resource

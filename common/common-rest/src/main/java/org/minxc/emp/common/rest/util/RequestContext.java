@@ -1,9 +1,9 @@
 package org.minxc.emp.common.rest.util;
 
-import com.minxc.emp.core.util.BeanUtils;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.minxc.emp.core.util.BeanUtils;
 
 public class RequestContext {
 

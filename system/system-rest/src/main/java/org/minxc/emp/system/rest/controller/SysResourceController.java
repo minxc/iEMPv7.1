@@ -16,6 +16,7 @@ import org.minxc.emp.core.api.aop.annotation.ErrorCatching;
 import org.minxc.emp.core.api.exception.BusinessException;
 import org.minxc.emp.core.api.query.QueryFilter;
 import org.minxc.emp.core.api.response.impl.ResultMessage;
+import org.minxc.emp.core.util.BeanUtils;
 import org.minxc.emp.system.impl.manager.RelResourceManager;
 import org.minxc.emp.system.impl.manager.SubsystemManager;
 import org.minxc.emp.system.impl.manager.SysResourceManager;
@@ -27,7 +28,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.github.pagehelper.Page;
-import com.minxc.emp.core.util.BeanUtils;
 
 /**
  * 子系统资源 控制器类

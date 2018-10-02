@@ -13,11 +13,10 @@ import org.minxc.emp.bpm.core.model.BpmTaskApprove;
 import org.minxc.emp.common.db.id.UniqueIdUtil;
 import org.minxc.emp.common.manager.impl.CommonManager;
 import org.minxc.emp.core.api.query.QueryFilter;
+import org.minxc.emp.core.util.StringUtil;
 import org.minxc.emp.idm.api.model.User;
 import org.minxc.emp.system.util.ContextUtil;
 import org.springframework.stereotype.Service;
-
-import com.minxc.emp.core.util.StringUtil;
 
 @Service(value = "bpmInstanceManager")
 public class BpmInstanceManagerImpl extends CommonManager<String, BpmInstance> implements BpmInstanceManager {

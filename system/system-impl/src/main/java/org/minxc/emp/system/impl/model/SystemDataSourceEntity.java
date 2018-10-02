@@ -4,12 +4,11 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import org.minxc.emp.core.impl.model.AbstractCommonModel;
+import org.minxc.emp.core.util.JacksonUtil;
+import org.minxc.emp.core.util.JsonUtil;
 import org.minxc.emp.system.api.model.SystemDataSource;
 import org.minxc.emp.system.impl.model.def.SysDataSourceDefAttribute;
-
-import com.minxc.emp.core.impl.model.AbstractCommonModel;
-import com.minxc.emp.core.util.JacksonUtil;
-import com.minxc.emp.core.util.JsonUtil;
 
 import java.util.List;
 

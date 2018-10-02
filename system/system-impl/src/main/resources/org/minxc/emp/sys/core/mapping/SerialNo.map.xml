@@ -1,38 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.dstz.sys.core.dao.SerialNoDao">
-    <resultMap id="SerialNo" type="com.dstz.sys.core.model.SerialNo">
-        <id property="id" column="id_" jdbcType="VARCHAR"/>
-        <result property="name" column="name_" jdbcType="VARCHAR"/>
-        <result property="alias" column="alias_" jdbcType="VARCHAR"/>
-        <result property="regulation" column="regulation_" jdbcType="VARCHAR"/>
-        <result property="genType" column="gen_type_" jdbcType="NUMERIC"/>
-        <result property="noLength" column="no_length_" jdbcType="NUMERIC"/>
-        <result property="curDate" column="cur_date_" jdbcType="VARCHAR"/>
-        <result property="initValue" column="init_value_" jdbcType="NUMERIC"/>
-        <result property="curValue" column="cur_value_" jdbcType="NUMERIC"/>
-        <result property="step" column="step_" jdbcType="NUMERIC"/>
+<mapper namespace="org.minxc.emp.system.impl.dao.SerialNoDao">
+
+    <resultMap id="SerialNo" type="org.minxc.emp.system.impl.model.SerialNoEntity">
+        <id column="ID" jdbcType="VARCHAR" property="id" />
+    	<result column="NAME" jdbcType="VARCHAR" property="name" />
+    	<result column="ALIAS" jdbcType="VARCHAR" property="alias" />
+    	<result column="RULE" jdbcType="VARCHAR" property="rule" />
+    	<result column="GEN_TYPE" jdbcType="DECIMAL" property="genType" />
+	    <result column="NO_LENGTH" jdbcType="DECIMAL" property="noLength" />
+	    <result column="CUR_DATE" jdbcType="VARCHAR" property="curDate" />
+	    <result column="INIT_VALUE" jdbcType="DECIMAL" property="initValue" />
+	    <result column="CUR_VALUE" jdbcType="DECIMAL" property="curValue" />
+	    <result column="STEP" jdbcType="DECIMAL" property="step" />
     </resultMap>
 
     <sql id="columns">
-		id_,name_,alias_,regulation_,gen_type_,no_length_,cur_date_,init_value_,cur_value_,step_
+		ID, NAME, ALIAS, RULE, GEN_TYPE, NO_LENGTH, CUR_DATE, INIT_VALUE, CUR_VALUE, STEP
 	</sql>
 
-    <insert id="create" parameterType="com.dstz.sys.core.model.SerialNo">
-		INSERT INTO sys_serialno
-		(id_,name_,alias_,regulation_,gen_type_,no_length_,cur_date_,init_value_,cur_value_,step_)
-		VALUES 
-		(#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{alias,jdbcType=VARCHAR}, #{regulation,jdbcType=VARCHAR}, #{genType,jdbcType=NUMERIC}, #{noLength,jdbcType=NUMERIC}, #{curDate,jdbcType=VARCHAR}, #{initValue,jdbcType=NUMERIC}, #{curValue,jdbcType=NUMERIC}, #{step,jdbcType=NUMERIC})
+    <insert id="create" parameterType="org.minxc.emp.system.impl.model.SerialNoEntity">
+	  INSERT INTO YMMG_SERIALNO (ID, NAME, ALIAS, 
+      RULE, GEN_TYPE, NO_LENGTH, 
+      CUR_DATE, INIT_VALUE, CUR_VALUE, 
+      STEP)
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{alias,jdbcType=VARCHAR}, 
+      #{rule,jdbcType=VARCHAR}, #{genType,jdbcType=DECIMAL}, #{noLength,jdbcType=DECIMAL}, 
+      #{curDate,jdbcType=VARCHAR}, #{initValue,jdbcType=DECIMAL}, #{curValue,jdbcType=DECIMAL}, 
+      #{step,jdbcType=DECIMAL})
 	</insert>
 
     <select id="get" parameterType="java.lang.String" resultMap="SerialNo">
-		SELECT * FROM sys_serialno 
+		SELECT * FROM YMMG_SERIALNO 
 		WHERE 
-		id_=#{id}
+		ID=#{id}
 	</select>
 
     <select id="query" parameterType="java.util.Map" resultMap="SerialNo">
-        SELECT * FROM sys_serialno
+        SELECT * FROM YMMG_SERIALNO
         <where>
             <if test="whereSql!=null">
                 ${whereSql}
@@ -42,52 +47,52 @@
             ORDER BY ${orderBySql}
         </if>
         <if test="orderBySql==null">
-            ORDER BY id_ DESC
+            ORDER BY ID DESC
         </if>
     </select>
 
-    <update id="update" parameterType="com.dstz.sys.core.model.SerialNo">
-		UPDATE sys_serialno SET
-		name_=#{name,jdbcType=VARCHAR},
-		alias_=#{alias,jdbcType=VARCHAR},
-		regulation_=#{regulation,jdbcType=VARCHAR},
-		gen_type_=#{genType,jdbcType=NUMERIC},
-		no_length_=#{noLength,jdbcType=NUMERIC},
-		cur_date_=#{curDate,jdbcType=VARCHAR},
-		init_value_=#{initValue,jdbcType=NUMERIC},
-		cur_value_=#{curValue,jdbcType=NUMERIC},
-		step_=#{step,jdbcType=NUMERIC}
-		WHERE
-		id_=#{id}
+	<update id="update"
+		parameterType="org.minxc.emp.system.impl.model.SerialNoEntity">
+		UPDATE YMMG_SERIALNO
+		set NAME = #{name,jdbcType=VARCHAR},
+		ALIAS = #{alias,jdbcType=VARCHAR},
+		RULE = #{rule,jdbcType=VARCHAR},
+		GEN_TYPE = #{genType,jdbcType=DECIMAL},
+		NO_LENGTH = #{noLength,jdbcType=DECIMAL},
+		CUR_DATE = #{curDate,jdbcType=VARCHAR},
+		INIT_VALUE = #{initValue,jdbcType=DECIMAL},
+		CUR_VALUE = #{curValue,jdbcType=DECIMAL},
+		STEP = #{step,jdbcType=DECIMAL}
+		where ID = #{id,jdbcType=VARCHAR}
 	</update>
 
-    <update id="updByAlias" parameterType="com.dstz.sys.core.model.SerialNo">
-		UPDATE sys_serialno SET
-		cur_date_=#{curDate,jdbcType=VARCHAR},
-		cur_value_=#{newCurValue,jdbcType=NUMERIC}
-		WHERE alias_=#{alias,jdbcType=VARCHAR}
-		and cur_value_=#{curValue,jdbcType=NUMERIC}
+    <update id="updByAlias" parameterType="org.minxc.emp.system.impl.model.SerialNoEntity">
+		UPDATE YMMG_SERIALNO SET
+			CUR_DATE = #{curDate,jdbcType=VARCHAR},
+		CUR_VALUE = #{curValue,jdbcType=DECIMAL}
+		WHERE ALIAS = #{alias,jdbcType=VARCHAR}
+		AND CUR_VALUE = #{curValue,jdbcType=DECIMAL}
 	</update>
 
     <delete id="remove" parameterType="java.lang.String">
-		DELETE FROM sys_serialno 
+		DELETE FROM YMMG_SERIALNO 
 		WHERE
-		id_=#{id}
+		ID = #{id}
 	</delete>
 
 
     <select id="isAliasExisted" resultType="java.lang.Integer">
-        select count(*) from sys_serialno where alias_=#{alias}
-        <if test="id!=null">AND id_ !=#{id}</if>
+        SELECT COUNT(*) FROM YMMG_SERIALNO WHERE ALIAS=#{alias}
+        <if test="id!=null">AND ID !=#{id}</if>
     </select>
 
     <!-- start getByAlias  -->
     <select id="getByAlias" parameterType="String" resultMap="SerialNo">
         SELECT
         <include refid="columns"/>
-        FROM sys_serialno
+        FROM YMMG_SERIALNO
         WHERE
-        alias_=#{alias}
+        ALIAS=#{alias}
     </select>
     <!-- end getByAlias  -->
 

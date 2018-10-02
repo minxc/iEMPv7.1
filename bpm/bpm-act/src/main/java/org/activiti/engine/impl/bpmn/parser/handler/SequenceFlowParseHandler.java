@@ -1,7 +1,5 @@
 package org.activiti.engine.impl.bpmn.parser.handler;
 
-import java.util.List;
-import java.util.Map;
 import org.activiti.bpmn.model.BaseElement;
 import org.activiti.bpmn.model.SequenceFlow;
 import org.activiti.engine.delegate.Expression;

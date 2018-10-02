@@ -1,6 +1,5 @@
 package org.minxc.emp.common.db.table.impl.db2;
 
-import com.minxc.emp.core.util.BeanUtils;
 import org.minxc.emp.common.db.api.table.ViewOperator;
 import org.minxc.emp.common.db.api.table.model.Column;
 import org.minxc.emp.common.db.api.table.model.Table;
@@ -10,6 +9,7 @@ import org.minxc.emp.common.db.table.model.DefaultTable;
 import org.minxc.emp.common.db.table.util.SQLConst;
 import org.apache.commons.lang3.StringUtils;
 import org.minxc.emp.core.api.query.Page;
+import org.minxc.emp.core.util.BeanUtils;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;

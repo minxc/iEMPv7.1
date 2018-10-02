@@ -15,12 +15,11 @@ import org.minxc.emp.bpm.core.model.TaskIdentityLink;
 import org.minxc.emp.common.db.id.UniqueIdUtil;
 import org.minxc.emp.common.manager.impl.CommonManager;
 import org.minxc.emp.core.api.exception.BusinessException;
+import org.minxc.emp.core.util.BeanUtils;
+import org.minxc.emp.core.util.StringUtil;
 import org.minxc.emp.idm.api.model.Group;
 import org.minxc.emp.idm.api.service.GroupService;
 import org.springframework.stereotype.Service;
-
-import com.minxc.emp.core.util.BeanUtils;
-import com.minxc.emp.core.util.StringUtil;
 
 @Service(value = "taskIdentityLinkManager")
 public class TaskIdentityLinkManagerImpl extends CommonManager<String, TaskIdentityLink>

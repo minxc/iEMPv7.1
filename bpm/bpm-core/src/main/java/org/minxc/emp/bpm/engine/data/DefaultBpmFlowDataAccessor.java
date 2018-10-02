@@ -1,8 +1,6 @@
 package org.minxc.emp.bpm.engine.data;
 
 import com.alibaba.fastjson.JSONObject;
-import com.minxc.emp.core.util.BeanUtils;
-import com.minxc.emp.core.util.StringUtil;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -40,6 +38,8 @@ import org.minxc.emp.bpm.engine.data.handle.BpmBusDataHandle;
 import org.minxc.emp.bpm.engine.model.DefaultBpmProcessDef;
 import org.minxc.emp.core.api.exception.BusinessException;
 import org.minxc.emp.core.api.exception.SystemException;
+import org.minxc.emp.core.util.BeanUtils;
+import org.minxc.emp.core.util.StringUtil;
 import org.minxc.emp.form.api.model.FormCategory;
 import org.minxc.emp.form.api.model.FormType;
 import org.minxc.emp.form.api.model.IFormDef;

@@ -27,13 +27,12 @@ import org.minxc.emp.bpm.engine.plugin.session.BpmUserCalcPluginSession;
 import org.minxc.emp.bpm.plugin.execution.nodemessage.def.NodeMessage;
 import org.minxc.emp.bpm.plugin.execution.nodemessage.def.NodeMessagePluginDef;
 import org.minxc.emp.bpm.plugin.task.userassign.plugin.UserAssignRuleCalc;
+import org.minxc.emp.core.util.BeanUtils;
+import org.minxc.emp.core.util.StringUtil;
 import org.minxc.emp.system.util.ContextUtil;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import com.minxc.emp.core.util.BeanUtils;
-import com.minxc.emp.core.util.StringUtil;
 
 @Component
 public class NodeMessagePlugin extends AbstractBpmExecutionPlugin<BpmExecutionPluginSession, NodeMessagePluginDef> {

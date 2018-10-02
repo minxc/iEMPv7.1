@@ -1,6 +1,5 @@
 package org.minxc.emp.bpm.api.engine.action.cmd;
 
-
 import java.util.List;
 import java.util.Map;
 
@@ -10,8 +9,6 @@ import org.minxc.emp.bpm.api.model.inst.IBpmInstance;
 
 /**
  * 任务操作处理基础接口
- *
- * @author jeff
  */
 public interface ActionCmd {
 
@@ -52,10 +49,8 @@ public interface ActionCmd {
 
     /**
      * 获取下一步节点执行人。
-     * <pre>
      * 	键为节点ID
      *  值为接收人员。
-     * </pre>
      *
      * @return Map&lt;String,List&lt;BpmIdentity>>
      */

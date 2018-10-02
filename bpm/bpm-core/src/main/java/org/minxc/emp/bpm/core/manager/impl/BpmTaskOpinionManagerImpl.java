@@ -13,11 +13,10 @@ import org.minxc.emp.bpm.core.dao.BpmTaskOpinionDao;
 import org.minxc.emp.bpm.core.manager.BpmTaskOpinionManager;
 import org.minxc.emp.bpm.core.model.BpmTaskOpinion;
 import org.minxc.emp.common.manager.impl.CommonManager;
+import org.minxc.emp.core.util.BeanUtils;
 import org.minxc.emp.idm.api.model.User;
 import org.minxc.emp.system.util.ContextUtil;
 import org.springframework.stereotype.Service;
-
-import com.minxc.emp.core.util.BeanUtils;
 
 @Service(value = "bpmTaskOpinionManager")
 public class BpmTaskOpinionManagerImpl extends CommonManager<String, BpmTaskOpinion> implements BpmTaskOpinionManager {

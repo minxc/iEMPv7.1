@@ -8,9 +8,9 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import com.minxc.emp.core.util.BeanUtils;
 import org.minxc.emp.common.db.model.table.ColumnEntity;
 import org.minxc.emp.common.db.model.table.TableEntity;
+import org.minxc.emp.core.util.BeanUtils;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import org.minxc.emp.common.db.dboper.DbOperator;

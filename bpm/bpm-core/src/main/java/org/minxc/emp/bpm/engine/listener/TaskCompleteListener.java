@@ -26,12 +26,11 @@ import org.minxc.emp.bpm.core.model.BpmTaskOpinion;
 import org.minxc.emp.bpm.core.model.BpmTaskStack;
 import org.minxc.emp.bpm.engine.action.cmd.DefualtTaskActionCmd;
 import org.minxc.emp.bpm.engine.listener.AbstractTaskListener;
+import org.minxc.emp.core.util.BeanUtils;
 import org.minxc.emp.idm.api.model.User;
 import org.minxc.emp.system.util.ContextUtil;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Component;
-
-import com.minxc.emp.core.util.BeanUtils;
 
 @Component
 public class TaskCompleteListener extends AbstractTaskListener<DefualtTaskActionCmd> {

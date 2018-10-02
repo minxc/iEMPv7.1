@@ -13,10 +13,9 @@ import org.minxc.emp.basis.api.model.SysIdentity;
 import org.minxc.emp.bpm.engine.plugin.runtime.abstact.AbstractUserCalcPlugin;
 import org.minxc.emp.bpm.engine.plugin.session.BpmUserCalcPluginSession;
 import org.minxc.emp.bpm.plugin.usercalc.script.def.ScriptPluginDef;
+import org.minxc.emp.core.util.BeanUtils;
+import org.minxc.emp.core.util.StringUtil;
 import org.springframework.stereotype.Component;
-
-import com.minxc.emp.core.util.BeanUtils;
-import com.minxc.emp.core.util.StringUtil;
 
 @Component
 public class ScriptPlugin extends AbstractUserCalcPlugin<ScriptPluginDef> {

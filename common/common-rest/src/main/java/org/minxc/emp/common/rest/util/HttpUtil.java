@@ -1,8 +1,5 @@
 package org.minxc.emp.common.rest.util;
 
-import com.minxc.emp.core.util.FileUtil;
-import com.minxc.emp.core.util.MinxcX509TrustManager;
-import com.minxc.emp.core.util.ZipUtil;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.*;
@@ -13,6 +10,9 @@ import org.apache.http.impl.client.DefaultHttpClient;
 //import org.minxc.emp.base.core.util.MyX509TrustManager;
 //import org.minxc.emp.base.core.util.StringUtil;
 //import org.minxc.emp.base.core.util.ZipUtil;
+import org.minxc.emp.core.util.FileUtil;
+import org.minxc.emp.core.util.MinxcX509TrustManager;
+import org.minxc.emp.core.util.ZipUtil;
 
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;

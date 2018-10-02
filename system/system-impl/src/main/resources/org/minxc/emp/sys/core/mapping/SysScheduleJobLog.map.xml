@@ -1,190 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.dstz.sys.core.dao.SysScheduleJobLogDao">
+<mapper namespace="org.minxc.emp.system.impl.dao.SysScheduleJobLogDao">
 
-    <resultMap id="SysScheduleJobLog" type="com.dstz.sys.core.model.SysScheduleJobLog">
-        <id column="id" jdbcType="VARCHAR" property="id" />
-        <result column="job_id" jdbcType="VARCHAR" property="jobId" />
-        <result column="run_state" jdbcType="VARCHAR" property="runState" />
-        <result column="run_ms" jdbcType="INTEGER" property="runMs" />
-        <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
-        <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
-        <result column="create_by_" jdbcType="VARCHAR" property="createBy" />
-        <result column="create_time_" jdbcType="TIMESTAMP" property="createTime" />
-        <result column="update_by_" jdbcType="VARCHAR" property="updateBy" />
-        <result column="update_time_" jdbcType="TIMESTAMP" property="updateTime" />
-        <result column="delete_flag_" jdbcType="BIT" property="deleteFlag" />
+    <resultMap id="SysScheduleJobLog" type="org.minxc.emp.system.impl.model.SystemScheduleJobLogEntity">
+        <id column="ID" jdbcType="VARCHAR" property="id" />
+	    <result column="JOB_ID" jdbcType="VARCHAR" property="jobId" />
+	    <result column="RUN_STATE" jdbcType="VARCHAR" property="runState" />
+	    <result column="RUN_MS" jdbcType="DECIMAL" property="runMs" />
+	    <result column="START_TIME" jdbcType="TIMESTAMP" property="startTime" />
+	    <result column="END_TIME" jdbcType="TIMESTAMP" property="endTime" />
+	    <result column="CREATE_BY" jdbcType="VARCHAR" property="createBy" />
+	    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+	    <result column="UPDATE_BY" jdbcType="VARCHAR" property="updateBy" />
+	    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+	    <result column="IS_DELETE" jdbcType="DECIMAL" property="isDelete" />
     </resultMap>
 
-    <resultMap extends="SysScheduleJobLog" id="SysScheduleJobLogBlobs" type="com.dstz.sys.core.model.SysScheduleJobLog">
-        <result column="content" jdbcType="LONGVARCHAR" property="content" />
+  	<resultMap extends="SysScheduleJobLog" id="SysScheduleJobLogBlobs" type="org.minxc.emp.system.impl.model.SystemScheduleJobLogEntity">
+        <result column="CONTENT" jdbcType="CLOB" property="content" />
     </resultMap>
-
-
 
     <sql id="Base_Column_List">
-        id, job_id, run_state, run_ms, start_time, end_time, create_by_, create_time_, update_by_,
-        update_time_, delete_flag_
+    ID, JOB_ID, RUN_STATE, RUN_MS, START_TIME, END_TIME, CREATE_BY, CREATE_TIME, UPDATE_BY, 
+    UPDATE_TIME, IS_DELETE, CONTENT
+  </sql>
+  
+  	<sql id="Blob_Column_List">
+        CONTENT
     </sql>
 
-    <sql id="Blob_Column_List">
-        content
-    </sql>
-
-
-    <insert id="create" parameterType="com.dstz.sys.core.model.SysScheduleJobLog">
-        insert into sys_schedule_job_log (id, job_id, run_state,
-          run_ms, start_time, end_time,
-          create_by_, create_time_, update_by_,
-          update_time_, delete_flag_, content
-          )
-        values (#{id,jdbcType=VARCHAR}, #{jobId,jdbcType=VARCHAR}, #{runState,jdbcType=VARCHAR},
-          #{runMs,jdbcType=INTEGER}, #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP},
-          #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR},
-          #{updateTime,jdbcType=TIMESTAMP}, #{deleteFlag,jdbcType=BIT}, #{content,jdbcType=LONGVARCHAR}
+    <insert id="create" parameterType="org.minxc.emp.system.impl.model.SystemScheduleJobLogEntity">
+       insert into YMMG_SCHEDULE_JOB_LOG (ID, JOB_ID, RUN_STATE, 
+      RUN_MS, START_TIME, END_TIME, 
+      CREATE_BY, CREATE_TIME, UPDATE_BY, 
+      UPDATE_TIME, IS_DELETE, CONTENT
+      )
+    values (#{id,jdbcType=VARCHAR}, #{jobId,jdbcType=VARCHAR}, #{runState,jdbcType=VARCHAR}, 
+      #{runMs,jdbcType=DECIMAL}, #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, 
+      #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{isDelete,jdbcType=DECIMAL}, #{content,jdbcType=CLOB}
+      )
     </insert>
 
-    <insert id="insertSelective" parameterType="com.dstz.sys.core.model.SysScheduleJobLog">
-        insert into sys_schedule_job_log
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                id,
-            </if>
-            <if test="jobId != null">
-                job_id,
-            </if>
-            <if test="runState != null">
-                run_state,
-            </if>
-            <if test="runMs != null">
-                run_ms,
-            </if>
-            <if test="startTime != null">
-                start_time,
-            </if>
-            <if test="endTime != null">
-                end_time,
-            </if>
-            <if test="createBy != null">
-                create_by_,
-            </if>
-            <if test="createTime != null">
-                create_time_,
-            </if>
-            <if test="updateBy != null">
-                update_by_,
-            </if>
-            <if test="updateTime != null">
-                update_time_,
-            </if>
-            <if test="deleteFlag != null">
-                delete_flag_,
-            </if>
-            <if test="content != null">
-                content,
-            </if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                #{id,jdbcType=VARCHAR},
-            </if>
-            <if test="jobId != null">
-                #{jobId,jdbcType=VARCHAR},
-            </if>
-            <if test="runState != null">
-                #{runState,jdbcType=VARCHAR},
-            </if>
-            <if test="runMs != null">
-                #{runMs,jdbcType=INTEGER},
-            </if>
-            <if test="startTime != null">
-                #{startTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="endTime != null">
-                #{endTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="createBy != null">
-                #{createBy,jdbcType=VARCHAR},
-            </if>
-            <if test="createTime != null">
-                #{createTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="updateBy != null">
-                #{updateBy,jdbcType=VARCHAR},
-            </if>
-            <if test="updateTime != null">
-                #{updateTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="deleteFlag != null">
-                #{deleteFlag,jdbcType=BIT},
-            </if>
-            <if test="content != null">
-                #{content,jdbcType=LONGVARCHAR},
-            </if>
-        </trim>
-    </insert>
+    
 
-    <update id="updateByPrimaryKeySelective" parameterType="com.dstz.sys.core.model.SysScheduleJobLog">
-        update sys_schedule_job_log
-        <set>
-            <if test="jobId != null">
-                job_id = #{jobId,jdbcType=VARCHAR},
-            </if>
-            <if test="runState != null">
-                run_state = #{runState,jdbcType=VARCHAR},
-            </if>
-            <if test="runMs != null">
-                run_ms = #{runMs,jdbcType=INTEGER},
-            </if>
-            <if test="startTime != null">
-                start_time = #{startTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="endTime != null">
-                end_time = #{endTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="createBy != null">
-                create_by_ = #{createBy,jdbcType=VARCHAR},
-            </if>
-            <if test="createTime != null">
-                create_time_ = #{createTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="updateBy != null">
-                update_by_ = #{updateBy,jdbcType=VARCHAR},
-            </if>
-            <if test="updateTime != null">
-                update_time_ = #{updateTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="deleteFlag != null">
-                delete_flag_ = #{deleteFlag,jdbcType=BIT},
-            </if>
-            <if test="content != null">
-                content = #{content,jdbcType=LONGVARCHAR},
-            </if>
-        </set>
-        where id = #{id,jdbcType=VARCHAR}
-    </update>
-
-    <update id="update" parameterType="com.dstz.sys.core.model.SysScheduleJobLog">
-         update sys_schedule_job_log
-         set job_id = #{jobId,jdbcType=VARCHAR},
-           run_state = #{runState,jdbcType=VARCHAR},
-           run_ms = #{runMs,jdbcType=INTEGER},
-           content = #{content,jdbcType=LONGVARCHAR},
-           start_time = #{startTime,jdbcType=TIMESTAMP},
-           end_time = #{endTime,jdbcType=TIMESTAMP},
-           create_by_ = #{createBy,jdbcType=VARCHAR},
-           create_time_ = #{createTime,jdbcType=TIMESTAMP},
-           update_by_ = #{updateBy,jdbcType=VARCHAR},
-           update_time_ = #{updateTime,jdbcType=TIMESTAMP},
-           delete_flag_ = #{deleteFlag,jdbcType=BIT}
-         where id = #{id,jdbcType=VARCHAR}
+    <update id="update" parameterType="org.minxc.emp.system.impl.model.SystemScheduleJobLogEntity">
+		update YMMG_SCHEDULE_JOB_LOG
+		set JOB_ID = #{jobId,jdbcType=VARCHAR},
+		RUN_STATE = #{runState,jdbcType=VARCHAR},
+		RUN_MS = #{runMs,jdbcType=DECIMAL},
+		START_TIME = #{startTime,jdbcType=TIMESTAMP},
+		END_TIME = #{endTime,jdbcType=TIMESTAMP},
+		CREATE_BY = #{createBy,jdbcType=VARCHAR},
+		CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+		UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+		UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+		IS_DELETE = #{isDelete,jdbcType=DECIMAL},
+		CONTENT = #{content,jdbcType=CLOB}
+		where ID = #{id,jdbcType=VARCHAR}
     </update>
 
     <select id="query" resultMap="SysScheduleJobLog">
         SELECT
             <include refid="Base_Column_List" />
         FROM
-        sys_schedule_job_log
+        YMMG_SCHEDULE_JOB_LOG
         <where>
             <if test="whereSql!=null">
                 ${whereSql}
@@ -194,12 +74,12 @@
             ORDER BY ${orderBySql}
         </if>
         <if test="orderBySql==null">
-            ORDER BY id DESC
+            ORDER BY ID DESC
         </if>
     </select>
 
     <delete id="removeByJobId">
-        DELETE FROM sys_schedule_job_log WHERE job_id = #{jobId,jdbcType=VARCHAR}
+        DELETE FROM YMMG_SCHEDULE_JOB_LOG WHERE JOB_ID = #{jobId,jdbcType=VARCHAR}
     </delete>
 
     <select id="get" parameterType="string" resultMap="SysScheduleJobLogBlobs">
@@ -207,8 +87,8 @@
             <include refid="Base_Column_List" />,
             <include refid="Blob_Column_List" />
         FROM
-            sys_schedule_job_log
+            YMMG_SCHEDULE_JOB_LOG
         WHERE
-            id = #{id,jdbcType=VARCHAR}
+            ID = #{id,jdbcType=VARCHAR}
     </select>
 </mapper>

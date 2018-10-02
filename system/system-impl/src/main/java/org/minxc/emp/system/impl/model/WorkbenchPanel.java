@@ -1,8 +1,7 @@
 package org.minxc.emp.system.impl.model;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
-
-import com.minxc.emp.core.impl.model.AbstractCommonModel;
+import org.minxc.emp.core.impl.model.AbstractCommonModel;
 
 
 public class WorkbenchPanel extends AbstractCommonModel {

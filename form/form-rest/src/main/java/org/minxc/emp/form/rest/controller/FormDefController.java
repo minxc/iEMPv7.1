@@ -19,6 +19,9 @@ import org.minxc.emp.core.api.exception.BusinessException;
 import org.minxc.emp.core.api.query.QueryFilter;
 import org.minxc.emp.core.api.query.QueryOperator;
 import org.minxc.emp.core.api.response.impl.ResultMessage;
+import org.minxc.emp.core.util.AppContextUtil;
+import org.minxc.emp.core.util.PropertiesUtil;
+import org.minxc.emp.core.util.StringUtil;
 import org.minxc.emp.form.api.constant.FormStatusCode;
 import org.minxc.emp.form.core.generator.AbsFormElementGenerator;
 import org.minxc.emp.form.core.generator.PcFormElementGenerator;
@@ -38,9 +41,6 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.Page;
-import com.minxc.emp.core.util.AppContextUtil;
-import com.minxc.emp.core.util.PropertiesUtil;
-import com.minxc.emp.core.util.StringUtil;
 
 import lombok.extern.slf4j.Slf4j;
 

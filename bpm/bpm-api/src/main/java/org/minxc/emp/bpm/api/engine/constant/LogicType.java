@@ -2,8 +2,6 @@ package org.minxc.emp.bpm.api.engine.constant;
 
 /**
  * 逻辑计算类型。
- * <pre>
- * </pre>
  */
 public enum LogicType {
 

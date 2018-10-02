@@ -3,7 +3,6 @@ package org.minxc.emp.common.db.dao.baseinterceptor;
 import java.util.Map;
 import java.util.Properties;
 
-import com.minxc.emp.core.util.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.cache.CacheKey;
 import org.apache.ibatis.executor.Executor;
@@ -21,6 +20,7 @@ import com.github.pagehelper.PageHelper;
 import org.minxc.emp.core.api.query.FieldSort;
 import org.minxc.emp.core.api.query.Page;
 import org.minxc.emp.core.api.query.QueryFilter;
+import org.minxc.emp.core.util.BeanUtils;
 
 /**
  * 查询切面逻辑

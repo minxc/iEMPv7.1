@@ -1,9 +1,8 @@
 package org.minxc.emp.bpm.engine.model;
 
 import org.minxc.emp.bpm.api.model.def.BpmVariableDef;
-
-import com.minxc.emp.core.util.StringUtil;
-import com.minxc.emp.core.util.time.DateFormatUtil;
+import org.minxc.emp.core.util.StringUtil;
+import org.minxc.emp.core.util.time.DateFormatUtil;
 
 
 public class DefaultBpmVariableDef implements BpmVariableDef {

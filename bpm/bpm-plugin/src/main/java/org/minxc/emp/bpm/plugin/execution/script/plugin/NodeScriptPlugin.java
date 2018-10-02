@@ -7,9 +7,8 @@ import org.minxc.emp.basis.api.groovy.IGroovyScriptEngine;
 import org.minxc.emp.bpm.engine.plugin.runtime.abstact.AbstractBpmExecutionPlugin;
 import org.minxc.emp.bpm.engine.plugin.session.BpmExecutionPluginSession;
 import org.minxc.emp.bpm.plugin.execution.script.def.NodeScriptPluginDef;
+import org.minxc.emp.core.util.StringUtil;
 import org.springframework.stereotype.Component;
-
-import com.minxc.emp.core.util.StringUtil;
 
 import lombok.extern.slf4j.Slf4j;
 

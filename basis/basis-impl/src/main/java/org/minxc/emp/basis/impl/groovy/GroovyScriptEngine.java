@@ -7,11 +7,10 @@ import java.util.Set;
 
 import org.minxc.emp.basis.api.groovy.IGroovyScriptEngine;
 import org.minxc.emp.basis.api.groovy.IScript;
+import org.minxc.emp.core.util.AppContextUtil;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
-
-import com.minxc.emp.core.util.AppContextUtil;
 
 import groovy.lang.GroovyShell;
 import lombok.extern.slf4j.Slf4j;
@@ -93,7 +92,7 @@ public class GroovyScriptEngine implements IGroovyScriptEngine, ApplicationListe
     }
     
     @Override
-    public void onApplicationEvent(ApplicationEvent arg0) {
+    public void onApplicationEvent(ApplicationEvent applicationEvent) {
     	Map<String, IScript> scirptImpls =	AppContextUtil.getImplInstance(IScript.class);
     	for(Entry<String, IScript> scriptMap : scirptImpls.entrySet()) {
     		groovyBinding.setProperty(scriptMap.getKey(), scriptMap.getValue());

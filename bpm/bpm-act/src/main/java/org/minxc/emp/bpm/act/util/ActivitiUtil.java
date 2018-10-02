@@ -1,6 +1,5 @@
 package org.minxc.emp.bpm.act.util;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -9,17 +8,14 @@ import org.activiti.engine.ProcessEngine;
 import org.activiti.engine.RepositoryService;
 import org.activiti.engine.impl.ProcessEngineImpl;
 import org.activiti.engine.impl.RepositoryServiceImpl;
-import org.activiti.engine.impl.cfg.ProcessEngineConfigurationImpl;
 import org.activiti.engine.impl.interceptor.CommandExecutor;
 import org.activiti.engine.impl.persistence.entity.ProcessDefinitionEntity;
 import org.activiti.engine.impl.pvm.PvmActivity;
 import org.activiti.engine.impl.pvm.PvmTransition;
-import org.activiti.engine.impl.pvm.ReadOnlyProcessDefinition;
 import org.activiti.engine.impl.pvm.process.ActivityImpl;
 import org.activiti.engine.impl.pvm.process.TransitionImpl;
-
-import com.minxc.emp.core.util.AppContextUtil;
-import com.minxc.emp.core.util.FileUtil;
+import org.minxc.emp.core.util.AppContextUtil;
+import org.minxc.emp.core.util.FileUtil;
 
 public class ActivitiUtil {
 	public static CommandExecutor getCommandExecutor() {
@@ -36,7 +32,8 @@ public class ActivitiUtil {
 		ActivityImpl curAct = processDefinition.findActivity(nodeId);
 		List<PvmTransition> outTrans = curAct.getOutgoingTransitions();
 		try {
-			List<PvmTransition> cloneOutTrans = (List) FileUtil.cloneObject(outTrans);
+			@SuppressWarnings("unchecked")
+			List<PvmTransition> cloneOutTrans = (List<PvmTransition>) FileUtil.cloneObject(outTrans);
 			map.put("outTrans", cloneOutTrans);
 		} catch (Exception ex) {
 			ex.printStackTrace();

@@ -23,6 +23,7 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityFilterAut
 
 
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class,SecurityAutoConfiguration.class, SecurityFilterAutoConfiguration.class})
+//@MapperScan(basePackages= {"org.minxc.emp"})
 public class WebApplication {
     public static void main(String[] args){
         SpringApplication.run(WebApplication.class, args);

@@ -1,8 +1,6 @@
 package org.minxc.emp.biz.core.service;
 
 import com.alibaba.fastjson.JSONArray;
-import com.minxc.emp.core.util.BeanUtils;
-import com.minxc.emp.core.util.StringUtil;
 
 import java.util.Map;
 import java.util.Set;
@@ -18,6 +16,8 @@ import org.minxc.emp.biz.core.model.permission.AbstractPermission;
 import org.minxc.emp.biz.core.model.permission.BusColumnPermission;
 import org.minxc.emp.biz.core.model.permission.BusObjPermission;
 import org.minxc.emp.biz.core.model.permission.BusTablePermission;
+import org.minxc.emp.core.util.BeanUtils;
+import org.minxc.emp.core.util.StringUtil;
 import org.minxc.emp.system.api.permission.PermissionCalculatorFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

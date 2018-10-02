@@ -16,6 +16,9 @@ import org.minxc.emp.bpm.api.exception.BpmStatusCode;
 import org.minxc.emp.bpm.api.model.def.IBpmDefinition;
 import org.minxc.emp.bpm.api.model.inst.IBpmInstance;
 import org.minxc.emp.core.api.exception.BusinessException;
+import org.minxc.emp.core.util.AppContextUtil;
+import org.minxc.emp.core.util.BeanUtils;
+import org.minxc.emp.core.util.JsonUtil;
 import org.minxc.emp.form.api.model.FormCategory;
 import org.minxc.emp.idm.api.model.User;
 import org.minxc.emp.idm.api.service.UserService;
@@ -24,14 +27,10 @@ import org.minxc.emp.system.util.ContextUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.minxc.emp.core.util.AppContextUtil;
-import com.minxc.emp.core.util.BeanUtils;
-import com.minxc.emp.core.util.JsonUtil;
 
 /**
  * 实现ActionCmd基础实现接口。
  *
- * @author jeff
  */
 public abstract class BaseActionCmd implements ActionCmd {
     /**

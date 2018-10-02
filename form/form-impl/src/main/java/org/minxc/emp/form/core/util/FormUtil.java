@@ -3,7 +3,7 @@ package org.minxc.emp.form.core.util;
 
 import java.io.File;
 
-import com.minxc.emp.core.util.FileUtil;
+import org.minxc.emp.core.util.FileUtil;
 
 /**
  * 表单实用函数。

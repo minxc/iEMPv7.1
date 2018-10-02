@@ -4,6 +4,7 @@ package org.minxc.emp.bpm.api.constant;
  * 任务状态。
  */
 public enum TaskType {
+	
     NORMAL("NORMAL", "普通任务"),
     SIGN("SIGN", "会签任务"),
     SUBFLOW("SUBFLOW", "子流程任务"),

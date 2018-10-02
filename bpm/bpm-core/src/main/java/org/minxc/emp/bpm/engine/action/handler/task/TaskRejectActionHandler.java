@@ -25,12 +25,11 @@ import org.minxc.emp.bpm.engine.action.cmd.DefualtTaskActionCmd;
 import org.minxc.emp.bpm.engine.action.handler.task.AbstractTaskActionHandler;
 import org.minxc.emp.bpm.engine.model.BpmIdentity;
 import org.minxc.emp.core.api.exception.BusinessException;
+import org.minxc.emp.core.util.BeanUtils;
+import org.minxc.emp.core.util.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-
-import com.minxc.emp.core.util.BeanUtils;
-import com.minxc.emp.core.util.StringUtil;
 
 @Component
 public class TaskRejectActionHandler extends AbstractTaskActionHandler<DefualtTaskActionCmd> {

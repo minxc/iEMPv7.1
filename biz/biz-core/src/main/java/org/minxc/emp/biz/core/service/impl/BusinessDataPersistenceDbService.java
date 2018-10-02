@@ -24,11 +24,10 @@ import org.minxc.emp.biz.core.model.BusinessTable;
 import org.minxc.emp.biz.core.service.BusinessDataPersistenceService;
 import org.minxc.emp.common.db.id.UniqueIdUtil;
 import org.minxc.emp.common.db.tableoper.TableOperator;
+import org.minxc.emp.core.util.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.minxc.emp.core.util.BeanUtils;
 /*
  * 
 *    

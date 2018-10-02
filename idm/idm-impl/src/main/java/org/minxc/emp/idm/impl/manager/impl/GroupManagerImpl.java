@@ -4,8 +4,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import com.minxc.emp.core.util.BeanUtils;
 import org.minxc.emp.common.manager.impl.CommonManager;
+import org.minxc.emp.core.util.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import org.minxc.emp.idm.impl.dao.GroupDao;

@@ -1,7 +1,6 @@
 package org.minxc.emp.biz.core.manager.impl;
 
 import com.alibaba.fastjson.JSONObject;
-import com.minxc.emp.core.util.BeanUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +20,7 @@ import org.minxc.emp.common.db.model.query.DefaultQueryFilter;
 import org.minxc.emp.common.manager.impl.CommonManager;
 import org.minxc.emp.core.api.exception.BusinessException;
 import org.minxc.emp.core.api.query.QueryOperator;
+import org.minxc.emp.core.util.BeanUtils;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 

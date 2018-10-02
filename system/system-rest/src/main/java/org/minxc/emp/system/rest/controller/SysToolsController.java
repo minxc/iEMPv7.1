@@ -9,13 +9,12 @@ import org.apache.commons.lang3.StringUtils;
 import org.minxc.emp.common.rest.GenericController;
 import org.minxc.emp.common.rest.util.RequestUtil;
 import org.minxc.emp.core.api.aop.annotation.ErrorCatching;
+import org.minxc.emp.core.util.AppContextUtil;
+import org.minxc.emp.core.util.ConstantUtil;
+import org.minxc.emp.core.util.EnumUtil;
+import org.minxc.emp.core.util.PinyinUtil;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.minxc.emp.core.util.AppContextUtil;
-import com.minxc.emp.core.util.ConstantUtil;
-import com.minxc.emp.core.util.EnumUtil;
-import com.minxc.emp.core.util.PinyinUtil;
 
 
 /**

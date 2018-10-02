@@ -4,16 +4,23 @@ import org.minxc.emp.common.db.api.IdGenerator;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Component;
+
+import lombok.extern.slf4j.Slf4j;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.annotation.Resource;
+
 /**
  * ID Generator
- *
  */
+@Slf4j
+@Component
 public class DefaultIdGenerator implements IdGenerator, InitializingBean {
-
+	
+	@Resource
     public JdbcTemplate jdbcTemplate;
     /**
      * 增长段值
@@ -58,7 +65,7 @@ public class DefaultIdGenerator implements IdGenerator, InitializingBean {
     }
 
     private void updateBound() {
-        String sql = "UPDATE XB_DB_ID SET START_=?,MAX_=? WHERE ID_=?";
+        String sql = "UPDATE YMMG_DB_ID_GENERATOR SET START_VALUE=?,MAXIMUM=? WHERE ID=?";
         dbid = maxDbid;
         maxDbid += increaseBound;
         jdbcTemplate.update(sql, dbid, maxDbid, machineDbid);
@@ -75,21 +82,23 @@ public class DefaultIdGenerator implements IdGenerator, InitializingBean {
 
     @SuppressWarnings({"unchecked", "rawtypes"})
     private void init() {
-        String sql = "select * from XB_DB_ID where MAC_NAME_=?";
+    	log.info("defaultIdGenerator is initilizaing ....");
+        String sql = "select * from YMMG_DB_ID_GENERATOR where MACHINE=?";
         //检查该机器是否已经存在增长的键值记录
         try {
             jdbcTemplate.queryForObject(sql, new RowMapper() {
                 public Object mapRow(ResultSet rs, int i) throws SQLException {
-                    dbid = rs.getLong("START_");
-                    maxDbid = rs.getLong("MAX_");
-                    machineDbid = rs.getInt("ID_");
+                    dbid = rs.getLong("START_VALUE");
+                    maxDbid = rs.getLong("MAXIMUM");
+                    machineDbid = rs.getInt("ID");
                     return machineDbid;
                 }
             }, machineName);
             //插入该机器的键值增长记录
             genNextDbIds();
         } catch (Exception ex) {
-            String maxSql = "select max(ID_) from XB_DB_ID";
+        	log.error(ex.toString());
+            String maxSql = "select max(ID) from YMMG_DB_ID_GENERATOR";
             Integer maxResult = jdbcTemplate.queryForObject(maxSql, Integer.class);
             if (maxResult == null || maxResult == 0) {
                 maxResult = 1;
@@ -98,7 +107,7 @@ public class DefaultIdGenerator implements IdGenerator, InitializingBean {
             }
             machineDbid = maxResult;
             maxDbid = dbid + increaseBound;
-            sql = "INSERT INTO XB_DB_ID(ID_,START_,MAX_,MAC_NAME_)VALUES(?,?,?,?)";
+            sql = "INSERT INTO YMMG_DB_ID_GENERATOR(ID,START_VALUE,MAXIMUM,MACHINE)VALUES(?,?,?,?)";
             jdbcTemplate.update(sql, new Object[]{machineDbid, dbid, maxDbid, machineName});
         }
     }

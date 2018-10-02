@@ -9,6 +9,8 @@ import javax.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
 import org.minxc.emp.basis.api.constant.EnvironmentConstant;
 import org.minxc.emp.common.manager.impl.CommonManager;
+import org.minxc.emp.core.util.AppContextUtil;
+import org.minxc.emp.core.util.BeanUtils;
 import org.minxc.emp.system.api.service.PropertyService;
 import org.minxc.emp.system.impl.dao.SysPropertiesDao;
 import org.minxc.emp.system.impl.manager.SysPropertiesManager;
@@ -17,9 +19,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
-
-import com.minxc.emp.core.util.AppContextUtil;
-import com.minxc.emp.core.util.BeanUtils;
 
 import lombok.extern.slf4j.Slf4j;
 

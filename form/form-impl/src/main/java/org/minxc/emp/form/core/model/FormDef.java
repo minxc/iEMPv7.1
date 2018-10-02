@@ -3,9 +3,8 @@ package org.minxc.emp.form.core.model;
 import javax.validation.constraints.NotEmpty;
 
 import org.apache.commons.lang3.StringUtils;
+import org.minxc.emp.core.impl.model.AbstractCommonModel;
 import org.minxc.emp.form.api.model.IFormDef;
-
-import com.minxc.emp.core.impl.model.AbstractCommonModel;
 
 
 /**

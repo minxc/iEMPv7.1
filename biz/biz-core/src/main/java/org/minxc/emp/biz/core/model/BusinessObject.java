@@ -1,9 +1,5 @@
 package org.minxc.emp.biz.core.model;
 
-import com.minxc.emp.core.impl.model.AbstractCommonModel;
-import com.minxc.emp.core.util.JacksonUtil;
-import com.minxc.emp.core.util.JsonUtil;
-
 import javax.validation.constraints.NotEmpty;
 
 import org.minxc.emp.biz.api.constant.RightsType;
@@ -14,6 +10,9 @@ import org.minxc.emp.biz.core.model.BusTableRel;
 import org.minxc.emp.biz.core.model.permission.BusColumnPermission;
 import org.minxc.emp.biz.core.model.permission.BusObjPermission;
 import org.minxc.emp.biz.core.model.permission.BusTablePermission;
+import org.minxc.emp.core.impl.model.AbstractCommonModel;
+import org.minxc.emp.core.util.JacksonUtil;
+import org.minxc.emp.core.util.JsonUtil;
 
 public class BusinessObject extends AbstractCommonModel implements IBusinessObject {
 	

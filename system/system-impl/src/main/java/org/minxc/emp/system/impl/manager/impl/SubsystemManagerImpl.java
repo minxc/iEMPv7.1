@@ -5,14 +5,13 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.minxc.emp.common.manager.impl.CommonManager;
+import org.minxc.emp.core.util.BeanUtils;
 import org.minxc.emp.idm.api.model.User;
 import org.minxc.emp.system.impl.dao.SubsystemDao;
 import org.minxc.emp.system.impl.manager.SubsystemManager;
 import org.minxc.emp.system.impl.model.ApplicationEntity;
 import org.minxc.emp.system.util.ContextUtil;
 import org.springframework.stereotype.Service;
-
-import com.minxc.emp.core.util.BeanUtils;
 
 /**
  * <pre>

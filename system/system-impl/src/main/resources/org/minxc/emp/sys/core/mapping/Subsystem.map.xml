@@ -1,40 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.dstz.sys.core.dao.SubsystemDao">
-    <resultMap id="Subsystem" type="com.dstz.sys.core.model.Subsystem">
-        <id property="id" column="ID_" jdbcType="VARCHAR"/>
-        <result property="name" column="name_" jdbcType="VARCHAR"/>
-        <result property="alias" column="alias_" jdbcType="VARCHAR"/>
-        <result property="logo" column="logo_" jdbcType="VARCHAR"/>
-        <result property="enabled" column="enabled_" jdbcType="NUMERIC"/>
-        <result property="homeUrl" column="home_url_" jdbcType="VARCHAR"/>
-        <result property="baseUrl" column="base_url_" jdbcType="VARCHAR"/>
-        <result property="tenant" column="tenant_" jdbcType="VARCHAR"/>
-        <result property="memo" column="MEMO_" jdbcType="VARCHAR"/>
-        <result property="creatorId" column="creator_Id_" jdbcType="VARCHAR"/>
-        <result property="creator" column="creator_" jdbcType="VARCHAR"/>
-        <result property="createTime" column="create_time_" jdbcType="TIMESTAMP"/>
-        <result property="isDefault" column="is_default_" jdbcType="NUMERIC"/>
+<mapper namespace="org.minxc.emp.system.impl.dao.SubsystemDao">
+    <resultMap id="Subsystem" type="org.minxc.emp.system.impl.model.ApplicationEntity">
+        <id column="ID" jdbcType="VARCHAR" property="id" />
+	    <result column="NAME" jdbcType="VARCHAR" property="name" />
+	    <result column="ALIAS" jdbcType="VARCHAR" property="alias" />
+	    <result column="LOGO" jdbcType="VARCHAR" property="logo" />
+	    <result column="ENABLED" jdbcType="DECIMAL" property="enabled" />
+	    <result column="HOME_URL" jdbcType="VARCHAR" property="homeUrl" />
+	    <result column="BASE_URL" jdbcType="VARCHAR" property="baseUrl" />
+	    <result column="TENANT" jdbcType="VARCHAR" property="tenant" />
+	    <result column="NOTES" jdbcType="VARCHAR" property="notes" />
+	    <result column="CREATOR_ID" jdbcType="VARCHAR" property="creatorId" />
+	    <result column="CREATOR" jdbcType="VARCHAR" property="creator" />
+	    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+	    <result column="IS_DEFAULT" jdbcType="DECIMAL" property="isDefault" />
     </resultMap>
-
-    <insert id="create" parameterType="com.dstz.sys.core.model.Subsystem">
-		INSERT INTO sys_subsystem
-		(ID_,name_,alias_,logo_,enabled_,home_url_,base_url_,tenant_,MEMO_,creator_Id_,creator_,create_time_,is_default_)
-		VALUES 
-		(#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{alias,jdbcType=VARCHAR}, #{logo,jdbcType=VARCHAR},
-		 #{enabled,jdbcType=NUMERIC}, #{homeUrl,jdbcType=VARCHAR}, #{baseUrl,jdbcType=VARCHAR}, #{tenant,jdbcType=VARCHAR}, 
-		 #{memo,jdbcType=VARCHAR}, #{creatorId,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
-		 , #{isDefault,jdbcType=NUMERIC})
+    
+ <sql id="Base_Column_List">
+    ID, NAME, ALIAS, LOGO, ENABLED, HOME_URL, BASE_URL, TENANT, NOTES, CREATOR_ID, CREATOR, 
+    CREATE_TIME, IS_DEFAULT
+  </sql>
+  
+    <insert id="create" parameterType="org.minxc.emp.system.impl.model.ApplicationEntity">
+		 INSERT INTO YMMG_APPLICATION (ID, NAME, ALIAS, 
+      LOGO, ENABLED, HOME_URL, 
+      BASE_URL, TENANT, NOTES, 
+      CREATOR_ID, CREATOR, CREATE_TIME, 
+      IS_DEFAULT)
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{alias,jdbcType=VARCHAR}, 
+      #{logo,jdbcType=VARCHAR}, #{enabled,jdbcType=DECIMAL}, #{homeUrl,jdbcType=VARCHAR}, 
+      #{baseUrl,jdbcType=VARCHAR}, #{tenant,jdbcType=VARCHAR}, #{notes,jdbcType=VARCHAR}, 
+      #{creatorId,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{isDefault,jdbcType=DECIMAL})
 	</insert>
 
     <select id="get" parameterType="java.lang.String" resultMap="Subsystem">
-		SELECT * FROM sys_subsystem 
+		SELECT * FROM YMMG_APPLICATION 
 		WHERE 
-		ID_=#{id}
+		ID=#{id}
 	</select>
 
     <select id="query" parameterType="java.util.Map" resultMap="Subsystem">
-        SELECT * FROM sys_subsystem
+        SELECT * FROM YMMG_APPLICATION
         <where>
             <if test="whereSql!=null">
                 ${whereSql}
@@ -44,49 +52,50 @@
             ORDER BY ${orderBySql}
         </if>
         <if test="orderBySql==null">
-            ORDER BY ID_ DESC
+            ORDER BY ID DESC
         </if>
     </select>
 
-    <update id="update" parameterType="com.dstz.sys.core.model.Subsystem">
-		UPDATE sys_subsystem SET
-		name_=#{name,jdbcType=VARCHAR},
-		alias_=#{alias,jdbcType=VARCHAR},
-		logo_=#{logo,jdbcType=VARCHAR},
-		enabled_=#{enabled,jdbcType=NUMERIC},
-		home_url_=#{homeUrl,jdbcType=VARCHAR},
-		base_url_=#{baseUrl,jdbcType=VARCHAR},
-		tenant_=#{tenant,jdbcType=VARCHAR},
-		MEMO_=#{memo,jdbcType=VARCHAR},
-		creator_Id_=#{creatorId,jdbcType=VARCHAR},
-		creator_=#{creator,jdbcType=VARCHAR},
-		create_time_=#{createTime,jdbcType=TIMESTAMP},
-		is_default_=#{isDefault,jdbcType=NUMERIC}
-		WHERE
-		ID_=#{id}
+    <update id="update" parameterType="org.minxc.emp.system.impl.model.ApplicationEntity">
+		UPDATE YMMG_APPLICATION SET
+		SET NAME = #{name,jdbcType=VARCHAR},
+      ALIAS = #{alias,jdbcType=VARCHAR},
+      LOGO = #{logo,jdbcType=VARCHAR},
+      ENABLED = #{enabled,jdbcType=DECIMAL},
+      HOME_URL = #{homeUrl,jdbcType=VARCHAR},
+      BASE_URL = #{baseUrl,jdbcType=VARCHAR},
+      TENANT = #{tenant,jdbcType=VARCHAR},
+      NOTES = #{notes,jdbcType=VARCHAR},
+      CREATOR_ID = #{creatorId,jdbcType=VARCHAR},
+      CREATOR = #{creator,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      IS_DEFAULT = #{isDefault,jdbcType=DECIMAL}
+   	  where ID = #{id,jdbcType=VARCHAR}
 	</update>
 
-    <update id="updNoDefault" parameterType="com.dstz.sys.core.model.Subsystem">
-		UPDATE sys_subsystem SET is_default_=0
+    <update id="updNoDefault" parameterType="org.minxc.emp.system.impl.model.ApplicationEntity">
+		UPDATE YMMG_APPLICATION SET IS_DEFAULT=0
 	</update>
 
     <delete id="remove" parameterType="java.lang.String">
-		DELETE FROM sys_subsystem 
+		DELETE FROM YMMG_APPLICATION 
 		WHERE
-		ID_=#{id}
+		ID=#{id}
 	</delete>
 
-    <select id="isExist" resultType="java.lang.Integer" parameterType="com.dstz.sys.core.model.Subsystem">
-        SELECT count(1) FROM sys_subsystem WHERE alias_=#{alias}
+    <select id="isExist" resultType="java.lang.Integer" parameterType="org.minxc.emp.system.impl.model.ApplicationEntity">
+        SELECT count(1) FROM YMMG_APPLICATION WHERE ALIAS=#{alias}
         <if test="id!=null">
-            and ID_!=#{id}
+            and ID!=#{id}
         </if>
     </select>
 
     <select id="getList" parameterType="java.lang.String" resultMap="Subsystem">
-		SELECT * FROM sys_subsystem where enabled_=1
+		SELECT * FROM YMMG_APPLICATION where ENABLED=1
 	</select>
-
+	
+	
+	<!-- 需要调整具体实现 -->
     <select id="getSystemByUser" parameterType="java.lang.String" resultMap="Subsystem">
 		SELECT distinct  s.* FROM sys_subsystem s,sys_res_role r,org_user_role ur
 		 where r.SYSTEM_ID_=s.ID_ and ur.user_id_=#{userId} and ur.role_id_=r.ROLE_ID_ and s.enabled_=1

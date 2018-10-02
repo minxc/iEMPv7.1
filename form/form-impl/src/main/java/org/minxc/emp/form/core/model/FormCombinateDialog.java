@@ -2,9 +2,8 @@ package org.minxc.emp.form.core.model;
 
 import org.apache.commons.lang3.StringUtils;
 import org.minxc.emp.core.api.model.IdModel;
+import org.minxc.emp.core.util.AppContextUtil;
 import org.minxc.emp.form.core.manager.FormCustDialogManager;
-
-import com.minxc.emp.core.util.AppContextUtil;
 
 
 /**

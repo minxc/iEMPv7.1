@@ -2,9 +2,6 @@ package org.minxc.emp.bpm.api.constant;
 
 /**
  * 流程节点类型
- * <pre>
- * 描述：流程节点类型
- * </pre>
  */
 public enum NodeType {
 

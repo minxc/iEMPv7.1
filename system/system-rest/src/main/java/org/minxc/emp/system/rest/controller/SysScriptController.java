@@ -12,6 +12,7 @@ import org.minxc.emp.basis.api.groovy.IGroovyScriptEngine;
 import org.minxc.emp.common.db.api.IdGenerator;
 import org.minxc.emp.common.rest.CommonController;
 import org.minxc.emp.common.rest.util.RequestUtil;
+import org.minxc.emp.core.util.JacksonUtil;
 import org.minxc.emp.system.impl.manager.ScriptManager;
 import org.minxc.emp.system.impl.model.ScriptEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.minxc.emp.core.util.JacksonUtil;
 
 
 @RestController

@@ -1,12 +1,12 @@
 package org.minxc.emp.security;
 
 
-import com.minxc.emp.core.util.BeanUtils;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.minxc.emp.core.util.BeanUtils;
 
 public class IngoreChecker {
 

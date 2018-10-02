@@ -29,10 +29,9 @@ import org.apache.commons.io.IOUtils;
 import org.minxc.emp.bpm.act.service.BpmImageService;
 import org.minxc.emp.bpm.api.exception.BpmStatusCode;
 import org.minxc.emp.core.api.exception.BusinessException;
+import org.minxc.emp.core.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.minxc.emp.core.util.StringUtil;
 
 @Service
 public class DefaultInstHistImgService implements BpmImageService {

@@ -1,10 +1,10 @@
 package org.minxc.emp.security.filter;
 
 import com.alibaba.fastjson.JSON;
-import com.minxc.emp.core.util.StringUtil;
 
 import org.minxc.emp.core.api.response.impl.ResultMessage;
 import org.minxc.emp.core.api.status.CommonStatusCode;
+import org.minxc.emp.core.util.StringUtil;
 import org.minxc.emp.security.IngoreChecker;
 
 import javax.servlet.*;

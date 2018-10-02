@@ -6,11 +6,10 @@ import java.util.Map.Entry;
 
 import org.minxc.emp.basis.api.jms.consumer.JmsConsumer;
 import org.minxc.emp.basis.api.jms.model.JmsDTO;
+import org.minxc.emp.core.util.AppContextUtil;
+import org.minxc.emp.core.util.BeanUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.minxc.emp.core.util.AppContextUtil;
-import com.minxc.emp.core.util.BeanUtils;
 
 /**
  * 获取消息的具体消费者并交给该处理着处理消息

@@ -16,7 +16,7 @@ public interface ResRoleDao extends CommonDao<String, RoleResouceLinkEntity> {
 
     List<RoleResouceLinkEntity> getByRoleId(String roleId);
 
-    void removeByRoleAndSystem(@Param("roleId")String roleId,@Param("systemId")String systemId);
+    void removeByRoleAndApplicationId(@Param("roleId")String roleId,@Param("applicationId")String applicationId);
 
     /**
      * 根据系统id获取关联的角色和URL资源。
@@ -24,7 +24,7 @@ public interface ResRoleDao extends CommonDao<String, RoleResouceLinkEntity> {
      * @param systemId
      * @return
      */
-    List<RoleResouceLinkEntity> getUrlRoleBySystemId(String systemId);
+    List<RoleResouceLinkEntity> getUrlRoleByApplicationId(String applicationId);
 
     /**
      * 根据系统Id获取资源和角色的映射关系。
@@ -32,5 +32,5 @@ public interface ResRoleDao extends CommonDao<String, RoleResouceLinkEntity> {
      * @param systemId
      * @return
      */
-    List<RoleResouceLinkEntity> getResRoleBySystemId(String systemId);
+    List<RoleResouceLinkEntity> getResRoleByApplicationId(String applicationId);
 }

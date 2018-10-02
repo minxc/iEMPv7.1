@@ -2,7 +2,6 @@ package org.minxc.emp.bpm.engine.parser.node;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.minxc.emp.core.util.AppContextUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +12,7 @@ import org.minxc.emp.bpm.api.engine.plugin.def.BpmDef;
 import org.minxc.emp.bpm.api.engine.plugin.def.BpmPluginDef;
 import org.minxc.emp.bpm.api.model.nodedef.impl.BaseBpmNodeDef;
 import org.minxc.emp.bpm.engine.parser.node.AbsNodeParse;
+import org.minxc.emp.core.util.AppContextUtil;
 import org.springframework.stereotype.Component;
 
 @Component

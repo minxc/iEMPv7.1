@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.dstz.sys.core.dao.ScriptDao">
-    <resultMap id="Script" type="com.dstz.sys.core.model.Script">
-        <id property="id" column="ID_" jdbcType="VARCHAR"/>
-        <result property="name" column="NAME_" jdbcType="VARCHAR"/>
-        <result property="script" column="SCRIPT_" jdbcType="CLOB"/>
-        <result property="category" column="CATEGORY_" jdbcType="VARCHAR"/>
-        <result property="memo" column="MEMO_" jdbcType="VARCHAR"/>
+<mapper namespace="org.minxc.emp.system.impl.dao.ScriptDao">
+    <resultMap id="Script" type="org.minxc.emp.system.impl.model.ScriptEntity">
+        <id column="ID" jdbcType="VARCHAR" property="id" />
+	    <result column="NAME" jdbcType="VARCHAR" property="name" />
+	     <result column="SCRIPT" jdbcType="CLOB" property="script" />
+	    <result column="CATEGORY" jdbcType="VARCHAR" property="category" />
+	    <result column="NOTES" jdbcType="VARCHAR" property="notes" />
     </resultMap>
 
     <sql id="columns">
-		ID_,NAME_,SCRIPT_,CATEGORY_,MEMO_
+		 ID, NAME,SCRIPT,CATEGORY, NOTES
 	</sql>
 
-    <insert id="create" parameterType="com.dstz.sys.core.model.Script">
+    <insert id="create" parameterType="org.minxc.emp.system.impl.model.ScriptEntity">
         INSERT INTO SYS_SCRIPT
         (<include refid="columns"/>)
         VALUES
@@ -37,32 +37,33 @@
     </select>
 
     <select id="get" parameterType="java.lang.String" resultMap="Script">
-		SELECT * FROM SYS_SCRIPT 
+		SELECT 
+   		 <include refid="columns" />
+   		 FROM YMMG_SCRIPT
 		WHERE 
-		ID_=#{id}
+	    ID = #{id,jdbcType=VARCHAR}
 	</select>
 
     <delete id="remove" parameterType="java.lang.String">
-		DELETE FROM SYS_SCRIPT 
+		DELETE FROM YMMG_SCRIPT 
 		WHERE
-		ID_=#{id}
+		 ID = #{id,jdbcType=VARCHAR}
 	</delete>
 
-    <update id="update" parameterType="com.dstz.sys.core.model.Script">
-		UPDATE SYS_SCRIPT SET
-		NAME_=#{name,jdbcType=VARCHAR} , 
-		SCRIPT_=#{script,jdbcType=CLOB} , 
-		CATEGORY_=#{category,jdbcType=VARCHAR} , 
-		MEMO_=#{memo,jdbcType=VARCHAR} 
-		WHERE
-		ID_=#{id}
+    <update id="update" parameterType="org.minxc.emp.system.impl.model.ScriptEntity">
+		 UPDATE YMMG_SCRIPT
+    SET NAME = #{name,jdbcType=VARCHAR},
+      CATEGORY = #{category,jdbcType=VARCHAR},
+      NOTES = #{notes,jdbcType=VARCHAR},
+      SCRIPT = #{script,jdbcType=CLOB}
+    WHERE ID = #{id,jdbcType=VARCHAR}
 	</update>
 
     <select id="getDistinctCategory" resultType="java.lang.String">
-		SELECT DISTINCT CATEGORY_ FROM SYS_SCRIPT 
+		SELECT DISTINCT CATEGORY FROM YMMG_SCRIPT 
 	</select>
 
     <select id="isNameExists" resultType="int" parameterType="java.lang.String">
-		SELECT COUNT(*) FROM SYS_SCRIPT WHERE NAME_=#{name}
+		SELECT COUNT(*) FROM YMMG_SCRIPT WHERE NAME = #{name,jdbcType=VARCHAR}
 	</select>
 </mapper>

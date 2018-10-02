@@ -4,9 +4,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.minxc.emp.core.api.exception.BusinessException;
-
-import com.minxc.emp.core.util.AppContextUtil;
-import com.minxc.emp.core.util.PropertiesUtil;
+import org.minxc.emp.core.util.AppContextUtil;
+import org.minxc.emp.core.util.PropertiesUtil;
 
 /**
  * 描述：上传器工厂

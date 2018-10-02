@@ -1,5 +1,6 @@
 package org.minxc.emp.security.login;
 
+import org.minxc.emp.core.util.BeanUtils;
 import org.minxc.emp.idm.api.model.User;
 import org.minxc.emp.idm.api.model.UserRole;
 import org.minxc.emp.idm.api.service.UserService;
@@ -12,8 +13,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
-import com.minxc.emp.core.util.BeanUtils;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;

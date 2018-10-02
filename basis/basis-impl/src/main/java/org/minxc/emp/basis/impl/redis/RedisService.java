@@ -1,30 +1,27 @@
 package org.minxc.emp.basis.impl.redis;
 
 import org.minxc.emp.basis.api.redis.IRedisService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.minxc.emp.core.util.SerializeUtil;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
-import com.minxc.emp.core.util.SerializeUtil;
-
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.util.Set;
+
+import javax.annotation.Resource;
 
 @Service
 public class RedisService implements IRedisService {
 
     private static String redisCode = "utf-8";
 
-    @Autowired
+    @Resource
     private RedisTemplate<String, Serializable> redisTemplate;
 
-    /* (non-Javadoc)
-     * @see com.dstz.sys.redis.IRedisService#del(java.lang.String)
-     */
     @Override
     public long del(final String... keys) {
         return redisTemplate.execute(new RedisCallback<Long>() {
@@ -39,7 +36,6 @@ public class RedisService implements IRedisService {
     }
 
     /* (non-Javadoc)
-     * @see com.dstz.sys.redis.IRedisService#set(byte[], byte[], long)
      */
     @Override
     public void set(final byte[] key, final byte[] value, final long liveTime) {
@@ -55,23 +51,18 @@ public class RedisService implements IRedisService {
     }
 
     /* (non-Javadoc)
-     * @see com.dstz.sys.redis.IRedisService#set(java.lang.String, java.lang.String, long)
      */
     @Override
     public void set(String key, String value, long liveTime) {
         this.set(key.getBytes(), value.getBytes(), liveTime);
     }
 
-    /* (non-Javadoc)
-     * @see com.dstz.sys.redis.IRedisService#set(java.lang.String, java.lang.String)
-     */
     @Override
     public void set(String key, String value) {
         this.set(key, value, 0L);
     }
 
     /* (non-Javadoc)
-     * @see com.dstz.sys.redis.IRedisService#set(java.lang.String, java.lang.Object)
      */
     @Override
     public void set(String key, Object object) {
@@ -79,7 +70,6 @@ public class RedisService implements IRedisService {
     }
 
     /* (non-Javadoc)
-     * @see com.dstz.sys.redis.IRedisService#set(java.lang.String, java.lang.Object, long)
      */
     @Override
     public void set(String key, Object object, long liveTime) {
@@ -88,7 +78,6 @@ public class RedisService implements IRedisService {
     }
 
     /* (non-Javadoc)
-     * @see com.dstz.sys.redis.IRedisService#set(java.lang.String, byte[])
      */
     @Override
     public void set(String key, byte[] value) {
@@ -96,7 +85,6 @@ public class RedisService implements IRedisService {
     }
 
     /* (non-Javadoc)
-     * @see com.dstz.sys.redis.IRedisService#set(byte[], byte[])
      */
     @Override
     public void set(byte[] key, byte[] value) {
@@ -104,7 +92,6 @@ public class RedisService implements IRedisService {
     }
 
     /* (non-Javadoc)
-     * @see com.dstz.sys.redis.IRedisService#get(java.lang.String)
      */
     @Override
     public String get(final String key) {
@@ -194,7 +181,6 @@ public class RedisService implements IRedisService {
     }
 
     /* (non-Javadoc)
-     * @see com.dstz.sys.redis.IRedisService#flushDB()
      */
     @Override
     public String flushDB() {
@@ -207,7 +193,6 @@ public class RedisService implements IRedisService {
     }
 
     /* (non-Javadoc)
-     * @see com.dstz.sys.redis.IRedisService#dbSize()
      */
     @Override
     public long dbSize() {
@@ -219,7 +204,6 @@ public class RedisService implements IRedisService {
     }
 
     /* (non-Javadoc)
-     * @see com.dstz.sys.redis.IRedisService#ping()
      */
     @Override
     public String ping() {

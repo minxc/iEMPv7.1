@@ -9,8 +9,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.minxc.emp.basis.impl.email.MailUtil;
 import org.minxc.emp.basis.impl.email.model.Mail;
 import org.minxc.emp.basis.impl.email.model.MailSetting;
-
-import com.minxc.emp.core.util.AppContextUtil;
+import org.minxc.emp.core.util.AppContextUtil;
 
 
 /**

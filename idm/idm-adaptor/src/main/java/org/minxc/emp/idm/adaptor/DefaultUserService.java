@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.minxc.emp.core.util.BeanCopierUtils;
+import org.minxc.emp.core.util.BeanUtils;
 import org.minxc.emp.idm.api.constant.GroupTypeConstant;
 import org.minxc.emp.idm.api.model.User;
 import org.minxc.emp.idm.api.model.UserRole;
@@ -17,9 +19,6 @@ import org.minxc.emp.idm.impl.manager.UserRoleManager;
 import org.minxc.emp.idm.impl.model.UserEntity;
 import org.minxc.emp.idm.impl.model.UserRoleEntity;
 import org.springframework.stereotype.Service;
-
-import com.minxc.emp.core.util.BeanCopierUtils;
-import com.minxc.emp.core.util.BeanUtils;
 
 /**
  * 

@@ -1,13 +1,12 @@
 package org.minxc.emp.basis.impl.freemark;
 
-import com.minxc.emp.core.util.PropertiesUtil;
-
 import freemarker.cache.StringTemplateLoader;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
 import org.minxc.emp.basis.api.freemark.IFreemarkEngine;
+import org.minxc.emp.core.util.PropertiesUtil;
 import org.springframework.stereotype.Component;
 
 import java.io.File;

@@ -1,8 +1,5 @@
 package org.minxc.emp.bpm.core.manager.impl;
 
-import com.minxc.emp.core.util.BeanUtils;
-import com.minxc.emp.core.util.StringUtil;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +19,8 @@ import org.minxc.emp.common.manager.impl.CommonManager;
 import org.minxc.emp.core.api.exception.BusinessException;
 import org.minxc.emp.core.api.query.QueryFilter;
 import org.minxc.emp.core.api.query.QueryOperator;
+import org.minxc.emp.core.util.BeanUtils;
+import org.minxc.emp.core.util.StringUtil;
 import org.minxc.emp.system.util.ContextUtil;
 import org.springframework.stereotype.Service;
 
