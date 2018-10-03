@@ -250,7 +250,7 @@ public class WebSecurityConfig {
         httpSessionSecurityContextRepository.setAllowSessionCreation(true);
         httpSessionSecurityContextRepository
                 .setSpringSecurityContextKey(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY);
-        httpSessionSecurityContextRepository.setDisableUrlRewriting(false);
+        httpSessionSecurityContextRepository.setDisableUrlRewriting(false);  //设置允许;jsessionid=xxxxx在url上面，新版Spring security不允许在url中出现;因此启用url重写，false时启用url重写ex：http://127.0.0.1:8080/login;jsessionid=889595CDB56828C5CB3FABCF25D7F681?para=errorauth；true时不会重写数据
         return httpSessionSecurityContextRepository;
     }
 

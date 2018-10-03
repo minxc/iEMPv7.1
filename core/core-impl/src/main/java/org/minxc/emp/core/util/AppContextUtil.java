@@ -1,4 +1,3 @@
-
 /**  
 
 * @Title: ApplicationContextUtil.java 
@@ -12,7 +11,6 @@
 * @date 2018年8月24日 上午12:39:36 
 
 * @version V1.0  
-
 */ 
 
 package org.minxc.emp.core.util;
@@ -157,7 +155,7 @@ public class AppContextUtil implements ApplicationContextAware {
      * @return
      */
     public static Cache getCache() {
-        return (Cache) getBean("iCache");
+        return  getBean(Cache.class);
     }
 
 

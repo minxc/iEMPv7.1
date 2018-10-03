@@ -24,18 +24,18 @@
 
     <select id="get" parameterType="java.lang.String" resultMap="ResRole">
 		SELECT 
-		 <include refid="Base_Column_List" />
+		 	<include refid="Base_Column_List" />
 		FROM YMMG_ROLE_RESOURCE_LINK 
-		WHERE 
-		ID=#{id}
+			WHERE 
+				ID=#{id}
 	</select>
 
     <select id="getByRoleId" parameterType="java.lang.String" resultMap="ResRole">
 		SELECT 
 		 <include refid="Base_Column_List" />
-		FROM YMMG_ROLE_RESOURCE_LINK 
+			FROM YMMG_ROLE_RESOURCE_LINK 
 		WHERE 
-		ROLE_ID=#{roleId}
+			ROLE_ID=#{roleId}
 	</select>
 
     <select id="query" parameterType="java.util.Map" resultMap="ResRole">
@@ -76,14 +76,13 @@
 	</delete>
 
 	
-	<!-- 需要进行调整和修改 -->
     <select id="getResRoleByApplicationId" parameterType="java.lang.String" resultMap="ResRole">
       	SELECT A.ALIAS RESALIAS, C.ALIAS ROLEALIAS, A.DEFAULT_URL URL
 		  FROM YMMG_RESOURCE A, YMMG_ROLE_RESOURCE_LINK B, YMMG_ROLE C
 		 WHERE A.APPLICATION_ID = #{applicationId}
 		   AND A.ID = B.RES_ID
 		   AND B.ROLE_ID = C.ID
-		   AND C.ENABLED = '1';
+		   AND C.ENABLED = '1'
 	</select>
 
     <select id="getUrlRoleByApplicationId" parameterType="java.lang.String" resultMap="ResRole">
