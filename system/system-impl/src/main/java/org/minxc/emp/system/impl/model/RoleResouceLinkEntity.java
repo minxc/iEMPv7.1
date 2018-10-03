@@ -57,6 +57,4 @@ public class RoleResouceLinkEntity implements IdModel {
      */
     protected String resAlias;
 
-
-    
 }

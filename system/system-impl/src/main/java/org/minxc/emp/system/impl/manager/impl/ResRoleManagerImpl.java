@@ -3,7 +3,7 @@ package org.minxc.emp.system.impl.manager.impl;
 import org.minxc.emp.common.db.id.UniqueIdUtil;
 import org.minxc.emp.common.manager.impl.CommonManager;
 import org.minxc.emp.core.cache.Cache;
-import org.minxc.emp.system.impl.dao.ResRoleDao;
+import org.minxc.emp.system.impl.dao.ResourceRoleLinkDao;
 import org.minxc.emp.system.impl.manager.ResRoleManager;
 import org.minxc.emp.system.impl.model.RoleResouceLinkEntity;
 import org.springframework.stereotype.Service;
@@ -28,10 +28,10 @@ import java.util.*;
 public class ResRoleManagerImpl extends CommonManager<String, RoleResouceLinkEntity> implements ResRoleManager {
 
 	@Resource
-	private ResRoleDao resRoleDao;
+	private ResourceRoleLinkDao resRoleDao;
 	
 	@Resource
-	private Cache cache;    //内控缓存，生存周期是和应用服务器启动维持一致
+	private Cache  cache;    //内控缓存，生存周期是和应用服务器启动维持一致
 
 	public final String RESOURCE_URL = "RES_URL_";
 
@@ -44,7 +44,7 @@ public class ResRoleManagerImpl extends CommonManager<String, RoleResouceLinkEnt
 
 	@Override
 	public void assignResByRoleSys(String resIds, String applicationId, String roleId) {
-		resRoleDao.removeByRoleAndApplicationId(roleId, applicationId);
+		resRoleDao.deleteByRoleAndApplicationId(roleId, applicationId);
 		String[] aryRes = resIds.split(",");
 		for (String resId : aryRes) {
 			if ("0".equals(resId))
