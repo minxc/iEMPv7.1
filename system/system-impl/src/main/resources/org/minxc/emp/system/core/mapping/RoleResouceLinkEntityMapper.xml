@@ -1,21 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.minxc.emp.system.impl.dao.ResRoleDao">
+<mapper namespace="org.minxc.emp.system.impl.dao.ResourceRoleLinkDao">
+
     <resultMap id="ResRole" type="org.minxc.emp.system.impl.model.RoleResouceLinkEntity">
        	<id column="ID" jdbcType="VARCHAR" property="id" />
-      	<result column="SYSTEM_ID" jdbcType="VARCHAR" property="systemId" />
+      	<result column="APPLICATION_ID" jdbcType="VARCHAR" property="applicationId" />
 	    <result column="RES_ID" jdbcType="VARCHAR" property="resId" />
 	    <result column="ROLE_ID" jdbcType="VARCHAR" property="roleId" />
+	    <result property="roleAlias" column="ROLEALIAS" jdbcType="VARCHAR"/>
+        <result property="url" column="URL" jdbcType="VARCHAR"/>
+        <result property="resAlias" column="RESALIAS" jdbcType="VARCHAR"/>
     </resultMap>
 
 	<sql id="Base_Column_List">
-   	 ID, SYSTEM_ID, RES_ID, ROLE_ID
+   	 	ID, APPLICATION_ID, RES_ID, ROLE_ID
   	</sql>
     <insert id="create" parameterType="org.minxc.emp.system.impl.model.RoleResouceLinkEntity">
 		INSERT INTO YMMG_ROLE_RESOURCE_LINK
 		 <include refid="Base_Column_List" />
 		VALUES 
-		(#{id,jdbcType=VARCHAR}, #{systemId,jdbcType=VARCHAR}, #{resId,jdbcType=VARCHAR}, #{roleId,jdbcType=VARCHAR})
+		(#{id,jdbcType=VARCHAR}, #{applicationId,jdbcType=VARCHAR}, #{resId,jdbcType=VARCHAR}, #{roleId,jdbcType=VARCHAR})
 	</insert>
 
     <select id="get" parameterType="java.lang.String" resultMap="ResRole">
@@ -26,7 +30,7 @@
 		ID=#{id}
 	</select>
 
-    <select id="getAllByRoleId" parameterType="java.lang.String" resultMap="ResRole">
+    <select id="getByRoleId" parameterType="java.lang.String" resultMap="ResRole">
 		SELECT 
 		 <include refid="Base_Column_List" />
 		FROM YMMG_ROLE_RESOURCE_LINK 
@@ -52,39 +56,42 @@
     </select>
 
     <update id="update" parameterType="org.minxc.emp.system.impl.model.RoleResouceLinkEntity">
-		UPDATE YMMG_ROLE_RESOURCE_LINK SET
-		SYSTEM_ID =#{systemId,jdbcType=VARCHAR},
-		RES_ID =#{resId,jdbcType=VARCHAR},
-		ROLE_ID=#{roleId,jdbcType=VARCHAR}
-		WHERE
-		ID=#{id}
+		UPDATE YMMG_ROLE_RESOURCE_LINK
+		   SET SYSTEM_ID = #{systemId,jdbcType  = VARCHAR},
+		       RES_ID    = #{resId, jdbcType  = VARCHAR},
+		       ROLE_ID   = #{roleId,jdbcType  = VARCHAR}
+		 WHERE ID = #{id}
 	</update>
 
     <delete id="remove" parameterType="java.lang.String">
 		DELETE FROM YMMG_ROLE_RESOURCE_LINK 
-		WHERE
-		ID=#{id}
+			WHERE
+		  ID=#{id}
 	</delete>
 
-    <delete id="removeByRoleAndSystem" parameterType="java.util.Map">
+    <delete id="deleteByRoleAndApplicationId" parameterType="java.util.Map">
 		DELETE FROM YMMG_ROLE_RESOURCE_LINK
-		WHERE 
-		ROLE_ID=#{roleId}
-		AND
-		SYSTEM_ID=#{systemId}
+		 WHERE ROLE_ID = #{roleId}
+		   AND SYSTEM_ID = #{systemId}
 	</delete>
 
 	
 	<!-- 需要进行调整和修改 -->
-    <select id="getResRoleBySystemId" parameterType="java.lang.String" resultMap="ResRole">
-		select a.ALIAS_ resAlias,c.alias_ roleAlias,a.default_url_ url from sys_resource a,sys_res_role b,org_role c
-			where a.SYSTEM_ID_=#{systemId} and a.ID_=b.RES_ID_ and b.ROLE_ID_=c.id_ and c.enabled_=1
+    <select id="getResRoleByApplicationId" parameterType="java.lang.String" resultMap="ResRole">
+      	SELECT A.ALIAS RESALIAS, C.ALIAS ROLEALIAS, A.DEFAULT_URL URL
+		  FROM YMMG_RESOURCE A, YMMG_ROLE_RESOURCE_LINK B, YMMG_ROLE C
+		 WHERE A.APPLICATION_ID = #{applicationId}
+		   AND A.ID = B.RES_ID
+		   AND B.ROLE_ID = C.ID
+		   AND C.ENABLED = '1';
 	</select>
 
-    <select id="getUrlRoleBySystemId" parameterType="java.lang.String" resultMap="ResRole">
-		select a.RES_URL_ url,c.alias_ roleAlias from sys_rel_resources a,sys_res_role b,org_role c
-			where b.SYSTEM_ID_=#{systemId} and a.RES_ID_=b.RES_ID_  and b.ROLE_ID_=c.id_ and c.enabled_=1
+    <select id="getUrlRoleByApplicationId" parameterType="java.lang.String" resultMap="ResRole">
+		SELECT A.RES_URL URL, C.ALIAS ROLEALIAS
+		  FROM YMMG_RESOURCE_LINK A, YMMG_ROLE_RESOURCE_LINK B, YMMG_ROLE C
+		 WHERE B.APPLICATION_ID = #{applicationId}
+		   AND A.RES_ID = B.RES_ID
+		   AND B.ROLE_ID = C.ID
+		   AND C.ENABLED = '1'
 	</select>
-
-
 </mapper>

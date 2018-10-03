@@ -12,11 +12,11 @@ import org.minxc.emp.system.impl.model.RoleResouceLinkEntity;
  * 角色资源分配 DAO接口
  */
 @Mapper
-public interface ResRoleDao extends CommonDao<String, RoleResouceLinkEntity> {
+public interface ResourceRoleLinkDao extends CommonDao<String, RoleResouceLinkEntity> {
 
     List<RoleResouceLinkEntity> getByRoleId(String roleId);
 
-    void removeByRoleAndApplicationId(@Param("roleId")String roleId,@Param("applicationId")String applicationId);
+    void deleteByRoleAndApplicationId(@Param("roleId")String roleId,@Param("applicationId")String applicationId);
 
     /**
      * 根据系统id获取关联的角色和URL资源。
