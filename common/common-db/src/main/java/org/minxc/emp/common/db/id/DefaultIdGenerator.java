@@ -4,7 +4,6 @@ import org.minxc.emp.common.db.api.IdGenerator;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.stereotype.Component;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -17,7 +16,6 @@ import javax.annotation.Resource;
  * ID Generator
  */
 @Slf4j
-@Component
 public class DefaultIdGenerator implements IdGenerator, InitializingBean {
 	
 	@Resource

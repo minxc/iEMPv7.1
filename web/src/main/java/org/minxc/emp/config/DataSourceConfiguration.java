@@ -1,6 +1,10 @@
 package org.minxc.emp.config;
 
 import com.zaxxer.hikari.HikariDataSource;
+
+import org.minxc.emp.common.db.api.IdGenerator;
+import org.minxc.emp.common.db.id.SnowflakeIdGenerator;
+import org.minxc.emp.common.db.id.SnowflakeIdMetadata;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -49,5 +53,18 @@ public class DataSourceConfiguration  {
         return dataSource;
     }
 
-
+    
+    /**
+     * 雪花算法主键生成器
+     * @return
+     */
+    @Bean
+    public IdGenerator idGenerator() {
+    	
+    	SnowflakeIdMetadata idMeta = new SnowflakeIdMetadata(1L, (byte)3, (byte)15, (byte)45);
+    	
+    	SnowflakeIdGenerator idGen = new SnowflakeIdGenerator(idMeta);
+    	
+    	return idGen;
+    }
 }

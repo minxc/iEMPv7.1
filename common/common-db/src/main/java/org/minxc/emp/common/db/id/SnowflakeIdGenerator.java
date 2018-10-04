@@ -3,12 +3,16 @@ package org.minxc.emp.common.db.id;
 import org.minxc.emp.common.db.api.IdGenerator;
 import org.springframework.util.Assert;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * 雪花算法Id生成器
  *
  */
+
+@Slf4j
 public class SnowflakeIdGenerator implements IdGenerator {
 
     private SnowflakeIdMetadata idMeta;
@@ -69,6 +73,7 @@ public class SnowflakeIdGenerator implements IdGenerator {
         long uid = idMeta.getMachine();
         uid |= newVariant.sequence << idMeta.getSequenceStartPos();
         uid |= newVariant.lastTimestamp << idMeta.getTimeStartPos();
+        log.debug("++++++++SnowflakeIdGenerator++++++++getUId():" + uid);
         return uid;
     }
 
