@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/sys/tools/")
-public class SysToolsController extends GenericController {
+public class SystemToolsController extends GenericController {
 	/**
 	 * <pre>
 	 * 根据一个枚举类的路径获取这个枚举的json形式，供前端使用

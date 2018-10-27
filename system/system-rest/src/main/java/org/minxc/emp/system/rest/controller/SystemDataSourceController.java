@@ -14,7 +14,7 @@ import org.minxc.emp.common.rest.GenericController;
 import org.minxc.emp.common.rest.util.RequestUtil;
 import org.minxc.emp.core.api.aop.annotation.ErrorCatching;
 import org.minxc.emp.core.api.query.QueryFilter;
-import org.minxc.emp.system.impl.manager.SysDataSourceManager;
+import org.minxc.emp.system.impl.manager.DataSourceManager;
 import org.minxc.emp.system.impl.model.SystemDataSourceEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,9 +27,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @Controller
 @RequestMapping("/sys/sysDataSource/")
-public class SysDataSourceController extends GenericController {
+public class SystemDataSourceController extends GenericController {
     @Autowired
-    SysDataSourceManager sysDataSourceManager;
+    DataSourceManager sysDataSourceManager;
 
     /**
      * <pre>

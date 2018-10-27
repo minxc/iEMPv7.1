@@ -10,7 +10,7 @@ import org.minxc.emp.core.api.response.impl.ResultMessage;
 import org.minxc.emp.core.util.BeanUtils;
 import org.minxc.emp.system.impl.manager.ResRoleManager;
 import org.minxc.emp.system.impl.manager.SubsystemManager;
-import org.minxc.emp.system.impl.manager.SysResourceManager;
+import org.minxc.emp.system.impl.manager.SystemResourceManager;
 import org.minxc.emp.system.impl.model.RoleResouceLinkEntity;
 import org.minxc.emp.system.impl.model.SystemResourceEntity;
 import org.springframework.stereotype.Controller;
@@ -30,13 +30,13 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/sys/resRole")
-public class SysResRoleController extends GenericController {
+public class SystemResRoleController extends GenericController {
 
 	@Resource
 	ResRoleManager resRoleManager;
 
 	@Resource
-	SysResourceManager sysResourceManager;
+	SystemResourceManager sysResourceManager;
 
 	@Resource
 	SubsystemManager subsystemManager;

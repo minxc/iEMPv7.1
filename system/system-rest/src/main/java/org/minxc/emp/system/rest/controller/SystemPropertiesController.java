@@ -15,7 +15,7 @@ import org.minxc.emp.common.rest.util.RequestUtil;
 import org.minxc.emp.core.api.aop.annotation.ErrorCatching;
 import org.minxc.emp.core.api.exception.BusinessException;
 import org.minxc.emp.core.api.query.QueryFilter;
-import org.minxc.emp.system.impl.manager.SysPropertiesManager;
+import org.minxc.emp.system.impl.manager.SystemPropertiesManager;
 import org.minxc.emp.system.impl.model.SystemPropertiesEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,10 +30,10 @@ import com.github.pagehelper.Page;
  */
 @Controller
 @RequestMapping("/sys/sysProperties")
-public class SysPropertiesController extends GenericController {
+public class SystemPropertiesController extends GenericController {
 	
     @Resource
-    SysPropertiesManager sysPropertiesManager;
+    SystemPropertiesManager sysPropertiesManager;
 
     /**
      * 系统属性列表(分页条件查询)数据

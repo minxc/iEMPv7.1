@@ -15,7 +15,7 @@ import org.minxc.emp.core.api.status.CommonStatusCode;
 import org.minxc.emp.core.util.AppContextUtil;
 import org.minxc.emp.core.util.BeanUtils;
 import org.minxc.emp.system.impl.dao.SysDataSourceDao;
-import org.minxc.emp.system.impl.manager.SysDataSourceManager;
+import org.minxc.emp.system.impl.manager.DataSourceManager;
 import org.minxc.emp.system.impl.model.SystemDataSourceEntity;
 import org.minxc.emp.system.impl.model.def.SysDataSourceDefAttribute;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +26,7 @@ import org.springframework.stereotype.Service;
  * 描述：数据源 Manager处理实现类
  */
 @Service
-public class SysDataSourceManagerImpl extends CommonManager<String, SystemDataSourceEntity> implements SysDataSourceManager {
+public class SysDataSourceManagerImpl extends CommonManager<String, SystemDataSourceEntity> implements DataSourceManager {
    
 	@Autowired
     SysDataSourceDao sysDataSourceDao;

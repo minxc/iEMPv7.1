@@ -5,8 +5,8 @@ import org.minxc.emp.common.manager.impl.CommonManager;
 import org.minxc.emp.core.api.query.QueryFilter;
 import org.minxc.emp.core.api.query.QueryOperator;
 import org.minxc.emp.system.impl.dao.SysTreeDao;
-import org.minxc.emp.system.impl.manager.SysTreeManager;
-import org.minxc.emp.system.impl.manager.SysTreeNodeManager;
+import org.minxc.emp.system.impl.manager.SystemTreeManager;
+import org.minxc.emp.system.impl.manager.SystemTreeNodeManager;
 import org.minxc.emp.system.impl.model.TreeEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,12 +26,12 @@ import org.springframework.stereotype.Service;
 *
  */
 @Service("sysTreeManager")
-public class SysTreeManagerImpl extends CommonManager<String, TreeEntity> implements SysTreeManager {
+public class SysTreeManagerImpl extends CommonManager<String, TreeEntity> implements SystemTreeManager {
    
 	@Autowired
     private SysTreeDao sysTreeDao;
 	@Autowired
-    private SysTreeNodeManager sysTreeNodeManager;
+    private SystemTreeNodeManager sysTreeNodeManager;
 
     @Override
     public TreeEntity getByKey(String key) {

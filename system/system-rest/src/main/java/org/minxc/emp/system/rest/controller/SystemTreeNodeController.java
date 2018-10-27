@@ -10,8 +10,8 @@ import org.minxc.emp.common.db.id.UniqueIdUtil;
 import org.minxc.emp.common.rest.GenericController;
 import org.minxc.emp.common.rest.util.RequestUtil;
 import org.minxc.emp.core.api.aop.annotation.ErrorCatching;
-import org.minxc.emp.system.impl.manager.SysTreeManager;
-import org.minxc.emp.system.impl.manager.SysTreeNodeManager;
+import org.minxc.emp.system.impl.manager.SystemTreeManager;
+import org.minxc.emp.system.impl.manager.SystemTreeNodeManager;
 import org.minxc.emp.system.impl.model.SystemTreeNodeEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,11 +25,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @Controller
 @RequestMapping("/sys/sysTreeNode/")
-public class SysTreeNodeController extends GenericController {
+public class SystemTreeNodeController extends GenericController {
     @Autowired
-    SysTreeManager sysTreeManager;
+    SystemTreeManager sysTreeManager;
     @Autowired
-    SysTreeNodeManager sysTreeNodeManager;
+    SystemTreeNodeManager sysTreeNodeManager;
 
     /**
      * <pre>

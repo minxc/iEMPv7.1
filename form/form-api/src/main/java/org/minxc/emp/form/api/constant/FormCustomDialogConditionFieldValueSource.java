@@ -1,27 +1,21 @@
 package org.minxc.emp.form.api.constant;
 
 /**
- * <pre>
  * 描述：FormCustDialogConditionField中的valueSource枚举
- * 作者:aschs
- * 邮箱:aschs@qq.com
- * 日期:2018年3月1日 下午4:29:12
- * 版权:summer
- * </pre>
  */
-public enum FormCustDialogConditionFieldValueSource {
+public enum FormCustomDialogConditionFieldValueSource {
 	/**
 	 * 页面输入或者url传入
 	 */
-	PARAM("param", "参数传入", new String[] { FormCustDialogStyle.LIST.getKey(),FormCustDialogStyle.TREE.getKey() }),
+	PARAM("param", "参数传入", new String[] { FormCustomDialogStyle.LIST.getKey(),FormCustomDialogStyle.TREE.getKey() }),
 	/**
 	 * 固定值
 	 */
-	FIXED_VALUE("fixedValue", "固定值", new String[] { FormCustDialogStyle.LIST.getKey(), FormCustDialogStyle.TREE.getKey() }),
+	FIXED_VALUE("fixedValue", "固定值", new String[] { FormCustomDialogStyle.LIST.getKey(), FormCustomDialogStyle.TREE.getKey() }),
 	/**
 	 * 脚本
 	 */
-	SCRIPT("script", "脚本", new String[] { FormCustDialogStyle.LIST.getKey(), FormCustDialogStyle.TREE.getKey() });
+	SCRIPT("script", "脚本", new String[] { FormCustomDialogStyle.LIST.getKey(), FormCustomDialogStyle.TREE.getKey() });
 	/**
 	 * key
 	 */
@@ -36,7 +30,7 @@ public enum FormCustDialogConditionFieldValueSource {
 	 */
 	private String[] supports;
 
-	private FormCustDialogConditionFieldValueSource(String key, String desc, String[] supports) {
+	private FormCustomDialogConditionFieldValueSource(String key, String desc, String[] supports) {
 		this.key = key;
 		this.desc = desc;
 		this.supports = supports;
@@ -55,9 +49,7 @@ public enum FormCustDialogConditionFieldValueSource {
 	}
 
 	/**
-	 * <pre>
 	 * 根据key来判断是否跟当前一致
-	 * </pre>
 	 * 
 	 * @param key
 	 * @return

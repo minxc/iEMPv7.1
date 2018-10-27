@@ -6,7 +6,7 @@ import org.minxc.emp.system.impl.model.SystemLogErrorEntity;
 /**
  * 描述：错误日志 处理接口
  */
-public interface LogErrManager extends Manager<String, SystemLogErrorEntity> {
+public interface LogErrorManager extends Manager<String, SystemLogErrorEntity> {
 
     void getSub();
 

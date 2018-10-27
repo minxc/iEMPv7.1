@@ -9,7 +9,7 @@ import org.minxc.emp.system.impl.model.def.SysDataSourceDefAttribute;
 /**
  * 数据源模板 Manager处理接口
  */
-public interface SysDataSourceDefManager extends Manager<String, SysDataSourceDef> {
+public interface SystemDataSourceDefManager extends Manager<String, SysDataSourceDef> {
 
     /**
      * <pre>

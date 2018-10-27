@@ -7,7 +7,7 @@ import javax.annotation.Resource;
 import org.minxc.emp.common.db.id.UniqueIdUtil;
 import org.minxc.emp.common.manager.impl.CommonManager;
 import org.minxc.emp.system.impl.dao.SysFileDao;
-import org.minxc.emp.system.impl.manager.SysFileManager;
+import org.minxc.emp.system.impl.manager.FileManager;
 import org.minxc.emp.system.impl.model.UploadedFileEntity;
 import org.minxc.emp.system.impl.upload.IUploader;
 import org.minxc.emp.system.impl.upload.UploaderFactory;
@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
  * 系统附件 Manager处理实现类
  */
 @Service("sysFileManager")
-public class SysFileManagerImpl extends CommonManager<String, UploadedFileEntity> implements SysFileManager {
+public class SysFileManagerImpl extends CommonManager<String, UploadedFileEntity> implements FileManager {
 	@Resource
 	SysFileDao sysFileDao;
 

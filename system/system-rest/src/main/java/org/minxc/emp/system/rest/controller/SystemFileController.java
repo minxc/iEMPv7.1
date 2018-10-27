@@ -16,7 +16,7 @@ import org.minxc.emp.core.api.response.impl.ResultMessage;
 import org.minxc.emp.core.util.FileUtil;
 import org.minxc.emp.core.util.ZipUtil;
 import org.minxc.emp.core.util.time.DateUtil;
-import org.minxc.emp.system.impl.manager.SysFileManager;
+import org.minxc.emp.system.impl.manager.FileManager;
 import org.minxc.emp.system.impl.model.UploadedFileEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -40,10 +40,10 @@ import net.lingala.zip4j.core.ZipFile;
  */
 @RestController
 @RequestMapping("/sys/sysFile/")
-public class SysFileController extends GenericController {
+public class SystemFileController extends GenericController {
 	
 	@Autowired
-	SysFileManager sysFileManager;
+	FileManager sysFileManager;
 
 	/**
 	 * <pre>

@@ -8,7 +8,7 @@ import org.minxc.emp.system.impl.model.SystemResourceEntity;
 /**
  *  子系统资源 处理接口
  */
-public interface SysResourceManager extends Manager<String, SystemResourceEntity> {
+public interface SystemResourceManager extends Manager<String, SystemResourceEntity> {
 
     /**
      * 根据子系统ID获取实体列表。

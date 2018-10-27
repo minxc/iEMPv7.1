@@ -9,6 +9,6 @@ import org.minxc.emp.system.impl.model.SystemScheduleJobEntity;
  * @author Xianchang.min
  *
  */
-public interface SysScheduleJobManager extends Manager<String, SystemScheduleJobEntity> {
+public interface ScheduleJobManager extends Manager<String, SystemScheduleJobEntity> {
 
 }

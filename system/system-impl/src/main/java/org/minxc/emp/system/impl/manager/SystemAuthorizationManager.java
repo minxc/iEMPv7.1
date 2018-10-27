@@ -9,7 +9,7 @@ import org.minxc.emp.common.manager.Manager;
 import org.minxc.emp.system.impl.model.BizAuthorizationEntity;
 
 
-public interface SysAuthorizationManager extends Manager<String, BizAuthorizationEntity> {
+public interface SystemAuthorizationManager extends Manager<String, BizAuthorizationEntity> {
 
     Set<String> getUserRights(String userId);
 

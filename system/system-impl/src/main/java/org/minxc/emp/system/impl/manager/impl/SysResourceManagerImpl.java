@@ -10,7 +10,7 @@ import org.minxc.emp.common.manager.impl.CommonManager;
 import org.minxc.emp.core.util.BeanUtils;
 import org.minxc.emp.system.impl.dao.RelResourceDao;
 import org.minxc.emp.system.impl.dao.SysResourceDao;
-import org.minxc.emp.system.impl.manager.SysResourceManager;
+import org.minxc.emp.system.impl.manager.SystemResourceManager;
 import org.minxc.emp.system.impl.model.ResourceLinkEntity;
 import org.minxc.emp.system.impl.model.SystemResourceEntity;
 import org.springframework.stereotype.Service;
@@ -21,7 +21,7 @@ import org.springframework.stereotype.Service;
  * </pre>
  */
 @Service("sysResourceManager")
-public class SysResourceManagerImpl extends CommonManager<String, SystemResourceEntity> implements SysResourceManager {
+public class SysResourceManagerImpl extends CommonManager<String, SystemResourceEntity> implements SystemResourceManager {
     @Resource
     SysResourceDao sysResourceDao;
 

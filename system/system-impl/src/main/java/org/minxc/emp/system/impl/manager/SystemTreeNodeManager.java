@@ -8,7 +8,7 @@ import org.minxc.emp.system.impl.model.SystemTreeNodeEntity;
 /**
  * 系统树节点 Manager处理接口
  */
-public interface SysTreeNodeManager extends Manager<String, SystemTreeNodeEntity> {
+public interface SystemTreeNodeManager extends Manager<String, SystemTreeNodeEntity> {
 
     /**
      * <pre>

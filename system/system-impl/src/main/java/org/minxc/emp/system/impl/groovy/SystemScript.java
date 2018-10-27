@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
  */
 
 @Component
-public class SysScript implements IScript {
+public class SystemScript implements IScript {
 	
 	@Resource
 	SerialNoService serialNoService;

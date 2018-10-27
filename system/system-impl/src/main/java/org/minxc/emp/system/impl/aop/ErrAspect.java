@@ -19,7 +19,7 @@ import org.minxc.emp.core.util.BeanUtils;
 import org.minxc.emp.core.util.ExceptionUtil;
 import org.minxc.emp.core.util.JacksonUtil;
 import org.minxc.emp.idm.api.model.User;
-import org.minxc.emp.system.impl.manager.LogErrManager;
+import org.minxc.emp.system.impl.manager.LogErrorManager;
 import org.minxc.emp.system.impl.model.SystemLogErrorEntity;
 import org.minxc.emp.system.util.ContextUtil;
 import org.slf4j.Logger;
@@ -46,7 +46,7 @@ public class ErrAspect {
 
 
     @Resource
-    LogErrManager logErrManager;
+    LogErrorManager logErrManager;
 
     @Resource
     private ThreadPoolTaskExecutor threadPoolTaskExecutor;

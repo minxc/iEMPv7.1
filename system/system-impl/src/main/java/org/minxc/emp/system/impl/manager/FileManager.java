@@ -8,7 +8,7 @@ import org.minxc.emp.system.impl.model.UploadedFileEntity;
 /**
  * 系统附件 Manager处理接口
  */
-public interface SysFileManager extends Manager<String, UploadedFileEntity>{
+public interface FileManager extends Manager<String, UploadedFileEntity>{
 	
 	/**
 	 * <pre>

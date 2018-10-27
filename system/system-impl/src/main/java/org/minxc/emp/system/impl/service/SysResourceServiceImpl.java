@@ -11,7 +11,7 @@ import org.minxc.emp.system.api.model.SystemResource;
 import org.minxc.emp.system.api.service.SysResourceService;
 import org.minxc.emp.system.impl.manager.ResRoleManager;
 import org.minxc.emp.system.impl.manager.SubsystemManager;
-import org.minxc.emp.system.impl.manager.SysResourceManager;
+import org.minxc.emp.system.impl.manager.SystemResourceManager;
 import org.springframework.stereotype.Service;
 
 /**
@@ -20,7 +20,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class SysResourceServiceImpl implements SysResourceService{
 	@Resource
-	SysResourceManager sysResourceManager;
+	SystemResourceManager sysResourceManager;
 	@Resource
 	SubsystemManager sybSystemManager;
 	@Resource

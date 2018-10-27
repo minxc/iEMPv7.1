@@ -19,7 +19,7 @@ import org.minxc.emp.core.api.response.impl.ResultMessage;
 import org.minxc.emp.core.util.BeanUtils;
 import org.minxc.emp.system.impl.manager.RelResourceManager;
 import org.minxc.emp.system.impl.manager.SubsystemManager;
-import org.minxc.emp.system.impl.manager.SysResourceManager;
+import org.minxc.emp.system.impl.manager.SystemResourceManager;
 import org.minxc.emp.system.impl.model.ApplicationEntity;
 import org.minxc.emp.system.impl.model.SystemResourceEntity;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,9 +34,9 @@ import com.github.pagehelper.Page;
  */
 @RestController
 @RequestMapping("/sys/sysResource")
-public class SysResourceController extends GenericController {
+public class SystemResourceController extends GenericController {
     @Resource
-    SysResourceManager sysResourceManager;
+    SystemResourceManager sysResourceManager;
 
     @Resource
     RelResourceManager relResourceManager;

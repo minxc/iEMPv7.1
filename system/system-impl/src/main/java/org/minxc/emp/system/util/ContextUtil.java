@@ -48,9 +48,9 @@ public class ContextUtil {
      * 获取当前组织Id。组织为空则返回空
      */
     public static String getCurrentGroupId() {
-        Group iGroup = getCurrentGroup();
-        if (BeanUtils.isNotEmpty(iGroup)) {
-            return iGroup.getGroupId();
+        Group group = getCurrentGroup();
+        if (BeanUtils.isNotEmpty(group)) {
+            return group.getGroupId();
         } else {
             return "";
         }
@@ -135,14 +135,14 @@ public class ContextUtil {
     }
     
     public static boolean isAdmin(User user) {
-    	  String tmp = SysPropertyUtil.getByAlias("admin.account", "admin");
+    	  String tmp = SystemPropertyUtil.getByAlias("admin.account", "admin");
           return tmp.equals(user.getAccount());
     }
     
     public static boolean currentUserIsAdmin() {
     	User user = getCurrentUser();
     	
-  	  	String tmp = SysPropertyUtil.getByAlias("admin.account", "admin");
+  	  	String tmp = SystemPropertyUtil.getByAlias("admin.account", "admin");
         return tmp.equals(user.getAccount());
   }
 }

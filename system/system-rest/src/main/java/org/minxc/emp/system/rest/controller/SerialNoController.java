@@ -30,7 +30,7 @@ import com.github.pagehelper.Page;
  */
 @RestController
 @RequestMapping("/sys/serialNo/")
-public class SysSerialNoController extends GenericController {
+public class SerialNoController extends GenericController {
     @Resource
     SerialNoManager serialNoManager;
     @Resource

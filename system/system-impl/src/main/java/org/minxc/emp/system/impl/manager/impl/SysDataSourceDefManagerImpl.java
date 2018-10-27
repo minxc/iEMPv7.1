@@ -12,7 +12,7 @@ import org.minxc.emp.core.api.exception.BusinessException;
 import org.minxc.emp.core.util.JacksonUtil;
 import org.minxc.emp.core.util.StringUtil;
 import org.minxc.emp.system.impl.dao.SysDataSourceDefDao;
-import org.minxc.emp.system.impl.manager.SysDataSourceDefManager;
+import org.minxc.emp.system.impl.manager.SystemDataSourceDefManager;
 import org.minxc.emp.system.impl.model.SysDataSourceDef;
 import org.minxc.emp.system.impl.model.def.SysDataSourceDefAttribute;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ import org.springframework.stereotype.Service;
  * @description 数据源模板 Manager处理实现类
  */
 @Service
-public class SysDataSourceDefManagerImpl extends CommonManager<String, SysDataSourceDef> implements SysDataSourceDefManager {
+public class SysDataSourceDefManagerImpl extends CommonManager<String, SysDataSourceDef> implements SystemDataSourceDefManager {
     @Autowired
     SysDataSourceDefDao sysDataSourceDefDao;
 

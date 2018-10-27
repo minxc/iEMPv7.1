@@ -13,8 +13,8 @@ import org.minxc.emp.core.api.query.QueryOperator;
 import org.minxc.emp.core.util.JacksonUtil;
 import org.minxc.emp.system.impl.dao.DataDictDao;
 import org.minxc.emp.system.impl.manager.DataDictManager;
-import org.minxc.emp.system.impl.manager.SysTreeManager;
-import org.minxc.emp.system.impl.manager.SysTreeNodeManager;
+import org.minxc.emp.system.impl.manager.SystemTreeManager;
+import org.minxc.emp.system.impl.manager.SystemTreeNodeManager;
 import org.minxc.emp.system.impl.model.DataDictEntity;
 import org.minxc.emp.system.impl.model.TreeEntity;
 import org.minxc.emp.system.impl.model.SystemTreeNodeEntity;
@@ -34,9 +34,9 @@ public class DataDictManagerImpl extends CommonManager<String, DataDictEntity> i
 	@Resource
 	private DataDictDao dataDictDao;
 	@Resource
-	private SysTreeNodeManager sysTreeNodeMananger;
+	private SystemTreeNodeManager sysTreeNodeMananger;
 	@Resource
-	private SysTreeManager sysTreeMananger;
+	private SystemTreeManager sysTreeMananger;
 
 	@Override
 	public List<DataDictEntity> getDictNodeList(String dictKey, Boolean hasRoot) {

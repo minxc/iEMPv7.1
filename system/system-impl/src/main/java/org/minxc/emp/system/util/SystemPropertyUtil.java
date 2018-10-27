@@ -8,7 +8,7 @@ import org.minxc.emp.system.api.service.PropertyService;
  *
  * @author ray
  */
-public class SysPropertyUtil {
+public class SystemPropertyUtil {
 
     /**
      * 获取字符串参数值。

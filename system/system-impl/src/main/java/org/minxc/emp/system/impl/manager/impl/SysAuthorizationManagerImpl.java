@@ -16,7 +16,7 @@ import org.minxc.emp.core.util.BeanUtils;
 import org.minxc.emp.idm.api.model.Group;
 import org.minxc.emp.idm.api.service.GroupService;
 import org.minxc.emp.system.impl.dao.SysAuthorizationDao;
-import org.minxc.emp.system.impl.manager.SysAuthorizationManager;
+import org.minxc.emp.system.impl.manager.SystemAuthorizationManager;
 import org.minxc.emp.system.impl.model.BizAuthorizationEntity;
 import org.minxc.emp.system.util.ContextUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ import org.springframework.stereotype.Service;
 
 
 @Service("sysAuthorizationManager")
-public class SysAuthorizationManagerImpl extends CommonManager<String, BizAuthorizationEntity> implements SysAuthorizationManager {
+public class SysAuthorizationManagerImpl extends CommonManager<String, BizAuthorizationEntity> implements SystemAuthorizationManager {
 
     @Resource
     private SysAuthorizationDao sysAuthorizationDao;

@@ -13,7 +13,7 @@ import org.minxc.emp.core.util.AppContextUtil;
 import org.minxc.emp.core.util.BeanUtils;
 import org.minxc.emp.system.api.service.PropertyService;
 import org.minxc.emp.system.impl.dao.SysPropertiesDao;
-import org.minxc.emp.system.impl.manager.SysPropertiesManager;
+import org.minxc.emp.system.impl.manager.SystemPropertiesManager;
 import org.minxc.emp.system.impl.model.SystemPropertiesEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,7 +31,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service("sysPropertiesManager")
 public class SysPropertiesManagerImpl extends CommonManager<String, SystemPropertiesEntity>
-		implements SysPropertiesManager, PropertyService {
+		implements SystemPropertiesManager, PropertyService {
 
 	@Resource
 	private SysPropertiesDao sysPropertiesDao;

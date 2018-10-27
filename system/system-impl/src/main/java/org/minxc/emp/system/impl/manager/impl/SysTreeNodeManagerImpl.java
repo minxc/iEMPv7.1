@@ -10,7 +10,7 @@ import org.minxc.emp.core.api.query.QueryFilter;
 import org.minxc.emp.core.api.query.QueryOperator;
 import org.minxc.emp.core.api.query.SortDirection;
 import org.minxc.emp.system.impl.dao.SysTreeNodeDao;
-import org.minxc.emp.system.impl.manager.SysTreeNodeManager;
+import org.minxc.emp.system.impl.manager.SystemTreeNodeManager;
 import org.minxc.emp.system.impl.model.SystemTreeNodeEntity;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +29,7 @@ import org.springframework.stereotype.Service;
 *
  */
 @Service("sysTreeNodeManager")
-public class SysTreeNodeManagerImpl extends CommonManager<String, SystemTreeNodeEntity> implements SysTreeNodeManager {
+public class SysTreeNodeManagerImpl extends CommonManager<String, SystemTreeNodeEntity> implements SystemTreeNodeManager {
     @Resource
     SysTreeNodeDao sysTreeNodeDao;
 

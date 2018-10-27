@@ -7,7 +7,7 @@ import org.minxc.emp.common.rest.GenericController;
 import org.minxc.emp.common.rest.util.RequestUtil;
 import org.minxc.emp.core.api.aop.annotation.ErrorCatching;
 import org.minxc.emp.core.api.query.QueryFilter;
-import org.minxc.emp.system.impl.manager.SysDataSourceDefManager;
+import org.minxc.emp.system.impl.manager.SystemDataSourceDefManager;
 import org.minxc.emp.system.impl.model.SysDataSourceDef;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,10 +24,10 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/sys/sysDataSourceDef/")
-public class SysDataSourceDefController extends GenericController {
+public class SystemDataSourceDefController extends GenericController {
 	
     @Autowired
-    SysDataSourceDefManager sysDataSourceDefManager;
+    SystemDataSourceDefManager sysDataSourceDefManager;
 
     /**
      * <pre>

@@ -1,14 +1,21 @@
 package org.minxc.emp.form.api.constant;
+
 /**
- * <pre> 
- * 描述：FormCustDialog中的objType枚举
- * 作者:aschs
- * 邮箱:aschs@qq.com
- * 日期:2018年3月1日 下午4:26:31
- * 版权:summer
- * </pre>
+ * 
+* 项目名称：form-api   
+* 类名称：FormCustomDialogObjectType   
+* 类描述：   FormCustomDialog中的objType枚举
+* 创建人：Xianchang.min   
+* 创建时间：2018年10月27日 下午8:36:06   
+* 修改人：Xianchang.min   
+* 修改时间：2018年10月27日 下午8:36:06   
+* 修改备注：   
+* @version  1.0  
+*
  */
-public enum FormCustDialogObjType {
+public enum FormCustomDialogObjectType {
+	
+	
 	TABLE("table", "表"), VIEW("view", "视图");
 	/**
 	 * key
@@ -19,7 +26,7 @@ public enum FormCustDialogObjType {
 	 */
 	private String desc;
 
-	private FormCustDialogObjType(String key, String desc) {
+	private FormCustomDialogObjectType(String key, String desc) {
 		this.key = key;
 		this.desc = desc;
 	}

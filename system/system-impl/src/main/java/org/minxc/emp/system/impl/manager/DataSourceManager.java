@@ -9,7 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 /**
  * 数据源 Manager处理接口
  */
-public interface SysDataSourceManager extends Manager<String, SystemDataSourceEntity> {
+public interface DataSourceManager extends Manager<String, SystemDataSourceEntity> {
 
     /**
      * <pre>

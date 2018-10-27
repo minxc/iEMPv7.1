@@ -22,9 +22,9 @@ import org.minxc.emp.core.api.query.QueryOperator;
 import org.minxc.emp.core.util.AppContextUtil;
 import org.minxc.emp.core.util.BeanUtils;
 import org.minxc.emp.core.util.StringUtil;
-import org.minxc.emp.form.api.constant.FormCustDialogConditionFieldValueSource;
-import org.minxc.emp.form.api.constant.FormCustDialogObjType;
-import org.minxc.emp.form.api.constant.FormCustDialogStyle;
+import org.minxc.emp.form.api.constant.FormCustomDialogConditionFieldValueSource;
+import org.minxc.emp.form.api.constant.FormCustomDialogObjectType;
+import org.minxc.emp.form.api.constant.FormCustomDialogStyle;
 import org.minxc.emp.form.core.dao.FormCustDialogDao;
 import org.minxc.emp.form.core.manager.FormCustDialogManager;
 import org.minxc.emp.form.core.model.FormCustDialog;
@@ -71,9 +71,9 @@ public class FormCustDialogManagerImpl extends CommonManager<String, FormCustDia
         Map<String, String> map = new HashMap<>();// Map<表/视图名,表/视图描述>
         DbOperator dbOperator = DbOperatorFactory.newOperator(sysDataSource.getDbType(), jdbcTemplate);
         // 表
-        if (FormCustDialogObjType.TABLE.equalsWithKey(formCustDialog.getObjType())) {
+        if (FormCustomDialogObjectType.TABLE.equalsWithKey(formCustDialog.getObjType())) {
             map = dbOperator.getTableNames(formCustDialog.getObjName());
-        } else if (FormCustDialogObjType.VIEW.equalsWithKey(formCustDialog.getObjType())) {// 视图
+        } else if (FormCustomDialogObjectType.VIEW.equalsWithKey(formCustDialog.getObjType())) {// 视图
             List<String> viewNames = dbOperator.getViewNames(formCustDialog.getObjName());
             for (String viewName : viewNames) {
                 map.put(viewName, viewName);
@@ -90,9 +90,9 @@ public class FormCustDialogManagerImpl extends CommonManager<String, FormCustDia
             DbOperator dbOperator = DbOperatorFactory.newOperator(sysDataSource.getDbType(), jdbcTemplate);
             TableEntity<ColumnEntity>  table = null;
             // 表
-            if (FormCustDialogObjType.TABLE.equalsWithKey(formCustDialog.getObjType())) {
+            if (FormCustomDialogObjectType.TABLE.equalsWithKey(formCustDialog.getObjType())) {
                 table = dbOperator.getTable(formCustDialog.getObjName());
-            } else if (FormCustDialogObjType.VIEW.equalsWithKey(formCustDialog.getObjType())) {// 视图
+            } else if (FormCustomDialogObjectType.VIEW.equalsWithKey(formCustDialog.getObjType())) {// 视图
                 table = dbOperator.getView(formCustDialog.getObjName());
             }
             return table;
@@ -154,12 +154,12 @@ public class FormCustDialogManagerImpl extends CommonManager<String, FormCustDia
     private String analyseSql(FormCustDialog formCustDialog) {
         // 返回sql
         Set<String> columnNameSet = new HashSet<>();//select 的展示字段
-        if (FormCustDialogStyle.LIST.equalsWithKey(formCustDialog.getStyle())) {
+        if (FormCustomDialogStyle.LIST.equalsWithKey(formCustDialog.getStyle())) {
             for (FormCustDialogDisplayField field : formCustDialog.getDisplayFields()) {//显示字段要查出来
                 columnNameSet.add(field.getColumnName());
             }
         }
-        if (FormCustDialogStyle.TREE.equalsWithKey(formCustDialog.getStyle())) {
+        if (FormCustomDialogStyle.TREE.equalsWithKey(formCustDialog.getStyle())) {
             columnNameSet.add(formCustDialog.getTreeConfig().getPid());
             columnNameSet.add(formCustDialog.getTreeConfig().getId());
             columnNameSet.add(formCustDialog.getTreeConfig().getShowColumn());
@@ -196,11 +196,11 @@ public class FormCustDialogManagerImpl extends CommonManager<String, FormCustDia
     private QueryFilter handleQueryFilter(FormCustDialog formCustDialog, QueryFilter queryFilter) {
         //处理条件 固定值，和脚本参数
         for (FormCustDialogConditionField field : formCustDialog.getConditionFields()) {
-            if (FormCustDialogConditionFieldValueSource.FIXED_VALUE.equalsWithKey(field.getValueSource())) {
+            if (FormCustomDialogConditionFieldValueSource.FIXED_VALUE.equalsWithKey(field.getValueSource())) {
                 Object value = BeanUtils.getValue(field.getDbType(), QueryOperator.getByVal(field.getCondition()), field.getValue().getText());
                 queryFilter.addFilter(field.getColumnName(), value, QueryOperator.getByVal(field.getCondition()));
             }
-            if (FormCustDialogConditionFieldValueSource.SCRIPT.equalsWithKey(field.getValueSource())) {
+            if (FormCustomDialogConditionFieldValueSource.SCRIPT.equalsWithKey(field.getValueSource())) {
                 Object value = groovyScriptEngine.executeObject(field.getValue().getText(), queryFilter.getParams());
                 queryFilter.addFilter(field.getColumnName(), value, QueryOperator.getByVal(field.getCondition()));
             }

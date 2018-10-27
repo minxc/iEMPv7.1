@@ -9,7 +9,7 @@ import org.minxc.emp.system.impl.model.SystemPropertiesEntity;
 /**
  * SYS_PROPERTIES 处理接口
  */
-public interface SysPropertiesManager extends Manager<String, SystemPropertiesEntity> {
+public interface SystemPropertiesManager extends Manager<String, SystemPropertiesEntity> {
 
 
     /**

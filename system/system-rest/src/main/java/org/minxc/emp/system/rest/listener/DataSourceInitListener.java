@@ -3,7 +3,7 @@ package org.minxc.emp.system.rest.listener;
 import org.minxc.emp.common.db.api.table.DbTypeEnum;
 import org.minxc.emp.common.db.datasource.DataSourceUtil;
 import org.minxc.emp.common.db.id.UniqueIdUtil;
-import org.minxc.emp.system.impl.manager.SysDataSourceManager;
+import org.minxc.emp.system.impl.manager.DataSourceManager;
 import org.minxc.emp.system.impl.model.SystemDataSourceEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -27,7 +27,7 @@ import java.util.Map.Entry;
 public class DataSourceInitListener implements ApplicationListener<ContextRefreshedEvent> {
 
     @Autowired
-    private SysDataSourceManager sysDataSourceManager;
+    private DataSourceManager sysDataSourceManager;
 
 
     @Override

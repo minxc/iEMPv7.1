@@ -18,7 +18,7 @@ import org.minxc.emp.core.util.AppContextUtil;
 import org.minxc.emp.core.util.BeanUtils;
 import org.minxc.emp.core.util.StringUtil;
 import org.minxc.emp.system.impl.dao.WorkbenchPanelDao;
-import org.minxc.emp.system.impl.manager.SysAuthorizationManager;
+import org.minxc.emp.system.impl.manager.SystemAuthorizationManager;
 import org.minxc.emp.system.impl.manager.WorkbenchLayoutManager;
 import org.minxc.emp.system.impl.manager.WorkbenchPanelManager;
 import org.minxc.emp.system.impl.model.WorkbenchLayout;
@@ -40,7 +40,7 @@ public class WorkbenchPanelManagerImpl
 	    WorkbenchLayoutManager workbenchLayoutManager;
 
 	    @Resource
-	    SysAuthorizationManager sysAuthorizationManager;
+	    SystemAuthorizationManager sysAuthorizationManager;
 
 
 	    @Override

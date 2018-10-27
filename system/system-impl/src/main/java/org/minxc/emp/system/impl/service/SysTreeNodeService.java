@@ -2,7 +2,7 @@ package org.minxc.emp.system.impl.service;
 
 import org.minxc.emp.system.api.model.SystemTreeNode;
 import org.minxc.emp.system.api.service.ISysTreeNodeService;
-import org.minxc.emp.system.impl.manager.SysTreeNodeManager;
+import org.minxc.emp.system.impl.manager.SystemTreeNodeManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class SysTreeNodeService implements ISysTreeNodeService {
     @Autowired
-    SysTreeNodeManager sysTreeNodeManager;
+    SystemTreeNodeManager sysTreeNodeManager;
 
     @Override
     public SystemTreeNode getById(String id) {

@@ -8,7 +8,7 @@ package org.minxc.emp.form.api.constant;
  * 版权:summer
  * </pre>
  */
-public enum FormCustDialogStyle {
+public enum FormCustomDialogStyle {
 	LIST("list", "列表"), TREE("tree", "树形");
 	/**
 	 * key
@@ -19,7 +19,7 @@ public enum FormCustDialogStyle {
 	 */
 	private String desc;
 
-	private FormCustDialogStyle(String key, String desc) {
+	private FormCustomDialogStyle(String key, String desc) {
 		this.key = key;
 		this.desc = desc;
 	}

@@ -24,7 +24,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 
 @RestController
 @RequestMapping("/sys/script/")
-public class SysScriptController extends CommonController<ScriptEntity> {
+public class SystemScriptController extends CommonController<ScriptEntity> {
 
     @Resource
     private ScriptManager scriptManager;
