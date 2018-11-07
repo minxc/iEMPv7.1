@@ -9,7 +9,6 @@ import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * 雪花算法Id生成器
- *
  */
 
 @Slf4j

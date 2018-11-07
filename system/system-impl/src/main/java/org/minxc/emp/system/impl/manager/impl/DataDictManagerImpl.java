@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.minxc.emp.basis.api.constant.SysStatusCode;
+import org.minxc.emp.basis.api.constant.SystemStatusCode;
 import org.minxc.emp.common.db.model.query.DefaultQueryFilter;
 import org.minxc.emp.common.manager.impl.CommonManager;
 import org.minxc.emp.core.api.exception.BusinessException;
@@ -53,7 +53,7 @@ public class DataDictManagerImpl extends CommonManager<String, DataDictEntity> i
 			count = dataDictDao.isExistNode(dataDict.getDictKey(), dataDict.getKey(), null);
 		}
 		if (count != 0) {
-			throw new BusinessException(dataDict.getKey() + "字典已经存在", SysStatusCode.PARAM_ILLEGAL);
+			throw new BusinessException(dataDict.getKey() + "字典已经存在", SystemStatusCode.PARAM_ILLEGAL);
 		}
 
 		super.create(dataDict);
@@ -70,7 +70,7 @@ public class DataDictManagerImpl extends CommonManager<String, DataDictEntity> i
 		}
 
 		if (count != 0) {
-			throw new BusinessException(dataDict.getKey() + "字典Key已经存在", SysStatusCode.PARAM_ILLEGAL);
+			throw new BusinessException(dataDict.getKey() + "字典Key已经存在", SystemStatusCode.PARAM_ILLEGAL);
 		}
 
 		super.update(dataDict);

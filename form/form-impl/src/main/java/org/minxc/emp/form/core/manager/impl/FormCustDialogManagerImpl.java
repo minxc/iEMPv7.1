@@ -33,7 +33,7 @@ import org.minxc.emp.form.core.model.custdialog.FormCustDialogDisplayField;
 import org.minxc.emp.form.core.model.custdialog.FormCustDialogReturnField;
 import org.minxc.emp.form.core.model.custdialog.FormCustDialogSortField;
 import org.minxc.emp.system.api.model.SystemDataSource;
-import org.minxc.emp.system.api.service.ISysDataSourceService;
+import org.minxc.emp.system.api.service.SystemDataSourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
@@ -51,7 +51,7 @@ public class FormCustDialogManagerImpl extends CommonManager<String, FormCustDia
     @Resource
     FormCustDialogDao formCustDialogDao;
     @Autowired
-    ISysDataSourceService sysDataSourceService;
+    SystemDataSourceService sysDataSourceService;
     @Autowired
     BasicDao<?> commonDao;
     @Autowired

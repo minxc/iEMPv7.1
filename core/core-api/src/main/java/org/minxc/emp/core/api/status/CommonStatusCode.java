@@ -84,6 +84,6 @@ public enum CommonStatusCode implements StatusCode{
 
     @Override
     public String getTenant() {
-        return null;
+        return tenant;
     }
 }

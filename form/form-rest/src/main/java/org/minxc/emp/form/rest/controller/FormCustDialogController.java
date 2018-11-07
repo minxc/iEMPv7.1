@@ -16,7 +16,7 @@ import org.minxc.emp.core.api.query.QueryFilter;
 import org.minxc.emp.form.core.manager.FormCustDialogManager;
 import org.minxc.emp.form.core.model.FormCustDialog;
 import org.minxc.emp.system.api.model.SystemDataSource;
-import org.minxc.emp.system.api.service.ISysDataSourceService;
+import org.minxc.emp.system.api.service.SystemDataSourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -36,7 +36,7 @@ public class FormCustDialogController extends CommonController<FormCustDialog> {
     BasicDao<?> commonDao;
     
     @Autowired
-    ISysDataSourceService sysDataSourceService;
+    SystemDataSourceService sysDataSourceService;
 
     /**
      * <pre>

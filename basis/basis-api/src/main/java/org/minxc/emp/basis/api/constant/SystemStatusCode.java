@@ -2,7 +2,7 @@ package org.minxc.emp.basis.api.constant;
 
 import org.minxc.emp.core.api.status.StatusCode;
 
-public enum SysStatusCode implements StatusCode {
+public enum SystemStatusCode implements StatusCode {
 
     SUCCESS("200", "成功"),
     SYSTEM_ERROR("500", "系统异常"),
@@ -19,7 +19,7 @@ public enum SysStatusCode implements StatusCode {
     private String application;
     private String tenant;
 
-    SysStatusCode(String code, String description) {
+    SystemStatusCode(String code, String description) {
         this.setCode(code);
         this.setDesc(description);
         this.setApplication("SYS");
@@ -69,7 +69,7 @@ public enum SysStatusCode implements StatusCode {
 	
 	@Override
 	public String getTenant() {
-		return null;
+		return this.tenant;
 	}
 
 }

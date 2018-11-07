@@ -3,7 +3,7 @@ package org.minxc.emp.system.api.service;
 import java.text.ParseException;
 
 /**
- * 流水号服务。
+ * 流水号服务
  */
 public interface SerialNoService {
 

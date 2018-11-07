@@ -5,7 +5,7 @@ import com.github.pagehelper.PageInfo;
 
 import lombok.extern.slf4j.Slf4j;
 
-import org.minxc.emp.basis.api.constant.SysStatusCode;
+import org.minxc.emp.basis.api.constant.SystemStatusCode;
 import org.minxc.emp.core.api.exception.BusinessException;
 import org.minxc.emp.core.api.query.QueryFilter;
 import org.minxc.emp.core.api.status.CommonStatusCode;
@@ -102,7 +102,7 @@ public class QuartzManagerService implements InitializingBean {
     @Transactional(rollbackFor = Exception.class)
     public void addSysScheduleJob(SystemScheduleJobEntity sysScheduleJob) throws SchedulerException {
         if (sysScheduleJobDao.exists(sysScheduleJob.getName(), sysScheduleJob.getGroup())) {
-            throw new BusinessException("请勿重复添加", SysStatusCode.PARAM_ILLEGAL);
+            throw new BusinessException("请勿重复添加", SystemStatusCode.PARAM_ILLEGAL);
         }
         sysScheduleJobDao.insertSelective(sysScheduleJob);
         //如果添加时是启用状态，往quartz中加入

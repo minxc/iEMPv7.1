@@ -3,12 +3,7 @@ package org.minxc.emp.biz.api.constant;
 import org.minxc.emp.core.api.status.StatusCode;
 
 /**
- * <pre>
  * bus层的异常码
- * </pre>
- * 
- * @author aschs
- *
  */
 public enum BusStatusCode implements StatusCode {
 

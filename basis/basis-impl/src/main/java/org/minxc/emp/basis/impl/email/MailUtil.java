@@ -25,9 +25,7 @@ import java.util.*;
 import java.util.Map.Entry;
 
 /**
- * <pre>
- * 描述：邮件处理类，实现邮箱的接收、发送、测试连接功能
- * </pre>
+ *  邮件处理类，实现邮箱的接收、发送、测试连接功能
  */
 public class MailUtil {
     /**

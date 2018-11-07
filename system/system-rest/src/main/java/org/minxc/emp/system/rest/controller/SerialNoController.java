@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
-import org.minxc.emp.basis.api.constant.SysStatusCode;
+import org.minxc.emp.basis.api.constant.SystemStatusCode;
 import org.minxc.emp.common.db.model.page.PageJson;
 import org.minxc.emp.common.rest.GenericController;
 import org.minxc.emp.common.rest.util.RequestUtil;
@@ -88,7 +88,7 @@ public class SerialNoController extends GenericController {
 
         boolean rtn = serialNoManager.isAliasExisted(SerialNo.getId(), SerialNo.getAlias());
         if (rtn) {
-            throw new BusinessException("别名已经存在!", SysStatusCode.SERIALNO_EXSIT);
+            throw new BusinessException("别名已经存在!", SystemStatusCode.SERIALNO_EXSIT);
         }
 
         if (StringUtils.isEmpty(SerialNo.getId())) {

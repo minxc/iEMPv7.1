@@ -1,7 +1,7 @@
 package org.minxc.emp.system.impl.service;
 
 import org.minxc.emp.system.api.model.SystemDataSource;
-import org.minxc.emp.system.api.service.ISysDataSourceService;
+import org.minxc.emp.system.api.service.SystemDataSourceService;
 import org.minxc.emp.system.impl.manager.DataSourceManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -14,7 +14,7 @@ import javax.sql.DataSource;
  */
 
 @Service
-public class SysDataSourceService implements ISysDataSourceService {
+public class SysDataSourceServiceImpl implements SystemDataSourceService {
     @Autowired
     DataSourceManager sysDataSourceManager;
 

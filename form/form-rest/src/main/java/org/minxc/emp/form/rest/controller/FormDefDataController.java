@@ -24,7 +24,7 @@ import org.minxc.emp.form.core.model.FormDef;
 import org.minxc.emp.form.core.model.FormDefData;
 import org.minxc.emp.form.core.service.FormDefDataService;
 import org.minxc.emp.system.api.model.SystemDataSource;
-import org.minxc.emp.system.api.service.ISysDataSourceService;
+import org.minxc.emp.system.api.service.SystemDataSourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -48,7 +48,7 @@ public class FormDefDataController extends GenericController {
 	@Autowired
 	IBusinessObjectService businessObjectService;
 	@Autowired
-	ISysDataSourceService sysDataSourceService;
+	SystemDataSourceService sysDataSourceService;
 	@Autowired
 	BasicDao<?> commonDao;
 	@Autowired

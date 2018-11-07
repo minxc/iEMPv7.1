@@ -23,7 +23,7 @@ import org.minxc.emp.core.api.exception.BusinessException;
 import org.minxc.emp.core.api.query.QueryFilter;
 import org.minxc.emp.core.api.query.QueryOperator;
 import org.minxc.emp.core.util.BeanUtils;
-import org.minxc.emp.system.api.service.ISysDataSourceService;
+import org.minxc.emp.system.api.service.SystemDataSourceService;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
@@ -38,7 +38,7 @@ public class BusinessTableManagerImpl extends CommonManager<String, BusinessTabl
 	@Resource
 	private BusColumnCtrlManager busColumnCtrlManager;
 	@Resource
-	private ISysDataSourceService sysDataSourceService;
+	private SystemDataSourceService sysDataSourceService;
 	@Resource
 	private JdbcTemplate jdbcTemplate;
 
