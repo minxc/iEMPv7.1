@@ -1,14 +1,5 @@
 package org.minxc.emp.system.api.model;
 
-/**
- * 
- * 系统树节点SysTreeNode接口类
- * 
- * 
- * 日期:2018年3月28日 下午3:27:50
- * 
- * 
- */
 public interface SystemTreeNode {
     /**
      * 
