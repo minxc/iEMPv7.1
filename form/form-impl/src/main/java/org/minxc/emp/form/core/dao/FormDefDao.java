@@ -2,7 +2,7 @@ package org.minxc.emp.form.core.dao;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.minxc.emp.common.db.dao.CommonDao;
-import org.minxc.emp.form.core.model.FormDef;
+import org.minxc.emp.form.core.model.FormDefinitionImpl;
 
 
 /**
@@ -11,8 +11,8 @@ import org.minxc.emp.form.core.model.FormDef;
  * @time 2018-03-19 20:30:46
  */
 @Mapper
-public interface FormDefDao extends CommonDao<String, FormDef> {
+public interface FormDefDao extends CommonDao<String, FormDefinitionImpl> {
 
-	FormDef getByKey(String key);
+	FormDefinitionImpl getByKey(String key);
 
 }

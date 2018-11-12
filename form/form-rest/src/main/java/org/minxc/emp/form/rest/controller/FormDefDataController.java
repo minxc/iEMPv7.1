@@ -20,7 +20,7 @@ import org.minxc.emp.common.rest.util.RequestUtil;
 import org.minxc.emp.core.api.aop.annotation.ErrorCatching;
 import org.minxc.emp.core.api.query.QueryFilter;
 import org.minxc.emp.form.core.manager.FormDefManager;
-import org.minxc.emp.form.core.model.FormDef;
+import org.minxc.emp.form.core.model.FormDefinitionImpl;
 import org.minxc.emp.form.core.model.FormDefData;
 import org.minxc.emp.form.core.service.FormDefDataService;
 import org.minxc.emp.system.api.model.SystemDataSource;
@@ -35,7 +35,7 @@ import com.alibaba.fastjson.JSONObject;
 
 
 /**
- * 描述：表单数据的controller
+ * 表单数据的controller
  * 日期:2018年5月17日
  */
 @RestController
@@ -57,9 +57,9 @@ public class FormDefDataController extends GenericController {
 	FormDefManager formDefManager;
 
 	/**
-	 * <pre>
+	 * 
 	 * 获取FormDefData的后端
-	 * </pre>
+	 * 
 	 * 
 	 * @param request
 	 * @param response
@@ -76,9 +76,9 @@ public class FormDefDataController extends GenericController {
 	}
 
 	/**
-	 * <pre>
+	 * 
 	 * 保存formDef中的data数据
-	 * </pre>
+	 * 
 	 * 
 	 * @param request
 	 * @param response
@@ -89,16 +89,16 @@ public class FormDefDataController extends GenericController {
 	@ErrorCatching(writeErrorToResponse = true, value = "保存formDef中的data数据异常")
 	public void saveData(HttpServletRequest request, HttpServletResponse response, @RequestBody JSONObject data) throws Exception {
 		String key = RequestUtil.getString(request, "key");
-		FormDef formDef = formDefManager.getByKey(key);
+		FormDefinitionImpl formDef = formDefManager.getByKey(key);
 		IBusinessPermission permission = businessPermissionService.getByObjTypeAndObjVal(BusinessPermissionObjType.FORM.getKey(), key, formDef.getBoKey(), true);
 		businessDataService.saveFormDefData(data, permission);
 		writeSuccessResult(response, "保存数据成功");
 	}
 
 	/**
-	 * <pre>
+	 * 
 	 * 获取bo的数据列表
-	 * </pre>
+	 * 
 	 * 
 	 * @param request
 	 * @param response
@@ -127,7 +127,7 @@ public class FormDefDataController extends GenericController {
 		String boKey = RequestUtil.getString(request, "boKey");
 		String key = RequestUtil.getString(request, "key");
 		String id = RequestUtil.getString(request, "id");
-		FormDef formDef = formDefManager.getByKey(key);
+		FormDefinitionImpl formDef = formDefManager.getByKey(key);
 		IBusinessPermission permission = businessPermissionService.getByObjTypeAndObjVal(BusinessPermissionObjType.FORM.getKey(), key,formDef.getBoKey(), true);
 		IBusinessObject businessObject = businessObjectService.getFilledByKey(boKey);
 		businessObject.setPermission(permission.getBusObj(boKey));

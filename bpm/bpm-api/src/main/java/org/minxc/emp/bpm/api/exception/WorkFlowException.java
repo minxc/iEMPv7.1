@@ -7,7 +7,7 @@ import org.minxc.emp.core.api.status.StatusCode;
  * 
 * 项目名称：bpm-api   
 * 类名称：WorkFlowException   
-* 类描述：   
+* 类   
 * 创建人：Xianchang.min   
 * 创建时间：2018年8月29日 下午10:22:33   
 * 修改人：Xianchang.min   

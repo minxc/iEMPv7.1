@@ -16,9 +16,9 @@ import java.util.List;
  */
 public abstract class AbstractExecutor<T> implements Executor<T> {
     /**
-     * <pre>
+     * 
      * 执行器的key
-     * </pre>
+     * 
      *
      * @return
      */
@@ -28,9 +28,9 @@ public abstract class AbstractExecutor<T> implements Executor<T> {
     }
 
     /**
-     * <pre>
+     * 
      * 执行器的名称
-     * </pre>
+     * 
      *
      * @return
      */
@@ -57,9 +57,9 @@ public abstract class AbstractExecutor<T> implements Executor<T> {
 	}
     
     /**
-     * <pre>
+     * 
      * 运行这个执行器
-     * </pre>
+     * 
      *
      * @param param
      */
@@ -76,9 +76,9 @@ public abstract class AbstractExecutor<T> implements Executor<T> {
     }
 
     /**
-     * <pre>
+     * 
      * 子类中运行这个执行器
-     * </pre>
+     * 
      *
      * @param param 运行的参数
      */

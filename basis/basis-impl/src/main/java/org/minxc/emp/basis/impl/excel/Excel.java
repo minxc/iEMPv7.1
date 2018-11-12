@@ -253,10 +253,10 @@ public class Excel {
     /**
      * <p>该方法始终返回最后一个空白行的编辑器，当需要循环插入n行时特别有用</p>
      *
-     * <blockquote><pre>
+     * <blockquote>
      * for(int i=0;i&lt;data.size();i++){
      * 		excel.row().value(data.get(i));
-     * }</pre></blockquote>
+     * }</blockquote>
      *
      * <b>注意：</b>如果要使用该方法设置一行的样式，请确保需要设置样式的单元格都已写入值，包括空值。否则请使用region方法选取区域
      *

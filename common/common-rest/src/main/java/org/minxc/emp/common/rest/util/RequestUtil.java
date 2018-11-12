@@ -508,7 +508,7 @@ public class RequestUtil {
     /**
      * 处理页面进来的请求参数。
      *
-     * <pre>
+     * 
      * 	1.参数字段命名规则。
      * 	a:参数名称^参数类型+条件 eg：a^VEQ 则表示，a字段是varchar类型，条件是eq ^后第一个参数为数据类型
      * 	b:参数名字^参数类型  eg：b^V则表示，b字段是varchar类型 用于sql拼参数
@@ -516,7 +516,7 @@ public class RequestUtil {
      * 3.参数类型:V :字符串 varchar N:数字number D:日期date
      * 条件参数 枚举：QueryOP
      *
-     * </pre>
+     * 
      *
      * @param request
      * @param queryFilter
@@ -689,10 +689,10 @@ public class RequestUtil {
     /**
      * 根据参数名称获取参数值。
      *
-     * <pre>
+     * 
      * 1.根据参数名称取得参数值的数组。
      * 2.将数组使用逗号分隔字符串。
-     * </pre>
+     * 
      *
      * @param request
      * @param paramName
@@ -854,10 +854,10 @@ public class RequestUtil {
 
 
     /**
-     * <pre>
+     * 
      * 获取JSONObject对象
      * 如果为空时，返回一个空的json={}（不是null）
-     * </pre>
+     * 
      *
      * @param request
      * @param key
@@ -869,10 +869,10 @@ public class RequestUtil {
     }
 
     /**
-     * <pre>
+     * 
      * 获取JSONArray对象
      * 如果为空时，返回一个空的json=[]（不是null）
-     * </pre>
+     * 
      *
      * @param request
      * @param key

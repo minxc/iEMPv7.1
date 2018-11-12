@@ -14,10 +14,10 @@ import org.minxc.emp.form.api.model.FormType;
 public interface BpmRightsFormService {
 
 	/**
-	 * <pre>
+	 * 
 	 * 获取页面表单以及权限。
 	 * 如果节点未配置权限，则获取全局表单，和全局表单的权限（表单往往与权限一致展示处理）
-	 * </pre>
+	 * 
 	 * @param flowData
 	 * @param nodeId
 	 * @param formType

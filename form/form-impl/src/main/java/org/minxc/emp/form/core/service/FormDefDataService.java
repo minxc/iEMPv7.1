@@ -11,7 +11,7 @@ import org.minxc.emp.biz.api.service.IBusinessPermissionService;
 import org.minxc.emp.biz.api.service.IBusinessTableService;
 import org.minxc.emp.form.api.service.IFormDefDataService;
 import org.minxc.emp.form.core.manager.FormDefManager;
-import org.minxc.emp.form.core.model.FormDef;
+import org.minxc.emp.form.core.model.FormDefinitionImpl;
 import org.minxc.emp.form.core.model.FormDefData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +20,7 @@ import com.alibaba.fastjson.JSONObject;
 
 
 /**
- * 描述：FormDefData的服务类
+ * FormDefData的服务类
  */
 @Service
 public class FormDefDataService implements IFormDefDataService {
@@ -37,9 +37,9 @@ public class FormDefDataService implements IFormDefDataService {
 	IBusinessDataService businessDataService;
 
 	/**
-	 * <pre>
+	 * 
 	 * 根据表单key和表单数据主表的id
-	 * </pre>
+	 * 
 	 * 
 	 * @param formDefKey
 	 * @param id
@@ -47,7 +47,7 @@ public class FormDefDataService implements IFormDefDataService {
 	 */
 	public FormDefData getByFormDefKey(String formDefKey, String id) {
 		FormDefData formDefData = new FormDefData();
-		FormDef formDef = formDefManager.getByKey(formDefKey);
+		FormDefinitionImpl formDef = formDefManager.getByKey(formDefKey);
 		formDefData.setHtml(formDef.getHtml());
 		
 		IBusinessPermission businessPermission = businessPermissionService.getByObjTypeAndObjVal(BusinessPermissionObjType.FORM.getKey(), formDef.getKey(), formDef.getBoKey(), true);
@@ -64,14 +64,14 @@ public class FormDefDataService implements IFormDefDataService {
 	
 
 	/**
-	 * <pre>
+	 * 
 	 * 处理boKey的初始化数据
-	 * </pre>
+	 * 
 	 * 
 	 * @param formDef
 	 * @param formDefData
 	 */
-	private void handleInitData(FormDef formDef, FormDefData formDefData) {
+	private void handleInitData(FormDefinitionImpl formDef, FormDefData formDefData) {
 		if (formDefData.getInitData() == null) {
 			formDefData.setInitData(new JSONObject());
 		}
@@ -86,10 +86,10 @@ public class FormDefDataService implements IFormDefDataService {
 	}
 	
 	/**
-	 * <pre>
+	 * 
 	 * 获取初始化数据
 	 * 
-	 * </pre>
+	 * 
 	 * 
 	 * @param busTableRel
 	 * @return
@@ -107,9 +107,9 @@ public class FormDefDataService implements IFormDefDataService {
 	}
 
 	/**
-	 * <pre>
+	 * 
 	 * 处理initdata初始化数据和data数据
-	 * </pre>
+	 * 
 	 * 
 	 * @param formDef
 	 * @param id
@@ -117,7 +117,7 @@ public class FormDefDataService implements IFormDefDataService {
 	 * @param formDefData
 	 * @param businessPermission2 
 	 */
-	private void handleData(FormDef formDef, String id, FormDefData formDefData, IBusinessPermission businessPermission) {
+	private void handleData(FormDefinitionImpl formDef, String id, FormDefData formDefData, IBusinessPermission businessPermission) {
 		if (formDefData.getData() == null) {
 			formDefData.setData(new JSONObject());
 		}

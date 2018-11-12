@@ -23,8 +23,8 @@ import java.util.Map.Entry;
 /**
  * DB2 视图操作的实现类。
  *
- * <pre>
- * </pre>
+ * 
+ * 
  */
 public class DB2ViewOperator extends BaseViewOperator implements ViewOperator {
 

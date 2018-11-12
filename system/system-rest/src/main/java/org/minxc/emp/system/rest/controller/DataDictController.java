@@ -49,7 +49,6 @@ public class DataDictController extends CommonController<DataDictEntity>{
 		QueryFilter filter = getQueryFilter(request);
 		filter.addFilter("dict_type_", DataDictEntity.TYPE_DICT, QueryOperator.EQUAL);
 		filter.setPage(null);
-		
 		List<DataDictEntity> dict = dataDictManager.query(filter);
 		return getSuccessResult(dict);
 	}

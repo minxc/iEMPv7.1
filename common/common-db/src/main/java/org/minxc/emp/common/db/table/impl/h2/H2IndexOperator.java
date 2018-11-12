@@ -18,8 +18,8 @@ import java.util.Map;
 /**
  * H2 索引操作的实现
  *
- * <pre>
- * </pre>
+ * 
+ * 
  */
 public class H2IndexOperator extends BaseIndexOperator {
 

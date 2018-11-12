@@ -9,13 +9,13 @@ import org.minxc.emp.common.db.table.util.SQLConst;
 /**
  * IndexOperator factorybean，用户创建IIndexOperator对象。
  *
- * <pre>
+ * 
  * 配置文件：app-beans.xml
  * &lt;bean id="indexOperator" class="org.minxc.emp.common.db.table.factory.IndexOperatorFactoryBean">
  * 		&lt;property name="dbType" value="${jdbc.dbType}"/>
  * 		&lt;property name="jdbcTemplate" ref="jdbcTemplate"/>
  * &lt;/bean>
- * </pre>
+ * 
  *
  * @author ray
  */

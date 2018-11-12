@@ -50,9 +50,9 @@ public interface FormTemplateManager extends Manager<String, FormTemplate> {
 
     
     /**
-     * <pre>
+     * 
      * 根据boKey获取模板数据
-     * </pre>
+     * 
      * @param boKey
      * @param type 
      * @return

@@ -1,7 +1,7 @@
 package org.minxc.emp.form.api.constant;
 
 /**
- * 描述：FormCustDialogConditionField中的valueSource枚举
+ * FormCustDialogConditionField中的valueSource枚举
  */
 public enum FormCustomDialogConditionFieldValueSource {
 	/**

@@ -9,7 +9,7 @@ import java.util.List;
  * 
 * 项目名称：base-intf   
 * 类名称：PageList   
-* 类描述：   包含“分页”信息的List，这个对象包含分页数据和分页结果。
+* 类   包含“分页”信息的List，这个对象包含分页数据和分页结果。
 * 创建人：Xianchang.min   
 * 创建时间：2018年8月21日 下午10:51:36   
 * 修改人：Xianchang.min   

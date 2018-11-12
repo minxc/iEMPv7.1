@@ -142,11 +142,11 @@ public class FormCustDialogManagerImpl extends CommonManager<String, FormCustDia
 	}
 
     /**
-     * <pre>
+     * 
      * 获取sql
      * 只获取到select XXXX from xxxx 这一段
      * where 和 order 由后面queryFilter来获取
-     * </pre>
+     * 
      *
      * @param formCustDialog
      * @return
@@ -185,9 +185,9 @@ public class FormCustDialogManagerImpl extends CommonManager<String, FormCustDia
     }
 
     /**
-     * <pre>
+     * 
      * 处理QueryFilter
-     * </pre>
+     * 
      *
      * @param formCustDialog
      * @param queryFilter

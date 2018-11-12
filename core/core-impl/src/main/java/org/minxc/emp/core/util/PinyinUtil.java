@@ -19,7 +19,7 @@ import java.util.regex.PatternSyntaxException;
  * 
 * 项目名称：base-core   
 * 类名称：PinyinUtil   
-* 类描述： 拼音使用工具类 </br> 功能： 输入汉字取得拼音s  
+* 类 拼音使用工具类 </br> 功能： 输入汉字取得拼音s  
 * 创建人：Xianchang.min   
 * 创建时间：2018年8月21日 下午11:25:10   
 * 修改人：Xianchang.min   

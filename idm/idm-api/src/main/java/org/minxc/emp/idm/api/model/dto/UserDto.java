@@ -7,7 +7,7 @@ import org.minxc.emp.idm.api.model.IdentityType;
 
 
 /**
- * 描述：用户表 实体对象
+ * 用户表 实体对象
  */
 public class UserDto implements User {
 

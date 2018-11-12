@@ -14,9 +14,9 @@ import org.minxc.emp.system.util.ContextUtil;
 import org.springframework.stereotype.Service;
 
 /**
- * <pre>
- * 描述：子系统定义 处理实现类
- * </pre>
+ * 
+ * 子系统定义 处理实现类
+ * 
  */
 @Service("subsystemManager")
 public class SubsystemManagerImpl extends CommonManager<String, ApplicationEntity> implements SubsystemManager {

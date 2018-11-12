@@ -9,7 +9,7 @@ import javax.validation.constraints.NotBlank;
  * 
 * 项目名称：bpm-api   
 * 类名称：NodeInit   
-* 类描述：节点初始化   
+* 类节点初始化   
 * 创建人：Xianchang.min   
 * 创建时间：2018年8月29日 下午10:28:34   
 * 修改人：Xianchang.min   

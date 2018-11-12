@@ -6,7 +6,7 @@ import java.io.Serializable;
  * 
 * 项目名称：idm-api   
 * 类名称：IdentityType   
-* 类描述：  用户标识类型
+* 类  用户标识类型
 * 创建人：Xianchang.min   
 * 创建时间：2018年9月4日 下午11:42:56   
 * 修改人：Xianchang.min   

@@ -11,10 +11,10 @@ import org.minxc.emp.system.impl.model.SystemTreeNodeEntity;
 public interface SystemTreeNodeManager extends Manager<String, SystemTreeNodeEntity> {
 
     /**
-     * <pre>
+     * 
      * 根据树id获取节点
      * 根据sn字段升序
-     * </pre>
+     * 
      *
      * @param treeId
      * @return
@@ -22,9 +22,9 @@ public interface SystemTreeNodeManager extends Manager<String, SystemTreeNodeEnt
     List<SystemTreeNodeEntity> getByTreeId(String treeId);
 
     /**
-     * <pre>
+     * 
      * 获取指定树下的指定节点
-     * </pre>
+     * 
      *
      * @param treeId
      * @param key
@@ -33,10 +33,10 @@ public interface SystemTreeNodeManager extends Manager<String, SystemTreeNodeEnt
     SystemTreeNodeEntity getByTreeIdAndKey(String treeId, String key);
 
     /**
-     * <pre>
+     * 
      * 根据父节点获取其子节点
      * 不会进行递归查询，只获取第一层
-     * </pre>
+     * 
      *
      * @param parentId
      * @return
@@ -44,9 +44,9 @@ public interface SystemTreeNodeManager extends Manager<String, SystemTreeNodeEnt
     List<SystemTreeNodeEntity> getByParentId(String parentId);
 
     /**
-     * <pre>
+     * 
      * 获取以path开始的路径
-     * </pre>
+     * 
      *
      * @param path
      * @return
@@ -54,18 +54,18 @@ public interface SystemTreeNodeManager extends Manager<String, SystemTreeNodeEnt
     List<SystemTreeNodeEntity> getStartWithPath(String path);
 
     /**
-     * <pre>
+     * 
      * 根据树id删除节点
-     * </pre>
+     * 
      *
      * @param treeId
      */
     void removeByTreeId(String treeId);
     
     /**
-     * <pre>
+     * 
      * 删除path下的全部节点
-     * </pre>
+     * 
      *
      * @param path
      */

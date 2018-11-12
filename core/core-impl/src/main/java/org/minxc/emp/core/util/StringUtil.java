@@ -323,12 +323,12 @@ public class StringUtil {
 
     /**
      * 为空判断,0做空处理。
-     * <pre>
+     * 
      * 这里判断：
      * 1.字符串为NULL
      * 2.字符串为空串。
      * 3.字符串为0。
-     * </pre>
+     * 
      *
      * @param tmp
      * @return boolean

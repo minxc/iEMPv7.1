@@ -10,7 +10,7 @@ import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
 /**
- * 描述：自定义对话框
+ * 自定义对话框
  * 日期:2018年1月17日 下午5:05:55
  */
 public class FormCustDialog extends AbstractCommonModel {

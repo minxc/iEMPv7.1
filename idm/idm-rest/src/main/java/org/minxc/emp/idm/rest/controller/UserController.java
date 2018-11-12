@@ -27,15 +27,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * 描述：用户表 控制器类
+ * 用户表 控制器类
  */
 @RestController
 @RequestMapping("/org/user")
 public class UserController extends CommonController<UserEntity> {
     @Resource
-    UserManager userManager;
+    private UserManager userManager;
     @Resource
-    GroupUserManager orgUserManager;
+    private GroupUserManager orgUserManager;
 
     /**
      * 获取用户下的组织列表

@@ -6,8 +6,6 @@ import org.minxc.emp.core.api.status.StatusCode;
  *  基础系统状态码定义
  */
 public enum FormStatusCode implements StatusCode {
-	
-	
 
 	FORM_ELEMENT_GENERATOR_ERROR("f10001","表单element解析失败"),
     /**

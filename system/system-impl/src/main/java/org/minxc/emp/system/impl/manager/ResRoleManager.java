@@ -8,9 +8,9 @@ import org.minxc.emp.common.manager.Manager;
 import org.minxc.emp.system.impl.model.RoleResouceLinkEntity;
 
 /**
- * <pre>
- * 描述：角色资源分配 处理接口
- * </pre>
+ * 
+ * 角色资源分配 处理接口
+ * 
  */
 public interface ResRoleManager extends Manager<String, RoleResouceLinkEntity> {
 

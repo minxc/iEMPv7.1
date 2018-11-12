@@ -26,10 +26,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/sys/tools/")
 public class SystemToolsController extends GenericController {
 	/**
-	 * <pre>
+	 * 
 	 * 根据一个枚举类的路径获取这个枚举的json形式，供前端使用
 	 * 注意！！如果枚举在类中间，那么路径如下：com.dstz.base.db.model.Column$TYPE
-	 * </pre>
+	 * 
 	 *
 	 * @param request
 	 * @param response
@@ -47,10 +47,10 @@ public class SystemToolsController extends GenericController {
 	}
 
 	/**
-	 * <pre>
+	 * 
 	 * 根据path(类路径)获取key（字段名）的常量
 	 * ps:如果key为空，会把path类的全部static final的静态变量获取出来
-	 * </pre>
+	 * 
 	 *
 	 * @param request
 	 * @param response

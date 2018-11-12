@@ -8,7 +8,7 @@ import java.util.Date;
 /**      
 * 项目名称：windows-service   
 * 类名称：JavaWindowsService   
-* 类描述：   
+* 类   
 * 创建人：Xianchang.min   
 * 创建时间：2018年9月2日 上午11:58:36   
 * 修改人：Xianchang.min   

@@ -5,7 +5,7 @@ import org.minxc.emp.common.db.dao.CommonDao;
 import org.minxc.emp.system.impl.model.SystemDataSourceEntity;
 
 /**
- * 描述：数据源 DAO接口
+ * 数据源 DAO接口
  */
 @Mapper
 public interface SysDataSourceDao extends CommonDao<String, SystemDataSourceEntity> {

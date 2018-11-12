@@ -4,9 +4,9 @@ import java.io.Serializable;
 
 /**
  * 分页结果，根据page,limit,totalCount用于页面上分页显示多项内容，计算页码和当前页的偏移量，方便页面分页使用.
- * <pre>
+ * 
  * 分页器，根据page,limit,totalCount用于页面上分页显示多项内容，计算页码和当前页的偏移量，方便页面分页使用.
- * </pre>
+ * 
  */
 public class PageResult implements Serializable {
 

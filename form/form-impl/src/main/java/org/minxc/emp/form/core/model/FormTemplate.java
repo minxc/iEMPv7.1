@@ -3,13 +3,13 @@ package org.minxc.emp.form.core.model;
 import java.io.Serializable;
 
 /**
- * <pre>
- * 描述：表单模版 entity对象
- * 作者:aschs
- * 邮箱:aschs@qq.com
+ * 
+ * 表单模版 entity对象
+ * 
+ * 
  * 日期:2018年3月8日 上午9:27:16
- * 版权:summer
- * </pre>
+ * 
+ * 
  */
 public class FormTemplate implements Serializable {
     /**

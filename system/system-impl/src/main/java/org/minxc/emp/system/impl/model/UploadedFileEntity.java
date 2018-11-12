@@ -3,7 +3,7 @@ package org.minxc.emp.system.impl.model;
 import org.minxc.emp.core.impl.model.AbstractCommonModel;
 
 /**
- * 描述：系统附件信息
+ * 系统附件信息
  */
 public class UploadedFileEntity extends AbstractCommonModel {
 	
@@ -13,17 +13,17 @@ public class UploadedFileEntity extends AbstractCommonModel {
 	 */
 	private String name;
 	/**
-	 * <pre>
+	 * 
 	 * 这附件用的是上传器
 	 * 具体类型可以看 IUploader 的实现类
-	 * </pre>
+	 * 
 	 */
 	private String uploader;
 	/**
-	 * <pre>
+	 * 
 	 * 路径，这个路径能从上传器中获取到对应的附件内容
 	 * 所以也不一定是路径，根据不同上传器会有不同值
-	 * </pre>
+	 * 
 	 */
 	private String path;
 

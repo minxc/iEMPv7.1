@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- * 描述：SysTreeNodeService接口
+ * SysTreeNodeService接口
  */
 @Service
 public class SysTreeNodeService implements ISysTreeNodeService {

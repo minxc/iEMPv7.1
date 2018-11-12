@@ -15,13 +15,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 /**
- * <pre>
- * 描述：businessObject层的controller
- * 作者:aschs
- * 邮箱:aschs@qq.com
+ * 
+ * businessObject层的controller
+ * 
+ * 
  * 日期:下午5:11:06
- * 版权:summer
- * </pre>
+ * 
+ * 
  */
 @RestController
 @RequestMapping("/bus/businessObject/")
@@ -30,10 +30,10 @@ public class BusinessObjectController extends CommonController<BusinessObject> {
 	BusinessObjectManager businessObjectManager;
 
 	/**
-	 * <pre>
+	 * 
 	 * 获取businessObject的后端
 	 * 目前支持根据id,key 获取businessObject
-	 * </pre>
+	 * 
 	 *
 	 * @param request
 	 * @param response

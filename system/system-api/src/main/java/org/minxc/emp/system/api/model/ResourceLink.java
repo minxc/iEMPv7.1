@@ -4,7 +4,7 @@ package org.minxc.emp.system.api.model;
  * 
 * 项目名称：system-api   
 * 类名称：ResourceLink   
-* 类描述：  关联资源
+* 类  关联资源
 * 创建人：Xianchang.min   
 * 创建时间：2018年9月4日 下午1:24:45   
 * 修改人：Xianchang.min   

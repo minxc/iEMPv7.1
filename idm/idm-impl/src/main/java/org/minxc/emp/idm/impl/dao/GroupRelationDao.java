@@ -10,7 +10,7 @@ import org.minxc.emp.common.db.dao.CommonDao;
 import org.minxc.emp.core.api.query.QueryFilter;
 
 /**
- * 描述：组织关联关系 DAO接口
+ * 组织关联关系 DAO接口
  */
 @Mapper
 public interface GroupRelationDao extends CommonDao<String, GroupRelationEntity> {

@@ -16,8 +16,8 @@ import java.util.Map.Entry;
 /**
  * DB2 表元数据的实现类
  *
- * <pre>
- * </pre>
+ * 
+ * 
  */
 public class DB2TableMeta extends BaseTableMeta {
 

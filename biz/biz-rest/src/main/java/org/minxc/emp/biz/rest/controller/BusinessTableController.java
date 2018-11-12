@@ -32,9 +32,9 @@ public class BusinessTableController extends CommonController<BusinessTable> {
 	BusinessTableManager businessTableManager;
 
 	/**
-	 * <pre>
+	 * 
 	 * businessTableEdit.html的save后端
-	 * </pre>
+	 * 
 	 *
 	 * @param request
 	 * @param response
@@ -50,10 +50,10 @@ public class BusinessTableController extends CommonController<BusinessTable> {
 	}
 
 	/**
-	 * <pre>
+	 * 
 	 * 获取BusinessTable的后端
 	 * 目前支持根据id,key 获取BusinessTable
-	 * </pre>
+	 * 
 	 *
 	 * @param request
 	 * @param response
@@ -81,9 +81,9 @@ public class BusinessTableController extends CommonController<BusinessTable> {
 
 
 	/**
-	 * <pre>
+	 * 
 	 * 新建表
-	 * </pre>
+	 * 
 	 *
 	 * @param request
 	 * @param response

@@ -60,9 +60,9 @@ public class TableEntity<C extends ColumnEntity> implements Serializable {
 	}
 
 	/**
-	 * <pre>
+	 * 
 	 * 系统只支持唯一主键的场景
-	 * </pre>
+	 * 
 	 *
 	 * @return
 	 */
@@ -83,9 +83,9 @@ public class TableEntity<C extends ColumnEntity> implements Serializable {
 	}
 
 	/**
-	 * <pre>
+	 * 
 	 * 根据name获取字段
-	 * </pre>
+	 * 
 	 * 
 	 * @param name
 	 * @return

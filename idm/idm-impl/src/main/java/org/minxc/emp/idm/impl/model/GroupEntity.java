@@ -13,7 +13,7 @@ import java.util.Map;
  * 
 * 项目名称：idm-impl   
 * 类名称：GroupEntity   
-* 类描述：组织架构 实体对象   
+* 类组织架构 实体对象   
 * 创建人：Xianchang.min   
 * 创建时间：2018年9月9日 下午9:40:12   
 * 修改人：Xianchang.min   

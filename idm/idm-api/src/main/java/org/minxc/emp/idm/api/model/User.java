@@ -4,7 +4,7 @@ import java.util.Map;
 
 
 /**
- * 描述：用户实体接口
+ * 用户实体接口
  */
 public interface User extends IdentityType{
 	

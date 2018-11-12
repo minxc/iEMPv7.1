@@ -15,7 +15,7 @@ import org.minxc.emp.idm.impl.manager.GroupRelationManager;
 import org.minxc.emp.idm.impl.model.GroupRelationEntity;
 
 /**
- * 描述：组织关联关系 处理实现类
+ * 组织关联关系 处理实现类
  */
 @Service("groupRelationManager")
 public class GroupRelationManagerImpl extends CommonManager<String, GroupRelationEntity>

@@ -4,7 +4,7 @@ package org.minxc.emp.idm.api.model;
  * 
 * 项目名称：idm-api   
 * 类名称：Group   
-* 类描述： 抽象用户组类型 
+* 类 抽象用户组类型 
 * 创建人：Xianchang.min   
 * 创建时间：2018年9月4日 下午11:43:26   
 * 修改人：Xianchang.min   

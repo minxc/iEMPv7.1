@@ -44,27 +44,27 @@ public abstract class TableOperator {
 	}
 
 	/**
-	 * <pre>
+	 * 
 	 * 返回的数据库类型
 	 * 枚举：DbType
-	 * </pre>
+	 * 
 	 *
 	 * @return
 	 */
 	public abstract String type();
 
 	/**
-	 * <pre>
+	 * 
 	 * 创建表
-	 * </pre>
+	 * 
 	 */
 	public void createTable() {
 	}
 
 	/**
-	 * <pre>
+	 * 
 	 * 删除表
-	 * </pre>
+	 * 
 	 */
 	public void dropTable() {
 		if (!isTableCreated()) {
@@ -75,10 +75,10 @@ public abstract class TableOperator {
 	}
 
 	/**
-	 * <pre>
+	 * 
 	 * 表是否被生成过
 	 * 或者说，表是否已存在数据库
-	 * </pre>
+	 * 
 	 *
 	 * @return
 	 */
@@ -87,9 +87,9 @@ public abstract class TableOperator {
 	}
 
 	/**
-	 * <pre>
+	 * 
 	 * 增加字段
-	 * </pre>
+	 * 
 	 *
 	 * @param column
 	 *            字段
@@ -99,9 +99,9 @@ public abstract class TableOperator {
 	}
 
 	/**
-	 * <pre>
+	 * 
 	 * 更新字段
-	 * </pre>
+	 * 
 	 *
 	 * @param column
 	 *            字段
@@ -111,9 +111,9 @@ public abstract class TableOperator {
 	}
 
 	/**
-	 * <pre>
+	 * 
 	 * 删除字段
-	 * </pre>
+	 * 
 	 *
 	 * @param columnName
 	 */
@@ -122,9 +122,9 @@ public abstract class TableOperator {
 	}
 
 	/**
-	 * <pre>
+	 * 
 	 * 插入数据
-	 * </pre>
+	 * 
 	 *
 	 * @param data
 	 *            数据
@@ -150,9 +150,9 @@ public abstract class TableOperator {
 	}
 
 	/**
-	 * <pre>
+	 * 
 	 * 根据主键删除数据
-	 * </pre>
+	 * 
 	 *
 	 * @param id
 	 *            主键值
@@ -163,9 +163,9 @@ public abstract class TableOperator {
 	}
 
 	/**
-	 * <pre>
+	 * 
 	 * 根据参数删除数据
-	 * </pre>
+	 * 
 	 *
 	 * @param param
 	 *            参数
@@ -189,10 +189,10 @@ public abstract class TableOperator {
 	}
 
 	/**
-	 * <pre>
+	 * 
 	 * 更新数据
 	 * 获取数据中的主键来进行更新
-	 * </pre>
+	 * 
 	 *
 	 * @param data
 	 *            数据
@@ -224,9 +224,9 @@ public abstract class TableOperator {
 	}
 
 	/**
-	 * <pre>
+	 * 
 	 * 根据主键获取唯一数据
-	 * </pre>
+	 * 
 	 *
 	 * @param columnName
 	 *            要查的字段
@@ -245,9 +245,9 @@ public abstract class TableOperator {
 	}
 
 	/**
-	 * <pre>
+	 * 
 	 * 根据主键获取唯一数据
-	 * </pre>
+	 * 
 	 *
 	 * @param id
 	 *            主键值
@@ -264,8 +264,8 @@ public abstract class TableOperator {
 	}
 
 	/**
-	 * <pre>
-	 * </pre>
+	 * 
+	 * 
 	 *
 	 * @param param
 	 *            参数
@@ -276,8 +276,8 @@ public abstract class TableOperator {
 	}
 
 	/**
-	 * <pre>
-	 * </pre>
+	 * 
+	 * 
 	 *
 	 * @param columnName
 	 *            要查的字段
@@ -316,10 +316,10 @@ public abstract class TableOperator {
 	}
 
 	/**
-	 * <pre>
+	 * 
 	 * 同步table和数据库中的字段信息
 	 * 目前只处理字段的增删
-	 * </pre>
+	 * 
 	 */
 	public void syncColumn() {
 		// 未生成表，不处理

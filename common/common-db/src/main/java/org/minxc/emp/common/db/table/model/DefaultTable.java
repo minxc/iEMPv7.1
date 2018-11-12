@@ -10,8 +10,8 @@ import java.util.List;
 /**
  * 默认表对象。
  *
- * <pre>
- * </pre>
+ * 
+ * 
  */
 public class DefaultTable implements Table {
     // 表名

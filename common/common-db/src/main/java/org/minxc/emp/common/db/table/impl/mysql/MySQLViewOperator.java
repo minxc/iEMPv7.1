@@ -22,8 +22,8 @@ import java.util.Map.Entry;
 /**
  * Mysql 视图操作的实现类。
  *
- * <pre>
- * </pre>
+ * 
+ * 
  */
 public class MySQLViewOperator extends BaseViewOperator implements
         ViewOperator {

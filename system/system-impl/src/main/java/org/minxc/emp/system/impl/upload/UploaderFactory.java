@@ -8,7 +8,7 @@ import org.minxc.emp.core.util.AppContextUtil;
 import org.minxc.emp.core.util.PropertiesUtil;
 
 /**
- * 描述：上传器工厂
+ * 上传器工厂
  */
 public class UploaderFactory {
 	private UploaderFactory() {
@@ -16,9 +16,9 @@ public class UploaderFactory {
 	}
 
 	/**
-	 * <pre>
+	 * 
 	 * 获取上传器
-	 * </pre>
+	 * 
 	 * 
 	 * @param type
 	 * @return
@@ -34,9 +34,9 @@ public class UploaderFactory {
 	}
 
 	/**
-	 * <pre>
+	 * 
 	 * 返回默认的上传器
-	 * </pre>
+	 * 
 	 * 
 	 * @return
 	 */

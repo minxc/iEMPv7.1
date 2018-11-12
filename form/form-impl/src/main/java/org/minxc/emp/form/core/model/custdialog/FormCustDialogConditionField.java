@@ -94,13 +94,13 @@ public class FormCustDialogConditionField implements Serializable {
     }
 
     /**
-     * <pre>
-     * 描述：值对象
-     * 作者:aschs
-     * 邮箱:aschs@qq.com
+     * 
+     * 值对象
+     * 
+     * 
      * 日期:2018年1月24日 下午5:20:30
-     * 版权:summer
-     * </pre>
+     * 
+     * 
      */
     public static class Value implements Serializable {
         /**

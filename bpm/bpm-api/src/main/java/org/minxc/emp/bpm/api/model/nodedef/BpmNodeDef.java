@@ -11,7 +11,7 @@ import org.minxc.emp.bpm.api.model.def.NodeProperties;
 import org.minxc.emp.bpm.api.model.form.BpmForm;
 
 /**
- * 描述：流程任务节点
+ * 流程任务节点
  */
 public interface BpmNodeDef extends Serializable, BpmDef {
     /**
@@ -159,10 +159,10 @@ public interface BpmNodeDef extends Serializable, BpmDef {
     /**
      * 获取节点按钮。
      *
-     * <pre>
+     * 
      * 1.获取节点配置按钮数据。
      * 2.如果获取不到,则获取节点的默认按钮。
-     * </pre>
+     * 
      *
      * @return List&lt;Button>
      */

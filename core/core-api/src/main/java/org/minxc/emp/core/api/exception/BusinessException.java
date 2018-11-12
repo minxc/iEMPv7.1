@@ -23,7 +23,7 @@ import org.minxc.emp.core.api.status.StatusCode;
 /**      
 * 项目名称：core-impl   
 * 类名称：BusinessException   
-* 类描述：   
+* 类   
 * 创建人：Xianchang.min   
 * 创建时间：2018年8月24日 上午1:42:56   
 * 修改人：Xianchang.min   

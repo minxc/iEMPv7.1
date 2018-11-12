@@ -16,9 +16,9 @@ import org.minxc.emp.system.impl.model.SystemResourceEntity;
 import org.springframework.stereotype.Service;
 
 /**
- * <pre>
- * 描述：子系统资源 处理实现类
- * </pre>
+ * 
+ * 子系统资源 处理实现类
+ * 
  */
 @Service("sysResourceManager")
 public class SysResourceManagerImpl extends CommonManager<String, SystemResourceEntity> implements SystemResourceManager {

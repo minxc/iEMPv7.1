@@ -11,9 +11,9 @@ import org.minxc.emp.system.impl.model.UploadedFileEntity;
 public interface FileManager extends Manager<String, UploadedFileEntity>{
 	
 	/**
-	 * <pre>
+	 * 
 	 * 上传附件
-	 * </pre>	
+	 * 	
 	 * @param is
 	 * @param fileName
 	 * @return
@@ -21,20 +21,20 @@ public interface FileManager extends Manager<String, UploadedFileEntity>{
 	UploadedFileEntity upload(InputStream is, String fileName);
 	
 	/**
-	 * <pre>
+	 * 
 	 * 下载附件
 	 * 返回流
-	 * </pre>	
+	 * 	
 	 * @param fileId
 	 * @return
 	 */
 	InputStream download(String fileId);
 	
 	/**
-	 * <pre>
+	 * 
 	 * 删除附件
 	 * 包括流信息
-	 * </pre>	
+	 * 	
 	 * @param fileId
 	 */
 	void delete(String fileId);

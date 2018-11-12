@@ -17,8 +17,8 @@ import java.util.Map.Entry;
 /**
  * Oracle 表元数据的实现类
  *
- * <pre>
- * </pre>
+ * 
+ * 
  */
 public class OracleTableMetadata extends BaseTableMeta {
     /**

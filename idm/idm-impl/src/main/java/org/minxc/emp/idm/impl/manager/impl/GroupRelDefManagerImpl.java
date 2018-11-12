@@ -10,7 +10,7 @@ import org.minxc.emp.idm.impl.manager.GroupRelDefManager;
 import org.minxc.emp.idm.impl.model.GroupRelDefEntity;
 
 /**
- * 描述：组织关系定义 处理实现类
+ * 组织关系定义 处理实现类
  */
 @Service("groupReldefManager")
 public class GroupRelDefManagerImpl extends CommonManager<String, GroupRelDefEntity> implements GroupRelDefManager {

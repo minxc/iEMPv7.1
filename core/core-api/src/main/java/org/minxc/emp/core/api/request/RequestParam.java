@@ -15,7 +15,7 @@ import java.util.Map;
  * 
 * 项目名称：base-intf   
 * 类名称：RequestParam   
-* 类描述：   用于请求参数的存放
+* 类   用于请求参数的存放
 * 创建人：Xianchang.min   
 * 创建时间：2018年8月21日 下午11:00:36   
 * 修改人：Xianchang.min   

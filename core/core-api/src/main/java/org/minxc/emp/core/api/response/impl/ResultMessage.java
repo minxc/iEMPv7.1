@@ -11,7 +11,7 @@ import java.util.Map;
 /**
  * 项目名称：base-intf
  * 类名称：ResultMessage
- * 类描述：回结果
+ * 类回结果
  * 创建人：Xianchang.min
  * 创建时间：2018年8月21日 下午11:02:33
  * 修改人：Xianchang.min

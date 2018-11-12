@@ -36,7 +36,7 @@ import net.lingala.zip4j.core.ZipFile;
 //import net.lingala.zip4j.core.ZipFile;
 
 /**
- * 描述：上传附件的controller
+ * 上传附件的controller
  */
 @RestController
 @RequestMapping("/sys/sysFile/")
@@ -46,8 +46,8 @@ public class SystemFileController extends GenericController {
 	FileManager sysFileManager;
 
 	/**
-	 * <pre>
-	 * </pre>
+	 * 
+	 * 
 	 * 
 	 * @param file
 	 * @return
@@ -61,8 +61,8 @@ public class SystemFileController extends GenericController {
 	}
 
 	/**
-	 * <pre>
-	 * </pre>
+	 * 
+	 * 
 	 * 
 	 * @param fileName
 	 *            文件名

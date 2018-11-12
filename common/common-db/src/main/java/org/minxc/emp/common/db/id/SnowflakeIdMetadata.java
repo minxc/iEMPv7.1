@@ -3,7 +3,7 @@ package org.minxc.emp.common.db.id;
  * 
 * 项目名称：common-db   
 * 类名称：SnowflakeIdMetadata   
-* 类描述：雪花算法Id元信息   
+* 类雪花算法Id元信息   
 * 创建人：Xianchang.min   
 * 创建时间：2018年9月3日 下午8:00:25   
 * 修改人：Xianchang.min   

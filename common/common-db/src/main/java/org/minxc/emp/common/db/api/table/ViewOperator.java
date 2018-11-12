@@ -13,8 +13,8 @@ import java.util.List;
  * <p>
  * 2.获取某个视图的具体信息，数据保存到Table中。
  *
- * <pre>
- * </pre>
+ * 
+ * 
  */
 public interface ViewOperator extends DbType {
 

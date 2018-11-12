@@ -30,19 +30,20 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/form/formCustDialog/")
 public class FormCustDialogController extends CommonController<FormCustDialog> {
+	
     @Autowired
-    FormCustDialogManager formCustDialogManager;
+    private FormCustDialogManager formCustDialogManager;
     @Autowired
-    BasicDao<?> commonDao;
+    private BasicDao<?> commonDao;
     
     @Autowired
-    SystemDataSourceService sysDataSourceService;
+    private SystemDataSourceService sysDataSourceService;
 
     /**
-     * <pre>
+     * 
      * 获取formCustDialog的后端
      * 目前支持根据id 获取formCustDialog
-     * </pre>
+     * 
      *
      * @param request
      * @param response
@@ -65,11 +66,11 @@ public class FormCustDialogController extends CommonController<FormCustDialog> {
     }
 
     /**
-     * <pre>
+     * 
      * edit页面的searchObjName
      * 其他页面使用可以参数传一个json:
      * {dsKey:"数据源key",objType:"枚举在 com.dstz.form.api.model.FormCustDialogOBJTYPE ",objName:"要查询的名字"}
-     * </pre>
+     * 
      *
      * @param request
      * @param response
@@ -83,11 +84,11 @@ public class FormCustDialogController extends CommonController<FormCustDialog> {
     }
 
     /**
-     * <pre>
+     * 
      * 获取objName对象的信息
      * 其他页面使用可以参数传一个json:
      * {dsKey:"数据源key",objType:"枚举在com.dstz.form.model.FormCustDialog$OBJTYPE",objName:"要查询的名字"}
-     * </pre>
+     * 
      *
      * @param request
      * @param response
@@ -101,9 +102,9 @@ public class FormCustDialogController extends CommonController<FormCustDialog> {
     }
 
     /**
-     * <pre>
+     * 
      * 获取对话框的列表数据后端
-     * </pre>
+     * 
      *
      * @param request
      * @param response
@@ -125,10 +126,8 @@ public class FormCustDialogController extends CommonController<FormCustDialog> {
     }
 
     /**
-     * <pre>
+     * 
      * 获取对话框的树数据后端
-     * </pre>
-     *
      * @param request
      * @param response
      * @param key

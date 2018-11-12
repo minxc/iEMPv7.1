@@ -21,10 +21,10 @@ public class ConstantUtil {
     }
 
     /**
-     * <pre>
+     * 
      * 获取指定类下的某个静态常量
      * ps:那个key 一定是final static 的才能被获取
-     * </pre>
+     * 
      *
      * @param classPath
      * @param key
@@ -39,9 +39,9 @@ public class ConstantUtil {
     }
 
     /**
-     * <pre>
+     * 
      * 获取指定类下的某个静态常量下所有final static的常量
-     * </pre>
+     * 
      *
      * @param classPath
      * @param key

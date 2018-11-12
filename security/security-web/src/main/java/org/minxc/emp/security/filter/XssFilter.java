@@ -16,13 +16,13 @@ import java.util.regex.Pattern;
 
 /**
  * XSS安全过滤器。
- * <pre>
+ * 
  *  这个功能是为了放置XSS攻击。
  *  如果有Xss攻击：
  *  	1.表单提交方式，平台将去到一个提示页面。
  *  	2.AJAX提交方式，弹出提示信息。
  *  可以配置某些不需要检测的URL.
- * </pre>
+ * 
  *
  * @author ray
  */

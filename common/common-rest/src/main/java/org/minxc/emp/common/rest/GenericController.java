@@ -11,7 +11,6 @@ import org.minxc.emp.core.api.query.FieldSort;
 import org.minxc.emp.core.api.query.QueryFilter;
 import org.minxc.emp.core.api.query.SortDirection;
 import org.minxc.emp.core.api.response.impl.ResultMessage;
-import org.minxc.emp.core.util.JacksonUtil;
 import org.minxc.emp.core.util.StringUtil;
 
 import javax.servlet.http.HttpServletRequest;
@@ -104,27 +103,27 @@ public class GenericController {
     @SuppressWarnings({"rawtypes", "unchecked"})
     @Deprecated
     protected void writeSuccessData(HttpServletResponse response, Object data) throws IOException {
-        ResultMessage ResultMessage = new ResultMessage();
-        ResultMessage.setSuccess(true);
-        ResultMessage.setData(data);
-        response.getWriter().print(JSON.toJSONString(ResultMessage));
+        ResultMessage resultMessage = new ResultMessage();
+        resultMessage.setSuccess(true);
+        resultMessage.setData(data);
+        response.getWriter().print(JSON.toJSONString(resultMessage));
     }
 
     @Deprecated
     protected void writeSuccessData(HttpServletResponse response, Object data, String msg) throws IOException {
-        ResultMessage ResultMessage = new ResultMessage();
-        ResultMessage.setSuccess(true);
-        ResultMessage.setMessage(msg);
-        ResultMessage.setData(data);
-        response.getWriter().print(JSON.toJSONString(ResultMessage));
+        ResultMessage resultMessage = new ResultMessage();
+        resultMessage.setSuccess(true);
+        resultMessage.setMessage(msg);
+        resultMessage.setData(data);
+        response.getWriter().print(JSON.toJSONString(resultMessage));
     }
 
     @Deprecated
     protected void writeSuccessResult(HttpServletResponse response, String msg) throws IOException {
-        ResultMessage ResultMessage = new ResultMessage();
-        ResultMessage.setSuccess(true);
-        ResultMessage.setMessage(msg);
-        response.getWriter().print(JSON.toJSONString(ResultMessage));
+        ResultMessage resultMessage = new ResultMessage();
+        resultMessage.setSuccess(true);
+        resultMessage.setMessage(msg);
+        response.getWriter().print(JSON.toJSONString(resultMessage));
     }
 
     /**
@@ -134,8 +133,8 @@ public class GenericController {
      * @param ResultMessage
      */
     @Deprecated
-    protected void writeResultMessage(PrintWriter writer, ResultMessage ResultMessage) {
-        writer.print(JSON.toJSONString(ResultMessage));
+    protected void writeResultMessage(PrintWriter writer, ResultMessage resultMessage) {
+        writer.print(JSON.toJSONString(resultMessage));
     }
 
 }

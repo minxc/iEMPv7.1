@@ -104,7 +104,7 @@ public interface ActionCmd {
 
     /**
      * 获取审批的处理状态或动作。
-     * <pre>
+     * 
      * 启动流程:
      * startFlow
      * draft
@@ -113,7 +113,7 @@ public interface ActionCmd {
      * 1.agree 审批。
      * 3.oppose 反对。
      * 7.reject 驳回。
-     * </pre>
+     * 
      *
      * @return String
      */

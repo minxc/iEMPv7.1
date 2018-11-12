@@ -28,7 +28,7 @@ import org.minxc.emp.form.core.generator.PcFormElementGenerator;
 import org.minxc.emp.form.core.generator.mobileFormElementGenerator;
 import org.minxc.emp.form.core.manager.FormDefManager;
 import org.minxc.emp.form.core.manager.FormTemplateManager;
-import org.minxc.emp.form.core.model.FormDef;
+import org.minxc.emp.form.core.model.FormDefinitionImpl;
 import org.minxc.emp.form.core.model.FormTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -51,7 +51,7 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @RequestMapping("/form/formDef/")
 @Slf4j
-public class FormDefController extends CommonController<FormDef> {
+public class FormDefController extends CommonController<FormDefinitionImpl> {
 	
 	@Autowired
 	FormDefManager formDefManager;
@@ -70,7 +70,7 @@ public class FormDefController extends CommonController<FormDef> {
 	public PageJson listJson(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		QueryFilter queryFilter = getQueryFilter(request);
 		queryFilter.addFilter("type_", "mobile", QueryOperator.NOT_EQUAL);
-	    Page<FormDef> pageList = (Page<FormDef>) formDefManager.query(queryFilter);
+	    Page<FormDefinitionImpl> pageList = (Page<FormDefinitionImpl>) formDefManager.query(queryFilter);
 	      
         return new PageJson(pageList);
 	}
@@ -80,7 +80,7 @@ public class FormDefController extends CommonController<FormDef> {
 	public PageJson mobileListJson(HttpServletRequest request) throws Exception {
 		QueryFilter queryFilter = getQueryFilter(request);
 		queryFilter.addFilter("type_", "mobile", QueryOperator.EQUAL);
-	    Page<FormDef> pageList = (Page<FormDef>) formDefManager.query(queryFilter);
+	    Page<FormDefinitionImpl> pageList = (Page<FormDefinitionImpl>) formDefManager.query(queryFilter);
 	      
         return new PageJson(pageList);
 	}
@@ -91,17 +91,17 @@ public class FormDefController extends CommonController<FormDef> {
 	@RequestMapping("save")
 	@Override
 	@ErrorCatching(writeErrorToResponse = true, value = "保存表单失败")
-	public ResultMessage<String> save(@RequestBody FormDef formDef) throws Exception {
+	public ResultMessage<String> save(@RequestBody FormDefinitionImpl formDef) throws Exception {
 		ResultMessage<String> msg =super.save( formDef);
 		formDefManager.saveBackupHtml(formDef);
 		return msg;
 	}
 
 	/**
-	 * <pre>
+	 * 
 	 * 获取formDef的后端
 	 * 目前支持根据id和key 获取formDef
-	 * </pre>
+	 * 
 	 * 
 	 * @param request
 	 * @param response
@@ -113,7 +113,7 @@ public class FormDefController extends CommonController<FormDef> {
 	public void getObject(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String id = RequestUtil.getString(request, "id");
 		String key = RequestUtil.getString(request, "key");
-		FormDef formDef = null;
+		FormDefinitionImpl formDef = null;
 		if (StringUtil.isNotEmpty(id)) {
 			formDef = formDefManager.get(id);
 		} else if (StringUtil.isNotEmpty(key)) {
@@ -128,9 +128,9 @@ public class FormDefController extends CommonController<FormDef> {
 	}
 
 	/**
-	 * <pre>
+	 * 
 	 * 获取开发者备份html
-	 * </pre>
+	 * 
 	 * 
 	 * @param request
 	 * @param response
@@ -142,7 +142,7 @@ public class FormDefController extends CommonController<FormDef> {
 	public void getBackupHtml(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String id = RequestUtil.getString(request, "id");
 		String key = RequestUtil.getString(request, "key");
-		FormDef formDef = null;
+		FormDefinitionImpl formDef = null;
 		if (StringUtil.isNotEmpty(id)) {
 			formDef = formDefManager.get(id);
 		} else if (StringUtil.isNotEmpty(key)) {
@@ -152,9 +152,9 @@ public class FormDefController extends CommonController<FormDef> {
 	}
 
 	/**
-	 * <pre>
+	 * 
 	 * boTree数据树
-	 * </pre>
+	 * 
 	 * 
 	 * @param request
 	 * @param response
@@ -168,9 +168,9 @@ public class FormDefController extends CommonController<FormDef> {
 	}
 
 	/**
-	 * <pre>
+	 * 
 	 * 根据bo获取表单模板信息
-	 * </pre>
+	 * 
 	 * 
 	 * @param request
 	 * @param response
@@ -187,9 +187,9 @@ public class FormDefController extends CommonController<FormDef> {
 	}
 
 	/**
-	 * <pre>
+	 * 
 	 * 根据表单选择的模板生成html
-	 * </pre>
+	 * 
 	 * 
 	 * @param request
 	 * @param response

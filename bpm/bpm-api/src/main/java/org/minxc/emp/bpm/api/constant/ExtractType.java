@@ -2,9 +2,9 @@ package org.minxc.emp.bpm.api.constant;
 
 /**
  * 人员抽取类型。
- * <pre>
- * 描述：人员抽取类型。
- * </pre>
+ * 
+ * 人员抽取类型。
+ * 
  */
 public enum ExtractType {
     /**

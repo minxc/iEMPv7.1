@@ -4,14 +4,15 @@ import javax.validation.constraints.NotEmpty;
 
 import org.apache.commons.lang3.StringUtils;
 import org.minxc.emp.core.impl.model.AbstractCommonModel;
-import org.minxc.emp.form.api.model.IFormDef;
+import org.minxc.emp.form.api.model.FormDefinition;
 
 
 /**
  *  表单对象
  * 日期:2018年3月16日 下午4:19:26
  */
-public class FormDef extends AbstractCommonModel implements IFormDef {
+public class FormDefinitionImpl extends AbstractCommonModel implements FormDefinition {
+	
 	private static final long serialVersionUID = -4468752282789085901L;
 	/**
 	 * 表单类型 FormType
@@ -48,9 +49,9 @@ public class FormDef extends AbstractCommonModel implements IFormDef {
      */
     private String boName;
     /**
-     * <pre>
+     * 
      * 表单内容
-     * </pre>
+     * 
      */
     private String html;
     

@@ -1,18 +1,18 @@
 package org.minxc.emp.biz.api.constant;
 
 /**
- * <pre>
+ * 
  *  
- * 描述：bus权限枚举
+ * bus权限枚举
  * 注意枚举的顺序是从大到小的，例如拥有了REQUIRED权限，就表示包含下面的权限了
  * 通常页面配置不会展示最后那个权限，因为当用户配置了权限，前面的权限都没有了，最后的就是权限了
  * 当用户没配置权限，则应该选择默认权限
  * 默认权限跟最后一个权限的概念是不一样的哦
- * 作者:aschs
- * 邮箱:aschs@qq.com
+ * 
+ * 
  * 日期:2018年4月14日 下午6:07:46
- * 版权:summer
- * </pre>
+ * 
+ * 
  */
 public enum RightsType {
 	/**
@@ -72,9 +72,9 @@ public enum RightsType {
 	}
 
 	/**
-	 * <pre>
+	 * 
 	 * 根据key来判断是否跟当前一致
-	 * </pre>
+	 * 
 	 * 
 	 * @param key
 	 * @return
@@ -101,9 +101,9 @@ public enum RightsType {
 	}
 
 	/**
-	 * <pre>
+	 * 
 	 * 返回默认权限
-	 * </pre>
+	 * 
 	 * 
 	 * @param key
 	 * @return PermissionType

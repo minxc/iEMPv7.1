@@ -44,7 +44,7 @@ public class MailUtil {
      *
      * @param mailSetting 邮件设置实体类
      *
-     *                    <pre>
+     *                    
      *                    接收示例：
      *                    MailSetting setting = getMailSettingEntity();
      *                    MailUtil util = new MailUtil(setting);
@@ -60,7 +60,7 @@ public class MailUtil {
      *                    MailSetting setting = getMailSettingEntity();
      *                    MailUtil util = new MailUtil(setting);
      *                    util.connectSmtpAndReceiver();
-     *                    </pre>
+     *                    
      * @see    MailSetting
      * @see AttacheHandler
      * @see Mail

@@ -4,7 +4,7 @@ package org.minxc.emp.idm.api.model;
  * 
 * 项目名称：idm-api   
 * 类名称：GroupType   
-* 类描述：组织类型   
+* 类组织类型   
 * 创建人：Xianchang.min   
 * 创建时间：2018年9月4日 下午11:44:45   
 * 修改人：Xianchang.min   

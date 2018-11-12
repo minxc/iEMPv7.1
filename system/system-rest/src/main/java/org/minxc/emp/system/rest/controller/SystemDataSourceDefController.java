@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
- * 描述：sysDataSourceDef层的controller
+ * sysDataSourceDef层的controller
  */
 @Controller
 @RequestMapping("/sys/sysDataSourceDef/")
@@ -30,9 +30,9 @@ public class SystemDataSourceDefController extends GenericController {
     SystemDataSourceDefManager sysDataSourceDefManager;
 
     /**
-     * <pre>
+     * 
      * 根据类路径获取类字段
-     * </pre>
+     * 
      *
      * @param request
      * @param response
@@ -46,9 +46,9 @@ public class SystemDataSourceDefController extends GenericController {
     }
 
     /**
-     * <pre>
+     * 
      * sysDataSourceDefEdit.html的save后端
-     * </pre>
+     * 
      *
      * @param request
      * @param response
@@ -69,10 +69,10 @@ public class SystemDataSourceDefController extends GenericController {
     }
 
     /**
-     * <pre>
+     * 
      * 获取sysDataSourceDef的后端
      * 目前支持根据id 获取sysDataSourceDef
-     * </pre>
+     * 
      *
      * @param request
      * @param response
@@ -91,9 +91,9 @@ public class SystemDataSourceDefController extends GenericController {
     }
 
     /**
-     * <pre>
+     * 
      * list页的后端
-     * </pre>
+     * 
      *
      * @param request
      * @param response

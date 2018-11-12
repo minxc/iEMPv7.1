@@ -17,8 +17,8 @@ import java.util.Map;
 /**
  * 达梦 索引操作的实现
  *
- * <pre>
- * </pre>
+ * 
+ * 
  */
 public class DmIndexOperator extends BaseIndexOperator {
 

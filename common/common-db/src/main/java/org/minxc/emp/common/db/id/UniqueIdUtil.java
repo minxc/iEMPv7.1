@@ -4,7 +4,7 @@ import org.minxc.emp.common.db.api.IdGenerator;
 
 /**
  * 唯一ID获取类。 
- * 描述：用于产生唯一ID，需要配置spring文件，具体参考
+ * 用于产生唯一ID，需要配置spring文件，具体参考
  */
 public class UniqueIdUtil {
 

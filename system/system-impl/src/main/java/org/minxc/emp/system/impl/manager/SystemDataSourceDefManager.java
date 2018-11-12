@@ -12,9 +12,9 @@ import org.minxc.emp.system.impl.model.def.SysDataSourceDefAttribute;
 public interface SystemDataSourceDefManager extends Manager<String, SysDataSourceDef> {
 
     /**
-     * <pre>
+     * 
      * 根据classPath类路径获取数据源的配置参数
-     * </pre>
+     * 
      *
      * @param classPath
      * @return

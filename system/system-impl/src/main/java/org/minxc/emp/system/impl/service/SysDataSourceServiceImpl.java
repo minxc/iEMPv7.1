@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import javax.sql.DataSource;
 
 /**
- * 描述：系统数据源对其他模块的服务类
+ * 系统数据源对其他模块的服务类
  */
 
 @Service

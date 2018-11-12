@@ -20,9 +20,9 @@ import org.minxc.emp.form.core.model.FormCustDialog;
 public interface FormCustDialogManager extends Manager<String, FormCustDialog> {
 
     /**
-     * <pre>
+     * 
      * 根据key获取FormCustDialog
-     * </pre>
+     * 
      *
      * @param key
      * @return
@@ -30,9 +30,9 @@ public interface FormCustDialogManager extends Manager<String, FormCustDialog> {
     FormCustDialog getByKey(String key);
 
     /**
-     * <pre>
+     * 
      * 查询ObjName
-     * </pre>
+     * 
      *
      * @param formCustDialog
      * @return
@@ -40,9 +40,9 @@ public interface FormCustDialogManager extends Manager<String, FormCustDialog> {
     Map<String, String> searchObjName(FormCustDialog formCustDialog);
 
     /**
-     * <pre>
+     * 
      * 获取objName对象的表 / 视图信息
-     * </pre>
+     * 
      *
      * @param formCustDialog
      * @return
@@ -50,10 +50,10 @@ public interface FormCustDialogManager extends Manager<String, FormCustDialog> {
     TableEntity<ColumnEntity> getTable(FormCustDialog formCustDialog);
 
     /**
-     * <pre>
+     * 
      * 根据formCustDialog获取数据
      * 包含树形和列表
-     * </pre>
+     * 
      *
      * @param formCustDialog
      * @param queryFilter    页面传参

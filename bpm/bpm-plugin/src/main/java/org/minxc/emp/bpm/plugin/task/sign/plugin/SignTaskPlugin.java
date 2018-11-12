@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 *    
 * 项目名称：wf-plugin   
 * 类名称：SignTaskPlugin   
-* 类描述：   TODO:查验该类的是否正确
+* 类   TODO:查验该类的是否正确
 * 创建人：Xianchang.min   
 * 创建时间：2018年8月11日 上午1:34:02   
 * 修改人：Xianchang.min   

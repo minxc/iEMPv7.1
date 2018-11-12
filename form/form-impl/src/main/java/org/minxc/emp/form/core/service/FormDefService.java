@@ -1,6 +1,6 @@
 package org.minxc.emp.form.core.service;
 
-import org.minxc.emp.form.api.model.IFormDef;
+import org.minxc.emp.form.api.model.FormDefinition;
 import org.minxc.emp.form.api.service.IFormDefService;
 import org.minxc.emp.form.core.manager.FormDefManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,7 @@ public class FormDefService implements IFormDefService {
 	FormDefManager formDefManager;
 
 	@Override
-	public IFormDef getByKey(String key) {
+	public FormDefinition getByKey(String key) {
 		return formDefManager.getByKey(key);
 	}
 }

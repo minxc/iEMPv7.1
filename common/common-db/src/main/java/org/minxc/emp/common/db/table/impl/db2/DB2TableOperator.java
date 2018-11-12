@@ -16,8 +16,8 @@ import java.util.Map;
 /**
  * DB2 数据库表操作的实现。
  *
- * <pre>
- * </pre>
+ * 
+ * 
  */
 public class DB2TableOperator extends BaseTableOperator {
 

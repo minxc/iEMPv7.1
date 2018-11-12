@@ -20,13 +20,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 /**
- * <pre>
- * 描述：businessPermission层的controller
- * 作者:aschs
- * 邮箱:aschs@qq.com
+ * 
+ * businessPermission层的controller
+ * 
+ * 
  * 日期:下午5:11:06
- * 版权:summer
- * </pre>
+ * 
+ * 
  */
 @RestController
 @RequestMapping("/bus/businessPermission/")
@@ -37,9 +37,9 @@ public class BusinessPermissionController extends CommonController<BusinessPermi
 	BusinessPermissionManager businessPermissionManager;
 
 	/**
-	 * <pre>
+	 * 
 	 * 获取businessPermission的后端
-	 * </pre>
+	 * 
 	 *
 	 * @param request
 	 * @param response
@@ -56,9 +56,9 @@ public class BusinessPermissionController extends CommonController<BusinessPermi
 	}
 
 	/**
-	 * <pre>
+	 * 
 	 * 获取bo数据的后端
-	 * </pre>
+	 * 
 	 *
 	 * @param request
 	 * @param response

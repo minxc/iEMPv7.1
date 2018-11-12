@@ -3,8 +3,8 @@ package org.minxc.emp.common.db.table.util;
 /**
  * 常用数据库变量
  *
- * <pre>
- * </pre>
+ * 
+ * 
  */
 public interface SQLConst {
 

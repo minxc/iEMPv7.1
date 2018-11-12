@@ -12,7 +12,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 /**
- * 描述：权限的工厂类
+ * 权限的工厂类
  */
 
 public class PermissionCalculatorFactory {
@@ -36,9 +36,9 @@ public class PermissionCalculatorFactory {
 	}
 
 	/**
-	 * <pre>
+	 * 
 	 * 判断当前用户是否有这权限串
-	 * </pre>
+	 * 
 	 * 
 	 * @param jsonArray
 	 *            :[{type:"user",id:"a,b,.."},{type:"org",id:"a,b,..."}]

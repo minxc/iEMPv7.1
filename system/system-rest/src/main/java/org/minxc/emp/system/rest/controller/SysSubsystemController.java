@@ -28,9 +28,9 @@ import java.util.List;
 
 
 /**
- * <pre>
- * 描述：子系统定义 控制器类
- * </pre>
+ * 
+ * 子系统定义 控制器类
+ * 
  */
 @Controller
 @RequestMapping("/sys/subsystem")

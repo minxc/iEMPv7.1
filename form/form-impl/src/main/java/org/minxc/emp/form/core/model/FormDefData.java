@@ -5,17 +5,17 @@ import java.io.Serializable;
 import com.alibaba.fastjson.JSONObject;
 
 /**
- * 描述：表单定义的页面数据类
+ * 表单定义的页面数据类
  * 当流程页时，请继承当前类，然后多一些字段，例如按钮数据什么的
  * 日期:2018年4月14日 下午5:38:51
- * </pre>
+ * 
  */
 public class FormDefData implements Serializable {
 	
 	
 	private static final long serialVersionUID = -8451398677571383221L;
 	/**
-	 * <pre>
+	 * 
 	 * 表单的数据
 	 * bo下面的第一层默认是主表的字段（不需要mainTable:{}这一层）
 	 * 子表如果是一对一，那么是{}对象，第一次取数据时，需要被初始化
@@ -36,11 +36,11 @@ public class FormDefData implements Serializable {
 	 *		table4:{...},
 	 *  }
 	 * }
-	 * </pre>
+	 * 
 	 */
 	private JSONObject data;
 	/**
-	 * <pre>
+	 * 
 	 * 表单的初始化数据
 	 * 
 	 * {
@@ -57,11 +57,11 @@ public class FormDefData implements Serializable {
 	 *	 	}
 	 *  }
 	 * }
-	 * </pre>
+	 * 
 	 */
 	private JSONObject initData;
 	/**
-	 * <pre>
+	 * 
 	 *  表单关于字段的权限
 	 * {
 	 * 	bo1:{
@@ -71,18 +71,18 @@ public class FormDefData implements Serializable {
 	 *	 	}
 	 *  }
 	 * }
-	 * </pre>
+	 * 
 	 */
 	private JSONObject permission;
 	/**
-	 * <pre>
+	 * 
 	 * 表单关于表的权限
 	 * {
 	 * 	bo1:{
 	 *		table1:w
 	 *  }
 	 * }
-	 * </pre>
+	 * 
 	 */
 	private JSONObject tablePermission;
 	/**

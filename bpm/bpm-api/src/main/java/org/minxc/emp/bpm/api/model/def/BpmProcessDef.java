@@ -7,9 +7,9 @@ import org.minxc.emp.bpm.api.model.nodedef.BpmNodeDef;
 
 
 /**
- * <pre>
- * 描述：BPM流程定义接口
- * </pre>
+ * 
+ * BPM流程定义接口
+ * 
  */
 public interface BpmProcessDef extends BpmDef {
 

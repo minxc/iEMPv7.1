@@ -17,8 +17,8 @@ import java.util.Map.Entry;
 /**
  * H2 表元数据的实现类
  *
- * <pre>
- * </pre>
+ * 
+ * 
  */
 public class H2TableMetadata extends BaseTableMeta {
 

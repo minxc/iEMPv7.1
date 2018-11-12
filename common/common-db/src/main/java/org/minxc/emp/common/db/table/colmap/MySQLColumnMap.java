@@ -15,7 +15,7 @@ import org.minxc.emp.common.db.table.model.DefaultColumn;
  * 
 * 项目名称：common-db   
 * 类名称：MySQLColumnMap   
-* 类描述： mysql 列的元数据到columnmodel的映射,用于从数据库元数据读取到列对象。  
+* 类 mysql 列的元数据到columnmodel的映射,用于从数据库元数据读取到列对象。  
 * 创建人：Xianchang.min   
 * 创建时间：2018年9月3日 下午8:21:03   
 * 修改人：Xianchang.min   

@@ -26,7 +26,7 @@ import javax.servlet.http.HttpServletResponse;
 /**      
 * 项目名称：core-impl   
 * 类名称：CookieUtil   
-* 类描述：   Cookie工具类
+* 类   Cookie工具类
 * 创建人：Xianchang.min   
 * 创建时间：2018年8月24日 下午12:57:49   
 * 修改人：Xianchang.min   

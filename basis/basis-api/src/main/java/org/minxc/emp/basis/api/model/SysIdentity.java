@@ -3,7 +3,7 @@ package org.minxc.emp.basis.api.model;
 import java.io.Serializable;
 
 /**
- * 描述：流程与组织挂接实体接口
+ * 流程与组织挂接实体接口
  */
 public interface SysIdentity extends Serializable{
 

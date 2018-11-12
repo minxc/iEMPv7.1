@@ -42,7 +42,7 @@ import org.minxc.emp.core.util.BeanUtils;
 import org.minxc.emp.core.util.StringUtil;
 import org.minxc.emp.form.api.model.FormCategory;
 import org.minxc.emp.form.api.model.FormType;
-import org.minxc.emp.form.api.model.IFormDef;
+import org.minxc.emp.form.api.model.FormDefinition;
 import org.minxc.emp.form.api.service.FormService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -122,7 +122,7 @@ public class DefaultBpmFlowDataAccessor implements BpmFlowDataAccessor {
 		BpmForm form = flowData.getForm();
 		if (FormCategory.INNER.equals((Object) form.getType())) {
 			Map dataMap = this.aH.a(permission, defId);
-			IFormDef formDef = this.aF.getByFormKey(form.getFormValue());
+			FormDefinition formDef = this.aF.getByFormKey(form.getFormValue());
 			if (formDef == null) {
 				throw new BusinessException(form.getFormValue(), BpmStatusCode.FLOW_FORM_LOSE);
 			}
@@ -144,7 +144,7 @@ public class DefaultBpmFlowDataAccessor implements BpmFlowDataAccessor {
 		if (FormCategory.INNER.equals((Object) form.getType())) {
 			Map dataModel = this.aH.a(businessPermision, instance);
 			flowData.setDataMap(dataModel);
-			IFormDef formDef = this.aF.getByFormKey(form.getFormValue());
+			FormDefinition formDef = this.aF.getByFormKey(form.getFormValue());
 			if (formDef == null) {
 				throw new BusinessException(form.getFormValue(), BpmStatusCode.FLOW_FORM_LOSE);
 			}

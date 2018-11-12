@@ -13,7 +13,7 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
  * 
 * 项目名称：system-impl   
 * 类名称：DataDictManager   
-* 类描述： 数据字典 Manager处理接口  
+* 类 数据字典 Manager处理接口  
 * 创建人：Xianchang.min   
 * 创建时间：2018年9月2日 下午5:37:57   
 * 修改人：Xianchang.min   

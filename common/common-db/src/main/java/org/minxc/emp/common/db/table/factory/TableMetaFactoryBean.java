@@ -8,13 +8,13 @@ import org.springframework.jdbc.core.JdbcTemplate;
 /**
  * TableOperator factorybean，用户创建ITableOperator对象。
  *
- * <pre>
+ * 
  * 配置文件：app-beans.xml
  * &lt;bean id="tableOperator" class="org.minxc.emp.common.db.table.factory.TableOperatorFactoryBean">
  * 		&lt;property name="dbType" value="${jdbc.dbType}"/>
  * 		&lt;property name="jdbcTemplate" ref="jdbcTemplate"/>
  * &lt;/bean>
- * </pre>
+ * 
  *
  * @author ray
  */

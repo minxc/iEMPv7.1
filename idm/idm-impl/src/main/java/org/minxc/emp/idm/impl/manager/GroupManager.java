@@ -6,7 +6,7 @@ import org.minxc.emp.common.manager.Manager;
 import java.util.List;
 
 /**
- * 描述：组织架构 处理接口
+ * 组织架构 处理接口
  */
 public interface GroupManager extends Manager<String, GroupEntity> {
 	/**

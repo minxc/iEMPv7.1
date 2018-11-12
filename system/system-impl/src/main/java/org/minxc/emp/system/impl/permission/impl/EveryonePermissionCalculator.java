@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import com.alibaba.fastjson.JSONObject;
 
 /**
- * 描述：所有人
+ * 所有人
  */
 @Service
 public class EveryonePermissionCalculator implements IPermissionCalculator {

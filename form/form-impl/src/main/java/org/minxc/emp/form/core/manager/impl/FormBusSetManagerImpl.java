@@ -10,9 +10,9 @@ import org.springframework.stereotype.Service;
 
 
 /**
- * <pre>
- * 描述：form_bus_set 处理实现类
- * </pre>
+ * 
+ * form_bus_set 处理实现类
+ * 
  */
 @Service("formBusSetManager")
 public class FormBusSetManagerImpl extends CommonManager<String, FormBusSet> implements FormBusSetManager {

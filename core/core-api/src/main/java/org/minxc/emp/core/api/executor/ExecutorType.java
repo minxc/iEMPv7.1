@@ -3,7 +3,7 @@ package org.minxc.emp.core.api.executor;
  *
  * 项目名称：base-intf
  * 类名称：ExecutorType
- * 类描述：   执行器类型
+ * 类   执行器类型
  * 创建人：Xianchang.min
  * 创建时间：2018年8月21日 下午10:50:21
  * 修改人：Xianchang.min

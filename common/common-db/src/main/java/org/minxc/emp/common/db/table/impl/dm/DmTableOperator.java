@@ -16,8 +16,8 @@ import java.util.Map;
 /**
  * 达梦 数据库表操作的接口实现。
  *
- * <pre>
- * </pre>
+ * 
+ * 
  */
 public class DmTableOperator extends BaseTableOperator {
 

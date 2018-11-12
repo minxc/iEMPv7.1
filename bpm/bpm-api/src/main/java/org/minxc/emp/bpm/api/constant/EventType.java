@@ -1,7 +1,7 @@
 package org.minxc.emp.bpm.api.constant;
 
 /**
- * 描述：事件类型,如节点创建事件,节点结束事件,任务创建事件,任务结束事件等
+ * 事件类型,如节点创建事件,节点结束事件,任务创建事件,任务结束事件等
  * 现在一般供插件开发使用，在各个Bpmn Listener的实现中设置。
  */
 public enum EventType {

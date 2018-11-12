@@ -9,7 +9,7 @@ import org.minxc.emp.core.api.model.IdModel;
 
 
 /**
- * 描述：form_bus_set 实体对象
+ * form_bus_set 实体对象
  */
 public class FormBusSet implements IdModel {
 

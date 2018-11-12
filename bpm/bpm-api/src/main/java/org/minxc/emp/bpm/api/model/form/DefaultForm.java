@@ -8,7 +8,7 @@ import org.minxc.emp.form.api.model.FormCategory;
  * 
 * 项目名称：bpm-api   
 * 类名称：DefaultForm   
-* 类描述：   
+* 类   
 * 创建人：Xianchang.min   
 * 创建时间：2018年8月29日 下午10:29:12   
 * 修改人：Xianchang.min   

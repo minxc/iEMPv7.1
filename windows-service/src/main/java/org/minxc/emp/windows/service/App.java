@@ -8,7 +8,7 @@ import java.util.Date;
 /**      
 * 项目名称：windows-service   
 * 类名称：App   
-* 类描述：  Windows服务入口类
+* 类  Windows服务入口类
 * 创建人：Xianchang.min   
 * 创建时间：2018年9月2日 上午11:59:40   
 * 修改人：Xianchang.min   

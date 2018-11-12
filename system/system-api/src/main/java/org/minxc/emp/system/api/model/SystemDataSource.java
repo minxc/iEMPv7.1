@@ -2,7 +2,7 @@ package org.minxc.emp.system.api.model;
 
 
 /**
- * 描述：系统数据源
+ * 系统数据源
  * 日期:2018年1月29日 上午10:21:25
  */
 public interface SystemDataSource {
@@ -29,9 +29,9 @@ public interface SystemDataSource {
     public String getDesc();
 
     /**
-     * <pre>
+     * 
      * 数据库类型 枚举在com.dstz.base.api.db.DbType 的key
-     * </pre>
+     * 
      *
      * @return
      */

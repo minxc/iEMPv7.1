@@ -10,7 +10,7 @@ import java.util.List;
  * 
 * 项目名称：base-intf   
 * 类名称：RequestPage   
-* 类描述：分页请求参数   
+* 类分页请求参数   
 * 创建人：Xianchang.min   
 * 创建时间：2018年8月21日 下午11:00:27   
 * 修改人：Xianchang.min   

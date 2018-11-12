@@ -11,7 +11,7 @@ import org.minxc.emp.biz.api.service.IBusinessDataService;
 import org.minxc.emp.core.util.BeanUtils;
 import org.minxc.emp.core.util.StringUtil;
 import org.minxc.emp.core.util.ThreadMsgUtil;
-import org.minxc.emp.form.api.model.IFormDef;
+import org.minxc.emp.form.api.model.FormDefinition;
 import org.minxc.emp.form.core.manager.FormBusManager;
 import org.minxc.emp.form.core.manager.FormBusSetManager;
 import org.minxc.emp.form.core.manager.FormDefManager;
@@ -24,9 +24,9 @@ import org.springframework.stereotype.Service;
 import com.alibaba.fastjson.JSONArray;
 
 /**
- * <pre>
- * 描述：form_bus_set 处理实现类
- * </pre>
+ * 
+ * form_bus_set 处理实现类
+ * 
  */
 @Service("formBusManager")
 public class FormBusManagerImpl implements FormBusManager {
@@ -62,7 +62,7 @@ public class FormBusManagerImpl implements FormBusManager {
     @Override
     public void saveData(String formKey, String json) {
 
-        IFormDef form = null;// formDefManager.getByFormKey(formKey);
+        FormDefinition form = null;// formDefManager.getByFormKey(formKey);
         String boCode = null;// form.getBoCodes();
 
         IBusinessData bizData = null;//bizDataService.getBusDataByBoData(boCode, JSON.parseObject(json));
@@ -97,7 +97,7 @@ public class FormBusManagerImpl implements FormBusManager {
 
     @Override
     public void removeByIds(String[] aryIds, String formKey) {
-        IFormDef form = null;// formDefManager.getByFormKey(formKey);
+        FormDefinition form = null;// formDefManager.getByFormKey(formKey);
         String boCode = null;// form.getBoCodes();
 
         //bizDataService.removeBusData(boCode, aryIds);
@@ -105,7 +105,7 @@ public class FormBusManagerImpl implements FormBusManager {
 
     @Override
     public JSONArray getList(String formKey, Map<String, Object> param) {
-        IFormDef form = null;// formDefManager.getByFormKey(formKey);
+        FormDefinition form = null;// formDefManager.getByFormKey(formKey);
         String boCode = null;// form.getBoCodes();
 
         return null; //bizDataService.getDataList(boCode, param);

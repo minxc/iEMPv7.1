@@ -37,7 +37,7 @@ import java.util.Map;
 /**      
 * 项目名称：core-impl   
 * 类名称：ApplicationContextUtil   
-* 类描述：系统进行上下文查找Bean工具类,系统组件的使用
+* 类系统进行上下文查找Bean工具类,系统组件的使用
 * 创建人：Xianchang.min   
 * 创建时间：2018年8月24日 上午12:39:36   
 * 修改人：Xianchang.min   

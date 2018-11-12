@@ -4,7 +4,7 @@ package org.minxc.emp.form.api.constant;
  * 
 * 项目名称：form-api   
 * 类名称：FormCustomDialogObjectType   
-* 类描述：   FormCustomDialog中的objType枚举
+* 类   FormCustomDialog中的objType枚举
 * 创建人：Xianchang.min   
 * 创建时间：2018年10月27日 下午8:36:06   
 * 修改人：Xianchang.min   
@@ -40,9 +40,9 @@ public enum FormCustomDialogObjectType {
 	}
 
 	/**
-	 * <pre>
+	 * 
 	 * 根据key来判断是否跟当前一致
-	 * </pre>
+	 * 
 	 * 
 	 * @param key
 	 * @return

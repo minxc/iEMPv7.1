@@ -21,7 +21,7 @@ package org.minxc.emp.core.api.query;
  * 
 * 项目名称：core-api   
 * 类名称：SortDirection   
-* 类描述：   数据库查询排序方式
+* 类   数据库查询排序方式
 * 创建人：Xianchang.min   
 * 创建时间：2018年8月24日 下午9:21:02   
 * 修改人：Xianchang.min   
@@ -58,9 +58,9 @@ public enum SortDirection {
 	}
 
 	/**
-	 * <pre>
+	 * 
 	 * 根据key来判断是否跟当前一致
-	 * </pre>
+	 * 
 	 *
 	 * @param key
 	 * @return

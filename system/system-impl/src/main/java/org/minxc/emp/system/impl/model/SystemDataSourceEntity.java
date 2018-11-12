@@ -43,10 +43,10 @@ public class SystemDataSourceEntity extends AbstractCommonModel implements Syste
     @NotEmpty
     private String classPath;
     /**
-     * <pre>
+     * 
      * 属性字段json，为了简单就以json格式入库就行
      * 因为这个对象也不常用，这样保存是可以的，对于常用对象这样就不建议用这个了
-     * </pre>
+     * 
      */
     @NotEmpty
     private String attributesJson;

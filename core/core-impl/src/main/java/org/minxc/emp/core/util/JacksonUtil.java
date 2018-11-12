@@ -38,7 +38,7 @@ import com.fasterxml.jackson.dataformat.xml.XmlMapper;
  * 
 * 项目名称：core-impl   
 * 类名称：JacksonUtil   
-* 类描述：   JacksonUtil
+* 类   JacksonUtil
 * 创建人：Xianchang.min   
 * 创建时间：2018年8月24日 下午8:48:57   
 * 修改人：Xianchang.min   
@@ -521,12 +521,12 @@ public class JacksonUtil {
 //    }
 
     /**
-     * <pre>
+     * 
      * JSONArray转成JSONObject
      * eg:
      * [{id:"1",name:"a"},{id:"2",name:"b"}] 当keyName设置为id是，转换成
      * {1:{id:"1",name:"a"},2:{id:"2",name:"b"}}
-     * </pre>
+     * 
      *
      * @param jsonArray
      * @param keyName   :以哪个字段为key
@@ -544,13 +544,13 @@ public class JacksonUtil {
 //    }
 
     /**
-     * <pre>
+     * 
      * 把jsonObject 转到jsonArray,通常用于以下这种情况
      * 为了保证jsonArray里的某个值是唯一的所以先用jsonObject来保存着
      * eg:
      * {a:{id:1,name:a},b:{id:2,name:b}}
      * 转成：[{id:1,name:a},{id:2,name:b}]
-     * </pre>
+     * 
      *
      * @param jsonObject
      * @return JSONArray
@@ -566,9 +566,9 @@ public class JacksonUtil {
 //    }
 
     /**
-     * <pre>
+     * 
      * 优化了JSON.parseObject()方法
-     * </pre>
+     * 
      *
      * @param jsonStr
      * @param cls
@@ -582,9 +582,9 @@ public class JacksonUtil {
 //    }
 
     /**
-     * <pre>
+     * 
      * 优化了JSON.parseArray()方法
-     * </pre>
+     * 
      *
      * @param jsonStr
      * @param cls
@@ -598,9 +598,9 @@ public class JacksonUtil {
 //    }
 
     /**
-     * <pre>
+     * 
      * 优化了JSON.toJSONString()方法
-     * </pre>
+     * 
      *
      * @param obj
      * @return

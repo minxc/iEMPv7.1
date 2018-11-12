@@ -34,7 +34,7 @@ import org.apache.commons.io.IOUtils;
 /**      
 * 项目名称：core-impl   
 * 类名称：CryptoUtils   
-* 类描述：   
+* 类   
 * 创建人：Xianchang.min   
 * 创建时间：2018年8月24日 下午1:16:55   
 * 修改人：Xianchang.min   

@@ -23,9 +23,9 @@ import org.springframework.stereotype.Service;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * <pre>
- * 描述：SYS_PROPERTIES 处理实现类
- * </pre>
+ * 
+ * SYS_PROPERTIES 处理实现类
+ * 
  */
 
 @Slf4j

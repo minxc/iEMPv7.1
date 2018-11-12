@@ -8,13 +8,13 @@ import org.minxc.emp.biz.api.model.IBusinessData;
 
 
 /**
- * <pre>
- * 描述：form_bus_set 处理接口
+ * 
+ * form_bus_set 处理接口
  * 构建组：x5-bpmx-platform
  * 作者:jeff
  * 邮箱:jeff@jee-soft.cn
  * 日期:2016-08-23 13:54:13
- * </pre>
+ * 
  */
 public interface FormBusManager {
     /**

@@ -21,7 +21,7 @@ import javax.annotation.Resource;
 @RequestMapping("/org/role")
 public class RoleController extends CommonController<RoleEntity> {
     @Resource
-    RoleManager roleManager;
+    private RoleManager roleManager;
 
 
     @Override

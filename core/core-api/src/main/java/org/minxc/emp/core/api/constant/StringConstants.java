@@ -20,7 +20,7 @@ package org.minxc.emp.core.api.constant;
 /*     
 * 项目名称：core-api   
 * 类名称：StringConstants   
-* 类描述：   常用字符串常量 
+* 类   常用字符串常量 
 * 创建人：Xianchang.min   
 * 创建时间：2018年8月24日 下午9:12:13   
 * 修改人：Xianchang.min   

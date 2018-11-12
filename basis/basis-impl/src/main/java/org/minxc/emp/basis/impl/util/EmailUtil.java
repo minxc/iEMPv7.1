@@ -14,18 +14,18 @@ import org.minxc.emp.core.util.AppContextUtil;
 
 /**
  * 这个类用于发送邮件。
- * <pre>
- * </pre>
+ * 
+ * 
  */
 public class EmailUtil {
 
 
     /**
      * 发送邮件。
-     * <pre>
+     * 
      * 	调用方法：
      * 	EmailUtil.sendEmail("收信人地址","抄送人地址","秘密抄送","发送人地址","主题","邮件内容");
-     * </pre>
+     * 
      *
      * @param to      收件人
      * @param cc      抄送人
@@ -62,10 +62,10 @@ public class EmailUtil {
 
     /**
      * 发送邮件。
-     * <pre>
+     * 
      * 	调用方法：
      * 	EmailUtil.sendEmail("收信人地址","抄送人地址","秘密抄送","发送人地址","主题","邮件内容");
-     * </pre>
+     * 
      *
      * @param to      收件人
      * @param from    发件人

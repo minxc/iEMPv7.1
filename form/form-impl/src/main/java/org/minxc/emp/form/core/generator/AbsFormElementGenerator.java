@@ -143,7 +143,7 @@ public abstract class AbsFormElementGenerator {
 	
 	
 	/**
-	 * <pre>
+	 * 
 	 * 获取子表的路径
 	 * 一直向上递归、若上级为主表、或者一对多的子表则停止。
 	 * eg: mian.subaList[1].subbList[1].name  那subb的path为 subbList
@@ -151,7 +151,7 @@ public abstract class AbsFormElementGenerator {
 	 * eg: main.subaList[1].subb.name 那 subb的path 为 suba.subb.name
 	 * eg: main.suba.subb.name 那subb的path为 mian.suba.subb.name
 	 * 子表会存在单独作用域所以查询到子表那里即可
-	 * </pre>
+	 * 
 	 * @param relation
 	 * @return
 	 */

@@ -9,7 +9,7 @@ import org.minxc.emp.idm.api.model.UserRole;
  * 
 * 项目名称：idm-impl   
 * 类名称：UserRoleEntity   
-* 类描述： 用户角色管理 实体对象  
+* 类 用户角色管理 实体对象  
 * 创建人：Xianchang.min   
 * 创建时间：2018年9月4日 下午11:47:46   
 * 修改人：Xianchang.min   

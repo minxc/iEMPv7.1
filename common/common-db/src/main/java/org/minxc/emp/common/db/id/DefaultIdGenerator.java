@@ -13,7 +13,17 @@ import java.sql.SQLException;
 import javax.annotation.Resource;
 
 /**
- * ID Generator
+ * 
+* 项目名称：common-db   
+* 类名称：DefaultIdGenerator   
+* 类   ID生成器
+* 创建人：Xianchang.min   
+* 创建时间：2018年11月7日 下午7:40:35   
+* 修改人：Xianchang.min   
+* 修改时间：2018年11月7日 下午7:40:35   
+* 修改备注：   
+* @version  1.0  
+*
  */
 @Slf4j
 public class DefaultIdGenerator implements IdGenerator, InitializingBean {
@@ -81,7 +91,7 @@ public class DefaultIdGenerator implements IdGenerator, InitializingBean {
     @SuppressWarnings({"unchecked", "rawtypes"})
     private void init() {
     	log.info("defaultIdGenerator is initilizaing ....");
-        String sql = "select * from YMMG_DB_ID_GENERATOR where MACHINE=?";
+        String sql = "SELECT * FROM YMMG_DB_ID_GENERATOR where MACHINE=?";
         //检查该机器是否已经存在增长的键值记录
         try {
             jdbcTemplate.queryForObject(sql, new RowMapper() {
@@ -96,7 +106,7 @@ public class DefaultIdGenerator implements IdGenerator, InitializingBean {
             genNextDbIds();
         } catch (Exception ex) {
         	log.error(ex.toString());
-            String maxSql = "select max(ID) from YMMG_DB_ID_GENERATOR";
+            String maxSql = "SELECT MAX(ID) FROM YMMG_DB_ID_GENERATOR";
             Integer maxResult = jdbcTemplate.queryForObject(maxSql, Integer.class);
             if (maxResult == null || maxResult == 0) {
                 maxResult = 1;

@@ -7,9 +7,9 @@ import org.minxc.emp.form.core.manager.FormCustDialogManager;
 
 
 /**
- * <pre>
- * 描述：combinate_dialog 实体对象
- * </pre>
+ * 
+ * combinate_dialog 实体对象
+ * 
  */
 public class FormCombinateDialog implements IdModel {
 	

@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
- * 描述：自定义对话框管理
+ * 自定义对话框管理
  */
 @Controller
 @RequestMapping("/form/formTemplate/")
@@ -30,9 +30,9 @@ public class FormTemplateController extends GenericController {
 	FormTemplateManager formTemplateManager;
 
 	/**
-	 * <pre>
+	 * 
 	 * formTemplateEdit.html的save后端
-	 * </pre>
+	 * 
 	 *
 	 * @param request
 	 * @param response
@@ -54,10 +54,10 @@ public class FormTemplateController extends GenericController {
 	}
 
 	/**
-	 * <pre>
+	 * 
 	 * 获取formTemplate的后端
 	 * 目前支持根据id 获取formTemplate
-	 * </pre>
+	 * 
 	 *
 	 * @param request
 	 * @param response
@@ -96,9 +96,9 @@ public class FormTemplateController extends GenericController {
 	}
 
 	/**
-	 * <pre>
+	 * 
 	 * 批量删除
-	 * </pre>
+	 * 
 	 *
 	 * @param request
 	 * @param response

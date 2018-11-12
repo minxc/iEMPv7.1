@@ -7,7 +7,7 @@ package org.minxc.emp.core.cache;
 /**      
 * 项目名称：core-cache   
 * 类名称：Cache   
-* 类描述： 缓存操作接口   定义了增加缓存，删除缓存，清除缓存，读取缓存接口
+* 类 缓存操作接口   定义了增加缓存，删除缓存，清除缓存，读取缓存接口
 * 创建人：Xianchang.min   
 * 创建时间：2018年10月1日 下午2:51:55   
 * 修改人：Xianchang.min   

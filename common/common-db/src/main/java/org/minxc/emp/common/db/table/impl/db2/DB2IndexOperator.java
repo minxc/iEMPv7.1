@@ -19,8 +19,8 @@ import java.util.Map;
 /**
  * DB2 索引操作的实现
  *
- * <pre>
- * </pre>
+ * 
+ * 
  */
 public class DB2IndexOperator extends BaseIndexOperator {
 

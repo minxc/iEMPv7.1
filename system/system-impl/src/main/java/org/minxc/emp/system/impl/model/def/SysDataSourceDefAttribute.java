@@ -6,7 +6,7 @@ import java.io.Serializable;
 import javax.validation.constraints.NotEmpty;
 
 /**
- * 描述：SysDataSourceDef的属性字段，SysDataSource也直接复用了
+ * SysDataSourceDef的属性字段，SysDataSource也直接复用了
  */
 public class SysDataSourceDefAttribute implements Serializable {
 	

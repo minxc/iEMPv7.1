@@ -36,11 +36,11 @@ public interface BpmForm extends Serializable{
 
     /**
      * 获取表单值
-     * <pre>
+     * 
      * 不同类型的表单该字段的值不一样：
      * 1、INNER（在线表单）：存放表单key
      * 2、FRAME（以iframe方式嵌入的表单）：存放表单的url
-     * </pre>
+     * 
      *
      * @return
      */

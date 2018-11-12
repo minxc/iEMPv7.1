@@ -6,7 +6,7 @@ import javax.annotation.Resource;
 
 import org.minxc.emp.form.core.dao.FormDefDao;
 import org.minxc.emp.form.core.manager.FormDefManager;
-import org.minxc.emp.form.core.model.FormDef;
+import org.minxc.emp.form.core.model.FormDefinitionImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,19 +24,19 @@ import org.minxc.emp.system.api.service.ISysTreeNodeService;
  * @time 2018-03-19 20:30:46
  */
 @Service("formDefManager")
-public class FormDefManagerImpl extends CommonManager<String, FormDef> implements FormDefManager {
+public class FormDefManagerImpl extends CommonManager<String, FormDefinitionImpl> implements FormDefManager {
 	@Resource
 	FormDefDao formDefDao;
 	@Autowired
 	ISysTreeNodeService sysTreeNodeService;
 
 	@Override
-	public FormDef getByKey(String key) {
+	public FormDefinitionImpl getByKey(String key) {
 		return formDefDao.getByKey(key);
 	}
 
 	@Override
-	public void saveBackupHtml(FormDef formDef) {
+	public void saveBackupHtml(FormDefinitionImpl formDef) {
 		String formDefPath = PropertiesUtil.getFormDefBackupPath();
 		if (StringUtil.isEmpty(formDefPath)) {
 			return;
@@ -48,7 +48,7 @@ public class FormDefManagerImpl extends CommonManager<String, FormDef> implement
 	}
 
 	@Override
-	public String getBackupHtml(FormDef formDef) {
+	public String getBackupHtml(FormDefinitionImpl formDef) {
 		String formDefPath = PropertiesUtil.getFormDefBackupPath();
 		if (StringUtil.isNotEmpty(formDefPath)) {
 			SystemTreeNode node = sysTreeNodeService.getById(formDef.getGroupId());

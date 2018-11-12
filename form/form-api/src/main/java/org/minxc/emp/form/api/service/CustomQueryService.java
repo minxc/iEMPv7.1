@@ -1,8 +1,3 @@
-/**
- * 描述：TODO
- * 包名：com.dstz.platform.customquery.service
- * 文件名：CustomQueryService.java
- */
 package org.minxc.emp.form.api.service;
 
 import java.util.List;

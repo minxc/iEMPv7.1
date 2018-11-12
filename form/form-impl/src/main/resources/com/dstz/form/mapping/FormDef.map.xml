@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.minxc.emp.form.core.dao.FormDefDao">
-    <resultMap id="FormDef" type="org.minxc.emp.form.core.model.FormDef">
+    <resultMap id="FormDef" type="org.minxc.emp.form.core.model.FormDefinitionImpl">
         <id property="id" column="id_" jdbcType="VARCHAR"/>
         <result property="type" column="type_" jdbcType="VARCHAR"/>
         <result property="key" column="key_" jdbcType="VARCHAR"/>
@@ -20,7 +20,7 @@
         <result property="delete" column="delete_" jdbcType="NUMERIC"/>
     </resultMap>
 
-    <insert id="create" parameterType="org.minxc.emp.form.core.model.FormDef">
+    <insert id="create" parameterType="org.minxc.emp.form.core.model.FormDefinitionImpl">
 		INSERT INTO form_def
 		(id_,type_,key_,name_,desc_,group_id_,group_name_,bo_key_,bo_name_,html_,create_time_,create_by_,update_time_,update_by_,version_,delete_)
 		VALUES 
@@ -48,7 +48,7 @@
         </if>
     </select>
 
-    <update id="update" parameterType="org.minxc.emp.form.core.model.FormDef">
+    <update id="update" parameterType="org.minxc.emp.form.core.model.FormDefinitionImpl">
 		UPDATE form_def SET
 		type_=#{type,jdbcType=VARCHAR},
 		key_=#{key,jdbcType=VARCHAR},

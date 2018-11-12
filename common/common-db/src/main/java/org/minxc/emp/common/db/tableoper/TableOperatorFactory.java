@@ -15,9 +15,9 @@ public class TableOperatorFactory {
 	}
 
 	/**
-	 * <pre>
+	 * 
 	 * 构建一个TableOperator
-	 * </pre>
+	 * 
 	 *
 	 * @param type
 	 * @param table

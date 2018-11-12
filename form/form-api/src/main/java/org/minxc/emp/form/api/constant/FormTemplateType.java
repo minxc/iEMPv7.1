@@ -1,15 +1,12 @@
 package org.minxc.emp.form.api.constant;
 
 /**
- * <pre>
- * 描述：FormTemplate的type枚举
- * 作者:aschs
- * 邮箱:aschs@qq.com
- * 日期:2018年3月8日 上午10:25:38
- * 版权:summer
- * </pre>
+ * 
+ * FormTemplate的type枚举
+ * 
  */
 public enum FormTemplateType {
+	
 	/**
 	 * 主表模板
 	 */
@@ -42,9 +39,9 @@ public enum FormTemplateType {
 	}
 
 	/**
-	 * <pre>
+	 * 
 	 * 根据key来判断是否跟当前一致
-	 * </pre>
+	 * 
 	 * 
 	 * @param key
 	 * @return

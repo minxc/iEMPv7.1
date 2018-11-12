@@ -84,9 +84,9 @@ public class MysqlTableOperator extends TableOperator {
 	}
 
 	/**
-	 * <pre>
+	 * 
 	 * 把column解析成Sql
-	 * </pre>
+	 * 
 	 *
 	 * @param column
 	 * @return

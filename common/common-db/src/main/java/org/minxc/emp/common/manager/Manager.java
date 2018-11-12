@@ -10,7 +10,7 @@ import java.util.List;
  * 
 * 项目名称：common-db   
 * 类名称：Manager   
-* 类描述： 业务类管理实体类接口  
+* 类 业务类管理实体类接口  
 * 创建人：Xianchang.min   
 * 创建时间：2018年9月3日 下午8:09:12   
 * 修改人：Xianchang.min   

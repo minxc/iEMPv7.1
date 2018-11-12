@@ -7,7 +7,7 @@ import javax.validation.constraints.NotEmpty;
 import org.minxc.emp.core.impl.model.AbstractCommonModel;
 
 /**
- * 描述：系统树
+ * 系统树
  */
 public class TreeEntity extends AbstractCommonModel {
 	private static final long serialVersionUID = 7359943904089818902L;

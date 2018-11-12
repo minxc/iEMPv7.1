@@ -15,7 +15,7 @@ import javax.transaction.Transaction;
 
 
 /**
- * 描述：jdbc的工具类
+ * jdbc的工具类
  * ps:
  * 目前主要是为了解决jta事务中ddl语句异常
  * executeWithTransaction
@@ -25,11 +25,11 @@ public class JdbcTemplateUtil {
 	protected static Logger LOG = LoggerFactory.getLogger(JdbcTemplateUtil.class);
 
 	/**
-	 * <pre>
+	 * 
 	 * 执行某个sql不需要任何事务保护
 	 * ps
 	 * 目前主要是为了解决jta事务中ddl语句异常
-	 * </pre>
+	 * 
 	 * 
 	 * @param jdbcTemplate
 	 * @param sql

@@ -14,7 +14,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 /**
- * 描述：数据库上传器
+ * 数据库上传器
  * 把流转成bytes放到数据库中
  */
 @Service

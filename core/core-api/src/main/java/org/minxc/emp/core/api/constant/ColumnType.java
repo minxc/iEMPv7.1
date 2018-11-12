@@ -24,7 +24,7 @@ import java.util.Arrays;
 /*     
 * 项目名称：core-api   
 * 类名称：ColumnType   
-* 类描述：  Column中的type枚举
+* 类  Column中的type枚举
 * 创建人：Xianchang.min   
 * 创建时间：2018年8月24日 下午9:15:34   
 * 修改人：Xianchang.min   
@@ -84,9 +84,9 @@ public enum ColumnType {
     }
 
     /**
-     * <pre>
+     * 
      * 根据key来判断是否跟当前一致
-     * </pre>
+     * 
      *
      * @param key
      * @return
@@ -96,9 +96,9 @@ public enum ColumnType {
     }
 
     /**
-     * <pre>
+     * 
      * 根据数据库的字段类型获取type
-     * </pre>
+     * 
      *
      * @param dbDataType 数据库的字段类型
      * @return

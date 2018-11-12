@@ -22,8 +22,8 @@ import java.util.Map.Entry;
 /**
  * SQLServer 视图操作的实现类。
  *
- * <pre>
- * </pre>
+ * 
+ * 
  */
 public class SQLServerViewOperator extends BaseViewOperator implements
         ViewOperator {

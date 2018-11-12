@@ -23,7 +23,7 @@ import org.minxc.emp.security.constant.PlatformSecurityConstants;
  * 
 * 项目名称：security-web   
 * 类名称：FilterInvocationSecurityMetadataSourceImpl   
-* 类描述：  根据当前的URL获取他上面分配的角色列表 
+* 类  根据当前的URL获取他上面分配的角色列表 
 * 创建人：Xianchang.min   
 * 创建时间：2018年10月2日 下午9:17:05   
 * 修改人：Xianchang.min   

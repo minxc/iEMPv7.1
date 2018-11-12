@@ -1,12 +1,12 @@
 package org.minxc.emp.biz.api.constant;
 /**
- * <pre> 
- * 描述：BusTableRelFkType中type属性的枚举
- * 作者:aschs
- * 邮箱:aschs@qq.com
+ *  
+ * BusTableRelFkType中type属性的枚举
+ * 
+ * 
  * 日期:2018年2月26日 下午3:22:03
- * 版权:summer
- * </pre>
+ * 
+ * 
  */
 public enum BusTableRelFkType {
 	/**
@@ -38,9 +38,9 @@ public enum BusTableRelFkType {
 	}
 
 	/**
-	 * <pre>
+	 * 
 	 * 根据key来判断是否跟当前一致
-	 * </pre>
+	 * 
 	 * 
 	 * @param key
 	 * @return

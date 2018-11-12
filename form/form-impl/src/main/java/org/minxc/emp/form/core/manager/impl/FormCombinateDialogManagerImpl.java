@@ -15,9 +15,9 @@ import org.springframework.stereotype.Service;
 
 
 /**
- * <pre>
- * 描述：combinate_dialog 处理实现类
- * </pre>
+ * 
+ * combinate_dialog 处理实现类
+ * 
  */
 @Service("combinateDialogManager")
 public class FormCombinateDialogManagerImpl extends CommonManager<String, FormCombinateDialog> implements FormCombinateDialogManager {

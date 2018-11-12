@@ -17,8 +17,8 @@ import java.util.Map.Entry;
 /**
  * MySQL 表元数据的实现类
  *
- * <pre>
- * </pre>
+ * 
+ * 
  */
 public class MySQLTableMetadata extends BaseTableMeta {
 

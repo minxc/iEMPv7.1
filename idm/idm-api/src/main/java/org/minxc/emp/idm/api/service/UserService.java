@@ -6,7 +6,7 @@ import org.minxc.emp.idm.api.model.UserRole;
 import java.util.List;
 
 /**
- * 描述：用户服务接口类
+ * 用户服务接口类
  */
 public interface UserService {
 

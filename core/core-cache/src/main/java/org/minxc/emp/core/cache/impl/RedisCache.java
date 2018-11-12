@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 /**      
 * 项目名称：core-cache   
 * 类名称：RedisCache   
-* 类描述：   
+* 类   
 * 创建人：Xianchang.min   
 * 创建时间：2018年10月1日 下午3:21:32   
 * 修改人：Xianchang.min   

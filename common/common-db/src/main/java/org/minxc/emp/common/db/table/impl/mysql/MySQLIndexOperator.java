@@ -20,8 +20,8 @@ import java.util.regex.Pattern;
 /**
  * MySQL 索引操作的实现
  *
- * <pre>
- * </pre>
+ * 
+ * 
  */
 public class MySQLIndexOperator extends BaseIndexOperator {
 

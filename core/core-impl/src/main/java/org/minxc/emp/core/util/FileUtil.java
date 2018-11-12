@@ -856,10 +856,10 @@ public class FileUtil {
     /**
      * 深度克隆对象。
      *
-     * <pre>
+     * 
      * 	将一个对象序列化一个内存数据组。
      *  在从数组中反序列化这个类。
-     * </pre>
+     * 
      *
      * @param obj
      * @return
@@ -941,9 +941,9 @@ public class FileUtil {
     }
     
     /**
-     * <pre>
+     * 
      * inputstream转file
-     * </pre>	
+     * 	
      * @param ins
      * @return
      */

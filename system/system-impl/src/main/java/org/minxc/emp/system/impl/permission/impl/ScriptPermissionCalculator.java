@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import com.alibaba.fastjson.JSONObject;
 
 /**
- * 描述：脚本
+ * 脚本
  */
 @Service
 public class ScriptPermissionCalculator implements IPermissionCalculator {

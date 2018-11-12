@@ -23,7 +23,7 @@ import com.alibaba.fastjson.JSON;
 /**      
 * 项目名称：cache-service   
 * 类名称：LayeringCache   
-* 类描述：   
+* 类   
 * 创建人：Xianchang.min   
 * 创建时间：2018年9月2日 下午7:11:36   
 * 修改人：Xianchang.min   

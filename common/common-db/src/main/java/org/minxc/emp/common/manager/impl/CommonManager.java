@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * 
 * 项目名称：common-db   
 * 类名称：CommonManager   
-* 类描述： 抽象实体业务管理类实现  
+* 类 抽象实体业务管理类实现  
 * 创建人：Xianchang.min   
 * 创建时间：2018年9月3日 下午8:09:36   
 * 修改人：Xianchang.min   

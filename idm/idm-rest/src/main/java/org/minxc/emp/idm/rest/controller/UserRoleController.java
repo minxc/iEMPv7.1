@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 public class UserRoleController extends CommonController<UserRoleEntity> {
 	
     @Resource
-    UserRoleManager userRoleManager;
+    private UserRoleManager userRoleManager;
 
     /**
      * 用户角色管理列表(分页条件查询)数据
@@ -73,9 +73,9 @@ public class UserRoleController extends CommonController<UserRoleEntity> {
         userRoleManager.create(userRole);
     }
 
-    /**
-     * 保存用户角色
-     */
+	/**
+	 * 保存用户角色
+	 */
     @RequestMapping("saveUserRole")
     @ErrorCatching
     public void saveUserRole(HttpServletRequest request, HttpServletResponse response) throws Exception {

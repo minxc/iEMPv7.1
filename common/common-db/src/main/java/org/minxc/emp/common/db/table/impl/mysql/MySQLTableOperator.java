@@ -16,8 +16,8 @@ import java.util.Map;
 /**
  * Mysql数据库表操作的实现。
  *
- * <pre>
- * </pre>
+ * 
+ * 
  */
 public class MySQLTableOperator extends BaseTableOperator {
 

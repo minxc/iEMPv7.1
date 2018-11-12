@@ -23,7 +23,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 /**
- * 描述：数据源 Manager处理实现类
+ * 数据源 Manager处理实现类
  */
 @Service
 public class SysDataSourceManagerImpl extends CommonManager<String, SystemDataSourceEntity> implements DataSourceManager {

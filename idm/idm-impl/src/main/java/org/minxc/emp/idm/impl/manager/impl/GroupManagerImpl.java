@@ -15,7 +15,7 @@ import org.minxc.emp.idm.impl.model.GroupEntity;
 import org.minxc.emp.idm.impl.model.UserEntity;
 
 /**
- * 描述：组织架构 处理实现类
+ * 组织架构 处理实现类
  */
 @Service("groupManager")
 public class GroupManagerImpl extends CommonManager<String, GroupEntity> implements GroupManager {

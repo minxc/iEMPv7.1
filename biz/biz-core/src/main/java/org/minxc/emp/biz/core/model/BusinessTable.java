@@ -46,9 +46,9 @@ public class BusinessTable extends TableEntity<BusinessColumn> implements Common
 
 	
 	/**
-	 * <pre>
+	 * 
 	 * 业务表的别名
-	 * </pre>
+	 * 
 	 * 
 	 * @return
 	 */
@@ -63,9 +63,9 @@ public class BusinessTable extends TableEntity<BusinessColumn> implements Common
 
 	
 	/**
-	 * <pre>
+	 * 
 	 * 数据源别名
-	 * </pre>
+	 * 
 	 * 
 	 * @return
 	 */
@@ -81,9 +81,9 @@ public class BusinessTable extends TableEntity<BusinessColumn> implements Common
 	
 	
 	/**
-	 * <pre>
+	 * 
 	 * 数据源名称
-	 * </pre>
+	 * 
 	 * @return
 	 */
 	@Override
@@ -139,9 +139,9 @@ public class BusinessTable extends TableEntity<BusinessColumn> implements Common
 	
 	
 	/**
-	 * <pre>
+	 * 
 	 * 字段
-	 * </pre>
+	 * 
 	 * 
 	 * @return
 	 */
@@ -159,9 +159,9 @@ public class BusinessTable extends TableEntity<BusinessColumn> implements Common
 	}
 
 	/**
-	 * <pre>
+	 * 
 	 * 获取不包含主键的字段
-	 * </pre>
+	 * 
 	 * @return
 	 */
 	@Override
@@ -194,12 +194,12 @@ public class BusinessTable extends TableEntity<BusinessColumn> implements Common
 
 	
 	/**
-	 * <pre>
+	 * 
 	 * 获取表的初始化数据库的数据
 	 * 不包含主键
 	 * 字段取的是name
 	 * 其实就是获取字段的默认值
-	 * </pre>	
+	 * 	
 	 * @return
 	 */
 	@Override
@@ -212,12 +212,12 @@ public class BusinessTable extends TableEntity<BusinessColumn> implements Common
 	}
 	
 	/**
-	 * <pre>
+	 * 
 	 * 获取表的初始化数据
 	 * 不包含主键
 	 * 字段取的是key
 	 * 其实就是获取字段的默认值
-	 * </pre>	
+	 * 	
 	 * @return
 	 */
 	
@@ -260,9 +260,9 @@ public class BusinessTable extends TableEntity<BusinessColumn> implements Common
 	}
 
 	/**
-	 * <pre>
+	 * 
 	 * 根据字段key获取字段
-	 * </pre>	
+	 * 	
 	 * @param key
 	 * @return
 	 */

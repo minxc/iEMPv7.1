@@ -58,9 +58,9 @@ public interface QueryFilter {
 	 */
 	public void addParamsFilter(String key, Object obj);
 	/**
-	 * <pre>
+	 * 
 	 * 增加排序
-	 * </pre>
+	 * 
 	 * @param orderField
 	 * @param orderSeq
 	 */

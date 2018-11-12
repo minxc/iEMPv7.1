@@ -33,7 +33,7 @@ import org.springframework.transaction.annotation.Transactional;
 *    
 * 项目名称：bus-core   
 * 类名称：BusinessDataPersistenceDbService   
-* 类描述：   TODO:BusinessDataPersistenceDbService內部方法需要大規模的進行重新的梳理，各种匿名的方法和接口之间的转换需进行处理
+* 类   TODO:BusinessDataPersistenceDbService內部方法需要大規模的進行重新的梳理，各种匿名的方法和接口之间的转换需进行处理
 * 创建人：Xianchang.min   
 * 创建时间：2018年8月11日 下午6:18:25   
 * 修改人：Xianchang.min   

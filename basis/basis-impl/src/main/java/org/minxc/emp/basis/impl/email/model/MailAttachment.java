@@ -1,9 +1,9 @@
 package org.minxc.emp.basis.impl.email.model;
 
 /**
- * <pre>
- * 描述：邮件附件类
- * </pre>
+ * 
+ * 邮件附件类
+ * 
  */
 public class MailAttachment {
 

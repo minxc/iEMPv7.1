@@ -10,8 +10,8 @@ import java.util.Map;
 /**
  * 数据表操作接口。 对每一个数据库写一个实现，实现对不同数据库的统一操作。
  *
- * <pre>
- * </pre>
+ * 
+ * 
  */
 public interface ITableOperator extends DbType {
 

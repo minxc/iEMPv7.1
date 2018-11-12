@@ -6,7 +6,7 @@ import org.minxc.emp.core.spring.CustPropertyPlaceholderConfigurer;
  * 
 * 项目名称：base-core   
 * 类名称：PropertyUtil   
-* 类描述：  属性工具类 
+* 类  属性工具类 
 * 创建人：Xianchang.min   
 * 创建时间：2018年8月21日 下午11:25:21   
 * 修改人：Xianchang.min   
@@ -111,9 +111,9 @@ public class PropertiesUtil {
     }
     
     /**
-     * <pre>
+     * 
      * 获取表单备份地址
-     * </pre>
+     * 
      * @return
      */
     public static String getFormDefBackupPath() {

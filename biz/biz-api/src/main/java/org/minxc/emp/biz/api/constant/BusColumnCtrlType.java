@@ -2,9 +2,9 @@ package org.minxc.emp.biz.api.constant;
 
 /**
  * 
- * <pre>
+ * 
  * businessColumn业务字段的控件类型枚举
- * </pre>
+ * 
  */
 public enum BusColumnCtrlType {
 	/**
@@ -106,9 +106,9 @@ public enum BusColumnCtrlType {
 	}
 
 	/**
-	 * <pre>
+	 * 
 	 * 根据key来判断是否跟当前一致
-	 * </pre>
+	 * 
 	 * 
 	 * @param key
 	 * @return

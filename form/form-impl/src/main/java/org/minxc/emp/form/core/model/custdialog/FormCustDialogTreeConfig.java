@@ -6,7 +6,7 @@ import java.io.Serializable;
 import javax.validation.constraints.NotEmpty;
 
 /**
- * 描述：自定义对话框树形的配置信息
+ * 自定义对话框树形的配置信息
  * 日期:2018年1月17日 下午8:26:42
  */
 public class FormCustDialogTreeConfig implements Serializable {

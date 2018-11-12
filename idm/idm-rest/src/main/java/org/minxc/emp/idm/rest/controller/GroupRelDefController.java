@@ -18,15 +18,14 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
- * <pre>
- * 描述：组织关系定义 控制器类
- * </pre>
+ *  组织关系定义 控制器类
  */
 @RestController
 @RequestMapping("/org/groupRelDef")
 public class GroupRelDefController extends CommonController<GroupRelDefEntity> {
+	
     @Resource
-    GroupRelDefManager groupRelDefManager;
+    private GroupRelDefManager groupRelDefManager;
 
 
     @RequestMapping("getAllJson")

@@ -7,7 +7,7 @@ import javax.validation.constraints.NotEmpty;
 import org.minxc.emp.core.api.model.TreeModel;
 
 /**
- * 描述：系统
+ * 系统
  */
 public class SysDataDict implements TreeModel<SysDataDict>, Serializable {
 	/**

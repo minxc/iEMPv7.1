@@ -11,7 +11,7 @@ import java.io.InputStream;
 import java.util.List;
 
 /**
- * 项目名称：core-impl 类名称：JsonUtil 类描述： 创建人：Xianchang.min 创建时间：2018年10月1日 下午2:38:43
+ * 项目名称：core-impl 类名称：JsonUtil 类 创建人：Xianchang.min 创建时间：2018年10月1日 下午2:38:43
  * 修改人：Xianchang.min 修改时间：2018年10月1日 下午2:38:43 修改备注：
  * 
  * @version 1.0
@@ -192,12 +192,12 @@ public class JsonUtil {
 	}
 
 	/**
-	 * <pre>
+	 * 
 	 * JSONArray转成JSONObject
 	 * eg:
 	 * [{id:"1",name:"a"},{id:"2",name:"b"}] 当keyName设置为id是，转换成
 	 * {1:{id:"1",name:"a"},2:{id:"2",name:"b"}}
-	 * </pre>
+	 * 
 	 *
 	 * @param jsonArray
 	 * @param keyName   :以哪个字段为key
@@ -214,13 +214,13 @@ public class JsonUtil {
 	}
 
 	/**
-	 * <pre>
+	 * 
 	 * 把jsonObject 转到jsonArray,通常用于以下这种情况
 	 * 为了保证jsonArray里的某个值是唯一的所以先用jsonObject来保存着
 	 * eg:
 	 * {a:{id:1,name:a},b:{id:2,name:b}}
 	 * 转成：[{id:1,name:a},{id:2,name:b}]
-	 * </pre>
+	 * 
 	 *
 	 * @param jsonObject
 	 * @return JSONArray
@@ -235,9 +235,9 @@ public class JsonUtil {
 	}
 
 	/**
-	 * <pre>
+	 * 
 	 * 优化了JSON.parseObject()方法
-	 * </pre>
+	 * 
 	 *
 	 * @param jsonStr
 	 * @param cls
@@ -251,9 +251,9 @@ public class JsonUtil {
 	}
 
 	/**
-	 * <pre>
+	 * 
 	 * 优化了JSON.parseArray()方法
-	 * </pre>
+	 * 
 	 *
 	 * @param jsonStr
 	 * @param cls
@@ -267,9 +267,9 @@ public class JsonUtil {
 	}
 
 	/**
-	 * <pre>
+	 * 
 	 * 优化了JSON.toJSONString()方法
-	 * </pre>
+	 * 
 	 *
 	 * @param obj
 	 * @return

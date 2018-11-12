@@ -32,9 +32,9 @@ public class SystemDataSourceController extends GenericController {
     DataSourceManager sysDataSourceManager;
 
     /**
-     * <pre>
+     * 
      * 测试连接
-     * </pre>
+     * 
      *
      * @param request
      * @param response
@@ -58,9 +58,9 @@ public class SystemDataSourceController extends GenericController {
     }
 
     /**
-     * <pre>
+     * 
      * sysDataSourceEdit.html的save后端
-     * </pre>
+     * 
      *
      * @param request
      * @param response
@@ -80,10 +80,10 @@ public class SystemDataSourceController extends GenericController {
     }
 
     /**
-     * <pre>
+     * 
      * 获取sysDataSource的后端
      * 目前支持根据id 获取sysDataSource
-     * </pre>
+     * 
      *
      * @param request
      * @param response
@@ -102,9 +102,9 @@ public class SystemDataSourceController extends GenericController {
     }
 
     /**
-     * <pre>
+     * 
      * list页的后端
-     * </pre>
+     * 
      *
      * @param request
      * @param response
@@ -120,9 +120,9 @@ public class SystemDataSourceController extends GenericController {
     }
 
     /**
-     * <pre>
+     * 
      * 批量删除
-     * </pre>
+     * 
      *
      * @param request
      * @param response

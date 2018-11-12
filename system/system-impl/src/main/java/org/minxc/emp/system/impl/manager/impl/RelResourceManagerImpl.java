@@ -11,9 +11,9 @@ import org.minxc.emp.system.impl.model.ResourceLinkEntity;
 import org.springframework.stereotype.Service;
 
 /**
- * <pre>
- * 描述：关联资源 处理实现类
- * </pre>
+ * 
+ * 关联资源 处理实现类
+ * 
  */
 @Service("relResourceManager")
 public class RelResourceManagerImpl extends CommonManager<String, ResourceLinkEntity> implements RelResourceManager {

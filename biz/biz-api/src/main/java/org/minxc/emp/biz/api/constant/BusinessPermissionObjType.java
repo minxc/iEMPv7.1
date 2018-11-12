@@ -1,14 +1,14 @@
 package org.minxc.emp.biz.api.constant;
 
 /**
- * <pre>
+ * 
  *  
- * 描述：BusinessPermission的objType枚举
- * 作者:aschs
- * 邮箱:aschs@qq.com
+ * BusinessPermission的objType枚举
+ * 
+ * 
  * 日期:2018年4月22日 下午5:54:01
- * 版权:summer
- * </pre>
+ * 
+ * 
  */
 public enum BusinessPermissionObjType {
 
@@ -47,9 +47,9 @@ public enum BusinessPermissionObjType {
 	}
 
 	/**
-	 * <pre>
+	 * 
 	 * 根据key来判断是否跟当前一致
-	 * </pre>
+	 * 
 	 * 
 	 * @param key
 	 * @return

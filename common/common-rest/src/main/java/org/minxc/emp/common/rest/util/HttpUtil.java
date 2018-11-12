@@ -77,11 +77,11 @@ public class HttpUtil {
     }
 
     /**
-     * <pre>
+     * 
      * 压缩多个文件到一个zip下然后提供到页面下载
      * 目前常用于导出xml
      * 里面进行了1：写一个临时文件；2：打包；3：导出打包好的文件；4：删除临时文件
-     * </pre>
+     * 
      *
      * @param request
      * @param response
@@ -110,11 +110,11 @@ public class HttpUtil {
     }
 
     /**
-     * <pre>
+     * 
      * 压缩一个文件到压缩包下然后提供到页面下载
      * 目前常用于导出xml
      * 里面进行了1：写一个临时文件；2：打包；3：导出打包好的文件；4：删除临时文件
-     * </pre>
+     * 
      *
      * @param request
      * @param response

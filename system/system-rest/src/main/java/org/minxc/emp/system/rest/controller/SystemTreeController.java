@@ -33,9 +33,9 @@ public class SystemTreeController extends GenericController {
     SystemTreeNodeManager sysTreeNodeManager;
 
     /**
-     * <pre>
+     * 
      * sysTreeEdit.html的save后端
-     * </pre>
+     * 
      *
      * @param request
      * @param response
@@ -55,9 +55,9 @@ public class SystemTreeController extends GenericController {
     }
 
     /**
-     * <pre>
+     * 
      * 获取sysTree的后端
-     * </pre>
+     * 
      *
      * @param request
      * @param response
@@ -79,9 +79,9 @@ public class SystemTreeController extends GenericController {
     }
 
     /**
-     * <pre>
+     * 
      * list页的后端
-     * </pre>
+     * 
      *
      * @param request
      * @param response
@@ -97,9 +97,9 @@ public class SystemTreeController extends GenericController {
     }
 
     /**
-     * <pre>
+     * 
      * 批量删除
-     * </pre>
+     * 
      *
      * @param request
      * @param response

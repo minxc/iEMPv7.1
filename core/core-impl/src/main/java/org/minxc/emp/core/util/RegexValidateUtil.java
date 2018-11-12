@@ -3,7 +3,7 @@ package org.minxc.emp.core.util;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * @功能描述：字符串验证工具类
+ * @功能字符串验证工具类
  * @作者：Winston Yan
  * @邮箱：yancm@jee-soft.cn
  * @创建时间：2013-11-26 下午4:21:09

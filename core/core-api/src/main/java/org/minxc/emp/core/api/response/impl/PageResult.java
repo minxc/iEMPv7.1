@@ -7,7 +7,7 @@ import org.minxc.emp.core.api.model.PageList;
  * 
 * 项目名称：base-intf   
 * 类名称：PageResult   
-* 类描述： 分页请求结果
+* 类 分页请求结果
 * 创建人：Xianchang.min   
 * 创建时间：2018年8月21日 下午11:02:11   
 * 修改人：Xianchang.min   

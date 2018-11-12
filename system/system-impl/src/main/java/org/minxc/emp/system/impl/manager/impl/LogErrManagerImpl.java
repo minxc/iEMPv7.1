@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
  * 
 * 项目名称：system-impl   
 * 类名称：LogErrManagerImpl   
-* 类描述： 错误日志 处理实现类 
+* 类 错误日志 处理实现类 
 * 创建人：Xianchang.min   
 * 创建时间：2018年9月2日 下午4:22:28   
 * 修改人：Xianchang.min   

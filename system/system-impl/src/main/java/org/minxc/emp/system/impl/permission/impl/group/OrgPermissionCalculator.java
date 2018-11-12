@@ -4,7 +4,7 @@ import org.minxc.emp.system.impl.permission.impl.GroupPermissionCalculator;
 import org.springframework.stereotype.Service;
 
 /**
- * 描述：组织
+ * 组织
  */
 @Service
 public class OrgPermissionCalculator extends GroupPermissionCalculator {

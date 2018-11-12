@@ -2,13 +2,13 @@ package org.minxc.emp.biz.api.model;
 
 
 /**
- * <pre>
- * 描述：BusinessColumn对其他模块的支持
- * 作者:aschs
- * 邮箱:aschs@qq.com
+ * 
+ * BusinessColumn对其他模块的支持
+ * 
+ * 
  * 日期:2018年4月10日 下午6:10:28
- * 版权:summer
- * </pre>
+ * 
+ * 
  */
 public interface IBusinessColumn {
 	String getKey();
@@ -36,19 +36,19 @@ public interface IBusinessColumn {
 	IBusinessTable getTable();
 	
 	/**
-	 * <pre>
+	 * 
 	 * 获取字段的初始化值
 	 * 根据defaultValue和type映射成对象
-	 * </pre>
+	 * 
 	 * 
 	 * @return
 	 */
 	Object initValue();
 	
 	/**
-	 * <pre>
+	 * 
 	 * 把某个字符串按照字段类型转成真正的值
-	 * </pre>	
+	 * 	
 	 * @param str
 	 * @return
 	 */

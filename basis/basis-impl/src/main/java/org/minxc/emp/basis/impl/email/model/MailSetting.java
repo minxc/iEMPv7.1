@@ -3,9 +3,9 @@ package org.minxc.emp.basis.impl.email.model;
 import java.io.Serializable;
 
 /**
- * <pre>
- * 描述：邮箱设置实体类
- * </pre>
+ * 
+ * 邮箱设置实体类
+ * 
  */
 public class MailSetting implements Serializable {
     protected static final long serialVersionUID = -1563590072023033989L;

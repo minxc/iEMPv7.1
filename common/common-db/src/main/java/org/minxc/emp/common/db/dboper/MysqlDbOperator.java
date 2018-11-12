@@ -92,9 +92,9 @@ public class MysqlDbOperator extends DbOperator {
 	}
 
 	/**
-	 * <pre>
+	 * 
 	 * 根据name获取其字段信息
-	 * </pre>
+	 * 
 	 *
 	 * @param name （表名/视图名）
 	 * @return

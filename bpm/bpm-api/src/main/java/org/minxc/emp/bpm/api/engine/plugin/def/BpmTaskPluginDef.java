@@ -2,9 +2,9 @@ package org.minxc.emp.bpm.api.engine.plugin.def;
 
 
 /**
- * <pre>
- * 描述：节点插件定义插件
- * </pre>
+ * 
+ * 节点插件定义插件
+ * 
  */
 public interface BpmTaskPluginDef extends BpmPluginDef {
 

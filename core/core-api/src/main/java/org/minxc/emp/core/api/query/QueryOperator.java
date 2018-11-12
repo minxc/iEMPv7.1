@@ -4,7 +4,7 @@ package org.minxc.emp.core.api.query;
  *
  * 项目名称：base-intf
  * 类名称：QueryOperation
- * 类描述：   查询字段和值的操作类型枚举
+ * 类   查询字段和值的操作类型枚举
  * 创建人：Xianchang.min
  * 创建时间：2018年8月21日 下午10:54:26
  * 修改人：Xianchang.min
@@ -131,9 +131,9 @@ public enum QueryOperator {
     }
 
     /**
-     * <pre>
+     * 
      * 根据val来判断是否跟当前一致
-     * </pre>
+     * 
      *
      * @param val
      * @return

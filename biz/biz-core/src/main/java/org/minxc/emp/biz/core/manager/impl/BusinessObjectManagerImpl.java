@@ -29,7 +29,7 @@ import org.springframework.stereotype.Service;
 *    
 * 项目名称：bus-core   
 * 类名称：BusinessObjectManagerImpl   
-* 类描述：   TODO:BusinessObjectManagerImpl内部方法需要去猜测一下
+* 类   TODO:BusinessObjectManagerImpl内部方法需要去猜测一下
 * 创建人：Xianchang.min   
 * 创建时间：2018年8月11日 下午5:11:05   
 * 修改人：Xianchang.min   

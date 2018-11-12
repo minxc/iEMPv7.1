@@ -33,9 +33,9 @@ public class BusTableRel implements IBusTableRel, Serializable {
 
 	
 	/**
-	 * <pre>
+	 * 
 	 * 子级
-	 * </pre>
+	 * 
 	 * 
 	 * @return
 	 */
@@ -64,9 +64,9 @@ public class BusTableRel implements IBusTableRel, Serializable {
 	}
 
 	/**
-	 * <pre>
+	 * 
 	 * 业务表的key
-	 * </pre>
+	 * 
 	 * 
 	 * @return
 	 */
@@ -80,9 +80,9 @@ public class BusTableRel implements IBusTableRel, Serializable {
 	}
 
 	/**
-	 * <pre>
+	 * 
 	 * 业务表的描述
-	 * </pre>
+	 * 
 	 * 
 	 * @return
 	 */
@@ -96,9 +96,9 @@ public class BusTableRel implements IBusTableRel, Serializable {
 	}
 
 	/**
-	 * <pre>
+	 * 
 	 * 类型 枚举 BusTableRelType
-	 * </pre>
+	 * 
 	 * 
 	 * @return
 	 */
@@ -112,9 +112,9 @@ public class BusTableRel implements IBusTableRel, Serializable {
 	}
 	
 	/**
-	 * <pre>
+	 * 
 	 * 外键设置
-	 * </pre>
+	 * 
 	 * 
 	 * @return
 	 */
@@ -128,10 +128,10 @@ public class BusTableRel implements IBusTableRel, Serializable {
 	}
 
 	/**
-	 * <pre>
+	 * 
 	 * 获取busTableRel的list模式
 	 * 包含根节点
-	 * </pre>
+	 * 
 	 * 
 	 * @return
 	 */
@@ -174,9 +174,9 @@ public class BusTableRel implements IBusTableRel, Serializable {
 
 	
 	/**
-	 * <pre>
+	 * 
 	 * 以当前为根节点，递归获取指定tableKey
-	 * </pre>
+	 * 
 	 * 
 	 * @param tableKey
 	 * @return

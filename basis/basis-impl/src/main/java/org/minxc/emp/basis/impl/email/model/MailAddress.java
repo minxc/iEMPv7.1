@@ -1,9 +1,9 @@
 package org.minxc.emp.basis.impl.email.model;
 
 /**
- * <pre>
- * 描述：邮件自定义显示名及邮件地址辅助类
- * </pre>
+ * 
+ * 邮件自定义显示名及邮件地址辅助类
+ * 
  */
 public class MailAddress {
 

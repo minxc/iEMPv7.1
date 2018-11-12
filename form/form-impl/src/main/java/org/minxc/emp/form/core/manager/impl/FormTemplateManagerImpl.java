@@ -33,13 +33,13 @@ import com.alibaba.fastjson.JSONObject;
 
 
 /**
- * <pre>
- * 描述：FormTemplateManager的实现
- * 作者:aschs
- * 邮箱:aschs@qq.com
+ * 
+ * FormTemplateManager的实现
+ * 
+ * 
  * 日期:2018年3月8日 下午3:16:32
- * 版权:summer
- * </pre>
+ * 
+ * 
  */
 @Service
 public class FormTemplateManagerImpl extends CommonManager<String, FormTemplate> implements FormTemplateManager{

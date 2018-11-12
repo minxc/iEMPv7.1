@@ -9,7 +9,7 @@ import org.minxc.emp.common.manager.Manager;
 *    
 * 项目名称：bus-core   
 * 类名称：BusColumnCtrlManager   
-* 类描述：   列控制组件管理器（服务类）
+* 类   列控制组件管理器（服务类）
 * 创建人：Xianchang.min   
 * 创建时间：2018年8月11日 上午12:21:13   
 * 修改人：Xianchang.min   

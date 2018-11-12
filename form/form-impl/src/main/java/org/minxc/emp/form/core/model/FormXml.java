@@ -5,7 +5,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import org.minxc.emp.form.api.model.IFormDef;
+import org.minxc.emp.form.api.model.FormDefinition;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,8 +18,8 @@ import java.util.List;
 public class FormXml {
 
 
-    @XmlElement(name = "bpmForm", type = FormDef.class)
-    private IFormDef bpmForm;
+    @XmlElement(name = "bpmForm", type = FormDefinitionImpl.class)
+    private FormDefinition bpmForm;
 
     @XmlElement(name = "formBusSet", type = FormBusSet.class)
     private FormBusSet formBusSet;
@@ -38,7 +38,7 @@ public class FormXml {
     }
 
 
-    public IFormDef getBpmForm() {
+    public FormDefinition getBpmForm() {
         return bpmForm;
     }
  
@@ -52,7 +52,7 @@ public class FormXml {
     }
 
 
-    public void setBpmForm(IFormDef bpmForm) {
+    public void setBpmForm(FormDefinition bpmForm) {
         this.bpmForm = bpmForm;
     }
 

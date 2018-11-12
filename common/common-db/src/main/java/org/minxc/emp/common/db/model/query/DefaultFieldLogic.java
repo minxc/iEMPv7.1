@@ -12,7 +12,7 @@ import java.util.List;
  * 
 * 项目名称：common-db   
 * 类名称：DefaultFieldLogic   
-* 类描述：字段查询的条件
+* 类字段查询的条件
 * 创建人：Xianchang.min   
 * 创建时间：2018年9月2日 下午4:15:32   
 * 修改人：Xianchang.min   

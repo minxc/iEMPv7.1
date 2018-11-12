@@ -44,9 +44,9 @@ public class ThreadMapUtil {
 	}
 	
 	/**
-	 * <pre>
+	 * 
 	 * 获取某个值，为空时创建mappingFunction
-	 * </pre>	
+	 * 	
 	 * @param key
 	 * @param mappingFunction
 	 * @return

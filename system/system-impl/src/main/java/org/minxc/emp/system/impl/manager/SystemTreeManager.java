@@ -9,9 +9,9 @@ import org.minxc.emp.system.impl.model.TreeEntity;
  */
 public interface SystemTreeManager extends Manager<String, TreeEntity> {
     /**
-     * <pre>
+     * 
      * 根据别名获取对象
-     * </pre>
+     * 
      *
      * @param key
      * @return

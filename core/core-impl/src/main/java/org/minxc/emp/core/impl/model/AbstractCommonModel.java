@@ -27,7 +27,7 @@ import java.util.Date;
 /**      
 * 项目名称：base-core   
 * 类名称：AbstractCommonModel   
-* 类描述：   
+* 类   
 * 创建人：Xianchang.min   
 * 创建时间：2018年8月22日 下午11:46:33   
 * 修改人：Xianchang.min   

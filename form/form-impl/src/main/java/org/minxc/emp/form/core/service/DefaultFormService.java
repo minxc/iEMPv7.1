@@ -6,10 +6,10 @@ import java.util.Set;
 
 import javax.annotation.Resource;
 
-import org.minxc.emp.form.api.model.IFormDef;
+import org.minxc.emp.form.api.model.FormDefinition;
 import org.minxc.emp.form.api.service.FormService;
 import org.minxc.emp.form.core.manager.FormDefManager;
-import org.minxc.emp.form.core.model.FormDef;
+import org.minxc.emp.form.core.model.FormDefinitionImpl;
 import org.springframework.stereotype.Service;
 @Service("formService")
 public class DefaultFormService implements FormService {
@@ -17,14 +17,14 @@ public class DefaultFormService implements FormService {
     @Resource
     private FormDefManager formDefManager;
 
-    public IFormDef getByFormKey(String formKey) {
-        IFormDef form = formDefManager.getByKey(formKey);
+    public FormDefinition getByFormKey(String formKey) {
+        FormDefinition form = formDefManager.getByKey(formKey);
         return form;
     }
 
 
     @Override
-    public IFormDef getByFormId(String formId) {
+    public FormDefinition getByFormId(String formId) {
         return formDefManager.get(formId);
     }
 
@@ -33,7 +33,7 @@ public class DefaultFormService implements FormService {
     public String getFormExportXml(Set<String> formKeys) {
         List<String> id = new ArrayList<String>();
         for (String formKey : formKeys) {
-            FormDef form =  formDefManager.getByKey(formKey);
+            FormDefinitionImpl form =  formDefManager.getByKey(formKey);
             id.add(form.getId());
         }
         //	Map<String,String> map = formDefManager.exportForms(id, false);

@@ -29,12 +29,13 @@ import java.util.Map;
 @RestController
 @RequestMapping("/org/groupUser")
 public class GroupUserController extends GenericController {
+	
     @Resource
-    GroupUserManager groupUserManager;
+    private GroupUserManager groupUserManager;
     @Resource
-    UserManager userManager;
+    private UserManager userManager;
     @Resource
-    GroupRelationManager groupRelationManager;
+    private GroupRelationManager groupRelationManager;
 
     /**
      * 用户组织关系列表(分页条件查询)数据
@@ -55,9 +56,9 @@ public class GroupUserController extends GenericController {
     }
 
 
-    /**
-     * 用户组织关系明细页面
-     */
+	/**
+	 * 用户组织关系明细页面
+	 */
     @RequestMapping("getJson")
     public GroupUserEntity getJson(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String id = RequestUtil.getString(request, "id");
@@ -70,9 +71,9 @@ public class GroupUserController extends GenericController {
     }
 
 
-    /**
-     * 分配用户岗位
-     */
+	/**
+	 * 分配用户岗位
+	 */
     @RequestMapping("saveGroupUserRel")
     @ErrorCatching
     public void saveGroupUserRel(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -102,7 +103,7 @@ public class GroupUserController extends GenericController {
     }
 
     /**
-     * 通过 组织用户删除关系
+     *  通过 组织用户删除关系
      */
     @RequestMapping("removeByOrgIdUserId")
     @ErrorCatching

@@ -35,10 +35,10 @@ public class ValidateUtil {
     }
 
     /**
-     * <pre>
+     * 
      * 校验某个对象
      * 基于javax.validation工具包
-     * </pre>
+     * 
      *
      * @param obj
      */

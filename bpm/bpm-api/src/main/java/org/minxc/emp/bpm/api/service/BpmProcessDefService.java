@@ -8,7 +8,7 @@ import org.minxc.emp.bpm.api.model.def.IBpmDefinition;
 import org.minxc.emp.bpm.api.model.nodedef.BpmNodeDef;
 
 /**
- * 描述：流程定义服务接口
+ * 流程定义服务接口
  */
 public interface BpmProcessDefService {
 

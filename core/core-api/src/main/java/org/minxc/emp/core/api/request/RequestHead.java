@@ -4,7 +4,7 @@ package org.minxc.emp.core.api.request;
  * 
 * 项目名称：base-intf   
 * 类名称：RequestHead   
-* 类描述：请求头信息描述   
+* 类请求头信息描述   
 * 创建人：Xianchang.min   
 * 创建时间：2018年8月21日 下午11:00:04   
 * 修改人：Xianchang.min   

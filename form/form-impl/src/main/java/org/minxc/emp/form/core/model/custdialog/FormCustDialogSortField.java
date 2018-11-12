@@ -6,7 +6,7 @@ import java.io.Serializable;
 import javax.validation.constraints.NotEmpty;
 
 /**
- * 描述：自定义对话框的排序字段
+ * 自定义对话框的排序字段
  * 日期:2018年1月17日 下午8:26:42
  */
 public class FormCustDialogSortField implements Serializable {

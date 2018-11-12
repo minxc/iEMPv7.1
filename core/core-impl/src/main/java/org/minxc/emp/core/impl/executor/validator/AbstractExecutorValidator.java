@@ -9,10 +9,10 @@ import org.minxc.emp.core.api.executor.validator.ExecutorValidator;
  */
 public abstract class AbstractExecutorValidator implements ExecutorValidator {
     /**
-     * <pre>
+     * 
      * 校验器的key
      * 默认是类名
-     * </pre>
+     * 
      *
      * @return
      */

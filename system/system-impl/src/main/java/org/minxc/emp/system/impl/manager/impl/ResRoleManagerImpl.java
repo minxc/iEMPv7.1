@@ -15,7 +15,7 @@ import java.util.*;
  * 
 * 项目名称：basis-impl   
 * 类名称：ResRoleManagerImpl   
-* 类描述： 角色资源分配 处理实现类  
+* 类 角色资源分配 处理实现类  
 * 创建人：Xianchang.min   
 * 创建时间：2018年8月29日 下午8:16:48   
 * 修改人：Xianchang.min   

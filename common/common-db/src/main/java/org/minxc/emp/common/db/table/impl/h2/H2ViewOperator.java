@@ -23,8 +23,8 @@ import java.util.Map.Entry;
 /**
  * H2 视图操作的实现类。
  *
- * <pre>
- * </pre>
+ * 
+ * 
  */
 public class H2ViewOperator extends BaseViewOperator implements ViewOperator {
 

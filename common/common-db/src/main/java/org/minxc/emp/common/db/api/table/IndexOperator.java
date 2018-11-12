@@ -9,8 +9,8 @@ import java.util.List;
 /**
  * 索引操作接口
  *
- * <pre>
- * </pre>
+ * 
+ * 
  */
 public interface IndexOperator extends DbType {
 

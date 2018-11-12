@@ -40,7 +40,7 @@ import net.lingala.zip4j.util.Zip4jConstants;
 /**      
 * 项目名称：core-impl   
 * 类名称：ZipUtil   
-* 类描述： 压缩工具类 
+* 类 压缩工具类 
 * 创建人：Xianchang.min   
 * 创建时间：2018年8月24日 下午12:59:35   
 * 修改人：Xianchang.min   
@@ -254,9 +254,9 @@ public class ZipUtil {
 	}
 
 	/**
-	 * <pre>
+	 * 
 	 * 把文件打包到zip文件中
-	 * </pre>
+	 * 
 	 * 
 	 * @param fileNames
 	 *            要压缩的文件列表
@@ -277,9 +277,9 @@ public class ZipUtil {
 	}
 	
 	/**
-	 * <pre>
+	 * 
 	 * 把文件打包到zip文件中
-	 * </pre>	
+	 * 	
 	 * @param sourceFileList
 	 * @param zipName
 	 * @return

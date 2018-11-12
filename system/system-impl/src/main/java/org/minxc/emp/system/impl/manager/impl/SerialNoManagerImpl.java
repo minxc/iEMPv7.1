@@ -92,9 +92,9 @@ public class SerialNoManagerImpl extends CommonManager<String, SerialNoEntity> i
 
     /**
      * 根据当前流水号的值和流水号显示的长度。
-     * <pre>
+     * 
      * 比如：当前流水号为55 ，显示长度为5那么这个方法返回：00055。
-     * </pre>
+     * 
      *
      * @param curValue 当前流水号的值。
      * @param length   显示的长度。

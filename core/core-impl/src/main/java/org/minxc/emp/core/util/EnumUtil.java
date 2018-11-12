@@ -21,7 +21,7 @@ public class EnumUtil {
 	}
 
 	/**
-	 * <pre>
+	 * 
 	 * 把一个枚举类转成JSON，主要是为了方便前端直接调用(以下是jsp的用法)
 	 * 前端调用例子：
 	 * <%@page import="com.dstz.sys.persistence.enums.FieldControlType"%>
@@ -30,7 +30,7 @@ public class EnumUtil {
 	 * var FieldControlType = <%=EnumUtil.toJSON(FieldControlType.class)%>;
 	 * </script>
 	 * 系统内置的异步获取类：toolsControllerUtil.js
-	 * </pre>
+	 * 
 	 *
 	 * @param enumClass
 	 * @return
@@ -64,10 +64,10 @@ public class EnumUtil {
 	}
 
 	/**
-	 * <pre>
+	 * 
 	 * 把一个枚举类的路径转成json数组
 	 * 注意！！如果枚举在类中间，那么路径如下：com.dstz.base.db.model.Column$TYPE
-	 * </pre>
+	 * 
 	 *
 	 * @param enumClassPath
 	 *            枚举路径
@@ -91,9 +91,9 @@ public class EnumUtil {
 	}
 
 	/**
-	 * <pre>
+	 * 
 	 * 把一个枚举实例转成JSON，主要是为了方便前端直接调用
-	 * </pre>
+	 * 
 	 *
 	 * @param e
 	 * @return

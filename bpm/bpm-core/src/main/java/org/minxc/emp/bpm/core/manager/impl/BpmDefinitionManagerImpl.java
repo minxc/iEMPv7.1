@@ -73,7 +73,7 @@ import org.springframework.util.MultiValueMap;
 *    
 * 项目名称：wf-core   
 * 类名称：BpmDefinitionManagerImpl   
-* 类描述：  TODO: BpmDefinitionManagerImpl  几个内部方法的推测
+* 类  TODO: BpmDefinitionManagerImpl  几个内部方法的推测
 * 创建人：Xianchang.min   
 * 创建时间：2018年8月11日 下午7:22:07   
 * 修改人：Xianchang.min   

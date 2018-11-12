@@ -11,7 +11,7 @@ import org.minxc.emp.system.api.model.SystemResource;
 
 /**
  * 
- * 项目名称：system-impl 类名称：SysResource 类描述：子系统资源 实体对象 创建人：Xianchang.min
+ * 项目名称：system-impl 类名称：SysResource 类子系统资源 实体对象 创建人：Xianchang.min
  * 创建时间：2018年9月3日 下午10:08:18 修改人：Xianchang.min 修改时间：2018年9月3日 下午10:08:18 修改备注：
  * 
  * @version 1.0

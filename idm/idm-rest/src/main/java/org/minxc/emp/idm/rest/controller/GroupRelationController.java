@@ -27,8 +27,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/org/groupRelation")
 public class GroupRelationController extends CommonController<GroupRelationEntity> {
+	
     @Resource
-    GroupRelationManager groupRelManager;
+    private GroupRelationManager groupRelationManager;
 
     /**
      * 组织关联关系列表(分页条件查询)数据
@@ -41,12 +42,13 @@ public class GroupRelationController extends CommonController<GroupRelationEntit
      */
     @RequestMapping("listJson")
     public PageJson listJson(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    	
         QueryFilter queryFilter = getQueryFilter(request);
         String groupId = RequestUtil.getString(request, "groupId");
         if (StringUtils.isNotEmpty(groupId)) {
             queryFilter.addParamsFilter("groupId", groupId);
         }
-        Page<GroupRelationEntity> orgRelList = (Page<GroupRelationEntity>) groupRelManager.queryInfoList(queryFilter);
+        Page<GroupRelationEntity> orgRelList = (Page<GroupRelationEntity>) groupRelationManager.queryInfoList(queryFilter);
         return new PageJson(orgRelList);
     }
 
@@ -60,7 +62,7 @@ public class GroupRelationController extends CommonController<GroupRelationEntit
     public ResultMessage<String> save(@RequestBody GroupRelationEntity orgRel) throws Exception {
 
         if (StringUtils.isEmpty(orgRel.getId())) {
-        	GroupRelationEntity relation = groupRelManager.getByCode(orgRel.getGroupCode());
+        	GroupRelationEntity relation = groupRelationManager.getByCode(orgRel.getGroupCode());
             if (relation != null) {
                 throw new BusinessException("岗位编码已经存在！");
             }
@@ -76,7 +78,7 @@ public class GroupRelationController extends CommonController<GroupRelationEntit
         if (StringUtils.isNotEmpty(id))
             return false;
         if (StringUtils.isNotEmpty(code)) {
-        	GroupRelationEntity temp = groupRelManager.getByCode(code);
+        	GroupRelationEntity temp = groupRelationManager.getByCode(code);
             return temp != null;
         }
         return false;
@@ -86,7 +88,7 @@ public class GroupRelationController extends CommonController<GroupRelationEntit
     @RequestMapping("getByGroupId")
     @ErrorCatching
     public void getByGroupId(HttpServletRequest request, HttpServletResponse response, String groupId) throws Exception {
-        List<GroupRelationEntity> list = groupRelManager.getListByGroupId(groupId);
+        List<GroupRelationEntity> list = groupRelationManager.getListByGroupId(groupId);
         writeSuccessData(response, list);
     }
 

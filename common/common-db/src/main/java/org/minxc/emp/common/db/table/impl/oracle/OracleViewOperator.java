@@ -22,8 +22,8 @@ import java.util.Map.Entry;
 /**
  * Oracle 视图操作的实现类。
  *
- * <pre>
- * </pre>
+ * 
+ * 
  */
 public class OracleViewOperator extends BaseViewOperator implements
         ViewOperator {

@@ -14,7 +14,7 @@ import com.alibaba.fastjson.JSONObject;
 
 
 /**
- * 描述：组 抽象类
+ * 组 抽象类
  */
 public abstract class GroupPermissionCalculator implements IPermissionCalculator {
 	

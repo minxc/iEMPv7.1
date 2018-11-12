@@ -3,7 +3,7 @@ package org.minxc.emp.core.api.exception;
 /*
 * 项目名称：base-intf   
 * 类名称：SerializationException   
-* 类描述：序列化异常  
+* 类序列化异常  
 * 创建人：Xianchang.min   
 * 创建时间：2018年8月21日 下午10:48:05   
 * 修改人：Xianchang.min   

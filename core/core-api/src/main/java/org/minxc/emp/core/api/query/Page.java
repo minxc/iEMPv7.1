@@ -3,7 +3,7 @@ package org.minxc.emp.core.api.query;
 /**
  * 项目名称：base-intf
  * 类名称：Page
- * 类描述：   分页对象接口
+ * 类   分页对象接口
  * 创建人：Xianchang.min
  * 创建时间：2018年8月21日 下午10:40:15
  * 修改人：Xianchang.min

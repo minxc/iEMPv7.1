@@ -7,9 +7,9 @@ import org.minxc.emp.bpm.api.model.def.BpmProcessDef;
 
 /**
  * 网关节点定义。
- * <pre>
- * 描述：TODO
- * </pre>
+ * 
+ * TODO
+ * 
  */
 public class GateWayBpmNodeDef extends BaseBpmNodeDef {
 

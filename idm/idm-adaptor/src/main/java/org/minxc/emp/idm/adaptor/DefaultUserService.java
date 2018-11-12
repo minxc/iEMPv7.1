@@ -24,7 +24,7 @@ import org.springframework.stereotype.Service;
  * 
 * 项目名称：idm-adaptor   
 * 类名称：DefaultUserService   
-* 类描述：   
+* 类   
 * 创建人：Xianchang.min   
 * 创建时间：2018年9月3日 上午12:15:53   
 * 修改人：Xianchang.min   

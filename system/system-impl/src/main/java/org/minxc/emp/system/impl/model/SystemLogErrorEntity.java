@@ -9,7 +9,7 @@ import org.minxc.emp.core.api.model.IdModel;
  * 
 * 项目名称：system-impl   
 * 类名称：SystemLogErrorEntity   
-* 类描述：错误日志 实体对象   
+* 类错误日志 实体对象   
 * 创建人：Xianchang.min   
 * 创建时间：2018年9月4日 下午1:36:01   
 * 修改人：Xianchang.min   

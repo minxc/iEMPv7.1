@@ -41,7 +41,10 @@ public class GroupController extends CommonController<GroupEntity> {
 	/**
 	 * 组织架构列表(分页条件查询)数据
 	 *
-	 * @param request @param response @return @throws Exception PageJson @throws
+	 * @param request 
+	 * @param response 
+	 * @return 
+	 * @throws Exception PageJson @throws
 	 */
 	@RequestMapping("listJson")
 	public PageJson listJson(HttpServletRequest request, HttpServletResponse response) throws Exception {

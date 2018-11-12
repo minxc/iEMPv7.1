@@ -10,7 +10,7 @@ import org.apache.commons.lang3.StringUtils;
  * <p>
  * 设置方法：<br/>
  *
- * <pre>
+ * 
  * ApplicationContext c = new ClassPathXmlApplicationContext(locations);
  *
  * DbContextHolder.setDbType(&quot;dataSource_Default2&quot;);
@@ -75,9 +75,9 @@ public class DbContextHolder {
 	}
 
 	/**
-	 * <pre>
+	 * 
 	 * 从dataSourceDbType获取数据库类型
-	 * </pre>
+	 * 
 	 *
 	 * @param dsKey 数据源别名
 	 * @return

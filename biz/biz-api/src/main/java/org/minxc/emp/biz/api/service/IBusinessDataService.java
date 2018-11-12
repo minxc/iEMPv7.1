@@ -11,18 +11,18 @@ import com.alibaba.fastjson.JSONObject;
  */
 public interface IBusinessDataService {
 	/**
-	 * <pre>
+	 * 
 	 * 保存 FormDefData 中的data数据
-	 * </pre>	
+	 * 	
 	 * @param data
 	 * @param businessPermission
 	 */
 	void saveFormDefData(JSONObject data,IBusinessPermission businessPermission);
 
 	/**
-	 * <pre>
+	 * 
 	 * 获取formdefData中的data相关信息
-	 * </pre>
+	 * 
 	 * 
 	 * @param businessObject
 	 * @param id
@@ -31,9 +31,9 @@ public interface IBusinessDataService {
 	JSONObject getFormDefData(IBusinessObject businessObject, Object id);
 	
 	/**
-	 * <pre>
+	 * 
 	 * 删除数据
-	 * </pre>
+	 * 
 	 * 
 	 * @param businessObject
 	 * @param id
@@ -43,9 +43,9 @@ public interface IBusinessDataService {
 	void saveData(IBusinessData businessData);
 	
 	/**
-	 * <pre>
+	 * 
 	 * 加载数据
-	 * </pre>	
+	 * 	
 	 * @param businessObject
 	 * @param id
 	 * @return

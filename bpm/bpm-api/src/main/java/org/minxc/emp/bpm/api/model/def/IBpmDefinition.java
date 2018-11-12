@@ -4,7 +4,7 @@ import org.minxc.emp.core.api.model.CommonModel;
 
 
 /**
- * 描述：流程定义实体接口
+ * 流程定义实体接口
  */
 public interface IBpmDefinition extends CommonModel{
     public final static class STATUS {

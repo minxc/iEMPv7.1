@@ -44,9 +44,9 @@ public class DataSourceInitListener implements ApplicationListener<ContextRefres
     }
 
     /**
-     * <pre>
+     * 
      * 加载系统数据源到dynamicDataSource中
-     * </pre>
+     * 
      */
     private void loadDataSourceFromSysDataSource() {
         for (SystemDataSourceEntity sysDataSource : sysDataSourceManager.getAll()) {
@@ -86,9 +86,9 @@ public class DataSourceInitListener implements ApplicationListener<ContextRefres
     }
 
     /**
-     * <pre>
+     * 
      * 根据数据源获取数据库类型
-     * </pre>
+     * 
      *
      * @param dataSource
      * @return

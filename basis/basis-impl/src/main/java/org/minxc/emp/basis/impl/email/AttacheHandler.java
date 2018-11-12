@@ -5,9 +5,9 @@ import javax.mail.Part;
 import org.minxc.emp.basis.impl.email.model.Mail;
 
 /**
- * <pre>
- * 描述：邮件附件处理接口
- * </pre>
+ * 
+ * 邮件附件处理接口
+ * 
  */
 public interface AttacheHandler {
 
@@ -17,7 +17,7 @@ public interface AttacheHandler {
      * @param part
      * @param mail 邮件对象
      *             <p>示例：</p>
-     *             <pre>
+     *             
      *             public void handle(Part part, Mail mail){
      *             	//获得文件名
      *             String filename=MimeUtility.decodeText(part.getFileName());
@@ -39,7 +39,7 @@ public interface AttacheHandler {
      *             //将附件的文件名及存放路径存入Mail对象
      *             mail.getMailAttachments().add(new MailAttachment(filename, filePath));
      *             }
-     *             </pre>
+     *             
      * @see    Mail
      */
     public void handle(Part part, Mail mail);
@@ -49,13 +49,13 @@ public interface AttacheHandler {
      *
      * @param messageId 同一个邮箱中的邮件唯一标识ID
      * @return true：下载；false：不下载 <p>示例：</p>
-     * <pre>
+     * 
      * public Boolean isDownlad(String UID) {
      * 	Mail mail = getFromDB("admin@jee-soft.cn", UID);
      * 	if(mail!=null) return false ;
      * 	return true;
      * }
-     * </pre>
+     * 
      */
     public Boolean isDownlad(String messageId);
 }

@@ -10,7 +10,7 @@ import org.minxc.emp.common.db.dao.CommonDao;
 import org.minxc.emp.core.api.query.QueryFilter;
 
 /**
- * 描述：用户组织关系 DAO接口
+ * 用户组织关系 DAO接口
  */
 @Mapper
 public interface GroupUserDao extends CommonDao<String, GroupUserEntity> {

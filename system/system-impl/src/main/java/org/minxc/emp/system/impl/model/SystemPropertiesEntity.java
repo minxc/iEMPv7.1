@@ -11,7 +11,7 @@ import org.minxc.emp.core.util.CryptoUtil;
 
 
 /**
- * 描述：SYS_PROPERTIES 实体对象
+ * SYS_PROPERTIES 实体对象
  */
 public class SystemPropertiesEntity extends AbstractCommonModel{
 

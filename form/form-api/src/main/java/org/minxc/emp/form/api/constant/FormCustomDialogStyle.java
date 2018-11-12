@@ -1,12 +1,12 @@
 package org.minxc.emp.form.api.constant;
 /**
- * <pre> 
- * 描述：FormCustDialog中的style枚举
- * 作者:aschs
- * 邮箱:aschs@qq.com
+ *  
+ * FormCustDialog中的style枚举
+ * 
+ * 
  * 日期:2018年3月1日 下午4:24:48
- * 版权:summer
- * </pre>
+ * 
+ * 
  */
 public enum FormCustomDialogStyle {
 	LIST("list", "列表"), TREE("tree", "树形");
@@ -33,9 +33,9 @@ public enum FormCustomDialogStyle {
 	}
 
 	/**
-	 * <pre>
+	 * 
 	 * 根据key来判断是否跟当前一致
-	 * </pre>
+	 * 
 	 * 
 	 * @param key
 	 * @return

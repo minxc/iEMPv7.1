@@ -7,7 +7,7 @@ import org.minxc.emp.idm.api.model.GroupType;
 import org.minxc.emp.idm.api.model.Group;
 
 /**
- * 描述：用户与组服务接口
+ * 用户与组服务接口
  */
 public interface GroupService {
 

@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 
 /**
- * 描述：普通的上传器
+ * 普通的上传器
  * 上传到服务器的某个文件夹中
  * 每次上传时会自动放在当前日期yyyyMMdd的目录下
  */

@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 /**      
 * 项目名称：core-cache   
 * 类名称：DefaultMemoryCache   
-* 类描述：   
+* 类   
 * 创建人：Xianchang.min   
 * 创建时间：2018年10月1日 下午3:18:37   
 * 修改人：Xianchang.min   

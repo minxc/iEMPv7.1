@@ -7,7 +7,7 @@ import org.minxc.emp.core.api.status.StatusCode;
  * 
 * 项目名称：base-intf   
 * 类名称：SystemException   
-* 类描述：   系统异常，相比businessExecption 表示更严重的异常
+* 类   系统异常，相比businessExecption 表示更严重的异常
 * 创建人：Xianchang.min   
 * 创建时间：2018年8月21日 下午10:48:56   
 * 修改人：Xianchang.min   

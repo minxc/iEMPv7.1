@@ -16,8 +16,8 @@ import java.util.Map;
 /**
  * H2 数据库表操作的实现。
  *
- * <pre>
- * </pre>
+ * 
+ * 
  */
 public class H2TableOperator extends BaseTableOperator {
 

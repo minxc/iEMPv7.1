@@ -22,8 +22,8 @@ import java.util.Map.Entry;
 /**
  * 达梦 视图操作的实现类。
  *
- * <pre>
- * </pre>
+ * 
+ * 
  */
 public class DmViewOperator extends BaseViewOperator implements
         ViewOperator {

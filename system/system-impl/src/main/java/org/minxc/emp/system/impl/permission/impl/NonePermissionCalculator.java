@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSONObject;
 /**
- * 描述：无人
+ * 无人
  */
 @Service
 public class NonePermissionCalculator implements IPermissionCalculator {

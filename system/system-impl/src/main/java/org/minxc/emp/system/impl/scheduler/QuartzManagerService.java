@@ -24,7 +24,7 @@ import java.util.List;
  * 
 * 项目名称：system-impl   
 * 类名称：QuartzManagerService   
-* 类描述： quartz管理业务  
+* 类 quartz管理业务  
 * 创建人：Xianchang.min   
 * 创建时间：2018年9月3日 上午12:21:32   
 * 修改人：Xianchang.min   

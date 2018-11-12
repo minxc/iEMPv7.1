@@ -3,7 +3,7 @@ package org.minxc.emp.bpm.api.model.def;
 import java.io.Serializable;
 
 /**
- * 描述：流程变量定义模型
+ * 流程变量定义模型
  */
 public interface BpmVariableDef extends Serializable {
 

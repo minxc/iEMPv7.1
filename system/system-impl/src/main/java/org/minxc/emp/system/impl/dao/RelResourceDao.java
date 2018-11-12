@@ -8,7 +8,7 @@ import org.minxc.emp.common.db.dao.CommonDao;
 import org.minxc.emp.system.impl.model.ResourceLinkEntity;
 
 /**
- * 描述：关联资源 DAO接口
+ * 关联资源 DAO接口
  */
 @Mapper
 public interface RelResourceDao extends CommonDao<String, ResourceLinkEntity> {

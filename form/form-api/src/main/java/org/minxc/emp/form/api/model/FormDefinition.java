@@ -1,6 +1,6 @@
 package org.minxc.emp.form.api.model;
 
-public interface IFormDef {
+public interface FormDefinition {
 
 	String getKey();
 

@@ -25,7 +25,7 @@ import java.util.*;
 /**
  * 项目名称：core-impl
  * 类名称：BeanUtil
- * 类描述： bean工具类  BeanUtils的等价类，只是将check exception改为uncheck exception
+ * 类 bean工具类  BeanUtils的等价类，只是将check exception改为uncheck exception
  * 创建人：Xianchang.min
  * 创建时间：2018年8月24日 上午12:49:19
  * 修改人：Xianchang.min
@@ -477,9 +477,9 @@ public class BeanUtils {
     }
 
     /**
-     * <pre>
+     * 
      * 根据字段类型，条件，把字符串的valStr转成真正的val
-     * </pre>
+     * 
      *
      * @param columnType 字段类型
      * @param queryOP    条件
