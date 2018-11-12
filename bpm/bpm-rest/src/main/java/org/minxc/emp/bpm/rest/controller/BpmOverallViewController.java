@@ -35,7 +35,7 @@ import com.alibaba.fastjson.JSON;
 
 /**
  * 流程配置全局预览 导入
- * @author jeff
+ * @author xianchang.min
  */
 @RestController
 @RequestMapping("/bpm/overallView")

@@ -6,7 +6,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 import org.activiti.engine.delegate.DelegateTask;
 import org.activiti.engine.impl.persistence.entity.TaskEntity;
-import org.minxc.emp.basis.api.model.SysIdentity;
+import org.minxc.emp.basis.api.model.SystemIdentity;
 import org.minxc.emp.bpm.api.constant.ActionType;
 import org.minxc.emp.bpm.api.constant.EventType;
 import org.minxc.emp.bpm.api.constant.NodeType;
@@ -86,7 +86,7 @@ public class TaskCreateListener extends AbstractTaskListener<DefualtTaskActionCm
 
 	private void d(TaskActionCmd taskActionModel) {
 		IBpmTask bpmTask = taskActionModel.getBpmTask();
-		List<SysIdentity> identityList = taskActionModel.getBpmIdentity(bpmTask.getNodeId());
+		List<SystemIdentity> identityList = taskActionModel.getBpmIdentity(bpmTask.getNodeId());
 		BpmNodeDef nodeDef = this.a.getBpmNodeDef(bpmTask.getDefId(), bpmTask.getNodeId());
 		if (!nodeDef.getNodeProperties().isAllowExecutorEmpty() && BeanUtils.isEmpty((Object) identityList)) {
 			throw new WorkFlowException(bpmTask.getNodeId() + "任务候选人为空", BpmStatusCode.NO_ASSIGN_USER);
@@ -94,14 +94,14 @@ public class TaskCreateListener extends AbstractTaskListener<DefualtTaskActionCm
 		if (BeanUtils.isEmpty((Object) identityList)) {
 			return;
 		}
-		SysIdentity firstIdentity = (SysIdentity) identityList.get(0);
+		SystemIdentity firstIdentity = (SystemIdentity) identityList.get(0);
 		if (identityList.size() == 1 && firstIdentity.getType().equals("user")) {
 			bpmTask.setAssigneeId(firstIdentity.getId());
 			bpmTask.setAssigneeNames(firstIdentity.getName());
 		} else {
 			bpmTask.setAssigneeId("0");
 			ArrayList<String> names = new ArrayList<String>();
-			for (SysIdentity identity : identityList) {
+			for (SystemIdentity identity : identityList) {
 				names.add(identity.getName());
 			}
 			bpmTask.setAssigneeNames(StringUtil.convertCollectionAsString(names));

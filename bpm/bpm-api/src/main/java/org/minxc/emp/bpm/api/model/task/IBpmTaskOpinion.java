@@ -3,7 +3,7 @@ package org.minxc.emp.bpm.api.model.task;
 /**
  * 流程审批意见
  *
- * @author Jeff
+ * @author xianchang.min
  */
 public interface IBpmTaskOpinion {
     /**

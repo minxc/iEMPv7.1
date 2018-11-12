@@ -7,7 +7,7 @@ package org.minxc.emp.bpm.api.engine.plugin.runtime;
  * @param <S> session
  * @param <M> modelDef
  * @param <R> return
- * @author jeff
+ * @author xianchang.min
  */
 public interface RunTimePlugin<S, M, R> {
 

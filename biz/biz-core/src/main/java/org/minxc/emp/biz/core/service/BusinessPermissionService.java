@@ -3,7 +3,6 @@ package org.minxc.emp.biz.core.service;
 import com.alibaba.fastjson.JSONArray;
 
 import java.util.Map;
-import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 import org.minxc.emp.biz.api.constant.RightsType;
@@ -25,15 +24,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class BusinessPermissionService implements IBusinessPermissionService {
 	@Autowired
-	private BusinessPermissionManager T;
+	private BusinessPermissionManager businessPermissionManager;
 	@Autowired
-	private BusinessObjectManager k;
+	private BusinessObjectManager businessObjectManager;
 
 	public BusinessPermission a(String objType, String objVal, String defalutBoKeys, boolean calculate) {
 		BusinessPermission businessPermission = null;
 		businessPermission = StringUtils.isNotEmpty((String) defalutBoKeys)
-				? this.T.getByObjTypeAndObjVal(objType, objVal, defalutBoKeys)
-				: this.T.getByObjTypeAndObjVal(objType, objVal);
+				? this.businessPermissionManager.getByObjTypeAndObjVal(objType, objVal, defalutBoKeys)
+				: this.businessPermissionManager.getByObjTypeAndObjVal(objType, objVal);
 		if (businessPermission == null) {
 			return new BusinessPermission();
 		}

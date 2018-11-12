@@ -3,7 +3,7 @@ package org.minxc.emp.form.core.model;
 import org.apache.commons.lang3.StringUtils;
 import org.minxc.emp.core.api.model.IdModel;
 import org.minxc.emp.core.util.AppContextUtil;
-import org.minxc.emp.form.core.manager.FormCustDialogManager;
+import org.minxc.emp.form.core.manager.FormCustomDialogManager;
 
 
 /**
@@ -25,8 +25,8 @@ public class FormCombinateDialog implements IdModel {
     protected String listDialogName; /* list_dialog_name_ */
     protected String field; /* 树数据返回数据对应列表数据的查询条件 */
     // 以下字段跟数据库无关
-    private FormCustDialog treeDialog;
-    private FormCustDialog listDialog;
+    private FormCustomDialog treeDialog;
+    private FormCustomDialog listDialog;
 
     public void setId(String id) {
         this.id = id;
@@ -158,19 +158,19 @@ public class FormCombinateDialog implements IdModel {
         return this.field;
     }
 
-    public FormCustDialog getTreeDialog() {
+    public FormCustomDialog getTreeDialog() {
         if (StringUtils.isEmpty(treeDialogId)) {
             return null;
         }
-        treeDialog = AppContextUtil.getBean(FormCustDialogManager.class).get(treeDialogId);
+        treeDialog = AppContextUtil.getBean(FormCustomDialogManager.class).get(treeDialogId);
         return treeDialog;
     }
 
-    public FormCustDialog getListDialog() {
+    public FormCustomDialog getListDialog() {
         if (StringUtils.isEmpty(listDialogId)) {
             return null;
         }
-        listDialog = AppContextUtil.getBean(FormCustDialogManager.class).get(listDialogId);
+        listDialog = AppContextUtil.getBean(FormCustomDialogManager.class).get(listDialogId);
         return listDialog;
     }
 

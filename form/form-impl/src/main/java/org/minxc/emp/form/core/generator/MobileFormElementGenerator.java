@@ -19,7 +19,7 @@ import com.alibaba.fastjson.JSONObject;
  * input select radio dic 等等的生成<br>
  */
 @Component
-public class mobileFormElementGenerator extends AbsFormElementGenerator{
+public class MobileFormElementGenerator extends AbsFormElementGenerator{
 	public String getColumn(IBusinessColumn column,IBusTableRel relation) {
 		if("1".equals("1")) {
 			return super.getColumn(column, relation);

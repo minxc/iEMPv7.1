@@ -3,7 +3,7 @@ package org.minxc.emp.bpm.api.engine.action.cmd;
 import java.util.List;
 import java.util.Map;
 
-import org.minxc.emp.basis.api.model.SysIdentity;
+import org.minxc.emp.basis.api.model.SystemIdentity;
 import org.minxc.emp.biz.api.model.IBusinessData;
 import org.minxc.emp.bpm.api.model.inst.IBpmInstance;
 
@@ -54,11 +54,11 @@ public interface ActionCmd {
      *
      * @return Map&lt;String,List&lt;BpmIdentity>>
      */
-    Map<String, List<SysIdentity>> getBpmIdentities();
+    Map<String, List<SystemIdentity>> getBpmIdentities();
 
-    List<SysIdentity> getBpmIdentity(String nodeId);
+    List<SystemIdentity> getBpmIdentity(String nodeId);
 
-    void setBpmIdentity(String nodeId, List<SysIdentity> bpmIdentityList);
+    void setBpmIdentity(String nodeId, List<SystemIdentity> bpmIdentityList);
 
     /**
      * 获取业务数据模式。

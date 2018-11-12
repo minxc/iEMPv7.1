@@ -5,7 +5,7 @@ import java.util.Set;
 
 import org.minxc.emp.basis.api.constant.RightsObjectConstants;
 
-public interface SysAuthorizationService {
+public interface SystemAuthorizationService {
 	
 	Set<String> getUserRights(String userId);
 

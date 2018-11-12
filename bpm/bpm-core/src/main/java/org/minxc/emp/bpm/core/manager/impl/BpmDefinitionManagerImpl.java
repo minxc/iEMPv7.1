@@ -62,7 +62,7 @@ import org.minxc.emp.core.api.query.QueryOperator;
 import org.minxc.emp.core.util.AppContextUtil;
 import org.minxc.emp.core.util.BeanUtils;
 import org.minxc.emp.core.util.StringUtil;
-import org.minxc.emp.system.api.service.SysAuthorizationService;
+import org.minxc.emp.system.api.service.SystemAuthorizationService;
 import org.minxc.emp.system.util.ContextUtil;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.stereotype.Service;
@@ -93,7 +93,7 @@ public class BpmDefinitionManagerImpl extends CommonManager<String, BpmDefinitio
 	@Resource
 	private ProcessEngineConfiguration processEngineConfiguration;
 	@Resource
-	private SysAuthorizationService sysAuthorizationService;
+	private SystemAuthorizationService sysAuthorizationService;
 	@Resource
 	private BpmInstanceManager bpmInstanceManager;
 

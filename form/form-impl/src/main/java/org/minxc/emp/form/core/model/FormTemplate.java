@@ -5,14 +5,13 @@ import java.io.Serializable;
 /**
  * 
  * 表单模版 entity对象
- * 
- * 
- * 日期:2018年3月8日 上午9:27:16
- * 
- * 
  */
 public class FormTemplate implements Serializable {
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = -5903957525474068776L;
+	/**
      * id
      */
     private String id;

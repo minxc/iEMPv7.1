@@ -5,7 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 /**
  * 系统内置权限
  */
-public interface IPermissionCalculator {
+public interface PermissionCalculator {
 	/**
 	 * 
 	 * 类型

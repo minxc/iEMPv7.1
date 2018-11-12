@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Resource;
 
-import org.minxc.emp.basis.api.model.SysIdentity;
+import org.minxc.emp.basis.api.model.SystemIdentity;
 import org.minxc.emp.bpm.core.manager.BpmTaskOpinionManager;
 import org.minxc.emp.bpm.core.model.BpmTaskOpinion;
 import org.minxc.emp.bpm.engine.model.BpmIdentity;
@@ -23,18 +23,18 @@ public class UserPlugin extends AbstractUserCalcPlugin<UserPluginDef> {
 	@Resource
 	UserService ak;
 
-	public List<SysIdentity> queryByPluginDef(BpmUserCalcPluginSession pluginSession, UserPluginDef def) {
-		List<SysIdentity> list = new ArrayList();
+	public List<SystemIdentity> queryByPluginDef(BpmUserCalcPluginSession pluginSession, UserPluginDef def) {
+		List<SystemIdentity> list = new ArrayList();
 		String source = def.getSource();
 		if ("start".equals(source)) {
 			List<BpmTaskOpinion> opinions = this.aa.getByInstAndNode(pluginSession.getBpmTask().getInstId(), "start");
 			BpmTaskOpinion firstNode = (BpmTaskOpinion) opinions.get(0);
-			SysIdentity bpmIdentity = new BpmIdentity(firstNode.getApprover(), firstNode.getApproverName(), "user");
+			SystemIdentity bpmIdentity = new BpmIdentity(firstNode.getApprover(), firstNode.getApproverName(), "user");
 			list.add(bpmIdentity);
 		}
 
 		if ("currentUser".equals(source)) {
-			SysIdentity bpmIdentity = new BpmIdentity(ContextUtil.getCurrentUser());
+			SystemIdentity bpmIdentity = new BpmIdentity(ContextUtil.getCurrentUser());
 			list.add(bpmIdentity);
 		} else if ("spec".equals(source)) {
 			String userKeys = def.getAccount();
@@ -45,7 +45,7 @@ public class UserPlugin extends AbstractUserCalcPlugin<UserPluginDef> {
 			for (int var9 = 0; var9 < var8; ++var9) {
 				String account = var16[var9];
 				User user = this.ak.getUserByAccount(account);
-				SysIdentity bpmIdentity = new BpmIdentity(user);
+				SystemIdentity bpmIdentity = new BpmIdentity(user);
 				list.add(bpmIdentity);
 			}
 		}

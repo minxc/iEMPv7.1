@@ -552,7 +552,7 @@ public class BeanUtils {
      * @描述 list数据转Tree，大多使用在前台json中。
      * @说明 实现接口 Tree即可
      * @扩展 可通过反射获取id, pid，目前只提供Tree接口排序的实现
-     * @author jeff
+     * @author xianchang.min
      */
     public static <T> List<T> listToTree(List<T> list) {
         Map<String, TreeModel> tempMap = new LinkedHashMap<String, TreeModel>();

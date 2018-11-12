@@ -3,7 +3,7 @@ package org.minxc.emp.system.impl.permission.impl;
 import javax.annotation.Resource;
 
 import org.minxc.emp.basis.api.groovy.IGroovyScriptEngine;
-import org.minxc.emp.system.api.permission.IPermissionCalculator;
+import org.minxc.emp.system.api.permission.PermissionCalculator;
 import org.springframework.stereotype.Service;
 
 
@@ -13,7 +13,7 @@ import com.alibaba.fastjson.JSONObject;
  * 脚本
  */
 @Service
-public class ScriptPermissionCalculator implements IPermissionCalculator {
+public class ScriptPermissionCalculator implements PermissionCalculator {
 	@Resource
 	IGroovyScriptEngine groovyScriptEngine;
 

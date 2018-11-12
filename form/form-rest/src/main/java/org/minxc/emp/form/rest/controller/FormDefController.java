@@ -6,7 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.minxc.emp.basis.api.freemark.IFreemarkEngine;
+import org.minxc.emp.basis.api.freemarker.FreeMarkerEngine;
 import org.minxc.emp.biz.api.model.IBusTableRel;
 import org.minxc.emp.biz.api.model.IBusinessObject;
 import org.minxc.emp.biz.api.service.IBusinessObjectService;
@@ -25,8 +25,8 @@ import org.minxc.emp.core.util.StringUtil;
 import org.minxc.emp.form.api.constant.FormStatusCode;
 import org.minxc.emp.form.core.generator.AbsFormElementGenerator;
 import org.minxc.emp.form.core.generator.PcFormElementGenerator;
-import org.minxc.emp.form.core.generator.mobileFormElementGenerator;
-import org.minxc.emp.form.core.manager.FormDefManager;
+import org.minxc.emp.form.core.generator.MobileFormElementGenerator;
+import org.minxc.emp.form.core.manager.FormDefinitionManager;
 import org.minxc.emp.form.core.manager.FormTemplateManager;
 import org.minxc.emp.form.core.model.FormDefinitionImpl;
 import org.minxc.emp.form.core.model.FormTemplate;
@@ -54,15 +54,15 @@ import lombok.extern.slf4j.Slf4j;
 public class FormDefController extends CommonController<FormDefinitionImpl> {
 	
 	@Autowired
-	FormDefManager formDefManager;
+	private FormDefinitionManager formDefManager;
 	@Autowired
-	IBusinessObjectService businessObjectService;
+	private IBusinessObjectService businessObjectService;
 	@Autowired
-	IBusinessTableService businessTableService;
+	private IBusinessTableService businessTableService;
 	@Autowired
-	FormTemplateManager formTemplateManager;
+	private FormTemplateManager formTemplateManager;
 	@Autowired
-	IFreemarkEngine freemarkEngine;
+	private FreeMarkerEngine freemarkerEngine;
 
 	
 	@Override
@@ -219,7 +219,7 @@ public class FormDefController extends CommonController<FormDefinitionImpl> {
 			
 			String html ;
 			try {
-				 html = freemarkEngine.parseByString(template.getHtml(), map);
+				 html = freemarkerEngine.parseByString(template.getHtml(), map);
 			} catch (Exception e) {
 				log.error(String.format( "业务表【%s】模板【%s】解析失败：%s", relation.getTableComment(),template.getDesc(),e.getMessage()));
 				throw new BusinessException(String.format( "业务表【%s】模板【%s】解析失败：%s", relation.getTableComment(),template.getDesc(),e.getMessage()),FormStatusCode.FORM_ELEMENT_GENERATOR_ERROR,e);

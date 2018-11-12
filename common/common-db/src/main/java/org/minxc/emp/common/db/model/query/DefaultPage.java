@@ -15,6 +15,7 @@ import java.util.List;
 public class DefaultPage extends RowBounds implements Page, Serializable {
 
     private static final long serialVersionUID = -1718110184113189225L;
+    
     public final static int NO_PAGE = 1;
     /**
      * 页号

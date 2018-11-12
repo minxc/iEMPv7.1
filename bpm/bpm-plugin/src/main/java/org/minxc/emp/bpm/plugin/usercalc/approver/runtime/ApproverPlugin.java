@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Resource;
 
-import org.minxc.emp.basis.api.model.SysIdentity;
+import org.minxc.emp.basis.api.model.SystemIdentity;
 import org.minxc.emp.bpm.core.manager.BpmTaskOpinionManager;
 import org.minxc.emp.bpm.core.model.BpmTaskOpinion;
 import org.minxc.emp.bpm.engine.model.BpmIdentity;
@@ -19,14 +19,14 @@ public class ApproverPlugin extends AbstractUserCalcPlugin<ApproverPluginDef> {
 	@Resource
 	private BpmTaskOpinionManager aa;
 
-	public List<SysIdentity> queryByPluginDef(BpmUserCalcPluginSession pluginSession, ApproverPluginDef pluginDef) {
-		ArrayList<SysIdentity> bpmIdentities = new ArrayList<SysIdentity>();
+	public List<SystemIdentity> queryByPluginDef(BpmUserCalcPluginSession pluginSession, ApproverPluginDef pluginDef) {
+		ArrayList<SystemIdentity> bpmIdentities = new ArrayList<SystemIdentity>();
 		List<BpmTaskOpinion> taskOpinionList = this.aa.getByInstId(pluginSession.getBpmTask().getInstId());
 		for (BpmTaskOpinion taskOpinion : taskOpinionList) {
 			if (StringUtil.isEmpty((String) taskOpinion.getApprover()))
 				continue;
 			BpmIdentity bpmIdentity = new BpmIdentity(taskOpinion.getApprover(), taskOpinion.getApproverName(), "user");
-			bpmIdentities.add((SysIdentity) bpmIdentity);
+			bpmIdentities.add((SystemIdentity) bpmIdentity);
 		}
 		return bpmIdentities;
 	}

@@ -10,7 +10,7 @@ import com.alibaba.fastjson.JSONObject;
  * 日期:2018年4月14日 下午5:38:51
  * 
  */
-public class FormDefData implements Serializable {
+public class FormDefinitionData implements Serializable {
 	
 	
 	private static final long serialVersionUID = -8451398677571383221L;

@@ -8,7 +8,7 @@ import org.minxc.emp.common.db.model.table.ColumnEntity;
 import org.minxc.emp.common.db.model.table.TableEntity;
 import org.minxc.emp.common.manager.Manager;
 import org.minxc.emp.core.api.query.QueryFilter;
-import org.minxc.emp.form.core.model.FormCustDialog;
+import org.minxc.emp.form.core.model.FormCustomDialog;
 
 /**
  * form_cust_dialog Manager处理接口
@@ -17,7 +17,7 @@ import org.minxc.emp.form.core.model.FormCustDialog;
  * @email aschs@qq.com
  * @time 2018-01-18 19:30:51
  */
-public interface FormCustDialogManager extends Manager<String, FormCustDialog> {
+public interface FormCustomDialogManager extends Manager<String, FormCustomDialog> {
 
     /**
      * 
@@ -27,7 +27,7 @@ public interface FormCustDialogManager extends Manager<String, FormCustDialog> {
      * @param key
      * @return
      */
-    FormCustDialog getByKey(String key);
+    FormCustomDialog getByKey(String key);
 
     /**
      * 
@@ -37,7 +37,7 @@ public interface FormCustDialogManager extends Manager<String, FormCustDialog> {
      * @param formCustDialog
      * @return
      */
-    Map<String, String> searchObjName(FormCustDialog formCustDialog);
+    Map<String, String> searchObjName(FormCustomDialog formCustDialog);
 
     /**
      * 
@@ -47,7 +47,7 @@ public interface FormCustDialogManager extends Manager<String, FormCustDialog> {
      * @param formCustDialog
      * @return
      */
-    TableEntity<ColumnEntity> getTable(FormCustDialog formCustDialog);
+    TableEntity<ColumnEntity> getTable(FormCustomDialog formCustDialog);
 
     /**
      * 
@@ -59,6 +59,6 @@ public interface FormCustDialogManager extends Manager<String, FormCustDialog> {
      * @param queryFilter    页面传参
      * @return
      */
-    List<?> data(FormCustDialog formCustDialog, QueryFilter queryFilter);
+    List<?> data(FormCustomDialog formCustDialog, QueryFilter queryFilter);
 
 }

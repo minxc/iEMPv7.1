@@ -7,9 +7,8 @@ import javax.validation.constraints.NotEmpty;
 
 /**
  * 自定义对话框的条件字段
- * 日期:2018年1月17日 下午8:26:42
  */
-public class FormCustDialogConditionField implements Serializable {
+public class FormCustomDialogConditionField implements Serializable {
     /**
 	 * 
 	 */

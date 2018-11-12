@@ -9,7 +9,7 @@ import org.minxc.emp.form.api.model.FormType;
 /**
  * 流程数据访问器
  *
- * @author Jeff
+ * @author xianchang.min
  */
 public interface BpmFlowDataAccessor {
 

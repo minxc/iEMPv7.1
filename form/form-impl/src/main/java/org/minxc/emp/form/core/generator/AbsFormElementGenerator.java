@@ -15,7 +15,7 @@ import com.alibaba.fastjson.JSONObject;
 
 /**
  * 自定义表单控件生成器父类，提供生成表单通用公共方法<br>
- * @author jeff
+ * @author xianchang.min
  */
 public abstract class AbsFormElementGenerator {
 	public abstract String getGeneratorName();

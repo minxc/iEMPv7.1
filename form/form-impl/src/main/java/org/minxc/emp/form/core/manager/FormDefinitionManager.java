@@ -9,7 +9,7 @@ import org.minxc.emp.form.core.model.FormDefinitionImpl;
  *
  * @time 2018-03-19 20:30:46
  */
-public interface FormDefManager extends Manager<String, FormDefinitionImpl> {
+public interface FormDefinitionManager extends Manager<String, FormDefinitionImpl> {
 
     /**
      * 

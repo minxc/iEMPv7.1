@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Resource;
 
-import org.minxc.emp.basis.api.model.SysIdentity;
+import org.minxc.emp.basis.api.model.SystemIdentity;
 import org.minxc.emp.bpm.engine.model.BpmIdentity;
 import org.minxc.emp.bpm.engine.plugin.runtime.abstact.AbstractUserCalcPlugin;
 import org.minxc.emp.bpm.engine.plugin.session.BpmUserCalcPluginSession;
@@ -19,17 +19,17 @@ public class GroupPlugin extends AbstractUserCalcPlugin<GroupPluginDef> {
 	@Resource
 	GroupService ac;
 
-	public List<SysIdentity> queryByPluginDef(BpmUserCalcPluginSession pluginSession, GroupPluginDef def) {
+	public List<SystemIdentity> queryByPluginDef(BpmUserCalcPluginSession pluginSession, GroupPluginDef def) {
 		if (StringUtil.isEmpty((String) def.getGroupKey())) {
 			return null;
 		}
 		String groupType = def.getType();
-		ArrayList<SysIdentity> identityList = new ArrayList<SysIdentity>();
+		ArrayList<SystemIdentity> identityList = new ArrayList<SystemIdentity>();
 		for (String key : def.getGroupKey().split(",")) {
 			Group group;
 			if (StringUtil.isEmpty((String) key) || (group = this.ac.getByCode(groupType, key)) == null)
 				continue;
-			identityList.add((SysIdentity) new BpmIdentity(group.getGroupId(), group.getName(), group.getGroupType()));
+			identityList.add((SystemIdentity) new BpmIdentity(group.getGroupId(), group.getName(), group.getGroupType()));
 		}
 		return identityList;
 	}

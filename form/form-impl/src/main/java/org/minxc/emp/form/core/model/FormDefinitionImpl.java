@@ -9,7 +9,6 @@ import org.minxc.emp.form.api.model.FormDefinition;
 
 /**
  *  表单对象
- * 日期:2018年3月16日 下午4:19:26
  */
 public class FormDefinitionImpl extends AbstractCommonModel implements FormDefinition {
 	

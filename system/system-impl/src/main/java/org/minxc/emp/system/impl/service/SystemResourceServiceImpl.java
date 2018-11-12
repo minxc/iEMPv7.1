@@ -8,7 +8,7 @@ import javax.annotation.Resource;
 
 import org.minxc.emp.system.api.model.Application;
 import org.minxc.emp.system.api.model.SystemResource;
-import org.minxc.emp.system.api.service.SysResourceService;
+import org.minxc.emp.system.api.service.SystemResourceService;
 import org.minxc.emp.system.impl.manager.ResRoleManager;
 import org.minxc.emp.system.impl.manager.SubsystemManager;
 import org.minxc.emp.system.impl.manager.SystemResourceManager;
@@ -18,13 +18,13 @@ import org.springframework.stereotype.Service;
  * 用户系统资源服务接口
  */
 @Service
-public class SysResourceServiceImpl implements SysResourceService{
+public class SystemResourceServiceImpl implements SystemResourceService{
 	@Resource
-	SystemResourceManager sysResourceManager;
+	private SystemResourceManager sysResourceManager;
 	@Resource
-	SubsystemManager sybSystemManager;
+	private SubsystemManager sybSystemManager;
 	@Resource
-	ResRoleManager resRoleManager;
+	private ResRoleManager resRoleManager;
 	
 	
 	@Override

@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Set;
 import javax.annotation.Resource;
 
-import org.minxc.emp.basis.api.model.SysIdentity;
+import org.minxc.emp.basis.api.model.SystemIdentity;
 import org.minxc.emp.bpm.api.exception.BpmStatusCode;
 import org.minxc.emp.bpm.api.model.task.IBpmTask;
 import org.minxc.emp.bpm.core.dao.TaskIdentityLinkDao;
@@ -63,9 +63,9 @@ public class TaskIdentityLinkManagerImpl extends CommonManager<String, TaskIdent
 		return rights;
 	}
 
-	public void createIdentityLink(IBpmTask bpmTask, List<SysIdentity> identitys) {
+	public void createIdentityLink(IBpmTask bpmTask, List<SystemIdentity> identitys) {
 		ArrayList<TaskIdentityLink> identityLinks = new ArrayList<TaskIdentityLink>();
-		for (SysIdentity identity : identitys) {
+		for (SystemIdentity identity : identitys) {
 			TaskIdentityLink link = new TaskIdentityLink();
 			link.setId(UniqueIdUtil.getSuid());
 			link.setIdentity(identity.getId());

@@ -9,10 +9,10 @@ import org.minxc.emp.biz.api.service.IBusinessDataService;
 import org.minxc.emp.biz.api.service.IBusinessObjectService;
 import org.minxc.emp.biz.api.service.IBusinessPermissionService;
 import org.minxc.emp.biz.api.service.IBusinessTableService;
-import org.minxc.emp.form.api.service.IFormDefDataService;
-import org.minxc.emp.form.core.manager.FormDefManager;
+import org.minxc.emp.form.api.service.FormDefDataService;
+import org.minxc.emp.form.core.manager.FormDefinitionManager;
 import org.minxc.emp.form.core.model.FormDefinitionImpl;
-import org.minxc.emp.form.core.model.FormDefData;
+import org.minxc.emp.form.core.model.FormDefinitionData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,10 +23,10 @@ import com.alibaba.fastjson.JSONObject;
  * FormDefData的服务类
  */
 @Service
-public class FormDefDataService implements IFormDefDataService {
+public class FormDefDataServiceImpl implements FormDefDataService {
 	
 	@Autowired
-	FormDefManager formDefManager;
+	FormDefinitionManager formDefManager;
 	@Autowired
 	IBusinessObjectService businessObjectService;
 	@Autowired
@@ -45,8 +45,8 @@ public class FormDefDataService implements IFormDefDataService {
 	 * @param id
 	 * @return
 	 */
-	public FormDefData getByFormDefKey(String formDefKey, String id) {
-		FormDefData formDefData = new FormDefData();
+	public FormDefinitionData getByFormDefKey(String formDefKey, String id) {
+		FormDefinitionData formDefData = new FormDefinitionData();
 		FormDefinitionImpl formDef = formDefManager.getByKey(formDefKey);
 		formDefData.setHtml(formDef.getHtml());
 		
@@ -71,7 +71,7 @@ public class FormDefDataService implements IFormDefDataService {
 	 * @param formDef
 	 * @param formDefData
 	 */
-	private void handleInitData(FormDefinitionImpl formDef, FormDefData formDefData) {
+	private void handleInitData(FormDefinitionImpl formDef, FormDefinitionData formDefData) {
 		if (formDefData.getInitData() == null) {
 			formDefData.setInitData(new JSONObject());
 		}
@@ -117,7 +117,7 @@ public class FormDefDataService implements IFormDefDataService {
 	 * @param formDefData
 	 * @param businessPermission2 
 	 */
-	private void handleData(FormDefinitionImpl formDef, String id, FormDefData formDefData, IBusinessPermission businessPermission) {
+	private void handleData(FormDefinitionImpl formDef, String id, FormDefinitionData formDefData, IBusinessPermission businessPermission) {
 		if (formDefData.getData() == null) {
 			formDefData.setData(new JSONObject());
 		}

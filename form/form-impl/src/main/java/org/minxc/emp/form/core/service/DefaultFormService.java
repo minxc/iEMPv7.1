@@ -8,14 +8,14 @@ import javax.annotation.Resource;
 
 import org.minxc.emp.form.api.model.FormDefinition;
 import org.minxc.emp.form.api.service.FormService;
-import org.minxc.emp.form.core.manager.FormDefManager;
+import org.minxc.emp.form.core.manager.FormDefinitionManager;
 import org.minxc.emp.form.core.model.FormDefinitionImpl;
 import org.springframework.stereotype.Service;
 @Service("formService")
 public class DefaultFormService implements FormService {
 
     @Resource
-    private FormDefManager formDefManager;
+    private FormDefinitionManager formDefManager;
 
     public FormDefinition getByFormKey(String formKey) {
         FormDefinition form = formDefManager.getByKey(formKey);

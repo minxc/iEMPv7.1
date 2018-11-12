@@ -22,7 +22,7 @@ import org.minxc.emp.idm.api.model.Group;
 import org.minxc.emp.idm.api.model.User;
 import org.minxc.emp.idm.api.service.GroupService;
 import org.minxc.emp.security.util.SubSystemUtil;
-import org.minxc.emp.system.api.service.SysResourceService;
+import org.minxc.emp.system.api.service.SystemResourceService;
 import org.minxc.emp.system.impl.model.ApplicationEntity;
 import org.minxc.emp.system.impl.model.SystemResourceEntity;
 import org.minxc.emp.system.util.ContextUtil;
@@ -41,7 +41,7 @@ public class UserResourceController extends GenericController {
     @Resource
     private GroupService groupService;
     @Resource
-    SysResourceService sysResourceService;
+    SystemResourceService sysResourceService;
 
 
     @SuppressWarnings("rawtypes")

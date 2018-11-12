@@ -18,7 +18,7 @@ import org.minxc.emp.core.util.AppContextUtil;
 /**
  * 通过actionhandle生成默认可配置的 button
  *
- * @author Jeff
+ * @author xianchang.min
  */
 public class ButtonFactory {
     /**

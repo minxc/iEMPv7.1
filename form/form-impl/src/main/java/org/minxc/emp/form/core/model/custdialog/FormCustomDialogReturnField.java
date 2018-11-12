@@ -7,9 +7,8 @@ import javax.validation.constraints.NotEmpty;
 
 /**
  * 自定义对话框的返回字段
- * 日期:2018年1月17日 下午8:26:42
  */
-public class FormCustDialogReturnField implements Serializable {
+public class FormCustomDialogReturnField implements Serializable {
 	
 	private static final long serialVersionUID = -312150284956281644L;
 	/**

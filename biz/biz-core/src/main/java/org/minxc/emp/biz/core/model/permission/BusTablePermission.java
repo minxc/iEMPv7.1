@@ -8,6 +8,12 @@ import org.minxc.emp.biz.core.model.permission.AbstractPermission;
 import org.minxc.emp.biz.core.model.permission.BusColumnPermission;
 
 public class BusTablePermission extends AbstractPermission implements IBusTablePermission {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3349087551365334534L;
+	
 	private String key;
 	private String comment;
 	private Map<String, BusColumnPermission> S = new HashMap<String, BusColumnPermission>();

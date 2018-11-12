@@ -1,11 +1,11 @@
-package org.minxc.emp.basis.impl.freemark;
+package org.minxc.emp.basis.impl.freemarker;
 
 import freemarker.cache.StringTemplateLoader;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
-import org.minxc.emp.basis.api.freemark.IFreemarkEngine;
+import org.minxc.emp.basis.api.freemarker.FreeMarkerEngine;
 import org.minxc.emp.core.util.PropertiesUtil;
 import org.springframework.stereotype.Component;
 
@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.io.StringWriter;
 
 @Component
-public class FreemarkEngine implements IFreemarkEngine {
+public class DefaultFreeMarkerEngine implements FreeMarkerEngine {
     // 配置来自app-resources.xml
     private Configuration formTemplateConfig;
 

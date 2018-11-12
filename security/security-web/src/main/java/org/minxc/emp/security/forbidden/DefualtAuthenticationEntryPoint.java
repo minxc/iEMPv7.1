@@ -16,7 +16,7 @@ import java.io.IOException;
 /**
  * 超时访问
  *
- * @author jeff
+ * @author xianchang.min
  */
 public class DefualtAuthenticationEntryPoint implements AuthenticationEntryPoint {
 

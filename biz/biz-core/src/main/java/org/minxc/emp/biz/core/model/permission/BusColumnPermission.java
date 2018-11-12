@@ -4,6 +4,11 @@ import org.minxc.emp.biz.api.model.permission.IBusColumnPermission;
 import org.minxc.emp.biz.core.model.permission.AbstractPermission;
 
 public class BusColumnPermission extends AbstractPermission implements IBusColumnPermission {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8456302348736295048L;
+	
 	private String key;
 	private String comment;
 

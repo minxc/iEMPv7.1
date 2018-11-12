@@ -13,8 +13,8 @@ import org.minxc.emp.common.rest.CommonController;
 import org.minxc.emp.common.rest.util.RequestUtil;
 import org.minxc.emp.core.api.aop.annotation.ErrorCatching;
 import org.minxc.emp.core.api.query.QueryFilter;
-import org.minxc.emp.form.core.manager.FormCustDialogManager;
-import org.minxc.emp.form.core.model.FormCustDialog;
+import org.minxc.emp.form.core.manager.FormCustomDialogManager;
+import org.minxc.emp.form.core.model.FormCustomDialog;
 import org.minxc.emp.system.api.model.SystemDataSource;
 import org.minxc.emp.system.api.service.SystemDataSourceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,16 +23,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
 /**
  * 自定义对话框管理
  */
 @RestController
 @RequestMapping("/form/formCustDialog/")
-public class FormCustDialogController extends CommonController<FormCustDialog> {
+public class FormCustDialogController extends CommonController<FormCustomDialog> {
 	
     @Autowired
-    private FormCustDialogManager formCustDialogManager;
+    private FormCustomDialogManager formCustDialogManager;
     @Autowired
     private BasicDao<?> commonDao;
     
@@ -55,7 +54,7 @@ public class FormCustDialogController extends CommonController<FormCustDialog> {
     public void getObject(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String id = RequestUtil.getString(request, "id");
         String key = RequestUtil.getString(request, "key");
-        FormCustDialog formCustDialog = null;
+        FormCustomDialog formCustDialog = null;
         if (StringUtils.isNotEmpty(id)) {
             formCustDialog = formCustDialogManager.get(id);
         } else if (StringUtils.isNotEmpty(key)) {
@@ -79,7 +78,7 @@ public class FormCustDialogController extends CommonController<FormCustDialog> {
      */
     @RequestMapping("searchObjName")
     @ErrorCatching(writeErrorToResponse = true, value = "根据数据源获取objName信息失败")
-    public void searchObjName(HttpServletRequest request, HttpServletResponse response, @RequestBody FormCustDialog formCustDialog) throws Exception {
+    public void searchObjName(HttpServletRequest request, HttpServletResponse response, @RequestBody FormCustomDialog formCustDialog) throws Exception {
         writeSuccessData(response, formCustDialogManager.searchObjName(formCustDialog), "根据数据源获取objName信息成功");
     }
 
@@ -97,7 +96,7 @@ public class FormCustDialogController extends CommonController<FormCustDialog> {
      */
     @RequestMapping("getTable")
     @ErrorCatching(writeErrorToResponse = true, value = "根据数据源获取objName的字段信息失败")
-    public void getTable(HttpServletRequest request, HttpServletResponse response, @RequestBody FormCustDialog formCustDialog) throws Exception {
+    public void getTable(HttpServletRequest request, HttpServletResponse response, @RequestBody FormCustomDialog formCustDialog) throws Exception {
         writeSuccessData(response, formCustDialogManager.getTable(formCustDialog), "根据数据源获取objName的字段信息成功");
     }
 
@@ -117,7 +116,7 @@ public class FormCustDialogController extends CommonController<FormCustDialog> {
     public PageJson listData(HttpServletRequest request, HttpServletResponse response, @PathVariable(value = "key") String key) throws Exception {
         QueryFilter queryFilter = getQueryFilter(request);
         // 页面来的参数
-        FormCustDialog formCustDialog = formCustDialogManager.getByKey(key);
+        FormCustomDialog formCustDialog = formCustDialogManager.getByKey(key);
         SystemDataSource sysDataSource = sysDataSourceService.getByKey(formCustDialog.getDsKey());
         // 切换数据源
         DbContextHolder.setDataSource(sysDataSource.getKey(), sysDataSource.getDbType());
@@ -138,7 +137,7 @@ public class FormCustDialogController extends CommonController<FormCustDialog> {
     public List<?> treeData(HttpServletRequest request, HttpServletResponse response, @PathVariable(value = "key") String key) throws Exception {
         QueryFilter queryFilter = getQueryFilter(request);
         // 页面来的参数
-        FormCustDialog formCustDialog = formCustDialogManager.getByKey(key);
+        FormCustomDialog formCustDialog = formCustDialogManager.getByKey(key);
         SystemDataSource sysDataSource = sysDataSourceService.getByKey(formCustDialog.getDsKey());
         // 切换数据源
         DbContextHolder.setDataSource(sysDataSource.getKey(), sysDataSource.getDbType());

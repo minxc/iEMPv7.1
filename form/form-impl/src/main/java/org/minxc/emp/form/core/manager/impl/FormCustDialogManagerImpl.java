@@ -26,12 +26,12 @@ import org.minxc.emp.form.api.constant.FormCustomDialogConditionFieldValueSource
 import org.minxc.emp.form.api.constant.FormCustomDialogObjectType;
 import org.minxc.emp.form.api.constant.FormCustomDialogStyle;
 import org.minxc.emp.form.core.dao.FormCustDialogDao;
-import org.minxc.emp.form.core.manager.FormCustDialogManager;
-import org.minxc.emp.form.core.model.FormCustDialog;
-import org.minxc.emp.form.core.model.custdialog.FormCustDialogConditionField;
-import org.minxc.emp.form.core.model.custdialog.FormCustDialogDisplayField;
-import org.minxc.emp.form.core.model.custdialog.FormCustDialogReturnField;
-import org.minxc.emp.form.core.model.custdialog.FormCustDialogSortField;
+import org.minxc.emp.form.core.manager.FormCustomDialogManager;
+import org.minxc.emp.form.core.model.FormCustomDialog;
+import org.minxc.emp.form.core.model.custdialog.FormCustomDialogConditionField;
+import org.minxc.emp.form.core.model.custdialog.FormCustomDialogDisplayField;
+import org.minxc.emp.form.core.model.custdialog.FormCustomDialogReturnField;
+import org.minxc.emp.form.core.model.custdialog.FormCustomDialogSortField;
 import org.minxc.emp.system.api.model.SystemDataSource;
 import org.minxc.emp.system.api.service.SystemDataSourceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +47,7 @@ import org.springframework.stereotype.Service;
  * @time 2018-01-18 19:30:51
  */
 @Service("formCustDialogManager")
-public class FormCustDialogManagerImpl extends CommonManager<String, FormCustDialog> implements FormCustDialogManager {
+public class FormCustDialogManagerImpl extends CommonManager<String, FormCustomDialog> implements FormCustomDialogManager {
     @Resource
     FormCustDialogDao formCustDialogDao;
     @Autowired
@@ -58,14 +58,14 @@ public class FormCustDialogManagerImpl extends CommonManager<String, FormCustDia
     IGroovyScriptEngine groovyScriptEngine;
 
     @Override
-    public FormCustDialog getByKey(String key) {
+    public FormCustomDialog getByKey(String key) {
         QueryFilter filter = new DefaultQueryFilter();
         filter.addFilter("key_", key, QueryOperator.EQUAL);
         return this.queryOne(filter);
     }
 
     @Override
-    public Map<String, String> searchObjName(FormCustDialog formCustDialog) {
+    public Map<String, String> searchObjName(FormCustomDialog formCustDialog) {
         SystemDataSource sysDataSource = sysDataSourceService.getByKey(formCustDialog.getDsKey());
         JdbcTemplate jdbcTemplate = sysDataSourceService.getJdbcTemplateByKey(formCustDialog.getDsKey());
         Map<String, String> map = new HashMap<>();// Map<表/视图名,表/视图描述>
@@ -83,7 +83,7 @@ public class FormCustDialogManagerImpl extends CommonManager<String, FormCustDia
     }
 
     @Override
-    public TableEntity<ColumnEntity> getTable(FormCustDialog formCustDialog) {
+    public TableEntity<ColumnEntity> getTable(FormCustomDialog formCustDialog) {
         try {
             SystemDataSource sysDataSource = sysDataSourceService.getByKey(formCustDialog.getDsKey());
             JdbcTemplate jdbcTemplate = sysDataSourceService.getJdbcTemplateByKey(formCustDialog.getDsKey());
@@ -102,11 +102,11 @@ public class FormCustDialogManagerImpl extends CommonManager<String, FormCustDia
     }
 
     @Override
-    public List<?> data(FormCustDialog formCustDialog, QueryFilter queryFilter) {
+    public List<?> data(FormCustomDialog formCustDialog, QueryFilter queryFilter) {
         String sql = analyseSql(formCustDialog);
         handleQueryFilter(formCustDialog, queryFilter);
 
-        if(FormCustDialog.DATA_SOURCE_INTERFACE.equals(formCustDialog.getDataSource())) {
+        if(FormCustomDialog.DATA_SOURCE_INTERFACE.equals(formCustDialog.getDataSource())) {
         	return getDataByInterface(formCustDialog,queryFilter);
         }
         
@@ -121,7 +121,7 @@ public class FormCustDialogManagerImpl extends CommonManager<String, FormCustDia
         return list;
     }
     
-	private List getDataByInterface(FormCustDialog customDialog, QueryFilter queryFilter) {
+	private List getDataByInterface(FormCustomDialog customDialog, QueryFilter queryFilter) {
 		String beanMethod = customDialog.getObjName();
 		if(StringUtil.isEmpty(beanMethod)) throw new RuntimeException("自定义对话框数据服务接口不能为空！"); 
 		
@@ -151,11 +151,11 @@ public class FormCustDialogManagerImpl extends CommonManager<String, FormCustDia
      * @param formCustDialog
      * @return
      */
-    private String analyseSql(FormCustDialog formCustDialog) {
+    private String analyseSql(FormCustomDialog formCustDialog) {
         // 返回sql
         Set<String> columnNameSet = new HashSet<>();//select 的展示字段
         if (FormCustomDialogStyle.LIST.equalsWithKey(formCustDialog.getStyle())) {
-            for (FormCustDialogDisplayField field : formCustDialog.getDisplayFields()) {//显示字段要查出来
+            for (FormCustomDialogDisplayField field : formCustDialog.getDisplayFields()) {//显示字段要查出来
                 columnNameSet.add(field.getColumnName());
             }
         }
@@ -165,10 +165,10 @@ public class FormCustDialogManagerImpl extends CommonManager<String, FormCustDia
             columnNameSet.add(formCustDialog.getTreeConfig().getShowColumn());
         }
 
-        for (FormCustDialogReturnField field : formCustDialog.getReturnFields()) {//返回字段要查出来
+        for (FormCustomDialogReturnField field : formCustDialog.getReturnFields()) {//返回字段要查出来
             columnNameSet.add(field.getColumnName());
         }
-        for (FormCustDialogSortField field : formCustDialog.getSortFields()) {//排序字段要查出来
+        for (FormCustomDialogSortField field : formCustDialog.getSortFields()) {//排序字段要查出来
             columnNameSet.add(field.getColumnName());
         }
 
@@ -193,9 +193,9 @@ public class FormCustDialogManagerImpl extends CommonManager<String, FormCustDia
      * @param queryFilter
      * @return
      */
-    private QueryFilter handleQueryFilter(FormCustDialog formCustDialog, QueryFilter queryFilter) {
+    private QueryFilter handleQueryFilter(FormCustomDialog formCustDialog, QueryFilter queryFilter) {
         //处理条件 固定值，和脚本参数
-        for (FormCustDialogConditionField field : formCustDialog.getConditionFields()) {
+        for (FormCustomDialogConditionField field : formCustDialog.getConditionFields()) {
             if (FormCustomDialogConditionFieldValueSource.FIXED_VALUE.equalsWithKey(field.getValueSource())) {
                 Object value = BeanUtils.getValue(field.getDbType(), QueryOperator.getByVal(field.getCondition()), field.getValue().getText());
                 queryFilter.addFilter(field.getColumnName(), value, QueryOperator.getByVal(field.getCondition()));
@@ -207,7 +207,7 @@ public class FormCustDialogManagerImpl extends CommonManager<String, FormCustDia
         }
 
         //处理默认排序
-        for (FormCustDialogSortField field : formCustDialog.getSortFields()) {
+        for (FormCustomDialogSortField field : formCustDialog.getSortFields()) {
             queryFilter.addFieldSort(field.getColumnName(), field.getSortType());
         }
 

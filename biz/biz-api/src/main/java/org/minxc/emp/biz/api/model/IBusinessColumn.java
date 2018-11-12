@@ -6,8 +6,6 @@ package org.minxc.emp.biz.api.model;
  * BusinessColumn对其他模块的支持
  * 
  * 
- * 日期:2018年4月10日 下午6:10:28
- * 
  * 
  */
 public interface IBusinessColumn {

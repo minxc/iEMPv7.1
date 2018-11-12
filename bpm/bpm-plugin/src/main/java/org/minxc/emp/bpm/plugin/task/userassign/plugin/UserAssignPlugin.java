@@ -7,7 +7,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.minxc.emp.basis.api.groovy.IGroovyScriptEngine;
-import org.minxc.emp.basis.api.model.SysIdentity;
+import org.minxc.emp.basis.api.model.SystemIdentity;
 import org.minxc.emp.bpm.api.engine.action.cmd.TaskActionCmd;
 import org.minxc.emp.bpm.api.engine.context.BpmContext;
 import org.minxc.emp.bpm.api.engine.plugin.def.BpmTaskPluginDef;
@@ -40,10 +40,10 @@ public class UserAssignPlugin extends AbstractBpmTaskPlugin<BpmTaskPluginSession
 		}
 		BpmUserCalcPluginSession bpmUserCalcPluginSession = BpmPluginSessionFactory
 				.buildBpmUserCalcPluginSession((BpmPluginSession) pluginSession);
-		List<SysIdentity> bpmIdentities = UserAssignRuleCalc.a((BpmUserCalcPluginSession) bpmUserCalcPluginSession, (List) ruleList,
+		List<SystemIdentity> bpmIdentities = UserAssignRuleCalc.a((BpmUserCalcPluginSession) bpmUserCalcPluginSession, (List) ruleList,
 				(Boolean) false);
-		ArrayList<SysIdentity> identitieList = new ArrayList<SysIdentity>();
-		for (SysIdentity identity : bpmIdentities) {
+		ArrayList<SystemIdentity> identitieList = new ArrayList<SystemIdentity>();
+		for (SystemIdentity identity : bpmIdentities) {
 			if (identity == null)
 				continue;
 			identitieList.add(identity);

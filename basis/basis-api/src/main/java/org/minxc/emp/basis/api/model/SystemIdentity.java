@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * 流程与组织挂接实体接口
  */
-public interface SysIdentity extends Serializable{
+public interface SystemIdentity extends Serializable{
 
     /**
      * 用户。

@@ -1,13 +1,7 @@
 package org.minxc.emp.biz.api.constant;
 
 /**
- * 
  * BusTableRel中type属性的枚举
- * 
- * 
- * 日期:2018年2月26日 下午3:19:05
- * 
- * 
  */
 public enum BusTableRelType {
 	/**
@@ -57,10 +51,7 @@ public enum BusTableRelType {
 	}
 
 	/**
-	 * 
 	 * 根据key获取
-	 * 
-	 * 
 	 * @param key
 	 * @return
 	 */

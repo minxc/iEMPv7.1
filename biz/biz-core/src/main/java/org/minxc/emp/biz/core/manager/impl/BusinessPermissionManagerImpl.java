@@ -110,6 +110,6 @@ public class BusinessPermissionManagerImpl extends CommonManager<String, Busines
 		json.put("type",  "everyone");
 		json.put("desc",  "所有人");
 		jsonArray.add(json);
-		permission.getRights().put(RightsType.getDefalut().getKey(), jsonArray);
+		permission.getRights().put(RightsType.getDefault().getKey(), jsonArray);
 	}
 }

@@ -6,8 +6,6 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.minxc.emp.form.api.model.FormDefinition;
-
-import java.util.ArrayList;
 import java.util.List;
 
 /**

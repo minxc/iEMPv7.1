@@ -14,7 +14,7 @@ import org.minxc.emp.core.util.ThreadMsgUtil;
 import org.minxc.emp.form.api.model.FormDefinition;
 import org.minxc.emp.form.core.manager.FormBusManager;
 import org.minxc.emp.form.core.manager.FormBusSetManager;
-import org.minxc.emp.form.core.manager.FormDefManager;
+import org.minxc.emp.form.core.manager.FormDefinitionManager;
 import org.minxc.emp.form.core.model.FormBusSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,7 +37,7 @@ public class FormBusManagerImpl implements FormBusManager {
     @Resource
     FormBusSetManager formBusSetManager;
     @Resource
-    FormDefManager formDefManager;
+    FormDefinitionManager formDefManager;
     @Resource
     IGroovyScriptEngine groovyScriptEngine;
 

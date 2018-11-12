@@ -5,17 +5,17 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.minxc.emp.basis.api.model.SysIdentity;
+import org.minxc.emp.basis.api.model.SystemIdentity;
 import org.minxc.emp.core.util.BeanUtils;
 import org.minxc.emp.idm.api.model.User;
 import org.minxc.emp.idm.api.service.GroupService;
 import org.minxc.emp.idm.api.service.UserService;
-import org.minxc.emp.system.api.service.SysIdentityConvert;
+import org.minxc.emp.system.api.service.SystemIdentityConvert;
 import org.springframework.stereotype.Component;
 
 
 @Component
-public class SysIdentityConvertServiceImpl implements SysIdentityConvert {
+public class SysIdentityConvertServiceImpl implements SystemIdentityConvert {
 	
 	@Resource
 	GroupService groupService;
@@ -24,7 +24,7 @@ public class SysIdentityConvertServiceImpl implements SysIdentityConvert {
 	UserService userService;
 	
 	@Override
-	public User convert2User(SysIdentity identity) {
+	public User convert2User(SystemIdentity identity) {
 		List<User> users = convert2Users(identity);
 		
 		if(BeanUtils.isNotEmpty(users)) {
@@ -36,9 +36,9 @@ public class SysIdentityConvertServiceImpl implements SysIdentityConvert {
 	}
 
 	@Override
-	public List<User> convert2Users(SysIdentity identity) {
+	public List<User> convert2Users(SystemIdentity identity) {
 		//如果为用户
-		if(SysIdentity.TYPE_USER.equals(identity.getType())) {
+		if(SystemIdentity.TYPE_USER.equals(identity.getType())) {
 			List<User> users = new ArrayList<>();
 			
 			users.add(userService.getUserById(identity.getId()));
@@ -51,10 +51,10 @@ public class SysIdentityConvertServiceImpl implements SysIdentityConvert {
 	}
 
 	@Override
-	public List<User> convert2Users(List<SysIdentity> identitys) {
+	public List<User> convert2Users(List<SystemIdentity> identitys) {
 		List<User> users = new ArrayList<>();
 		
-		for(SysIdentity identity : identitys) {
+		for(SystemIdentity identity : identitys) {
 			users.addAll(convert2Users(identity));
 		}
 		

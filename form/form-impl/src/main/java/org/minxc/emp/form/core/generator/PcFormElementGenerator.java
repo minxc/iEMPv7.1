@@ -16,7 +16,7 @@ import com.alibaba.fastjson.JSONObject;
 /**
  * 自定义表单控件生成器<br>
  * input select radio dic 等等的生成<br>
- * @author jeff
+ * @author xianchang.min
  */
 @Component
 public class PcFormElementGenerator extends AbsFormElementGenerator{

@@ -11,7 +11,6 @@ import org.minxc.emp.biz.core.model.permission.BusColumnPermission;
 import org.minxc.emp.biz.core.model.permission.BusObjPermission;
 import org.minxc.emp.biz.core.model.permission.BusTablePermission;
 import org.minxc.emp.core.impl.model.AbstractCommonModel;
-import org.minxc.emp.core.util.JacksonUtil;
 import org.minxc.emp.core.util.JsonUtil;
 
 public class BusinessObject extends AbstractCommonModel implements IBusinessObject {
@@ -138,7 +137,7 @@ public class BusinessObject extends AbstractCommonModel implements IBusinessObje
 			rightsType = RightsType.getByKey((String) columnPermission.getResult());
 		}
 		if (rightsType == null) {
-			rightsType = RightsType.getDefalut();
+			rightsType = RightsType.getDefault();
 		}
 		if (isEdit) {
 			return rightsType.isDbEditable();
@@ -160,8 +159,8 @@ public class BusinessObject extends AbstractCommonModel implements IBusinessObje
 			return false;
 		}
 		if (isEdit) {
-			return RightsType.getDefalut().isDbEditable();
+			return RightsType.getDefault().isDbEditable();
 		}
-		return RightsType.getDefalut().isDbReadable();
+		return RightsType.getDefault().isDbReadable();
 	}
 }

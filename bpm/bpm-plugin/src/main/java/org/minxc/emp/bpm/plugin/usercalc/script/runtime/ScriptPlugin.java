@@ -9,7 +9,7 @@ import java.util.Set;
 import javax.annotation.Resource;
 
 import org.minxc.emp.basis.api.groovy.IGroovyScriptEngine;
-import org.minxc.emp.basis.api.model.SysIdentity;
+import org.minxc.emp.basis.api.model.SystemIdentity;
 import org.minxc.emp.bpm.engine.plugin.runtime.abstact.AbstractUserCalcPlugin;
 import org.minxc.emp.bpm.engine.plugin.session.BpmUserCalcPluginSession;
 import org.minxc.emp.bpm.plugin.usercalc.script.def.ScriptPluginDef;
@@ -22,13 +22,13 @@ public class ScriptPlugin extends AbstractUserCalcPlugin<ScriptPluginDef> {
 	@Resource
 	IGroovyScriptEngine groovyScriptEngine;
 
-	public List<SysIdentity> queryByPluginDef(BpmUserCalcPluginSession pluginSession, ScriptPluginDef def) {
+	public List<SystemIdentity> queryByPluginDef(BpmUserCalcPluginSession pluginSession, ScriptPluginDef def) {
 		String script = def.getScript();
 		if (StringUtil.isEmpty((String) script)) {
 			return Collections.EMPTY_LIST;
 		}
 		Set set = (Set) this.groovyScriptEngine.executeObject(script, (Map) pluginSession);
-		ArrayList<SysIdentity> list = new ArrayList<SysIdentity>();
+		ArrayList<SystemIdentity> list = new ArrayList<SystemIdentity>();
 		if (BeanUtils.isEmpty((Object) set)) {
 			return list;
 		}

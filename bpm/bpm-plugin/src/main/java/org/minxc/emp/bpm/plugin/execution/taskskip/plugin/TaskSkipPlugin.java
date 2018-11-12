@@ -5,7 +5,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.minxc.emp.basis.api.groovy.IGroovyScriptEngine;
-import org.minxc.emp.basis.api.model.SysIdentity;
+import org.minxc.emp.basis.api.model.SystemIdentity;
 import org.minxc.emp.bpm.api.engine.action.cmd.TaskActionCmd;
 import org.minxc.emp.bpm.api.engine.context.BpmContext;
 import org.minxc.emp.bpm.api.model.nodedef.BpmNodeDef;
@@ -63,7 +63,7 @@ public class TaskSkipPlugin extends AbstractBpmExecutionPlugin<BpmExecutionPlugi
 						return skipResult;
 					}
 					String userId = ContextUtil.getCurrentUserId();
-					SysIdentity identity = (SysIdentity) identityList.get(0);
+					SystemIdentity identity = (SystemIdentity) identityList.get(0);
 					if (!identity.getId().equals(userId))
 						break;
 					skipResult = TaskSkipType.SAME_USER_SKIP;

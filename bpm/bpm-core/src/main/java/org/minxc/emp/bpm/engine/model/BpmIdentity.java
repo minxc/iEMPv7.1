@@ -3,10 +3,10 @@ package org.minxc.emp.bpm.engine.model;
 import java.io.PrintStream;
 import java.util.LinkedHashSet;
 
-import org.minxc.emp.basis.api.model.SysIdentity;
+import org.minxc.emp.basis.api.model.SystemIdentity;
 import org.minxc.emp.idm.api.model.User;
 
-public class BpmIdentity implements SysIdentity {
+public class BpmIdentity implements SystemIdentity {
 	private static final long serialVersionUID = 4416404339210896051L;
 	private String id;
 	private String name;

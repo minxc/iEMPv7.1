@@ -1,6 +1,6 @@
 package org.minxc.emp.form.core.manager.impl;
 
-import org.minxc.emp.form.core.manager.FormDefManager;
+import org.minxc.emp.form.core.manager.FormDefinitionManager;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -13,7 +13,7 @@ public class FormHandlerManager {
 
 
     @Resource
-    FormDefManager formDefManager;
+    FormDefinitionManager formDefManager;
 
     /*	*//**
      * * field：{"NAME": "w", "SEX": "r"} table：{"TABLE1": "r", "TABLE2": "w"}

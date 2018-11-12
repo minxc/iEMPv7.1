@@ -11,9 +11,8 @@ import java.util.List;
 
 /**
  * 自定义对话框
- * 日期:2018年1月17日 下午5:05:55
  */
-public class FormCustDialog extends AbstractCommonModel {
+public class FormCustomDialog extends AbstractCommonModel {
 	
 	private static final long serialVersionUID = -5782406723540303549L;
 
@@ -110,27 +109,27 @@ public class FormCustDialog extends AbstractCommonModel {
      * 树形的配置信息
      */
     @Valid
-    private FormCustDialogTreeConfig treeConfig;
+    private FormCustomDialogTreeConfig treeConfig;
     /**
      * 列表数据时的展示字段
      */
     @Valid
-    private List<FormCustDialogDisplayField> displayFields;
+    private List<FormCustomDialogDisplayField> displayFields;
     /**
      * 条件字段
      */
     @Valid
-    private List<FormCustDialogConditionField> conditionFields;
+    private List<FormCustomDialogConditionField> conditionFields;
     /**
      * 返回字段
      */
     @Valid
-    private List<FormCustDialogReturnField> returnFields;
+    private List<FormCustomDialogReturnField> returnFields;
     /**
      * 排序字段
      */
     @Valid
-    private List<FormCustDialogSortField> sortFields;
+    private List<FormCustomDialogSortField> sortFields;
     
 
     public String getKey() {
@@ -258,7 +257,7 @@ public class FormCustDialog extends AbstractCommonModel {
     }
 
     public void setTreeConfigJson(String treeConfigJson) {
-        this.treeConfig = JsonUtil.parseObject(treeConfigJson, FormCustDialogTreeConfig.class);
+        this.treeConfig = JsonUtil.parseObject(treeConfigJson, FormCustomDialogTreeConfig.class);
         this.treeConfigJson = treeConfigJson;
     }
 
@@ -267,7 +266,7 @@ public class FormCustDialog extends AbstractCommonModel {
     }
 
     public void setDisplayFieldsJson(String displayFieldsJson) {
-        this.displayFields = JsonUtil.parseArray(displayFieldsJson, FormCustDialogDisplayField.class);
+        this.displayFields = JsonUtil.parseArray(displayFieldsJson, FormCustomDialogDisplayField.class);
         this.displayFieldsJson = displayFieldsJson;
     }
 
@@ -276,7 +275,7 @@ public class FormCustDialog extends AbstractCommonModel {
     }
 
     public void setConditionFieldsJson(String conditionFieldsJson) {
-        this.conditionFields = JsonUtil.parseArray(conditionFieldsJson, FormCustDialogConditionField.class);
+        this.conditionFields = JsonUtil.parseArray(conditionFieldsJson, FormCustomDialogConditionField.class);
         this.conditionFieldsJson = conditionFieldsJson;
     }
 
@@ -285,7 +284,7 @@ public class FormCustDialog extends AbstractCommonModel {
     }
 
     public void setReturnFieldsJson(String returnFieldsJson) {
-        this.returnFields = JsonUtil.parseArray(returnFieldsJson, FormCustDialogReturnField.class);
+        this.returnFields = JsonUtil.parseArray(returnFieldsJson, FormCustomDialogReturnField.class);
         this.returnFieldsJson = returnFieldsJson;
     }
 
@@ -294,51 +293,51 @@ public class FormCustDialog extends AbstractCommonModel {
     }
 
     public void setSortFieldsJson(String sortFieldsJson) {
-        this.sortFields = JsonUtil.parseArray(sortFieldsJson, FormCustDialogSortField.class);
+        this.sortFields = JsonUtil.parseArray(sortFieldsJson, FormCustomDialogSortField.class);
         this.sortFieldsJson = sortFieldsJson;
     }
 
-    public FormCustDialogTreeConfig getTreeConfig() {
+    public FormCustomDialogTreeConfig getTreeConfig() {
         return treeConfig;
     }
 
-    public void setTreeConfig(FormCustDialogTreeConfig treeConfig) {
+    public void setTreeConfig(FormCustomDialogTreeConfig treeConfig) {
         this.treeConfigJson = JsonUtil.toJSONString(treeConfig);
         this.treeConfig = treeConfig;
     }
 
-    public List<FormCustDialogDisplayField> getDisplayFields() {
+    public List<FormCustomDialogDisplayField> getDisplayFields() {
         return displayFields;
     }
 
-    public void setDisplayFields(List<FormCustDialogDisplayField> displayFields) {
+    public void setDisplayFields(List<FormCustomDialogDisplayField> displayFields) {
         this.displayFieldsJson = JsonUtil.toJSONString(displayFields);
         this.displayFields = displayFields;
     }
 
-    public List<FormCustDialogConditionField> getConditionFields() {
+    public List<FormCustomDialogConditionField> getConditionFields() {
         return conditionFields;
     }
 
-    public void setConditionFields(List<FormCustDialogConditionField> conditionFields) {
+    public void setConditionFields(List<FormCustomDialogConditionField> conditionFields) {
         this.conditionFieldsJson = JsonUtil.toJSONString(conditionFields);
         this.conditionFields = conditionFields;
     }
 
-    public List<FormCustDialogReturnField> getReturnFields() {
+    public List<FormCustomDialogReturnField> getReturnFields() {
         return returnFields;
     }
 
-    public void setReturnFields(List<FormCustDialogReturnField> returnFields) {
+    public void setReturnFields(List<FormCustomDialogReturnField> returnFields) {
         this.returnFieldsJson = JsonUtil.toJSONString(returnFields);
         this.returnFields = returnFields;
     }
 
-    public List<FormCustDialogSortField> getSortFields() {
+    public List<FormCustomDialogSortField> getSortFields() {
         return sortFields;
     }
 
-    public void setSortFields(List<FormCustDialogSortField> sortFields) {
+    public void setSortFields(List<FormCustomDialogSortField> sortFields) {
         this.sortFieldsJson = JsonUtil.toJSONString(sortFields);
         this.sortFields = sortFields;
     }

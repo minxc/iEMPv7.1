@@ -1,10 +1,10 @@
-package org.minxc.emp.basis.api.freemark;
+package org.minxc.emp.basis.api.freemarker;
 
 import freemarker.template.TemplateException;
 
 import java.io.IOException;
 
-public interface IFreemarkEngine {
+public interface FreeMarkerEngine{
 
     /**
      * 把指定的模板生成对应的字符串。

@@ -1,6 +1,6 @@
 package org.minxc.emp.system.impl.permission.impl;
 
-import org.minxc.emp.system.api.permission.IPermissionCalculator;
+import org.minxc.emp.system.api.permission.PermissionCalculator;
 import org.minxc.emp.system.util.ContextUtil;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +11,7 @@ import com.alibaba.fastjson.JSONObject;
  *  用户
  */
 @Service
-public class UsersPermissionCalculator implements IPermissionCalculator {
+public class UsersPermissionCalculator implements PermissionCalculator {
 
 	@Override
 	public String getTitle() {

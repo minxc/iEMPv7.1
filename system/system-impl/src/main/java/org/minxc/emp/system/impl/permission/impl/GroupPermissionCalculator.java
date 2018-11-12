@@ -7,7 +7,7 @@ import org.minxc.emp.core.util.AppContextUtil;
 import org.minxc.emp.core.util.ThreadMapUtil;
 import org.minxc.emp.idm.api.model.Group;
 import org.minxc.emp.idm.api.service.GroupService;
-import org.minxc.emp.system.api.permission.IPermissionCalculator;
+import org.minxc.emp.system.api.permission.PermissionCalculator;
 import org.minxc.emp.system.util.ContextUtil;
 
 import com.alibaba.fastjson.JSONObject;
@@ -16,7 +16,7 @@ import com.alibaba.fastjson.JSONObject;
 /**
  * 组 抽象类
  */
-public abstract class GroupPermissionCalculator implements IPermissionCalculator {
+public abstract class GroupPermissionCalculator implements PermissionCalculator {
 	
 	/**
 	 * 线程变量ThreadMapUtil中关于当前权限解析器的线程变量

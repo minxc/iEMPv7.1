@@ -6,12 +6,13 @@ import java.util.Set;
 import javax.annotation.Resource;
 
 import org.minxc.emp.basis.api.constant.RightsObjectConstants;
-import org.minxc.emp.system.api.service.SysAuthorizationService;
+import org.minxc.emp.system.api.service.SystemAuthorizationService;
 import org.minxc.emp.system.impl.manager.SystemAuthorizationManager;
 import org.springframework.stereotype.Service;
 
 @Service
-public class DefaultSysAuthorizationService implements SysAuthorizationService {
+public class DefaultSystemAuthorizationService implements SystemAuthorizationService {
+	
 	@Resource
 	SystemAuthorizationManager sysAuthorizationManager;
 

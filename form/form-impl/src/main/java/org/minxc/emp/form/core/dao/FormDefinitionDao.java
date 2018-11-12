@@ -11,7 +11,7 @@ import org.minxc.emp.form.core.model.FormDefinitionImpl;
  * @time 2018-03-19 20:30:46
  */
 @Mapper
-public interface FormDefDao extends CommonDao<String, FormDefinitionImpl> {
+public interface FormDefinitionDao extends CommonDao<String, FormDefinitionImpl> {
 
 	FormDefinitionImpl getByKey(String key);
 

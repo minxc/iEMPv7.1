@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Resource;
 
-import org.minxc.emp.basis.api.model.SysIdentity;
+import org.minxc.emp.basis.api.model.SystemIdentity;
 import org.minxc.emp.bpm.api.constant.ActionType;
 import org.minxc.emp.bpm.api.engine.action.cmd.BaseActionCmd;
 import org.minxc.emp.bpm.api.exception.BpmStatusCode;
@@ -63,7 +63,7 @@ public class TaskRejectActionHandler extends AbstractTaskActionHandler<DefualtTa
 			identitys = new BpmIdentity(opinion.getApprover(), opinion.getApproverName(), "user");
 		}
 		if (identitys != null) {
-			ArrayList<SysIdentity> list = new ArrayList<SysIdentity>();
+			ArrayList<SystemIdentity> list = new ArrayList<SystemIdentity>();
 			list.add(identitys);
 			actionModel.setBpmIdentity(destinationNode, list);
 		}

@@ -7,7 +7,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import javax.annotation.Resource;
 
-import org.minxc.emp.basis.api.model.SysIdentity;
+import org.minxc.emp.basis.api.model.SystemIdentity;
 import org.minxc.emp.bpm.api.constant.ExtractType;
 import org.minxc.emp.bpm.api.engine.plugin.def.BpmTaskPluginDef;
 import org.minxc.emp.bpm.engine.model.BpmIdentity;
@@ -22,26 +22,26 @@ public abstract class AbstractUserCalcPlugin<M extends BpmTaskPluginDef> impleme
 	@Resource
 	protected UserService bL;
 
-	protected abstract List<SysIdentity> queryByPluginDef(BpmUserCalcPluginSession var1, M var2);
+	protected abstract List<SystemIdentity> queryByPluginDef(BpmUserCalcPluginSession var1, M var2);
 
-	public List<SysIdentity> execute(BpmUserCalcPluginSession pluginSession, M pluginDef) {
+	public List<SystemIdentity> execute(BpmUserCalcPluginSession pluginSession, M pluginDef) {
 		if (pluginSession.isPreVrewModel().booleanValue() && !this.supportPreView()) {
 			return Collections.emptyList();
 		}
-		List<SysIdentity> list = this.queryByPluginDef(pluginSession, pluginDef);
+		List<SystemIdentity> list = this.queryByPluginDef(pluginSession, pluginDef);
 		if (BeanUtils.isEmpty(list)) {
 			return list;
 		}
 		ExtractType extractType = ((AbstractUserCalcPluginDef) pluginDef).getExtract();
-		LinkedHashSet<SysIdentity> set = new LinkedHashSet<SysIdentity>();
-		ArrayList<SysIdentity> rtnList = new ArrayList<SysIdentity>();
+		LinkedHashSet<SystemIdentity> set = new LinkedHashSet<SystemIdentity>();
+		ArrayList<SystemIdentity> rtnList = new ArrayList<SystemIdentity>();
 		list = this.extract(list, extractType);
 		set.addAll(list);
 		rtnList.addAll(set);
 		return rtnList;
 	}
 
-	protected List<SysIdentity> extract(List<SysIdentity> bpmIdentities, ExtractType extractType) {
+	protected List<SystemIdentity> extract(List<SystemIdentity> bpmIdentities, ExtractType extractType) {
 		if (BeanUtils.isEmpty(bpmIdentities)) {
 			return Collections.EMPTY_LIST;
 		}
@@ -51,16 +51,16 @@ public abstract class AbstractUserCalcPlugin<M extends BpmTaskPluginDef> impleme
 		return this.extractBpmIdentity(bpmIdentities);
 	}
 
-	protected List<SysIdentity> extractBpmIdentity(List<SysIdentity> bpmIdentities) {
-		ArrayList<SysIdentity> results = new ArrayList<SysIdentity>();
-		for (SysIdentity bpmIdentity : bpmIdentities) {
+	protected List<SystemIdentity> extractBpmIdentity(List<SystemIdentity> bpmIdentities) {
+		ArrayList<SystemIdentity> results = new ArrayList<SystemIdentity>();
+		for (SystemIdentity bpmIdentity : bpmIdentities) {
 			if ("user".equals(bpmIdentity.getType())) {
 				results.add(bpmIdentity);
 				continue;
 			}
 			List<User> users = this.bL.getUserListByGroup(bpmIdentity.getType(), bpmIdentity.getId());
 			for (User user : users) {
-				results.add((SysIdentity) new BpmIdentity(user));
+				results.add((SystemIdentity) new BpmIdentity(user));
 			}
 		}
 		return results;

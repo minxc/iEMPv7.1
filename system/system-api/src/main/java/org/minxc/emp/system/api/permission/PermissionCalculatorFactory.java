@@ -1,7 +1,6 @@
 package org.minxc.emp.system.api.permission;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -19,16 +18,16 @@ public class PermissionCalculatorFactory {
 	/**
 	 * Map<type,permission>
 	 */
-	private static Map<String, IPermissionCalculator> permissionMap;
+	private static Map<String, PermissionCalculator> permissionMap;
 
 	private PermissionCalculatorFactory() {
 
 	}
 
-	private static Map<String, IPermissionCalculator> permissionMap() {
+	private static Map<String, PermissionCalculator> permissionMap() {
 		if (permissionMap == null) {
 			permissionMap = new HashMap<>();
-			for (Entry<String, IPermissionCalculator> entry : AppContextUtil.getImplInstance(IPermissionCalculator.class).entrySet()) {
+			for (Entry<String, PermissionCalculator> entry : AppContextUtil.getImplInstance(PermissionCalculator.class).entrySet()) {
 				permissionMap.put(entry.getValue().getType(), entry.getValue());
 			}
 		}
@@ -50,7 +49,7 @@ public class PermissionCalculatorFactory {
 		}
 		for (Object obj : jsonArray) {
 			JSONObject json = (JSONObject) obj;
-			IPermissionCalculator permission = permissionMap().get(json.getString("type"));
+			PermissionCalculator permission = permissionMap().get(json.getString("type"));
 			if(permission==null) {
 				throw new BusinessException("权限类型["+json.getString("type")+"]找不到处理器");
 			}

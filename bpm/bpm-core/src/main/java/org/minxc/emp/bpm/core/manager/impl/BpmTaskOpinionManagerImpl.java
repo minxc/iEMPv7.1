@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.List;
 import javax.annotation.Resource;
 
-import org.minxc.emp.basis.api.model.SysIdentity;
+import org.minxc.emp.basis.api.model.SystemIdentity;
 import org.minxc.emp.bpm.api.engine.action.cmd.TaskActionCmd;
 import org.minxc.emp.bpm.api.model.inst.IBpmInstance;
 import org.minxc.emp.bpm.api.model.task.IBpmTask;
@@ -53,7 +53,7 @@ public class BpmTaskOpinionManagerImpl extends CommonManager<String, BpmTaskOpin
 	public void createOpinionByTask(TaskActionCmd taskActionModel) {
 		IBpmTask task = taskActionModel.getBpmTask();
 		IBpmInstance bpmInstance = taskActionModel.getBpmInstance();
-		List<SysIdentity> taskIdentitys = taskActionModel.getBpmIdentity(taskActionModel.getNodeId());
+		List<SystemIdentity> taskIdentitys = taskActionModel.getBpmIdentity(taskActionModel.getNodeId());
 		BpmTaskOpinion bpmTaskOpinion = new BpmTaskOpinion();
 		bpmTaskOpinion.setUpdateTime(new Date());
 		bpmTaskOpinion.setDurMs(Long.valueOf(0L));
@@ -72,7 +72,7 @@ public class BpmTaskOpinionManagerImpl extends CommonManager<String, BpmTaskOpin
 		}
 		StringBuffer assignInfo = new StringBuffer();
 		if (BeanUtils.isNotEmpty((Object) taskIdentitys)) {
-			for (SysIdentity identity : taskIdentitys) {
+			for (SystemIdentity identity : taskIdentitys) {
 				assignInfo.append(identity.getType()).append("-").append(identity.getName()).append("-")
 						.append(identity.getId()).append(",");
 			}

@@ -7,24 +7,23 @@ import java.util.List;
 import org.minxc.emp.biz.api.model.IBusinessObject;
 import org.minxc.emp.biz.api.service.IBusinessObjectService;
 import org.minxc.emp.biz.core.manager.BusinessObjectManager;
-import org.minxc.emp.biz.core.model.BusinessObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class BusinessObjectService implements IBusinessObjectService {
 	@Autowired
-	BusinessObjectManager k;
+	private BusinessObjectManager businessObjectManager;
 
 	public IBusinessObject getByKey(String key) {
-		return this.k.getByKey(key);
+		return this.businessObjectManager.getByKey(key);
 	}
 
 	public IBusinessObject getFilledByKey(String key) {
-		return this.k.getFilledByKey(key);
+		return this.businessObjectManager.getFilledByKey(key);
 	}
 
 	public List<JSONObject> boTreeData(String key) {
-		return this.k.boTreeData(key);
+		return this.businessObjectManager.boTreeData(key);
 	}
 }

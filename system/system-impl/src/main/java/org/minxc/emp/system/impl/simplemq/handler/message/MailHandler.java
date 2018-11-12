@@ -12,7 +12,7 @@ import org.minxc.emp.basis.impl.util.EmailUtil;
 import org.minxc.emp.core.util.JacksonUtil;
 import org.minxc.emp.core.util.PropertiesUtil;
 import org.minxc.emp.idm.api.model.User;
-import org.minxc.emp.system.api.service.SysIdentityConvert;
+import org.minxc.emp.system.api.service.SystemIdentityConvert;
 import org.springframework.stereotype.Component;
 
 import com.alibaba.fastjson.JSON;
@@ -26,7 +26,7 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 public class MailHandler extends AbsNotifyMessageHandler<NotifyMessage> {
 	@Resource
-	SysIdentityConvert sysIdentityConvert;
+	SystemIdentityConvert sysIdentityConvert;
 	
     @Override
     public String getType() {

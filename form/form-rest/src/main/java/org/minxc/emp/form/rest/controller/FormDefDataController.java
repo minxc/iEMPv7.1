@@ -19,10 +19,10 @@ import org.minxc.emp.common.rest.GenericController;
 import org.minxc.emp.common.rest.util.RequestUtil;
 import org.minxc.emp.core.api.aop.annotation.ErrorCatching;
 import org.minxc.emp.core.api.query.QueryFilter;
-import org.minxc.emp.form.core.manager.FormDefManager;
+import org.minxc.emp.form.core.manager.FormDefinitionManager;
 import org.minxc.emp.form.core.model.FormDefinitionImpl;
-import org.minxc.emp.form.core.model.FormDefData;
-import org.minxc.emp.form.core.service.FormDefDataService;
+import org.minxc.emp.form.core.model.FormDefinitionData;
+import org.minxc.emp.form.core.service.FormDefDataServiceImpl;
 import org.minxc.emp.system.api.model.SystemDataSource;
 import org.minxc.emp.system.api.service.SystemDataSourceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +42,7 @@ import com.alibaba.fastjson.JSONObject;
 @RequestMapping("/form/formDefData/")
 public class FormDefDataController extends GenericController {
 	@Autowired
-	FormDefDataService formDefDataService;
+	FormDefDataServiceImpl formDefDataService;
 	@Autowired
 	IBusinessDataService businessDataService;
 	@Autowired
@@ -54,7 +54,7 @@ public class FormDefDataController extends GenericController {
 	@Autowired
 	IBusinessPermissionService businessPermissionService;
 	@Autowired
-	FormDefManager formDefManager;
+	FormDefinitionManager formDefManager;
 
 	/**
 	 * 
@@ -71,7 +71,7 @@ public class FormDefDataController extends GenericController {
 	public void getFormDefData(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String key = RequestUtil.getString(request, "key");
 		String id = RequestUtil.getString(request, "id");
-		FormDefData formDefData = formDefDataService.getByFormDefKey(key, id);
+		FormDefinitionData formDefData = formDefDataService.getByFormDefKey(key, id);
 		writeSuccessData(response, formDefData);
 	}
 

@@ -6,8 +6,6 @@ import javax.xml.bind.annotation.XmlElement;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.minxc.emp.core.api.model.IdModel;
 
-
-
 /**
  * form_bus_set 实体对象
  */

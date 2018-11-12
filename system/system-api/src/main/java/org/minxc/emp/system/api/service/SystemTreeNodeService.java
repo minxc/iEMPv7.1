@@ -11,7 +11,7 @@ import org.minxc.emp.system.api.model.SystemTreeNode;
  * 
  * 
  */
-public interface ISysTreeNodeService {
+public interface SystemTreeNodeService {
     /**
      * 
      * 根据id获取对象

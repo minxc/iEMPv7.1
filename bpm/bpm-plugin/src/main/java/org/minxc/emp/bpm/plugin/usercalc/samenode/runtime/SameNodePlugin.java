@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Resource;
 
-import org.minxc.emp.basis.api.model.SysIdentity;
+import org.minxc.emp.basis.api.model.SystemIdentity;
 import org.minxc.emp.bpm.api.model.task.IBpmTaskOpinion;
 import org.minxc.emp.bpm.core.manager.BpmTaskOpinionManager;
 import org.minxc.emp.bpm.engine.model.BpmIdentity;
@@ -19,8 +19,8 @@ public class SameNodePlugin extends AbstractUserCalcPlugin<SameNodePluginDef> {
 	@Resource
 	private BpmTaskOpinionManager aa;
 
-	public List<SysIdentity> queryByPluginDef(BpmUserCalcPluginSession pluginSession, SameNodePluginDef sameNodeDef) {
-		ArrayList<SysIdentity> bpmIdentities = new ArrayList<SysIdentity>();
+	public List<SystemIdentity> queryByPluginDef(BpmUserCalcPluginSession pluginSession, SameNodePluginDef sameNodeDef) {
+		ArrayList<SystemIdentity> bpmIdentities = new ArrayList<SystemIdentity>();
 		List taskOpinionList = this.aa.getByInstAndNode(pluginSession.getBpmTask().getInstId(),
 				sameNodeDef.getNodeId());
 		if (BeanUtils.isEmpty((Object) taskOpinionList)) {
@@ -28,7 +28,7 @@ public class SameNodePlugin extends AbstractUserCalcPlugin<SameNodePluginDef> {
 		}
 		IBpmTaskOpinion taskOpinion = (IBpmTaskOpinion) taskOpinionList.get(taskOpinionList.size() - 1);
 		BpmIdentity bpmIdentity = new BpmIdentity(taskOpinion.getApprover(), taskOpinion.getApproverName(), "user");
-		bpmIdentities.add((SysIdentity) bpmIdentity);
+		bpmIdentities.add((SystemIdentity) bpmIdentity);
 		return bpmIdentities;
 	}
 

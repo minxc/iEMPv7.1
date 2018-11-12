@@ -9,13 +9,9 @@ import com.alibaba.fastjson.JSONObject;
 /**
  * 
  * Bo对其他模块提供出的service
- * 
- * 
- * 日期:2018年3月26日 下午5:46:56
- * 
- * 
  */
 public interface IBusinessObjectService {
+	
 	/**
 	 * 
 	 * 根据key获取BusinessObject

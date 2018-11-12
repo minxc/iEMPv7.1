@@ -2,7 +2,7 @@ package org.minxc.emp.form.core.dao;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.minxc.emp.common.db.dao.CommonDao;
-import org.minxc.emp.form.core.model.FormCustDialog;
+import org.minxc.emp.form.core.model.FormCustomDialog;
 
 
 /**
@@ -13,6 +13,6 @@ import org.minxc.emp.form.core.model.FormCustDialog;
  * @time 2018-01-18 19:30:51
  */
 @Mapper
-public interface FormCustDialogDao extends CommonDao<String, FormCustDialog> {
+public interface FormCustDialogDao extends CommonDao<String, FormCustomDialog> {
 
 }

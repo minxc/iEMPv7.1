@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
-import org.minxc.emp.basis.api.model.SysIdentity;
+import org.minxc.emp.basis.api.model.SystemIdentity;
 import org.minxc.emp.biz.api.model.IBusinessData;
 import org.minxc.emp.bpm.api.constant.ActionType;
 import org.minxc.emp.bpm.api.engine.action.handler.ActionHandler;
@@ -30,7 +30,6 @@ import com.alibaba.fastjson.JSONObject;
 
 /**
  * 实现ActionCmd基础实现接口。
- *
  */
 public abstract class BaseActionCmd implements ActionCmd {
     /**
@@ -40,7 +39,7 @@ public abstract class BaseActionCmd implements ActionCmd {
     /**
      * 前端、或者插件过程中设置的人员配置
      */
-    protected Map<String, List<SysIdentity>> identityMap_ = new HashMap<String, List<SysIdentity>>();
+    protected Map<String, List<SystemIdentity>> identityMap_ = new HashMap<String, List<SystemIdentity>>();
 
     /**
      * 前端提供业务数据
@@ -130,20 +129,20 @@ public abstract class BaseActionCmd implements ActionCmd {
     private void handleUserSetting(JSONObject jsonObject) {
         if (jsonObject.isEmpty()) return;
 
-        Map<String, List<SysIdentity>> map = new HashMap<String, List<SysIdentity>>();
+        Map<String, List<SystemIdentity>> map = new HashMap<String, List<SystemIdentity>>();
 
         Set<String> nodeIds = jsonObject.keySet();
         for (String nodeId : nodeIds) {
             JSONArray users = jsonObject.getJSONArray(nodeId);
             if (users == null || users.isEmpty()) continue;
-            List<SysIdentity> userList = new ArrayList<SysIdentity>();
+            List<SystemIdentity> userList = new ArrayList<SystemIdentity>();
 
             for (Object userObj : users) {
                 JSONObject user = (JSONObject) userObj;
                 String id = user.getString("id");
                 if (StringUtils.isEmpty(id)) continue;
 
-                SysIdentity bpmInentity = null;//TODO (BpmIdentity) DefaultBpmIdentity.getIdentityByUserId(id, user.getString("name"));
+                SystemIdentity bpmInentity = null;//TODO (BpmIdentity) DefaultBpmIdentity.getIdentityByUserId(id, user.getString("name"));
                 String type = user.getString("type");
                 if (StringUtils.isNotEmpty(type)) {
                     bpmInentity.setType(type);
@@ -175,7 +174,7 @@ public abstract class BaseActionCmd implements ActionCmd {
     }
 
 
-    public void setBpmIdentities(Map<String, List<SysIdentity>> map) {
+    public void setBpmIdentities(Map<String, List<SystemIdentity>> map) {
         this.identityMap_ = map;
     }
 
@@ -183,10 +182,10 @@ public abstract class BaseActionCmd implements ActionCmd {
         this.identityMap_.clear();
     }
 
-    public void addBpmIdentity(String key, SysIdentity bpmIdentity) {
-        List<SysIdentity> list = this.identityMap_.get(key);
+    public void addBpmIdentity(String key, SystemIdentity bpmIdentity) {
+        List<SystemIdentity> list = this.identityMap_.get(key);
         if (BeanUtils.isEmpty(list)) {
-            list = new ArrayList<SysIdentity>();
+            list = new ArrayList<SystemIdentity>();
             list.add(bpmIdentity);
             this.identityMap_.put(key, list);
         } else {
@@ -200,10 +199,10 @@ public abstract class BaseActionCmd implements ActionCmd {
      * @param key
      * @param bpmIdentityList void
      */
-    public void addBpmIdentity(String key, List<SysIdentity> bpmIdentityList) {
-        List<SysIdentity> list = this.identityMap_.get(key);
+    public void addBpmIdentity(String key, List<SystemIdentity> bpmIdentityList) {
+        List<SystemIdentity> list = this.identityMap_.get(key);
         if (BeanUtils.isEmpty(list)) {
-            list = new ArrayList<SysIdentity>();
+            list = new ArrayList<SystemIdentity>();
             list.addAll(bpmIdentityList);
             this.identityMap_.put(key, list);
         } else {
@@ -217,10 +216,10 @@ public abstract class BaseActionCmd implements ActionCmd {
      * @param key
      * @param bpmIdentityList void
      */
-    public void setBpmIdentity(String key, List<SysIdentity> bpmIdentityList) {
-        List<SysIdentity> list = this.identityMap_.get(key);
+    public void setBpmIdentity(String key, List<SystemIdentity> bpmIdentityList) {
+        List<SystemIdentity> list = this.identityMap_.get(key);
         if (BeanUtils.isEmpty(list)) {
-            list = new ArrayList<SysIdentity>();
+            list = new ArrayList<SystemIdentity>();
             list.addAll(bpmIdentityList);
             this.identityMap_.put(key, list);
         } else {
@@ -230,12 +229,12 @@ public abstract class BaseActionCmd implements ActionCmd {
     }
 
     @Override
-    public List<SysIdentity> getBpmIdentity(String nodeId) {
+    public List<SystemIdentity> getBpmIdentity(String nodeId) {
         return this.identityMap_.get(nodeId);
     }
 
     @Override
-    public Map<String, List<SysIdentity>> getBpmIdentities() {
+    public Map<String, List<SystemIdentity>> getBpmIdentities() {
         return identityMap_;
     }
 

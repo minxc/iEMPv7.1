@@ -2,7 +2,6 @@ package org.minxc.emp.bpm.api.engine.data.result;
 
 import com.alibaba.fastjson.JSONObject;
 
-import java.beans.Transient;
 import java.util.List;
 import java.util.Map;
 

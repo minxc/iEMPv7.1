@@ -122,7 +122,10 @@ public class DefaultQueryFilter implements QueryFilter {
         }
 		return dynamicWhereSql;
 	}
-
+	
+	/**
+	 * 获取排序语句
+	 */
 	@Override
 	public String getOrderBySql() {
 		if (this.getFieldSortList().size() > 0) {

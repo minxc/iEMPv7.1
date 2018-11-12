@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 import org.activiti.engine.delegate.VariableScope;
 import org.minxc.emp.basis.api.groovy.IGroovyScriptEngine;
-import org.minxc.emp.basis.api.model.SysIdentity;
+import org.minxc.emp.basis.api.model.SystemIdentity;
 import org.minxc.emp.bpm.api.constant.ExtractType;
 import org.minxc.emp.bpm.api.engine.constant.LogicType;
 import org.minxc.emp.bpm.api.engine.plugin.context.UserCalcPluginContext;
@@ -34,9 +34,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class UserAssignRuleCalc {
 
-	public static List<SysIdentity> a(BpmUserCalcPluginSession bpmUserCalcPluginSession, List<UserAssignRule> ruleList,
+	public static List<SystemIdentity> a(BpmUserCalcPluginSession bpmUserCalcPluginSession, List<UserAssignRule> ruleList,
 			Boolean forceExtract) {
-		ArrayList<SysIdentity> bpmIdentities = new ArrayList<SysIdentity>();
+		ArrayList<SystemIdentity> bpmIdentities = new ArrayList<SystemIdentity>();
 		Collections.sort(ruleList);
 		for (UserAssignRule userRule : ruleList) {
 			if (bpmIdentities.size() > 0)
@@ -71,10 +71,10 @@ public class UserAssignRuleCalc {
 		return bpmIdentities;
 	}
 
-	private static void a(List<SysIdentity> existBpmIdentities, List<SysIdentity> newBpmIdentities, LogicType logic) {
+	private static void a(List<SystemIdentity> existBpmIdentities, List<SystemIdentity> newBpmIdentities, LogicType logic) {
 		switch (logic) {
 			case OR : {
-				LinkedHashSet<SysIdentity> set = new LinkedHashSet<SysIdentity>();
+				LinkedHashSet<SystemIdentity> set = new LinkedHashSet<SystemIdentity>();
 				set.addAll(existBpmIdentities);
 				set.addAll(newBpmIdentities);
 				existBpmIdentities.clear();
@@ -82,9 +82,9 @@ public class UserAssignRuleCalc {
 				break;
 			}
 			case AND : {
-				ArrayList<SysIdentity> rtnList = new ArrayList<SysIdentity>();
-				for (SysIdentity identity : existBpmIdentities) {
-					for (SysIdentity tmp : newBpmIdentities) {
+				ArrayList<SystemIdentity> rtnList = new ArrayList<SystemIdentity>();
+				for (SystemIdentity identity : existBpmIdentities) {
+					for (SystemIdentity tmp : newBpmIdentities) {
 						if (!identity.equals((Object) tmp))
 							continue;
 						rtnList.add(identity);
@@ -95,7 +95,7 @@ public class UserAssignRuleCalc {
 				break;
 			}
 			default : {
-				for (SysIdentity tmp : newBpmIdentities) {
+				for (SystemIdentity tmp : newBpmIdentities) {
 					existBpmIdentities.remove((Object) tmp);
 				}
 			}

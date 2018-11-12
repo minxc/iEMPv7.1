@@ -1,12 +1,7 @@
 package org.minxc.emp.biz.api.constant;
+
 /**
- *  
  * BusinessObject中PersistenceType属性的枚举
- * 
- * 
- * 日期:2018年2月26日 下午3:19:05
- * 
- * 
  */
 public enum BusinessObjectPersistenceType {
 	/**

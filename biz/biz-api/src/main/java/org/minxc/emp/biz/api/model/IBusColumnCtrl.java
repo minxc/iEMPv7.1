@@ -1,12 +1,16 @@
 package org.minxc.emp.biz.api.model;
 /**
- *  
- * BusColumnCtrl接口类
  * 
- * 
- * 日期:2018年4月10日 下午7:43:11
- * 
- * 
+* 项目名称：biz-api   
+* 类名称：IBusColumnCtrl   
+* 类描述：   BusColumnCtrl接口类 
+* 创建人：Xianchang.min   
+* 创建时间：2018年11月12日 下午10:35:44   
+* 修改人：Xianchang.min   
+* 修改时间：2018年11月12日 下午10:35:44   
+* 修改备注：   
+* @version  1.0  
+*
  */
 public interface IBusColumnCtrl {
 

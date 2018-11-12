@@ -1,7 +1,5 @@
 package org.minxc.emp.form.core.manager;
 
-import java.util.List;
-
 import org.minxc.emp.common.manager.Manager;
 import org.minxc.emp.form.core.model.FormTemplate;
 

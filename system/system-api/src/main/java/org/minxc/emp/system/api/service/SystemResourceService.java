@@ -8,7 +8,7 @@ import org.minxc.emp.system.api.model.Application;
 import org.minxc.emp.system.api.model.SystemResource;
 
 
-public interface SysResourceService {
+public interface SystemResourceService {
 
 	List<Application> getCurrentUserSystem();
 

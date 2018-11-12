@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.minxc.emp.basis.api.model.SysIdentity;
+import org.minxc.emp.basis.api.model.SystemIdentity;
 import org.minxc.emp.idm.api.model.User;
 
 /**
@@ -20,10 +20,10 @@ public class NotifyMessage implements Serializable{
     private String htmlContent;
     private String textContent;
     private User sender;
-    private List<SysIdentity> receivers;
+    private List<SystemIdentity> receivers;
 
 
-    public NotifyMessage(String subject, String htmlContent, User sender, List<SysIdentity> receivers) {
+    public NotifyMessage(String subject, String htmlContent, User sender, List<SystemIdentity> receivers) {
         this.subject = subject;
         this.sender = sender;
         this.receivers = receivers;
@@ -49,11 +49,11 @@ public class NotifyMessage implements Serializable{
         this.sender = sender;
     }
 
-    public List<SysIdentity> getReceivers() {
+    public List<SystemIdentity> getReceivers() {
         return receivers;
     }
 
-    public void setReceivers(List<SysIdentity> receivers) {
+    public void setReceivers(List<SystemIdentity> receivers) {
         this.receivers = receivers;
     }
 

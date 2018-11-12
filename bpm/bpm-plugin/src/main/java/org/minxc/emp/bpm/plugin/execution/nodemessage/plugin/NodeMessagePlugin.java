@@ -1,6 +1,5 @@
 package org.minxc.emp.bpm.plugin.execution.nodemessage.plugin;
 
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -8,12 +7,12 @@ import java.util.List;
 import java.util.Map;
 import javax.annotation.Resource;
 
-import org.minxc.emp.basis.api.freemark.IFreemarkEngine;
+import org.minxc.emp.basis.api.freemarker.FreeMarkerEngine;
 import org.minxc.emp.basis.api.jms.model.DefaultJmsDTO;
 import org.minxc.emp.basis.api.jms.model.JmsDTO;
 import org.minxc.emp.basis.api.jms.model.msg.NotifyMessage;
 import org.minxc.emp.basis.api.jms.producer.JmsProducer;
-import org.minxc.emp.basis.api.model.SysIdentity;
+import org.minxc.emp.basis.api.model.SystemIdentity;
 import org.minxc.emp.basis.impl.groovy.GroovyScriptEngine;
 import org.minxc.emp.bpm.api.engine.action.cmd.BaseActionCmd;
 import org.minxc.emp.bpm.api.engine.context.BpmContext;
@@ -30,7 +29,6 @@ import org.minxc.emp.bpm.plugin.task.userassign.plugin.UserAssignRuleCalc;
 import org.minxc.emp.core.util.BeanUtils;
 import org.minxc.emp.core.util.StringUtil;
 import org.minxc.emp.system.util.ContextUtil;
-import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -43,7 +41,7 @@ public class NodeMessagePlugin extends AbstractBpmExecutionPlugin<BpmExecutionPl
 	@Resource
 	private JmsProducer i;
 	@Autowired
-	private IFreemarkEngine j;
+	private FreeMarkerEngine j;
 
 	public Void a(BpmExecutionPluginSession pluginSession, NodeMessagePluginDef pluginDef) {
 		List<NodeMessage> messages = pluginDef.getNodeMessageList();
@@ -75,7 +73,7 @@ public class NodeMessagePlugin extends AbstractBpmExecutionPlugin<BpmExecutionPl
 			this.LOG.error("消息发送插件解析消息模板失败，可能原因为:{}", (Object) e.getMessage(), (Object) e);
 			e.printStackTrace();
 		}
-		List<SysIdentity> userList = new ArrayList();
+		List<SystemIdentity> userList = new ArrayList();
 		if (BeanUtils.isEmpty((Object) nodeMessage.getUserRules())) {
 			BaseActionCmd cmd = (BaseActionCmd) BpmContext.getActionModel();
 			userList = cmd.getBpmIdentity(cmd.getNodeId());
@@ -96,7 +94,7 @@ public class NodeMessagePlugin extends AbstractBpmExecutionPlugin<BpmExecutionPl
 		return jmsDto;
 	}
 
-	private List<SysIdentity> a(BpmExecutionPluginSession pluginSession, List<UserAssignRule> ruleList) {
+	private List<SystemIdentity> a(BpmExecutionPluginSession pluginSession, List<UserAssignRule> ruleList) {
 		BpmUserCalcPluginSession calcSession = BpmPluginSessionFactory
 				.buildBpmUserCalcPluginSession((BpmPluginSession) pluginSession);
 		return UserAssignRuleCalc.a((BpmUserCalcPluginSession) calcSession, ruleList, (Boolean) false);

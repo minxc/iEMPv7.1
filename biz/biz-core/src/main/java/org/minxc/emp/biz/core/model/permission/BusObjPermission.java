@@ -10,8 +10,14 @@ import org.minxc.emp.biz.core.model.permission.BusTablePermission;
 public class BusObjPermission extends AbstractPermission implements IBusObjPermission {
 	
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7942366046542813475L;
+	
 	private String key;
 	private String name;
+	
 	private Map<String, BusTablePermission> R = new HashMap<String, BusTablePermission>();
 
 	public String getKey() {
