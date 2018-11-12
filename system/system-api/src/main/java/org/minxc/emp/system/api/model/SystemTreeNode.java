@@ -1,13 +1,13 @@
 package org.minxc.emp.system.api.model;
 
 /**
- * <pre>
- * 描述：系统树节点SysTreeNode接口类
- * 作者:aschs
- * 邮箱:aschs@qq.com
- * 日期:2018年3月28日 下午3:27:50
- * 版权:summer
- * </pre>
+
+ * 系统树节点SysTreeNode接口类
+
+
+
+
+
  */
 public interface SystemTreeNode {
     /**
