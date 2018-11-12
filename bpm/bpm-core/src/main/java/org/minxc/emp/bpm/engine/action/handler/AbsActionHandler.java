@@ -10,7 +10,7 @@ import javax.annotation.Resource;
 
 import org.minxc.emp.basis.impl.groovy.GroovyScriptEngine;
 import org.minxc.emp.biz.api.model.IBusinessData;
-import org.minxc.emp.biz.api.service.IBusinessDataService;
+import org.minxc.emp.biz.api.service.BusinessDataService;
 import org.minxc.emp.bpm.api.constant.ActionType;
 import org.minxc.emp.bpm.api.engine.action.cmd.BaseActionCmd;
 import org.minxc.emp.bpm.api.engine.action.cmd.TaskActionCmd;
@@ -55,7 +55,7 @@ public abstract class AbsActionHandler<T extends BaseActionCmd> implements Actio
 	@Resource
 	protected TaskIdentityLinkManager i;
 	@Resource
-	protected IBusinessDataService au;
+	protected BusinessDataService au;
 	@Resource
 	protected GroovyScriptEngine av;
 

@@ -5,13 +5,8 @@ import org.minxc.emp.biz.api.model.IBusinessTable;
 /**
  * 
  * 业务表对其他模块的service
- * 
- * 
- * 日期:2018年3月26日 下午6:03:05
- * 
- * 
  */
-public interface IBusinessTableService {
+public interface BusinessTableService {
 	/**
 	 * 
 	 * 根据key获取businessTable

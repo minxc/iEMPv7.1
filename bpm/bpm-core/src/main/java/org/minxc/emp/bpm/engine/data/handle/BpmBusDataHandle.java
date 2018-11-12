@@ -11,9 +11,9 @@ import javax.annotation.Resource;
 import org.minxc.emp.biz.api.model.IBusinessData;
 import org.minxc.emp.biz.api.model.IBusinessObject;
 import org.minxc.emp.biz.api.model.IBusinessPermission;
-import org.minxc.emp.biz.api.service.IBusinessDataService;
-import org.minxc.emp.biz.api.service.IBusinessObjectService;
-import org.minxc.emp.biz.api.service.IBusinessPermissionService;
+import org.minxc.emp.biz.api.service.BusinessDataService;
+import org.minxc.emp.biz.api.service.BusinessObjectService;
+import org.minxc.emp.biz.api.service.BusinessPermissionService;
 import org.minxc.emp.bpm.api.engine.action.cmd.BaseActionCmd;
 import org.minxc.emp.bpm.api.exception.BpmStatusCode;
 import org.minxc.emp.bpm.api.model.def.BpmDataModel;
@@ -46,11 +46,11 @@ public class BpmBusDataHandle {
 	@Resource
 	private BpmRightsFormService aI;
 	@Resource
-	private IBusinessDataService au;
+	private BusinessDataService au;
 	@Autowired
-	private IBusinessObjectService businessObjectService;
+	private BusinessObjectService businessObjectService;
 	@Autowired
-	private IBusinessPermissionService businessPermissionService;
+	private BusinessPermissionService businessPermissionService;
 	private static int aJ = -1;
 	private static Set<String> aK = Collections.synchronizedSet(new HashSet());
 	private static final String tableName = "BPM_BUS_LINK";

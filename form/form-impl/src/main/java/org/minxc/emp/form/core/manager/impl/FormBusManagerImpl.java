@@ -7,7 +7,7 @@ import javax.annotation.Resource;
 
 import org.minxc.emp.basis.api.groovy.IGroovyScriptEngine;
 import org.minxc.emp.biz.api.model.IBusinessData;
-import org.minxc.emp.biz.api.service.IBusinessDataService;
+import org.minxc.emp.biz.api.service.BusinessDataService;
 import org.minxc.emp.core.util.BeanUtils;
 import org.minxc.emp.core.util.StringUtil;
 import org.minxc.emp.core.util.ThreadMsgUtil;
@@ -33,7 +33,7 @@ public class FormBusManagerImpl implements FormBusManager {
     private final Logger log = LoggerFactory.getLogger(getClass());
 
     @Resource
-    IBusinessDataService bizDataService;
+    BusinessDataService bizDataService;
     @Resource
     FormBusSetManager formBusSetManager;
     @Resource

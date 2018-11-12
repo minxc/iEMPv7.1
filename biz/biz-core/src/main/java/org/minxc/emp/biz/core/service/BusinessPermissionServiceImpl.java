@@ -7,7 +7,7 @@ import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 import org.minxc.emp.biz.api.constant.RightsType;
 import org.minxc.emp.biz.api.model.IBusinessPermission;
-import org.minxc.emp.biz.api.service.IBusinessPermissionService;
+import org.minxc.emp.biz.api.service.BusinessPermissionService;
 import org.minxc.emp.biz.core.manager.BusinessObjectManager;
 import org.minxc.emp.biz.core.manager.BusinessPermissionManager;
 import org.minxc.emp.biz.core.model.BusinessPermission;
@@ -22,7 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class BusinessPermissionService implements IBusinessPermissionService {
+public class BusinessPermissionServiceImpl implements BusinessPermissionService {
 	@Autowired
 	private BusinessPermissionManager businessPermissionManager;
 	@Autowired

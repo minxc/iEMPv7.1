@@ -5,13 +5,13 @@ import com.alibaba.fastjson.JSONObject;
 import java.util.List;
 
 import org.minxc.emp.biz.api.model.IBusinessObject;
-import org.minxc.emp.biz.api.service.IBusinessObjectService;
+import org.minxc.emp.biz.api.service.BusinessObjectService;
 import org.minxc.emp.biz.core.manager.BusinessObjectManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class BusinessObjectService implements IBusinessObjectService {
+public class BusinessObjectServiceImpl implements BusinessObjectService {
 	@Autowired
 	private BusinessObjectManager businessObjectManager;
 

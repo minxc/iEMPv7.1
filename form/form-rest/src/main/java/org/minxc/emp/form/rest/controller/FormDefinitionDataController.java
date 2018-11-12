@@ -9,9 +9,9 @@ import org.minxc.emp.biz.api.constant.BusinessPermissionObjType;
 import org.minxc.emp.biz.api.model.IBusinessObject;
 import org.minxc.emp.biz.api.model.IBusinessPermission;
 import org.minxc.emp.biz.api.model.IBusinessTable;
-import org.minxc.emp.biz.api.service.IBusinessDataService;
-import org.minxc.emp.biz.api.service.IBusinessObjectService;
-import org.minxc.emp.biz.api.service.IBusinessPermissionService;
+import org.minxc.emp.biz.api.service.BusinessDataService;
+import org.minxc.emp.biz.api.service.BusinessObjectService;
+import org.minxc.emp.biz.api.service.BusinessPermissionService;
 import org.minxc.emp.common.db.dao.BasicDao;
 import org.minxc.emp.common.db.datasource.DbContextHolder;
 import org.minxc.emp.common.db.model.page.PageJson;
@@ -40,19 +40,19 @@ import com.alibaba.fastjson.JSONObject;
  */
 @RestController
 @RequestMapping("/form/formDefData/")
-public class FormDefDataController extends GenericController {
+public class FormDefinitionDataController extends GenericController {
 	@Autowired
 	FormDefDataServiceImpl formDefDataService;
 	@Autowired
-	IBusinessDataService businessDataService;
+	BusinessDataService businessDataService;
 	@Autowired
-	IBusinessObjectService businessObjectService;
+	BusinessObjectService businessObjectService;
 	@Autowired
 	SystemDataSourceService sysDataSourceService;
 	@Autowired
 	BasicDao<?> commonDao;
 	@Autowired
-	IBusinessPermissionService businessPermissionService;
+	BusinessPermissionService businessPermissionService;
 	@Autowired
 	FormDefinitionManager formDefManager;
 

@@ -5,8 +5,8 @@ import com.alibaba.fastjson.JSONObject;
 
 import org.minxc.emp.biz.api.model.IBusinessColumn;
 import org.minxc.emp.biz.api.model.IBusinessObject;
-import org.minxc.emp.biz.api.service.IBusinessDataService;
-import org.minxc.emp.biz.api.service.IBusinessObjectService;
+import org.minxc.emp.biz.api.service.BusinessDataService;
+import org.minxc.emp.biz.api.service.BusinessObjectService;
 import org.minxc.emp.bpm.api.constant.BpmConstants;
 import org.minxc.emp.bpm.api.engine.action.button.ButtonFactory;
 import org.minxc.emp.bpm.api.model.def.BpmDataModel;
@@ -47,11 +47,11 @@ public class BpmProcessDefController extends GenericController {
     @Resource
     BpmProcessDefService bpmProcessDefService;
     @Resource
-    IBusinessDataService bizDataService;
+    BusinessDataService bizDataService;
     @Resource
     GroupService userGroupService;
 	@Autowired
-	IBusinessObjectService businessObjectService;
+	BusinessObjectService businessObjectService;
 
 
     @RequestMapping("getDefaultNodeBtns")

@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.minxc.emp.basis.api.freemarker.FreeMarkerEngine;
 import org.minxc.emp.biz.api.model.IBusTableRel;
 import org.minxc.emp.biz.api.model.IBusinessObject;
-import org.minxc.emp.biz.api.service.IBusinessObjectService;
-import org.minxc.emp.biz.api.service.IBusinessTableService;
+import org.minxc.emp.biz.api.service.BusinessObjectService;
+import org.minxc.emp.biz.api.service.BusinessTableService;
 import org.minxc.emp.common.db.model.page.PageJson;
 import org.minxc.emp.common.rest.CommonController;
 import org.minxc.emp.common.rest.util.RequestUtil;
@@ -51,14 +51,14 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @RequestMapping("/form/formDef/")
 @Slf4j
-public class FormDefController extends CommonController<FormDefinitionImpl> {
+public class FormDefinitionController extends CommonController<FormDefinitionImpl> {
 	
 	@Autowired
 	private FormDefinitionManager formDefManager;
 	@Autowired
-	private IBusinessObjectService businessObjectService;
+	private BusinessObjectService businessObjectService;
 	@Autowired
-	private IBusinessTableService businessTableService;
+	private BusinessTableService businessTableService;
 	@Autowired
 	private FormTemplateManager formTemplateManager;
 	@Autowired

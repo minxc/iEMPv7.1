@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.minxc.emp.form.core.dao.FormCustDialogDao">
+<mapper namespace="org.minxc.emp.form.core.dao.FormCustomDialogDao">
     <resultMap id="FormCustDialog" type="org.minxc.emp.form.core.model.FormCustomDialog">
         <id property="id" column="id_" jdbcType="VARCHAR"/>
         <result property="key" column="key_" jdbcType="VARCHAR"/>

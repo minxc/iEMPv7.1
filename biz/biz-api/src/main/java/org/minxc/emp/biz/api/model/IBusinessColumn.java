@@ -5,8 +5,6 @@ package org.minxc.emp.biz.api.model;
  * 
  * BusinessColumn对其他模块的支持
  * 
- * 
- * 
  */
 public interface IBusinessColumn {
 	String getKey();

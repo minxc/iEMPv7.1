@@ -13,7 +13,7 @@ import javax.annotation.Resource;
 import org.minxc.emp.basis.impl.groovy.GroovyScriptEngine;
 import org.minxc.emp.biz.api.model.IBusinessData;
 import org.minxc.emp.biz.api.model.IBusinessPermission;
-import org.minxc.emp.biz.api.service.IBusinessDataService;
+import org.minxc.emp.biz.api.service.BusinessDataService;
 import org.minxc.emp.bpm.api.engine.action.button.ButtonFactory;
 import org.minxc.emp.bpm.api.engine.data.BpmFlowDataAccessor;
 import org.minxc.emp.bpm.api.engine.data.result.BpmFlowData;
@@ -71,7 +71,7 @@ public class DefaultBpmFlowDataAccessor implements BpmFlowDataAccessor {
 	@Resource
 	private GroovyScriptEngine av;
 	@Resource
-	private IBusinessDataService businessDataService;
+	private BusinessDataService businessDataService;
 
 	public BpmFlowInstanceData getInstanceData(String instanceId, FormType formType, String nodeId) {
 		BpmFlowInstanceData data = new BpmFlowInstanceData();

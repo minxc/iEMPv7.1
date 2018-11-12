@@ -5,10 +5,10 @@ import org.minxc.emp.biz.api.constant.BusinessPermissionObjType;
 import org.minxc.emp.biz.api.model.IBusTableRel;
 import org.minxc.emp.biz.api.model.IBusinessObject;
 import org.minxc.emp.biz.api.model.IBusinessPermission;
-import org.minxc.emp.biz.api.service.IBusinessDataService;
-import org.minxc.emp.biz.api.service.IBusinessObjectService;
-import org.minxc.emp.biz.api.service.IBusinessPermissionService;
-import org.minxc.emp.biz.api.service.IBusinessTableService;
+import org.minxc.emp.biz.api.service.BusinessDataService;
+import org.minxc.emp.biz.api.service.BusinessObjectService;
+import org.minxc.emp.biz.api.service.BusinessPermissionService;
+import org.minxc.emp.biz.api.service.BusinessTableService;
 import org.minxc.emp.form.api.service.FormDefDataService;
 import org.minxc.emp.form.core.manager.FormDefinitionManager;
 import org.minxc.emp.form.core.model.FormDefinitionImpl;
@@ -28,13 +28,13 @@ public class FormDefDataServiceImpl implements FormDefDataService {
 	@Autowired
 	FormDefinitionManager formDefManager;
 	@Autowired
-	IBusinessObjectService businessObjectService;
+	BusinessObjectService businessObjectService;
 	@Autowired
-	IBusinessTableService businessTableService;
+	BusinessTableService businessTableService;
 	@Autowired
-	IBusinessPermissionService businessPermissionService;
+	BusinessPermissionService businessPermissionService;
 	@Autowired
-	IBusinessDataService businessDataService;
+	BusinessDataService businessDataService;
 
 	/**
 	 * 

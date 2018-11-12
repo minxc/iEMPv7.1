@@ -25,7 +25,7 @@ import org.minxc.emp.core.util.StringUtil;
 import org.minxc.emp.form.api.constant.FormCustomDialogConditionFieldValueSource;
 import org.minxc.emp.form.api.constant.FormCustomDialogObjectType;
 import org.minxc.emp.form.api.constant.FormCustomDialogStyle;
-import org.minxc.emp.form.core.dao.FormCustDialogDao;
+import org.minxc.emp.form.core.dao.FormCustomDialogDao;
 import org.minxc.emp.form.core.manager.FormCustomDialogManager;
 import org.minxc.emp.form.core.model.FormCustomDialog;
 import org.minxc.emp.form.core.model.custdialog.FormCustomDialogConditionField;
@@ -47,9 +47,9 @@ import org.springframework.stereotype.Service;
  * @time 2018-01-18 19:30:51
  */
 @Service("formCustDialogManager")
-public class FormCustDialogManagerImpl extends CommonManager<String, FormCustomDialog> implements FormCustomDialogManager {
+public class FormCustomDialogManagerImpl extends CommonManager<String, FormCustomDialog> implements FormCustomDialogManager {
     @Resource
-    FormCustDialogDao formCustDialogDao;
+    FormCustomDialogDao formCustDialogDao;
     @Autowired
     SystemDataSourceService sysDataSourceService;
     @Autowired

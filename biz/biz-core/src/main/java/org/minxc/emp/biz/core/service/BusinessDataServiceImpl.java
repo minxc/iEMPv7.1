@@ -15,7 +15,7 @@ import org.minxc.emp.biz.api.model.IBusTableRel;
 import org.minxc.emp.biz.api.model.IBusinessData;
 import org.minxc.emp.biz.api.model.IBusinessObject;
 import org.minxc.emp.biz.api.model.IBusinessPermission;
-import org.minxc.emp.biz.api.service.IBusinessDataService;
+import org.minxc.emp.biz.api.service.BusinessDataService;
 import org.minxc.emp.biz.core.executor.assemblyval.AssemblyValExecuteChain;
 import org.minxc.emp.biz.core.executor.assemblyval.AssemblyValParam;
 import org.minxc.emp.biz.core.executor.parseval.ParseValExecuteChain;
@@ -30,7 +30,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class BusinessDataService implements IBusinessDataService {
+public class BusinessDataServiceImpl implements BusinessDataService {
 	
 	
 	@Autowired

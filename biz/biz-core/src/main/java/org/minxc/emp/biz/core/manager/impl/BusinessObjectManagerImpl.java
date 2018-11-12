@@ -15,7 +15,7 @@ import org.minxc.emp.biz.core.model.BusTableRel;
 import org.minxc.emp.biz.core.model.BusinessColumn;
 import org.minxc.emp.biz.core.model.BusinessObject;
 import org.minxc.emp.biz.core.model.BusinessTable;
-import org.minxc.emp.biz.core.service.BusinessPermissionService;
+import org.minxc.emp.biz.core.service.BusinessPermissionServiceImpl;
 import org.minxc.emp.common.db.model.query.DefaultQueryFilter;
 import org.minxc.emp.common.manager.impl.CommonManager;
 import org.minxc.emp.core.api.exception.BusinessException;
@@ -46,7 +46,7 @@ public class BusinessObjectManagerImpl extends CommonManager<String, BusinessObj
 	@Resource
 	private BusinessTableManager businessTableManager;
 	@Resource
-	private BusinessPermissionService businessPermissionService;
+	private BusinessPermissionServiceImpl businessPermissionService;
 	@Resource
 	private JdbcTemplate jdbcTemplate;
 

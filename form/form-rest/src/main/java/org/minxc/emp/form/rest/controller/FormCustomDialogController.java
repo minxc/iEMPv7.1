@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/form/formCustDialog/")
-public class FormCustDialogController extends CommonController<FormCustomDialog> {
+public class FormCustomDialogController extends CommonController<FormCustomDialog> {
 	
     @Autowired
     private FormCustomDialogManager formCustDialogManager;

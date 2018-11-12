@@ -6,14 +6,14 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 
 /**
- * @author xianggang
+ * @author xianchang.min
  */
 @Service("bpmFormHandlerManager")
 public class FormHandlerManager {
 
 
     @Resource
-    FormDefinitionManager formDefManager;
+    private FormDefinitionManager formDefManager;
 
     /*	*//**
      * * field：{"NAME": "w", "SEX": "r"} table：{"TABLE1": "r", "TABLE2": "w"}

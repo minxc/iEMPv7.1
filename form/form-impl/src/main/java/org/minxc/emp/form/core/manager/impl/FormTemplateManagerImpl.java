@@ -12,7 +12,7 @@ import org.dom4j.Element;
 import org.minxc.emp.biz.api.constant.BusTableRelType;
 import org.minxc.emp.biz.api.model.IBusTableRel;
 import org.minxc.emp.biz.api.model.IBusinessObject;
-import org.minxc.emp.biz.api.service.IBusinessObjectService;
+import org.minxc.emp.biz.api.service.BusinessObjectService;
 import org.minxc.emp.common.db.id.UniqueIdUtil;
 import org.minxc.emp.common.db.model.query.DefaultQueryFilter;
 import org.minxc.emp.common.manager.impl.CommonManager;
@@ -31,22 +31,16 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
-
 /**
  * 
  * FormTemplateManager的实现
- * 
- * 
- * 日期:2018年3月8日 下午3:16:32
- * 
- * 
  */
 @Service
 public class FormTemplateManagerImpl extends CommonManager<String, FormTemplate> implements FormTemplateManager{
 	@Resource
-	FormTemplateDao formTemplateDao;
+	private FormTemplateDao formTemplateDao;
 	@Autowired
-	IBusinessObjectService businessObjectService;
+	private BusinessObjectService businessObjectService;
 	
 	/**
 	 * 返回模版物理的路径。

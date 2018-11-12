@@ -10,7 +10,7 @@ import com.alibaba.fastjson.JSONObject;
  * 
  * Bo对其他模块提供出的service
  */
-public interface IBusinessObjectService {
+public interface BusinessObjectService {
 	
 	/**
 	 * 

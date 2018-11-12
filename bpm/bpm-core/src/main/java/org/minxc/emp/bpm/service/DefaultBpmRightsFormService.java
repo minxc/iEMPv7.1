@@ -7,7 +7,7 @@ import javax.annotation.Resource;
 
 import org.minxc.emp.biz.api.constant.BusinessPermissionObjType;
 import org.minxc.emp.biz.api.model.IBusinessPermission;
-import org.minxc.emp.biz.api.service.IBusinessPermissionService;
+import org.minxc.emp.biz.api.service.BusinessPermissionService;
 import org.minxc.emp.bpm.api.engine.data.result.BpmFlowData;
 import org.minxc.emp.bpm.api.exception.BpmStatusCode;
 import org.minxc.emp.bpm.api.model.def.BpmProcessDef;
@@ -29,7 +29,7 @@ public class DefaultBpmRightsFormService implements BpmRightsFormService {
 	@Resource
 	BpmProcessDefService a;
 	@Resource
-	IBusinessPermissionService businessPermissionService;
+	BusinessPermissionService businessPermissionService;
 
 	public IBusinessPermission getInstanceFormPermission(BpmFlowData flowData, String nodeId, FormType formType,
 			boolean isReadOnly) {

@@ -2,7 +2,7 @@ package org.minxc.emp.biz.api.service;
 
 import org.minxc.emp.biz.api.model.IBusinessPermission;
 
-public interface IBusinessPermissionService {
+public interface BusinessPermissionService {
 	/**
 	 * 
 	 * 以特定的bo为模板，根据objType和objVal返回权限

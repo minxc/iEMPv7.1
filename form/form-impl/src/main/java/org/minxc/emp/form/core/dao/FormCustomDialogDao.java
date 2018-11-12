@@ -13,6 +13,6 @@ import org.minxc.emp.form.core.model.FormCustomDialog;
  * @time 2018-01-18 19:30:51
  */
 @Mapper
-public interface FormCustDialogDao extends CommonDao<String, FormCustomDialog> {
+public interface FormCustomDialogDao extends CommonDao<String, FormCustomDialog> {
 
 }

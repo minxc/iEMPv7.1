@@ -9,7 +9,7 @@ import com.alibaba.fastjson.JSONObject;
 /**
  * 业务数据服务接口
  */
-public interface IBusinessDataService {
+public interface BusinessDataService {
 	/**
 	 * 
 	 * 保存 FormDefData 中的data数据

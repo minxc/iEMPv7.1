@@ -27,7 +27,7 @@ import java.util.List;
 public class FormTemplateController extends GenericController {
 
 	@Autowired
-	FormTemplateManager formTemplateManager;
+	private FormTemplateManager formTemplateManager;
 
 	/**
 	 * 
