@@ -9,7 +9,7 @@ import java.util.Set;
 
 import javax.annotation.Resource;
 
-import org.minxc.emp.basis.api.groovy.IGroovyScriptEngine;
+import org.minxc.emp.basis.api.groovy.GroovyScriptEngine;
 import org.minxc.emp.common.db.dao.BasicDao;
 import org.minxc.emp.common.db.dboper.DbOperator;
 import org.minxc.emp.common.db.dboper.DbOperatorFactory;
@@ -55,7 +55,7 @@ public class FormCustomDialogManagerImpl extends CommonManager<String, FormCusto
     @Autowired
     BasicDao<?> commonDao;
     @Autowired
-    IGroovyScriptEngine groovyScriptEngine;
+    GroovyScriptEngine groovyScriptEngine;
 
     @Override
     public FormCustomDialog getByKey(String key) {

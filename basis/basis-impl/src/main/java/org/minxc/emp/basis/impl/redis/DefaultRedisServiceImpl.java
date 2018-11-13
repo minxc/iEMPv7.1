@@ -1,6 +1,6 @@
 package org.minxc.emp.basis.impl.redis;
 
-import org.minxc.emp.basis.api.redis.IRedisService;
+import org.minxc.emp.basis.api.redis.RedisService;
 import org.minxc.emp.core.util.SerializeUtil;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.connection.RedisConnection;
@@ -15,7 +15,7 @@ import java.util.Set;
 import javax.annotation.Resource;
 
 @Service
-public class RedisService implements IRedisService {
+public class DefaultRedisServiceImpl implements RedisService {
 
     private static String redisCode = "utf-8";
 

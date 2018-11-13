@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 import javax.annotation.Resource;
 
-import org.minxc.emp.basis.api.groovy.IGroovyScriptEngine;
+import org.minxc.emp.basis.api.groovy.GroovyScriptEngine;
 import org.minxc.emp.basis.api.model.SystemIdentity;
 import org.minxc.emp.bpm.api.engine.action.cmd.TaskActionCmd;
 import org.minxc.emp.bpm.api.engine.context.BpmContext;
@@ -24,7 +24,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class TaskSkipPlugin extends AbstractBpmExecutionPlugin<BpmExecutionPluginSession, TaskSkipPluginDef> {
 	@Resource
-	IGroovyScriptEngine g;
+	GroovyScriptEngine g;
 	@Resource
 	BpmProcessDefService h;
 

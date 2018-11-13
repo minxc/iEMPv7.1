@@ -62,8 +62,8 @@ public class SysPropertiesManagerImpl extends CommonManager<String, SystemProper
 		Map<String, Map<String, String>> propertiesCache = new HashMap<String, Map<String, String>>();
 		for (SystemPropertiesEntity property : list) {
 			String environment = property.getEnvironment();
-			if (!EnvironmentConstant.contain(environment)) {
-				log.warn("当前系统属性的环境参数“{}”非系统定义参数{}请注意！", environment, EnvironmentConstant.getKes());
+			if (!EnvironmentConstant.containsKey(environment)) {
+				log.warn("当前系统属性的环境参数“{}”非系统定义参数{}请注意！", environment, EnvironmentConstant.getKey());
 			}
 
 			Map<String, String> proerties = propertiesCache.get(environment);

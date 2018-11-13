@@ -11,7 +11,7 @@ import org.minxc.emp.biz.api.constant.BusTableRelFkType;
 import org.minxc.emp.biz.api.constant.BusTableRelType;
 import org.minxc.emp.biz.api.constant.BusinessObjectPersistenceType;
 import org.minxc.emp.biz.api.model.IBusTableRel;
-import org.minxc.emp.biz.api.model.IBusTableRelFk;
+import org.minxc.emp.biz.api.model.BizTableRelationForeignKey;
 import org.minxc.emp.biz.api.model.IBusinessColumn;
 import org.minxc.emp.biz.api.model.IBusinessData;
 import org.minxc.emp.biz.core.manager.BusinessObjectManager;
@@ -77,7 +77,7 @@ public class BusinessDataPersistenceDbService implements BusinessDataPersistence
 			if (BeanUtils.isEmpty((Object) id)) {
 				businessData.setPk((Object) UniqueIdUtil.getSuid());
 				BusinessData parBusinessData = businessData.getParent();
-				for (IBusTableRelFk fk : businessData.getBusTableRel().getFks()) {
+				for (BizTableRelationForeignKey fk : businessData.getBusTableRel().getFks()) {
 					if (BusTableRelFkType.FIXED_VALUE.equalsWithKey(fk.getType())) {
 						businessData.put(fk.getFrom(), (Object) fk.getValue());
 						continue;
@@ -109,7 +109,7 @@ public class BusinessDataPersistenceDbService implements BusinessDataPersistence
 					&& !BusTableRelType.ONE_TO_ONE.equalsWithKey(rel.getType()))
 				continue;
 			HashMap<String, Object> param = new HashMap<String, Object>();
-			for (IBusTableRelFk fk : rel.getFks()) {
+			for (BizTableRelationForeignKey fk : rel.getFks()) {
 				if (BusTableRelFkType.FIXED_VALUE.equalsWithKey(fk.getType())) {
 					param.put(fk.getFrom(), fk.getValue());
 					continue;
@@ -167,7 +167,7 @@ public class BusinessDataPersistenceDbService implements BusinessDataPersistence
 				return;
 			}
 			HashMap<String, Object> param = new HashMap<String, Object>();
-			for (IBusTableRelFk fk2 : rel.getFks()) {
+			for (BizTableRelationForeignKey fk2 : rel.getFks()) {
 				if (BusTableRelFkType.FIXED_VALUE.equalsWithKey(fk2.getType())) {
 					param.put(fk2.getFrom(), fk2.getValue());
 					continue;
@@ -212,7 +212,7 @@ public class BusinessDataPersistenceDbService implements BusinessDataPersistence
 				continue;
 			HashMap<String, Object> param = new HashMap<String, Object>();
 			Map<String, Object> data = this.b((BusinessTable)busTableRel.getTable(), dbData);
-			for (IBusTableRelFk fk2 : rel.getFks()) {
+			for (BizTableRelationForeignKey fk2 : rel.getFks()) {
 				if (BusTableRelFkType.FIXED_VALUE.equalsWithKey(fk2.getType())) {
 					param.put(fk2.getFrom(), fk2.getValue());
 					continue;

@@ -8,7 +8,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import org.activiti.engine.delegate.VariableScope;
-import org.minxc.emp.basis.api.groovy.IGroovyScriptEngine;
+import org.minxc.emp.basis.api.groovy.GroovyScriptEngine;
 import org.minxc.emp.basis.api.model.SystemIdentity;
 import org.minxc.emp.bpm.api.constant.ExtractType;
 import org.minxc.emp.bpm.api.engine.constant.LogicType;
@@ -112,7 +112,7 @@ public class UserAssignRuleCalc {
 		map.put("bpmInstance", (Object) bpmUserCalcPluginSession.getBpmInstance());
 		map.put("variableScope", (Object) bpmUserCalcPluginSession.getVariableScope());
 		try {
-			return ((IGroovyScriptEngine) AppContextUtil.getBean(IGroovyScriptEngine.class)).executeBoolean(script, map);
+			return ((GroovyScriptEngine) AppContextUtil.getBean(GroovyScriptEngine.class)).executeBoolean(script, map);
 		} catch (Exception e) {
 			log.error("人员前置脚本解析失败,脚本：{},可能原因为：{}", new Object[]{script, e.getMessage(), e});
 			throw new BusinessException(BpmStatusCode.PLUGIN_USERCALC_RULE_CONDITION_ERROR);

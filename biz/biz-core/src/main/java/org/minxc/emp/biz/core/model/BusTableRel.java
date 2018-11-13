@@ -9,7 +9,7 @@ import java.util.List;
 import org.minxc.emp.biz.api.model.IBusTableRel;
 import org.minxc.emp.biz.api.model.IBusinessObject;
 import org.minxc.emp.biz.api.model.IBusinessTable;
-import org.minxc.emp.biz.core.model.BusTableRelFk;
+import org.minxc.emp.biz.core.model.BizTableRelationForeignKeyImpl;
 import org.minxc.emp.core.util.BeanUtils;
 
 public class BusTableRel implements IBusTableRel, Serializable {
@@ -26,7 +26,7 @@ public class BusTableRel implements IBusTableRel, Serializable {
 	private String tableKey;
 	private String tableComment;
 	private String type;
-	private List<BusTableRelFk> fks;
+	private List<BizTableRelationForeignKeyImpl> fks;
 	private IBusinessTable table;
 	private IBusTableRel parent;
 	private IBusinessObject busObj;
@@ -119,11 +119,11 @@ public class BusTableRel implements IBusTableRel, Serializable {
 	 * @return
 	 */
 	@Override
-	public List<BusTableRelFk> getFks() {
+	public List<BizTableRelationForeignKeyImpl> getFks() {
 		return this.fks;
 	}
 
-	public void setFks(List<BusTableRelFk> fks) {
+	public void setFks(List<BizTableRelationForeignKeyImpl> fks) {
 		this.fks = fks;
 	}
 

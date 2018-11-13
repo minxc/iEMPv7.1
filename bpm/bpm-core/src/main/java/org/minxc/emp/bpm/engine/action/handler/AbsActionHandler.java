@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 import javax.annotation.Resource;
 
-import org.minxc.emp.basis.impl.groovy.GroovyScriptEngine;
+import org.minxc.emp.basis.impl.groovy.DefaultGroovyScriptEngineImpl;
 import org.minxc.emp.biz.api.model.IBusinessData;
 import org.minxc.emp.biz.api.service.BusinessDataService;
 import org.minxc.emp.bpm.api.constant.ActionType;
@@ -57,7 +57,7 @@ public abstract class AbsActionHandler<T extends BaseActionCmd> implements Actio
 	@Resource
 	protected BusinessDataService au;
 	@Resource
-	protected GroovyScriptEngine av;
+	protected DefaultGroovyScriptEngineImpl av;
 
 	@Transactional
 	public void execute(T model) {

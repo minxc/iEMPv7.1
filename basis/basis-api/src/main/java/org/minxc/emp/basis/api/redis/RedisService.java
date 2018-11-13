@@ -2,7 +2,7 @@ package org.minxc.emp.basis.api.redis;
 
 import java.util.Set;
 
-public interface IRedisService {
+public interface RedisService {
 
     /**
      * @param keyo

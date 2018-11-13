@@ -5,7 +5,7 @@ package org.minxc.emp.core.cache.impl;
 
 import javax.annotation.Resource;
 
-import org.minxc.emp.basis.api.redis.IRedisService;
+import org.minxc.emp.basis.api.redis.RedisService;
 import org.minxc.emp.core.cache.Cache;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,7 +26,7 @@ public class RedisCache<T extends Object> implements Cache<T>  {
 	private Logger logger = LoggerFactory.getLogger(RedisCache.class);
 
     @Resource
-    private IRedisService redisService;
+    private RedisService redisService;
 
     @Override
     public synchronized void add(String key, T obj) {

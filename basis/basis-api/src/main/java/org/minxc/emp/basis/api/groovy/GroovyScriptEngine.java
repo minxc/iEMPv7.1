@@ -2,7 +2,7 @@ package org.minxc.emp.basis.api.groovy;
 
 import java.util.Map;
 
-public interface IGroovyScriptEngine {
+public interface GroovyScriptEngine {
     /**
      * 执行groovy代码无返回。
      *

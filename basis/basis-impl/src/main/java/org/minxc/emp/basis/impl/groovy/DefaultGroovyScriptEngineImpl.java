@@ -5,8 +5,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import org.minxc.emp.basis.api.groovy.IGroovyScriptEngine;
-import org.minxc.emp.basis.api.groovy.IScript;
+import org.minxc.emp.basis.api.groovy.GroovyScriptEngine;
+import org.minxc.emp.basis.api.groovy.Script;
 import org.minxc.emp.core.util.AppContextUtil;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationListener;
@@ -21,7 +21,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @Component
-public class GroovyScriptEngine implements IGroovyScriptEngine, ApplicationListener{
+public class DefaultGroovyScriptEngineImpl implements GroovyScriptEngine, ApplicationListener{
 
     private GroovyBinding groovyBinding = new GroovyBinding();
     
@@ -93,8 +93,8 @@ public class GroovyScriptEngine implements IGroovyScriptEngine, ApplicationListe
     
     @Override
     public void onApplicationEvent(ApplicationEvent applicationEvent) {
-    	Map<String, IScript> scirptImpls =	AppContextUtil.getImplInstance(IScript.class);
-    	for(Entry<String, IScript> scriptMap : scirptImpls.entrySet()) {
+    	Map<String, Script> scirptImpls =	AppContextUtil.getImplInstance(Script.class);
+    	for(Entry<String, Script> scriptMap : scirptImpls.entrySet()) {
     		groovyBinding.setProperty(scriptMap.getKey(), scriptMap.getValue());
     	}
     }

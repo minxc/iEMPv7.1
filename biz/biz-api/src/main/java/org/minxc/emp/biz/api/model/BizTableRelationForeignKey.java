@@ -9,7 +9,7 @@ package org.minxc.emp.biz.api.model;
  * 
  * 
  */
-public interface IBusTableRelFk {
+public interface BizTableRelationForeignKey {
 	/**
 	 * 
 	 * 业务表对应的映射字段

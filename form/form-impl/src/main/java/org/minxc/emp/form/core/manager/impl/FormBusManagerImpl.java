@@ -5,7 +5,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import org.minxc.emp.basis.api.groovy.IGroovyScriptEngine;
+import org.minxc.emp.basis.api.groovy.GroovyScriptEngine;
 import org.minxc.emp.biz.api.model.IBusinessData;
 import org.minxc.emp.biz.api.service.BusinessDataService;
 import org.minxc.emp.core.util.BeanUtils;
@@ -39,7 +39,7 @@ public class FormBusManagerImpl implements FormBusManager {
     @Resource
     FormDefinitionManager formDefManager;
     @Resource
-    IGroovyScriptEngine groovyScriptEngine;
+    GroovyScriptEngine groovyScriptEngine;
 
     @Override
     public IBusinessData getBoData(String boKey, Map param) {

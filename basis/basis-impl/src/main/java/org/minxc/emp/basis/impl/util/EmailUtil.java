@@ -14,8 +14,6 @@ import org.minxc.emp.core.util.AppContextUtil;
 
 /**
  * 这个类用于发送邮件。
- * 
- * 
  */
 public class EmailUtil {
 

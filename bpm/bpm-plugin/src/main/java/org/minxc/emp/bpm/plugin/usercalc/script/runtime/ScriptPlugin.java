@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.Set;
 import javax.annotation.Resource;
 
-import org.minxc.emp.basis.api.groovy.IGroovyScriptEngine;
+import org.minxc.emp.basis.api.groovy.GroovyScriptEngine;
 import org.minxc.emp.basis.api.model.SystemIdentity;
 import org.minxc.emp.bpm.engine.plugin.runtime.abstact.AbstractUserCalcPlugin;
 import org.minxc.emp.bpm.engine.plugin.session.BpmUserCalcPluginSession;
@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ScriptPlugin extends AbstractUserCalcPlugin<ScriptPluginDef> {
 	@Resource
-	IGroovyScriptEngine groovyScriptEngine;
+	GroovyScriptEngine groovyScriptEngine;
 
 	public List<SystemIdentity> queryByPluginDef(BpmUserCalcPluginSession pluginSession, ScriptPluginDef def) {
 		String script = def.getScript();

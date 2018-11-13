@@ -1,6 +1,5 @@
 package org.minxc.emp.common.db.api.table;
 
-
 import org.minxc.emp.common.db.api.table.model.Index;
 
 import java.sql.SQLException;

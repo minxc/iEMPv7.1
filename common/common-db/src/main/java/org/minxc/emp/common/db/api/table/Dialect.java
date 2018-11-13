@@ -7,9 +7,6 @@ import java.util.List;
 
 /**
  * 方言接口
- *
- * 
- * 
  */
 public interface Dialect {
     /**

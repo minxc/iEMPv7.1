@@ -2,7 +2,7 @@ package org.minxc.emp.system.impl.groovy;
 
 import javax.annotation.Resource;
 
-import org.minxc.emp.basis.api.groovy.IScript;
+import org.minxc.emp.basis.api.groovy.Script;
 import org.minxc.emp.idm.api.model.User;
 import org.minxc.emp.system.api.service.SerialNoService;
 import org.minxc.emp.system.util.ContextUtil;
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
  */
 
 @Component
-public class SystemScript implements IScript {
+public class SystemScript implements Script {
 	
 	@Resource
 	SerialNoService serialNoService;

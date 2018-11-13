@@ -1,9 +1,7 @@
 package org.minxc.emp.basis.api.constant;
 
 /**
- * 
  * @author Xianchang.min
- *
  */
 public enum RightsObjectConstants {
 	
@@ -30,6 +28,6 @@ public enum RightsObjectConstants {
 				return rights;
 			}
 		}
-		throw new RuntimeException(String.format(" key [%s] 对应RightsObjectConstants 不存在常亮定义，请核查！",key));
+		throw new RuntimeException(String.format(" key [%s]所对应的RightsObjectConstants不存在常量定义，请检查！",key));
 	}
 }

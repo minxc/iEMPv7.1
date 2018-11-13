@@ -13,7 +13,7 @@ import org.minxc.emp.basis.api.jms.model.JmsDTO;
 import org.minxc.emp.basis.api.jms.model.msg.NotifyMessage;
 import org.minxc.emp.basis.api.jms.producer.JmsProducer;
 import org.minxc.emp.basis.api.model.SystemIdentity;
-import org.minxc.emp.basis.impl.groovy.GroovyScriptEngine;
+import org.minxc.emp.basis.impl.groovy.DefaultGroovyScriptEngineImpl;
 import org.minxc.emp.bpm.api.engine.action.cmd.BaseActionCmd;
 import org.minxc.emp.bpm.api.engine.context.BpmContext;
 import org.minxc.emp.bpm.api.engine.plugin.def.UserAssignRule;
@@ -35,7 +35,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class NodeMessagePlugin extends AbstractBpmExecutionPlugin<BpmExecutionPluginSession, NodeMessagePluginDef> {
 	@Resource
-	private GroovyScriptEngine g;
+	private DefaultGroovyScriptEngineImpl g;
 	@Resource
 	private BpmProcessDefService h;
 	@Resource

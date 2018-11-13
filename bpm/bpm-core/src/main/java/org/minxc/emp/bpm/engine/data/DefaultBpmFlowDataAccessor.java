@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.Set;
 import javax.annotation.Resource;
 
-import org.minxc.emp.basis.impl.groovy.GroovyScriptEngine;
+import org.minxc.emp.basis.impl.groovy.DefaultGroovyScriptEngineImpl;
 import org.minxc.emp.biz.api.model.IBusinessData;
 import org.minxc.emp.biz.api.model.IBusinessPermission;
 import org.minxc.emp.biz.api.service.BusinessDataService;
@@ -69,7 +69,7 @@ public class DefaultBpmFlowDataAccessor implements BpmFlowDataAccessor {
 	@Resource
 	private BpmBusDataHandle aH;
 	@Resource
-	private GroovyScriptEngine av;
+	private DefaultGroovyScriptEngineImpl av;
 	@Resource
 	private BusinessDataService businessDataService;
 

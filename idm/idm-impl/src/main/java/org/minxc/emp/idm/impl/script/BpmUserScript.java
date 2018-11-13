@@ -3,7 +3,7 @@ package org.minxc.emp.idm.impl.script;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
-import org.minxc.emp.basis.api.groovy.IScript;
+import org.minxc.emp.basis.api.groovy.Script;
 import org.minxc.emp.idm.impl.manager.GroupManager;
 import org.minxc.emp.idm.impl.manager.GroupUserManager;
 import org.minxc.emp.idm.impl.manager.RoleManager;
@@ -14,7 +14,7 @@ import org.minxc.emp.idm.impl.manager.UserManager;
  * 作用：可用于节点处理人
  */
 @Service
-public class BpmUserScript implements IScript {
+public class BpmUserScript implements Script {
 	
     @Resource
     RoleManager roleManager;

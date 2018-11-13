@@ -2,11 +2,9 @@ package org.minxc.emp.basis.api.constant;
 
 import org.apache.commons.lang3.StringUtils;
 
-
 /**
  * 
  * @author Xianchang.min
- *
  */
 public enum EnvironmentConstant {
     DEV("DEV", ",开发-默认"),
@@ -32,7 +30,7 @@ public enum EnvironmentConstant {
         return value;
     }
 
-    public static String getKes() {
+    public static String getKey() {
         StringBuffer sb = new StringBuffer();
         for (EnvironmentConstant e : EnvironmentConstant.values()) {
             sb.append("[").append(e.key).append("]");
@@ -40,7 +38,7 @@ public enum EnvironmentConstant {
         return sb.toString();
     }
 
-    public static boolean contain(String key) {
+    public static boolean containsKey(String key) {
         if (StringUtils.isEmpty(key)) return false;
 
         for (EnvironmentConstant e : EnvironmentConstant.values()) {

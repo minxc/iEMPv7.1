@@ -15,14 +15,15 @@ public enum SystemStatusCode implements StatusCode {
     SERIALNO_NO_EXSIT("50002", "流水号不存在"),;
 
     private String code;
-    private String desc;
+    private String description;
     private String application;
     private String tenant;
 
     SystemStatusCode(String code, String description) {
         this.setCode(code);
-        this.setDesc(description);
+        this.setDescription(description);
         this.setApplication("SYS");
+        this.setTenant("");
     }
 
     /**
@@ -47,19 +48,14 @@ public enum SystemStatusCode implements StatusCode {
         this.code = code;
     }
 
-    public String getDesc() {
-        return desc;
-    }
-
-    public void setDesc(String msg) {
-        this.desc = msg;
-    }
-
 
 	@Override
 	public String getDescription() {
-		// TODO Auto-generated method stub
-		return desc;
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	@Override

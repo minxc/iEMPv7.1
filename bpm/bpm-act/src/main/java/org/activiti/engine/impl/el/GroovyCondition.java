@@ -3,7 +3,7 @@ package org.activiti.engine.impl.el;
 import java.util.Map;
 import org.activiti.engine.delegate.DelegateExecution;
 import org.activiti.engine.impl.Condition;
-import org.minxc.emp.basis.api.groovy.IGroovyScriptEngine;
+import org.minxc.emp.basis.api.groovy.GroovyScriptEngine;
 import org.minxc.emp.bpm.api.engine.action.cmd.ActionCmd;
 import org.minxc.emp.bpm.api.engine.action.cmd.BaseActionCmd;
 import org.minxc.emp.bpm.api.engine.context.BpmContext;
@@ -26,7 +26,7 @@ public class GroovyCondition implements Condition {
 		maps.putAll(cmd.getBizDataMap());
 		BaseActionCmd submitAction = (BaseActionCmd) BpmContext.submitActionModel();
 		maps.put("submitActionName", submitAction.getActionType().getKey());
-		IGroovyScriptEngine engine = (IGroovyScriptEngine) AppContextUtil.getBean(IGroovyScriptEngine.class);
+		GroovyScriptEngine engine = (GroovyScriptEngine) AppContextUtil.getBean(GroovyScriptEngine.class);
 		try {
 			return engine.executeBoolean(this.script, maps);
 		} catch (Exception e) {

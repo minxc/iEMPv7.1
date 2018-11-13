@@ -5,11 +5,6 @@ import org.minxc.emp.biz.api.model.permission.IBusObjPermission;
 /**
  *  
  * BusinessObject接口类
- * 
- * 
- * 日期:2018年3月26日 下午5:40:45
- * 
- * 
  */
 public interface IBusinessObject {
 	/**

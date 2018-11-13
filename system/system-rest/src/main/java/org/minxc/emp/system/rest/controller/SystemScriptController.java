@@ -8,7 +8,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.minxc.emp.basis.api.groovy.IGroovyScriptEngine;
+import org.minxc.emp.basis.api.groovy.GroovyScriptEngine;
 import org.minxc.emp.common.db.api.IdGenerator;
 import org.minxc.emp.common.rest.CommonController;
 import org.minxc.emp.common.rest.util.RequestUtil;
@@ -31,7 +31,7 @@ public class SystemScriptController extends CommonController<ScriptEntity> {
     @Resource
     private IdGenerator idGenerator;
     @Resource
-    IGroovyScriptEngine groovyScriptEngine;
+    GroovyScriptEngine groovyScriptEngine;
 
    
 

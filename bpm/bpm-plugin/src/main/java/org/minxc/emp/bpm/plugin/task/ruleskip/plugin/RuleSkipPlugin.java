@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 import javax.annotation.Resource;
 
-import org.minxc.emp.basis.api.groovy.IGroovyScriptEngine;
+import org.minxc.emp.basis.api.groovy.GroovyScriptEngine;
 import org.minxc.emp.bpm.api.engine.action.cmd.TaskActionCmd;
 import org.minxc.emp.bpm.api.engine.context.BpmContext;
 import org.minxc.emp.bpm.engine.plugin.runtime.abstact.AbstractBpmTaskPlugin;
@@ -19,7 +19,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class RuleSkipPlugin extends AbstractBpmTaskPlugin<BpmTaskPluginSession, RuleSkipPluginDef> {
 	@Resource
-	private IGroovyScriptEngine g;
+	private GroovyScriptEngine g;
 
 	public Void a(BpmTaskPluginSession pluginSession, RuleSkipPluginDef pluginDef) {
 		if (BeanUtils.isEmpty((Object) pluginDef.getJumpRules())) {

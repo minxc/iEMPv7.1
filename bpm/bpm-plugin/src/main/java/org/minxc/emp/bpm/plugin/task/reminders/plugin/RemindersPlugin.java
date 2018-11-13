@@ -3,7 +3,7 @@ package org.minxc.emp.bpm.plugin.task.reminders.plugin;
 import java.util.List;
 import javax.annotation.Resource;
 
-import org.minxc.emp.basis.api.groovy.IGroovyScriptEngine;
+import org.minxc.emp.basis.api.groovy.GroovyScriptEngine;
 import org.minxc.emp.bpm.api.constant.EventType;
 import org.minxc.emp.bpm.engine.plugin.runtime.abstact.AbstractBpmTaskPlugin;
 import org.minxc.emp.bpm.engine.plugin.session.BpmTaskPluginSession;
@@ -13,7 +13,7 @@ import org.minxc.emp.core.util.StringUtil;
 
 public class RemindersPlugin extends AbstractBpmTaskPlugin<BpmTaskPluginSession, RemindersPluginDef> {
 	@Resource
-	IGroovyScriptEngine groovyScriptEngine;
+	GroovyScriptEngine groovyScriptEngine;
 
 	public Void execute(BpmTaskPluginSession pluginSession, RemindersPluginDef pluginDef) {
 		if (pluginSession.getEventType() == EventType.TASK_COMPLETE_EVENT) {

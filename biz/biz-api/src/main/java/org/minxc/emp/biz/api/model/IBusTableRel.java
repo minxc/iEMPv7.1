@@ -55,7 +55,7 @@ public interface IBusTableRel {
 	 * 
 	 * @return
 	 */
-	List<? extends IBusTableRelFk> getFks();
+	List<? extends BizTableRelationForeignKey> getFks();
 
 	/**
 	 * 

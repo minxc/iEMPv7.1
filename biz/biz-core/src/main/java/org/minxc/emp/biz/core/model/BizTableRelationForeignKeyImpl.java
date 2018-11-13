@@ -2,13 +2,12 @@ package org.minxc.emp.biz.core.model;
 
 import java.io.Serializable;
 
-import org.minxc.emp.biz.api.model.IBusTableRelFk;
+import org.minxc.emp.biz.api.model.BizTableRelationForeignKey;
 
-public class BusTableRelFk implements IBusTableRelFk, Serializable {
+public class BizTableRelationForeignKeyImpl implements BizTableRelationForeignKey, Serializable {
+	
 	/** 
-	
 	* @Fields serialVersionUID : TODO(用一句话描述这个变量表示什么) 
-	
 	*/ 
 	private static final long serialVersionUID = -8146703461596028045L;
 	

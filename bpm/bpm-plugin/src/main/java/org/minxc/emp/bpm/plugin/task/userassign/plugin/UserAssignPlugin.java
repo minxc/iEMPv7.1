@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Resource;
 
-import org.minxc.emp.basis.api.groovy.IGroovyScriptEngine;
+import org.minxc.emp.basis.api.groovy.GroovyScriptEngine;
 import org.minxc.emp.basis.api.model.SystemIdentity;
 import org.minxc.emp.bpm.api.engine.action.cmd.TaskActionCmd;
 import org.minxc.emp.bpm.api.engine.context.BpmContext;
@@ -25,7 +25,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserAssignPlugin extends AbstractBpmTaskPlugin<BpmTaskPluginSession, BpmTaskPluginDef> {
 	@Resource
-	IGroovyScriptEngine groovyScriptEngine;
+	GroovyScriptEngine groovyScriptEngine;
 
 	public Void execute(BpmTaskPluginSession pluginSession, BpmTaskPluginDef pluginDef) {
 		UserAssignPluginDef assignPluginDef = (UserAssignPluginDef) pluginDef;

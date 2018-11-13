@@ -8,10 +8,9 @@ import java.util.Map;
 
 /**
  * Groovy 绑定
- *
- * @author ray
  */
 public class GroovyBinding extends Binding {
+	
     @SuppressWarnings("unused")
     private Map<?, ?> variables;
     private static ThreadLocal<Map<String, Object>> localVars = new ThreadLocal<Map<String, Object>>();
