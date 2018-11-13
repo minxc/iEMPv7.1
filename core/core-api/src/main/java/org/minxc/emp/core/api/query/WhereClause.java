@@ -15,6 +15,7 @@ package org.minxc.emp.core.api.query;
  */
 
 public interface WhereClause {
+
     /**
      * 返回SQL片段
      */

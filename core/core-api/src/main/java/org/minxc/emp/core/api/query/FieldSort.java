@@ -1,6 +1,5 @@
 package org.minxc.emp.core.api.query;
 
-
 /**
  * 
 * 项目名称：base-intf   

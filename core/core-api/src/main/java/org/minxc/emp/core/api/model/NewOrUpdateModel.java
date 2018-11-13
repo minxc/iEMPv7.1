@@ -44,6 +44,7 @@ public interface NewOrUpdateModel {
      * @param createBy
      */
     public void setCreateBy(String createBy);
+
     /**
      * 
      * 更新时间

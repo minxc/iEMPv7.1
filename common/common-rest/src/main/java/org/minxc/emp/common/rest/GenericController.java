@@ -128,9 +128,8 @@ public class GenericController {
 
     /**
      * 返回出错或成功的信息。
-     *
      * @param writer
-     * @param ResultMessage
+     * @param resultMessage
      */
     @Deprecated
     protected void writeResultMessage(PrintWriter writer, ResultMessage resultMessage) {

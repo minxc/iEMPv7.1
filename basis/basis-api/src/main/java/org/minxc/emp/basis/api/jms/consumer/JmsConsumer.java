@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 import org.minxc.emp.basis.api.jms.model.JmsDTO;
 
-
 /**
  * 所有消费者 均需要实现该接口
  * 通过type 获取具体的处理者

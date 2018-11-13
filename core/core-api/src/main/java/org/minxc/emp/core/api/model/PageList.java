@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /*
  * 
 * 项目名称：base-intf   
@@ -21,7 +20,8 @@ import java.util.List;
 public class PageList<E> extends ArrayList<E> implements Serializable {
 
 	private static final long serialVersionUID = 1412759446332294208L;
-	private static final int DEFAULT_SLIDERS_COUNT = 7;
+
+	private static final int DEFAULT_SLIDERS_COUNT = 7; //默认显示页面
 
 	public PageList() {
 	}
@@ -29,7 +29,7 @@ public class PageList<E> extends ArrayList<E> implements Serializable {
 	/**
 	 * 分页大小
 	 */
-	private int limit = 12;
+	private int limit = 10;
 	/**
 	 * 页数
 	 */

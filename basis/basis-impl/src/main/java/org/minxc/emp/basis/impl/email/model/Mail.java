@@ -6,9 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * 
  * 邮件实体类
- * 
  */
 public class Mail implements Serializable {
 

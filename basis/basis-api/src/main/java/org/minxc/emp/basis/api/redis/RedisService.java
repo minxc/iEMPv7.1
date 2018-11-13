@@ -2,10 +2,15 @@ package org.minxc.emp.basis.api.redis;
 
 import java.util.Set;
 
+/**
+ * Redis服务接口类
+ * edit by min.xianchang
+ * 2018-11-14
+ */
 public interface RedisService {
 
     /**
-     * @param keyo
+     * @param
      */
     public long del(String... keys);
 
