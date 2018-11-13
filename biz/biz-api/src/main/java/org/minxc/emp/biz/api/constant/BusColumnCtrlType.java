@@ -1,10 +1,7 @@
 package org.minxc.emp.biz.api.constant;
 
 /**
- * 
- * 
- * businessColumn业务字段的控件类型枚举
- * 
+ *  businessColumn业务字段的控件类型枚举
  */
 public enum BusColumnCtrlType {
 	/**
