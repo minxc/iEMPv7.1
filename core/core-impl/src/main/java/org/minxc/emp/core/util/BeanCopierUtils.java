@@ -76,8 +76,7 @@ public class BeanCopierUtils {
     //	if(sourceList instanceof Page) 对分页数据进行特殊处理 TODO
     	return list;
     }
-    
-    
+
     private static String generateKey(Class<?>class1,Class<?>class2){  
         return class1.toString() + class2.toString();  
     }  

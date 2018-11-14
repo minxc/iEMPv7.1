@@ -44,8 +44,8 @@ public class ConstantUtil {
      * 
      *
      * @param classPath
-     * @param key
-     * @return 返回map:{key:{key:"字段名",value:"字段值",type:"字段的类型"},key1:{key:"字段名1",value:"字段值1",type:"字段的类型1"}}
+     * @return 返回map:
+     *     {key:{key:"字段名",value:"字段值",type:"字段的类型"},key1:{key:"字段名1",value:"字段值1",type:"字段的类型1"}}
      */
     public static Map<String, JSONObject> get(String classPath) {
         try {
