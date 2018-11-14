@@ -5,11 +5,11 @@ import com.alibaba.fastjson.JSONObject;
 
 import java.util.Iterator;
 import java.util.Map;
-import javax.annotation.Resource;
 
 import org.minxc.emp.biz.api.constant.RightsType;
 import org.minxc.emp.biz.api.model.BusinessTableRelation;
 import org.minxc.emp.biz.api.model.BusinessColumn;
+import org.minxc.emp.biz.api.model.permission.BusinessObjectPermission;
 import org.minxc.emp.biz.core.dao.BusinessPermissionDao;
 import org.minxc.emp.biz.core.manager.BusinessObjectManager;
 import org.minxc.emp.biz.core.manager.BusinessPermissionManager;
@@ -28,7 +28,7 @@ import org.springframework.stereotype.Service;
 public class BusinessPermissionManagerImpl extends CommonManager<String, BusinessPermissionImpl>
 		implements
 			BusinessPermissionManager {
-	@Resource
+	@Autowired
 	private BusinessPermissionDao businessPermissionDao;
 	@Autowired
 	private BusinessObjectManager businessObjectManager;
@@ -45,14 +45,14 @@ public class BusinessPermissionManagerImpl extends CommonManager<String, Busines
 			oldPermission = new BusinessPermissionImpl();
 		}
 		BusinessPermissionImpl businessPermission = new BusinessPermissionImpl();
-		businessPermission.setObjType(objType);
-		businessPermission.setObjVal(objVal);
+		businessPermission.setObjectType(objType);
+		businessPermission.setObjectValue(objVal);
 		for (String boKey : defaultBoKeys.split(",")) {
 			BusinessObjectImpl bo = this.businessObjectManager.getFilledByKey(boKey);
 			if (bo == null) {
 				throw new BusinessException(boKey + " 业务对象丢失！");
 			}
-			BusinessObjectPermission busObjPermission = oldPermission.c(boKey);
+			BusinessObjectPermissionImpl busObjPermission = (BusinessObjectPermissionImpl)oldPermission.getBusObj(boKey);
 			if (busObjPermission == null) {
 				busObjPermission = new BusinessObjectPermissionImpl();
 				busObjPermission.setKey(boKey);

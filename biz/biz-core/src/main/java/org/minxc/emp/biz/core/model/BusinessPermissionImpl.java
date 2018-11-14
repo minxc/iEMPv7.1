@@ -15,35 +15,37 @@ import org.minxc.emp.core.impl.model.AbstractCommonModel;
 import org.minxc.emp.core.util.JsonUtil;
 
 public class BusinessPermissionImpl extends AbstractCommonModel implements BusinessPermission {
-	/** 
+
+	/**
 	
-	* @Fields serialVersionUID : TODO(用一句话描述这个变量表示什么) 
+	* @Fields serialVersionUID
 	
 	*/ 
 	private static final long serialVersionUID = 3626757861344616318L;
-	
-	
-	private String objType;
-	private String objVal;
+
+	private String objectType;
+	private String objectValue;
 	private String busObjMapJson;
-	private Map<String, BusinessObjectPermissionImpl> busObjMap = new HashMap<String, BusinessObjectPermissionImpl>();
+	private Map<String, BusinessObjectPermission> busObjMap = new HashMap<String, BusinessObjectPermission>();
 	private JSONObject K;
 	private JSONObject L = null;
 
+	@Override
 	public String getObjectType() {
-		return this.objType;
+		return this.objectType;
 	}
 
-	public void setObjType(String objType) {
-		this.objType = objType;
+	public void setObjectType(String objectType) {
+		this.objectType = objectType;
 	}
 
+    @Override
 	public String getObjectValue() {
-		return this.objVal;
+		return this.objectValue;
 	}
 
-	public void setObjVal(String objVal) {
-		this.objVal = objVal;
+	public void setObjectValue(String objectValue) {
+		this.objectValue = objectValue;
 	}
 
 	public String getBusObjMapJson() {
@@ -59,10 +61,11 @@ public class BusinessPermissionImpl extends AbstractCommonModel implements Busin
 		this.busObjMap = new HashMap<String, BusinessObjectPermission>();
 		Map<String, String> map = JSONObject.parseObject(busObjMapJson, Map.class);
 		for (Map.Entry<String, String> entry : map.entrySet()) {
-			this.busObjMap.put(entry.getKey(), JSONObject.parseObject(entry.getValue(), BusinessObjectPermission.class));
+			this.busObjMap.put(entry.getKey(), JSONObject.parseObject(entry.getValue(), BusinessObjectPermissionImpl.class));
 		}
 	}
 
+	@Override
 	public Map<String, BusinessObjectPermission> getBusinessObjectMap() {
 		return this.busObjMap;
 	}
@@ -72,15 +75,19 @@ public class BusinessPermissionImpl extends AbstractCommonModel implements Busin
 		this.busObjMapJson = JsonUtil.toJSONString(busObjMap);
 	}
 
-	public BusinessObjectPermissionImpl c(String boKey) {
+	@Override
+	public BusinessObjectPermission getBusObj(String boKey) {
 		return this.busObjMap.get(boKey);
 	}
 
+
+    @Override
 	public JSONObject getTablePermission(boolean isReadonly) {
 		this.a(isReadonly);
 		return this.K;
 	}
 
+	@Override
 	public JSONObject getPermission(boolean isReadonly) {
 		this.a(isReadonly);
 		return this.L;
@@ -121,7 +128,14 @@ public class BusinessPermissionImpl extends AbstractCommonModel implements Busin
 		return result;
 	}
 
-	public BusinessObjectPermission getBusObj(String string) {
-		return this.c(string);
-	}
+
+
+	public static void main(String[] args){
+		// {"Demo":{"key":"Demo","name":"Demo","rights":{"w":[{"type":"everyone","desc":"所有人"}]},"tableMap":{"Demo":{"columnMap":{"zjlx":{"comment":"证件类型","key":"zjlx","rights":{"b":[{"type":"everyone","desc":"所有人"}],"r":[{"type":"everyone","desc":"所有人"}],"w":[{"type":"everyone","desc":"所有人"}]}},"zd1":{"comment":"字段1","key":"zd1","rights":{}},"ah":{"comment":"爱好","key":"ah","rights":{"b":[{"type":"everyone","desc":"所有人"}]}},"bmId":{"comment":"部门ID","key":"bmId","rights":{}},"zd2":{"comment":"字段2","key":"zd2","rights":{}},"xb":{"comment":"性别","key":"xb","rights":{"b":[{"type":"everyone","desc":"所有人"}]}},"bm":{"comment":"部门","key":"bm","rights":{}},"mz":{"comment":"名字","key":"mz","rights":{}},"nl":{"comment":"年龄","key":"nl","rights":{"b":[{"type":"everyone","desc":"所有人"}]}}},"comment":"案例","key":"Demo","rights":{}},"DemoSub":{"columnMap":{"fk":{"comment":"外键","key":"fk","rights":{}},"ms":{"comment":"描述","key":"ms","rights":{}},"zd1":{"comment":"字段1","key":"zd1","rights":{}},"zd2":{"comment":"字段2","key":"zd2","rights":{}},"mz":{"comment":"名字","key":"mz","rights":{}}},"comment":"Demo子表","key":"DemoSub","rights":{}}}}}
+
+		String permissionMapJson = "{\"Demo\":{\"key\":\"Demo\",\"name\":\"Demo\",\"rights\":{\"w\":[{\"type\":\"everyone\",\"desc\":\"所有人\"}]},\"tableMap\":{\"Demo\":{\"columnMap\":{\"zjlx\":{\"comment\":\"证件类型\",\"key\":\"zjlx\",\"rights\":{\"b\":[{\"type\":\"everyone\",\"desc\":\"所有人\"}],\"r\":[{\"type\":\"everyone\",\"desc\":\"所有人\"}],\"w\":[{\"type\":\"everyone\",\"desc\":\"所有人\"}]}},\"zd1\":{\"comment\":\"字段1\",\"key\":\"zd1\",\"rights\":{}},\"ah\":{\"comment\":\"爱好\",\"key\":\"ah\",\"rights\":{\"b\":[{\"type\":\"everyone\",\"desc\":\"所有人\"}]}},\"bmId\":{\"comment\":\"部门ID\",\"key\":\"bmId\",\"rights\":{}},\"zd2\":{\"comment\":\"字段2\",\"key\":\"zd2\",\"rights\":{}},\"xb\":{\"comment\":\"性别\",\"key\":\"xb\",\"rights\":{\"b\":[{\"type\":\"everyone\",\"desc\":\"所有人\"}]}},\"bm\":{\"comment\":\"部门\",\"key\":\"bm\",\"rights\":{}},\"mz\":{\"comment\":\"名字\",\"key\":\"mz\",\"rights\":{}},\"nl\":{\"comment\":\"年龄\",\"key\":\"nl\",\"rights\":{\"b\":[{\"type\":\"everyone\",\"desc\":\"所有人\"}]}}},\"comment\":\"案例\",\"key\":\"Demo\",\"rights\":{}},\"DemoSub\":{\"columnMap\":{\"fk\":{\"comment\":\"外键\",\"key\":\"fk\",\"rights\":{}},\"ms\":{\"comment\":\"描述\",\"key\":\"ms\",\"rights\":{}},\"zd1\":{\"comment\":\"字段1\",\"key\":\"zd1\",\"rights\":{}},\"zd2\":{\"comment\":\"字段2\",\"key\":\"zd2\",\"rights\":{}},\"mz\":{\"comment\":\"名字\",\"key\":\"mz\",\"rights\":{}}},\"comment\":\"Demo子表\",\"key\":\"DemoSub\",\"rights\":{}}}}}";
+		Map<String, String> map = JSONObject.parseObject(permissionMapJson, Map.class);
+	    System.out.println("Hello world");
+    }
+
 }
