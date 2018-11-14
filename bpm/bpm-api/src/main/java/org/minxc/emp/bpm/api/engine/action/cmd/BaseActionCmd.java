@@ -8,7 +8,7 @@ import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 import org.minxc.emp.basis.api.model.SystemIdentity;
-import org.minxc.emp.biz.api.model.IBusinessData;
+import org.minxc.emp.biz.api.model.BusinessData;
 import org.minxc.emp.bpm.api.constant.ActionType;
 import org.minxc.emp.bpm.api.engine.action.handler.ActionHandler;
 import org.minxc.emp.bpm.api.engine.context.BpmContext;
@@ -63,7 +63,7 @@ public abstract class BaseActionCmd implements ActionCmd {
     /**
      * 数据模型
      */
-    protected Map<String, IBusinessData> bizDataMap = new HashMap<String, IBusinessData>();
+    protected Map<String, BusinessData> bizDataMap = new HashMap<String, BusinessData>();
 
     /**
      * 动作名称
@@ -308,11 +308,11 @@ public abstract class BaseActionCmd implements ActionCmd {
         this.defId = defId;
     }
 
-    public Map<String, IBusinessData> getBizDataMap() {
+    public Map<String, BusinessData> getBizDataMap() {
         return bizDataMap;
     }
 
-    public void setBizDataMap(Map<String, IBusinessData> bizDataMap) {
+    public void setBizDataMap(Map<String, BusinessData> bizDataMap) {
         this.bizDataMap = bizDataMap;
     }
 

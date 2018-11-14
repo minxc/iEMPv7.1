@@ -3,11 +3,9 @@ package org.minxc.emp.biz.core.model.permission;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.minxc.emp.biz.api.model.permission.IBusTablePermission;
-import org.minxc.emp.biz.core.model.permission.AbstractPermission;
-import org.minxc.emp.biz.core.model.permission.BusColumnPermission;
+import org.minxc.emp.biz.api.model.permission.BusinessTablePermission;
 
-public class BusTablePermission extends AbstractPermission implements IBusTablePermission {
+public class BusinessTablePermissionImpl extends AbstractPermission implements BusinessTablePermission {
 	
 	/**
 	 * 
@@ -16,7 +14,7 @@ public class BusTablePermission extends AbstractPermission implements IBusTableP
 	
 	private String key;
 	private String comment;
-	private Map<String, BusColumnPermission> S = new HashMap<String, BusColumnPermission>();
+	private Map<String, BusinessColumnPermissionImpl> S = new HashMap<String, BusinessColumnPermissionImpl>();
 
 	public String getKey() {
 		return this.key;
@@ -34,11 +32,11 @@ public class BusTablePermission extends AbstractPermission implements IBusTableP
 		this.comment = comment;
 	}
 
-	public Map<String, BusColumnPermission> getColumnMap() {
+	public Map<String, BusinessColumnPermissionImpl> getColumnMap() {
 		return this.S;
 	}
 
-	public void setColumnMap(Map<String, BusColumnPermission> columnMap) {
+	public void setColumnMap(Map<String, BusinessColumnPermissionImpl> columnMap) {
 		this.S = columnMap;
 	}
 }

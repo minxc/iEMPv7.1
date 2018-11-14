@@ -4,11 +4,9 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
-import org.minxc.emp.biz.api.model.permission.IBusObjPermission;
-
 import com.alibaba.fastjson.JSONObject;
 
-public interface IBusinessData extends Serializable{
+public interface BusinessData extends Serializable{
 
 	Object getPk();
 
@@ -18,9 +16,9 @@ public interface IBusinessData extends Serializable{
 
 	Object get(String key);
 
-	IBusinessData getParent();
+	BusinessData getParent();
 
-	IBusTableRel getBusTableRel();
+	BusinessTableRelation getBusTableRel();
 
 	String getString(String key);
 	
@@ -32,7 +30,7 @@ public interface IBusinessData extends Serializable{
 	 * 	
 	 * @return
 	 */
-	Map<String, List<IBusinessData>> getChilds();
+	Map<String, List<BusinessData>> getChilds();
 	
 	JSONObject fullBusDataInitData(JSONObject initData);
 }

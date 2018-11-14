@@ -8,17 +8,15 @@ import java.util.Map;
 import java.util.Set;
 import javax.annotation.Resource;
 
-import org.minxc.emp.biz.api.model.IBusinessData;
-import org.minxc.emp.biz.api.model.IBusinessObject;
-import org.minxc.emp.biz.api.model.IBusinessPermission;
+import org.minxc.emp.biz.api.model.BusinessData;
+import org.minxc.emp.biz.api.model.BusinessObject;
+import org.minxc.emp.biz.api.model.BusinessPermission;
 import org.minxc.emp.biz.api.service.BusinessDataService;
 import org.minxc.emp.biz.api.service.BusinessObjectService;
 import org.minxc.emp.biz.api.service.BusinessPermissionService;
 import org.minxc.emp.bpm.api.engine.action.cmd.BaseActionCmd;
 import org.minxc.emp.bpm.api.exception.BpmStatusCode;
 import org.minxc.emp.bpm.api.model.def.BpmDataModel;
-import org.minxc.emp.bpm.api.model.def.BpmProcessDef;
-import org.minxc.emp.bpm.api.model.inst.IBpmInstance;
 import org.minxc.emp.bpm.api.model.nodedef.BpmNodeDef;
 import org.minxc.emp.bpm.api.service.BpmProcessDefService;
 import org.minxc.emp.bpm.api.service.BpmRightsFormService;
@@ -55,10 +53,10 @@ public class BpmBusDataHandle {
 	private static Set<String> aK = Collections.synchronizedSet(new HashSet());
 	private static final String tableName = "BPM_BUS_LINK";
 
-	public Map<String, IBusinessData> a(IBusinessPermission businessPermision, BpmInstance instance) {
-		IBusinessData busData;
-		IBusinessObject businessObject;
-		HashMap<String, IBusinessData> dataMap = new HashMap<String, IBusinessData>();
+	public Map<String, BusinessData> a(BusinessPermission businessPermision, BpmInstance instance) {
+		BusinessData busData;
+		BusinessObject businessObject;
+		HashMap<String, BusinessData> dataMap = new HashMap<String, BusinessData>();
 		BpmInstance topInstance = this.f.getTopInstance(instance);
 		if (topInstance != null) {
 			List<BpmBusLink> topInstanceBusLinks = this.aG.getByInstanceId(topInstance.getId());
@@ -78,7 +76,7 @@ public class BpmBusDataHandle {
 		for (BpmBusLink busLink : busLinks) {
 			businessObject = this.businessObjectService.getFilledByKey(busLink.getBizCode());
 			businessObject.setPermission(businessPermision.getBusObj(busLink.getBizCode()));
-			busData = this.au.loadData((IBusinessObject) businessObject, (Object) busLink.getBizId());
+			busData = this.au.loadData((BusinessObject) businessObject, (Object) busLink.getBizId());
 			if (busData == null) {
 				throw new SystemException(
 						String.format("bizCode[%s] bizId[%s]", busLink.getBizCode(), busLink.getBizId()),
@@ -92,23 +90,23 @@ public class BpmBusDataHandle {
 			String code = model.getCode();
 			if (dataMap.containsKey(code))
 				continue;
-			IBusinessObject businessObject2 = this.businessObjectService.getFilledByKey(code);
+			BusinessObject businessObject2 = this.businessObjectService.getFilledByKey(code);
 			businessObject2.setPermission(businessPermision.getBusObj(code));
-			IBusinessData busData2 = this.au.loadData(businessObject2, null);
+			BusinessData busData2 = this.au.loadData(businessObject2, null);
 			dataMap.put(code, busData2);
 		}
 		return dataMap;
 	}
 
-	public Map<String, IBusinessData> a(IBusinessPermission businessPermision, String defId) {
-		HashMap<String, IBusinessData> dataMap = new HashMap<String, IBusinessData>();
+	public Map<String, BusinessData> a(BusinessPermission businessPermision, String defId) {
+		HashMap<String, BusinessData> dataMap = new HashMap<String, BusinessData>();
 		DefaultBpmProcessDef processDef = (DefaultBpmProcessDef) this.a.getBpmProcessDef(defId);
 		List<BpmDataModel> listDataModel = processDef.getDataModelList();
 		for (BpmDataModel model : listDataModel) {
 			String code = model.getCode();
-			IBusinessObject businessObject = this.businessObjectService.getFilledByKey(code);
+			BusinessObject businessObject = this.businessObjectService.getFilledByKey(code);
 			businessObject.setPermission(businessPermision.getBusObj(code));
-			IBusinessData busData = this.au.loadData(businessObject, null);
+			BusinessData busData = this.au.loadData(businessObject, null);
 			dataMap.put(code, busData);
 		}
 		return dataMap;
@@ -116,14 +114,14 @@ public class BpmBusDataHandle {
 
 	public void n(BaseActionCmd actionCmd) {
 		String modelCode;
-		IBusinessData businessData;
+		BusinessData businessData;
 		Map boDataMap = actionCmd.getBizDataMap();
 		if (BeanUtils.isEmpty((Object) boDataMap)) {
 			return;
 		}
 		BpmInstance instance = (BpmInstance) actionCmd.getBpmInstance();
 		BpmNodeDef startNode = this.a.getStartEvent(instance.getDefId());
-		IBusinessPermission businessPermision = this.aI.getNodeSavePermission(instance.getDefKey(),
+		BusinessPermission businessPermision = this.aI.getNodeSavePermission(instance.getDefKey(),
 				startNode.getNodeId(), boDataMap.keySet());
 		BpmInstance topInstance = this.f.getTopInstance(instance);
 		HashSet<String> topModelCodes = new HashSet<String>();
@@ -135,7 +133,7 @@ public class BpmBusDataHandle {
 				if (!boDataMap.containsKey(modelCode))
 					continue;
 				topModelCodes.add(modelCode);
-				businessData = (IBusinessData) boDataMap.get(modelCode);
+				businessData = (BusinessData) boDataMap.get(modelCode);
 				businessData.getBusTableRel().getBusObj().setPermission(businessPermision.getBusObj(modelCode));
 				this.au.saveData(businessData);
 				this.a(businessData, modelCode, topInstance, topBusLinks);
@@ -147,14 +145,14 @@ public class BpmBusDataHandle {
 			modelCode = dataModel.getCode();
 			if (!boDataMap.containsKey(modelCode) || topModelCodes.contains(modelCode))
 				continue;
-			businessData = (IBusinessData) boDataMap.get(modelCode);
+			businessData = (BusinessData) boDataMap.get(modelCode);
 			businessData.getBusTableRel().getBusObj().setPermission(businessPermision.getBusObj(modelCode));
 			this.au.saveData(businessData);
 			this.a(businessData, modelCode, instance, busLinkList);
 		}
 	}
 
-	private void a(IBusinessData iBusinessData, String modelCode, BpmInstance instance, List<BpmBusLink> busLinks) {
+	private void a(BusinessData iBusinessData, String modelCode, BpmInstance instance, List<BpmBusLink> busLinks) {
 		for (BpmBusLink link : busLinks) {
 			if (!link.getBizId().equals(iBusinessData.getPk()))
 				continue;

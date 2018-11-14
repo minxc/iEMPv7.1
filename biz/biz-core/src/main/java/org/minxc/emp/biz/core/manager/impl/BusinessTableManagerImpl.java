@@ -8,11 +8,10 @@ import org.minxc.emp.biz.core.dao.BusinessTableDao;
 import org.minxc.emp.biz.core.manager.BusColumnCtrlManager;
 import org.minxc.emp.biz.core.manager.BusinessColumnManager;
 import org.minxc.emp.biz.core.manager.BusinessTableManager;
-import org.minxc.emp.biz.core.model.BusColumnCtrl;
-import org.minxc.emp.biz.core.model.BusinessColumn;
-import org.minxc.emp.biz.core.model.BusinessTable;
+import org.minxc.emp.biz.core.model.BusinessColumnControlImpl;
+import org.minxc.emp.biz.core.model.BusinessColumnImpl;
+import org.minxc.emp.biz.core.model.BusinessTableImpl;
 import org.minxc.emp.biz.core.util.BusinessTableCacheUtil;
-import org.minxc.emp.common.db.api.table.ITableOperator;
 import org.minxc.emp.common.db.datasource.DbContextHolder;
 import org.minxc.emp.common.db.id.UniqueIdUtil;
 import org.minxc.emp.common.db.model.query.DefaultQueryFilter;
@@ -28,7 +27,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
-public class BusinessTableManagerImpl extends CommonManager<String, BusinessTable> implements BusinessTableManager {
+public class BusinessTableManagerImpl extends CommonManager<String, BusinessTableImpl> implements BusinessTableManager {
 	
 	
 	@Resource
@@ -42,7 +41,7 @@ public class BusinessTableManagerImpl extends CommonManager<String, BusinessTabl
 	@Resource
 	private JdbcTemplate jdbcTemplate;
 
-	public void save(BusinessTable businessTable) {
+	public void save(BusinessTableImpl businessTable) {
 		if (StringUtils.isEmpty((String) businessTable.getId())) {
 			businessTable.setId(UniqueIdUtil.getSuid());
 			this.create(businessTable);
@@ -51,14 +50,14 @@ public class BusinessTableManagerImpl extends CommonManager<String, BusinessTabl
 			this.busColumnCtrlManager.removeByTableId(businessTable.getId());
 			this.businessColumnManager.removeByTableId(businessTable.getId());
 		}
-		for (BusinessColumn businessColumn : businessTable.getColumns()) {
+		for (BusinessColumnImpl businessColumn : businessTable.getColumns()) {
 			if (StringUtils.isEmpty((String) businessColumn.getId())) {
 				businessColumn.setId(UniqueIdUtil.getSuid());
 			}
 			businessColumn.setTable(businessTable);
 			businessColumn.setTableId(businessTable.getId());
 			this.businessColumnManager.create(businessColumn);
-			BusColumnCtrl ctrl = businessColumn.getCtrl();
+			BusinessColumnControlImpl ctrl = businessColumn.getCtrl();
 			if (businessColumn.isPrimary())
 				continue;
 			if (StringUtils.isEmpty((String) ctrl.getId())) {
@@ -68,25 +67,25 @@ public class BusinessTableManagerImpl extends CommonManager<String, BusinessTabl
 			this.busColumnCtrlManager.create(businessColumn.getCtrl());
 		}
 		this.newTableOperator(businessTable).syncColumn();
-		BusinessTableCacheUtil.put((BusinessTable) businessTable);
+		BusinessTableCacheUtil.put((BusinessTableImpl) businessTable);
 	}
 
-	public BusinessTable getByKey(String key) {
+	public BusinessTableImpl getByKey(String key) {
 		DefaultQueryFilter filter = new DefaultQueryFilter();
 		filter.addFilter("key_", (Object) key, QueryOperator.EQUAL);
-		return (BusinessTable) this.queryOne((QueryFilter) filter);
+		return (BusinessTableImpl) this.queryOne((QueryFilter) filter);
 	}
 
 	
 
-	public TableOperator newTableOperator(BusinessTable businessTable) {
+	public TableOperator newTableOperator(BusinessTableImpl businessTable) {
 		JdbcTemplate dataSourceJdbcTemplate = this.sysDataSourceService.getJdbcTemplateByKey(businessTable.getDsKey());
 		return TableOperatorFactory.newOperator( DbContextHolder.getDataSourceDbType(businessTable.getDsKey()), businessTable,
 				 dataSourceJdbcTemplate);
 	}
 
-	public BusinessTable getFilledByKey(String key) {
-		BusinessTable businessTable = BusinessTableCacheUtil.get(key);
+	public BusinessTableImpl getFilledByKey(String key) {
+		BusinessTableImpl businessTable = BusinessTableCacheUtil.get(key);
 		if (businessTable != null) {
 			return businessTable;
 		}
@@ -97,12 +96,12 @@ public class BusinessTableManagerImpl extends CommonManager<String, BusinessTabl
 	}
 
 	
-	private void a(BusinessTable businessTable) {
+	private void a(BusinessTableImpl businessTable) {
 		if (businessTable == null) {
 			return;
 		}
-		List<BusinessColumn> columns = this.businessColumnManager.getByTableId(businessTable.getId());
-		for (BusinessColumn column : columns) {
+		List<BusinessColumnImpl> columns = this.businessColumnManager.getByTableId(businessTable.getId());
+		for (BusinessColumnImpl column : columns) {
 			column.setCtrl(this.busColumnCtrlManager.getByColumnId(column.getId()));
 			column.setTable(businessTable);
 		}
@@ -112,7 +111,7 @@ public class BusinessTableManagerImpl extends CommonManager<String, BusinessTabl
 	}
 	
 	public void remove(String entityId) {
-		BusinessTable table = (BusinessTable) this.get(entityId);
+		BusinessTableImpl table = (BusinessTableImpl) this.get(entityId);
 		if (table == null) {
 			return;
 		}

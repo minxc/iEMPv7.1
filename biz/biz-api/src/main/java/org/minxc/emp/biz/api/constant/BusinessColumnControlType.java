@@ -3,7 +3,7 @@ package org.minxc.emp.biz.api.constant;
 /**
  *  businessColumn业务字段的控件类型枚举
  */
-public enum BusColumnCtrlType {
+public enum BusinessColumnControlType {
 	/**
 	 * 隐藏字段
 	 */
@@ -62,7 +62,7 @@ public enum BusColumnCtrlType {
 	 */
 	private String[] supports;
 
-	BusColumnCtrlType(String key, String desc, String[] supports) {
+	BusinessColumnControlType(String key, String desc, String[] supports) {
 		this.key = key;
 		this.desc = desc;
 		this.supports = supports;
@@ -93,8 +93,8 @@ public enum BusColumnCtrlType {
 	 * @exception @since
 	 *                1.0.0
 	 */
-	public static BusColumnCtrlType getByKey(String key) {
-		for (BusColumnCtrlType f : BusColumnCtrlType.values()) {
+	public static BusinessColumnControlType getByKey(String key) {
+		for (BusinessColumnControlType f : BusinessColumnControlType.values()) {
 			if (f.key.equals(key)) {
 				return f;
 			}

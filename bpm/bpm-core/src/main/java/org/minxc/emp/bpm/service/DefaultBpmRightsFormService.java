@@ -1,16 +1,13 @@
 package org.minxc.emp.bpm.service;
 
-import com.alibaba.fastjson.JSONObject;
-
 import java.util.Set;
 import javax.annotation.Resource;
 
-import org.minxc.emp.biz.api.constant.BusinessPermissionObjType;
-import org.minxc.emp.biz.api.model.IBusinessPermission;
+import org.minxc.emp.biz.api.constant.BusinessPermissionObjectType;
+import org.minxc.emp.biz.api.model.BusinessPermission;
 import org.minxc.emp.biz.api.service.BusinessPermissionService;
 import org.minxc.emp.bpm.api.engine.data.result.BpmFlowData;
 import org.minxc.emp.bpm.api.exception.BpmStatusCode;
-import org.minxc.emp.bpm.api.model.def.BpmProcessDef;
 import org.minxc.emp.bpm.api.model.form.BpmForm;
 import org.minxc.emp.bpm.api.model.nodedef.BpmNodeDef;
 import org.minxc.emp.bpm.api.service.BpmProcessDefService;
@@ -31,9 +28,9 @@ public class DefaultBpmRightsFormService implements BpmRightsFormService {
 	@Resource
 	BusinessPermissionService businessPermissionService;
 
-	public IBusinessPermission getInstanceFormPermission(BpmFlowData flowData, String nodeId, FormType formType,
-			boolean isReadOnly) {
-		IBusinessPermission permision = null;
+	public BusinessPermission getInstanceFormPermission(BpmFlowData flowData, String nodeId, FormType formType,
+                                                        boolean isReadOnly) {
+		BusinessPermission permision = null;
 		BpmForm form = null;
 		boolean isMobile = FormType.MOBILE == formType;
 		DefaultBpmProcessDef processDef = (DefaultBpmProcessDef) this.a.getBpmProcessDef(flowData.getDefId());
@@ -53,7 +50,7 @@ public class DefaultBpmRightsFormService implements BpmRightsFormService {
 					BpmStatusCode.FLOW_FORM_LOSE);
 		}
 		if (FormCategory.INNER.equals((Object) form.getType())) {
-			permision = this.businessPermissionService.getByObjTypeAndObjVal(BusinessPermissionObjType.FLOW.getKey(),
+			permision = this.businessPermissionService.getByObjTypeAndObjVal(BusinessPermissionObjectType.FLOW.getKey(),
 					processDef.getDefKey() + "-" + nodeId, processDef.getDataModelKeys(), true);
 			flowData.setPermission(permision.getPermission(isReadOnly));
 			flowData.setTablePermission(permision.getTablePermission(isReadOnly));
@@ -62,12 +59,12 @@ public class DefaultBpmRightsFormService implements BpmRightsFormService {
 		return permision;
 	}
 
-	public IBusinessPermission getNodeSavePermission(String defKey, String nodeId, Set<String> bocodes) {
+	public BusinessPermission getNodeSavePermission(String defKey, String nodeId, Set<String> bocodes) {
 		String boCodes = null;
 		if (BeanUtils.isNotEmpty(bocodes)) {
 			boCodes = StringUtil.convertCollectionAsString(bocodes);
 		}
-		return this.businessPermissionService.getByObjTypeAndObjVal(BusinessPermissionObjType.FLOW.getKey(),
+		return this.businessPermissionService.getByObjTypeAndObjVal(BusinessPermissionObjectType.FLOW.getKey(),
 				defKey + "-" + nodeId, boCodes, true);
 	}
 }

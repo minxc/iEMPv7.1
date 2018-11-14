@@ -1,16 +1,10 @@
 package org.minxc.emp.biz.api.constant;
 
 /**
- * 
- *  
  * BusinessPermission的objType枚举
- * 
- * 
  * 日期:2018年4月22日 下午5:54:01
- * 
- * 
  */
-public enum BusinessPermissionObjType {
+public enum BusinessPermissionObjectType {
 
 	/**
 	 * 表单
@@ -33,7 +27,7 @@ public enum BusinessPermissionObjType {
 	 */
 	private String desc;
 
-	private BusinessPermissionObjType(String key, String desc) {
+	private BusinessPermissionObjectType(String key, String desc) {
 		this.key = key;
 		this.desc = desc;
 	}
@@ -66,8 +60,8 @@ public enum BusinessPermissionObjType {
 	 * @exception @since
 	 *                1.0.0
 	 */
-	public static BusinessPermissionObjType getByKey(String key) {
-		for (BusinessPermissionObjType value : BusinessPermissionObjType.values()) {
+	public static BusinessPermissionObjectType getByKey(String key) {
+		for (BusinessPermissionObjectType value : BusinessPermissionObjectType.values()) {
 			if (value.key.equals(key)) {
 				return value;
 			}

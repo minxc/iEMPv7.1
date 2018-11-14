@@ -1,9 +1,8 @@
 package org.minxc.emp.biz.core.model.permission;
 
-import org.minxc.emp.biz.api.model.permission.IBusColumnPermission;
-import org.minxc.emp.biz.core.model.permission.AbstractPermission;
+import org.minxc.emp.biz.api.model.permission.BusinessColumnPermission;
 
-public class BusColumnPermission extends AbstractPermission implements IBusColumnPermission {
+public class BusinessColumnPermissionImpl extends AbstractPermission implements BusinessColumnPermission {
 	/**
 	 * 
 	 */

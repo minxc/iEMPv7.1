@@ -5,7 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import java.util.List;
 import java.util.Map;
 
-import org.minxc.emp.biz.api.model.IBusinessData;
+import org.minxc.emp.biz.api.model.BusinessData;
 import org.minxc.emp.bpm.api.model.form.BpmForm;
 import org.minxc.emp.bpm.api.model.nodedef.Button;
 
@@ -24,7 +24,7 @@ public class BpmFlowData implements FlowData {
 
     protected List<Button> buttonList;
     
-    transient Map<String, IBusinessData>  dataMap;
+    transient Map<String, BusinessData>  dataMap;
 
     /* (non-Javadoc)
      * @see com.dstz.bpm.api.engine.data.model.FlowData#getDefId()
@@ -98,11 +98,11 @@ public class BpmFlowData implements FlowData {
         return buttonList;
     }
 
-    public Map<String, IBusinessData> getDataMap() {
+    public Map<String, BusinessData> getDataMap() {
 		return dataMap;
 	}
 
-	public void setDataMap(Map<String, IBusinessData> dataMap) {
+	public void setDataMap(Map<String, BusinessData> dataMap) {
 		this.dataMap = dataMap;
 	}
 

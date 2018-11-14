@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 import javax.annotation.Resource;
 import org.activiti.engine.impl.persistence.entity.ExecutionEntity;
 import org.apache.commons.lang3.StringUtils;
-import org.minxc.emp.biz.api.model.IBusinessData;
+import org.minxc.emp.biz.api.model.BusinessData;
 import org.minxc.emp.bpm.api.constant.EventType;
 import org.minxc.emp.bpm.api.constant.ScriptType;
 import org.minxc.emp.bpm.api.engine.action.cmd.ActionCmd;
@@ -16,8 +16,6 @@ import org.minxc.emp.bpm.api.engine.action.cmd.InstanceActionCmd;
 import org.minxc.emp.bpm.api.engine.action.cmd.TaskActionCmd;
 import org.minxc.emp.bpm.api.engine.context.BpmContext;
 import org.minxc.emp.bpm.api.exception.BpmStatusCode;
-import org.minxc.emp.bpm.api.model.def.BpmDefProperties;
-import org.minxc.emp.bpm.api.model.def.BpmProcessDef;
 import org.minxc.emp.bpm.api.model.def.IBpmDefinition;
 import org.minxc.emp.bpm.api.model.inst.IBpmInstance;
 import org.minxc.emp.bpm.api.service.BpmProcessDefService;
@@ -27,14 +25,12 @@ import org.minxc.emp.bpm.core.manager.BpmTaskOpinionManager;
 import org.minxc.emp.bpm.core.model.BpmDefinition;
 import org.minxc.emp.bpm.core.model.BpmInstance;
 import org.minxc.emp.bpm.engine.action.cmd.DefaultInstanceActionCmd;
-import org.minxc.emp.bpm.engine.listener.AbstractInstanceListener;
 import org.minxc.emp.bpm.engine.model.DefaultBpmProcessDef;
 import org.minxc.emp.core.api.exception.BusinessException;
 import org.minxc.emp.core.util.BeanUtils;
 import org.minxc.emp.core.util.StringUtil;
 import org.minxc.emp.core.util.time.DateUtil;
 import org.minxc.emp.system.util.ContextUtil;
-import org.slf4j.Logger;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -113,7 +109,7 @@ public class InstanceStartEventListener extends AbstractInstanceListener {
 		if (BeanUtils.isNotEmpty((Object) boMap)) {
 			Set<String> bocodes = boMap.keySet();
 			for (String bocode : bocodes) {
-				IBusinessData bizData = (IBusinessData) boMap.get(bocode);
+				BusinessData bizData = (BusinessData) boMap.get(bocode);
 				Map<String, Object> dataMap = bizData.getData();
 				for (Map.Entry entry : dataMap.entrySet()) {
 					ruleVariables.put(bocode + "." + entry.getKey(), entry.getValue());

@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Map;
 import com.alibaba.fastjson.JSONArray;
 
-public interface IAbstractPermission extends Serializable{
+public interface AbstractPermission extends Serializable{
 
 	String getResult();
 

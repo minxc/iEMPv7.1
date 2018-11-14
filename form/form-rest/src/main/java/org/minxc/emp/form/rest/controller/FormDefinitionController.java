@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.minxc.emp.basis.api.freemarker.FreeMarkerEngine;
-import org.minxc.emp.biz.api.model.IBusTableRel;
-import org.minxc.emp.biz.api.model.IBusinessObject;
+import org.minxc.emp.biz.api.model.BusinessTableRelation;
+import org.minxc.emp.biz.api.model.BusinessObject;
 import org.minxc.emp.biz.api.service.BusinessObjectService;
 import org.minxc.emp.biz.api.service.BusinessTableService;
 import org.minxc.emp.common.db.model.page.PageJson;
@@ -24,8 +24,6 @@ import org.minxc.emp.core.util.PropertiesUtil;
 import org.minxc.emp.core.util.StringUtil;
 import org.minxc.emp.form.api.constant.FormStatusCode;
 import org.minxc.emp.form.core.generator.AbsFormElementGenerator;
-import org.minxc.emp.form.core.generator.PcFormElementGenerator;
-import org.minxc.emp.form.core.generator.MobileFormElementGenerator;
 import org.minxc.emp.form.core.manager.FormDefinitionManager;
 import org.minxc.emp.form.core.manager.FormTemplateManager;
 import org.minxc.emp.form.core.model.FormDefinitionImpl;
@@ -200,11 +198,11 @@ public class FormDefinitionController extends CommonController<FormDefinitionImp
 	@ErrorCatching(writeErrorToResponse = true, value = "生成html异常")
 	public void createHtml(HttpServletRequest request, HttpServletResponse response, @RequestBody JSONArray jsonArray) throws Exception {
 		String boKey = RequestUtil.getString(request, "boKey");
-		IBusinessObject businessObject = businessObjectService.getFilledByKey(boKey);
+		BusinessObject businessObject = businessObjectService.getFilledByKey(boKey);
 		StringBuilder sb = new StringBuilder();
 		for (Object object : jsonArray) {
 			JSONObject jsonObject = (JSONObject) object;
-			IBusTableRel relation = businessObject.getRelation().find(jsonObject.getString("tableKey"));
+			BusinessTableRelation relation = businessObject.getRelation().find(jsonObject.getString("tableKey"));
 			FormTemplate template = formTemplateManager.getByKey(jsonObject.getString("templateKey"));
 			if (template == null) {
 				continue;

@@ -12,7 +12,7 @@ import java.util.Map;
  * 
  * 
  */
-public interface IBusinessTable {
+public interface BusinessTable {
 	/**
 	 * 默认的主键id名称
 	 */
@@ -60,7 +60,7 @@ public interface IBusinessTable {
 	 * 
 	 * @return
 	 */
-	List<? extends IBusinessColumn> getColumns();
+	List<? extends BusinessColumn> getColumns();
 	/**
 	 * 
 	 * 数据源名称
@@ -75,7 +75,7 @@ public interface IBusinessTable {
 	 * 
 	 * @return
 	 */
-	List<? extends IBusinessColumn> getColumnsWithoutPk();
+	List<? extends BusinessColumn> getColumnsWithoutPk();
 	
 	/**
 	 * 
@@ -106,7 +106,7 @@ public interface IBusinessTable {
 	 * @param key
 	 * @return
 	 */
-	IBusinessColumn getColumnByKey(String key);
+	BusinessColumn getColumnByKey(String key);
 	
 	/**
 	 * 
@@ -115,5 +115,5 @@ public interface IBusinessTable {
 	 * @param name
 	 * @return
 	 */
-	IBusinessColumn getColumn(String name);
+	BusinessColumn getColumn(String name);
 }

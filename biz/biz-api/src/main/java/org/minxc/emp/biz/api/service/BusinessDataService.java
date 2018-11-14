@@ -1,8 +1,8 @@
 package org.minxc.emp.biz.api.service;
 
-import org.minxc.emp.biz.api.model.IBusinessData;
-import org.minxc.emp.biz.api.model.IBusinessObject;
-import org.minxc.emp.biz.api.model.IBusinessPermission;
+import org.minxc.emp.biz.api.model.BusinessData;
+import org.minxc.emp.biz.api.model.BusinessObject;
+import org.minxc.emp.biz.api.model.BusinessPermission;
 
 import com.alibaba.fastjson.JSONObject;
 
@@ -17,7 +17,7 @@ public interface BusinessDataService {
 	 * @param data
 	 * @param businessPermission
 	 */
-	void saveFormDefData(JSONObject data,IBusinessPermission businessPermission);
+	void saveFormDefData(JSONObject data, BusinessPermission businessPermission);
 
 	/**
 	 * 
@@ -28,7 +28,7 @@ public interface BusinessDataService {
 	 * @param id
 	 * @return
 	 */
-	JSONObject getFormDefData(IBusinessObject businessObject, Object id);
+	JSONObject getFormDefData(BusinessObject businessObject, Object id);
 	
 	/**
 	 * 
@@ -38,9 +38,9 @@ public interface BusinessDataService {
 	 * @param businessObject
 	 * @param id
 	 */
-	void removeData(IBusinessObject businessObject, Object id);
+	void removeData(BusinessObject businessObject, Object id);
 	
-	void saveData(IBusinessData businessData);
+	void saveData(BusinessData businessData);
 	
 	/**
 	 * 
@@ -50,7 +50,7 @@ public interface BusinessDataService {
 	 * @param id
 	 * @return
 	 */
-	IBusinessData loadData(IBusinessObject businessObject, Object id);
+	BusinessData loadData(BusinessObject businessObject, Object id);
 	
 	/**
 	 * 将前端的json 转成 IbusinessData结构
@@ -58,13 +58,12 @@ public interface BusinessDataService {
 	 * @param modelCode
 	 * @return
 	 */
-	IBusinessData parseBusinessData(JSONObject jsonObject, String modelCode);
+	BusinessData parseBusinessData(JSONObject jsonObject, String modelCode);
 	
 	/**
 	 * 把businessData转成json格式<br>
 	 * 用在BD执行过展示前置脚本后转成json提供给前端
-	 * @param data
 	 * @param businessData
 	 */
-	JSONObject assemblyFormDefData(IBusinessData businessData);
+	JSONObject assemblyFormDefData(BusinessData businessData);
 }

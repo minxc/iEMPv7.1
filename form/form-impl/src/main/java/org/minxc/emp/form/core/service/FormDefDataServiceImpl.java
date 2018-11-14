@@ -1,10 +1,10 @@
 package org.minxc.emp.form.core.service;
 
-import org.minxc.emp.biz.api.constant.BusTableRelType;
-import org.minxc.emp.biz.api.constant.BusinessPermissionObjType;
-import org.minxc.emp.biz.api.model.IBusTableRel;
-import org.minxc.emp.biz.api.model.IBusinessObject;
-import org.minxc.emp.biz.api.model.IBusinessPermission;
+import org.minxc.emp.biz.api.constant.BusinessTableRelationType;
+import org.minxc.emp.biz.api.constant.BusinessPermissionObjectType;
+import org.minxc.emp.biz.api.model.BusinessTableRelation;
+import org.minxc.emp.biz.api.model.BusinessObject;
+import org.minxc.emp.biz.api.model.BusinessPermission;
 import org.minxc.emp.biz.api.service.BusinessDataService;
 import org.minxc.emp.biz.api.service.BusinessObjectService;
 import org.minxc.emp.biz.api.service.BusinessPermissionService;
@@ -50,7 +50,7 @@ public class FormDefDataServiceImpl implements FormDefDataService {
 		FormDefinitionImpl formDef = formDefManager.getByKey(formDefKey);
 		formDefData.setHtml(formDef.getHtml());
 		
-		IBusinessPermission businessPermission = businessPermissionService.getByObjTypeAndObjVal(BusinessPermissionObjType.FORM.getKey(), formDef.getKey(), formDef.getBoKey(), true);
+		BusinessPermission businessPermission = businessPermissionService.getByObjTypeAndObjVal(BusinessPermissionObjectType.FORM.getKey(), formDef.getKey(), formDef.getBoKey(), true);
 		
 		formDefData.setPermission(businessPermission.getPermission(false));
 		formDefData.setTablePermission(businessPermission.getTablePermission(false));
@@ -76,11 +76,11 @@ public class FormDefDataServiceImpl implements FormDefDataService {
 			formDefData.setInitData(new JSONObject());
 		}
 		JSONObject initData = formDefData.getInitData();
-		IBusinessObject businessObject = businessObjectService.getFilledByKey(formDef.getBoKey());
+		BusinessObject businessObject = businessObjectService.getFilledByKey(formDef.getBoKey());
 
 		initData.put(formDef.getBoKey(), new JSONObject());
 
-		for (IBusTableRel rel : businessObject.getRelation().list()) {
+		for (BusinessTableRelation rel : businessObject.getRelation().list()) {
 			initData.getJSONObject(formDef.getBoKey()).put(rel.getTableKey(), getInitData(rel));
 		}
 	}
@@ -94,11 +94,11 @@ public class FormDefDataServiceImpl implements FormDefDataService {
 	 * @param busTableRel
 	 * @return
 	 */
-	private JSONObject getInitData(IBusTableRel busTableRel) {
+	private JSONObject getInitData(BusinessTableRelation busTableRel) {
 		JSONObject table = new JSONObject();
 		table.putAll(busTableRel.getTable().initData());
-		for (IBusTableRel rel : busTableRel.getChildren()) {
-			if (BusTableRelType.ONE_TO_ONE.equalsWithKey(rel.getType())) {
+		for (BusinessTableRelation rel : busTableRel.getChildren()) {
+			if (BusinessTableRelationType.ONE_TO_ONE.equalsWithKey(rel.getType())) {
 				// 递归处理一对一
 				table.put(rel.getTableKey(), getInitData(rel));
 			}
@@ -117,14 +117,14 @@ public class FormDefDataServiceImpl implements FormDefDataService {
 	 * @param formDefData
 	 * @param businessPermission2 
 	 */
-	private void handleData(FormDefinitionImpl formDef, String id, FormDefinitionData formDefData, IBusinessPermission businessPermission) {
+	private void handleData(FormDefinitionImpl formDef, String id, FormDefinitionData formDefData, BusinessPermission businessPermission) {
 		if (formDefData.getData() == null) {
 			formDefData.setData(new JSONObject());
 		}
 
 		JSONObject data = formDefData.getData();
-		IBusinessObject businessObject = businessObjectService.getFilledByKey(formDef.getBoKey());
-		businessObject.setPermission(businessPermission.getBusObjMap().get(formDef.getBoKey()));
+		BusinessObject businessObject = businessObjectService.getFilledByKey(formDef.getBoKey());
+		businessObject.setPermission(businessPermission.getBusinessObjectMap().get(formDef.getBoKey()));
 		data.put(formDef.getBoKey(), businessDataService.getFormDefData(businessObject, id));
 	}
 

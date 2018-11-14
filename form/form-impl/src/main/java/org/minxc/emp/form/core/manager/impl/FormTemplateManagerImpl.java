@@ -9,9 +9,9 @@ import javax.annotation.Resource;
 import org.apache.commons.io.IOUtils;
 import org.dom4j.Document;
 import org.dom4j.Element;
-import org.minxc.emp.biz.api.constant.BusTableRelType;
-import org.minxc.emp.biz.api.model.IBusTableRel;
-import org.minxc.emp.biz.api.model.IBusinessObject;
+import org.minxc.emp.biz.api.constant.BusinessTableRelationType;
+import org.minxc.emp.biz.api.model.BusinessTableRelation;
+import org.minxc.emp.biz.api.model.BusinessObject;
 import org.minxc.emp.biz.api.service.BusinessObjectService;
 import org.minxc.emp.common.db.id.UniqueIdUtil;
 import org.minxc.emp.common.db.model.query.DefaultQueryFilter;
@@ -166,8 +166,8 @@ public class FormTemplateManagerImpl extends CommonManager<String, FormTemplate>
 	
 	@Override
 	public JSONArray templateData(String boKey,String type) {
-		IBusinessObject bo = businessObjectService.getByKey(boKey);
-		List<IBusTableRel> rels = (List<IBusTableRel>) bo.getRelation().list();
+		BusinessObject bo = businessObjectService.getByKey(boKey);
+		List<BusinessTableRelation> rels = (List<BusinessTableRelation>) bo.getRelation().list();
 		List<FormTemplate> mainTemplates = getByType("main",type);
 		List<FormTemplate> subTableTemplates = getByType("subTable",type);
 		for (FormTemplate template : mainTemplates) {
@@ -178,12 +178,12 @@ public class FormTemplateManagerImpl extends CommonManager<String, FormTemplate>
 		}
 
 		JSONArray jsonArray = new JSONArray();
-		for (IBusTableRel rel : rels) {
+		for (BusinessTableRelation rel : rels) {
 			JSONObject jsonObject = new JSONObject();
 			jsonObject.put("tableKey", rel.getTableKey());
 			jsonObject.put("tableComment", rel.getTableComment());
-			jsonObject.put("typeDesc", BusTableRelType.getByKey(rel.getType()).getDesc());
-			if (BusTableRelType.MAIN.equalsWithKey(rel.getType())) {
+			jsonObject.put("typeDesc", BusinessTableRelationType.getByKey(rel.getType()).getDesc());
+			if (BusinessTableRelationType.MAIN.equalsWithKey(rel.getType())) {
 				jsonObject.put("templates", JSON.toJSON(mainTemplates));
 			} else {
 				jsonObject.put("templates", JSON.toJSON(subTableTemplates));

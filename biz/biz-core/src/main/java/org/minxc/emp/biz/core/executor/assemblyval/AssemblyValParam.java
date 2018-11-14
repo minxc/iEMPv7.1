@@ -1,14 +1,14 @@
 package org.minxc.emp.biz.core.executor.assemblyval;
 
-import org.minxc.emp.biz.core.model.BusinessData;
+import org.minxc.emp.biz.core.model.BusinessDataImpl;
 
 import com.alibaba.fastjson.JSONObject;
 
 public class AssemblyValParam {
 	private JSONObject data;
-	private BusinessData businessData;
+	private BusinessDataImpl businessData;
 
-	public AssemblyValParam(JSONObject data, BusinessData businessData) {
+	public AssemblyValParam(JSONObject data, BusinessDataImpl businessData) {
 		this.data = data;
 		this.businessData = businessData;
 	}
@@ -17,7 +17,7 @@ public class AssemblyValParam {
 		return this.data;
 	}
 
-	public BusinessData getBusinessData() {
+	public BusinessDataImpl getBusinessData() {
 		return this.businessData;
 	}
 }

@@ -1,7 +1,7 @@
 package org.minxc.emp.biz.api.constant;
 
 /**
- * bus权限枚举
+ * Business权限枚举
  * 注意枚举的顺序是从大到小的，例如拥有了REQUIRED权限，就表示包含下面的权限了
  * 通常页面配置不会展示最后那个权限，因为当用户配置了权限，前面的权限都没有了，最后的就是权限了
  * 当用户没配置权限，则应该选择默认权限
@@ -98,9 +98,6 @@ public enum RightsType {
 	/**
 	 * 
 	 * 返回默认权限
-	 * 
-	 * 
-	 * @param key
 	 * @return PermissionType
 	 * @exception @since
 	 *                1.0.0

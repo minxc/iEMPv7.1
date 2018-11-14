@@ -10,15 +10,13 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 
 import org.apache.commons.lang3.StringUtils;
-import org.minxc.emp.biz.api.model.IBusinessColumn;
-import org.minxc.emp.biz.core.model.BusColumnCtrl;
-import org.minxc.emp.biz.core.model.BusinessTable;
+import org.minxc.emp.biz.api.model.BusinessColumn;
 import org.minxc.emp.common.db.model.table.ColumnEntity;
 import org.minxc.emp.core.api.constant.ColumnType;
 import org.minxc.emp.core.api.model.CommonModel;
 import org.minxc.emp.core.util.time.DateFormatUtil;
 
-public class BusinessColumn extends ColumnEntity implements CommonModel, IBusinessColumn {
+public class BusinessColumnImpl extends ColumnEntity implements CommonModel, BusinessColumn {
 	/** 
 	
 	* @Fields serialVersionUID : TODO(用一句话描述这个变量表示什么) 
@@ -34,8 +32,8 @@ public class BusinessColumn extends ColumnEntity implements CommonModel, IBusine
 	@NotEmpty
 	private String tableId;
 	@Valid
-	private BusColumnCtrl ctrl;
-	private BusinessTable table;
+	private BusinessColumnControlImpl ctrl;
+	private BusinessTableImpl table;
 
 	public String getId() {
 		return this.id;
@@ -53,11 +51,11 @@ public class BusinessColumn extends ColumnEntity implements CommonModel, IBusine
 		this.key = key;
 	}
 
-	public BusColumnCtrl getCtrl() {
+	public BusinessColumnControlImpl getCtrl() {
 		return this.ctrl;
 	}
 
-	public void setCtrl(BusColumnCtrl ctrl) {
+	public void setCtrl(BusinessColumnControlImpl ctrl) {
 		this.ctrl = ctrl;
 	}
 
@@ -69,11 +67,11 @@ public class BusinessColumn extends ColumnEntity implements CommonModel, IBusine
 		this.tableId = tableId;
 	}
 
-	public BusinessTable getTable() {
+	public BusinessTableImpl getTable() {
 		return this.table;
 	}
 
-	public void setTable(BusinessTable table) {
+	public void setTable(BusinessTableImpl table) {
 		this.table = table;
 	}
 

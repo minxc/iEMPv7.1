@@ -1,6 +1,6 @@
 package org.minxc.emp.biz.api.service;
 
-import org.minxc.emp.biz.api.model.IBusinessTable;
+import org.minxc.emp.biz.api.model.BusinessTable;
 
 /**
  * 
@@ -15,7 +15,7 @@ public interface BusinessTableService {
 	 * @param key
 	 * @return
 	 */
-	IBusinessTable getByKey(String key);
+	BusinessTable getByKey(String key);
 	
 	/**
 	 * 
@@ -24,6 +24,6 @@ public interface BusinessTableService {
 	 * @param key
 	 * @return
 	 */
-	IBusinessTable getFilledByKey(String key);
+	BusinessTable getFilledByKey(String key);
 	
 }

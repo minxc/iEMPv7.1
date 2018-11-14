@@ -6,7 +6,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.minxc.emp.basis.api.groovy.GroovyScriptEngine;
-import org.minxc.emp.biz.api.model.IBusinessData;
+import org.minxc.emp.biz.api.model.BusinessData;
 import org.minxc.emp.biz.api.service.BusinessDataService;
 import org.minxc.emp.core.util.BeanUtils;
 import org.minxc.emp.core.util.StringUtil;
@@ -42,7 +42,7 @@ public class FormBusManagerImpl implements FormBusManager {
     GroovyScriptEngine groovyScriptEngine;
 
     @Override
-    public IBusinessData getBoData(String boKey, Map param) {
+    public BusinessData getBoData(String boKey, Map param) {
 
         try {
             if (BeanUtils.isNotEmpty(param)) {
@@ -65,7 +65,7 @@ public class FormBusManagerImpl implements FormBusManager {
         FormDefinition form = null;// formDefManager.getByFormKey(formKey);
         String boCode = null;// form.getBoCodes();
 
-        IBusinessData bizData = null;//bizDataService.getBusDataByBoData(boCode, JSON.parseObject(json));
+        BusinessData bizData = null;//bizDataService.getBusDataByBoData(boCode, JSON.parseObject(json));
 
         FormBusSet busSet = formBusSetManager.getByFormKey(formKey);
         Map<String, Object> param = new HashMap<String, Object>();

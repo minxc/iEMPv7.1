@@ -2,11 +2,10 @@ package org.minxc.emp.biz.api.model;
 
 
 /**
- * 
  * BusinessColumn对其他模块的支持
- * 
  */
-public interface IBusinessColumn {
+public interface BusinessColumn {
+
 	String getKey();
 	
 	String getName();
@@ -25,11 +24,11 @@ public interface IBusinessColumn {
 
 	String getComment();
 
-	IBusColumnCtrl getCtrl();
+	BusinessColumnControl getCtrl();
 
 	String getTableId();
 
-	IBusinessTable getTable();
+	BusinessTable getTable();
 	
 	/**
 	 * 

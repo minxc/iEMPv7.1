@@ -1,9 +1,9 @@
 package org.minxc.emp.form.core.generator;
 
 import org.jsoup.nodes.Element;
-import org.minxc.emp.biz.api.constant.BusTableRelType;
-import org.minxc.emp.biz.api.model.IBusTableRel;
-import org.minxc.emp.biz.api.model.IBusinessColumn;
+import org.minxc.emp.biz.api.constant.BusinessTableRelationType;
+import org.minxc.emp.biz.api.model.BusinessTableRelation;
+import org.minxc.emp.biz.api.model.BusinessColumn;
 import org.minxc.emp.core.api.exception.BusinessException;
 import org.minxc.emp.core.util.StringUtil;
 import org.minxc.emp.core.util.ThreadMapUtil;
@@ -21,11 +21,11 @@ import com.alibaba.fastjson.JSONObject;
 @Component
 public class PcFormElementGenerator extends AbsFormElementGenerator{
 
-	private void handleNgModel(Element element,IBusinessColumn column) {
+	private void handleNgModel(Element element, BusinessColumn column) {
 		String boCode = (String) ThreadMapUtil.get("boCode");
-		IBusTableRel relation  = (IBusTableRel) ThreadMapUtil.get("relation");
+		BusinessTableRelation relation  = (BusinessTableRelation) ThreadMapUtil.get("relation");
 		//如果是多行子表
-		if(relation.getType().equals(BusTableRelType.ONE_TO_MANY.getKey())) {
+		if(relation.getType().equals(BusinessTableRelationType.ONE_TO_MANY.getKey())) {
 			element.attr("ng-model",column.getTable().getKey() + "." + column.getKey());
 			return ;
 		}
@@ -34,7 +34,7 @@ public class PcFormElementGenerator extends AbsFormElementGenerator{
 	}
 	
 	
-	protected String getColumnOnetext(IBusinessColumn column) {
+	protected String getColumnOnetext(BusinessColumn column) {
 		
 		Element element = getElement("input").attr("type", "text").addClass("form-control");
 		
@@ -46,7 +46,7 @@ public class PcFormElementGenerator extends AbsFormElementGenerator{
 	}
 	
 
-	protected String getColumnDate(IBusinessColumn column) {
+	protected String getColumnDate(BusinessColumn column) {
 		Element element = getElement("input").addClass("form-control");
 		
 		handleNgModel(element, column);
@@ -62,7 +62,7 @@ public class PcFormElementGenerator extends AbsFormElementGenerator{
 		return element.toString();
 	}
 	
-	protected String getColumnDic(IBusinessColumn column) {
+	protected String getColumnDic(BusinessColumn column) {
 		Element element = getElement("span").attr("type", "text").addClass("input-div");
 		
 		handleNgModel(element, column);
@@ -80,7 +80,7 @@ public class PcFormElementGenerator extends AbsFormElementGenerator{
 		return element.toString();
 	}
 
-	protected String getColumnIdentity(IBusinessColumn column) {
+	protected String getColumnIdentity(BusinessColumn column) {
 		Element element = getElement("input").attr("type", "text").addClass("form-control");
 		handleNgModel(element, column);
 		handlePermission(element, column);
@@ -94,7 +94,7 @@ public class PcFormElementGenerator extends AbsFormElementGenerator{
 		return element.toString();
 	}
 
-	protected String getColumnMultitext(IBusinessColumn column) {
+	protected String getColumnMultitext(BusinessColumn column) {
 		Element element = getElement("textarea").attr("type", "text").addClass("form-control");
 		
 		handleNgModel(element, column);
@@ -104,7 +104,7 @@ public class PcFormElementGenerator extends AbsFormElementGenerator{
 		return element.toString();
 	}
 
-	protected String getColumnCheckBox(IBusinessColumn column) {
+	protected String getColumnCheckBox(BusinessColumn column) {
 		JSONObject config = JSON.parseObject(column.getCtrl().getConfig());
 		if(!config.containsKey("options")) {
 			throw new BusinessException(String.format("表【%s】CheckBox 字段  【%s】解析失败,options 配置信息不能为空", column.getTable().getKey(),column.getComment()));
@@ -130,7 +130,7 @@ public class PcFormElementGenerator extends AbsFormElementGenerator{
 		return permissionElement.toString();
 	}
 
-	protected String getColumnRadio(IBusinessColumn column) {
+	protected String getColumnRadio(BusinessColumn column) {
 		JSONObject config = JSON.parseObject(column.getCtrl().getConfig());
 		if(!config.containsKey("options")) {
 			throw new BusinessException(String.format("表【%s】Radio 字段  【%s】解析失败,options 配置信息不能为空", column.getTable().getKey(),column.getComment()));
@@ -155,7 +155,7 @@ public class PcFormElementGenerator extends AbsFormElementGenerator{
 		return permissionElement.toString();
 	}
 
-	protected String getColumnSelect(IBusinessColumn column,Boolean isMultiple) {
+	protected String getColumnSelect(BusinessColumn column, Boolean isMultiple) {
 		JSONObject config = JSON.parseObject(column.getCtrl().getConfig());
 		if(!config.containsKey("options")) {
 			throw new BusinessException(String.format("表【%s】Select 字段  【%s】解析失败,options 配置信息不能为空", column.getTable().getKey(),column.getComment()));
@@ -182,7 +182,7 @@ public class PcFormElementGenerator extends AbsFormElementGenerator{
 		return permissionElement.toString();
 	}
 
-	protected String getColumnFile(IBusinessColumn column) {
+	protected String getColumnFile(BusinessColumn column) {
 		//<a href="javascript:void(0)" class="btn btn-primary fa-upload" ab-upload ng-model="test">指令测试</a>
 		Element element = getElement("a").attr("href", "javascript:void(0)").addClass("btn btn-primary fa-upload");
 		element.attr("ab-upload","");
@@ -193,13 +193,13 @@ public class PcFormElementGenerator extends AbsFormElementGenerator{
 	}
 	
 	// id="boCode-tableKey" ab-basic-permission="boCode.table.tableKey" ...
-	public String getSubAttrs(IBusTableRel rel) {
+	public String getSubAttrs(BusinessTableRelation rel) {
 		StringBuffer sb = new StringBuffer();
 		sb.append( " id="+"\""+ rel.getBusObj().getKey()+"-"+rel.getTableKey()+"\" ");
 		
 		//一对多的三层情况下弹框展示
-		if(rel.getType().equals(BusTableRelType.ONE_TO_MANY.getKey()) 
-				&& !rel.getParent().getType().equals(BusTableRelType.MAIN.getKey())) {
+		if(rel.getType().equals(BusinessTableRelationType.ONE_TO_MANY.getKey())
+				&& !rel.getParent().getType().equals(BusinessTableRelationType.MAIN.getKey())) {
 			sb.append(" hide ");
 		}
 		

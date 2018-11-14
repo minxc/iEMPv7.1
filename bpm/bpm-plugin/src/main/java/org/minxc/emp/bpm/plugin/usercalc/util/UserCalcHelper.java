@@ -22,7 +22,7 @@ public class UserCalcHelper {
 //		if ("BO".equals(executorVar.getSource())) {
 //			PKs = executorVar.getName().split("\\.");
 //			boMap = null;
-//			IBusinessData boData = (IBusinessData) boMap.get(PKs[0]);
+//			BusinessData boData = (BusinessData) boMap.get(PKs[0]);
 //			PK = boData.getString(PKs[1]);
 //		} else if ("flowVar".equals(executorVar.getSource())) {
 //			PK = (String) ((Map) vars).get(executorVar.getName());

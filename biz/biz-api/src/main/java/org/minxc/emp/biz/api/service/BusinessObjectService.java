@@ -2,7 +2,7 @@ package org.minxc.emp.biz.api.service;
 
 import java.util.List;
 
-import org.minxc.emp.biz.api.model.IBusinessObject;
+import org.minxc.emp.biz.api.model.BusinessObject;
 
 import com.alibaba.fastjson.JSONObject;
 
@@ -20,7 +20,7 @@ public interface BusinessObjectService {
 	 * @param key
 	 * @return
 	 */
-	IBusinessObject getByKey(String key);
+	BusinessObject getByKey(String key);
 
 	/**
 	 * 
@@ -33,5 +33,5 @@ public interface BusinessObjectService {
 	 */
 	List<JSONObject> boTreeData(String key);
 	
-	IBusinessObject getFilledByKey(String key);
+	BusinessObject getFilledByKey(String key);
 }

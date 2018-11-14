@@ -2,9 +2,7 @@ package org.minxc.emp.biz.core.executor.parseval;
 
 
 import org.apache.commons.lang3.StringUtils;
-import org.minxc.emp.biz.api.model.IBusinessColumn;
-import org.minxc.emp.biz.core.executor.parseval.ParseValExecuteChain;
-import org.minxc.emp.biz.core.executor.parseval.ParseValParam;
+import org.minxc.emp.biz.api.model.BusinessColumn;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,7 +15,7 @@ public class ParseValTypeExecutor extends ParseValExecuteChain {
 		if (value == null || StringUtils.isEmpty((String) value.toString())) {
 			return;
 		}
-		IBusinessColumn column = param.getBusTableRel().getTable().getColumnByKey(key);
+		BusinessColumn column = param.getBusTableRel().getTable().getColumnByKey(key);
 		if (column == null) {
 			param.getData().put(key, value);
 			return;

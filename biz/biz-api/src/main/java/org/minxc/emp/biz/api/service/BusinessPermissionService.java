@@ -1,6 +1,6 @@
 package org.minxc.emp.biz.api.service;
 
-import org.minxc.emp.biz.api.model.IBusinessPermission;
+import org.minxc.emp.biz.api.model.BusinessPermission;
 
 public interface BusinessPermissionService {
 	/**
@@ -19,6 +19,6 @@ public interface BusinessPermissionService {
 	 *            是否计算当前用户的结果
 	 * @return
 	 */
-	IBusinessPermission getByObjTypeAndObjVal(String objType, String objVal, String defalutBoKeys, boolean calculate);
+	BusinessPermission getByObjTypeAndObjVal(String objType, String objVal, String defalutBoKeys, boolean calculate);
 
 }

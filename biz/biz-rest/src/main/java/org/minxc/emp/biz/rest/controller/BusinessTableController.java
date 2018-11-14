@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
 import org.minxc.emp.biz.core.manager.BusinessTableManager;
-import org.minxc.emp.biz.core.model.BusinessTable;
+import org.minxc.emp.biz.core.model.BusinessTableImpl;
 import org.minxc.emp.biz.core.util.BusinessTableCacheUtil;
 import org.minxc.emp.common.db.tableoper.TableOperator;
 import org.minxc.emp.common.rest.CommonController;
@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/bus/businessTable/")
-public class BusinessTableController extends CommonController<BusinessTable> {
+public class BusinessTableController extends CommonController<BusinessTableImpl> {
 	
 	
 	@Resource
@@ -44,7 +44,7 @@ public class BusinessTableController extends CommonController<BusinessTable> {
 	@RequestMapping("save")
 	@Override
 	@ErrorCatching(value = "保存业务表失败")
-	public ResultMessage<String> save(@RequestBody BusinessTable businessTable) throws Exception {
+	public ResultMessage<String> save(@RequestBody BusinessTableImpl businessTable) throws Exception {
 		businessTableManager.save(businessTable);
 		return getSuccessResult("保存业务表成功");
 	}
@@ -66,7 +66,7 @@ public class BusinessTableController extends CommonController<BusinessTable> {
 		String id = RequestUtil.getString(request, "id");
 		String key = RequestUtil.getString(request, "key");
 		boolean fill = RequestUtil.getBoolean(request, "fill");// 是否要填充table
-		BusinessTable table = null;
+		BusinessTableImpl table = null;
 		if (StringUtils.isNotEmpty(id)) {
 			table = businessTableManager.get(id);
 		} else if (StringUtils.isNotEmpty(key)) {
@@ -93,7 +93,7 @@ public class BusinessTableController extends CommonController<BusinessTable> {
 	@ErrorCatching(writeErrorToResponse = true, value = "建表失败")
 	public void createTable(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String id = RequestUtil.getString(request, "id");
-		BusinessTable businessTable = businessTableManager.get(id);
+		BusinessTableImpl businessTable = businessTableManager.get(id);
 		businessTable = businessTableManager.getFilledByKey(businessTable.getKey());
 		TableOperator tableOperator = businessTableManager.newTableOperator(businessTable);
 		tableOperator.createTable();

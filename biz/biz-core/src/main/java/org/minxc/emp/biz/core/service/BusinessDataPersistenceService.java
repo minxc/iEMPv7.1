@@ -1,14 +1,14 @@
 package org.minxc.emp.biz.core.service;
 
-import org.minxc.emp.biz.core.model.BusinessData;
-import org.minxc.emp.biz.core.model.BusinessObject;
+import org.minxc.emp.biz.core.model.BusinessDataImpl;
+import org.minxc.emp.biz.core.model.BusinessObjectImpl;
 
 public interface BusinessDataPersistenceService {
 	String type();
 
-	void saveData(BusinessData var1);
+	void saveData(BusinessDataImpl var1);
 
-	BusinessData loadData(BusinessObject var1, Object var2);
+	BusinessDataImpl loadData(BusinessObjectImpl var1, Object var2);
 
-	void removeData(BusinessObject var1, Object var2);
+	void removeData(BusinessObjectImpl var1, Object var2);
 }

@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSONArray;
 
 import java.util.Map;
 
-import org.minxc.emp.biz.api.model.IBusinessData;
+import org.minxc.emp.biz.api.model.BusinessData;
 
 
 /**
@@ -20,7 +20,7 @@ public interface FormBusManager {
      * @param id
      * @return
      */
-    IBusinessData getBoData(String boKey, Map param);
+    BusinessData getBoData(String boKey, Map param);
 
     /**
      * 通过formKey json 保存bo数据

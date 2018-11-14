@@ -4,33 +4,28 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import javax.annotation.Resource;
 
 import org.minxc.emp.biz.api.constant.RightsType;
-import org.minxc.emp.biz.api.model.IBusTableRel;
-import org.minxc.emp.biz.api.model.IBusinessColumn;
+import org.minxc.emp.biz.api.model.BusinessTableRelation;
+import org.minxc.emp.biz.api.model.BusinessColumn;
 import org.minxc.emp.biz.core.dao.BusinessPermissionDao;
 import org.minxc.emp.biz.core.manager.BusinessObjectManager;
 import org.minxc.emp.biz.core.manager.BusinessPermissionManager;
-import org.minxc.emp.biz.core.model.BusTableRel;
-import org.minxc.emp.biz.core.model.BusinessColumn;
-import org.minxc.emp.biz.core.model.BusinessObject;
-import org.minxc.emp.biz.core.model.BusinessPermission;
-import org.minxc.emp.biz.core.model.BusinessTable;
+import org.minxc.emp.biz.core.model.BusinessObjectImpl;
+import org.minxc.emp.biz.core.model.BusinessPermissionImpl;
 import org.minxc.emp.biz.core.model.permission.AbstractPermission;
-import org.minxc.emp.biz.core.model.permission.BusColumnPermission;
-import org.minxc.emp.biz.core.model.permission.BusObjPermission;
-import org.minxc.emp.biz.core.model.permission.BusTablePermission;
+import org.minxc.emp.biz.core.model.permission.BusinessColumnPermissionImpl;
+import org.minxc.emp.biz.core.model.permission.BusinessObjectPermissionImpl;
+import org.minxc.emp.biz.core.model.permission.BusinessTablePermissionImpl;
 import org.minxc.emp.common.manager.impl.CommonManager;
 import org.minxc.emp.core.api.exception.BusinessException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service(value = "busObjPermissionManager")
-public class BusinessPermissionManagerImpl extends CommonManager<String, BusinessPermission>
+public class BusinessPermissionManagerImpl extends CommonManager<String, BusinessPermissionImpl>
 		implements
 			BusinessPermissionManager {
 	@Resource
@@ -38,63 +33,63 @@ public class BusinessPermissionManagerImpl extends CommonManager<String, Busines
 	@Autowired
 	private BusinessObjectManager businessObjectManager;
 
-	public BusinessPermission getByObjTypeAndObjVal(String objType, String objVal) {
+	public BusinessPermissionImpl getByObjTypeAndObjVal(String objType, String objVal) {
 		return this.businessPermissionDao.getByObjTypeAndObjVal(objType, objVal);
 	}
 
-	public BusinessPermission getByObjTypeAndObjVal(String objType, String objVal, String defaultBoKeys) {
+	public BusinessPermissionImpl getByObjTypeAndObjVal(String objType, String objVal, String defaultBoKeys) {
 		
 		
-		BusinessPermission oldPermission = this.getByObjTypeAndObjVal(objType, objVal);
+		BusinessPermissionImpl oldPermission = this.getByObjTypeAndObjVal(objType, objVal);
 		if (oldPermission == null) {
-			oldPermission = new BusinessPermission();
+			oldPermission = new BusinessPermissionImpl();
 		}
-		BusinessPermission businessPermission = new BusinessPermission();
+		BusinessPermissionImpl businessPermission = new BusinessPermissionImpl();
 		businessPermission.setObjType(objType);
 		businessPermission.setObjVal(objVal);
 		for (String boKey : defaultBoKeys.split(",")) {
-			BusinessObject bo = this.businessObjectManager.getFilledByKey(boKey);
+			BusinessObjectImpl bo = this.businessObjectManager.getFilledByKey(boKey);
 			if (bo == null) {
 				throw new BusinessException(boKey + " 业务对象丢失！");
 			}
-			BusObjPermission busObjPermission = oldPermission.c(boKey);
+			BusinessObjectPermission busObjPermission = oldPermission.c(boKey);
 			if (busObjPermission == null) {
-				busObjPermission = new BusObjPermission();
+				busObjPermission = new BusinessObjectPermissionImpl();
 				busObjPermission.setKey(boKey);
 				busObjPermission.setName(bo.getName());
 				this.a((AbstractPermission) busObjPermission);
 			}
-			businessPermission.getBusObjMap().put(boKey, busObjPermission);
-			for (IBusTableRel rel : bo.getRelation().list()) {
-				BusTablePermission busTablePermission = (BusTablePermission) busObjPermission.getTableMap()
+			businessPermission.getBusinessObjectMap().put(boKey, busObjPermission);
+			for (BusinessTableRelation rel : bo.getRelation().list()) {
+				BusinessTablePermissionImpl busTablePermission = (BusinessTablePermissionImpl) busObjPermission.getTableMap()
 						.get(rel.getTableKey());
 				if (busTablePermission == null) {
-					busTablePermission = new BusTablePermission();
+					busTablePermission = new BusinessTablePermissionImpl();
 					busTablePermission.setKey(rel.getTableKey());
 					busTablePermission.setComment(rel.getTableComment());
 				}
 				busObjPermission.getTableMap().put(rel.getTableKey(), busTablePermission);
-				for (IBusinessColumn column : rel.getTable().getColumnsWithoutPk()) {
-					BusColumnPermission busColumnPermission = (BusColumnPermission) busTablePermission.getColumnMap()
+				for (BusinessColumn column : rel.getTable().getColumnsWithoutPk()) {
+					BusinessColumnPermissionImpl busColumnPermission = (BusinessColumnPermissionImpl) busTablePermission.getColumnMap()
 							.get(column.getKey());
 					if (busColumnPermission == null) {
-						busColumnPermission = new BusColumnPermission();
+						busColumnPermission = new BusinessColumnPermissionImpl();
 						busColumnPermission.setKey(column.getKey());
 						busColumnPermission.setComment(column.getComment());
 					}
 					busTablePermission.getColumnMap().put(column.getKey(), busColumnPermission);
 				}
-				Iterator<Map.Entry<String, BusColumnPermission>> it = busTablePermission.getColumnMap().entrySet().iterator();
+				Iterator<Map.Entry<String, BusinessColumnPermissionImpl>> it = busTablePermission.getColumnMap().entrySet().iterator();
 				while (it.hasNext()) {
-					Map.Entry<String, BusColumnPermission> entry = it.next();
+					Map.Entry<String, BusinessColumnPermissionImpl> entry = it.next();
 					if (rel.getTable().getColumnByKey(entry.getKey()) != null)
 						continue;
 					it.remove();
 				}
 			}
-			Iterator<Map.Entry<String, BusTablePermission>>  it = busObjPermission.getTableMap().entrySet().iterator();
+			Iterator<Map.Entry<String, BusinessTablePermissionImpl>>  it = busObjPermission.getTableMap().entrySet().iterator();
 			while (it.hasNext()) {
-				Map.Entry<String, BusTablePermission> entry = it.next();
+				Map.Entry<String, BusinessTablePermissionImpl> entry = it.next();
 				
 				if (bo.getRelation().find(entry.getKey()) != null)
 					continue;

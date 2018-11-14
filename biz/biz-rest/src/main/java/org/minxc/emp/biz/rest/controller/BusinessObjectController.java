@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
 import org.minxc.emp.biz.core.manager.BusinessObjectManager;
-import org.minxc.emp.biz.core.model.BusinessObject;
+import org.minxc.emp.biz.core.model.BusinessObjectImpl;
 import org.minxc.emp.common.rest.CommonController;
 import org.minxc.emp.common.rest.util.RequestUtil;
 import org.minxc.emp.core.api.aop.annotation.ErrorCatching;
@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/bus/businessObject/")
-public class BusinessObjectController extends CommonController<BusinessObject> {
+public class BusinessObjectController extends CommonController<BusinessObjectImpl> {
 	@Resource
 	BusinessObjectManager businessObjectManager;
 
@@ -46,7 +46,7 @@ public class BusinessObjectController extends CommonController<BusinessObject> {
 		String id = RequestUtil.getString(request, "id");
 		String key = RequestUtil.getString(request, "key");
 		boolean fill = RequestUtil.getBoolean(request, "fill");// 是否要填充table
-		BusinessObject object = null;
+		BusinessObjectImpl object = null;
 		if (StringUtils.isNotEmpty(id)) {
 			object = businessObjectManager.get(id);
 		} else if (StringUtils.isNotEmpty(key)) {

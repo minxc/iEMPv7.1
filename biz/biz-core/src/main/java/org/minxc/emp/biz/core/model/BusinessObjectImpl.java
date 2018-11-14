@@ -3,17 +3,16 @@ package org.minxc.emp.biz.core.model;
 import javax.validation.constraints.NotEmpty;
 
 import org.minxc.emp.biz.api.constant.RightsType;
-import org.minxc.emp.biz.api.model.IBusinessColumn;
-import org.minxc.emp.biz.api.model.IBusinessObject;
-import org.minxc.emp.biz.api.model.permission.IBusObjPermission;
-import org.minxc.emp.biz.core.model.BusTableRel;
-import org.minxc.emp.biz.core.model.permission.BusColumnPermission;
-import org.minxc.emp.biz.core.model.permission.BusObjPermission;
-import org.minxc.emp.biz.core.model.permission.BusTablePermission;
+import org.minxc.emp.biz.api.model.BusinessColumn;
+import org.minxc.emp.biz.api.model.BusinessObject;
+import org.minxc.emp.biz.api.model.permission.BusinessObjectPermission;
+import org.minxc.emp.biz.core.model.permission.BusinessColumnPermissionImpl;
+import org.minxc.emp.biz.core.model.permission.BusinessObjectPermissionImpl;
+import org.minxc.emp.biz.core.model.permission.BusinessTablePermissionImpl;
 import org.minxc.emp.core.impl.model.AbstractCommonModel;
 import org.minxc.emp.core.util.JsonUtil;
 
-public class BusinessObject extends AbstractCommonModel implements IBusinessObject {
+public class BusinessObjectImpl extends AbstractCommonModel implements BusinessObject {
 	
 	
 	/** 
@@ -35,8 +34,8 @@ public class BusinessObject extends AbstractCommonModel implements IBusinessObje
 	private String groupName;
 	@NotEmpty
 	private String persistenceType;
-	private BusTableRel relation;
-	private BusObjPermission permission;
+	private BusinessTableRelationImpl relation;
+	private BusinessObjectPermission permission;
 
 	public String getKey() {
 		return this.key;
@@ -68,7 +67,7 @@ public class BusinessObject extends AbstractCommonModel implements IBusinessObje
 
 	public void setRelationJson(String relationJson) {
 		this.relationJson = relationJson;
-		this.relation = (BusTableRel) JsonUtil.parseObject(relationJson, BusTableRel.class);
+		this.relation = (BusinessTableRelationImpl) JsonUtil.parseObject(relationJson, BusinessTableRelationImpl.class);
 	}
 
 	public String getGroupId() {
@@ -95,21 +94,21 @@ public class BusinessObject extends AbstractCommonModel implements IBusinessObje
 		this.persistenceType = persistenceType;
 	}
 
-	public BusTableRel getRelation() {
+	public BusinessTableRelationImpl getRelation() {
 		return this.relation;
 	}
 
-	public void setRelation(BusTableRel relation) {
+	public void setRelation(BusinessTableRelationImpl relation) {
 		this.relation = relation;
 		this.relationJson = JsonUtil.toJSONString(relation);
 	}
 
-	public BusObjPermission getPermission() {
+	public BusinessObjectPermission getPermission() {
 		return this.permission;
 	}
 
-	public void setPermission(IBusObjPermission permission) {
-		this.permission = (BusObjPermission) permission;
+	public void setPermission(BusinessObjectPermission permission) {
+		this.permission = (BusinessObjectPermission) permission;
 	}
 
 	public boolean haveTableDbEditRights(String tableKey) {
@@ -129,11 +128,11 @@ public class BusinessObject extends AbstractCommonModel implements IBusinessObje
 	}
 
 	private boolean a(boolean isEdit, String tableKey, String columnKey) {
-		BusColumnPermission columnPermission;
-		BusTablePermission tablePermission;
+		BusinessColumnPermissionImpl columnPermission;
+		BusinessTablePermissionImpl tablePermission;
 		RightsType rightsType = null;
-		if (this.permission != null && (tablePermission = (BusTablePermission) this.permission.getTableMap().get(tableKey)) != null
-				&& (columnPermission = (BusColumnPermission) tablePermission.getColumnMap().get(columnKey)) != null) {
+		if (this.permission != null && (tablePermission = (BusinessTablePermissionImpl) this.permission.getTableMap().get(tableKey)) != null
+				&& (columnPermission = (BusinessColumnPermissionImpl) tablePermission.getColumnMap().get(columnKey)) != null) {
 			rightsType = RightsType.getByKey((String) columnPermission.getResult());
 		}
 		if (rightsType == null) {
@@ -146,9 +145,9 @@ public class BusinessObject extends AbstractCommonModel implements IBusinessObje
 	}
 
 	private boolean a(boolean isEdit, String tableKey) {
-		BusTablePermission tablePermission;
-		if (this.permission != null && (tablePermission = (BusTablePermission) this.permission.getTableMap().get(tableKey)) != null) {
-			for (IBusinessColumn column : this.relation.find(tableKey).getTable().getColumnsWithoutPk()) {
+		BusinessTablePermissionImpl tablePermission;
+		if (this.permission != null && (tablePermission = (BusinessTablePermissionImpl) this.permission.getTableMap().get(tableKey)) != null) {
+			for (BusinessColumn column : this.relation.find(tableKey).getTable().getColumnsWithoutPk()) {
 				if (isEdit && this.haveColumnDbEditRights(tableKey, column.getKey())) {
 					return true;
 				}

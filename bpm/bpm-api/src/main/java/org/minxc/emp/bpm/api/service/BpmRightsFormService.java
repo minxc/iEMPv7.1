@@ -2,7 +2,7 @@ package org.minxc.emp.bpm.api.service;
 
 import java.util.Set;
 
-import org.minxc.emp.biz.api.model.IBusinessPermission;
+import org.minxc.emp.biz.api.model.BusinessPermission;
 import org.minxc.emp.bpm.api.engine.data.result.BpmFlowData;
 import org.minxc.emp.form.api.model.FormType;
 
@@ -24,7 +24,7 @@ public interface BpmRightsFormService {
 	 * @param isReadOnly
 	 * @return
 	 */
-	IBusinessPermission getInstanceFormPermission(BpmFlowData flowData, String nodeId, FormType formType,boolean isReadOnly);
+	BusinessPermission getInstanceFormPermission(BpmFlowData flowData, String nodeId, FormType formType, boolean isReadOnly);
 	
 	/**
 	 * 节点保存权限，若节点未配置。则不管了。也不获取全局权限。直接使用默认编辑权限即可
@@ -33,6 +33,6 @@ public interface BpmRightsFormService {
 	 * @param boCodes
 	 * @return
 	 */
-	IBusinessPermission getNodeSavePermission(String defKey, String nodeId, Set<String> boCodes);
+	BusinessPermission getNodeSavePermission(String defKey, String nodeId, Set<String> boCodes);
 
 }

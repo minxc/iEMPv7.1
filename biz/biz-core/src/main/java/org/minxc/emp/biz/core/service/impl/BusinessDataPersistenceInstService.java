@@ -1,8 +1,8 @@
 package org.minxc.emp.biz.core.service.impl;
 
 import org.minxc.emp.biz.api.constant.BusinessObjectPersistenceType;
-import org.minxc.emp.biz.core.model.BusinessData;
-import org.minxc.emp.biz.core.model.BusinessObject;
+import org.minxc.emp.biz.core.model.BusinessDataImpl;
+import org.minxc.emp.biz.core.model.BusinessObjectImpl;
 import org.minxc.emp.biz.core.service.BusinessDataPersistenceService;
 import org.springframework.stereotype.Service;
 
@@ -12,13 +12,13 @@ public class BusinessDataPersistenceInstService implements BusinessDataPersisten
 		return BusinessObjectPersistenceType.INST.getKey();
 	}
 
-	public void saveData(BusinessData businessData) {
+	public void saveData(BusinessDataImpl businessData) {
 	}
 
-	public BusinessData loadData(BusinessObject businessObject, Object id) {
+	public BusinessDataImpl loadData(BusinessObjectImpl businessObject, Object id) {
 		return null;
 	}
 
-	public void removeData(BusinessObject businessObject, Object id) {
+	public void removeData(BusinessObjectImpl businessObject, Object id) {
 	}
 }

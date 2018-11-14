@@ -1,22 +1,20 @@
 package org.minxc.emp.biz.core.model;
 
 import com.alibaba.fastjson.JSONObject;
-
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 import org.minxc.emp.biz.api.constant.RightsType;
-import org.minxc.emp.biz.api.model.IBusinessPermission;
-import org.minxc.emp.biz.api.model.permission.IBusColumnPermission;
-import org.minxc.emp.biz.api.model.permission.IBusObjPermission;
-import org.minxc.emp.biz.api.model.permission.IBusTablePermission;
-import org.minxc.emp.biz.core.model.permission.BusObjPermission;
+import org.minxc.emp.biz.api.model.BusinessPermission;
+import org.minxc.emp.biz.api.model.permission.BusinessColumnPermission;
+import org.minxc.emp.biz.api.model.permission.BusinessObjectPermission;
+import org.minxc.emp.biz.api.model.permission.BusinessTablePermission;
+import org.minxc.emp.biz.core.model.permission.BusinessObjectPermissionImpl;
 import org.minxc.emp.core.impl.model.AbstractCommonModel;
 import org.minxc.emp.core.util.JsonUtil;
 
-public class BusinessPermission extends AbstractCommonModel implements IBusinessPermission {
+public class BusinessPermissionImpl extends AbstractCommonModel implements BusinessPermission {
 	/** 
 	
 	* @Fields serialVersionUID : TODO(用一句话描述这个变量表示什么) 
@@ -28,11 +26,11 @@ public class BusinessPermission extends AbstractCommonModel implements IBusiness
 	private String objType;
 	private String objVal;
 	private String busObjMapJson;
-	private Map<String, BusObjPermission> busObjMap = new HashMap<String, BusObjPermission>();
+	private Map<String, BusinessObjectPermissionImpl> busObjMap = new HashMap<String, BusinessObjectPermissionImpl>();
 	private JSONObject K;
 	private JSONObject L = null;
 
-	public String getObjType() {
+	public String getObjectType() {
 		return this.objType;
 	}
 
@@ -40,7 +38,7 @@ public class BusinessPermission extends AbstractCommonModel implements IBusiness
 		this.objType = objType;
 	}
 
-	public String getObjVal() {
+	public String getObjectValue() {
 		return this.objVal;
 	}
 
@@ -58,23 +56,23 @@ public class BusinessPermission extends AbstractCommonModel implements IBusiness
 			this.busObjMap = null;
 			return;
 		}
-		this.busObjMap = new HashMap<String, BusObjPermission>();
+		this.busObjMap = new HashMap<String, BusinessObjectPermission>();
 		Map<String, String> map = JSONObject.parseObject(busObjMapJson, Map.class);
 		for (Map.Entry<String, String> entry : map.entrySet()) {
-			this.busObjMap.put(entry.getKey(), JSONObject.parseObject(entry.getValue(), BusObjPermission.class));
+			this.busObjMap.put(entry.getKey(), JSONObject.parseObject(entry.getValue(), BusinessObjectPermission.class));
 		}
 	}
 
-	public Map<String, BusObjPermission> getBusObjMap() {
+	public Map<String, BusinessObjectPermission> getBusinessObjectMap() {
 		return this.busObjMap;
 	}
 
-	public void setBusObjMap(Map<String, BusObjPermission> busObjMap) {
+	public void setBusObjMap(Map<String, BusinessObjectPermission> busObjMap) {
 		this.busObjMap = busObjMap;
 		this.busObjMapJson = JsonUtil.toJSONString(busObjMap);
 	}
 
-	public BusObjPermission c(String boKey) {
+	public BusinessObjectPermissionImpl c(String boKey) {
 		return this.busObjMap.get(boKey);
 	}
 
@@ -94,18 +92,18 @@ public class BusinessPermission extends AbstractCommonModel implements IBusiness
 		}
 		this.K = new JSONObject();
 		this.L = new JSONObject();
-		for (Map.Entry<String, BusObjPermission> entry : this.getBusObjMap().entrySet()) {
-			IBusObjPermission busObjPermission = (IBusObjPermission) entry.getValue();
+		for (Map.Entry<String, BusinessObjectPermission> entry : this.getBusinessObjectMap().entrySet()) {
+			BusinessObjectPermission busObjPermission = (BusinessObjectPermission) entry.getValue();
 			this.L.put(busObjPermission.getKey(), (Object) new JSONObject());
 			this.K.put(busObjPermission.getKey(), (Object) new JSONObject());
 			for (Map.Entry etry : busObjPermission.getTableMap().entrySet()) {
-				IBusTablePermission busTablePermission = (IBusTablePermission) etry.getValue();
+				BusinessTablePermission busTablePermission = (BusinessTablePermission) etry.getValue();
 				this.L.getJSONObject(busObjPermission.getKey()).put(busTablePermission.getKey(),
 						(Object) new JSONObject());
 				this.K.getJSONObject(busObjPermission.getKey()).put(busTablePermission.getKey(),
 						(Object) this.a(busTablePermission.getResult(), isReadonly));
 				for (Map.Entry ery : busTablePermission.getColumnMap().entrySet()) {
-					IBusColumnPermission busColumnPermission = (IBusColumnPermission) ery.getValue();
+					BusinessColumnPermission busColumnPermission = (BusinessColumnPermission) ery.getValue();
 					this.L.getJSONObject(busObjPermission.getKey()).getJSONObject(busTablePermission.getKey()).put(
 							busColumnPermission.getKey(), (Object) this.a(busColumnPermission.getResult(), isReadonly));
 				}
@@ -123,7 +121,7 @@ public class BusinessPermission extends AbstractCommonModel implements IBusiness
 		return result;
 	}
 
-	public IBusObjPermission getBusObj(String string) {
+	public BusinessObjectPermission getBusObj(String string) {
 		return this.c(string);
 	}
 }

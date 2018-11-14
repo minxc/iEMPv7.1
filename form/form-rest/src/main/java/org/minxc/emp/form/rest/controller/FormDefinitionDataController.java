@@ -5,10 +5,10 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.minxc.emp.biz.api.constant.BusinessPermissionObjType;
-import org.minxc.emp.biz.api.model.IBusinessObject;
-import org.minxc.emp.biz.api.model.IBusinessPermission;
-import org.minxc.emp.biz.api.model.IBusinessTable;
+import org.minxc.emp.biz.api.constant.BusinessPermissionObjectType;
+import org.minxc.emp.biz.api.model.BusinessObject;
+import org.minxc.emp.biz.api.model.BusinessPermission;
+import org.minxc.emp.biz.api.model.BusinessTable;
 import org.minxc.emp.biz.api.service.BusinessDataService;
 import org.minxc.emp.biz.api.service.BusinessObjectService;
 import org.minxc.emp.biz.api.service.BusinessPermissionService;
@@ -90,7 +90,7 @@ public class FormDefinitionDataController extends GenericController {
 	public void saveData(HttpServletRequest request, HttpServletResponse response, @RequestBody JSONObject data) throws Exception {
 		String key = RequestUtil.getString(request, "key");
 		FormDefinitionImpl formDef = formDefManager.getByKey(key);
-		IBusinessPermission permission = businessPermissionService.getByObjTypeAndObjVal(BusinessPermissionObjType.FORM.getKey(), key, formDef.getBoKey(), true);
+		BusinessPermission permission = businessPermissionService.getByObjTypeAndObjVal(BusinessPermissionObjectType.FORM.getKey(), key, formDef.getBoKey(), true);
 		businessDataService.saveFormDefData(data, permission);
 		writeSuccessResult(response, "保存数据成功");
 	}
@@ -111,8 +111,8 @@ public class FormDefinitionDataController extends GenericController {
 	public PageJson getList(HttpServletRequest request, HttpServletResponse response, @PathVariable(value = "boKey") String boKey) throws Exception {
 		QueryFilter queryFilter = getQueryFilter(request);
 		// 页面来的参数
-		IBusinessObject businessObject = businessObjectService.getFilledByKey(boKey);
-		IBusinessTable businessTable = businessObject.getRelation().getTable();
+		BusinessObject businessObject = businessObjectService.getFilledByKey(boKey);
+		BusinessTable businessTable = businessObject.getRelation().getTable();
 		SystemDataSource sysDataSource = sysDataSourceService.getByKey(businessTable.getDsKey());
 		// 切换数据源
 		DbContextHolder.setDataSource(sysDataSource.getKey(), sysDataSource.getDbType());
@@ -128,8 +128,8 @@ public class FormDefinitionDataController extends GenericController {
 		String key = RequestUtil.getString(request, "key");
 		String id = RequestUtil.getString(request, "id");
 		FormDefinitionImpl formDef = formDefManager.getByKey(key);
-		IBusinessPermission permission = businessPermissionService.getByObjTypeAndObjVal(BusinessPermissionObjType.FORM.getKey(), key,formDef.getBoKey(), true);
-		IBusinessObject businessObject = businessObjectService.getFilledByKey(boKey);
+		BusinessPermission permission = businessPermissionService.getByObjTypeAndObjVal(BusinessPermissionObjectType.FORM.getKey(), key,formDef.getBoKey(), true);
+		BusinessObject businessObject = businessObjectService.getFilledByKey(boKey);
 		businessObject.setPermission(permission.getBusObj(boKey));
 		businessDataService.removeData(businessObject, id);
 		writeSuccessResult(response, "删除数据成功");

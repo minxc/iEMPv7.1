@@ -2,9 +2,9 @@ package org.minxc.emp.biz.core.model;
 
 import java.io.Serializable;
 
-import org.minxc.emp.biz.api.model.BizTableRelationForeignKey;
+import org.minxc.emp.biz.api.model.BusinessTableRelationForeignKey;
 
-public class BizTableRelationForeignKeyImpl implements BizTableRelationForeignKey, Serializable {
+public class BizTableRelationForeignKeyImpl implements BusinessTableRelationForeignKey, Serializable {
 	
 	/** 
 	* @Fields serialVersionUID : TODO(用一句话描述这个变量表示什么) 
@@ -22,7 +22,7 @@ public class BizTableRelationForeignKeyImpl implements BizTableRelationForeignKe
 	
 	/**
 	 * 
-	 * 映射的方式 枚举 BusTableRelFkType
+	 * 映射的方式 枚举 BusinessTableRelationForeignKeyType
 	 * 
 	 * 
 	 * @return

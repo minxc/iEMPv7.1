@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.minxc.emp.basis.api.model.SystemIdentity;
-import org.minxc.emp.biz.api.model.IBusinessData;
+import org.minxc.emp.biz.api.model.BusinessData;
 import org.minxc.emp.bpm.api.model.inst.IBpmInstance;
 
 /**
@@ -140,7 +140,7 @@ public interface ActionCmd {
      *
      * @return
      */
-    public Map<String, IBusinessData> getBizDataMap();
+    public Map<String, BusinessData> getBizDataMap();
 
     public String executeCmd();
 }

@@ -8,14 +8,13 @@ import java.util.Map;
 
 import javax.validation.constraints.NotEmpty;
 
-import org.minxc.emp.biz.api.constant.BusColumnCtrlType;
-import org.minxc.emp.biz.api.model.IBusinessColumn;
-import org.minxc.emp.biz.api.model.IBusinessTable;
-import org.minxc.emp.biz.core.model.BusinessColumn;
+import org.minxc.emp.biz.api.constant.BusinessColumnControlType;
+import org.minxc.emp.biz.api.model.BusinessColumn;
+import org.minxc.emp.biz.api.model.BusinessTable;
 import org.minxc.emp.common.db.model.table.TableEntity;
 import org.minxc.emp.core.api.model.CommonModel;
 
-public class BusinessTable extends TableEntity<BusinessColumn> implements CommonModel, IBusinessTable {
+public class BusinessTableImpl extends TableEntity<BusinessColumnImpl> implements CommonModel, BusinessTable {
 	/** 
 	
 	* @Fields serialVersionUID : TODO(用一句话描述这个变量表示什么) 
@@ -133,7 +132,7 @@ public class BusinessTable extends TableEntity<BusinessColumn> implements Common
 		return  this.getPkColumn().getKey();
 	}
 
-	public void setColumns(List<BusinessColumn> columns) {
+	public void setColumns(List<BusinessColumnImpl> columns) {
 		super.setColumns(columns);
 	}
 	
@@ -146,7 +145,7 @@ public class BusinessTable extends TableEntity<BusinessColumn> implements Common
 	 * @return
 	 */
 	@Override
-	public List<BusinessColumn> getColumns() {
+	public List<BusinessColumnImpl> getColumns() {
 		return super.getColumns();
 	}
 
@@ -165,12 +164,12 @@ public class BusinessTable extends TableEntity<BusinessColumn> implements Common
 	 * @return
 	 */
 	@Override
-	public List<BusinessColumn> getColumnsWithoutPk() {
+	public List<BusinessColumnImpl> getColumnsWithoutPk() {
 		if (this.columns == null) {
 			return null;
 		}
-		List<BusinessColumn> columnList = new ArrayList<BusinessColumn>();
-		for (BusinessColumn column : this.columns) {
+		List<BusinessColumnImpl> columnList = new ArrayList<BusinessColumnImpl>();
+		for (BusinessColumnImpl column : this.columns) {
 			if (column.isPrimary())
 				continue;
 			columnList.add(column);
@@ -178,14 +177,14 @@ public class BusinessTable extends TableEntity<BusinessColumn> implements Common
 		return columnList;
 	}
 
-	public List<BusinessColumn> getColumnsWithOutHidden() {
+	public List<BusinessColumnImpl> getColumnsWithOutHidden() {
 		if (this.columns == null) {
 			return null;
 		}
-		ArrayList<BusinessColumn> columnList = new ArrayList<BusinessColumn>();
-		for (BusinessColumn column : this.columns) {
+		ArrayList<BusinessColumnImpl> columnList = new ArrayList<BusinessColumnImpl>();
+		for (BusinessColumnImpl column : this.columns) {
 			if (column.isPrimary() || column.getCtrl() == null
-					|| BusColumnCtrlType.HIDDEN.getKey().equals(column.getCtrl().getType()))
+					|| BusinessColumnControlType.HIDDEN.getKey().equals(column.getCtrl().getType()))
 				continue;
 			columnList.add(column);
 		}
@@ -205,7 +204,7 @@ public class BusinessTable extends TableEntity<BusinessColumn> implements Common
 	@Override
 	public Map<String, Object> initDbData() {
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		for (IBusinessColumn column : this.getColumnsWithoutPk()) {
+		for (BusinessColumn column : this.getColumnsWithoutPk()) {
 			map.put(column.getName(), column.initValue());
 		}
 		return map;
@@ -224,7 +223,7 @@ public class BusinessTable extends TableEntity<BusinessColumn> implements Common
 	@Override
 	public Map<String, Object> initData() {
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		for (IBusinessColumn column : this.getColumnsWithoutPk()) {
+		for (BusinessColumn column : this.getColumnsWithoutPk()) {
 			map.put(column.getKey(), column.initValue());
 		}
 		return map;
@@ -267,8 +266,8 @@ public class BusinessTable extends TableEntity<BusinessColumn> implements Common
 	 * @return
 	 */
 	@Override
-	public IBusinessColumn getColumnByKey(String key) {
-		for (IBusinessColumn column : this.columns) {
+	public BusinessColumn getColumnByKey(String key) {
+		for (BusinessColumn column : this.columns) {
 			if (!key.equals(column.getKey()))
 				continue;
 			return column;

@@ -1,13 +1,13 @@
 package org.minxc.emp.biz.core.manager;
 
-import org.minxc.emp.biz.core.model.BusinessPermission;
+import org.minxc.emp.biz.core.model.BusinessPermissionImpl;
 import org.minxc.emp.common.manager.Manager;
 
 
-public interface BusinessPermissionManager extends Manager<String, BusinessPermission> {
+public interface BusinessPermissionManager extends Manager<String, BusinessPermissionImpl> {
 	
 	//TODO:思考两个方法的区别
-	public BusinessPermission getByObjTypeAndObjVal(String var1, String var2);
+	public BusinessPermissionImpl getByObjTypeAndObjVal(String var1, String var2);
 
-	public BusinessPermission getByObjTypeAndObjVal(String var1, String var2, String var3);
+	public BusinessPermissionImpl getByObjTypeAndObjVal(String var1, String var2, String var3);
 }

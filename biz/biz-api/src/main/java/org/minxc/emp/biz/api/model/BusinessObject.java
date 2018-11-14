@@ -1,17 +1,17 @@
 package org.minxc.emp.biz.api.model;
 
-import org.minxc.emp.biz.api.model.permission.IBusObjPermission;
+import org.minxc.emp.biz.api.model.permission.BusinessObjectPermission;
 
 /**
  *  
  * BusinessObject接口类
  */
-public interface IBusinessObject {
+public interface BusinessObject {
+
 	/**
 	 * 
 	 * key
-	 * 
-	 * 
+	 *
 	 * @return
 	 */
 	String getKey();
@@ -50,11 +50,11 @@ public interface IBusinessObject {
 	 * 
 	 * @return
 	 */
-	IBusTableRel getRelation();
+	BusinessTableRelation getRelation();
 
-	IBusObjPermission getPermission();
+	BusinessObjectPermission getPermission();
 
-	void setPermission(IBusObjPermission permission);
+	void setPermission(BusinessObjectPermission permission);
 	
 	/**
 	 * 
@@ -64,7 +64,7 @@ public interface IBusinessObject {
 	 * 如果一个字段都没，则表没有操作权限
 	 * 
 	 * 
-	 * @param columnKey
+	 * @param tableKey
 	 * @return
 	 */
 	boolean haveTableDbEditRights(String tableKey);
@@ -77,7 +77,7 @@ public interface IBusinessObject {
 	 * 如果一个字段都没，则表没有读取权限
 	 * 
 	 * 
-	 * @param columnKey
+	 * @param tableKey
 	 * @return
 	 */
 	boolean haveTableDbReadRights(String tableKey);

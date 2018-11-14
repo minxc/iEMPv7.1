@@ -2,10 +2,10 @@ package org.minxc.emp.biz.core.model;
 
 import javax.validation.constraints.NotEmpty;
 
-import org.minxc.emp.biz.api.model.IBusColumnCtrl;
+import org.minxc.emp.biz.api.model.BusinessColumnControl;
 import org.minxc.emp.core.impl.model.AbstractCommonModel;
 
-public class BusColumnCtrl extends AbstractCommonModel implements IBusColumnCtrl {
+public class BusinessColumnControlImpl extends AbstractCommonModel implements BusinessColumnControl {
 	/**
 	 * 
 	 * @Fields serialVersionUID : TODO(用一句话描述这个变量表示什么)

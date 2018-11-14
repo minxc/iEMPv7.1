@@ -3,20 +3,19 @@ package org.minxc.emp.bpm.engine.plugin.session.impl;
 import java.util.HashMap;
 import java.util.Map;
 import org.activiti.engine.delegate.VariableScope;
-import org.minxc.emp.biz.api.model.IBusinessData;
+import org.minxc.emp.biz.api.model.BusinessData;
 import org.minxc.emp.bpm.api.constant.ActionType;
 import org.minxc.emp.bpm.api.constant.EventType;
 import org.minxc.emp.bpm.api.engine.action.cmd.BaseActionCmd;
 import org.minxc.emp.bpm.api.engine.context.BpmContext;
 import org.minxc.emp.bpm.api.model.inst.IBpmInstance;
-import org.minxc.emp.bpm.api.model.task.IBpmTask;
 import org.minxc.emp.bpm.engine.action.cmd.DefualtTaskActionCmd;
 import org.minxc.emp.bpm.engine.plugin.session.BpmExecutionPluginSession;
 import org.minxc.emp.system.util.ContextUtil;
 
 public class DefaultBpmExecutionPluginSession extends HashMap<String, Object> implements BpmExecutionPluginSession {
 	private static final long serialVersionUID = 4225343560381914372L;
-	private Map<String, IBusinessData> bM;
+	private Map<String, BusinessData> bM;
 	private EventType bN;
 	private VariableScope variableScope;
 	private IBpmInstance bpmInstance;
@@ -35,11 +34,11 @@ public class DefaultBpmExecutionPluginSession extends HashMap<String, Object> im
 		}
 	}
 
-	public Map<String, IBusinessData> getBoDatas() {
+	public Map<String, BusinessData> getBoDatas() {
 		return this.bM;
 	}
 
-	public void setBoDatas(Map<String, IBusinessData> boDatas) {
+	public void setBoDatas(Map<String, BusinessData> boDatas) {
 		this.putAll(boDatas);
 		this.bM = boDatas;
 	}

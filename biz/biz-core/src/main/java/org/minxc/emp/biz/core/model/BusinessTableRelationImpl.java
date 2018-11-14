@@ -6,13 +6,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.minxc.emp.biz.api.model.IBusTableRel;
-import org.minxc.emp.biz.api.model.IBusinessObject;
-import org.minxc.emp.biz.api.model.IBusinessTable;
-import org.minxc.emp.biz.core.model.BizTableRelationForeignKeyImpl;
+import org.minxc.emp.biz.api.model.BusinessTableRelation;
+import org.minxc.emp.biz.api.model.BusinessObject;
+import org.minxc.emp.biz.api.model.BusinessTable;
 import org.minxc.emp.core.util.BeanUtils;
 
-public class BusTableRel implements IBusTableRel, Serializable {
+public class BusinessTableRelationImpl implements BusinessTableRelation, Serializable {
 	
 	/** 
 	
@@ -22,14 +21,14 @@ public class BusTableRel implements IBusTableRel, Serializable {
 	private static final long serialVersionUID = -9105853169718466190L;
 	
 	
-	private List<IBusTableRel> children;
+	private List<BusinessTableRelation> children;
 	private String tableKey;
 	private String tableComment;
 	private String type;
 	private List<BizTableRelationForeignKeyImpl> fks;
-	private IBusinessTable table;
-	private IBusTableRel parent;
-	private IBusinessObject busObj;
+	private BusinessTable table;
+	private BusinessTableRelation parent;
+	private BusinessObject busObj;
 
 	
 	/**
@@ -40,17 +39,17 @@ public class BusTableRel implements IBusTableRel, Serializable {
 	 * @return
 	 */
 	@Override
-	public List<IBusTableRel> getChildren() {
+	public List<BusinessTableRelation> getChildren() {
 		if (this.children == null) {
 			return Collections.emptyList();
 		}
 		return this.children;
 	}
 
-	public List<IBusTableRel> getChildren(String type) {
-		List<IBusTableRel> list = new ArrayList<IBusTableRel>();
+	public List<BusinessTableRelation> getChildren(String type) {
+		List<BusinessTableRelation> list = new ArrayList<BusinessTableRelation>();
 		if (BeanUtils.isNotEmpty(this.children)) {
-			for (IBusTableRel rel : this.children) {
+			for (BusinessTableRelation rel : this.children) {
 				if (!type.equals(rel.getType()))
 					continue;
 				list.add(rel);
@@ -59,7 +58,7 @@ public class BusTableRel implements IBusTableRel, Serializable {
 		return list;
 	}
 
-	public void setChildren(List<IBusTableRel> children) {
+	public void setChildren(List<BusinessTableRelation> children) {
 		this.children = children;
 	}
 
@@ -97,7 +96,7 @@ public class BusTableRel implements IBusTableRel, Serializable {
 
 	/**
 	 * 
-	 * 类型 枚举 BusTableRelType
+	 * 类型 枚举 BusinessTableRelationType
 	 * 
 	 * 
 	 * @return
@@ -136,11 +135,11 @@ public class BusTableRel implements IBusTableRel, Serializable {
 	 * @return
 	 */
 	@Override
-	public List<IBusTableRel> list() {
-		ArrayList<IBusTableRel> rels = new ArrayList<IBusTableRel>();
+	public List<BusinessTableRelation> list() {
+		ArrayList<BusinessTableRelation> rels = new ArrayList<BusinessTableRelation>();
 		rels.add(this);
 		if (this.children != null) {
-			for (IBusTableRel rel : this.children) {
+			for (BusinessTableRelation rel : this.children) {
 				rels.addAll(rel.list());
 			}
 		}
@@ -148,27 +147,27 @@ public class BusTableRel implements IBusTableRel, Serializable {
 	}
 
 	@Override
-	public IBusinessTable getTable() {
+	public BusinessTable getTable() {
 		return this.table;
 	}
 
-	public void setTable(IBusinessTable table) {
+	public void setTable(BusinessTable table) {
 		this.table = table;
 	}
 
-	public IBusTableRel getParent() {
+	public BusinessTableRelation getParent() {
 		return this.parent;
 	}
 
-	public void setParent(IBusTableRel parent) {
+	public void setParent(BusinessTableRelation parent) {
 		this.parent = parent;
 	}
 
-	public IBusinessObject getBusObj() {
+	public BusinessObject getBusObj() {
 		return this.busObj;
 	}
 
-	public void setBusObj(IBusinessObject busObj) {
+	public void setBusObj(BusinessObject busObj) {
 		this.busObj = busObj;
 	}
 
@@ -182,13 +181,13 @@ public class BusTableRel implements IBusTableRel, Serializable {
 	 * @return
 	 */
 	@Override
-	public IBusTableRel find(String tableKey) {
+	public BusinessTableRelation find(String tableKey) {
 		if (this.tableKey.equals(tableKey)) {
 			return this;
 		}
 		if (this.children != null) {
-			for (IBusTableRel rel : this.children) {
-				IBusTableRel r = rel.find(tableKey);
+			for (BusinessTableRelation rel : this.children) {
+				BusinessTableRelation r = rel.find(tableKey);
 				if (r == null)
 					continue;
 				return r;

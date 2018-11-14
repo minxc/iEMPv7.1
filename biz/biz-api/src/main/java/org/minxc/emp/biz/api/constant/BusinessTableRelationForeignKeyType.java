@@ -2,13 +2,9 @@ package org.minxc.emp.biz.api.constant;
 /**
  *  
  * BusTableRelFkType中type属性的枚举
- * 
- * 
- * 日期:2018年2月26日 下午3:22:03
- * 
- * 
+ *
  */
-public enum BusTableRelFkType {
+public enum BusinessTableRelationForeignKeyType {
 	/**
 	 * 对应父实例的字段
 	 */
@@ -21,10 +17,11 @@ public enum BusTableRelFkType {
 	 * 父实例对应字段
 	 */
 	CHILD_FIELD("childField", "子表字段 对应 父实例外键");
+
 	private String key;
 	private String desc;
 
-	private BusTableRelFkType(String key, String desc) {
+	private BusinessTableRelationForeignKeyType(String key, String desc) {
 		this.key = key;
 		this.desc = desc;
 	}

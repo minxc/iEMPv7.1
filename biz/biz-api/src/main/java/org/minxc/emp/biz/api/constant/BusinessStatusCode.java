@@ -5,7 +5,7 @@ import org.minxc.emp.core.api.status.StatusCode;
 /**
  * bus层的异常码
  */
-public enum BusStatusCode implements StatusCode {
+public enum BusinessStatusCode implements StatusCode {
 
 	PARAM_ILLEGAL("100", "参数校验不通过");
 
@@ -14,7 +14,7 @@ public enum BusStatusCode implements StatusCode {
 	private String application;
 	private String tenant;
 
-	private BusStatusCode(String code, String desc) {
+	private BusinessStatusCode(String code, String desc) {
 		this.code = code;
 		this.description = desc;
 		this.application = "BUS";

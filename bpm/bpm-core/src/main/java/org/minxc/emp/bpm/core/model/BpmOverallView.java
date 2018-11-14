@@ -4,25 +4,24 @@ import com.alibaba.fastjson.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.minxc.emp.biz.api.model.IBusinessPermission;
-import org.minxc.emp.bpm.core.model.BpmDefinition;
+import org.minxc.emp.biz.api.model.BusinessPermission;
 
 public class BpmOverallView {
 	public static final String K = "override";
 	public static final String L = "edit";
 	public static final String M = "newVersion";
 	private BpmDefinition N;
-	private List<IBusinessPermission> O = new ArrayList<IBusinessPermission>();
+	private List<BusinessPermission> O = new ArrayList<BusinessPermission>();
 	private String importType = "edit";
 	private String defId;
 	private Boolean P;
 	private JSONObject Q;
 
-	public List<IBusinessPermission> getFormRights() {
+	public List<BusinessPermission> getFormRights() {
 		return this.O;
 	}
 
-	public void setFormRights(List<IBusinessPermission> formRights) {
+	public void setFormRights(List<BusinessPermission> formRights) {
 		this.O = formRights;
 	}
 

@@ -7,12 +7,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.minxc.emp.biz.api.constant.BusTableRelType;
-import org.minxc.emp.biz.api.model.IBusTableRel;
-import org.minxc.emp.biz.api.model.IBusinessColumn;
-import org.minxc.emp.biz.api.model.IBusinessData;
+import org.minxc.emp.biz.api.constant.BusinessTableRelationType;
+import org.minxc.emp.biz.api.model.BusinessData;
+import org.minxc.emp.biz.api.model.BusinessTableRelation;
+import org.minxc.emp.biz.api.model.BusinessColumn;
 
-public class BusinessData implements IBusinessData {
+public class BusinessDataImpl implements BusinessData {
 	/** 
 	
 	* @Fields serialVersionUID : TODO(用一句话描述这个变量表示什么) 
@@ -21,16 +21,16 @@ public class BusinessData implements IBusinessData {
 	private static final long serialVersionUID = -6272407461993770532L;
 	
 	
-	private IBusTableRel busTableRel;
+	private BusinessTableRelation busTableRel;
 	private Map<String, Object> data = new HashMap<String, Object>();
-	private Map<String, List<IBusinessData>> children = new HashMap<String, List<IBusinessData>>();
-	private BusinessData parent;
+	private Map<String, List<BusinessData>> children = new HashMap<String, List<BusinessData>>();
+	private BusinessDataImpl parent;
 
-	public IBusTableRel getBusTableRel() {
+	public BusinessTableRelation getBusTableRel() {
 		return this.busTableRel;
 	}
 
-	public void setBusTableRel(IBusTableRel busTableRel) {
+	public void setBusTableRel(BusinessTableRelation busTableRel) {
 		this.busTableRel = busTableRel;
 	}
 	
@@ -43,30 +43,30 @@ public class BusinessData implements IBusinessData {
 		this.data = data;
 	}
 
-	public Map<String, List<IBusinessData>> getChildren() {
+	public Map<String, List<BusinessData>> getChildren() {
 		return this.children;
 	}
 
-	public void setChildren(Map<String, List<IBusinessData>> children) {
+	public void setChildren(Map<String, List<BusinessData>> children) {
 		this.children = children;
 	}
 
-	public BusinessData getParent() {
+	public BusinessDataImpl getParent() {
 		return this.parent;
 	}
 
-	public void setParent(BusinessData parent) {
+	public void setParent(BusinessDataImpl parent) {
 		this.parent = parent;
 	}
 
 	public void setPk(Object id) {
-		BusinessTable businessTable = (BusinessTable)this.busTableRel.getTable();
+		BusinessTableImpl businessTable = (BusinessTableImpl)this.busTableRel.getTable();
 		this.data.put(businessTable.getPkKey(), id);
 	}
 	
 	@Override
 	public Object getPk() {
-		BusinessTable businessTable = (BusinessTable)this.busTableRel.getTable();
+		BusinessTableImpl businessTable = (BusinessTableImpl)this.busTableRel.getTable();
 		return this.data.get(businessTable.getPkKey());
 	}
 
@@ -88,7 +88,7 @@ public class BusinessData implements IBusinessData {
 
 	public Map<String, Object> getDbData() {
 		HashMap<String, Object> dbData = new HashMap<String, Object>();
-		for (IBusinessColumn column : this.busTableRel.getTable().getColumns()) {
+		for (BusinessColumn column : this.busTableRel.getTable().getColumns()) {
 			if (!column.isPrimary()
 					&& !this.busTableRel.getBusObj().haveColumnDbEditRights(this.busTableRel.getTableKey(), column.getKey()))
 				continue;
@@ -99,7 +99,7 @@ public class BusinessData implements IBusinessData {
 	}
 
 	public void setDbData(Map<String, Object> dbData) {
-		for (IBusinessColumn column : this.busTableRel.getTable().getColumns()) {
+		for (BusinessColumn column : this.busTableRel.getTable().getColumns()) {
 			if (!this.busTableRel.getBusObj().haveColumnDbReadRights(this.busTableRel.getTableKey(), column.getKey()))
 				continue;
 			this.data.put(column.getKey(), dbData.get(column.getName()));
@@ -109,17 +109,17 @@ public class BusinessData implements IBusinessData {
 	
 	
 	//TODO:推测该方法的作用
-	public void a(BusinessData businessData) {
+	public void a(BusinessDataImpl businessData) {
 		String tableKey = businessData.getBusTableRel().getTable().getKey();
 		List list = this.children.computeIfAbsent(tableKey, k -> new ArrayList());
 		businessData.setParent(this);
 		list.add(businessData);
 	}
 
-	public Map<String, List<IBusinessData>> getChilds() {
-		HashMap<String, List<IBusinessData>> map = new HashMap<String, List<IBusinessData>>();
-		for (Map.Entry<String, List<IBusinessData>> entry : this.children.entrySet()) {
-			ArrayList<IBusinessData> list = new ArrayList<IBusinessData>();
+	public Map<String, List<BusinessData>> getChilds() {
+		HashMap<String, List<BusinessData>> map = new HashMap<String, List<BusinessData>>();
+		for (Map.Entry<String, List<BusinessData>> entry : this.children.entrySet()) {
+			ArrayList<BusinessData> list = new ArrayList<BusinessData>();
 			list.addAll(entry.getValue());
 			map.put(entry.getKey(), list);
 		}
@@ -136,18 +136,18 @@ public class BusinessData implements IBusinessData {
 			initData = new JSONObject();
 		}
 		JSONObject initTables = new JSONObject();
-		for (IBusTableRel rel : this.getBusTableRel().getChildren()) {
+		for (BusinessTableRelation rel : this.getBusTableRel().getChildren()) {
 			initTables.put(rel.getTableKey(), (Object) this.a(rel));
 		}
 		initData.put(this.getBusTableRel().getBusObj().getKey(), (Object) initTables);
 		return initData;
 	}
 
-	private JSONObject a(IBusTableRel busTableRel) {
+	private JSONObject a(BusinessTableRelation busTableRel) {
 		JSONObject table = new JSONObject();
 		table.putAll(busTableRel.getTable().initData());
-		for (IBusTableRel rel : busTableRel.getChildren()) {
-			if (!BusTableRelType.ONE_TO_ONE.equalsWithKey(rel.getType()))
+		for (BusinessTableRelation rel : busTableRel.getChildren()) {
+			if (!BusinessTableRelationType.ONE_TO_ONE.equalsWithKey(rel.getType()))
 				continue;
 			table.put(rel.getTableKey(), (Object) this.a(rel));
 		}

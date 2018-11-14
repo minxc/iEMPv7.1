@@ -11,7 +11,7 @@ import java.util.List;
  * 
  * 
  */
-public interface IBusTableRel {
+public interface BusinessTableRelation {
 	/**
 	 * 
 	 * 子级
@@ -19,7 +19,7 @@ public interface IBusTableRel {
 	 * 
 	 * @return
 	 */
-	List<? extends IBusTableRel> getChildren();
+	List<? extends BusinessTableRelation> getChildren();
 
 	/**
 	 * 
@@ -41,7 +41,7 @@ public interface IBusTableRel {
 
 	/**
 	 * 
-	 * 类型 枚举 BusTableRelType
+	 * 类型 枚举 BusinessTableRelationType
 	 * 
 	 * 
 	 * @return
@@ -55,7 +55,7 @@ public interface IBusTableRel {
 	 * 
 	 * @return
 	 */
-	List<? extends BizTableRelationForeignKey> getFks();
+	List<? extends BusinessTableRelationForeignKey> getFks();
 
 	/**
 	 * 
@@ -65,9 +65,9 @@ public interface IBusTableRel {
 	 * 
 	 * @return
 	 */
-	List<? extends IBusTableRel> list();
+	List<? extends BusinessTableRelation> list();
 
-	IBusinessTable getTable();
+	BusinessTable getTable();
 	
 	/**
 	 * 
@@ -77,11 +77,11 @@ public interface IBusTableRel {
 	 * @param tableKey
 	 * @return
 	 */
-	IBusTableRel find(String tableKey);
+	BusinessTableRelation find(String tableKey);
 
-	IBusTableRel getParent();
+	BusinessTableRelation getParent();
 
-	IBusinessObject getBusObj();
+	BusinessObject getBusObj();
 
-	List<IBusTableRel> getChildren(String type);
+	List<BusinessTableRelation> getChildren(String type);
 }

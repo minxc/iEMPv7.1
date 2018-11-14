@@ -5,9 +5,7 @@ import com.alibaba.fastjson.JSONArray;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.minxc.emp.biz.api.model.permission.IAbstractPermission;
-
-public abstract class AbstractPermission implements IAbstractPermission {
+public abstract class AbstractPermission implements org.minxc.emp.biz.api.model.permission.AbstractPermission {
 	
 	private static final long serialVersionUID = 4633557074058674394L;
 	

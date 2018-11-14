@@ -6,15 +6,15 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.minxc.emp.biz.api.constant.RightsType;
-import org.minxc.emp.biz.api.model.IBusinessPermission;
+import org.minxc.emp.biz.api.model.BusinessPermission;
 import org.minxc.emp.biz.api.service.BusinessPermissionService;
 import org.minxc.emp.biz.core.manager.BusinessObjectManager;
 import org.minxc.emp.biz.core.manager.BusinessPermissionManager;
-import org.minxc.emp.biz.core.model.BusinessPermission;
+import org.minxc.emp.biz.core.model.BusinessPermissionImpl;
 import org.minxc.emp.biz.core.model.permission.AbstractPermission;
-import org.minxc.emp.biz.core.model.permission.BusColumnPermission;
-import org.minxc.emp.biz.core.model.permission.BusObjPermission;
-import org.minxc.emp.biz.core.model.permission.BusTablePermission;
+import org.minxc.emp.biz.core.model.permission.BusinessColumnPermissionImpl;
+import org.minxc.emp.biz.core.model.permission.BusinessObjectPermissionImpl;
+import org.minxc.emp.biz.core.model.permission.BusinessTablePermissionImpl;
 import org.minxc.emp.core.util.BeanUtils;
 import org.minxc.emp.core.util.StringUtil;
 import org.minxc.emp.system.api.permission.PermissionCalculatorFactory;
@@ -28,13 +28,13 @@ public class BusinessPermissionServiceImpl implements BusinessPermissionService 
 	@Autowired
 	private BusinessObjectManager businessObjectManager;
 
-	public BusinessPermission a(String objType, String objVal, String defalutBoKeys, boolean calculate) {
-		BusinessPermission businessPermission = null;
+	public BusinessPermissionImpl a(String objType, String objVal, String defalutBoKeys, boolean calculate) {
+		BusinessPermissionImpl businessPermission = null;
 		businessPermission = StringUtils.isNotEmpty((String) defalutBoKeys)
 				? this.businessPermissionManager.getByObjTypeAndObjVal(objType, objVal, defalutBoKeys)
 				: this.businessPermissionManager.getByObjTypeAndObjVal(objType, objVal);
 		if (businessPermission == null) {
-			return new BusinessPermission();
+			return new BusinessPermissionImpl();
 		}
 		if (calculate) {
 			this.a(businessPermission);
@@ -42,19 +42,19 @@ public class BusinessPermissionServiceImpl implements BusinessPermissionService 
 		return businessPermission;
 	}
 
-	private void a(BusinessPermission businessPermission) {
-		for (Map.Entry entry : businessPermission.getBusObjMap().entrySet()) {
-			BusObjPermission busObjPermission = (BusObjPermission) entry.getValue();
+	private void a(BusinessPermissionImpl businessPermission) {
+		for (Map.Entry entry : businessPermission.getBusinessObjectMap().entrySet()) {
+			BusinessObjectPermissionImpl busObjPermission = (BusinessObjectPermissionImpl) entry.getValue();
 			this.b((AbstractPermission) busObjPermission);
 			for (Map.Entry etry : busObjPermission.getTableMap().entrySet()) {
-				BusTablePermission busTablePermission = (BusTablePermission) etry.getValue();
+				BusinessTablePermissionImpl busTablePermission = (BusinessTablePermissionImpl) etry.getValue();
 				if (BeanUtils.isEmpty((Object) busTablePermission.getRights())) {
 					busTablePermission.setResult(busObjPermission.getResult());
 				} else {
 					this.b((AbstractPermission) busTablePermission);
 				}
 				for (Map.Entry ery : busTablePermission.getColumnMap().entrySet()) {
-					BusColumnPermission busColumnPermission = (BusColumnPermission) ery.getValue();
+					BusinessColumnPermissionImpl busColumnPermission = (BusinessColumnPermissionImpl) ery.getValue();
 					if (BeanUtils.isEmpty((Object) busColumnPermission.getRights())) {
 						busColumnPermission.setResult(busTablePermission.getResult());
 						continue;
@@ -79,7 +79,7 @@ public class BusinessPermissionServiceImpl implements BusinessPermissionService 
 		}
 	}
 
-	public IBusinessPermission getByObjTypeAndObjVal(String string, String string2, String string3, boolean bl) {
+	public BusinessPermission getByObjTypeAndObjVal(String string, String string2, String string3, boolean bl) {
 		return this.a(string, string2, string3, bl);
 	}
 }

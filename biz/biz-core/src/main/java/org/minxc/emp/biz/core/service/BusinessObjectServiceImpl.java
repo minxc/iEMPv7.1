@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 
 import java.util.List;
 
-import org.minxc.emp.biz.api.model.IBusinessObject;
+import org.minxc.emp.biz.api.model.BusinessObject;
 import org.minxc.emp.biz.api.service.BusinessObjectService;
 import org.minxc.emp.biz.core.manager.BusinessObjectManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +15,11 @@ public class BusinessObjectServiceImpl implements BusinessObjectService {
 	@Autowired
 	private BusinessObjectManager businessObjectManager;
 
-	public IBusinessObject getByKey(String key) {
+	public BusinessObject getByKey(String key) {
 		return this.businessObjectManager.getByKey(key);
 	}
 
-	public IBusinessObject getFilledByKey(String key) {
+	public BusinessObject getFilledByKey(String key) {
 		return this.businessObjectManager.getFilledByKey(key);
 	}
 

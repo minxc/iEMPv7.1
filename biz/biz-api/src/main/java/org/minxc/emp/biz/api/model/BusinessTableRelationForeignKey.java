@@ -9,7 +9,7 @@ package org.minxc.emp.biz.api.model;
  * 
  * 
  */
-public interface BizTableRelationForeignKey {
+public interface BusinessTableRelationForeignKey {
 	/**
 	 * 
 	 * 业务表对应的映射字段
@@ -21,7 +21,7 @@ public interface BizTableRelationForeignKey {
 
 	/**
 	 * 
-	 * 映射的方式 枚举 BusTableRelFkType
+	 * 映射的方式 枚举 BusinessTableRelationForeignKeyType
 	 * 
 	 * 
 	 * @return

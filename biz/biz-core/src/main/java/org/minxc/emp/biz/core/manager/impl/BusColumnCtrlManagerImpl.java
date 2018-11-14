@@ -5,12 +5,12 @@ import javax.annotation.Resource;
 
 import org.minxc.emp.biz.core.dao.BusColumnCtrlDao;
 import org.minxc.emp.biz.core.manager.BusColumnCtrlManager;
-import org.minxc.emp.biz.core.model.BusColumnCtrl;
+import org.minxc.emp.biz.core.model.BusinessColumnControlImpl;
 import org.minxc.emp.common.manager.impl.CommonManager;
 import org.springframework.stereotype.Service;
 
 @Service
-public class BusColumnCtrlManagerImpl extends CommonManager<String, BusColumnCtrl> implements BusColumnCtrlManager {
+public class BusColumnCtrlManagerImpl extends CommonManager<String, BusinessColumnControlImpl> implements BusColumnCtrlManager {
 	
 	
 	@Resource
@@ -20,7 +20,7 @@ public class BusColumnCtrlManagerImpl extends CommonManager<String, BusColumnCtr
 		this.busColumnCtrlDao.removeByTableId(tableId);
 	}
 
-	public BusColumnCtrl getByColumnId(String columnId) {
+	public BusinessColumnControlImpl getByColumnId(String columnId) {
 		return this.busColumnCtrlDao.getByColumnId(columnId);
 	}
 }

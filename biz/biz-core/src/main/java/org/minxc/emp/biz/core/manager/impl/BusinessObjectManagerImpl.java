@@ -6,15 +6,15 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Resource;
 
-import org.minxc.emp.biz.api.constant.BusTableRelType;
-import org.minxc.emp.biz.api.model.IBusTableRel;
+import org.minxc.emp.biz.api.constant.BusinessTableRelationType;
+import org.minxc.emp.biz.api.model.BusinessTableRelation;
 import org.minxc.emp.biz.core.dao.BusinessObjectDao;
 import org.minxc.emp.biz.core.manager.BusinessObjectManager;
 import org.minxc.emp.biz.core.manager.BusinessTableManager;
-import org.minxc.emp.biz.core.model.BusTableRel;
-import org.minxc.emp.biz.core.model.BusinessColumn;
-import org.minxc.emp.biz.core.model.BusinessObject;
-import org.minxc.emp.biz.core.model.BusinessTable;
+import org.minxc.emp.biz.core.model.BusinessTableRelationImpl;
+import org.minxc.emp.biz.core.model.BusinessColumnImpl;
+import org.minxc.emp.biz.core.model.BusinessObjectImpl;
+import org.minxc.emp.biz.core.model.BusinessTableImpl;
 import org.minxc.emp.biz.core.service.BusinessPermissionServiceImpl;
 import org.minxc.emp.common.db.model.query.DefaultQueryFilter;
 import org.minxc.emp.common.manager.impl.CommonManager;
@@ -39,7 +39,7 @@ import org.springframework.stereotype.Service;
 *
  */
 @Service
-public class BusinessObjectManagerImpl extends CommonManager<String, BusinessObject> implements BusinessObjectManager {
+public class BusinessObjectManagerImpl extends CommonManager<String, BusinessObjectImpl> implements BusinessObjectManager {
 
 	@Resource
 	private BusinessObjectDao businessObjectDao;
@@ -51,15 +51,15 @@ public class BusinessObjectManagerImpl extends CommonManager<String, BusinessObj
 	private JdbcTemplate jdbcTemplate;
 
 	@Override
-	public BusinessObject getByKey(String key) {
+	public BusinessObjectImpl getByKey(String key) {
 		DefaultQueryFilter filter = new DefaultQueryFilter();
 		filter.addFilter("key_", key, QueryOperator.EQUAL);
-		return (BusinessObject) this.queryOne(filter);
+		return (BusinessObjectImpl) this.queryOne(filter);
 	}
 
 	@Override
-	public BusinessObject getFilledByKey(String key) {
-		BusinessObject businessObject = this.getByKey(key);
+	public BusinessObjectImpl getFilledByKey(String key) {
+		BusinessObjectImpl businessObject = this.getByKey(key);
 		this.a(businessObject);
 		return businessObject;
 	}
@@ -68,21 +68,21 @@ public class BusinessObjectManagerImpl extends CommonManager<String, BusinessObj
 	 * TODO: 函数的意思需要去猜想出来
 	 * 
 	 */
-	private void a(BusinessObject businessObject) {
+	private void a(BusinessObjectImpl businessObject) {
 		if (businessObject == null) {
 			return;
 		}
-		for (IBusTableRel rel : businessObject.getRelation().list()) {
-			BusTableRel busTableRel = (BusTableRel) rel;
+		for (BusinessTableRelation rel : businessObject.getRelation().list()) {
+			BusinessTableRelationImpl busTableRel = (BusinessTableRelationImpl) rel;
 			busTableRel.setTable(this.businessTableManager.getFilledByKey(rel.getTableKey()));
 			busTableRel.setBusObj(businessObject);
 		}
 		this.a(businessObject.getRelation());
 	}
 
-	private void a(IBusTableRel rel) {
-		for (IBusTableRel r : rel.getChildren()) {
-			BusTableRel busTableRel = (BusTableRel) r;
+	private void a(BusinessTableRelation rel) {
+		for (BusinessTableRelation r : rel.getChildren()) {
+			BusinessTableRelationImpl busTableRel = (BusinessTableRelationImpl) r;
 			busTableRel.setParent(rel);
 			this.a(r);
 		}
@@ -103,8 +103,8 @@ public class BusinessObjectManagerImpl extends CommonManager<String, BusinessObj
 	 */
 	@Override
 	public List<JSONObject> boTreeData(String key) {
-		BusinessObject businessObject = this.getByKey(key);
-		BusTableRel busTableRel = businessObject.getRelation();
+		BusinessObjectImpl businessObject = this.getByKey(key);
+		BusinessTableRelationImpl busTableRel = businessObject.getRelation();
 		ArrayList<JSONObject> list = new ArrayList<JSONObject>();
 		this.a(busTableRel, "0", list);
 		if (BeanUtils.isNotEmpty(list)) {
@@ -113,18 +113,18 @@ public class BusinessObjectManagerImpl extends CommonManager<String, BusinessObj
 		return list;
 	}
 
-	private void a(IBusTableRel busTableRel, String parentId, List<JSONObject> list) {
+	private void a(BusinessTableRelation busTableRel, String parentId, List<JSONObject> list) {
 
-		BusinessTable businessTable = this.businessTableManager.getFilledByKey(busTableRel.getTableKey());
+		BusinessTableImpl businessTable = this.businessTableManager.getFilledByKey(busTableRel.getTableKey());
 		JSONObject root = new JSONObject();
 		root.put("id", businessTable.getId());
 		root.put("key", businessTable.getKey());
 		root.put("name",
-				businessTable.getName() + "(" + BusTableRelType.getByKey(busTableRel.getType()).getDesc() + ")");
+				businessTable.getName() + "(" + BusinessTableRelationType.getByKey(busTableRel.getType()).getDesc() + ")");
 		root.put("parentId", parentId);
 		root.put("nodeType", "table");
 		list.add(root);
-		for (BusinessColumn businessColumn : businessTable.getColumns()) {
+		for (BusinessColumnImpl businessColumn : businessTable.getColumns()) {
 			JSONObject columnJson = new JSONObject();
 			columnJson.put("id", businessColumn.getId());
 			columnJson.put("key", businessColumn.getName());
@@ -134,13 +134,13 @@ public class BusinessObjectManagerImpl extends CommonManager<String, BusinessObj
 			columnJson.put("nodeType", "column");
 			list.add(columnJson);
 		}
-		for (IBusTableRel rel : busTableRel.getChildren()) {
+		for (BusinessTableRelation rel : busTableRel.getChildren()) {
 			this.a(rel, businessTable.getId(), list);
 		}
 	}
 
 	public void remove(String entityId) {
-		BusinessObject businessObject = (BusinessObject) this.get(entityId);
+		BusinessObjectImpl businessObject = (BusinessObjectImpl) this.get(entityId);
 		if (businessObject == null) {
 			return;
 		}

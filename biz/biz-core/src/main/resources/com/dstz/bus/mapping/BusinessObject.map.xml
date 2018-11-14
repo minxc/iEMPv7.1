@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.minxc.emp.biz.core.dao.BusinessObjectDao">
-    <resultMap id="BusinessObject" type="org.minxc.emp.biz.core.model.BusinessObject">
+    <resultMap id="BusinessObject" type="org.minxc.emp.biz.core.model.BusinessObjectImpl">
         <id property="id" column="id_" jdbcType="VARCHAR"/>
         <result property="key" column="key_" jdbcType="VARCHAR"/>
         <result property="name" column="name_" jdbcType="VARCHAR"/>
@@ -12,7 +12,7 @@
         <result property="persistenceType" column="persistence_type_" jdbcType="VARCHAR"/>
     </resultMap>
 
-    <insert id="create" parameterType="org.minxc.emp.biz.core.model.BusinessObject">
+    <insert id="create" parameterType="org.minxc.emp.biz.core.model.BusinessObjectImpl">
 		INSERT INTO bus_object
 		(id_,key_,name_,desc_,relation_json_,group_id_,group_name_,persistence_type_)
 		VALUES 
@@ -40,7 +40,7 @@
         </if>
     </select>
 
-    <update id="update" parameterType="org.minxc.emp.biz.core.model.BusinessObject">
+    <update id="update" parameterType="org.minxc.emp.biz.core.model.BusinessObjectImpl">
 		UPDATE bus_object SET
 		key_=#{key,jdbcType=VARCHAR},
 		name_=#{name,jdbcType=VARCHAR},

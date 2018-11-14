@@ -3,11 +3,10 @@ package org.minxc.emp.bpm.rest.controller;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
-import org.minxc.emp.biz.api.model.IBusinessColumn;
-import org.minxc.emp.biz.api.model.IBusinessObject;
+import org.minxc.emp.biz.api.model.BusinessColumn;
+import org.minxc.emp.biz.api.model.BusinessObject;
 import org.minxc.emp.biz.api.service.BusinessDataService;
 import org.minxc.emp.biz.api.service.BusinessObjectService;
-import org.minxc.emp.bpm.api.constant.BpmConstants;
 import org.minxc.emp.bpm.api.engine.action.button.ButtonFactory;
 import org.minxc.emp.bpm.api.model.def.BpmDataModel;
 import org.minxc.emp.bpm.api.model.def.BpmVariableDef;
@@ -26,7 +25,6 @@ import org.minxc.emp.idm.api.service.GroupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -137,9 +135,9 @@ public class BpmProcessDefController extends GenericController {
     	 List<BpmDataModel> boDefs = bpmProcessDef.getDataModelList();
     	 if (BeanUtils.isNotEmpty(boDefs)) {
              for (BpmDataModel boDef : boDefs) {
-                 IBusinessObject bo = businessObjectService.getFilledByKey(boDef.getCode());
+                 BusinessObject bo = businessObjectService.getFilledByKey(boDef.getCode());
                  
-                 for(IBusinessColumn column :  bo.getRelation().getTable().getColumns()) {
+                 for(BusinessColumn column :  bo.getRelation().getTable().getColumns()) {
                 	 JSONObject json = new JSONObject();
                 	 json.put("name",bo.getName() +"-"+column.getComment());
                 	 json.put("key", bo.getKey()+"."+column.getKey());

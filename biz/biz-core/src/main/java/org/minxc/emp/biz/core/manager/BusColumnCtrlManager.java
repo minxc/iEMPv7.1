@@ -1,6 +1,6 @@
 package org.minxc.emp.biz.core.manager;
 
-import org.minxc.emp.biz.core.model.BusColumnCtrl;
+import org.minxc.emp.biz.core.model.BusinessColumnControlImpl;
 import org.minxc.emp.common.manager.Manager;
 
 
@@ -18,8 +18,8 @@ import org.minxc.emp.common.manager.Manager;
 * @version  1.0  
 *
  */
-public interface BusColumnCtrlManager extends Manager<String, BusColumnCtrl> {
+public interface BusColumnCtrlManager extends Manager<String, BusinessColumnControlImpl> {
 	public void removeByTableId(String tableId);
 
-	public BusColumnCtrl getByColumnId(String columnId);
+	public BusinessColumnControlImpl getByColumnId(String columnId);
 }

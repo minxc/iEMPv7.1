@@ -9,7 +9,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.minxc.emp.basis.impl.groovy.DefaultGroovyScriptEngineImpl;
-import org.minxc.emp.biz.api.model.IBusinessData;
+import org.minxc.emp.biz.api.model.BusinessData;
 import org.minxc.emp.biz.api.service.BusinessDataService;
 import org.minxc.emp.bpm.api.constant.ActionType;
 import org.minxc.emp.bpm.api.engine.action.cmd.BaseActionCmd;
@@ -197,7 +197,7 @@ public abstract class AbsActionHandler<T extends BaseActionCmd> implements Actio
 			String modelCode = dataModel.getCode();
 			if (!data.containsKey((Object) modelCode))
 				continue;
-			IBusinessData businessData = this.au.parseBusinessData(data.getJSONObject(modelCode), modelCode);
+			BusinessData businessData = this.au.parseBusinessData(data.getJSONObject(modelCode), modelCode);
 			actionModel.getBizDataMap().put(modelCode, businessData);
 		}
 	}

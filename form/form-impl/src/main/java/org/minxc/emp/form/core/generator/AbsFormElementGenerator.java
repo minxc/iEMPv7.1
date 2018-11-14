@@ -4,10 +4,10 @@ import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import org.minxc.emp.biz.api.constant.BusColumnCtrlType;
-import org.minxc.emp.biz.api.constant.BusTableRelType;
-import org.minxc.emp.biz.api.model.IBusTableRel;
-import org.minxc.emp.biz.api.model.IBusinessColumn;
+import org.minxc.emp.biz.api.constant.BusinessColumnControlType;
+import org.minxc.emp.biz.api.constant.BusinessTableRelationType;
+import org.minxc.emp.biz.api.model.BusinessTableRelation;
+import org.minxc.emp.biz.api.model.BusinessColumn;
 import org.minxc.emp.core.util.ThreadMapUtil;
 
 import com.alibaba.fastjson.JSONArray;
@@ -26,8 +26,8 @@ public abstract class AbsFormElementGenerator {
 	 * @param relation
 	 * @return HTML
 	 */
-	public String getColumn(IBusinessColumn column,IBusTableRel relation) {
-		BusColumnCtrlType columnType = BusColumnCtrlType.getByKey(column.getCtrl().getType());
+	public String getColumn(BusinessColumn column, BusinessTableRelation relation) {
+		BusinessColumnControlType columnType = BusinessColumnControlType.getByKey(column.getCtrl().getType());
 		String boCode = relation.getBusObj().getKey();
 		ThreadMapUtil.put("boCode", boCode);
 		ThreadMapUtil.put("relation", relation);
@@ -60,23 +60,23 @@ public abstract class AbsFormElementGenerator {
 		
 	}
 
-	protected abstract String getColumnOnetext(IBusinessColumn column);
+	protected abstract String getColumnOnetext(BusinessColumn column);
 	
-	protected abstract String getColumnDate(IBusinessColumn column);
+	protected abstract String getColumnDate(BusinessColumn column);
 	
-	protected abstract String getColumnDic(IBusinessColumn column);
+	protected abstract String getColumnDic(BusinessColumn column);
 	
-	protected abstract String getColumnIdentity(IBusinessColumn column);
+	protected abstract String getColumnIdentity(BusinessColumn column);
 	
-	protected abstract String getColumnMultitext(IBusinessColumn column);
+	protected abstract String getColumnMultitext(BusinessColumn column);
 	
-	protected abstract String getColumnCheckBox(IBusinessColumn column);
+	protected abstract String getColumnCheckBox(BusinessColumn column);
 	
-	protected abstract String getColumnRadio(IBusinessColumn column);
+	protected abstract String getColumnRadio(BusinessColumn column);
 	
-	protected abstract String getColumnSelect(IBusinessColumn column,Boolean isMultiple);
+	protected abstract String getColumnSelect(BusinessColumn column, Boolean isMultiple);
 	
-	protected abstract String getColumnFile(IBusinessColumn column);
+	protected abstract String getColumnFile(BusinessColumn column);
 	
 	/**
 	 * 构建一个 element
@@ -93,12 +93,12 @@ public abstract class AbsFormElementGenerator {
 	 * @param element
 	 * @param column
 	 */
-	protected void handlePermission(Element element,IBusinessColumn column) {
+	protected void handlePermission(Element element, BusinessColumn column) {
 		element.attr("ab-basic-permission", getPermissionPath(column));
 		element.attr("desc", column.getComment());
 	}
 	
-	public String getPermissionPath(IBusinessColumn column,IBusTableRel relation) {
+	public String getPermissionPath(BusinessColumn column, BusinessTableRelation relation) {
 		String boCode = relation.getBusObj().getKey();
 		return "permission."+ boCode + "." + column.getTable().getKey() + "." + column.getKey();
 	}
@@ -108,7 +108,7 @@ public abstract class AbsFormElementGenerator {
 	 * @param column
 	 * @return
 	 */
-	protected String getPermissionPath(IBusinessColumn column) {
+	protected String getPermissionPath(BusinessColumn column) {
 		String boCode = (String) ThreadMapUtil.get("boCode");
 		return "permission."+ boCode + "." + column.getTable().getKey() + "." + column.getKey();
 	}
@@ -118,7 +118,7 @@ public abstract class AbsFormElementGenerator {
 	 * @param element
 	 * @param column
 	 */
-	protected void handleValidateRules(Element element,IBusinessColumn column) {
+	protected void handleValidateRules(Element element, BusinessColumn column) {
 		String rulesStr = column.getCtrl().getValidRule();
 		if(StringUtils.isEmpty(rulesStr)) return ;
 		
@@ -155,8 +155,8 @@ public abstract class AbsFormElementGenerator {
 	 * @param relation
 	 * @return
 	 */
-	public String getScopePath(IBusTableRel relation) {
-		if(relation.getType().equals(BusTableRelType.MAIN.getKey())) {
+	public String getScopePath(BusinessTableRelation relation) {
+		if(relation.getType().equals(BusinessTableRelationType.MAIN.getKey())) {
 			return "data."+relation.getBusObj().getKey();
 		}
 		
@@ -164,7 +164,7 @@ public abstract class AbsFormElementGenerator {
 		// 一对一是对象名字 
 		sb.append(relation.getTableKey());
 		// 如果是一对多则添加List
-		if(relation.getType().equals(BusTableRelType.ONE_TO_MANY.getKey())){
+		if(relation.getType().equals(BusinessTableRelationType.ONE_TO_MANY.getKey())){
 			sb.append("List");
 			//第三层后面均为表单模板，模板会从subTempData中获取中间值。
 			if(isThreeChildren(relation)) {
@@ -179,19 +179,19 @@ public abstract class AbsFormElementGenerator {
 		return sb.toString();
 	}
 	
-	protected void getParentPath(IBusTableRel parent,StringBuffer sb) {
+	protected void getParentPath(BusinessTableRelation parent, StringBuffer sb) {
 		if(parent == null) return;
 		//上级是一对多则将scope的name 返回
-		if(parent.getType().equals(BusTableRelType.ONE_TO_MANY.getKey())) {
+		if(parent.getType().equals(BusinessTableRelationType.ONE_TO_MANY.getKey())) {
 			sb.insert(0, parent.getTableKey()+".");
 			return ;
 		}
 		//一对一子表
-		if(parent.getType().equals(BusTableRelType.ONE_TO_ONE.getKey())) {
+		if(parent.getType().equals(BusinessTableRelationType.ONE_TO_ONE.getKey())) {
 			sb.insert(0, parent.getTableKey()+".");
 		}
 		// 主表则是boCode
-		if(parent.getType().equals(BusTableRelType.MAIN.getKey())) {
+		if(parent.getType().equals(BusinessTableRelationType.MAIN.getKey())) {
 			sb.insert(0, "data."+parent.getBusObj().getKey()+".");
 		}
 		
@@ -199,12 +199,12 @@ public abstract class AbsFormElementGenerator {
 	}
 	
 	// id="boCode-tableKey" ab-basic-permission="boCode.table.tableKey" ...
-	public abstract String getSubAttrs(IBusTableRel rel) ;
+	public abstract String getSubAttrs(BusinessTableRelation rel) ;
 	
 	//如果父类不是主表、那么当前子表则一定是第三层
-	public boolean isThreeChildren(IBusTableRel rel) {
-		if(rel.getType().equals(BusTableRelType.ONE_TO_MANY.getKey()) 
-				&& !rel.getParent().getType().equals(BusTableRelType.MAIN.getKey())) {
+	public boolean isThreeChildren(BusinessTableRelation rel) {
+		if(rel.getType().equals(BusinessTableRelationType.ONE_TO_MANY.getKey())
+				&& !rel.getParent().getType().equals(BusinessTableRelationType.MAIN.getKey())) {
 			return true;
 		}
 		return false;

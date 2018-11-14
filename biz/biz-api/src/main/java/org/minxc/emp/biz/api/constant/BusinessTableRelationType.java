@@ -3,7 +3,7 @@ package org.minxc.emp.biz.api.constant;
 /**
  * BusTableRel中type属性的枚举
  */
-public enum BusTableRelType {
+public enum BusinessTableRelationType {
 	/**
 	 * 主表
 	 */
@@ -25,7 +25,7 @@ public enum BusTableRelType {
 	 */
 	private String desc;
 
-	private BusTableRelType(String key, String desc) {
+	private BusinessTableRelationType(String key, String desc) {
 		this.key = key;
 		this.desc = desc;
 	}
@@ -55,8 +55,8 @@ public enum BusTableRelType {
 	 * @param key
 	 * @return
 	 */
-	public static BusTableRelType getByKey(String key) {
-		for (BusTableRelType type : BusTableRelType.values()) {
+	public static BusinessTableRelationType getByKey(String key) {
+		for (BusinessTableRelationType type : BusinessTableRelationType.values()) {
 			if (key.equals(type.getKey())) {
 				return type;
 			}

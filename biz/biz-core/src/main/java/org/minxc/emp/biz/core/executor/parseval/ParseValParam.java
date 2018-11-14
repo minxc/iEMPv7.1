@@ -2,15 +2,15 @@ package org.minxc.emp.biz.core.executor.parseval;
 
 import java.util.Map;
 
-import org.minxc.emp.biz.core.model.BusTableRel;
+import org.minxc.emp.biz.core.model.BusinessTableRelationImpl;
 
 public class ParseValParam {
 	private String key;
 	private Object value;
 	private Map<String, Object> data;
-	private BusTableRel busTableRel;
+	private BusinessTableRelationImpl busTableRel;
 
-	public ParseValParam(String key, Object value, Map<String, Object> data, BusTableRel busTableRel) {
+	public ParseValParam(String key, Object value, Map<String, Object> data, BusinessTableRelationImpl busTableRel) {
 		this.key = key;
 		this.value = value;
 		this.data = data;
@@ -29,7 +29,7 @@ public class ParseValParam {
 		return this.data;
 	}
 
-	public BusTableRel getBusTableRel() {
+	public BusinessTableRelationImpl getBusTableRel() {
 		return this.busTableRel;
 	}
 }

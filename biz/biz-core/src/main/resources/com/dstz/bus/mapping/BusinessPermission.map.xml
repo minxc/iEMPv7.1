@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.minxc.emp.biz.core.dao.BusinessPermissionDao">
-	<resultMap id="BusinessPermission" type="org.minxc.emp.biz.core.model.BusinessPermission">
+	<resultMap id="BusinessPermission" type="org.minxc.emp.biz.core.model.BusinessPermissionImpl">
 		<id property="id" column="id_" jdbcType="VARCHAR"/>
 		<result property="objType" column="obj_type_" jdbcType="VARCHAR"/>
 		<result property="objVal" column="obj_val_" jdbcType="VARCHAR"/>
 		<result property="busObjMapJson" column="bus_obj_map_json_" jdbcType="CLOB"/>
 	</resultMap>
 	
-	<insert id="create" parameterType="org.minxc.emp.biz.core.model.BusinessPermission">
+	<insert id="create" parameterType="org.minxc.emp.biz.core.model.BusinessPermissionImpl">
 		INSERT INTO bus_permission
 		(id_,obj_type_,obj_val_,bus_obj_map_json_)
 		VALUES 
@@ -36,7 +36,7 @@
 		</if>
 	</select>
 	
-	<update id="update" parameterType="org.minxc.emp.biz.core.model.BusinessPermission">
+	<update id="update" parameterType="org.minxc.emp.biz.core.model.BusinessPermissionImpl">
 		UPDATE bus_permission SET
 		obj_type_=#{objType,jdbcType=VARCHAR},
 		obj_val_=#{objVal,jdbcType=VARCHAR},

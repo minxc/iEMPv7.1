@@ -2,17 +2,15 @@ package org.minxc.emp.bpm.engine.data;
 
 import com.alibaba.fastjson.JSONObject;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import javax.annotation.Resource;
 
 import org.minxc.emp.basis.impl.groovy.DefaultGroovyScriptEngineImpl;
-import org.minxc.emp.biz.api.model.IBusinessData;
-import org.minxc.emp.biz.api.model.IBusinessPermission;
+import org.minxc.emp.biz.api.model.BusinessData;
+import org.minxc.emp.biz.api.model.BusinessPermission;
 import org.minxc.emp.biz.api.service.BusinessDataService;
 import org.minxc.emp.bpm.api.engine.action.button.ButtonFactory;
 import org.minxc.emp.bpm.api.engine.data.BpmFlowDataAccessor;
@@ -20,7 +18,6 @@ import org.minxc.emp.bpm.api.engine.data.result.BpmFlowData;
 import org.minxc.emp.bpm.api.engine.data.result.BpmFlowInstanceData;
 import org.minxc.emp.bpm.api.engine.data.result.BpmFlowTaskData;
 import org.minxc.emp.bpm.api.exception.BpmStatusCode;
-import org.minxc.emp.bpm.api.model.def.BpmProcessDef;
 import org.minxc.emp.bpm.api.model.def.NodeInit;
 import org.minxc.emp.bpm.api.model.form.BpmForm;
 import org.minxc.emp.bpm.api.model.inst.IBpmInstance;
@@ -117,7 +114,7 @@ public class DefaultBpmFlowDataAccessor implements BpmFlowDataAccessor {
 		String defId = flowData.getDefId();
 		BpmNodeDef startNode = this.a.getStartEvent(defId);
 		flowData.setDefName(this.a.getBpmProcessDef(defId).getName());
-		IBusinessPermission permission = this.aE.getInstanceFormPermission((BpmFlowData) flowData,
+		BusinessPermission permission = this.aE.getInstanceFormPermission((BpmFlowData) flowData,
 				startNode.getNodeId(), formType, false);
 		BpmForm form = flowData.getForm();
 		if (FormCategory.INNER.equals((Object) form.getType())) {
@@ -138,7 +135,7 @@ public class DefaultBpmFlowDataAccessor implements BpmFlowDataAccessor {
 	private void a(BpmFlowData flowData, String instaneId, String nodeId, FormType formType, boolean isReadOnly) {
 		BpmInstance instance = (BpmInstance) this.aD.get(instaneId);
 		String defKey = instance.getDefKey();
-		IBusinessPermission businessPermision = this.aE.getInstanceFormPermission(flowData, nodeId, formType,
+		BusinessPermission businessPermision = this.aE.getInstanceFormPermission(flowData, nodeId, formType,
 				isReadOnly);
 		BpmForm form = flowData.getForm();
 		if (FormCategory.INNER.equals((Object) form.getType())) {
@@ -155,7 +152,7 @@ public class DefaultBpmFlowDataAccessor implements BpmFlowDataAccessor {
 	}
 
 	private void a(BpmFlowData flowData, String nodeId) {
-		Map<String, IBusinessData>  bos = flowData.getDataMap();
+		Map<String, BusinessData>  bos = flowData.getDataMap();
 		if (BeanUtils.isEmpty((Object) bos)) {
 			return;
 		}
@@ -181,7 +178,7 @@ public class DefaultBpmFlowDataAccessor implements BpmFlowDataAccessor {
 		JSONObject json = new JSONObject();
 		JSONObject initJson = new JSONObject();
 		for (String key : bos.keySet()) {
-			IBusinessData bd = (IBusinessData) bos.get(key);
+			BusinessData bd = (BusinessData) bos.get(key);
 			JSONObject boJson = this.businessDataService.assemblyFormDefData(bd);
 			json.put(key, (Object) boJson);
 			bd.fullBusDataInitData(initJson);
