@@ -1,0 +1,2612 @@
+import javax.servlet.ServletOutputStream;
+
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
+import org.apache.tools.zip.ZipEntry;
+import org.apache.tools.zip.ZipFile;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import de.innosystec.unrar.Archive;
+import de.innosystec.unrar.rarfile.FileHeader;
+
+
+public class FileTool
+{
+    private static boolean exist = false;
+
+    public static boolean sh_isOver;
+
+    protected static Logger log = LoggerFactory.getLogger(FileTool.class);
+
+    /**
+     * @description java中要想删除一个文件夹，首先要清空它下面的所有文件！删除整个文件夹
+     * @param path
+     */
+    public static void delete(String path)
+    {
+        File f = new File(path);
+        if (f.isDirectory())
+        {// 如果是目录，先递归删除
+            String[] list = f.list();
+            for (int i = 0; i < list.length; i++)
+            {
+                delete(path + "//" + list[i]);// 先删除目录下的文件
+            }
+        }
+        f.delete();
+    }
+
+    /**
+     * @description 把多个文件压缩成zip
+     * @author
+     * @param srcfile
+     * @param zipfile
+     */
+    public static void zipFiles(List<File> srcfile, File zipfile)
+    {
+        byte[] buf = new byte[1024];
+        try
+        {
+            // 创建 the ZIP file
+            ZipOutputStream out = new ZipOutputStream(new FileOutputStream(zipfile));
+            // 压缩 the files
+            for (int i = 0; i < srcfile.size(); i++)
+            {
+                File file = srcfile.get(i);
+                FileInputStream in = new FileInputStream(file);
+                // 添加 ZIP entry 到 output stream.
+                out.putNextEntry(new ZipEntry(file.getName()));
+                // Transfer bytes from the file to the ZIP file
+                int len;
+                while ((len = in.read(buf)) > 0)
+                {
+                    out.write(buf, 0, len);
+                }
+                out.flush();
+                // Complete the entry
+                out.closeEntry();
+                in.close();
+            }
+            // 完成 the ZIP file
+            out.close();
+        } catch (IOException e)
+        {
+            log.error(e.getMessage(), e);
+        }
+    }
+
+    /**
+     * @description 创建文件目录
+
+     * @param mkdirName
+     *            文件名称
+     */
+    public static boolean mkdir(String mkdirName)
+    {
+        boolean bFileFlag = false;
+        try
+        {
+            File dirFile = new File(mkdirName);
+            boolean bFile = dirFile.exists();
+            if (bFile)
+            {
+                System.out.println("The folder exists.");
+            } else
+            {
+                bFile = dirFile.mkdirs();
+                if (bFile)
+                {
+                    bFileFlag = true;
+                }
+            }
+        } catch (Exception err)
+        {
+            log.error(err.getMessage(), err);
+        }
+        return bFileFlag;
+    }
+
+    /**
+     * @description 检查文件路径中是否含有文件
+
+     * @param path
+     *            文件路径
+     */
+    public static boolean checkSiteFileExist(String path)
+    {
+        exist = false;
+        File f = new File(path);
+        // 检查给定路径的文件名称是否存在
+        show(f);
+        return exist;
+    }
+
+    /**
+     * @description 检查给定路径的文件名称是否存在
+     * @author dKF70691
+     * @param mkdirName
+     *            文件名称
+     */
+    private static void show(File fi)
+    {
+        File[] file = fi.listFiles();
+        if (file != null)
+            for (int i = 0; i < file.length; i++)
+            {
+                if (file[i].isFile())
+                {
+                    exist = true;
+                    break;
+                }
+                if (file[i].isDirectory())
+                    show(file[i]);
+            }
+    }
+
+    /**
+     * @description 检查给定路径的文件名称是否存在
+
+     * @param mkdirName
+     *            文件名称
+     */
+    public static boolean getFileFolderFiles(String dir, String fileNameKeyword, String filePostfixName)
+    {
+        boolean fileExist = false;
+        File[] files = new File(dir).listFiles();
+        for (int i = 0; i < files.length; i++)
+        {
+            String fileName = files[i].getName();
+            String postfixName = "";
+            int j = fileName.lastIndexOf(".");
+            if ((j > 0) && (j < fileName.length() - 1))
+            {
+                postfixName = fileName.substring(j + 1).toLowerCase();
+            }
+            if (postfixName.equals(filePostfixName))
+            {
+                fileExist = true;
+                break;
+            }
+        }
+        return fileExist;
+    }
+
+    /**
+     * @description 上传文件的具体读入过程
+
+     * @param uploadFile
+     *            所上传的文件
+     * @param filePathFile
+     *            所上传的文件路径
+     */
+    public static boolean uploadFile(File uploadFile, File filePathFile) throws Exception
+    {
+        InputStream in = null;
+        OutputStream out = null;
+        try
+        {
+            in = new BufferedInputStream(new FileInputStream(uploadFile));
+            out = new BufferedOutputStream(new FileOutputStream(filePathFile));
+            byte[] buffer = new byte[1024];
+            int len = 0;
+            while ((len = in.read(buffer)) > 0)
+            {
+                out.write(buffer, 0, len);
+            }
+            out.flush();
+        } catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+            return false;
+        } catch (IOException e)
+        {
+            return false;
+        } finally
+        {
+            if (in != null)
+            {
+                in.close();
+            }
+            if (out != null)
+            {
+                out.close();
+            }
+        }
+        return true;
+    }
+
+    /**
+     * 执行脚本文件
+     * 
+     * @param projectPath
+     *            工程路径
+     * @param complieLog
+     *            编译文件路径
+     * @param compileFileName
+     *            脚本文件名称
+     * @return 是否成功
+     */
+    public static void processScriptFile(String projectPath, String complieLog, String compileFileName)
+    {
+        InputStream is = null;
+        InputStreamReader isr = null;
+        BufferedReader br = null;
+        // 这里必须要给文件赋权限 chmod u+x fileName;
+        // String cmd =
+        // "D:\\usr1\\makepatch\\mxc\\CE12800\\V1R2C00\\test_3/xxx.sh";
+        try
+        {
+            // 先判断编译文件是否已经生成，若生成先删除
+            File file = new File(complieLog);
+            if (file.exists())
+            {
+                file.delete();
+                log.debug("######delete complie file:" + complieLog);
+            }
+
+            // 1.先给文件赋权限
+            String cdProjectDir = "cd " + projectPath + ";";
+            String command = cdProjectDir + "chmod u+x " + compileFileName;
+            String[] commonds = { "/bin/sh", "-c", command };
+            log.debug("######commond1:" + command);
+            Runtime.getRuntime().exec(commonds).waitFor();
+
+            // 2.使用Runtime来执行command，生成Process对象
+            String shCommond = cdProjectDir + "sh " + compileFileName;
+            String[] commondShs = { "/bin/sh", "-c", shCommond + " >" + file.getName() + " 2>&1" };
+            log.debug("######commond2:" + shCommond);
+            // 等待执行shell脚本输出编译日志文件
+            Runtime.getRuntime().exec(commondShs).waitFor();
+
+        } catch (IOException e)
+        {
+            log.error(e.getMessage(), e);
+        } catch (InterruptedException e)
+        {
+            log.error(e.getMessage(), e);
+        } finally
+        {
+            IOUtils.closeQuietly(is, isr, br);
+        }
+    }
+    
+    /**
+     * 执行脚本文件
+     * 
+     * @param projectPath
+     *            工程路径
+     * @param complieLog
+     *            编译文件路径
+     * @param compileFileName
+     *            脚本文件名称
+     * @return 是否成功
+     */
+    public static void processScriptFileNotWait(String projectPath, String complieLog, String compileFileName)
+    {
+        InputStream is = null;
+        InputStreamReader isr = null;
+        BufferedReader br = null;
+        // 这里必须要给文件赋权限 chmod u+x fileName;
+        // String cmd =
+        // "D:\\usr1\\makepatch\\mxc\\cccc\\ccc\\test_3/make_patch.sh";
+        try
+        {
+            // 先判断编译文件是否已经生成，若生成先删除
+            File file = new File(complieLog);
+            if (file.exists())
+            {
+                file.delete();
+                log.debug("######delete complie file:" + complieLog);
+            }
+
+            // 1.先给文件赋权限
+            String cdProjectDir = "cd " + projectPath + ";";
+            String command = cdProjectDir + "chmod u+x " + compileFileName;
+            String[] commonds = { "/bin/sh", "-c", command };
+            log.debug("######commond1:" + command);
+            Runtime.getRuntime().exec(commonds).waitFor();
+
+            // 2.使用Runtime来执行command，生成Process对象
+            String shCommond = cdProjectDir + "sh " + compileFileName;
+            String[] commondShs = { "/bin/sh", "-c", shCommond + " >" + file.getName() + " 2>&1" };
+            log.debug("######commond2:" + shCommond);
+            // 等待执行shell脚本输出编译日志文件
+            Runtime.getRuntime().exec(commondShs);
+
+        } catch (IOException e)
+        {
+            log.error(e.getMessage(), e);
+        } catch (InterruptedException e)
+        {
+            log.error(e.getMessage(), e);
+        } finally
+        {
+            IOUtils.closeQuietly(is, isr, br);
+        }
+    }
+
+    /**
+     * 执行脚本文件
+     * 
+     * @param projectPath
+     *            工程路径
+     * @param complieLog
+     *            编译文件路径
+     * @param eulerFileSh
+     *            euler脚本文件名称
+     * @param fenixSh
+     *            fenix脚本
+     * @return 是否成功
+     */
+    public static void processScriptFile_forFenix(String projectPath, String complieLog, String eulerFileSh, String fenixSh)
+    {
+        InputStream is = null;
+        InputStreamReader isr = null;
+        BufferedReader br = null;
+        // 这里必须要给文件赋权限 chmod u+x fileName;
+        // String cmd =
+        // "D:\\usr1\\makepatch\\mxc\\cc\\cc\\cc/make_patch.sh";
+        try
+        {
+            // 先判断编译文件是否已经生成，若生成先删除
+            File file = new File(complieLog);
+            if (file.exists())
+            {
+                boolean deleteQuietly = FileUtils.deleteQuietly(file);
+                log.debug("######delete complie file:" + deleteQuietly);
+            }
+            // 1.先给文件赋权限
+            String cdProjectDir = "cd " + projectPath + ";";
+            String command = cdProjectDir + "chmod u+x *";
+            String[] commonds = { "/bin/sh", "-c", command };
+            log.debug("######commond1:" + command);
+            Runtime.getRuntime().exec(commonds).waitFor();
+
+            // 1.进入欧拉模拟器
+            String commondEulers = "";
+            if (StringUtils.isEmpty(eulerFileSh))
+            {
+                commondEulers = cdProjectDir + "sh " + fenixSh + " >" + file.getName() + " 2>&1";
+            } else
+            {
+                commondEulers = cdProjectDir + "sh " + eulerFileSh + " " + projectPath + " " + fenixSh + " " + file.getName() + " 2>&1";
+            }
+            String[] commonds2 = { "/bin/sh", "-c", commondEulers };
+            log.debug("######commond2:" + commondEulers);
+            Runtime.getRuntime().exec(commonds2).waitFor();
+            log.debug("######log in Euler compile");
+
+        } catch (IOException e)
+        {
+            log.error(e.getMessage(), e);
+        } catch (InterruptedException e)
+        {
+            log.error(e.getMessage(), e);
+        } finally
+        {
+            IOUtils.closeQuietly(is, isr, br);
+        }
+    }
+
+    /**
+     * 执行fenix补丁合集脚本
+     * 
+     * @param projectPath
+     *            工程路径
+     * @param complieLog
+     *            编译日志文件名称
+     * @param coverLog
+     *            覆盖文件名称
+     * @param fenixSh
+     *            fenix脚本
+     * @param eulerFileSh
+     *            euler脚本文件名称
+     */
+    public static void excuteSetScriptFile_forFenix(String projectPath, String complieLog, String coverLog, String eulerFileSh, String fenixSh)
+    {
+        InputStream is = null;
+        InputStreamReader isr = null;
+        BufferedReader br = null;
+        try
+        {
+            // 先判断编译文件是否已经生成，若生成先删除
+            File file_compile = new File(complieLog);
+            if (file_compile.exists())
+            {
+                boolean deleteQuietly = FileUtils.deleteQuietly(file_compile);
+                log.debug("######delete complie file:" + deleteQuietly);
+            }
+
+            // 先判断覆盖文件是否已经生成，若生成先删除
+
+            File file_cover = null;
+            if (coverLog != null)
+            {
+                file_cover = new File(coverLog);
+                if (file_cover.exists())
+                {
+                    boolean deleteQuietly = FileUtils.deleteQuietly(file_cover);
+                    log.debug("######delete cover file:" + deleteQuietly);
+                }
+            }
+
+            // 这里必须要给文件赋权限 chmod u+x fileName;
+            // String cmd =
+            // "D:\\usr1\\makepatch\\swx387375\\M2\\V8R7C10\\ipatch_M2_V8R7C10/make_union_patch.sh";
+            // 1.先给文件赋权限
+            log.debug("project path: " + projectPath);
+            String cdProjectDir = "cd " + projectPath + ";";
+            String command = cdProjectDir + "chmod u+x *";
+            String[] commonds = { "/bin/sh", "-c", command };
+            log.debug("commond1: " + command);
+            Runtime.getRuntime().exec(commonds).waitFor();
+
+            // 2.使用Runtime来执行command，生成Process对象
+            String shCommond = "";
+            if (StringUtils.isEmpty(eulerFileSh))
+            {
+                shCommond = cdProjectDir + "sh " + fenixSh + " >" + file_compile.getName() + " 2>&1";
+            } else
+            {
+                shCommond = cdProjectDir + "sh " + eulerFileSh + " " + projectPath + " " + fenixSh + " " + file_compile.getName() + " 2>&1";
+            }
+            String[] commondShs = { "/bin/sh", "-c", shCommond };
+            log.debug("commond2: " + shCommond);
+            Runtime.getRuntime().exec(commondShs).waitFor();
+            log.debug("commondShs over");
+            // 脚本执行结束写入往执行文件中
+            FileUtils.writeStringToFile(file_compile, "excute make_union_fenix_patch.sh over.\n", Constants.DEFAULT_ENCODING, true);
+
+        } catch (IOException e)
+        {
+            log.error(e.getMessage(), e);
+        } catch (Exception e)
+        {
+            log.error(e.getMessage(), e);
+        } finally
+        {
+            IOUtils.closeQuietly(is, isr, br);
+        }
+
+    }
+
+    /**
+     * 执行合集R版本补丁脚本文件
+     * 
+     * @param projectPath
+     *            工程路径
+     * @param complieLog
+     *            编译日志文件名称
+     * @param coverLog
+     *            覆盖文件名称
+     * @param compileFileName
+     *            脚本文件名称
+     */
+    public static void excuteSetScriptFile(String projectPath, String complieLog, String coverLog, String compileFileName)
+    {
+        InputStream is = null;
+        InputStreamReader isr = null;
+        BufferedReader br = null;
+        try
+        {
+            // 先判断编译文件是否已经生成，若生成先删除
+            File file_compile = new File(complieLog);
+            if (file_compile.exists())
+            {
+                boolean deleteQuietly = FileUtils.deleteQuietly(file_compile);
+                log.debug("######delete complie file:" + deleteQuietly);
+            }
+
+            // 先判断覆盖文件是否已经生成，若生成先删除
+
+            File file_cover = null;
+            if (coverLog != null)
+            {
+                file_cover = new File(coverLog);
+                if (file_cover.exists())
+                {
+                    boolean deleteQuietly = FileUtils.deleteQuietly(file_cover);
+                    log.debug("######delete cover file:" + deleteQuietly);
+                }
+            }
+
+            // 这里必须要给文件赋权限 chmod u+x fileName;
+            // String cmd =
+            // "D:\\usr1\\makepatch\\swx387375\\M2\\V8R7C10\\ipatch_M2_V8R7C10/make_union_patch.sh";
+            // 1.先给文件赋权限
+            log.debug("project path: " + projectPath);
+            String cdProjectDir = "cd " + projectPath + ";";
+            String command = cdProjectDir + "chmod u+x " + compileFileName;
+            String[] commonds = { "/bin/sh", "-c", command };
+            log.debug("commond1: " + command);
+            Runtime.getRuntime().exec(commonds).waitFor();
+
+            // 2.使用Runtime来执行command，生成Process对象
+            String shCommond = cdProjectDir + "sh " + compileFileName;
+            String[] commondShs = { "/bin/sh", "-c", shCommond + " >" + file_compile.getName() + " 2>&1" };
+            log.debug("commond2: " + shCommond);
+            Runtime.getRuntime().exec(commondShs).waitFor();
+            log.debug("commondShs over");
+            // 脚本执行结束写入往执行文件中
+            FileUtils.writeStringToFile(file_compile, "excute make_union_patch.sh over.\n", Constants.DEFAULT_ENCODING, true);
+
+        } catch (IOException e)
+        {
+            log.error(e.getMessage(), e);
+        } catch (Exception e)
+        {
+            log.error(e.getMessage(), e);
+        } finally
+        {
+            IOUtils.closeQuietly(is, isr, br);
+        }
+
+    }
+
+    /**
+     * 执行大规格补丁脚本文件
+     * 
+     * @param projectPath
+     *            工程路径
+     * @param complieLog
+     *            编译日志文件名称
+     * @param coverLog
+     *            覆盖文件名称
+     * @param compileFileName
+     *            脚本文件名称
+     */
+    public static void excuteMaxNumScriptFile(String projectPath, String complieLog, String coverLog, String compileFileName)
+    {
+        InputStream is = null;
+        InputStreamReader isr = null;
+        BufferedReader br = null;
+        try
+        {
+            // 先判断编译文件是否已经生成，若生成先删除
+            File file_compile = new File(complieLog);
+            if (file_compile.exists())
+            {
+                boolean deleteQuietly = FileUtils.deleteQuietly(file_compile);
+                log.debug("######delete complie file:" + deleteQuietly);
+            }
+
+            // 先判断覆盖文件是否已经生成，若生成先删除
+
+            File file_cover = null;
+            if (coverLog != null)
+            {
+                file_cover = new File(coverLog);
+                if (file_cover.exists())
+                {
+                    boolean deleteQuietly = FileUtils.deleteQuietly(file_cover);
+                    log.debug("######delete cover file:" + deleteQuietly);
+                }
+            }
+
+            // 这里必须要给文件赋权限 chmod u+x fileName;
+            // String cmd =
+            // "D:\\usr1\\makepatch\\swx387375\\M2\\V8R7C10\\ipatch_M2_V8R7C10/make_union_patch.sh";
+            // 1.先给文件赋权限
+            log.debug("project path: " + projectPath);
+            String cdProjectDir = "cd " + projectPath + ";";
+            String command = cdProjectDir + "chmod u+x " + compileFileName;
+            String[] commonds = { "/bin/sh", "-c", command };
+            log.debug("commond1: " + command);
+            Runtime.getRuntime().exec(commonds).waitFor();
+
+            // 2.使用Runtime来执行command，生成Process对象
+            String shCommond = cdProjectDir + "sh " + compileFileName;
+            String[] commondShs = { "/bin/sh", "-c", shCommond + " >" + file_compile.getName() + " 2>&1" };
+            log.debug("commond2: " + shCommond);
+            Runtime.getRuntime().exec(commondShs).waitFor();
+            log.debug("commondShs over");
+            // 脚本执行结束写入往执行文件中
+            FileUtils.writeStringToFile(file_compile, "excute make_MaxNum_patch.sh over.\n", Constants.DEFAULT_ENCODING, true);
+
+        } catch (IOException e)
+        {
+            log.error(e.getMessage(), e);
+        } catch (Exception e)
+        {
+            log.error(e.getMessage(), e);
+        } finally
+        {
+            IOUtils.closeQuietly(is, isr, br);
+        }
+
+    }
+
+    /**
+     * 执行合集R版本补丁脚本文件
+     * 
+     * @param projectPath
+     *            工程路径
+     * @param complieLog
+     *            编译日志文件名称
+     * @param coverLog
+     *            覆盖文件名称
+     * @param compileFileName
+     *            脚本文件名称
+     */
+    public static void excuteSetScriptFile_forIAS(String projectPath, String complieLog, String compileFileName)
+    {
+        InputStream is = null;
+        InputStreamReader isr = null;
+        BufferedReader br = null;
+        try
+        {
+            // 先判断编译文件是否已经生成，若生成先删除
+            File file_compile = new File(complieLog);
+            if (file_compile.exists())
+            {
+                boolean deleteQuietly = FileUtils.deleteQuietly(file_compile);
+                log.debug("######delete complie file:" + deleteQuietly);
+            }
+
+            // 这里必须要给文件赋权限 chmod u+x fileName;
+            // String cmd =
+            // "D:\\usr1\\makepatch\\swx387375\\M2\\V8R7C10\\ipatch_M2_V8R7C10/make_union_patch.sh";
+            // 1.先给文件赋权限
+            log.debug("project path: " + projectPath);
+            String cdProjectDir = "cd " + projectPath + ";";
+            String command = cdProjectDir + "chmod u+x " + compileFileName;
+            String[] commonds = { "/bin/sh", "-c", command };
+            log.debug("commond1: " + command);
+            Runtime.getRuntime().exec(commonds).waitFor();
+
+            // 2.使用Runtime来执行command，生成Process对象
+            String shCommond = cdProjectDir + "sh " + compileFileName;
+            String[] commondShs = { "/bin/sh", "-c", shCommond + " >" + file_compile.getName() + " 2>&1" };
+            log.debug("commond2: " + shCommond);
+            Runtime.getRuntime().exec(commondShs).waitFor();
+            log.debug("commondShs over");
+            // 脚本执行结束写入往执行文件中
+            FileUtils.writeStringToFile(file_compile, "excute make_union_patch.sh over.\n", Constants.DEFAULT_ENCODING, true);
+
+        } catch (IOException e)
+        {
+            log.error(e.getMessage(), e);
+        } catch (Exception e)
+        {
+            log.error(e.getMessage(), e);
+        } finally
+        {
+            IOUtils.closeQuietly(is, isr, br);
+        }
+
+    }
+
+    /**
+     * 执行shell命令
+     * 
+     * @param command
+     */
+    public static void excuteShellScript(String command)
+    {
+        InputStream is = null;
+        InputStreamReader isr = null;
+        BufferedReader br = null;
+        try
+        {
+            String[] commonds = { "/bin/sh", "-c", command };
+            log.debug("excuteShellScript: " + command);
+            Runtime.getRuntime().exec(commonds).waitFor();
+        } catch (Exception e)
+        {
+            log.error(e.getMessage(), e);
+        } finally
+        {
+            IOUtils.closeQuietly(is, isr, br);
+        }
+    }
+
+    /**
+     * 执行脚本
+     * 
+     */
+    public static void excuteScriptFile(String scriptPath, String scriptName, File outLog, String params)
+    {
+        Process process = null;
+        InputStream is = null;
+        InputStreamReader isr = null;
+        BufferedReader br = null;
+
+        try
+        {
+            // 1.先给文件赋权限
+            log.debug("script path: " + scriptPath);
+            String cdProjectDir = "cd " + scriptPath + ";";
+            String command = cdProjectDir + "chmod u+x " + scriptName;
+            String[] commonds = { "/bin/sh", "-c", command };
+            log.debug("commond1: " + command);
+            Runtime.getRuntime().exec(commonds).waitFor();
+
+            // 2.使用Runtime来执行command，生成Process对象
+            StringBuffer shCommond = new StringBuffer();
+            shCommond.append(cdProjectDir);
+            shCommond.append("sh ");
+            shCommond.append(scriptName);
+            if (params != null && params.length() > 0)
+            {
+                shCommond.append(params);
+            }
+            String[] commondShs = { "/bin/sh", "-c", shCommond.toString() };
+            log.debug("commond2: " + shCommond.toString());
+            process = Runtime.getRuntime().exec(commondShs);
+            // 取得命令结果的输出流
+            is = process.getInputStream();
+            // 用一个读输出流类去读
+            isr = new InputStreamReader(is);
+            // 用缓冲器读行
+            br = new BufferedReader(isr);
+            String line = null;
+            while ((line = br.readLine()) != null)
+            {
+                // 生成解析日志:补丁名.log
+                FileUtils.writeStringToFile(outLog, line + "\n", Constants.DEFAULT_ENCODING, true);
+            }
+
+        } catch (IOException e)
+        {
+            log.error(e.getMessage());
+        } catch (InterruptedException e)
+        {
+            log.error(e.getMessage());
+        } finally
+        {
+            IOUtils.closeQuietly(is, isr, br);
+        }
+
+    }
+
+    /**
+     * 执行python脚本
+     * 
+     */
+    public static void excutePythonScript(String resultFileName, String uploadPy, String socketPy, String currentProject, String sourceFile,
+            String username, String serverIp)
+    {
+        InputStream is = null;
+        InputStreamReader isr = null;
+        BufferedReader br = null;
+
+        try
+        {
+            // 1.删除工程下已存在的结果文件
+            if (StringUtils.isNotEmpty(resultFileName))
+            {
+                File resultFile = new File(currentProject + resultFileName);
+                if (resultFile.exists() && resultFile.isFile())
+                {
+                    FileUtils.forceDelete(resultFile);
+                }
+            }
+            String cdProjectDir = "cd " + currentProject + ";";
+            // 2.使用Runtime来执行command，生成Process对象
+            if (StringUtils.isNotEmpty(sourceFile))
+            {
+                File srcFile = new File(currentProject + Constants.PROJECT_CODE_DIR + File.separator + sourceFile);
+                if (srcFile.exists() && srcFile.isFile())
+                {
+                    StringBuffer shCommondUpload = new StringBuffer();
+                    shCommondUpload.append(cdProjectDir);
+
+                    // python /usr1/Karrigell-3.1.1/ftpUpload.py
+                    // /usr1/makepatch/swx387375/PTN7900/V1R7C10B366/t22/code/abvc.c
+                    shCommondUpload.append("/usr/bin/python " + Constants.STATIC_DIR + uploadPy + " " + srcFile.getAbsolutePath());
+                    String command = shCommondUpload.toString();
+                    log.debug("commondPython1: " + command);
+                    String[] commonds = { "/bin/sh", "-c", command };
+                    Runtime.getRuntime().exec(commonds).waitFor();
+
+                    // python /usr1/Karrigell-3.1.1/socket-client.py swx387375
+                    // /usr1/makepatch/swx387375/PTN7900/V1R7C10B366/t22
+                    // 10.120.22.208
+                    StringBuffer shCommondSocket = new StringBuffer();
+                    shCommondSocket.append(cdProjectDir);
+                    shCommondSocket.append("/usr/bin/python " + Constants.STATIC_DIR + socketPy + " " + username + " "
+                            + currentProject.substring(0, currentProject.length() - 1) + " " + serverIp);
+                    String commondNew = shCommondSocket.toString();
+                    log.debug("commondPython2: " + commondNew);
+                    String[] commondNews = { "/bin/sh", "-c", commondNew };
+                    Runtime.getRuntime().exec(commondNews).waitFor();
+                }
+            } else
+            {
+                StringBuffer shCommondSocket = new StringBuffer();
+                shCommondSocket.append(cdProjectDir);
+                shCommondSocket.append("/usr/bin/python " + Constants.STATIC_DIR + socketPy + " " + username + " "
+                        + currentProject.substring(0, currentProject.length() - 1) + " " + serverIp);
+                String commondNew = shCommondSocket.toString();
+                log.debug("commondPython2: " + commondNew);
+                String[] commondNews = { "/bin/sh", "-c", commondNew };
+                Runtime.getRuntime().exec(commondNews).waitFor();
+            }
+        } catch (IOException e)
+        {
+            log.error(e.getMessage());
+        } catch (InterruptedException e)
+        {
+            log.error(e.getMessage());
+        } finally
+        {
+            IOUtils.closeQuietly(is, isr, br);
+        }
+
+    }
+
+    /**
+     * 执行python脚本pclint
+     * 
+     */
+    public static void excutePythonScriptPclint(String resultFileName, String uploadPy, String socketPy, String currentProject, String sourceFile,
+            String username, String serverIp, String vrpVersion)
+    {
+        InputStream is = null;
+        InputStreamReader isr = null;
+        BufferedReader br = null;
+
+        try
+        {
+            // 1.删除工程下已存在的结果文件
+            File resultFile = new File(currentProject + resultFileName);
+            if (resultFile.exists() && resultFile.isFile())
+            {
+                FileUtils.forceDelete(resultFile);
+            }
+            String cdProjectDir = "cd " + currentProject + ";";
+            // 2.使用Runtime来执行command，生成Process对象
+            File srcFile = new File(currentProject + Constants.PROJECT_CODE_DIR + File.separator + sourceFile);
+            if (srcFile.exists() && srcFile.isFile())
+            {
+                StringBuffer shCommondUpload = new StringBuffer();
+                shCommondUpload.append(cdProjectDir);
+
+                // python /usr1/Karrigell-3.1.1/ftpUpload.py
+                // /usr1/makepatch/swx387375/PTN7900/V1R7C10B366/t22/code/abvc.c
+                shCommondUpload.append("/usr/bin/python " + Constants.STATIC_DIR + uploadPy + " " + srcFile.getAbsolutePath());
+                String command = shCommondUpload.toString();
+                log.debug("commondPython1: " + command);
+                String[] commonds = { "/bin/sh", "-c", command };
+                Runtime.getRuntime().exec(commonds).waitFor();
+
+                // python /usr1/Karrigell-3.1.1/socket-client.py swx387375
+                // V8R10C10 /usr1/makepatch/swx387375/PTN7900/V1R7C10B366/t22
+                // 10.120.22.208
+                StringBuffer shCommondSocket = new StringBuffer();
+                shCommondSocket.append(cdProjectDir);
+                shCommondSocket.append("/usr/bin/python " + Constants.STATIC_DIR + socketPy + " " + username + " " + vrpVersion + " "
+                        + currentProject.substring(0, currentProject.length() - 1) + " " + serverIp);
+                String commondNew = shCommondSocket.toString();
+                log.debug("commondPython2: " + commondNew);
+                String[] commondNews = { "/bin/sh", "-c", commondNew };
+                Runtime.getRuntime().exec(commondNews).waitFor();
+            }
+        } catch (IOException e)
+        {
+            log.error(e.getMessage());
+        } catch (InterruptedException e)
+        {
+            log.error(e.getMessage());
+        } finally
+        {
+            IOUtils.closeQuietly(is, isr, br);
+        }
+
+    }
+
+    /**
+     * 执行python脚本pclint 模块
+     * 
+     */
+    public static void excutePythonScriptPclintModule(String resultFileName, String uploadPy, String socketPy, String currentProject,
+            String username, String serverIp, String version, String module)
+    {
+        InputStream is = null;
+        InputStreamReader isr = null;
+        BufferedReader br = null;
+
+        try
+        {
+            // 1.删除工程下已存在的结果文件
+            File resultFile = new File(currentProject + resultFileName);
+            if (resultFile.exists() && resultFile.isFile())
+            {
+                FileUtils.forceDelete(resultFile);
+            }
+            String cdProjectDir = "cd " + currentProject + ";";
+            // 2.使用Runtime来执行command，生成Process对象
+            // File srcFile = new File(currentProject +
+            // Constants.PROJECT_CODE_DIR + File.separator + sourceFile);
+            // if (srcFile.exists() && srcFile.isFile())
+            // {
+            StringBuffer shCommondUpload = new StringBuffer();
+            shCommondUpload.append(cdProjectDir);
+
+            // python /usr1/Karrigell-3.1.1/ftpUpload.py
+            // /usr1/makepatch/swx387375/PTN7900/V1R7C10B366/t22/code/abvc.c
+            // shCommondUpload.append("/usr/bin/python " +
+            // Constants.STATIC_DIR + uploadPy + " " +
+            // srcFile.getAbsolutePath());
+            // String command = shCommondUpload.toString();
+            // log.debug("commondPython1: " + command);
+            // String[] commonds = { "/bin/sh", "-c", command };
+            // Runtime.getRuntime().exec(commonds).waitFor();
+
+            // python /usr1/Karrigell-3.1.1/socket-client.py swx387375
+            // V8R10C10 /usr1/makepatch/swx387375/PTN7900/V1R7C10B366/t22
+            // 10.120.22.208
+            StringBuffer shCommondSocket = new StringBuffer();
+            shCommondSocket.append(cdProjectDir);
+            shCommondSocket.append("/usr/bin/python " + Constants.STATIC_DIR + socketPy + " " + username + " " + version + " "
+                    + currentProject.substring(0, currentProject.length() - 1) + " " + serverIp + " " + module);
+            String commondNew = shCommondSocket.toString();
+            log.debug("commondPython2: " + commondNew);
+            String[] commondNews = { "/bin/sh", "-c", commondNew };
+            Runtime.getRuntime().exec(commondNews).waitFor();
+            log.debug("exec CommondPython2  Over!");
+            // }
+        } catch (IOException e)
+        {
+            log.error(e.getMessage());
+        } catch (InterruptedException e)
+        {
+            log.error(e.getMessage());
+        } finally
+        {
+            IOUtils.closeQuietly(is, isr, br);
+        }
+
+    }
+
+    public static void printScriptFile(ServletOutputStream out, String scriptPath, String scriptName, File outLog, String params)
+    {
+        Process process = null;
+        InputStream is = null;
+        InputStreamReader isr = null;
+        BufferedReader br = null;
+
+        try
+        {
+            // 1.先给文件赋权限
+            log.debug("script path: " + scriptPath);
+            String cdProjectDir = "cd " + scriptPath + ";";
+            String command = cdProjectDir + "chmod u+x *";
+            String[] commonds = { "/bin/sh", "-c", command };
+            log.debug("commond1: " + command);
+            Runtime.getRuntime().exec(commonds).waitFor();
+
+            // 2.使用Runtime来执行command，生成Process对象
+            StringBuffer shCommond = new StringBuffer();
+            shCommond.append(cdProjectDir);
+            shCommond.append("sh ");
+            shCommond.append(scriptName);
+            if (params != null && params.length() > 0)
+            {
+                shCommond.append(params);
+            }
+            String[] commondShs = { "/bin/sh", "-c", shCommond.toString() };
+            log.debug("commond2: " + shCommond.toString());
+            process = Runtime.getRuntime().exec(commondShs);
+            // 取得命令结果的输出流
+            is = process.getInputStream();
+            // 用一个读输出流类去读
+            isr = new InputStreamReader(is);
+            // 用缓冲器读行
+            br = new BufferedReader(isr);
+            String line = null;
+            while ((line = br.readLine()) != null)
+            {
+                // 过滤check
+                if (!line.startsWith("check") && !line.startsWith("["))
+                {
+                    // 生成解析日志:补丁名.log
+                    FileUtils.writeStringToFile(outLog, line + "\n", Constants.DEFAULT_ENCODING, true);
+                    out.println(line);
+                }
+
+            }
+        } catch (IOException e)
+        {
+            try
+            {
+                out.println(e.getMessage());
+            } catch (IOException e1)
+            {
+                log.error(e1.getMessage());
+            }
+            log.error(e.getMessage());
+        } catch (InterruptedException e)
+        {
+            try
+            {
+                out.println(e.getMessage());
+            } catch (IOException e1)
+            {
+                log.error(e1.getMessage());
+            }
+            log.error(e.getMessage());
+        } finally
+        {
+            IOUtils.closeQuietly(is, isr, br, out);
+        }
+
+    }
+    
+    public static void printFileWaitScriptOver(ServletOutputStream out, String scriptPath, String scriptName, File outLog, String params)
+    {
+        Process process = null;
+        InputStream is = null;
+        InputStreamReader isr = null;
+        BufferedReader br = null;
+
+        try
+        {
+            // 1.先给文件赋权限
+            log.debug("script path: " + scriptPath);
+            String cdProjectDir = "cd " + scriptPath + ";";
+            String command = cdProjectDir + "chmod u+x *";
+            String[] commonds = { "/bin/sh", "-c", command };
+            log.debug("commond1: " + command);
+            Runtime.getRuntime().exec(commonds).waitFor();
+
+            // 2.使用Runtime来执行command，生成Process对象
+            StringBuffer shCommond = new StringBuffer();
+            shCommond.append(cdProjectDir);
+            shCommond.append("sh ");
+            shCommond.append(scriptName);
+            if (params != null && params.length() > 0)
+            {
+                shCommond.append(params);
+            }
+            String[] commondShs = { "/bin/sh", "-c", shCommond.toString() };
+            log.debug("commond2: " + shCommond.toString());
+            process = Runtime.getRuntime().exec(commondShs);
+            process.waitFor();
+            // 取得命令结果的输出流
+            is = process.getInputStream();
+            // 用一个读输出流类去读
+            isr = new InputStreamReader(is);
+            // 用缓冲器读行
+            br = new BufferedReader(isr);
+            String line = null;
+            while ((line = br.readLine()) != null)
+            {
+                // 过滤check
+                if (!line.startsWith("check") && !line.startsWith("["))
+                {
+                    // 生成解析日志:补丁名.log
+                    FileUtils.writeStringToFile(outLog, line + "\n", Constants.DEFAULT_ENCODING, true);
+                    out.println(line);
+                }
+
+            }
+        } catch (IOException e)
+        {
+            try
+            {
+                out.println(e.getMessage());
+            } catch (IOException e1)
+            {
+                log.error(e1.getMessage());
+            }
+            log.error(e.getMessage());
+        } catch (InterruptedException e)
+        {
+            try
+            {
+                out.println(e.getMessage());
+            } catch (IOException e1)
+            {
+                log.error(e1.getMessage());
+            }
+            log.error(e.getMessage());
+        } finally
+        {
+            IOUtils.closeQuietly(is, isr, br, out);
+        }
+
+    }
+
+    public static void printMkResScriptFile(ServletOutputStream out, String scriptPath, String scriptName, File outLog, String params)
+    {
+        InputStream is = null;
+        InputStreamReader isr = null;
+        BufferedReader br = null;
+
+        try
+        {
+            // 1.先给文件赋权限
+            log.debug("script path: " + scriptPath);
+            String cdProjectDir = "cd " + scriptPath + ";";
+            String command = cdProjectDir + "chmod u+x *";
+            String[] commonds = { "/bin/sh", "-c", command };
+            log.debug("commond1: " + command);
+            Runtime.getRuntime().exec(commonds).waitFor();
+
+            // 2.使用Runtime来执行command，生成Process对象
+            StringBuffer shCommond = new StringBuffer();
+            shCommond.append(cdProjectDir);
+            shCommond.append("sh ");
+            shCommond.append(scriptName);
+            if (params != null && params.length() > 0)
+            {
+                shCommond.append(params);
+            }
+            String[] commondShs = { "/bin/sh", "-c", shCommond + " >" + outLog.getName() + " 2>&1" };
+            log.debug("commond2: " + shCommond.toString());
+            Runtime.getRuntime().exec(commondShs).waitFor();
+        } catch (IOException e)
+        {
+            log.error(e.getMessage());
+
+        } catch (InterruptedException e)
+        {
+            log.error(e.getMessage());
+        } finally
+        {
+            IOUtils.closeQuietly(is, isr, br);
+        }
+
+    }
+
+    /**
+     * @desc 补丁制作导出--将多个文件夹生成指定格式的压缩文件,格式zip
+     * @param resourcesDirPaths
+     *            文件夹列表
+     * @param targetPath
+     *            目的压缩文件保存路径
+     * @param zipName
+     *            压缩后的文件名称
+     * @param rootFilePath
+     *            需要压缩在根目录下的单独文件
+     * @return void
+     * @throws Exception
+     */
+    public static void compressedFiles4MakePatch(List<String> resourcesDirPaths, String targetPath, String zipName, File rootFilePath)
+            throws Exception
+    {
+        if (resourcesDirPaths == null || resourcesDirPaths.isEmpty())
+        {
+            return;
+        }
+        // 目的
+        File targetFile = new File(targetPath);
+        FileOutputStream outputStream = new FileOutputStream(targetPath + File.separator + zipName);
+        ZipOutputStream out = new ZipOutputStream(new BufferedOutputStream(outputStream));
+        // 如果目的路径不存在，则新建
+        if (!targetFile.exists())
+        {
+            targetFile.mkdirs();
+        }
+        for (String projectPath : resourcesDirPaths)
+        {
+            // 源文件目录
+            File file = new File(projectPath);
+            String dirName = file.getName();
+            // 将文件夹添加到下一级打包目录
+            out.putNextEntry(new ZipEntry(dirName + File.separator));
+
+            dirName = dirName.length() == 0 ? "" : dirName + File.separator;
+
+            // 1.先打包处理ini文件
+            File patchIniFile = new File(projectPath + Constants.PATCH_FILE);
+            File patchConfigFile = new File(projectPath + Constants.PATCH_CONFIG_FILE);
+            File makeIpokUIConfigFile = new File(projectPath + Constants.MAKEIPOKUI_CONFIG_FILE);
+            if (patchIniFile.exists())
+            {
+                compressedOneFile(out, patchIniFile, dirName + patchIniFile.getName(), zipName, patchIniFile.getName());
+            } else if (patchConfigFile.exists())
+            {
+                compressedOneFile(out, patchConfigFile, dirName + patchConfigFile.getName(), zipName, patchConfigFile.getName());
+            } else if (makeIpokUIConfigFile.exists())
+            {
+                compressedOneFile(out, makeIpokUIConfigFile, dirName + makeIpokUIConfigFile.getName(), zipName, makeIpokUIConfigFile.getName());
+            }
+
+            // 2.处理config 文件
+            File configFile = new File(projectPath + Constants.DEFAULT_CONFIG_FILE);
+            if (configFile.exists())
+            {
+                compressedOneFile(out, configFile, dirName + configFile.getName(), zipName, configFile.getName());
+            }
+
+            // 3.处理code文件夹
+            File codeDir = new File(projectPath + Constants.PROJECT_CODE_DIR);
+            if (codeDir.isDirectory())
+            {
+                createCompressedFile4MakePatch(out, codeDir, dirName + codeDir.getName(), zipName);
+            }
+
+            // 4.处理add_pkgpool_file文件夹
+            File pkgPoolDir = new File(projectPath + Constants.PKG_POOL_DIR);
+            if (pkgPoolDir.isDirectory())
+            {
+                createCompressedFile4MakePatch(out, pkgPoolDir, dirName + pkgPoolDir.getName(), zipName);
+            }
+
+            // 5.处理ipoks文件夹
+            File ipoksDir = new File(projectPath + Constants.ROJECT_IPOKS_DIR);
+            if (ipoksDir.isDirectory())
+            {
+                createCompressedFile4MakePatch(out, ipoksDir, dirName + ipoksDir.getName(), zipName);
+            }
+
+            // 处理X3X8X16的三个文件夹
+            File x3Dir = new File(projectPath + "X3");
+            if (x3Dir.exists() && x3Dir.isDirectory())
+            {
+                createCompressedFile4MakePatch(out, x3Dir, dirName + x3Dir.getName(), zipName);
+            }
+            File x3aDir = new File(projectPath + "X3A");
+            if (x3aDir.exists() && x3aDir.isDirectory())
+            {
+                createCompressedFile4MakePatch(out, x3aDir, dirName + x3aDir.getName(), zipName);
+            }
+            File x8x16Dir = new File(projectPath + "X8X16");
+            if (x8x16Dir.exists() && x8x16Dir.isDirectory())
+            {
+                createCompressedFile4MakePatch(out, x8x16Dir, dirName + x8x16Dir.getName(), zipName);
+            }
+
+            // 得到文件列表信息 ,处理C码高级选项的文件
+            File[] files = file.listFiles();
+            for (File tmpFile : files)
+            {
+                // 只处理文件
+                if (!tmpFile.isDirectory())
+                {
+                    String tmpFileName = tmpFile.getName();
+                    if (tmpFileName.endsWith(".ipok"))
+                    {
+                        // 去掉工程自己生成的ipok文件
+                        String projectName = file.getName();
+                        String tmpName = tmpFileName.substring(0, tmpFileName.lastIndexOf(".ipok"));
+                        if (!projectName.equals(tmpName))
+                        {
+                            compressedOneFile(out, tmpFile, dirName + tmpFileName, zipName, tmpFileName);
+                        }
+                    } else if (tmpFileName.endsWith(".ipbk") || tmpFileName.endsWith(".dbg") || tmpFileName.endsWith(".map")
+                            || tmpFileName.endsWith(".cc") || tmpFileName.equalsIgnoreCase("build.sh"))
+                    {
+
+                        compressedOneFile(out, tmpFile, dirName + tmpFileName, zipName, tmpFileName);
+                    }
+                }
+            }
+        }
+
+        if (rootFilePath != null)
+        {
+            // 处理ini文件
+            createCompressedFile4MakePatch(out, rootFilePath, rootFilePath.getName(), zipName);
+        }
+
+        out.close();
+
+    }
+
+    /**
+     * @desc 补丁制作导出--生成压缩文件。 如果是文件夹，则使用递归，进行文件遍历、压缩 如果是文件，直接压缩
+     * @param out
+     *            输出流
+     * @param file
+     *            目标文件夹路径
+     * @param dir
+     *            目标文件/文件夹名称
+     * @param zipName
+     *            压缩后的文件名称
+     * @throws Exception
+     */
+    public static void createCompressedFile4MakePatch(ZipOutputStream out, File file, String dir, String zipName) throws Exception
+    {
+        // 如果当前的是文件夹，则进行进一步处理
+        String fileName = file.getName();
+        if (file.isDirectory())
+        {
+            log.debug("###############isDirectory: " + fileName);
+
+            // 得到文件列表信息
+            File[] files = file.listFiles();
+            // 将文件夹添加到下一级打包目录
+            out.putNextEntry(new ZipEntry(dir + File.separator));
+
+            dir = dir.length() == 0 ? "" : dir + File.separator;
+
+            // 循环将文件夹中的文件打包
+            for (int i = 0; i < files.length; i++)
+            {
+                // 递归处理
+                createCompressedFile4MakePatch(out, files[i], dir + files[i].getName(), zipName);
+            }
+        } else
+        {
+            // 压缩单个文件
+            compressedOneFile(out, file, dir, zipName, fileName);
+        }
+    }
+
+    /**
+     * 压缩单个文件
+     * 
+     * @param out
+     *            输出流
+     * @param file
+     *            压缩文件
+     * @param dir
+     *            文件夹/文件名称
+     * @param zipName
+     *            压缩文件名称
+     * @param fileName
+     *            文件名称
+     * @throws FileNotFoundException
+     * @throws IOException
+     */
+    public static void compressedOneFile(ZipOutputStream out, File file, String dir, String zipName, String fileName) throws FileNotFoundException,
+            IOException
+    {
+        log.debug("##############isNotDirectory: " + fileName);
+        if (!zipName.equals(fileName))
+        {
+            // 当前的是文件，打包处理
+            // 文件输入流
+            FileInputStream fis = new FileInputStream(file);
+
+            out.putNextEntry(new ZipEntry(dir));
+            // 进行写操作
+            int j = 0;
+            byte[] buffer = new byte[1024];
+            while ((j = fis.read(buffer)) > 0)
+            {
+                out.write(buffer, 0, j);
+            }
+            // 关闭输入流
+            fis.close();
+        }
+    }
+
+    /**
+     * @desc 将多个文件夹生成指定格式的压缩文件,格式zip
+     * @param resourcesDirPaths
+     *            文件夹列表
+     * @param targetPath
+     *            目的压缩文件保存路径
+     * @param zipName
+     *            压缩后的文件名称
+     * @param rootFilePath
+     *            需要压缩在根目录下的单独文件
+     * @return void
+     * @throws Exception
+     */
+    public static void compressedFiles(List<String> resourcesDirPaths, String targetPath, String zipName, File rootFilePath, String[] noNeedDealNames)
+            throws Exception
+    {
+        if (resourcesDirPaths == null || resourcesDirPaths.isEmpty())
+        {
+            return;
+        }
+        File targetFile = new File(targetPath); // 目的
+        FileOutputStream outputStream = new FileOutputStream(targetPath + File.separator + zipName);
+        ZipOutputStream out = new ZipOutputStream(new BufferedOutputStream(outputStream));
+        // 如果目的路径不存在，则新建
+        if (!targetFile.exists())
+        {
+            targetFile.mkdirs();
+        }
+        for (String resourcesDirPath : resourcesDirPaths)
+        {
+            // 源文件目录
+            File resourcesFile = new File(resourcesDirPath);
+            createCompressedFile(out, resourcesFile, resourcesFile.getName(), zipName, noNeedDealNames, true);
+        }
+
+        if (rootFilePath != null)
+        {
+            createCompressedFile(out, rootFilePath, rootFilePath.getName(), zipName, noNeedDealNames, false);
+        }
+
+        out.close();
+
+    }
+
+    /**
+     * @desc 将多个源文件生成指定格式的压缩文件,格式zip
+     * @param resourcesPathMap
+     *            源文件路径列表<文件路径，子目录名称>
+     * @param targetPath
+     *            目的压缩文件保存路径
+     * @param zipName
+     *            压缩后的文件名称
+     * @return void
+     * @throws Exception
+     */
+    public static void compressedFiles(Map<String, String> resourcesPathMap, String targetPath, String zipName)
+    {
+        try
+        {
+            // 要被压缩的文件夹
+            File zipFileDir = new File(targetPath);
+            if (!zipFileDir.exists())
+            {
+                zipFileDir.mkdirs();
+            }
+            File zipFile = new File(targetPath + File.separator + zipName);
+
+            InputStream input = null;
+            ZipOutputStream zipOut = new ZipOutputStream(new FileOutputStream(zipFile));
+            // zip的名称为
+            zipOut.setComment(zipName);
+            for (Map.Entry<String, String> entry : resourcesPathMap.entrySet())
+            {
+                String filePath = entry.getKey();
+                String subDir = entry.getValue();
+                File file = new File(filePath);
+                if (file.exists())
+                {
+                    input = new FileInputStream(file);
+                }
+                else
+                {
+                    continue;
+                }
+                log.debug("@@@@@sourceFile@@@@@@@@@: " + file.getPath());
+                if (StringUtils.isNotEmpty(subDir))
+                {
+                    zipOut.putNextEntry(new ZipEntry(subDir + File.separator + file.getName()));
+                } else
+                {
+                    zipOut.putNextEntry(new ZipEntry(file.getName()));
+                }
+
+                int temp = 0;
+                while ((temp = input.read()) != -1)
+                {
+                    zipOut.write(temp);
+                }
+                input.close();
+            }
+            zipOut.close();
+        } catch (Exception e)
+        {
+            log.error(e.getMessage(), e);
+        }
+    }
+
+    /**
+     * @desc 将路径下的多个某后缀文件生成指定格式的压缩文件,格式zip
+     * @param resourcesPathMap
+     *            源文件路径列表<文件路径，子目录名称>
+     * @param targetPath
+     *            目的压缩文件保存路径
+     * @param zipName
+     *            压缩后的文件名称
+     * @return void
+     * @throws Exception
+     */
+    public static void compressedFilesInDir(Map<String, String> resourcesPathMap, String targetPath, String zipName, String fileSuffix)
+    {
+        try
+        {
+            // 要被压缩的文件夹
+            File zipFileDir = new File(targetPath);
+            if (!zipFileDir.exists())
+            {
+                zipFileDir.mkdirs();
+            }
+            File zipFile = new File(targetPath + File.separator + zipName);
+
+            InputStream input = null;
+            ZipOutputStream zipOut = new ZipOutputStream(new FileOutputStream(zipFile));
+            // zip的名称为
+            zipOut.setComment(zipName);
+            String [] fileSuffixs = fileSuffix.split(";");
+            for (Map.Entry<String, String> entry : resourcesPathMap.entrySet())
+            {
+                String filePath = entry.getKey();
+                String subDir = entry.getValue();
+                File dir = new File(filePath);
+                if (dir.exists() && dir.isDirectory())
+                {
+                    File mks[] = dir.listFiles();
+                    if (mks != null && mks.length > 0)
+                    {
+                        for (File f : mks)
+                        {
+                            String fileName = f.getName();
+                            if (fileName.contains("."))
+                            {
+                                String fileNameSuffix = fileName.split("\\.")[1];
+                                if (Arrays.asList(fileSuffixs).contains(fileNameSuffix))
+                                {
+                                    input = new FileInputStream(f);
+                                    log.debug("@@@@@sourceFile@@@@@@@@@: " + f.getPath());
+                                    if (StringUtils.isNotEmpty(subDir))
+                                    {
+                                        zipOut.putNextEntry(new ZipEntry(subDir + File.separator + f.getName()));
+                                    } else
+                                    {
+                                        zipOut.putNextEntry(new ZipEntry(f.getName()));
+                                    }
+
+                                    int temp = 0;
+                                    while ((temp = input.read()) != -1)
+                                    {
+                                        zipOut.write(temp);
+                                    }
+                                    input.close();
+                                }
+                            }
+                        }
+                    }
+                } 
+                else
+                {
+                    log.debug("@@@@@sourceFile@@@@@@@@@: " + dir.getPath());
+                    input = new FileInputStream(dir);
+                    if (StringUtils.isNotEmpty(subDir))
+                    {
+                        zipOut.putNextEntry(new ZipEntry(subDir + File.separator + dir.getName()));
+                    } else
+                    {
+                        zipOut.putNextEntry(new ZipEntry(dir.getName()));
+                    }
+
+                    int temp = 0;
+                    while ((temp = input.read()) != -1)
+                    {
+                        zipOut.write(temp);
+                    }
+                    input.close();
+                }
+            }
+            zipOut.close();
+        } catch (Exception e)
+        {
+            log.error(e.getMessage(), e);
+        }
+    }
+
+    /**
+     * @desc 生成压缩文件。 如果是文件夹，则使用递归，进行文件遍历、压缩 如果是文件，直接压缩
+     * @param out
+     *            输出流
+     * @param file
+     *            目标文件夹路径
+     * @param dir
+     *            目标文件/文件夹名称
+     * @param zipName
+     *            压缩后的文件名称
+     * @param noNeedDealNames
+     *            不需要压缩的文件夹名称
+     * @param 是否文件夹的根目录
+     * @return void
+     * @throws Exception
+     */
+    public static void createCompressedFile(ZipOutputStream out, File file, String dir, String zipName, String[] noNeedDealNames, boolean isRootDir)
+            throws Exception
+    {
+        // 如果当前的是文件夹，则进行进一步处理
+        String fileName = file.getName();
+        if (file.isDirectory())
+        {
+            log.debug("###############isDirectory: " + fileName);
+            // 非导出文件夹的根目录且不需要压缩的文件夹名称，不处理
+            if (!isRootDir && noNeedDealNames != null)
+            {
+                for (String noDealName : noNeedDealNames)
+                {
+                    if (noDealName.equals(fileName))
+                    {
+                        return;
+                    }
+                }
+            }
+
+            // 得到文件列表信息
+            File[] files = file.listFiles();
+            // 将文件夹添加到下一级打包目录
+            out.putNextEntry(new ZipEntry(dir + File.separator));
+
+            dir = dir.length() == 0 ? "" : dir + File.separator;
+
+            // 循环将文件夹中的文件打包
+            for (int i = 0; i < files.length; i++)
+            {
+                // 递归处理
+                createCompressedFile(out, files[i], dir + files[i].getName(), zipName, noNeedDealNames, false);
+            }
+        } else
+        {
+            compressedOneFile(out, file, dir, zipName, fileName);
+        }
+    }
+
+    /**
+     * 解压缩zip文件
+     * 
+     * @param sourceFileName
+     *            要解压缩的zip文件
+     * @param desDir
+     *            解压缩到的目录
+     * @throws IOException
+     *             压缩文件的过程中可能会抛出IO异常，请自行处理该异常。
+     */
+    public static void UnZIP(String sourceFileName, String desDir) throws IOException
+    {
+        // 创建压缩文件对象
+        ZipFile zf = new ZipFile(new File(sourceFileName));
+
+        // 获取压缩文件中的文件枚举
+        Enumeration<ZipEntry> en = zf.getEntries();
+        int length = 0;
+        byte[] b = new byte[2048];
+
+        // 提取压缩文件夹中的所有压缩实例对象
+        while (en.hasMoreElements())
+        {
+            ZipEntry ze = en.nextElement();
+            // 创建解压缩后的文件实例对象
+            File f = new File(desDir + ze.getName());
+            // 如果当前压缩文件中的实例对象是文件夹就在解压缩后的文件夹中创建该文件夹
+            if (ze.isDirectory())
+            {
+                f.mkdirs();
+            } else
+            {
+                // 如果当前解压缩文件的父级文件夹没有创建的话，则创建好父级文件夹
+                if (!f.getParentFile().exists())
+                {
+                    f.getParentFile().mkdirs();
+                }
+
+                // 将当前文件的内容写入解压后的文件夹中。
+                OutputStream outputStream = new FileOutputStream(f);
+                InputStream inputStream = zf.getInputStream(ze);
+                while ((length = inputStream.read(b)) > 0)
+                    outputStream.write(b, 0, length);
+
+                inputStream.close();
+                outputStream.close();
+            }
+        }
+        zf.close();
+    }
+
+    /**
+     * <资源补丁文件导入预解压，返回工程列表>
+     * 
+     * @param sourceFileName
+     *            zip文件
+     * @param desDir
+     *            解压目录
+     * @return
+     * @throws IOException
+     * @author f00380333
+     */
+    public static List<String> UnZIPforImport(String sourceFileName, String desDir) throws IOException
+    {
+        List<String> retList = new ArrayList<String>();
+        // 创建压缩文件对象
+        ZipFile zf = new ZipFile(new File(sourceFileName));
+
+        // 获取压缩文件中的文件枚举
+        Enumeration<ZipEntry> en = zf.getEntries();
+        int length = 0;
+        byte[] b = new byte[2048];
+
+        // 提取压缩文件夹中的所有压缩实例对象
+        while (en.hasMoreElements())
+        {
+            ZipEntry ze = en.nextElement();
+            // 创建解压缩后的文件实例对象
+            File f = new File(desDir + File.separator + ze.getName());
+            // 如果当前压缩文件中的实例对象是文件夹就在解压缩后的文件夹中创建该文件夹
+            if (ze.isDirectory())
+            {
+                retList.add(ze.getName());
+                f.mkdirs();
+            } else
+            {
+                // 如果当前解压缩文件的父级文件夹没有创建的话，则创建好父级文件夹
+                if (!f.getParentFile().exists())
+                {
+                    f.getParentFile().mkdirs();
+                }
+
+                // 将当前文件的内容写入解压后的文件夹中。
+                OutputStream outputStream = new FileOutputStream(f);
+                InputStream inputStream = zf.getInputStream(ze);
+                while ((length = inputStream.read(b)) > 0)
+                    outputStream.write(b, 0, length);
+
+                inputStream.close();
+                outputStream.close();
+            }
+        }
+        zf.close();
+        return retList;
+    }
+
+    /**
+     * 挂载当前用户指定的共享目录到linux服务器上
+     * 
+     * @param userName
+     *            当前用户名
+     * @param passwd
+     *            用户密码
+     * @param userIP
+     *            用户访问IP
+     * @param product
+     *            产品名称
+     * @param pdtVersion
+     *            产品版本
+     * @param userShareMountPath
+     *            用户挂载的共享目录名称
+     */
+    public static void mountUserSharePath(String userName, String passwd, String userIP, String product, String pdtVersion, String userShareMountPath)
+    {
+        Process process = null;
+        InputStream is = null;
+        InputStreamReader isr = null;
+        BufferedReader br = null;
+
+        try
+        {
+            // 1.先创建挂载目录：用户名+产品+版本 /mnt/share/lwx365720/NE5000E/V8R3C00SPC200
+            String mountPath = Constants.LINUX_SHARE_PATH + userName + File.separator + product + File.separator + pdtVersion;
+            mkdir(mountPath);
+            log.debug("#########userShareMountPath#####: " + userShareMountPath);
+
+            // 2.执行挂载
+            String cdProjectDir = "cd " + Constants.LINUX_SHARE_PATH + ";";
+            String mountSh = "mount -t cifs -o username='" + userName + "',password='" + passwd + "',nounix,noserverino //" + userIP + "/"
+                    + userShareMountPath + " " + mountPath;
+            String command = cdProjectDir + mountSh;
+            String[] commonds = { "/bin/sh", "-c", command };
+            // Runtime.getRuntime().exec(commonds).waitFor();
+            process = Runtime.getRuntime().exec(commonds);
+            // 取得命令结果的输出流
+            is = process.getInputStream();
+            // 用一个读输出流类去读
+            isr = new InputStreamReader(is);
+            // 用缓冲器读行
+            br = new BufferedReader(isr);
+            String line = null;
+            StringBuffer buff = new StringBuffer();
+            while ((line = br.readLine()) != null)
+            {
+                buff.append(line);
+            }
+            log.debug("########mountUserSharePath process log########: " + buff.toString());
+
+        } catch (Exception e)
+        {
+            log.error(e.getMessage(), e);
+        }
+    }
+
+    /**
+     * 挂载当前用户指定的共享目录到linux服务器上
+     * 
+     * @param userName
+     *            当前用户名
+     * @param passwd
+     *            用户密码
+     * @param userIP
+     *            用户访问IP
+     * @param tarPath
+     *            产品名称
+     * @param pdtVersion
+     *            产品版本
+     * @param userShareMountPath
+     *            用户挂载的共享目录名称
+     */
+    public static void mountPatPushPath(String userName, String passwd, String userIP, String tarPath, String userShareMountPath)
+    {
+        Process process = null;
+        InputStream is = null;
+        InputStreamReader isr = null;
+        BufferedReader br = null;
+
+        try
+        {
+            // 1.先创建挂载目录： /usr3/f00380333
+            String mountPath = tarPath;
+            mkdir(mountPath);
+            log.debug("#########userShareMountPath#####: " + userShareMountPath);
+
+            // 2.执行挂载
+            String cdProjectDir = "cd " + mountPath + ";";
+            String mountSh = "mount -t cifs -o username=" + userName + ",password=" + passwd + ",nounix,noserverino //" + userIP + "/"
+                    + userShareMountPath + " " + mountPath;
+            String command = cdProjectDir + mountSh;
+            String[] commonds = { "/bin/sh", "-c", command };
+            // Runtime.getRuntime().exec(commonds).waitFor();
+            process = Runtime.getRuntime().exec(commonds);
+            // 取得命令结果的输出流
+            is = process.getInputStream();
+            // 用一个读输出流类去读
+            isr = new InputStreamReader(is);
+            // 用缓冲器读行
+            br = new BufferedReader(isr);
+            String line = null;
+            StringBuffer buff = new StringBuffer();
+            while ((line = br.readLine()) != null)
+            {
+                buff.append(line);
+            }
+            log.debug("########mountUserSharePath process log########: " + buff.toString());
+
+        } catch (Exception e)
+        {
+            log.error(e.getMessage(), e);
+        }
+    }
+
+    /**
+     * 卸载载当前用户指定的共享目录到linux服务器上
+     * 
+     * @param userName
+     *            当前用户名
+     * @param product
+     *            产品名称
+     * @param pdtVersion
+     *            产品版本
+     */
+    public static void unMountUserSharePath(String userName, String product, String pdtVersion)
+    {
+        try
+        {
+            // 1.先创建挂载目录：用户名+产品+版本 /mnt/share/lwx365720/NE5000E/V8R3C00SPC200
+            String mountPath = Constants.LINUX_SHARE_PATH + userName + File.separator + product + File.separator + pdtVersion;
+            log.debug("unMountUserSharePath -> " + mountPath);
+
+            // 2.执行卸载
+            String cdProjectDir = "cd " + Constants.LINUX_SHARE_PATH + ";";
+            String mountSh = "umount " + mountPath;
+            String command = cdProjectDir + mountSh;
+            String[] commonds = { "/bin/sh", "-c", command };
+            log.debug("######umount commond####: " + command);
+            Runtime.getRuntime().exec(commonds).waitFor();
+
+        } catch (IOException e)
+        {
+            log.warn(e.getMessage());
+        } catch (InterruptedException e)
+        {
+            log.warn(e.getMessage());
+        }
+    }
+
+    /**
+     * 根据路劲获取目录下文件列表
+     * 
+     * @param Path
+     * @return
+     * @author f00380333
+     */
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+    public static IDataset getFilesByPath(String Path)
+    {
+        File dir = new File(Path);
+        if (!dir.exists())
+        {
+            dir.mkdir();
+        }
+        File mks[] = dir.listFiles();
+        IDataset dataSet = new DatasetList<IData>();
+        if (mks != null && mks.length > 0)
+        {
+            for (File f : mks)
+            {
+                Map<String, String> returnMap = new HashMap<String, String>();
+                returnMap.put("FILE_NAME", f.getName());
+                returnMap.put("FILE_PATH", f.getAbsolutePath());
+                dataSet.add(returnMap);
+            }
+        }
+        return dataSet;
+    }
+
+    /**
+     * 根据路劲获取目录下对应后缀的文件列表
+     * 
+     * @param Path
+     *            目录路径
+     * @param suffix
+     *            搜索文件的后缀名
+     * @return
+     */
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+    public static IDataset<Map<String, String>> getFilesByPathAndSuffix(String Path, String suffix)
+    {
+        File dir = new File(Path);
+        if (!dir.exists())
+        {
+            return null;
+        }
+        if (StringUtils.isEmpty(suffix))
+        {
+            log.debug("param \"suffix\" is null");
+            return null;
+        }
+        // 获取路径下的所有文件
+        File files[] = dir.listFiles();
+        IDataset dataSet = new DatasetList<IData>();
+        if (files != null && files.length > 0)
+        {
+            Map<String, String> returnMap = null;
+            for (File f : files)
+            {
+                String fileName = f.getName();
+                returnMap = new HashMap<String, String>();
+                if (fileName.contains("."))
+                {
+                    String fileNameSuffix = fileName.split("\\.")[1];
+                    if (suffix.contains(fileNameSuffix))
+                    {
+                        returnMap.put("FILE_NAME", fileName);
+                        returnMap.put("FILE_PATH", f.getAbsolutePath());
+                        dataSet.add(returnMap);
+                    }
+                }
+            }
+        }
+        return dataSet;
+    }
+
+    /**
+     * 根据文件获取文件内容
+     * 
+     * @param Path
+     * @return
+     * @author f00380333
+     * @throws IOException
+     */
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+    public static IData getFileContent(String Path, IData param) throws IOException
+    {
+        File file = new File(Path);
+        if (file.exists())
+        {
+            List<String> complieResultList = FileUtils.readLines(file, Constants.DEFAULT_ENCODING);
+            StringBuffer buff = new StringBuffer();
+            for (String line : complieResultList)
+            {
+                buff.append(line).append("\r\n");
+            }
+            param.clear();
+            param.put("FILE_CONTENT", buff.toString());
+        }
+        return param;
+    }
+
+    public static boolean uploadFileByInputStream(InputStream inputStream, File filePathFile) throws Exception
+    {
+        InputStream in = null;
+        OutputStream out = null;
+        try
+        {
+            in = new BufferedInputStream(inputStream);
+            out = new BufferedOutputStream(new FileOutputStream(filePathFile));
+            byte[] buffer = new byte[1024];
+            int len = 0;
+            while ((len = in.read(buffer)) > 0)
+            {
+                out.write(buffer, 0, len);
+            }
+            out.flush();
+        } catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+            return false;
+        } catch (IOException e)
+        {
+            return false;
+        } finally
+        {
+            if (in != null)
+            {
+                in.close();
+            }
+            if (out != null)
+            {
+                out.close();
+            }
+        }
+        return true;
+    }
+
+    public static void getHeadPath(ServletOutputStream out, String product_type, String product_name, String product_version, String headname)
+    {
+        Process process = null;
+        InputStream is = null;
+        InputStreamReader isr = null;
+        BufferedReader br = null;
+        try
+        {
+            StringBuffer errMsg = new StringBuffer();
+            StringBuffer warnMsg = new StringBuffer();
+            String script = "findHPath.sh";
+            StringBuffer shCommond = new StringBuffer();
+            String[] items = headname.split(";");
+            for (String item : items)
+            {
+                if (!item.endsWith(".h") && !item.endsWith(".inc"))
+                {
+                    errMsg.append("[ERROR]:Illegal file name : " + item + "\r\n");
+                    continue;
+                }
+                boolean nothing = true;
+                shCommond.delete(0, shCommond.length());
+                shCommond.append("cd /usr1/makefile;");
+                shCommond.append("sh ");
+                shCommond.append(script);
+                shCommond.append(" " + product_version);
+                shCommond.append(" " + product_name);
+                shCommond.append(" " + item);
+                shCommond.append(" " + product_type);
+                String[] commondShs = { "/bin/sh", "-c", shCommond.toString() };
+                log.debug("commond2: " + shCommond.toString());
+                process = Runtime.getRuntime().exec(commondShs);
+                // 取得命令结果的输出流
+                is = process.getInputStream();
+                // 用一个读输出流类去读
+                isr = new InputStreamReader(is);
+                // 用缓冲器读行
+                br = new BufferedReader(isr);
+                String line = null;
+                while ((line = br.readLine()) != null)
+                {
+                    nothing = false;
+                    line = line.replaceAll("product_code/", "");
+                    if (line.contains("COMMON") && !warnMsg.toString().contains("COMMON"))
+                    {
+                        warnMsg.append("[WARNING]:COMMON is the platform folder, and the product patch projects are forbidden to reference its hearder file.");
+                    }
+                    out.println("-I${V8_ROOT}" + line.substring(1));
+
+                }
+                if (nothing)
+                {
+                    errMsg.append("[ERROR]:Can not find path for input : " + item + "\r\n");
+                }
+            }
+            if (warnMsg != null && warnMsg.length() > 0)
+            {
+                out.println(warnMsg.toString());
+            }
+            if (errMsg != null && errMsg.length() > 0)
+            {
+                out.println(errMsg.toString());
+            }
+
+        } catch (IOException e)
+        {
+            log.error(e.getMessage(), e);
+        } finally
+        {
+            IOUtils.closeQuietly(is, isr, br);
+        }
+
+    }
+
+    /**
+     * 根据V8ROOT分类逻辑区分config.mk目录区分逻辑
+     * 
+     * @param product
+     * @param plat_version
+     * @return
+     * @author f00380333
+     */
+    public static String getMKPath(String product, String plat_version)
+    {
+        String rootPath = File.separator + "usr1" + File.separator + Constants.CONFIG_MK_PATH_NAME;
+        String v8root = File.separator + "usr1" + File.separator + "CODE" + File.separator;
+        String path = rootPath;
+        if (new File(v8root + plat_version + File.separator + product).exists())
+        {
+            path += File.separator + plat_version + File.separator + product;
+        } else if ((product.equals("CX600") || product.equals("M2"))
+                && new File(v8root + File.separator + plat_version + File.separator + "CX_M2").exists())
+        {
+            path += File.separator + plat_version + File.separator + "CX_M2";
+        } else if ((product.equals("CX600") || product.equals("M2") || product.contains("NE40E"))
+                && new File(v8root + File.separator + plat_version + File.separator + "NE40E").exists())
+        {
+            path += File.separator + plat_version + File.separator + "NE40E";
+        } else if (product.contains("ATN") && new File(v8root + File.separator + plat_version + File.separator + "PTN990").exists())
+        {
+            path += File.separator + plat_version + File.separator + "PTN990";
+        } else if (product.contains("CE") && new File(v8root + File.separator + plat_version + File.separator + "DC").exists())
+        {
+            path += File.separator + plat_version + File.separator + "DC";
+        } else
+        {
+            path += File.separator + plat_version;
+        }
+        return path;
+    }
+
+    public static IDataset getDependList(String path)
+    {
+        IDataset element = new DatasetList();
+        String IPBK_PATH = path + File.separator + "IPBK";
+        String IPT_PATH = path + File.separator + "IPTS";
+        File dir = new File(IPBK_PATH);
+        if (dir.exists() && dir.isDirectory())
+        {
+            File[] files = dir.listFiles();
+            for (File f : files)
+            { // f = project_name
+                if (!f.isDirectory())
+                {
+                    continue;
+                }
+                File[] ipbks = f.listFiles();
+                for (File ipbk : ipbks)
+                {
+                    if (!ipbk.getName().endsWith(".ipbk"))
+                    {
+                        continue;
+                    }
+                    DataMap<String, String> item = new DataMap<String, String>();
+                    String show = f.getName() + "/" + getPatName(ipbk.getName());
+                    String ipt_path = IPT_PATH + File.separator + f.getName() + File.separator + "hp" + getPatName(ipbk.getName()).substring(2)
+                            + ".ipt";
+                    File ipt = new File(ipt_path);
+                    if (!ipt.exists())
+                    {// 没有对应的ipt文件
+                        continue;
+                    }
+                    // 页面显示值
+                    item.put("VALUE", show);
+                    // 传递后台值
+                    String value = ipbk.getAbsolutePath() + ";" + ipt.getAbsolutePath();
+                    item.put("KEY", value);
+                    element.add(item);
+                }
+            }
+        }
+        return element;
+    }
+
+    private static String getPatName(String ipbk)
+    {
+        int end = ipbk.lastIndexOf(".");
+        int start = ipbk.lastIndexOf("-");
+        return ipbk.substring(start + 1, end);
+    }
+
+    public static IDataset getBasePat(String path)
+    {
+        IDataset element = new DatasetList();
+        File dir = new File(path);
+        if (dir.exists() && dir.isDirectory())
+        {
+            File[] files = dir.listFiles();
+            for (File f : files)
+            { // f = project_name
+                if (!f.isDirectory())
+                {
+                    continue;
+                }
+                File[] ipbks = f.listFiles();
+                for (File ipbk : ipbks)
+                {
+                    if (!ipbk.getName().endsWith(".ipbk"))
+                    {
+                        continue;
+                    }
+                    DataMap<String, String> item = new DataMap<String, String>();
+                    String show = f.getName() + "/" + getPatName(ipbk.getName());
+                    // 页面显示值
+                    item.put("KEY", show);
+                    // 传递后台值
+                    item.put("VALUE", ipbk.getAbsolutePath());
+                    element.add(item);
+                }
+            }
+        }
+        return element;
+    }
+
+    /**
+     * 主动拷贝主服务（172）的最新基线版本数据到其它集群服务器
+     * 
+     * @param product
+     *            产品名称
+     * @param pdtVersion
+     *            产品版本
+     * @param currentServerIp
+     *            当前服务器IP
+     */
+    public static void copyPbkInfo2ClusterServer(String product, String pdtVersion, String currentServerIp)
+    {
+        try
+        {
+            log.debug("#########clusterServers command start!#####");
+            Common common = Common.getInstance();
+            String clusterServers = common.getPropertiesValue("config.properties", "clusterServer");
+            log.debug("#########clusterServers#####: " + clusterServers);
+            if (StringUtils.isNotEmpty(clusterServers))
+            {
+                String[] clusterServersIps = clusterServers.split(";");
+                String cdRootPath = "cd " + FileConfig.ROOTPATH + ";";
+                String srcCommd = "scp -r /usr1/pdt_info/" + product + "/" + pdtVersion + "/pbk_info/pbk_newest";
+                StringBuffer commdBuff = new StringBuffer();
+                for (String clusterServerIP : clusterServersIps)
+                {
+                    // 不同步当前服务器
+                    if (!currentServerIp.equals(clusterServerIP))
+                    {
+                        String descCommd = "root@" + clusterServerIP + ":/usr1/pdt_info/" + product + "/" + pdtVersion + "/pbk_info/";
+                        commdBuff.append(srcCommd).append(' ').append(descCommd).append(';');
+                    }
+                }
+                String command = cdRootPath + commdBuff.toString();
+                log.debug("#########clusterServers command#####: " + command);
+
+                String[] commonds = { "/bin/sh", "-c", command };
+                Runtime.getRuntime().exec(commonds).waitFor();
+
+                log.debug("#########clusterServers command end!#####");
+            }
+
+        } catch (Exception e)
+        {
+            log.error(e.getMessage(), e);
+        }
+    }
+
+    /**
+     * 删除code文件夹下多余的文件
+     * 
+     * @param uploadfilesArray
+     *            上传的文件
+     * @param path
+     *            工程根路径
+     * @param appendSubDir
+     *            工程下的子目录
+     */
+    public static void delInValidateFile4DirFile(String[] uploadfilesArray, String path, String appendSubDir)
+    {
+        List<String> uploadCodeFileList = new ArrayList<String>();
+        if (uploadfilesArray != null)
+        {
+            uploadCodeFileList.addAll(StringUtils.srtingSplit2List(uploadfilesArray[1], ";"));
+        }
+
+        File codeDir = new File(path + appendSubDir);
+        if (codeDir.isDirectory())
+        {
+            File[] listFiles = codeDir.listFiles();
+            for (File file : listFiles)
+            {
+                if (!uploadCodeFileList.contains(file.getName()))
+                {
+                    file.delete();
+                }
+            }
+        }
+    }
+
+    /**
+     * 获取指定后缀名称的文件
+     * 
+     * @param splitName
+     *            需要过滤的文件名称后缀
+     * @return
+     */
+    public static FileFilter filterSplitName(final String splitName)
+    {
+        FileFilter ff = new FileFilter()
+        {
+            @Override
+            public boolean accept(File pathname)
+            {
+                String fileName = pathname.getName();
+                if (pathname.isFile())
+                {
+                    if (fileName.endsWith(splitName))
+                    {
+                        return true;
+                    }
+                }
+                return false;
+            }
+        };
+        return ff;
+    }
+
+    /**
+     * 删除工程根路径下指定后缀名称多余的文件
+     * 
+     * @param uploadFilesArray
+     *            上传的文件列表
+     * @param path
+     *            工程根路径
+     * @param splitName
+     *            需要过滤的文件名称后缀
+     */
+    public static void delInValidateFile(String[] uploadFilesArray, String path, String splitName)
+    {
+        List<String> uploadCodeFileList = new ArrayList<String>();
+        if (uploadFilesArray != null)
+        {
+            uploadCodeFileList.addAll(StringUtils.srtingSplit2List(uploadFilesArray[1], ";"));
+        }
+        File projectDir = new File(path);
+        if (projectDir.isDirectory())
+        {
+            File[] listFiles = projectDir.listFiles(filterSplitName(splitName));
+            for (File file : listFiles)
+            {
+                if (!uploadCodeFileList.contains(file.getName()))
+                {
+                    file.delete();
+                }
+            }
+        }
+    }
+
+    /**
+     * 解压RAR文件
+     * 
+     * @param sourceRar
+     *            源rar文件路径
+     * @param destDir
+     *            解压目标路径
+     * @return 解压的文件列表
+     * @throws Exception
+     */
+    public static List<String> unrar(String sourceRar, String destDir) throws Exception
+    {
+        System.out.println("begin pick up rar");
+        List<String> fileNames = new ArrayList<String>();
+        Archive a = null;
+        FileOutputStream fos = null;
+        try
+        {
+            a = new Archive(new File(sourceRar), "", false);
+            FileHeader fh = a.nextFileHeader();
+            while (fh != null)
+            {
+                if (!fh.isDirectory())
+                {
+                    // 1 根据不同的操作系统拿到相应的 destDirName 和 destFileName
+                    String compressFileName = fh.getFileNameString().trim();
+                    fileNames.add(compressFileName);
+                    String destFileName = "";
+                    String destDirName = "";
+                    // 非windows系统
+                    if (File.separator.equals("/"))
+                    {
+                        destFileName = destDir + File.separator + compressFileName.replaceAll("\\\\", "/");
+                        destDirName = destFileName.substring(0, destFileName.lastIndexOf(File.separator));
+                        // windows系统
+                    } else
+                    {
+                        destFileName = destDir + File.separator + compressFileName.replaceAll("/", "\\\\");
+                        destDirName = destFileName.substring(0, destFileName.lastIndexOf(File.separator));
+                    }
+                    // 2创建文件夹
+
+                    File dir = new File(destDirName);
+                    if (!dir.exists() || !dir.isDirectory())
+                    {
+                        dir.mkdirs();
+                    }
+                    // 3解压缩文件
+                    fos = new FileOutputStream(new File(destFileName));
+                    System.out.println(destFileName);
+                    a.extractFile(fh, fos);
+                    fos.close();
+                    fos = null;
+                }
+                fh = a.nextFileHeader();
+            }
+            a.close();
+            a = null;
+        } catch (Exception e)
+        {
+            log.error(e.getMessage(), e);
+        } finally
+        {
+            if (fos != null)
+            {
+                try
+                {
+                    fos.close();
+                    fos = null;
+                } catch (Exception e)
+                {
+                    log.error(e.getMessage(), e);
+                }
+            }
+            if (a != null)
+            {
+                try
+                {
+                    a.close();
+                    a = null;
+                } catch (Exception e)
+                {
+                    log.error(e.getMessage(), e);
+                }
+            }
+        }
+        return fileNames;
+    }
+
+    /**
+     * 删除制度路径文件夹下多余的文件
+     * 
+     * @param validateFilesArray
+     *            应该包含的文件
+     * @param path
+     *            需要删除多余文件目录
+     */
+    public static void delInValidateFile4Path(String[] validateFilesArray, String path)
+    {
+        List<String> validateFileList = new ArrayList<String>();
+        if (validateFilesArray != null)
+        {
+            validateFileList.addAll(StringUtils.srtingSplit2List(validateFilesArray[1], ";"));
+        }
+        File codeDir = new File(path);
+        if (codeDir.isDirectory())
+        {
+            File[] listFiles = codeDir.listFiles();
+            for (File file : listFiles)
+            {
+                if (!validateFileList.contains(file.getName()))
+                {
+                    file.delete();
+                }
+            }
+        }
+    }
+
+    /**
+     * 执行linux服务器上的kill命令
+     * 
+     * @param projectPath
+     *            工程路径
+     * @param complieLog
+     *            编译文件路径
+     * @param compileFileName
+     *            脚本文件名称
+     * @return 是否成功
+     */
+    public static void processScript4KillPid(String projectPath)
+    {
+        log.debug("########processScript4KillPid start##########");
+        try
+        {
+            // 1.先给文件赋权限
+            String command = "ps -ef |grep " + "'" + projectPath + "' | awk '{print $2}' | xargs kill -9";
+            String[] commonds = { "/bin/sh", "-c", command };
+            log.debug("######kill pid commond:" + command);
+            Runtime.getRuntime().exec(commonds).waitFor();
+        } catch (IOException e)
+        {
+            log.error(e.getMessage(), e);
+        } catch (InterruptedException e)
+        {
+            log.error(e.getMessage(), e);
+        }
+
+        log.debug("########processScript4KillPid end##########");
+    }
+
+    /**
+     * 挂载指定服务器地址到服务器上
+     * 
+     * @param userName
+     *            当前用户名
+     * @param passwd
+     *            用户密码
+     * @param userIP
+     *            用户访问IP
+     * @param mountSharePath
+     *            共享服务器的挂着路径,如: \\10.249.32.121\NSMP_Version\chenshixin
+     * @param tmpLocalServerPath
+     *            创建的临时挂着目录,如：/usr4/ResourceFromPatchSite/
+     *            lwx365720_20171024193010
+     * 
+     */
+    public static void mountSharePath(String userName, String passwd, String mountSharePath, String tmpLocalServerPath)
+    {
+        try
+        {
+            // 1.先创建挂载目录：用户名+产品+版本 /mnt/share/lwx365720/NE5000E/V8R3C00SPC200
+            mkdir(tmpLocalServerPath);
+            log.debug("#########userShareMountPath#####: " + tmpLocalServerPath);
+
+            // 2.执行挂载: mount -t cifs -o username=Administrator,password=Smsp2016
+            // '\\100.121.85.85\d$\ResourceFromPatchSite'
+            // /usr4/ResourceFromPatchSite/用户账号+时间(lwx365720_20171024193010)
+            String mountSh = "mount -t cifs -o username='" + userName + "',password='" + passwd + "',nounix,noserverino '" + mountSharePath + "' "
+                    + tmpLocalServerPath;
+            log.debug("########mountSh#####: " + mountSh);
+            String[] commonds = { "/bin/sh", "-c", mountSh };
+            Runtime.getRuntime().exec(commonds).waitFor();
+        } catch (Exception e)
+        {
+            log.error(e.getMessage(), e);
+        }
+    }
+
+    /**
+     * 卸载指定服务器
+     * 
+     * @param mountPath
+     *            需要卸载的路径
+     */
+    public static void unMountSharePath(String mountPath)
+    {
+        try
+        {
+            String command = "umount " + mountPath;
+            String[] commonds = { "/bin/sh", "-c", command };
+            log.debug("######umount commond####: " + command);
+            Runtime.getRuntime().exec(commonds).waitFor();
+
+        } catch (IOException e)
+        {
+            log.warn(e.getMessage());
+        } catch (InterruptedException e)
+        {
+            log.warn(e.getMessage());
+        }
+    }
+    
+    /**
+     * 执行脚本文件
+     * 
+     * @param projectPath
+     *            工程路径
+     * @param complieLog
+     *            编译文件路径
+     * @param compileFileName
+     *            脚本文件名称
+     * @return 是否成功
+     */
+    public static void processScriptFileNoWait(String projectPath, String complieLog, String compileFileName)
+    {
+        try
+        {
+            // 先判断编译文件是否已经生成，若生成先删除
+            File file = new File(complieLog);
+            if (file.exists())
+            {
+                file.delete();
+                log.debug("######delete complie file:" + complieLog);
+            }
+
+            // 1.先给文件赋权限
+            String cdProjectDir = "cd " + projectPath + ";";
+            String command = cdProjectDir + "chmod u+x " + compileFileName;
+            String[] commonds = { "/bin/sh", "-c", command };
+            log.debug("######commond1:" + command);
+            Runtime.getRuntime().exec(commonds).waitFor();
+
+            // 2.使用Runtime来执行command，生成Process对象
+            String shCommond = cdProjectDir + "sh " + compileFileName;
+            String[] commondShs = { "/bin/sh", "-c", shCommond + " >" + file.getName() + " 2>&1" };
+            log.debug("######commond2:" + shCommond);
+            // 等待执行shell脚本输出编译日志文件
+            Runtime.getRuntime().exec(commondShs);
+            
+            log.debug("######processScriptFileNoWait ->: " + projectPath);
+
+        } catch (IOException e)
+        {
+            log.error(e.getMessage(), e);
+        } catch (InterruptedException e)
+        {
+            log.error(e.getMessage(), e);
+        }
+    }
+}
