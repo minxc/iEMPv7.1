@@ -7,8 +7,8 @@ import java.util.Set;
 import javax.annotation.Resource;
 
 import org.minxc.emp.basis.api.model.SystemIdentity;
-import org.minxc.emp.bpm.api.exception.BpmStatusCode;
-import org.minxc.emp.bpm.api.model.task.IBpmTask;
+import org.minxc.emp.bpm.api.exception.BpmnStatusCode;
+import org.minxc.emp.bpm.api.model.task.BpmTask;
 import org.minxc.emp.bpm.core.dao.TaskIdentityLinkDao;
 import org.minxc.emp.bpm.core.manager.TaskIdentityLinkManager;
 import org.minxc.emp.bpm.core.model.TaskIdentityLink;
@@ -44,7 +44,7 @@ public class TaskIdentityLinkManagerImpl extends CommonManager<String, TaskIdent
 
 	public Boolean checkUserOperatorPermission(String userId, String instanceId, String taskId) {
 		if (StringUtil.isEmpty((String) instanceId) && StringUtil.isEmpty((String) taskId)) {
-			throw new BusinessException("检查权限必须提供流程或者任务id",  BpmStatusCode.PARAM_ILLEGAL);
+			throw new BusinessException("检查权限必须提供流程或者任务id",  BpmnStatusCode.PARAM_ILLEGAL);
 		}
 		Set<String> rights = this.getUserRights(userId);
 		return this.m.checkUserOperatorPermission(rights, taskId, instanceId) > 0;
@@ -63,7 +63,7 @@ public class TaskIdentityLinkManagerImpl extends CommonManager<String, TaskIdent
 		return rights;
 	}
 
-	public void createIdentityLink(IBpmTask bpmTask, List<SystemIdentity> identitys) {
+	public void createIdentityLink(BpmTask bpmTask, List<SystemIdentity> identitys) {
 		ArrayList<TaskIdentityLink> identityLinks = new ArrayList<TaskIdentityLink>();
 		for (SystemIdentity identity : identitys) {
 			TaskIdentityLink link = new TaskIdentityLink();

@@ -4,9 +4,8 @@ import com.alibaba.fastjson.JSONObject;
 
 import java.util.Date;
 
-import org.minxc.emp.bpm.engine.model.DefaultBpmProcessDef;
-import org.minxc.emp.bpm.engine.model.DefaultBpmVariableDef;
-import org.minxc.emp.bpm.engine.parser.flow.AbsFlowParse;
+import org.minxc.emp.bpm.engine.model.DefaultBpmnProcessDefinition;
+import org.minxc.emp.bpm.engine.model.DefaultBpmnVariableDef;
 import org.minxc.emp.core.util.EncryptUtil;
 import org.minxc.emp.core.util.PropertiesUtil;
 import org.minxc.emp.core.util.StringUtil;
@@ -14,11 +13,11 @@ import org.minxc.emp.core.util.time.DateFormatUtil;
 import org.springframework.stereotype.Component;
 
 @Component
-public class FlowVersionParse extends AbsFlowParse<DefaultBpmVariableDef> {
+public class FlowVersionParse extends AbsFlowParse<DefaultBpmnVariableDef> {
 	private static boolean bD = false;
 	private static String bE = "b";
 
-	public void parse(DefaultBpmProcessDef def, JSONObject flowConf) {
+	public void parse(DefaultBpmnProcessDefinition def, JSONObject flowConf) {
 		if (bD) {
 			flowConf.put("v", bE);
 			if (bE.equals("b")) {
@@ -79,7 +78,7 @@ public class FlowVersionParse extends AbsFlowParse<DefaultBpmVariableDef> {
 		return null;
 	}
 
-	public void setDefParam(DefaultBpmProcessDef bpmdef, Object object) {
+	public void setDefParam(DefaultBpmnProcessDefinition bpmdef, Object object) {
 	}
 
 }

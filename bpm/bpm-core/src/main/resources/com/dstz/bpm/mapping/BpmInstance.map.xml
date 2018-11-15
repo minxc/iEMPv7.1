@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.minxc.emp.bpm.core.dao.BpmInstanceDao">
-	<resultMap id="BpmInstance" type="org.minxc.emp.bpm.core.model.BpmInstance">
+<mapper namespace="org.minxc.emp.bpm.core.dao.BpmnInstanceDao">
+	<resultMap id="BpmInstance" type="org.minxc.emp.bpm.core.model.BpmnInstanceImpl">
 		<id property="id" column="id_" jdbcType="VARCHAR"/>
 		<result property="subject" column="subject_" jdbcType="VARCHAR"/>
 		<result property="defId" column="def_id_" jdbcType="VARCHAR"/>
@@ -28,7 +28,7 @@
 		<result property="superNodeId" column="super_node_id_" jdbcType="VARCHAR"/>
 	</resultMap>
 	
-	<insert id="create" parameterType="org.minxc.emp.bpm.core.model.BpmInstance">
+	<insert id="create" parameterType="org.minxc.emp.bpm.core.model.BpmnInstanceImpl">
 		INSERT INTO bpm_instance
 		(id_,subject_,def_id_,act_def_id_,def_key_,def_name_,biz_key_,status_,end_time_,duration_,type_id_,act_inst_id_,create_by_,creator_,create_time_,create_org_id_,update_by_,update_time_,is_formmal_,parent_inst_id_,is_forbidden_,data_mode_,support_mobile_,super_node_id_)
 		VALUES 
@@ -56,7 +56,7 @@
 		</if>
 	</select>
 	
-	<update id="update" parameterType="org.minxc.emp.bpm.core.model.BpmInstance">
+	<update id="update" parameterType="org.minxc.emp.bpm.core.model.BpmnInstanceImpl">
 		UPDATE bpm_instance SET
 		subject_=#{subject,jdbcType=VARCHAR},
 		def_id_=#{defId,jdbcType=VARCHAR},
@@ -110,7 +110,7 @@
 		</if>
 	</select>
 	
-	<select id="getApproveHistoryList" parameterType="java.util.Map" resultType="org.minxc.emp.bpm.core.model.BpmTaskApprove">
+	<select id="getApproveHistoryList" parameterType="java.util.Map" resultType="org.minxc.emp.bpm.core.model.BpmnTaskApprove">
 		select inst.id_ id,inst.subject_ subject,inst.def_name_ defName,inst.status_ status,inst.creator_ creator,inst.create_time_ createTime,end_time_ endTime,duration_ duration,inst.type_id_ typeId,
 		o.task_name_ nodeName,o.task_key_ nodeId,o.approve_time_ approveTime,o.status_ approveStatus,o.dur_ms_ durMs
 		from bpm_task_opinion o INNER JOIN bpm_instance inst on o.inst_id_ = inst.id_ 

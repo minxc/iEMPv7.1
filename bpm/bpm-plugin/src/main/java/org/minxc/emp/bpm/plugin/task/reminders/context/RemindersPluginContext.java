@@ -7,11 +7,16 @@ import java.util.List;
 
 import org.minxc.emp.bpm.api.constant.EventType;
 import org.minxc.emp.bpm.api.engine.plugin.runtime.RunTimePlugin;
-import org.minxc.emp.bpm.engine.plugin.context.AbstractBpmTaskPluginContext;
-import org.minxc.emp.bpm.plugin.task.reminders.def.RemindersPluginDef;
+import org.minxc.emp.bpm.engine.plugin.context.AbstractBpmnTaskPluginContext;
+import org.minxc.emp.bpm.plugin.task.reminders.def.RemindersPluginDefinition;
 import org.minxc.emp.bpm.plugin.task.reminders.plugin.RemindersPlugin;
 
-public class RemindersPluginContext extends AbstractBpmTaskPluginContext<RemindersPluginDef> {
+/**
+ *
+ * 催办处理事项上下文
+ *
+ */
+public class RemindersPluginContext extends AbstractBpmnTaskPluginContext<RemindersPluginDefinition> {
 	private static final long serialVersionUID = -8171025388788811778L;
 
 	public List<EventType> getEventTypes() {
@@ -25,8 +30,8 @@ public class RemindersPluginContext extends AbstractBpmTaskPluginContext<Reminde
 		return RemindersPlugin.class;
 	}
 
-	protected RemindersPluginDef parseFromJson(JSON pluginJson) {
-		RemindersPluginDef def = (RemindersPluginDef) JSON.toJavaObject((JSON) pluginJson, RemindersPluginDef.class);
+	protected RemindersPluginDefinition parseFromJson(JSON pluginJson) {
+		RemindersPluginDefinition def = (RemindersPluginDefinition) JSON.toJavaObject((JSON) pluginJson, RemindersPluginDefinition.class);
 		return def;
 	}
 
@@ -34,7 +39,7 @@ public class RemindersPluginContext extends AbstractBpmTaskPluginContext<Reminde
 		return "任务催办";
 	}
 
-//	protected BpmPluginDef parseFromJson(JSON jSON) {
+//	protected BpmnPluginDef parseFromJson(JSON jSON) {
 //		return this.d(jSON);
 //	}
 }

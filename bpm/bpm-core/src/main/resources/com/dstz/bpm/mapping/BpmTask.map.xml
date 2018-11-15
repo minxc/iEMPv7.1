@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.minxc.emp.bpm.core.dao.BpmTaskDao">
-	<resultMap id="BpmTask" type="org.minxc.emp.bpm.core.model.BpmTask">
+<mapper namespace="org.minxc.emp.bpm.core.dao.BpmnTaskDao">
+	<resultMap id="BpmTask" type="org.minxc.emp.bpm.core.model.BpmnTaskImpl">
 		<id property="id" column="id_" jdbcType="VARCHAR"/>
 		<result property="name" column="name_" jdbcType="VARCHAR"/>
 		<result property="subject" column="subject_" jdbcType="VARCHAR"/>
@@ -24,7 +24,7 @@
 		<result property="supportMobile" column="support_mobile_" jdbcType="NUMERIC"/>
 	</resultMap>
 	
-	<insert id="create" parameterType="org.minxc.emp.bpm.core.model.BpmTask">
+	<insert id="create" parameterType="org.minxc.emp.bpm.core.model.BpmnTaskImpl">
 		INSERT INTO bpm_task
 		(id_,name_,subject_,inst_id_,task_id_,node_id_,def_id_,assignee_id_,assignee_names_,status_,priority_,due_time_,task_type_,parent_id_,act_inst_id_,act_execution_id_,type_id_,create_time_,create_by_,support_mobile_)
 		VALUES 
@@ -52,7 +52,7 @@
 		</if>
 	</select>
 	
-	<update id="update" parameterType="org.minxc.emp.bpm.core.model.BpmTask">
+	<update id="update" parameterType="org.minxc.emp.bpm.core.model.BpmnTaskImpl">
 		UPDATE bpm_task SET
 		name_=#{name,jdbcType=VARCHAR},
 		subject_=#{subject,jdbcType=VARCHAR},

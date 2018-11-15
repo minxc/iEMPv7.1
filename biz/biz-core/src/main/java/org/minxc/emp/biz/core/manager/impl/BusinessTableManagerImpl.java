@@ -5,7 +5,7 @@ import javax.annotation.Resource;
 
 import org.apache.commons.lang3.StringUtils;
 import org.minxc.emp.biz.core.dao.BusinessTableDao;
-import org.minxc.emp.biz.core.manager.BusColumnCtrlManager;
+import org.minxc.emp.biz.core.manager.BusinessColumnControlManager;
 import org.minxc.emp.biz.core.manager.BusinessColumnManager;
 import org.minxc.emp.biz.core.manager.BusinessTableManager;
 import org.minxc.emp.biz.core.model.BusinessColumnControlImpl;
@@ -35,7 +35,7 @@ public class BusinessTableManagerImpl extends CommonManager<String, BusinessTabl
 	@Resource
 	private BusinessColumnManager businessColumnManager;
 	@Resource
-	private BusColumnCtrlManager busColumnCtrlManager;
+	private BusinessColumnControlManager businessColumnControlManager;
 	@Resource
 	private SystemDataSourceService sysDataSourceService;
 	@Resource
@@ -47,7 +47,7 @@ public class BusinessTableManagerImpl extends CommonManager<String, BusinessTabl
 			this.create(businessTable);
 		} else {
 			this.update(businessTable);
-			this.busColumnCtrlManager.removeByTableId(businessTable.getId());
+			this.businessColumnControlManager.removeByTableId(businessTable.getId());
 			this.businessColumnManager.removeByTableId(businessTable.getId());
 		}
 		for (BusinessColumnImpl businessColumn : businessTable.getColumns()) {
@@ -64,7 +64,7 @@ public class BusinessTableManagerImpl extends CommonManager<String, BusinessTabl
 				ctrl.setId(UniqueIdUtil.getSuid());
 			}
 			ctrl.setColumnId(businessColumn.getId());
-			this.busColumnCtrlManager.create(businessColumn.getCtrl());
+			this.businessColumnControlManager.create(businessColumn.getCtrl());
 		}
 		this.newTableOperator(businessTable).syncColumn();
 		BusinessTableCacheUtil.put((BusinessTableImpl) businessTable);
@@ -102,7 +102,7 @@ public class BusinessTableManagerImpl extends CommonManager<String, BusinessTabl
 		}
 		List<BusinessColumnImpl> columns = this.businessColumnManager.getByTableId(businessTable.getId());
 		for (BusinessColumnImpl column : columns) {
-			column.setCtrl(this.busColumnCtrlManager.getByColumnId(column.getId()));
+			column.setCtrl(this.businessColumnControlManager.getByColumnId(column.getId()));
 			column.setTable(businessTable);
 		}
 		businessTable.setColumns(columns);

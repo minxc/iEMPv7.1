@@ -3,15 +3,13 @@ package org.minxc.emp.bpm.engine.parser.flow;
 import java.util.HashSet;
 import java.util.List;
 
-import org.minxc.emp.bpm.api.engine.plugin.def.BpmDef;
 import org.minxc.emp.bpm.api.model.def.BpmVariableDef;
-import org.minxc.emp.bpm.engine.model.DefaultBpmProcessDef;
-import org.minxc.emp.bpm.engine.model.DefaultBpmVariableDef;
-import org.minxc.emp.bpm.engine.parser.flow.AbsFlowParse;
+import org.minxc.emp.bpm.engine.model.DefaultBpmnProcessDefinition;
+import org.minxc.emp.bpm.engine.model.DefaultBpmnVariableDef;
 import org.springframework.stereotype.Component;
 
 @Component
-public class FlowVariablesParse extends AbsFlowParse<DefaultBpmVariableDef> {
+public class FlowVariablesParse extends AbsFlowParse<DefaultBpmnVariableDef> {
 	public String getKey() {
 		return "variableList";
 	}
@@ -29,7 +27,7 @@ public class FlowVariablesParse extends AbsFlowParse<DefaultBpmVariableDef> {
 		return "";
 	}
 	@Override
-	public void setDefParam(DefaultBpmProcessDef bpmProcessDef, Object object) {
+	public void setDefParam(DefaultBpmnProcessDefinition bpmProcessDef, Object object) {
 		List varList = (List) object;
 		bpmProcessDef.setVarList(varList);
 	}

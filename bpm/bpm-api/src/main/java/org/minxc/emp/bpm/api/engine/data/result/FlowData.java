@@ -21,7 +21,7 @@ public interface FlowData {
     
     public abstract JSONObject getInitData();
 
-//	public abstract IBpmDefinition getBpmDefinition();
+//	public abstract BpmnDefinition getBpmDefinition();
 
     public List<Button> getButtonList();
 

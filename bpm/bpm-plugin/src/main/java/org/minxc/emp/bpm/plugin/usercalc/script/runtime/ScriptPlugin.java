@@ -1,7 +1,6 @@
 package org.minxc.emp.bpm.plugin.usercalc.script.runtime;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -10,19 +9,19 @@ import javax.annotation.Resource;
 
 import org.minxc.emp.basis.api.groovy.GroovyScriptEngine;
 import org.minxc.emp.basis.api.model.SystemIdentity;
-import org.minxc.emp.bpm.engine.plugin.runtime.abstact.AbstractUserCalcPlugin;
-import org.minxc.emp.bpm.engine.plugin.session.BpmUserCalcPluginSession;
-import org.minxc.emp.bpm.plugin.usercalc.script.def.ScriptPluginDef;
+import org.minxc.emp.bpm.engine.plugin.runtime.abstact.AbstractUserCalculatePlugin;
+import org.minxc.emp.bpm.engine.plugin.session.BpmnUserCalcPluginSession;
+import org.minxc.emp.bpm.plugin.usercalc.script.def.ScriptPluginDefinition;
 import org.minxc.emp.core.util.BeanUtils;
 import org.minxc.emp.core.util.StringUtil;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ScriptPlugin extends AbstractUserCalcPlugin<ScriptPluginDef> {
+public class ScriptPlugin extends AbstractUserCalculatePlugin<ScriptPluginDefinition> {
 	@Resource
 	GroovyScriptEngine groovyScriptEngine;
 
-	public List<SystemIdentity> queryByPluginDef(BpmUserCalcPluginSession pluginSession, ScriptPluginDef def) {
+	public List<SystemIdentity> queryByPluginDef(BpmnUserCalcPluginSession pluginSession, ScriptPluginDefinition def) {
 		String script = def.getScript();
 		if (StringUtil.isEmpty((String) script)) {
 			return Collections.EMPTY_LIST;
@@ -40,7 +39,7 @@ public class ScriptPlugin extends AbstractUserCalcPlugin<ScriptPluginDef> {
 		return false;
 	}
 
-//	public List queryByPluginDef(BpmUserCalcPluginSession bpmUserCalcPluginSession, BpmTaskPluginDef bpmTaskPluginDef) {
-//		return this.a(bpmUserCalcPluginSession, (ScriptPluginDef) bpmTaskPluginDef);
+//	public List queryByPluginDef(BpmnUserCalcPluginSession bpmUserCalcPluginSession, BpmnTaskPluginDef bpmTaskPluginDef) {
+//		return this.a(bpmUserCalcPluginSession, (ScriptPluginDefinition) bpmTaskPluginDef);
 //	}
 }

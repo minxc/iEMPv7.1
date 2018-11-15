@@ -7,9 +7,9 @@ import org.minxc.emp.bpm.act.service.ActInstanceService;
 import org.minxc.emp.bpm.api.constant.ActionType;
 import org.minxc.emp.bpm.api.constant.NodeType;
 import org.minxc.emp.bpm.api.model.nodedef.BpmNodeDef;
-import org.minxc.emp.bpm.api.service.BpmProcessDefService;
-import org.minxc.emp.bpm.core.manager.BpmInstanceManager;
-import org.minxc.emp.bpm.core.model.BpmInstance;
+import org.minxc.emp.bpm.api.service.BpmnProcessDefinitionService;
+import org.minxc.emp.bpm.core.manager.BpmnInstanceManager;
+import org.minxc.emp.bpm.core.model.BpmnInstanceImpl;
 import org.minxc.emp.bpm.engine.action.cmd.DefaultInstanceActionCmd;
 import org.minxc.emp.core.util.StringUtil;
 import org.springframework.stereotype.Component;
@@ -17,15 +17,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class InstanceStartActionHandler extends InstanceSaveActionHandler {
 	@Resource
-	BpmInstanceManager f;
+    BpmnInstanceManager f;
 	@Resource
 	ActInstanceService aw;
 	@Resource
-	BpmProcessDefService a;
+    BpmnProcessDefinitionService a;
 
 	public void a(DefaultInstanceActionCmd startActionModel) {
 		String destination = startActionModel.getDestination();
-		BpmInstance instance = (BpmInstance) startActionModel.getBpmInstance();
+		BpmnInstanceImpl instance = (BpmnInstanceImpl) startActionModel.getBpmInstance();
 		String actInstId = null;
 		if (StringUtil.isEmpty(destination)) {
 			actInstId = this.aw.startProcessInstance(instance.getActDefId(), instance.getBizKey(),

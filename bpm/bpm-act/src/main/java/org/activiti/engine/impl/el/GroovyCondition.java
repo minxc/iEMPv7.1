@@ -6,8 +6,8 @@ import org.activiti.engine.impl.Condition;
 import org.minxc.emp.basis.api.groovy.GroovyScriptEngine;
 import org.minxc.emp.bpm.api.engine.action.cmd.ActionCmd;
 import org.minxc.emp.bpm.api.engine.action.cmd.BaseActionCmd;
-import org.minxc.emp.bpm.api.engine.context.BpmContext;
-import org.minxc.emp.bpm.api.exception.BpmStatusCode;
+import org.minxc.emp.bpm.api.engine.context.BpmnContext;
+import org.minxc.emp.bpm.api.exception.BpmnStatusCode;
 import org.minxc.emp.core.api.exception.BusinessException;
 import org.minxc.emp.core.util.AppContextUtil;
 
@@ -22,9 +22,9 @@ public class GroovyCondition implements Condition {
 	public boolean evaluate(String arg0, DelegateExecution execution) {
 		Map<String, Object> maps = execution.getVariables();
 		maps.put("variableScope", execution);
-		ActionCmd cmd = BpmContext.getActionModel();
+		ActionCmd cmd = BpmnContext.getActionModel();
 		maps.putAll(cmd.getBizDataMap());
-		BaseActionCmd submitAction = (BaseActionCmd) BpmContext.submitActionModel();
+		BaseActionCmd submitAction = (BaseActionCmd) BpmnContext.submitActionModel();
 		maps.put("submitActionName", submitAction.getActionType().getKey());
 		GroovyScriptEngine engine = (GroovyScriptEngine) AppContextUtil.getBean(GroovyScriptEngine.class);
 		try {
@@ -36,7 +36,7 @@ public class GroovyCondition implements Condition {
 			message.append("\n脚本：" + this.script);
 			message.append("\n异常：" + e.getMessage());
 			message.append("\n\n流程变量：" + maps.toString());
-			throw new BusinessException(message.toString(), BpmStatusCode.GATEWAY_ERROR, (Throwable) e);
+			throw new BusinessException(message.toString(), BpmnStatusCode.GATEWAY_ERROR, (Throwable) e);
 		}
 	}
 }

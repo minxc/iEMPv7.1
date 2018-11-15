@@ -1,6 +1,6 @@
 package org.minxc.emp.bpm.api.constant;
 
-import org.minxc.emp.bpm.api.exception.BpmStatusCode;
+import org.minxc.emp.bpm.api.exception.BpmnStatusCode;
 import org.minxc.emp.core.api.exception.BusinessException;
 
 
@@ -78,7 +78,7 @@ public enum ActionType {
             if (c.getKey().equalsIgnoreCase(key))
                 return c;
         }
-        throw new BusinessException(BpmStatusCode.NO_TASK_ACTION);
+        throw new BusinessException(BpmnStatusCode.NO_TASK_ACTION);
     }
 
 }

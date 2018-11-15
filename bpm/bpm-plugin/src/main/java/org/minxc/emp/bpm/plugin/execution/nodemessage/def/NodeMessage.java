@@ -5,22 +5,25 @@ import java.util.List;
 import javax.validation.constraints.NotBlank;
 
 import org.minxc.emp.bpm.api.engine.plugin.def.UserAssignRule;
-import org.minxc.emp.bpm.engine.plugin.plugindef.AbstractBpmExecutionPluginDef;
+import org.minxc.emp.bpm.engine.plugin.plugindef.AbstractBpmnExecutionPluginDefinition;
 
-public class NodeMessage extends AbstractBpmExecutionPluginDef {
+/**
+ * 节点消息
+ */
+public class NodeMessage extends AbstractBpmnExecutionPluginDefinition {
 	
 	private static final long serialVersionUID = 1L;
 	@NotBlank(message = "节点消息描述不能为空")
 	private String desc;
-	private String a;
+	private String nodeId;
 	@NotBlank
 	private String event;
 	private String condition;
-	private List<UserAssignRule> b;
+	private List<UserAssignRule> userRules;
 	@NotBlank
-	private String c;
-	private String d;
-	private String e;
+	private String msgType;
+	private String htmlTemplate;
+	private String textTemplate;
 
 	public String getDesc() {
 		return this.desc;
@@ -31,11 +34,11 @@ public class NodeMessage extends AbstractBpmExecutionPluginDef {
 	}
 
 	public String getNodeId() {
-		return this.a;
+		return this.nodeId;
 	}
 
 	public void setNodeId(String nodeId) {
-		this.a = nodeId;
+		this.nodeId = nodeId;
 	}
 
 	public String getEvent() {
@@ -55,34 +58,34 @@ public class NodeMessage extends AbstractBpmExecutionPluginDef {
 	}
 
 	public List<UserAssignRule> getUserRules() {
-		return this.b;
+		return this.userRules;
 	}
 
 	public void setUserRules(List<UserAssignRule> userRules) {
-		this.b = userRules;
+		this.userRules = userRules;
 	}
 
 	public String getMsgType() {
-		return this.c;
+		return this.msgType;
 	}
 
 	public void setMsgType(String msgType) {
-		this.c = msgType;
+		this.msgType = msgType;
 	}
 
 	public String getHtmlTemplate() {
-		return this.d;
+		return this.htmlTemplate;
 	}
 
 	public void setHtmlTemplate(String htmlTemplate) {
-		this.d = htmlTemplate;
+		this.htmlTemplate = htmlTemplate;
 	}
 
 	public String getTextTemplate() {
-		return this.e;
+		return this.textTemplate;
 	}
 
 	public void setTextTemplate(String textTemplate) {
-		this.e = textTemplate;
+		this.textTemplate = textTemplate;
 	}
 }

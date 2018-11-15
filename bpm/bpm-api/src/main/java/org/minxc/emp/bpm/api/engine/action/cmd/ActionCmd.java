@@ -5,7 +5,7 @@ import java.util.Map;
 
 import org.minxc.emp.basis.api.model.SystemIdentity;
 import org.minxc.emp.biz.api.model.BusinessData;
-import org.minxc.emp.bpm.api.model.inst.IBpmInstance;
+import org.minxc.emp.bpm.api.model.inst.BpmnInstance;
 
 /**
  * 任务操作处理基础接口
@@ -129,7 +129,7 @@ public interface ActionCmd {
 
     String getDefId();
 
-    public IBpmInstance getBpmInstance();
+    public BpmnInstance getBpmInstance();
 
     String getDestination();
 

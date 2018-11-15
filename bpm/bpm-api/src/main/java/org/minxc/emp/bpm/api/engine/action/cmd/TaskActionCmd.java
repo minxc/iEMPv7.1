@@ -1,7 +1,7 @@
 package org.minxc.emp.bpm.api.engine.action.cmd;
 
 import org.minxc.emp.bpm.api.constant.ActionType;
-import org.minxc.emp.bpm.api.model.task.IBpmTask;
+import org.minxc.emp.bpm.api.model.task.BpmTask;
 
 
 /**
@@ -33,10 +33,10 @@ public interface TaskActionCmd extends ActionCmd {
     String getNodeId();
 
 
-    IBpmTask getBpmTask();
+    BpmTask getBpmTask();
 
 
-    void setBpmTask(IBpmTask task);
+    void setBpmTask(BpmTask task);
 
     /**
      * 目标节点，在一般情况下不需要指定，流程会按照流程图进行运行。

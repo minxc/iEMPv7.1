@@ -4,9 +4,9 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.minxc.emp.basis.api.groovy.GroovyScriptEngine;
-import org.minxc.emp.bpm.engine.plugin.runtime.abstact.AbstractBpmExecutionPlugin;
-import org.minxc.emp.bpm.engine.plugin.session.BpmExecutionPluginSession;
-import org.minxc.emp.bpm.plugin.execution.script.def.NodeScriptPluginDef;
+import org.minxc.emp.bpm.engine.plugin.runtime.abstact.AbstractBpmnExecutionPlugin;
+import org.minxc.emp.bpm.engine.plugin.session.BpmnExecutionPluginSession;
+import org.minxc.emp.bpm.plugin.execution.script.def.NodeScriptPluginDefinition;
 import org.minxc.emp.core.util.StringUtil;
 import org.springframework.stereotype.Component;
 
@@ -14,11 +14,11 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Component
-public class NodeScriptPlugin extends AbstractBpmExecutionPlugin<BpmExecutionPluginSession, NodeScriptPluginDef> {
+public class NodeScriptPlugin extends AbstractBpmnExecutionPlugin<BpmnExecutionPluginSession, NodeScriptPluginDefinition> {
 	@Resource
 	private GroovyScriptEngine groovyScriptEngine;
 
-	public Void execute(BpmExecutionPluginSession pluginSession, NodeScriptPluginDef pluginDef) {
+	public Void execute(BpmnExecutionPluginSession pluginSession, NodeScriptPluginDefinition pluginDef) {
 		String script = pluginDef.a(pluginSession.getEventType());
 		if (StringUtil.isEmpty((String) script)) {
 			return null;
@@ -30,6 +30,6 @@ public class NodeScriptPlugin extends AbstractBpmExecutionPlugin<BpmExecutionPlu
 	}
 
 //	public Object execute(Object object, Object object2) {
-//		return this.a((BpmExecutionPluginSession) object, (NodeScriptPluginDef) object2);
+//		return this.a((BpmnExecutionPluginSession) object, (NodeScriptPluginDefinition) object2);
 //	}
 }

@@ -7,10 +7,10 @@ import org.activiti.engine.delegate.DelegateTask;
 import org.minxc.emp.bpm.api.constant.ActionType;
 import org.minxc.emp.bpm.api.engine.action.cmd.BaseActionCmd;
 import org.minxc.emp.bpm.api.engine.action.cmd.TaskActionCmd;
-import org.minxc.emp.bpm.api.exception.BpmStatusCode;
+import org.minxc.emp.bpm.api.exception.BpmnStatusCode;
 import org.minxc.emp.bpm.api.exception.WorkFlowException;
-import org.minxc.emp.bpm.api.model.task.IBpmTask;
-import org.minxc.emp.bpm.core.model.BpmTaskStack;
+import org.minxc.emp.bpm.api.model.task.BpmTask;
+import org.minxc.emp.bpm.core.model.BpmnTaskStack;
 import org.minxc.emp.bpm.engine.action.handler.AbsActionHandler;
 import org.minxc.emp.bpm.engine.constant.TaskSkipType;
 import org.minxc.emp.core.api.exception.BusinessException;
@@ -21,11 +21,11 @@ public class DefualtTaskActionCmd extends BaseActionCmd implements TaskActionCmd
 	
 	
 	private String taskId;
-	private IBpmTask ao;
+	private BpmTask ao;
 	private DelegateTask ap;
 	private String ai;
-	private BpmTaskStack aq;
-	private BpmTaskStack ar;
+	private BpmnTaskStack aq;
+	private BpmnTaskStack ar;
 	private TaskSkipType as = TaskSkipType.NO_SKIP;
 
 	public DefualtTaskActionCmd() {
@@ -49,7 +49,7 @@ public class DefualtTaskActionCmd extends BaseActionCmd implements TaskActionCmd
 	public void initSpecialParam(JSONObject flowParam) {
 		String taskId = flowParam.getString("taskId");
 		if (StringUtil.isEmpty((String) taskId)) {
-			throw new BusinessException("taskId 不能为空", BpmStatusCode.TASK_NOT_FOUND);
+			throw new BusinessException("taskId 不能为空", BpmnStatusCode.TASK_NOT_FOUND);
 		}
 		this.setTaskId(taskId);
 		String destination = flowParam.getString("destination");
@@ -58,11 +58,11 @@ public class DefualtTaskActionCmd extends BaseActionCmd implements TaskActionCmd
 		this.setOpinion(opinion);
 	}
 
-	public IBpmTask getBpmTask() {
+	public BpmTask getBpmTask() {
 		return this.ao;
 	}
 
-	public void setBpmTask(IBpmTask task) {
+	public void setBpmTask(BpmTask task) {
 		this.ao = task;
 	}
 
@@ -89,46 +89,46 @@ public class DefualtTaskActionCmd extends BaseActionCmd implements TaskActionCmd
 		this.ai = opinion;
 	}
 
-	public BpmTaskStack getTaskStack() {
+	public BpmnTaskStack getTaskStack() {
 		return this.aq;
 	}
 
-	public void setTaskStack(BpmTaskStack taskStack) {
+	public void setTaskStack(BpmnTaskStack taskStack) {
 		this.aq = taskStack;
 	}
 
-	public BpmTaskStack getParentTaskStack() {
+	public BpmnTaskStack getParentTaskStack() {
 		return this.ar;
 	}
 
-	public void setParentTaskStack(BpmTaskStack parentTaskStack) {
+	public void setParentTaskStack(BpmnTaskStack parentTaskStack) {
 		this.ar = parentTaskStack;
 	}
 
 	public void addVariable(String variableName, Object value) {
 		if (this.ap == null) {
-			throw new WorkFlowException( BpmStatusCode.VARIABLES_NO_SYNC);
+			throw new WorkFlowException( BpmnStatusCode.VARIABLES_NO_SYNC);
 		}
 		this.ap.setVariable(variableName, value);
 	}
 
 	public Object getVariable(String variableName) {
 		if (this.ap == null) {
-			throw new WorkFlowException(BpmStatusCode.VARIABLES_NO_SYNC);
+			throw new WorkFlowException(BpmnStatusCode.VARIABLES_NO_SYNC);
 		}
 		return this.ap.getVariable(variableName);
 	}
 
 	public boolean hasVariable(String variableName) {
 		if (this.ap == null) {
-			throw new WorkFlowException( BpmStatusCode.VARIABLES_NO_SYNC);
+			throw new WorkFlowException( BpmnStatusCode.VARIABLES_NO_SYNC);
 		}
 		return this.ap.hasVariable(variableName);
 	}
 
 	public void removeVariable(String variableName) {
 		if (this.ap == null) {
-			throw new WorkFlowException(BpmStatusCode.VARIABLES_NO_SYNC);
+			throw new WorkFlowException(BpmnStatusCode.VARIABLES_NO_SYNC);
 		}
 	}
 
@@ -139,14 +139,14 @@ public class DefualtTaskActionCmd extends BaseActionCmd implements TaskActionCmd
 	public synchronized String a() {
 		if (this.hasExecuted) {
 			throw new BusinessException("action cmd caonot be invoked twice",
-					BpmStatusCode.PARAM_ILLEGAL);
+					BpmnStatusCode.PARAM_ILLEGAL);
 		}
 		this.hasExecuted = true;
 		ActionType actonType = ActionType.fromKey((String) this.getActionName());
 		AbsActionHandler handler = (AbsActionHandler) AppContextUtil.getBean((String) actonType.getBeanId());
 		if (handler == null) {
 			throw new BusinessException("action beanId cannot be found :" + actonType.getName(),
-					BpmStatusCode.NO_TASK_ACTION);
+					BpmnStatusCode.NO_TASK_ACTION);
 		}
 		handler.g((BaseActionCmd) this);
 		return handler.getActionType().getName();

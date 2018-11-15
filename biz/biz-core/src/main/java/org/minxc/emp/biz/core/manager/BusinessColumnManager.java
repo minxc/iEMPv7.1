@@ -1,6 +1,5 @@
 package org.minxc.emp.biz.core.manager;
 
-
 import java.util.List;
 
 import org.minxc.emp.biz.core.model.BusinessColumnImpl;

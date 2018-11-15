@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
-import org.minxc.emp.bpm.api.engine.plugin.context.UserCalcPluginContext;
+import org.minxc.emp.bpm.api.engine.plugin.context.UserCalculatePluginContext;
 
 /**
  * 用户分配规则定义。
@@ -25,7 +25,7 @@ public class UserAssignRule implements Comparable<UserAssignRule>, Serializable 
     //分组编号。
     private int groupNo = 1;
     //人员计算规则
-    private List<UserCalcPluginContext> calcPluginContextList = new ArrayList<UserCalcPluginContext>();
+    private List<UserCalculatePluginContext> calcPluginContextList = new ArrayList<UserCalculatePluginContext>();
 
 
     public String getName() {
@@ -39,7 +39,7 @@ public class UserAssignRule implements Comparable<UserAssignRule>, Serializable 
     public String getDescription() {
         if (StringUtils.isEmpty(description)) {
             String desc = "";
-            for (UserCalcPluginContext ctx : calcPluginContextList)
+            for (UserCalculatePluginContext ctx : calcPluginContextList)
                 desc = desc + "　　　【" + ctx.getTitle() + "】" + ctx.getDescription() + ";";
 
             return desc;
@@ -76,12 +76,12 @@ public class UserAssignRule implements Comparable<UserAssignRule>, Serializable 
         this.groupNo = groupNo;
     }
 
-    public List<UserCalcPluginContext> getCalcPluginContextList() {
+    public List<UserCalculatePluginContext> getCalcPluginContextList() {
         return calcPluginContextList;
     }
 
     public void setCalcPluginContextList(
-            List<UserCalcPluginContext> calcPluginContextList) {
+            List<UserCalculatePluginContext> calcPluginContextList) {
         this.calcPluginContextList = calcPluginContextList;
     }
 

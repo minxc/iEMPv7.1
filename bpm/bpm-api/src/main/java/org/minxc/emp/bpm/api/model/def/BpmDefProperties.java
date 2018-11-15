@@ -34,7 +34,7 @@ public class BpmDefProperties implements Serializable {
      * 流程状态。
      */
     @NotBlank
-    protected String status = IBpmDefinition.STATUS.DRAFT;
+    protected String status = BpmnDefinition.STATUS.DRAFT;
 
     public String getSubjectRule() {
         return subjectRule;

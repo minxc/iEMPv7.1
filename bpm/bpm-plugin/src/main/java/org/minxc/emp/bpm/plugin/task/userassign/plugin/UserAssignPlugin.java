@@ -9,27 +9,25 @@ import javax.annotation.Resource;
 import org.minxc.emp.basis.api.groovy.GroovyScriptEngine;
 import org.minxc.emp.basis.api.model.SystemIdentity;
 import org.minxc.emp.bpm.api.engine.action.cmd.TaskActionCmd;
-import org.minxc.emp.bpm.api.engine.context.BpmContext;
-import org.minxc.emp.bpm.api.engine.plugin.def.BpmTaskPluginDef;
-import org.minxc.emp.bpm.engine.plugin.factory.BpmPluginSessionFactory;
-import org.minxc.emp.bpm.engine.plugin.runtime.abstact.AbstractBpmTaskPlugin;
-import org.minxc.emp.bpm.engine.plugin.session.BpmPluginSession;
-import org.minxc.emp.bpm.engine.plugin.session.BpmTaskPluginSession;
-import org.minxc.emp.bpm.engine.plugin.session.BpmUserCalcPluginSession;
-import org.minxc.emp.bpm.plugin.task.userassign.def.UserAssignPluginDef;
-import org.minxc.emp.bpm.plugin.task.userassign.plugin.UserAssignRuleCalc;
+import org.minxc.emp.bpm.api.engine.context.BpmnContext;
+import org.minxc.emp.bpm.api.engine.plugin.def.BpmnTaskPluginDef;
+import org.minxc.emp.bpm.engine.plugin.factory.BpmnPluginSessionFactory;
+import org.minxc.emp.bpm.engine.plugin.runtime.abstact.AbstractBpmnTaskPlugin;
+import org.minxc.emp.bpm.engine.plugin.session.BpmnPluginSession;
+import org.minxc.emp.bpm.engine.plugin.session.BpmnTaskPluginSession;
+import org.minxc.emp.bpm.engine.plugin.session.BpmnUserCalcPluginSession;
+import org.minxc.emp.bpm.plugin.task.userassign.def.UserAssignPluginDefinition;
 import org.minxc.emp.core.util.BeanUtils;
-import org.slf4j.Logger;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UserAssignPlugin extends AbstractBpmTaskPlugin<BpmTaskPluginSession, BpmTaskPluginDef> {
+public class UserAssignPlugin extends AbstractBpmnTaskPlugin<BpmnTaskPluginSession, BpmnTaskPluginDef> {
 	@Resource
 	GroovyScriptEngine groovyScriptEngine;
 
-	public Void execute(BpmTaskPluginSession pluginSession, BpmTaskPluginDef pluginDef) {
-		UserAssignPluginDef assignPluginDef = (UserAssignPluginDef) pluginDef;
-		TaskActionCmd model = (TaskActionCmd) BpmContext.getActionModel();
+	public Void execute(BpmnTaskPluginSession pluginSession, BpmnTaskPluginDef pluginDef) {
+		UserAssignPluginDefinition assignPluginDef = (UserAssignPluginDefinition) pluginDef;
+		TaskActionCmd model = (TaskActionCmd) BpmnContext.getActionModel();
 		List identityList = model.getBpmIdentity(model.getNodeId());
 		if (BeanUtils.isNotEmpty((Object) identityList)) {
 			return null;
@@ -38,9 +36,9 @@ public class UserAssignPlugin extends AbstractBpmTaskPlugin<BpmTaskPluginSession
 		if (BeanUtils.isEmpty((Object) ruleList)) {
 			return null;
 		}
-		BpmUserCalcPluginSession bpmUserCalcPluginSession = BpmPluginSessionFactory
-				.buildBpmUserCalcPluginSession((BpmPluginSession) pluginSession);
-		List<SystemIdentity> bpmIdentities = UserAssignRuleCalc.a((BpmUserCalcPluginSession) bpmUserCalcPluginSession, (List) ruleList,
+		BpmnUserCalcPluginSession bpmUserCalcPluginSession = BpmnPluginSessionFactory
+				.buildBpmUserCalcPluginSession((BpmnPluginSession) pluginSession);
+		List<SystemIdentity> bpmIdentities = UserAssignRuleCalc.a((BpmnUserCalcPluginSession) bpmUserCalcPluginSession, (List) ruleList,
 				(Boolean) false);
 		ArrayList<SystemIdentity> identitieList = new ArrayList<SystemIdentity>();
 		for (SystemIdentity identity : bpmIdentities) {
@@ -55,6 +53,6 @@ public class UserAssignPlugin extends AbstractBpmTaskPlugin<BpmTaskPluginSession
 	}
 
 //	public Object execute(Object object, Object object2) {
-//		return this.a((BpmTaskPluginSession) object, (BpmTaskPluginDef) object2);
+//		return this.a((BpmnTaskPluginSession) object, (BpmnTaskPluginDef) object2);
 //	}
 }

@@ -17,7 +17,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.activiti.editor.constants.ModelDataJsonConstants;
 import org.activiti.engine.RepositoryService;
 import org.activiti.engine.repository.Model;
-import org.minxc.emp.bpm.core.manager.BpmDefinitionManager;
+import org.minxc.emp.bpm.core.manager.BpmnDefinitionManager;
 import org.minxc.emp.core.api.aop.annotation.ErrorCatching;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,7 +38,7 @@ public class ModelSaveRestResource implements ModelDataJsonConstants {
     protected static final Logger LOGGER = LoggerFactory.getLogger(ModelSaveRestResource.class);
 
     @Autowired
-    private BpmDefinitionManager bpmDefinitionManager;
+    private BpmnDefinitionManager bpmnDefinitionManager;
     private ObjectMapper objectMapper = new ObjectMapper();
     @Resource
     RepositoryService repositoryService;
@@ -52,6 +52,6 @@ public class ModelSaveRestResource implements ModelDataJsonConstants {
         ObjectNode modelJson = (ObjectNode) objectMapper.readTree(model.getMetaInfo());
         modelJson.put("name", values.getFirst("name"));
         modelJson.put("description", values.getFirst("description"));
-        bpmDefinitionManager.updateBpmnModel(model, values);
+        bpmnDefinitionManager.updateBpmnModel(model, values);
     }
 }

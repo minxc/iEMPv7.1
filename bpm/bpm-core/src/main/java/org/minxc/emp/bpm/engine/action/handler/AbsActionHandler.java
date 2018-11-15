@@ -15,23 +15,23 @@ import org.minxc.emp.bpm.api.constant.ActionType;
 import org.minxc.emp.bpm.api.engine.action.cmd.BaseActionCmd;
 import org.minxc.emp.bpm.api.engine.action.cmd.TaskActionCmd;
 import org.minxc.emp.bpm.api.engine.action.handler.ActionHandler;
-import org.minxc.emp.bpm.api.engine.context.BpmContext;
-import org.minxc.emp.bpm.api.exception.BpmStatusCode;
+import org.minxc.emp.bpm.api.engine.context.BpmnContext;
+import org.minxc.emp.bpm.api.exception.BpmnStatusCode;
 import org.minxc.emp.bpm.api.exception.WorkFlowException;
 import org.minxc.emp.bpm.api.model.def.BpmDataModel;
 import org.minxc.emp.bpm.api.model.def.NodeInit;
 import org.minxc.emp.bpm.api.model.form.BpmForm;
-import org.minxc.emp.bpm.api.model.inst.IBpmInstance;
+import org.minxc.emp.bpm.api.model.inst.BpmnInstance;
 import org.minxc.emp.bpm.api.model.nodedef.BpmNodeDef;
-import org.minxc.emp.bpm.api.model.task.IBpmTask;
-import org.minxc.emp.bpm.api.service.BpmProcessDefService;
-import org.minxc.emp.bpm.core.manager.BpmInstanceManager;
+import org.minxc.emp.bpm.api.model.task.BpmTask;
+import org.minxc.emp.bpm.api.service.BpmnProcessDefinitionService;
+import org.minxc.emp.bpm.core.manager.BpmnInstanceManager;
 import org.minxc.emp.bpm.core.manager.TaskIdentityLinkManager;
-import org.minxc.emp.bpm.core.model.BpmInstance;
+import org.minxc.emp.bpm.core.model.BpmnInstanceImpl;
 import org.minxc.emp.bpm.engine.action.cmd.DefualtTaskActionCmd;
 import org.minxc.emp.bpm.engine.constant.TaskSkipType;
-import org.minxc.emp.bpm.engine.data.handle.BpmBusDataHandle;
-import org.minxc.emp.bpm.engine.model.DefaultBpmProcessDef;
+import org.minxc.emp.bpm.engine.data.handle.BpmnBusinessDataHandle;
+import org.minxc.emp.bpm.engine.model.DefaultBpmnProcessDefinition;
 import org.minxc.emp.bpm.engine.util.HandlerUtil;
 import org.minxc.emp.core.api.exception.BusinessException;
 import org.minxc.emp.core.api.exception.SystemException;
@@ -47,11 +47,11 @@ public abstract class AbsActionHandler<T extends BaseActionCmd> implements Actio
 	
 	protected Logger LOG = LoggerFactory.getLogger(this.getClass());
 	@Resource
-	protected BpmProcessDefService a;
+	protected BpmnProcessDefinitionService a;
 	@Resource
-	protected BpmInstanceManager f;
+	protected BpmnInstanceManager f;
 	@Resource
-	protected BpmBusDataHandle at;
+	protected BpmnBusinessDataHandle at;
 	@Resource
 	protected TaskIdentityLinkManager i;
 	@Resource
@@ -63,11 +63,11 @@ public abstract class AbsActionHandler<T extends BaseActionCmd> implements Actio
 	public void execute(T model) {
 		this.c(model);
 		this.k((BaseActionCmd) model);
-		BpmContext.setActionModel(model);
+		BpmnContext.setActionModel(model);
 		this.d(model);
 		this.b(model);
 		this.f(model);
-		BpmContext.removeActionModel();
+		BpmnContext.removeActionModel();
 		this.e(model);
 	}
 
@@ -88,7 +88,7 @@ public abstract class AbsActionHandler<T extends BaseActionCmd> implements Actio
 			return;
 		}
 		if (model.isSource()) {
-			BpmContext.cleanTread();
+			BpmnContext.cleanTread();
 		}
 	}
 
@@ -97,7 +97,7 @@ public abstract class AbsActionHandler<T extends BaseActionCmd> implements Actio
 				&& this.getActionType() != ActionType.START) {
 			return;
 		}
-		DefualtTaskActionCmd taskModel = (DefualtTaskActionCmd) BpmContext.getActionModel();
+		DefualtTaskActionCmd taskModel = (DefualtTaskActionCmd) BpmnContext.getActionModel();
 		if (taskModel.getActionName().equals((Object) ActionType.CREATE)) {
 			return;
 		}
@@ -117,11 +117,11 @@ public abstract class AbsActionHandler<T extends BaseActionCmd> implements Actio
 	}
 
 	public void g(T model) {
-		BpmContext.setActionModel(model);
+		BpmnContext.setActionModel(model);
 		this.h(model);
 		this.b(model);
 		this.f(model);
-		BpmContext.removeActionModel();
+		BpmnContext.removeActionModel();
 		this.e(model);
 	}
 
@@ -131,7 +131,7 @@ public abstract class AbsActionHandler<T extends BaseActionCmd> implements Actio
 
 	protected void j(T actionModel) {
 		String handler;
-		BpmInstance instance = (BpmInstance) actionModel.getBpmInstance();
+		BpmnInstanceImpl instance = (BpmnInstanceImpl) actionModel.getBpmInstance();
 		if (StringUtil.isEmpty((String) actionModel.getBusinessKey())
 				&& StringUtil.isNotEmpty((String) instance.getBizKey())) {
 			actionModel.setBusinessKey(instance.getBizKey());
@@ -143,7 +143,7 @@ public abstract class AbsActionHandler<T extends BaseActionCmd> implements Actio
 			HandlerUtil.a(actionModel, (String) handler);
 			this.LOG.debug("执行URL表单处理器：{}", (Object) handler);
 		} catch (Exception ex) {
-			throw new WorkFlowException(BpmStatusCode.HANDLER_ERROR, (Throwable) ex);
+			throw new WorkFlowException(BpmnStatusCode.HANDLER_ERROR, (Throwable) ex);
 		}
 		if (StringUtil.isNotEmpty((String) actionModel.getBusinessKey())
 				&& StringUtil.isEmpty((String) instance.getBizKey())) {
@@ -152,14 +152,14 @@ public abstract class AbsActionHandler<T extends BaseActionCmd> implements Actio
 	}
 
 	protected void k(BaseActionCmd actionModel) {
-		IBpmTask task;
-		IBpmInstance instance = actionModel.getBpmInstance();
+		BpmTask task;
+		BpmnInstance instance = actionModel.getBpmInstance();
 		if (instance.getIsForbidden() == 1) {
-			throw new WorkFlowException("流程实例已经被禁止，请联系管理员", BpmStatusCode.DEF_FORBIDDEN);
+			throw new WorkFlowException("流程实例已经被禁止，请联系管理员", BpmnStatusCode.DEF_FORBIDDEN);
 		}
-		DefaultBpmProcessDef def = (DefaultBpmProcessDef) this.a.getBpmProcessDef(instance.getDefId());
+		DefaultBpmnProcessDefinition def = (DefaultBpmnProcessDefinition) this.a.getBpmProcessDef(instance.getDefId());
 		if ("forbidden".equals(def.getExtProperties().getStatus())) {
-			throw new WorkFlowException("流程定义已经被禁用，请联系管理员", BpmStatusCode.DEF_FORBIDDEN);
+			throw new WorkFlowException("流程定义已经被禁用，请联系管理员", BpmnStatusCode.DEF_FORBIDDEN);
 		}
 		User user = ContextUtil.getCurrentUser();
 		if (ContextUtil.isAdmin((User) user)) {
@@ -182,17 +182,17 @@ public abstract class AbsActionHandler<T extends BaseActionCmd> implements Actio
 		instId = null;
 		Boolean hasPermission = this.i.checkUserOperatorPermission(user.getUserId(), instId, taskId);
 		if (!hasPermission.booleanValue()) {
-			throw new BusinessException("没有该任务的操作权限", BpmStatusCode.NO_PERMISSION);
+			throw new BusinessException("没有该任务的操作权限", BpmnStatusCode.NO_PERMISSION);
 		}
 	}
 
 	protected void l(T actionModel) {
-		IBpmInstance instance = actionModel.getBpmInstance();
+		BpmnInstance instance = actionModel.getBpmInstance();
 		if (StringUtil.isEmpty((String) actionModel.getBusData())) {
 			return;
 		}
 		JSONObject data = JSON.parseObject((String) actionModel.getBusData());
-		DefaultBpmProcessDef bpmProcessDef = (DefaultBpmProcessDef) this.a.getBpmProcessDef(instance.getDefId());
+		DefaultBpmnProcessDefinition bpmProcessDef = (DefaultBpmnProcessDefinition) this.a.getBpmProcessDef(instance.getDefId());
 		for (BpmDataModel dataModel : bpmProcessDef.getDataModelList()) {
 			String modelCode = dataModel.getCode();
 			if (!data.containsKey((Object) modelCode))
@@ -204,7 +204,7 @@ public abstract class AbsActionHandler<T extends BaseActionCmd> implements Actio
 
 	protected void a(BaseActionCmd cmd, BpmNodeDef nodeDef) {
 		String nodeId = nodeDef.getNodeId();
-		DefaultBpmProcessDef def = (DefaultBpmProcessDef) this.a.getBpmProcessDef(cmd.getBpmInstance().getDefId());
+		DefaultBpmnProcessDefinition def = (DefaultBpmnProcessDefinition) this.a.getBpmProcessDef(cmd.getBpmInstance().getDefId());
 		List<NodeInit> nodeInitList = def.e(nodeId);
 		Map bos = cmd.getBizDataMap();
 		if (BeanUtils.isEmpty((Object) bos) || BeanUtils.isEmpty((Object) nodeInitList)) {
@@ -223,7 +223,7 @@ public abstract class AbsActionHandler<T extends BaseActionCmd> implements Actio
 				this.av.execute(init.getWhenSave(), param);
 			} catch (Exception e) {
 				throw new SystemException(e.getMessage(),
-						BpmStatusCode.FLOW_DATA_EXECUTE_SHOWSCRIPT_ERROR, (Throwable) e);
+						BpmnStatusCode.FLOW_DATA_EXECUTE_SHOWSCRIPT_ERROR, (Throwable) e);
 			}
 			this.LOG.debug("执行节点数据初始化脚本{}", (Object) init.getBeforeShow());
 		}
@@ -242,7 +242,7 @@ public abstract class AbsActionHandler<T extends BaseActionCmd> implements Actio
 			form = nodeDef.getForm();
 		}
 		if (form == null || form.isFormEmpty()) {
-			DefaultBpmProcessDef def = (DefaultBpmProcessDef) this.a.getBpmProcessDef(defId);
+			DefaultBpmnProcessDefinition def = (DefaultBpmnProcessDefinition) this.a.getBpmProcessDef(defId);
 			form = def.getGlobalForm();
 		}
 		if (form != null) {

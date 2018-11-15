@@ -1,31 +1,29 @@
 package org.minxc.emp.bpm.plugin.task.ruleskip.plugin;
 
-import java.util.List;
 import java.util.Map;
 import javax.annotation.Resource;
 
 import org.minxc.emp.basis.api.groovy.GroovyScriptEngine;
 import org.minxc.emp.bpm.api.engine.action.cmd.TaskActionCmd;
-import org.minxc.emp.bpm.api.engine.context.BpmContext;
-import org.minxc.emp.bpm.engine.plugin.runtime.abstact.AbstractBpmTaskPlugin;
-import org.minxc.emp.bpm.engine.plugin.session.BpmTaskPluginSession;
+import org.minxc.emp.bpm.api.engine.context.BpmnContext;
+import org.minxc.emp.bpm.engine.plugin.runtime.abstact.AbstractBpmnTaskPlugin;
+import org.minxc.emp.bpm.engine.plugin.session.BpmnTaskPluginSession;
 import org.minxc.emp.bpm.plugin.task.ruleskip.def.JumpRule;
-import org.minxc.emp.bpm.plugin.task.ruleskip.def.RuleSkipPluginDef;
+import org.minxc.emp.bpm.plugin.task.ruleskip.def.RuleSkipPluginDefinition;
 import org.minxc.emp.core.util.BeanUtils;
 import org.minxc.emp.core.util.StringUtil;
-import org.slf4j.Logger;
 import org.springframework.stereotype.Component;
 
 @Component
-public class RuleSkipPlugin extends AbstractBpmTaskPlugin<BpmTaskPluginSession, RuleSkipPluginDef> {
+public class RuleSkipPlugin extends AbstractBpmnTaskPlugin<BpmnTaskPluginSession, RuleSkipPluginDefinition> {
 	@Resource
 	private GroovyScriptEngine g;
 
-	public Void a(BpmTaskPluginSession pluginSession, RuleSkipPluginDef pluginDef) {
+	public Void a(BpmnTaskPluginSession pluginSession, RuleSkipPluginDefinition pluginDef) {
 		if (BeanUtils.isEmpty((Object) pluginDef.getJumpRules())) {
 			return null;
 		}
-		TaskActionCmd taskAction = (TaskActionCmd) BpmContext.getActionModel();
+		TaskActionCmd taskAction = (TaskActionCmd) BpmnContext.getActionModel();
 		if (StringUtil.isNotEmpty((String) taskAction.getDestination())) {
 			LOG.info("任务【{}】已经指定了跳转节点【{}】，规则跳转将忽略", (Object) pluginSession.getBpmTask().getName(),
 					(Object) taskAction.getDestination());
@@ -49,7 +47,7 @@ public class RuleSkipPlugin extends AbstractBpmTaskPlugin<BpmTaskPluginSession, 
 
 
 	@Override
-	public Void execute(BpmTaskPluginSession pluginSession, RuleSkipPluginDef pluginDef) {
+	public Void execute(BpmnTaskPluginSession pluginSession, RuleSkipPluginDefinition pluginDef) {
 		return this.a(pluginSession, pluginDef);
 	}
 }

@@ -11,10 +11,10 @@ import org.minxc.emp.basis.api.model.SystemIdentity;
 import org.minxc.emp.biz.api.model.BusinessData;
 import org.minxc.emp.bpm.api.constant.ActionType;
 import org.minxc.emp.bpm.api.engine.action.handler.ActionHandler;
-import org.minxc.emp.bpm.api.engine.context.BpmContext;
-import org.minxc.emp.bpm.api.exception.BpmStatusCode;
-import org.minxc.emp.bpm.api.model.def.IBpmDefinition;
-import org.minxc.emp.bpm.api.model.inst.IBpmInstance;
+import org.minxc.emp.bpm.api.engine.context.BpmnContext;
+import org.minxc.emp.bpm.api.exception.BpmnStatusCode;
+import org.minxc.emp.bpm.api.model.def.BpmnDefinition;
+import org.minxc.emp.bpm.api.model.inst.BpmnInstance;
 import org.minxc.emp.core.api.exception.BusinessException;
 import org.minxc.emp.core.util.AppContextUtil;
 import org.minxc.emp.core.util.BeanUtils;
@@ -49,14 +49,14 @@ public abstract class BaseActionCmd implements ActionCmd {
     /**
      * 流程定义
      */
-    protected IBpmDefinition bpmDefinition = null;
+    protected BpmnDefinition bpmDefinition = null;
     /***流程数据未获取时候使用，若已经在执行过程中，使用bpmDefinition**/
     protected String defId;
 
     /**
      * 流程实例
      */
-    protected IBpmInstance bpmInstance = null;
+    protected BpmnInstance bpmInstance = null;
     /***流程数据未获取时候使用，若已经在执行过程中，使用bpmInstance**/
     protected String instanceId;
 
@@ -251,11 +251,11 @@ public abstract class BaseActionCmd implements ActionCmd {
         return this.busData;
     }
 
-    public IBpmInstance getBpmInstance() {
+    public BpmnInstance getBpmInstance() {
         return bpmInstance;
     }
 
-    public void setBpmInstance(IBpmInstance bpmInstance) {
+    public void setBpmInstance(BpmnInstance bpmInstance) {
         this.bpmInstance = bpmInstance;
     }
 
@@ -349,11 +349,11 @@ public abstract class BaseActionCmd implements ActionCmd {
         this.actionName = actionName;
     }
 
-    public IBpmDefinition getBpmDefinition() {
+    public BpmnDefinition getBpmDefinition() {
         return bpmDefinition;
     }
 
-    public void setBpmDefinition(IBpmDefinition bpmDefinition) {
+    public void setBpmDefinition(BpmnDefinition bpmDefinition) {
         this.bpmDefinition = bpmDefinition;
     }
 
@@ -371,7 +371,7 @@ public abstract class BaseActionCmd implements ActionCmd {
     @Override
     public synchronized String executeCmd() {
         if (this.hasExecuted) {
-            throw new BusinessException("action cmd caonot be invoked twice", BpmStatusCode.NO_PERMISSION);
+            throw new BusinessException("action cmd caonot be invoked twice", BpmnStatusCode.NO_PERMISSION);
         }
         hasExecuted = true;
 
@@ -379,11 +379,11 @@ public abstract class BaseActionCmd implements ActionCmd {
 
         ActionHandler handler = (ActionHandler) AppContextUtil.getBean(actonType.getBeanId());
         if (handler == null) {
-            throw new BusinessException("action beanId cannot be found :" + actonType.getName(), BpmStatusCode.NO_TASK_ACTION);
+            throw new BusinessException("action beanId cannot be found :" + actonType.getName(), BpmnStatusCode.NO_TASK_ACTION);
         }
         handler.execute(this);
         //彻底清除线程变量
-        BpmContext.cleanTread();
+        BpmnContext.cleanTread();
         return handler.getActionType().getName();
     }
 

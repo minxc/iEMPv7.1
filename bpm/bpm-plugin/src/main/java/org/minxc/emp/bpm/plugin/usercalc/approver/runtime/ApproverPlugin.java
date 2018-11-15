@@ -5,33 +5,33 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.minxc.emp.basis.api.model.SystemIdentity;
-import org.minxc.emp.bpm.core.manager.BpmTaskOpinionManager;
-import org.minxc.emp.bpm.core.model.BpmTaskOpinion;
-import org.minxc.emp.bpm.engine.model.BpmIdentity;
-import org.minxc.emp.bpm.engine.plugin.runtime.abstact.AbstractUserCalcPlugin;
-import org.minxc.emp.bpm.engine.plugin.session.BpmUserCalcPluginSession;
-import org.minxc.emp.bpm.plugin.usercalc.approver.def.ApproverPluginDef;
+import org.minxc.emp.bpm.core.manager.BpmnTaskOpinionManager;
+import org.minxc.emp.bpm.core.model.BpmnTaskOpinion;
+import org.minxc.emp.bpm.engine.model.BpmnIdentity;
+import org.minxc.emp.bpm.engine.plugin.runtime.abstact.AbstractUserCalculatePlugin;
+import org.minxc.emp.bpm.engine.plugin.session.BpmnUserCalcPluginSession;
+import org.minxc.emp.bpm.plugin.usercalc.approver.def.ApproverPluginDefinition;
 import org.minxc.emp.core.util.StringUtil;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ApproverPlugin extends AbstractUserCalcPlugin<ApproverPluginDef> {
+public class ApproverPlugin extends AbstractUserCalculatePlugin<ApproverPluginDefinition> {
 	@Resource
-	private BpmTaskOpinionManager aa;
+	private BpmnTaskOpinionManager aa;
 
-	public List<SystemIdentity> queryByPluginDef(BpmUserCalcPluginSession pluginSession, ApproverPluginDef pluginDef) {
+	public List<SystemIdentity> queryByPluginDef(BpmnUserCalcPluginSession pluginSession, ApproverPluginDefinition pluginDef) {
 		ArrayList<SystemIdentity> bpmIdentities = new ArrayList<SystemIdentity>();
-		List<BpmTaskOpinion> taskOpinionList = this.aa.getByInstId(pluginSession.getBpmTask().getInstId());
-		for (BpmTaskOpinion taskOpinion : taskOpinionList) {
+		List<BpmnTaskOpinion> taskOpinionList = this.aa.getByInstId(pluginSession.getBpmTask().getInstId());
+		for (BpmnTaskOpinion taskOpinion : taskOpinionList) {
 			if (StringUtil.isEmpty((String) taskOpinion.getApprover()))
 				continue;
-			BpmIdentity bpmIdentity = new BpmIdentity(taskOpinion.getApprover(), taskOpinion.getApproverName(), "user");
-			bpmIdentities.add((SystemIdentity) bpmIdentity);
+			BpmnIdentity bpmnIdentity = new BpmnIdentity(taskOpinion.getApprover(), taskOpinion.getApproverName(), "user");
+			bpmIdentities.add((SystemIdentity) bpmnIdentity);
 		}
 		return bpmIdentities;
 	}
 
-//	public List queryByPluginDef(BpmUserCalcPluginSession bpmUserCalcPluginSession, BpmTaskPluginDef bpmTaskPluginDef) {
-//		return this.a(bpmUserCalcPluginSession, (ApproverPluginDef) bpmTaskPluginDef);
+//	public List queryByPluginDef(BpmnUserCalcPluginSession bpmUserCalcPluginSession, BpmnTaskPluginDef bpmTaskPluginDef) {
+//		return this.a(bpmUserCalcPluginSession, (ApproverPluginDefinition) bpmTaskPluginDef);
 //	}
 }

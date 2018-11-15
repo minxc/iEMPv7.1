@@ -5,19 +5,18 @@ import com.alibaba.fastjson.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import org.minxc.emp.bpm.api.constant.EventType;
 import org.minxc.emp.bpm.api.engine.plugin.runtime.RunTimePlugin;
-import org.minxc.emp.bpm.engine.plugin.context.AbstractBpmExecutionPluginContext;
-import org.minxc.emp.bpm.plugin.execution.script.def.NodeScriptPluginDef;
+import org.minxc.emp.bpm.engine.plugin.context.AbstractBpmnExecutionPluginContext;
+import org.minxc.emp.bpm.plugin.execution.script.def.NodeScriptPluginDefinition;
 import org.minxc.emp.bpm.plugin.execution.script.plugin.NodeScriptPlugin;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 @Component
 @Scope(value = "prototype")
-public class NodeScriptPluginContext extends AbstractBpmExecutionPluginContext<NodeScriptPluginDef> {
+public class NodeScriptPluginContext extends AbstractBpmnExecutionPluginContext<NodeScriptPluginDefinition> {
 	private static final long serialVersionUID = -5958682303600423597L;
 
 	public List<EventType> getEventTypes() {
@@ -33,9 +32,9 @@ public class NodeScriptPluginContext extends AbstractBpmExecutionPluginContext<N
 		return NodeScriptPlugin.class;
 	}
 
-	protected NodeScriptPluginDef parseFromJson(JSON pluginJson) {
+	protected NodeScriptPluginDefinition parseFromJson(JSON pluginJson) {
 		JSONObject jsonObject = (JSONObject) pluginJson;
-		NodeScriptPluginDef def = new NodeScriptPluginDef();
+		NodeScriptPluginDefinition def = new NodeScriptPluginDefinition();
 		for (String key : jsonObject.keySet()) {
 			try {
 				EventType event = EventType.fromKey((String) key);

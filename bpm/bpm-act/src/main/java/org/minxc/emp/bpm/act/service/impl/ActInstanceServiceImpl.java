@@ -9,7 +9,6 @@ import org.activiti.engine.RuntimeService;
 import org.activiti.engine.impl.ProcessEngineImpl;
 import org.activiti.engine.impl.cmd.GetExecutionVariableCmd;
 import org.activiti.engine.impl.identity.Authentication;
-import org.activiti.engine.impl.interceptor.Command;
 import org.activiti.engine.impl.interceptor.CommandExecutor;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.minxc.emp.bpm.act.cmd.GetSuperVariableCmd;
@@ -17,7 +16,7 @@ import org.minxc.emp.bpm.act.cmd.ProcessInstanceEndCmd;
 import org.minxc.emp.bpm.act.service.ActInstanceService;
 import org.minxc.emp.bpm.act.util.ActivitiUtil;
 import org.minxc.emp.bpm.api.model.nodedef.BpmNodeDef;
-import org.minxc.emp.bpm.api.service.BpmProcessDefService;
+import org.minxc.emp.bpm.api.service.BpmnProcessDefinitionService;
 import org.minxc.emp.idm.api.model.User;
 import org.minxc.emp.system.util.ContextUtil;
 import org.slf4j.Logger;
@@ -34,7 +33,7 @@ public class ActInstanceServiceImpl implements ActInstanceService {
 	@Resource
 	RepositoryService repositoryService;
 	@Resource
-	BpmProcessDefService h;
+    BpmnProcessDefinitionService h;
 
 	public String startProcessInstance(String actDefId, String businessKey, Map<String, Object> variables,
 			String[] aryDestination) {

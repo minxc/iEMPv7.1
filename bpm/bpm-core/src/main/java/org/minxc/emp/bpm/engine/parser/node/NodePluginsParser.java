@@ -5,28 +5,24 @@ import com.alibaba.fastjson.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
-import org.minxc.emp.bpm.api.engine.plugin.context.BpmPluginContext;
-import org.minxc.emp.bpm.api.engine.plugin.def.BpmDef;
-import org.minxc.emp.bpm.api.engine.plugin.def.BpmPluginDef;
-import org.minxc.emp.bpm.api.model.nodedef.impl.BaseBpmNodeDef;
-import org.minxc.emp.bpm.engine.parser.node.AbsNodeParse;
+import org.minxc.emp.bpm.api.engine.plugin.context.BpmnPluginContext;
+import org.minxc.emp.bpm.api.model.nodedef.impl.BaseBpmnNodeDefinition;
 import org.minxc.emp.core.util.AppContextUtil;
 import org.springframework.stereotype.Component;
 
 @Component
-public class NodePluginsParser extends AbsNodeParse<BpmPluginContext> {
+public class NodePluginsParser extends AbsNodeParse<BpmnPluginContext> {
 	
 	
 	@Override
-	public Object parseDef(BaseBpmNodeDef userNodeDef, String json) {
+	public Object parseDef(BaseBpmnNodeDefinition userNodeDef, String json) {
 		JSONObject plugins = JSON.parseObject((String) json);
-		ArrayList<BpmPluginContext> pluginContextList = new ArrayList<BpmPluginContext>();
+		ArrayList<BpmnPluginContext> pluginContextList = new ArrayList<BpmnPluginContext>();
 		for (String pluginName : plugins.keySet()) {
-			BpmPluginContext pluginContext = (BpmPluginContext) AppContextUtil
+			BpmnPluginContext pluginContext = (BpmnPluginContext) AppContextUtil
 					.getBean((String) (pluginName + "PluginContext"));
-			if (pluginContext instanceof BpmPluginContext) {
+			if (pluginContext instanceof BpmnPluginContext) {
 				Object object = plugins.get((Object) pluginName);
 				pluginContext.parse((JSON) object);
 			}
@@ -43,8 +39,8 @@ public class NodePluginsParser extends AbsNodeParse<BpmPluginContext> {
 		return null;
 	}
 	@Override
-	public void setDefParam(BaseBpmNodeDef userNodeDef, Object object) {
+	public void setDefParam(BaseBpmnNodeDefinition userNodeDef, Object object) {
 		ArrayList pluginContextList = (ArrayList) object;
-		userNodeDef.setBpmPluginContexts((List) pluginContextList);
+		userNodeDef.setBpmnPluginContexts((List) pluginContextList);
 	}
 }

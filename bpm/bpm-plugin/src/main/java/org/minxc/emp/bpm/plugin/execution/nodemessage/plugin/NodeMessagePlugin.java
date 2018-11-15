@@ -15,16 +15,16 @@ import org.minxc.emp.basis.api.jms.producer.JmsProducer;
 import org.minxc.emp.basis.api.model.SystemIdentity;
 import org.minxc.emp.basis.impl.groovy.DefaultGroovyScriptEngineImpl;
 import org.minxc.emp.bpm.api.engine.action.cmd.BaseActionCmd;
-import org.minxc.emp.bpm.api.engine.context.BpmContext;
+import org.minxc.emp.bpm.api.engine.context.BpmnContext;
 import org.minxc.emp.bpm.api.engine.plugin.def.UserAssignRule;
-import org.minxc.emp.bpm.api.service.BpmProcessDefService;
-import org.minxc.emp.bpm.engine.plugin.factory.BpmPluginSessionFactory;
-import org.minxc.emp.bpm.engine.plugin.runtime.abstact.AbstractBpmExecutionPlugin;
-import org.minxc.emp.bpm.engine.plugin.session.BpmExecutionPluginSession;
-import org.minxc.emp.bpm.engine.plugin.session.BpmPluginSession;
-import org.minxc.emp.bpm.engine.plugin.session.BpmUserCalcPluginSession;
+import org.minxc.emp.bpm.api.service.BpmnProcessDefinitionService;
+import org.minxc.emp.bpm.engine.plugin.factory.BpmnPluginSessionFactory;
+import org.minxc.emp.bpm.engine.plugin.runtime.abstact.AbstractBpmnExecutionPlugin;
+import org.minxc.emp.bpm.engine.plugin.session.BpmnExecutionPluginSession;
+import org.minxc.emp.bpm.engine.plugin.session.BpmnPluginSession;
+import org.minxc.emp.bpm.engine.plugin.session.BpmnUserCalcPluginSession;
 import org.minxc.emp.bpm.plugin.execution.nodemessage.def.NodeMessage;
-import org.minxc.emp.bpm.plugin.execution.nodemessage.def.NodeMessagePluginDef;
+import org.minxc.emp.bpm.plugin.execution.nodemessage.def.NodeMessagePluginDefinition;
 import org.minxc.emp.bpm.plugin.task.userassign.plugin.UserAssignRuleCalc;
 import org.minxc.emp.core.util.BeanUtils;
 import org.minxc.emp.core.util.StringUtil;
@@ -33,17 +33,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class NodeMessagePlugin extends AbstractBpmExecutionPlugin<BpmExecutionPluginSession, NodeMessagePluginDef> {
+public class NodeMessagePlugin extends AbstractBpmnExecutionPlugin<BpmnExecutionPluginSession, NodeMessagePluginDefinition> {
 	@Resource
 	private DefaultGroovyScriptEngineImpl g;
 	@Resource
-	private BpmProcessDefService h;
+	private BpmnProcessDefinitionService h;
 	@Resource
 	private JmsProducer i;
 	@Autowired
 	private FreeMarkerEngine j;
 
-	public Void a(BpmExecutionPluginSession pluginSession, NodeMessagePluginDef pluginDef) {
+	public Void a(BpmnExecutionPluginSession pluginSession, NodeMessagePluginDefinition pluginDef) {
 		List<NodeMessage> messages = pluginDef.getNodeMessageList();
 		for (NodeMessage nodeMessage : messages) {
 			if (!this.a(pluginSession, nodeMessage))
@@ -56,7 +56,7 @@ public class NodeMessagePlugin extends AbstractBpmExecutionPlugin<BpmExecutionPl
 		return null;
 	}
 
-	private List<JmsDTO> a(NodeMessage nodeMessage, BpmExecutionPluginSession session) {
+	private List<JmsDTO> a(NodeMessage nodeMessage, BpmnExecutionPluginSession session) {
 		String[] msgType = nodeMessage.getMsgType().split(",");
 		String htmlTemplate = nodeMessage.getHtmlTemplate();
 		String textTemplate = nodeMessage.getTextTemplate();
@@ -75,7 +75,7 @@ public class NodeMessagePlugin extends AbstractBpmExecutionPlugin<BpmExecutionPl
 		}
 		List<SystemIdentity> userList = new ArrayList();
 		if (BeanUtils.isEmpty((Object) nodeMessage.getUserRules())) {
-			BaseActionCmd cmd = (BaseActionCmd) BpmContext.getActionModel();
+			BaseActionCmd cmd = (BaseActionCmd) BpmnContext.getActionModel();
 			userList = cmd.getBpmIdentity(cmd.getNodeId());
 		} else {
 			userList = this.a(session, nodeMessage.getUserRules());
@@ -94,13 +94,13 @@ public class NodeMessagePlugin extends AbstractBpmExecutionPlugin<BpmExecutionPl
 		return jmsDto;
 	}
 
-	private List<SystemIdentity> a(BpmExecutionPluginSession pluginSession, List<UserAssignRule> ruleList) {
-		BpmUserCalcPluginSession calcSession = BpmPluginSessionFactory
-				.buildBpmUserCalcPluginSession((BpmPluginSession) pluginSession);
-		return UserAssignRuleCalc.a((BpmUserCalcPluginSession) calcSession, ruleList, (Boolean) false);
+	private List<SystemIdentity> a(BpmnExecutionPluginSession pluginSession, List<UserAssignRule> ruleList) {
+		BpmnUserCalcPluginSession calcSession = BpmnPluginSessionFactory
+				.buildBpmUserCalcPluginSession((BpmnPluginSession) pluginSession);
+		return UserAssignRuleCalc.a((BpmnUserCalcPluginSession) calcSession, ruleList, (Boolean) false);
 	}
 
-	private boolean a(BpmExecutionPluginSession session, NodeMessage nodeMessage) {
+	private boolean a(BpmnExecutionPluginSession session, NodeMessage nodeMessage) {
 		Boolean support;
 		if (StringUtil.isNotEmpty((String) nodeMessage.getEvent())
 				&& !nodeMessage.getEvent().equals(session.getEventType().getKey())) {
@@ -119,7 +119,7 @@ public class NodeMessagePlugin extends AbstractBpmExecutionPlugin<BpmExecutionPl
 	}
 
 	@Override
-	public Void execute(BpmExecutionPluginSession pluginSession, NodeMessagePluginDef pluginDef) {
+	public Void execute(BpmnExecutionPluginSession pluginSession, NodeMessagePluginDefinition pluginDef) {
 		return this.a(pluginSession, pluginDef);
 	}
 }

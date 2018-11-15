@@ -1,24 +1,22 @@
 package org.minxc.emp.bpm.engine.plugin.cmd;
 
 
-import java.util.List;
 import javax.annotation.Resource;
 
 import org.minxc.emp.bpm.api.constant.EventType;
 import org.minxc.emp.bpm.api.engine.action.cmd.InstanceActionCmd;
 import org.minxc.emp.bpm.api.engine.plugin.cmd.ExecutionCommand;
-import org.minxc.emp.bpm.api.engine.plugin.context.BpmPluginContext;
-import org.minxc.emp.bpm.api.engine.plugin.def.BpmExecutionPluginDef;
-import org.minxc.emp.bpm.api.engine.plugin.def.BpmPluginDef;
-import org.minxc.emp.bpm.api.exception.BpmStatusCode;
-import org.minxc.emp.bpm.api.model.def.BpmProcessDef;
+import org.minxc.emp.bpm.api.engine.plugin.context.BpmnPluginContext;
+import org.minxc.emp.bpm.api.engine.plugin.def.BpmnExecutionPluginDef;
+import org.minxc.emp.bpm.api.engine.plugin.def.BpmnPluginDef;
+import org.minxc.emp.bpm.api.exception.BpmnStatusCode;
 import org.minxc.emp.bpm.api.model.nodedef.BpmNodeDef;
-import org.minxc.emp.bpm.api.service.BpmProcessDefService;
-import org.minxc.emp.bpm.engine.model.DefaultBpmProcessDef;
-import org.minxc.emp.bpm.engine.plugin.factory.BpmPluginFactory;
-import org.minxc.emp.bpm.engine.plugin.factory.BpmPluginSessionFactory;
-import org.minxc.emp.bpm.engine.plugin.runtime.BpmExecutionPlugin;
-import org.minxc.emp.bpm.engine.plugin.session.BpmExecutionPluginSession;
+import org.minxc.emp.bpm.api.service.BpmnProcessDefinitionService;
+import org.minxc.emp.bpm.engine.model.DefaultBpmnProcessDefinition;
+import org.minxc.emp.bpm.engine.plugin.factory.BpmnPluginFactory;
+import org.minxc.emp.bpm.engine.plugin.factory.BpmnPluginSessionFactory;
+import org.minxc.emp.bpm.engine.plugin.runtime.BpmnExecutionPlugin;
+import org.minxc.emp.bpm.engine.plugin.session.BpmnExecutionPluginSession;
 import org.minxc.emp.core.api.exception.BusinessException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,13 +26,13 @@ import org.springframework.stereotype.Component;
 public class ExecutionPluginCommand implements ExecutionCommand {
 	protected Logger LOG = LoggerFactory.getLogger(this.getClass());
 	@Resource
-	BpmProcessDefService a;
+	BpmnProcessDefinitionService a;
 
 	public void execute(EventType eventType, InstanceActionCmd actionModel) {
 		String defId = actionModel.getDefId();
-		DefaultBpmProcessDef bpmProcessDef = (DefaultBpmProcessDef) this.a.getBpmProcessDef(defId);
+		DefaultBpmnProcessDefinition bpmProcessDef = (DefaultBpmnProcessDefinition) this.a.getBpmProcessDef(defId);
 		for (Object bpmPluginContext : bpmProcessDef.getBpmPluginContexts()) {
-			this.a((BpmPluginContext) bpmPluginContext, actionModel, eventType);
+			this.a((BpmnPluginContext) bpmPluginContext, actionModel, eventType);
 		}
 		BpmNodeDef nodeDef = null;
 		if (eventType == EventType.START_POST_EVENT || eventType == EventType.START_EVENT) {
@@ -42,28 +40,28 @@ public class ExecutionPluginCommand implements ExecutionCommand {
 		} else if (eventType == EventType.END_EVENT || eventType == EventType.END_POST_EVENT) {
 			nodeDef = (BpmNodeDef) this.a.getEndEvents(defId).get(0);
 		}
-		if (nodeDef != null && nodeDef.getBpmPluginContexts() != null) {
-			for (BpmPluginContext bpmPluginContext : nodeDef.getBpmPluginContexts()) {
-				this.a(bpmPluginContext, actionModel, eventType);
+		if (nodeDef != null && nodeDef.getBpmnPluginContexts() != null) {
+			for (BpmnPluginContext bpmnPluginContext : nodeDef.getBpmnPluginContexts()) {
+				this.a(bpmnPluginContext, actionModel, eventType);
 			}
 		}
 	}
 
-	private void a(BpmPluginContext bpmPluginContext, InstanceActionCmd actionModel, EventType eventType) {
-		BpmPluginDef bpmPluginDef = bpmPluginContext.getBpmPluginDef();
-		if (bpmPluginDef instanceof BpmExecutionPluginDef) {
-			BpmExecutionPluginDef bpmExecutionPluginDef = (BpmExecutionPluginDef) bpmPluginDef;
-			BpmExecutionPlugin bpmExecutionPlugin = BpmPluginFactory
-					.buildExecutionPlugin((BpmPluginContext) bpmPluginContext, (EventType) eventType);
-			BpmExecutionPluginSession session = BpmPluginSessionFactory
+	private void a(BpmnPluginContext bpmnPluginContext, InstanceActionCmd actionModel, EventType eventType) {
+		BpmnPluginDef bpmnPluginDef = bpmnPluginContext.getBpmPluginDef();
+		if (bpmnPluginDef instanceof BpmnExecutionPluginDef) {
+			BpmnExecutionPluginDef bpmExecutionPluginDef = (BpmnExecutionPluginDef) bpmnPluginDef;
+			BpmnExecutionPlugin bpmnExecutionPlugin = BpmnPluginFactory
+					.buildExecutionPlugin((BpmnPluginContext) bpmnPluginContext, (EventType) eventType);
+			BpmnExecutionPluginSession session = BpmnPluginSessionFactory
 					.buildExecutionPluginSession((InstanceActionCmd) actionModel, (EventType) eventType);
-			if (bpmExecutionPlugin != null) {
+			if (bpmnExecutionPlugin != null) {
 				try {
-					bpmExecutionPlugin.execute((Object) session, (Object) bpmExecutionPluginDef);
-					this.LOG.debug("==>执行插件【{}】", (Object) bpmPluginContext.getTitle());
+					bpmnExecutionPlugin.execute((Object) session, (Object) bpmExecutionPluginDef);
+					this.LOG.debug("==>执行插件【{}】", (Object) bpmnPluginContext.getTitle());
 				} catch (Exception e) {
-					this.LOG.error("执行插件【{}】出现异常:{}", new Object[]{bpmPluginContext.getTitle(), e.getMessage(), e});
-					throw new BusinessException(bpmPluginContext.getTitle(), BpmStatusCode.PLUGIN_ERROR,
+					this.LOG.error("执行插件【{}】出现异常:{}", new Object[]{bpmnPluginContext.getTitle(), e.getMessage(), e});
+					throw new BusinessException(bpmnPluginContext.getTitle(), BpmnStatusCode.PLUGIN_ERROR,
 							(Throwable) e);
 				}
 			}

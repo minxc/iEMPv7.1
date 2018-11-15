@@ -3,7 +3,6 @@ package org.minxc.emp.bpm.act.service.impl;
 
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import org.activiti.bpmn.model.BpmnModel;
 import org.activiti.engine.HistoryService;
@@ -13,21 +12,16 @@ import org.activiti.engine.RepositoryService;
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.history.HistoricActivityInstance;
 import org.activiti.engine.history.HistoricActivityInstanceQuery;
-import org.activiti.engine.history.HistoricProcessInstanceQuery;
 import org.activiti.engine.impl.RepositoryServiceImpl;
 import org.activiti.engine.impl.cfg.ProcessEngineConfigurationImpl;
 import org.activiti.engine.impl.persistence.entity.ProcessDefinitionEntity;
-import org.activiti.engine.impl.pvm.PvmActivity;
 import org.activiti.engine.impl.pvm.PvmTransition;
-import org.activiti.engine.impl.pvm.ReadOnlyProcessDefinition;
 import org.activiti.engine.impl.pvm.process.ActivityImpl;
-import org.activiti.engine.query.Query;
-import org.activiti.image.ProcessDiagramGenerator;
 import org.activiti.image.impl.DefaultProcessDiagramGenerator;
 import org.activiti.spring.ProcessEngineFactoryBean;
 import org.apache.commons.io.IOUtils;
 import org.minxc.emp.bpm.act.service.BpmImageService;
-import org.minxc.emp.bpm.api.exception.BpmStatusCode;
+import org.minxc.emp.bpm.api.exception.BpmnStatusCode;
 import org.minxc.emp.core.api.exception.BusinessException;
 import org.minxc.emp.core.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +45,7 @@ public class DefaultInstHistImgService implements BpmImageService {
 	public InputStream draw(String actDefId, String actInstId) throws Exception {
 		InputStream imageStream = null;
 		if (StringUtil.isEmpty(actDefId)) {
-			throw new BusinessException("流程定义actDefId不能缺失", BpmStatusCode.PARAM_ILLEGAL);
+			throw new BusinessException("流程定义actDefId不能缺失", BpmnStatusCode.PARAM_ILLEGAL);
 		}
 		if (StringUtil.isEmpty(actInstId)) {
 			return this.b(actDefId);

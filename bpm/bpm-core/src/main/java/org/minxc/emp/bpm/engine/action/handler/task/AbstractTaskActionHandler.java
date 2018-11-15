@@ -7,11 +7,11 @@ import org.minxc.emp.bpm.act.service.ActTaskService;
 import org.minxc.emp.bpm.api.constant.EventType;
 import org.minxc.emp.bpm.api.constant.NodeType;
 import org.minxc.emp.bpm.api.engine.plugin.cmd.TaskCommand;
-import org.minxc.emp.bpm.api.exception.BpmStatusCode;
-import org.minxc.emp.bpm.api.model.inst.IBpmInstance;
+import org.minxc.emp.bpm.api.exception.BpmnStatusCode;
+import org.minxc.emp.bpm.api.model.inst.BpmnInstance;
 import org.minxc.emp.bpm.api.model.nodedef.BpmNodeDef;
-import org.minxc.emp.bpm.core.manager.BpmTaskManager;
-import org.minxc.emp.bpm.core.model.BpmTask;
+import org.minxc.emp.bpm.core.manager.BpmnTaskManager;
+import org.minxc.emp.bpm.core.model.BpmnTaskImpl;
 import org.minxc.emp.bpm.engine.action.cmd.DefualtTaskActionCmd;
 import org.minxc.emp.bpm.engine.action.handler.AbsActionHandler;
 import org.minxc.emp.core.api.exception.BusinessException;
@@ -21,14 +21,14 @@ public abstract class AbstractTaskActionHandler<T extends DefualtTaskActionCmd> 
 	@Resource
 	protected ActTaskService ax;
 	@Resource
-	protected BpmTaskManager ay;
+	protected BpmnTaskManager ay;
 	@Resource
 	protected TaskCommand az;
 
 	public void a(T actionModel) {
-		BpmTask bpmTask = (BpmTask) actionModel.getBpmTask();
-		String taskId = bpmTask.getTaskId();
-		String destinationNode = bpmTask.getBackNode();
+		BpmnTaskImpl bpmnTask = (BpmnTaskImpl) actionModel.getBpmTask();
+		String taskId = bpmnTask.getTaskId();
+		String destinationNode = bpmnTask.getBackNode();
 		if (StringUtil.isEmpty(destinationNode)) {
 			destinationNode = actionModel.getDestination();
 		}
@@ -43,13 +43,13 @@ public abstract class AbstractTaskActionHandler<T extends DefualtTaskActionCmd> 
 
 	protected void b(T data) {
 		if (data.getBpmTask() == null) {
-			BpmTask task = (BpmTask) this.ay.get(data.getTaskId());
+			BpmnTaskImpl task = (BpmnTaskImpl) this.ay.get(data.getTaskId());
 			if (task == null) {
-				throw new BusinessException(BpmStatusCode.TASK_NOT_FOUND);
+				throw new BusinessException(BpmnStatusCode.TASK_NOT_FOUND);
 			} else {
 				data.setBpmTask(task);
 				data.setDefId(task.getDefId());
-				data.setBpmInstance((IBpmInstance) this.f.get(task.getInstId()));
+				data.setBpmInstance((BpmnInstance) this.f.get(task.getInstId()));
 				this.l(data);
 				this.a(data, this.a.getBpmNodeDef(task.getDefId(), task.getNodeId()));
 			}

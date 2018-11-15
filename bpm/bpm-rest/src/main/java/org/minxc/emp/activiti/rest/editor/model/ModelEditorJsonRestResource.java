@@ -18,12 +18,10 @@ import org.activiti.engine.ActivitiException;
 import org.activiti.engine.RepositoryService;
 import org.activiti.engine.repository.Model;
 import org.apache.commons.lang3.StringUtils;
-import org.minxc.emp.bpm.api.model.def.BpmProcessDef;
-import org.minxc.emp.bpm.api.model.def.IBpmDefinition;
-import org.minxc.emp.bpm.api.service.BpmProcessDefService;
-import org.minxc.emp.bpm.core.manager.BpmDefinitionManager;
-import org.minxc.emp.bpm.core.model.BpmDefinition;
-import org.minxc.emp.bpm.engine.model.DefaultBpmProcessDef;
+import org.minxc.emp.bpm.api.service.BpmnProcessDefinitionService;
+import org.minxc.emp.bpm.core.manager.BpmnDefinitionManager;
+import org.minxc.emp.bpm.core.model.BpmnDefinitionImpl;
+import org.minxc.emp.bpm.engine.model.DefaultBpmnProcessDefinition;
 import org.minxc.emp.core.util.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,10 +42,10 @@ public class ModelEditorJsonRestResource {
     private RepositoryService repositoryService;
 
     @Resource
-    private BpmDefinitionManager bpmDefinitionManager;
+    private BpmnDefinitionManager bpmnDefinitionManager;
 
     @Autowired
-    private BpmProcessDefService bpmProcessDefService;
+    private BpmnProcessDefinitionService bpmnProcessDefinitionService;
 
     @RequestMapping(value = "/model/{modelId}/json", method = RequestMethod.GET)
     @ResponseBody
@@ -67,11 +65,11 @@ public class ModelEditorJsonRestResource {
                 String editorJson = new String(repositoryService.getModelEditorSource(model.getId()), "utf-8");
 
                 JSONObject editorModelJson = JSONObject.parseObject(editorJson);
-                BpmDefinition def = bpmDefinitionManager.getMainDefByActModelId(modelId);
+                BpmnDefinitionImpl def = bpmnDefinitionManager.getMainDefByActModelId(modelId);
 
                 JSONObject bpmDefSetting = new JSONObject();
                 if (StringUtil.isNotEmpty(def.getActDefId())) {
-                	DefaultBpmProcessDef processDef = (DefaultBpmProcessDef) bpmProcessDefService.getBpmProcessDef(def.getId());
+                	DefaultBpmnProcessDefinition processDef = (DefaultBpmnProcessDefinition) bpmnProcessDefinitionService.getBpmProcessDef(def.getId());
                     bpmDefSetting = processDef.getJson();
                 }
 

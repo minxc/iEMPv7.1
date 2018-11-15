@@ -1,16 +1,16 @@
 package org.minxc.emp.bpm.api.engine.plugin.context;
 
-import org.minxc.emp.bpm.api.engine.plugin.def.BpmPluginDef;
+import org.minxc.emp.bpm.api.engine.plugin.def.BpmnPluginDef;
 
 import com.alibaba.fastjson.JSON;
 
 
-public interface PluginParse<T extends BpmPluginDef> {
+public interface PluginParse<T extends BpmnPluginDef> {
     /**
      * 解析插件定义。
      *
      * @param pluginDefJson
-     * @return BpmPluginDef
+     * @return BpmnPluginDef
      */
     public T parse(JSON json);
 

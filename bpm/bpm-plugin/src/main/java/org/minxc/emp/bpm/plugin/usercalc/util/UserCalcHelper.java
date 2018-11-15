@@ -12,7 +12,7 @@ import org.minxc.emp.bpm.plugin.usercalc.user.def.ExecutorVar;
 
 public class UserCalcHelper {
 	
-//	public static List<String> a(ExecutorVar executorVar, BpmUserCalcPluginSession pluginSession,
+//	public static List<String> a(ExecutorVar executorVar, BpmnUserCalcPluginSession pluginSession,
 //			boolean turnKeys2Ids) {
 //		Map<String, Object> vars = null;
 //		List<String> ids = new ArrayList();

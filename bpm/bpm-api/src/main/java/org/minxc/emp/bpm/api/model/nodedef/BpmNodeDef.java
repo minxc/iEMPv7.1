@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import org.minxc.emp.bpm.api.constant.NodeType;
-import org.minxc.emp.bpm.api.engine.plugin.context.BpmPluginContext;
+import org.minxc.emp.bpm.api.engine.plugin.context.BpmnPluginContext;
 import org.minxc.emp.bpm.api.engine.plugin.def.BpmDef;
 import org.minxc.emp.bpm.api.model.def.BpmProcessDef;
 import org.minxc.emp.bpm.api.model.def.NodeProperties;
@@ -77,7 +77,7 @@ public interface BpmNodeDef extends Serializable, BpmDef {
      *
      * @return List&lt;BpmNodePlugin>
      */
-    List<BpmPluginContext> getBpmPluginContexts();
+    List<BpmnPluginContext> getBpmnPluginContexts();
 
 
     /**
@@ -145,7 +145,7 @@ public interface BpmNodeDef extends Serializable, BpmDef {
      * 根据插件类名获取插件实例上下文定义。
      *
      * @param cls
-     * @return BpmPluginContext
+     * @return BpmnPluginContext
      */
     <T> T getPluginContext(Class<T> cls);
 

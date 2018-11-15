@@ -1,6 +1,6 @@
 package org.minxc.emp.bpm.api.engine.action.cmd;
 
-import org.minxc.emp.bpm.api.model.inst.IBpmInstance;
+import org.minxc.emp.bpm.api.model.inst.BpmnInstance;
 
 
 /**
@@ -14,6 +14,6 @@ public interface InstanceActionCmd extends ActionCmd {
 
     public String getInstanceId();
 
-    public IBpmInstance getBpmInstance();
+    public BpmnInstance getBpmInstance();
 
 }

@@ -9,12 +9,12 @@ import java.util.List;
 
 import org.minxc.emp.bpm.api.constant.EventType;
 import org.minxc.emp.bpm.api.engine.plugin.runtime.RunTimePlugin;
-import org.minxc.emp.bpm.engine.plugin.context.AbstractBpmExecutionPluginContext;
+import org.minxc.emp.bpm.engine.plugin.context.AbstractBpmnExecutionPluginContext;
 import org.minxc.emp.bpm.plugin.execution.nodemessage.def.NodeMessage;
-import org.minxc.emp.bpm.plugin.execution.nodemessage.def.NodeMessagePluginDef;
+import org.minxc.emp.bpm.plugin.execution.nodemessage.def.NodeMessagePluginDefinition;
 import org.minxc.emp.bpm.plugin.execution.nodemessage.plugin.NodeMessagePlugin;
 import org.minxc.emp.bpm.plugin.task.userassign.context.UserAssignPluginContext;
-import org.minxc.emp.bpm.plugin.task.userassign.def.UserAssignPluginDef;
+import org.minxc.emp.bpm.plugin.task.userassign.def.UserAssignPluginDefinition;
 import org.minxc.emp.core.util.AppContextUtil;
 import org.minxc.emp.core.util.StringUtil;
 import org.springframework.context.annotation.Scope;
@@ -22,7 +22,8 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Scope(value = "prototype")
-public class NodeMessagePluginContext extends AbstractBpmExecutionPluginContext<NodeMessagePluginDef> {
+public class NodeMessagePluginContext extends AbstractBpmnExecutionPluginContext<NodeMessagePluginDefinition> {
+
 	private static final long serialVersionUID = -8171025388788811778L;
 
 	public List<EventType> getEventTypes() {
@@ -38,21 +39,21 @@ public class NodeMessagePluginContext extends AbstractBpmExecutionPluginContext<
 		return NodeMessagePlugin.class;
 	}
 
-	protected NodeMessagePluginDef parseFromJson(JSON pluginJson) {
+	protected NodeMessagePluginDefinition parseFromJson(JSON pluginJson) {
 		JSONArray array = (JSONArray) pluginJson;
 		ArrayList<NodeMessage> messageList = new ArrayList<NodeMessage>();
-		for (int i = 0; i < array.size(); ++i) {
+		for (int i = 0; i < array.size(); i++) {
 			JSONObject msgJson = array.getJSONObject(i);
 			NodeMessage nodeMessage = (NodeMessage) JSON.toJavaObject((JSON) msgJson, NodeMessage.class);
 			if (StringUtil.isNotEmpty((String) msgJson.getString("userRules"))) {
 				UserAssignPluginContext userPluginContext = (UserAssignPluginContext) AppContextUtil
 						.getBean(UserAssignPluginContext.class);
 				userPluginContext.parse(msgJson.getString("userRules"));
-				nodeMessage.setUserRules(((UserAssignPluginDef) userPluginContext.getBpmPluginDef()).getRuleList());
+				nodeMessage.setUserRules(((UserAssignPluginDefinition) userPluginContext.getBpmPluginDef()).getRuleList());
 			}
 			messageList.add(nodeMessage);
 		}
-		return new NodeMessagePluginDef(messageList);
+		return new NodeMessagePluginDefinition(messageList);
 	}
 
 	public String getTitle() {

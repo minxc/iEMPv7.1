@@ -1,7 +1,6 @@
 package org.minxc.emp.bpm.engine.listener;
 
 import java.util.Date;
-import java.util.Map;
 import javax.annotation.Resource;
 import org.activiti.engine.impl.persistence.entity.ExecutionEntity;
 import org.minxc.emp.bpm.api.constant.EventType;
@@ -9,26 +8,22 @@ import org.minxc.emp.bpm.api.constant.InstanceStatus;
 import org.minxc.emp.bpm.api.constant.ScriptType;
 import org.minxc.emp.bpm.api.engine.action.cmd.BaseActionCmd;
 import org.minxc.emp.bpm.api.engine.action.cmd.InstanceActionCmd;
-import org.minxc.emp.bpm.api.engine.context.BpmContext;
-import org.minxc.emp.bpm.api.model.def.IBpmDefinition;
-import org.minxc.emp.bpm.api.model.inst.IBpmInstance;
-import org.minxc.emp.bpm.core.manager.BpmInstanceManager;
-import org.minxc.emp.bpm.core.manager.BpmTaskOpinionManager;
-import org.minxc.emp.bpm.core.manager.BpmTaskStackManager;
-import org.minxc.emp.bpm.core.model.BpmInstance;
+import org.minxc.emp.bpm.api.engine.context.BpmnContext;
+import org.minxc.emp.bpm.core.manager.BpmnInstanceManager;
+import org.minxc.emp.bpm.core.manager.BpmnTaskOpinionManager;
+import org.minxc.emp.bpm.core.manager.BpmnTaskStackManager;
+import org.minxc.emp.bpm.core.model.BpmnInstanceImpl;
 import org.minxc.emp.bpm.engine.action.cmd.DefaultInstanceActionCmd;
-import org.minxc.emp.bpm.engine.listener.AbstractInstanceListener;
-import org.slf4j.Logger;
 import org.springframework.stereotype.Component;
 
 @Component
 public class InstanceEndEventListener extends AbstractInstanceListener {
 	@Resource
-	BpmTaskOpinionManager aO;
+	BpmnTaskOpinionManager aO;
 	@Resource
-	BpmInstanceManager f;
+    BpmnInstanceManager f;
 	@Resource
-	BpmTaskStackManager aA;
+	BpmnTaskStackManager aA;
 
 	public EventType getBeforeTriggerEventType() {
 		return EventType.END_EVENT;
@@ -45,7 +40,7 @@ public class InstanceEndEventListener extends AbstractInstanceListener {
 
 	public void b(InstanceActionCmd instanceActionModel) {
 		this.aO.createOpinionByInstance(instanceActionModel.getBpmInstance(), instanceActionModel.getFormId(), false);
-		BpmInstance instance = (BpmInstance) instanceActionModel.getBpmInstance();
+		BpmnInstanceImpl instance = (BpmnInstanceImpl) instanceActionModel.getBpmInstance();
 		instance.setStatus(InstanceStatus.STATUS_END.getKey());
 		instance.setEndTime(new Date());
 		instance.setDuration(Long.valueOf(instance.getEndTime().getTime() - instance.getCreateTime().getTime()));
@@ -63,7 +58,7 @@ public class InstanceEndEventListener extends AbstractInstanceListener {
 	}
 
 	protected InstanceActionCmd a(ExecutionEntity excutionEntity) {
-		BaseActionCmd actionModle = (BaseActionCmd) BpmContext.getActionModel();
+		BaseActionCmd actionModle = (BaseActionCmd) BpmnContext.getActionModel();
 		DefaultInstanceActionCmd instanceModel = new DefaultInstanceActionCmd();
 		instanceModel.setBpmInstance(actionModle.getBpmInstance());
 		instanceModel.setBpmDefinition(actionModle.getBpmDefinition());

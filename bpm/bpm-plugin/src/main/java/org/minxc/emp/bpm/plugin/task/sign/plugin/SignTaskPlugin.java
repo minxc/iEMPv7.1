@@ -1,8 +1,8 @@
 package org.minxc.emp.bpm.plugin.task.sign.plugin;
 
-import org.minxc.emp.bpm.engine.plugin.runtime.abstact.AbstractBpmTaskPlugin;
-import org.minxc.emp.bpm.engine.plugin.session.BpmTaskPluginSession;
-import org.minxc.emp.bpm.plugin.task.sign.def.SignTaskPluginDef;
+import org.minxc.emp.bpm.engine.plugin.runtime.abstact.AbstractBpmnTaskPlugin;
+import org.minxc.emp.bpm.engine.plugin.session.BpmnTaskPluginSession;
+import org.minxc.emp.bpm.plugin.task.sign.def.SignTaskPluginDefinition;
 import org.springframework.stereotype.Component;
 
 /*
@@ -20,10 +20,10 @@ import org.springframework.stereotype.Component;
 *
  */
 @Component
-public class SignTaskPlugin extends AbstractBpmTaskPlugin<BpmTaskPluginSession, SignTaskPluginDef> {
+public class SignTaskPlugin extends AbstractBpmnTaskPlugin<BpmnTaskPluginSession, SignTaskPluginDefinition> {
 	
 	@Override
-	public Void execute(BpmTaskPluginSession pluginSession, SignTaskPluginDef pluginDef) {
+	public Void execute(BpmnTaskPluginSession pluginSession, SignTaskPluginDefinition pluginDef) {
 		return null;
 	}
 

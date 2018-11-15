@@ -2,7 +2,7 @@ package org.minxc.emp.bpm.api.engine.plugin.context;
 
 import java.io.Serializable;
 
-import org.minxc.emp.bpm.api.engine.plugin.def.BpmPluginDef;
+import org.minxc.emp.bpm.api.engine.plugin.def.BpmnPluginDef;
 import org.minxc.emp.bpm.api.engine.plugin.runtime.RunTimePlugin;
 
 public interface PluginContext extends Serializable{
@@ -22,11 +22,11 @@ public interface PluginContext extends Serializable{
     /**
      * 返回流程插件定义
      *
-     * @return BpmPluginDef
+     * @return BpmnPluginDef
      * @throws
      * @since 1.0.0
      */
-    BpmPluginDef getBpmPluginDef();
+    BpmnPluginDef getBpmPluginDef();
 
     /**
      * 获取插件标题。

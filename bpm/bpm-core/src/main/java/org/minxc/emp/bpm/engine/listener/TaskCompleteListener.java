@@ -1,9 +1,7 @@
 package org.minxc.emp.bpm.engine.listener;
 
-import java.io.Serializable;
 import java.util.Date;
 import java.util.Map;
-import java.util.Set;
 import javax.annotation.Resource;
 import org.activiti.engine.delegate.DelegateTask;
 import org.activiti.engine.impl.persistence.entity.TaskEntity;
@@ -12,39 +10,34 @@ import org.minxc.emp.bpm.api.constant.EventType;
 import org.minxc.emp.bpm.api.constant.InstanceStatus;
 import org.minxc.emp.bpm.api.constant.OpinionStatus;
 import org.minxc.emp.bpm.api.constant.ScriptType;
-import org.minxc.emp.bpm.api.engine.action.cmd.TaskActionCmd;
-import org.minxc.emp.bpm.api.engine.context.BpmContext;
-import org.minxc.emp.bpm.api.model.inst.IBpmInstance;
-import org.minxc.emp.bpm.api.model.task.IBpmTask;
-import org.minxc.emp.bpm.core.manager.BpmInstanceManager;
-import org.minxc.emp.bpm.core.manager.BpmTaskManager;
-import org.minxc.emp.bpm.core.manager.BpmTaskOpinionManager;
-import org.minxc.emp.bpm.core.manager.BpmTaskStackManager;
+import org.minxc.emp.bpm.api.engine.context.BpmnContext;
+import org.minxc.emp.bpm.core.manager.BpmnInstanceManager;
+import org.minxc.emp.bpm.core.manager.BpmnTaskManager;
+import org.minxc.emp.bpm.core.manager.BpmnTaskOpinionManager;
+import org.minxc.emp.bpm.core.manager.BpmnTaskStackManager;
 import org.minxc.emp.bpm.core.manager.TaskIdentityLinkManager;
-import org.minxc.emp.bpm.core.model.BpmInstance;
-import org.minxc.emp.bpm.core.model.BpmTaskOpinion;
-import org.minxc.emp.bpm.core.model.BpmTaskStack;
+import org.minxc.emp.bpm.core.model.BpmnInstanceImpl;
+import org.minxc.emp.bpm.core.model.BpmnTaskOpinion;
+import org.minxc.emp.bpm.core.model.BpmnTaskStack;
 import org.minxc.emp.bpm.engine.action.cmd.DefualtTaskActionCmd;
-import org.minxc.emp.bpm.engine.listener.AbstractTaskListener;
 import org.minxc.emp.core.util.BeanUtils;
 import org.minxc.emp.idm.api.model.User;
 import org.minxc.emp.system.util.ContextUtil;
-import org.slf4j.Logger;
 import org.springframework.stereotype.Component;
 
 @Component
 public class TaskCompleteListener extends AbstractTaskListener<DefualtTaskActionCmd> {
 	private static final long serialVersionUID = 6844821899585103714L;
 	@Resource
-	BpmInstanceManager f;
+	BpmnInstanceManager f;
 	@Resource
-	BpmTaskManager aQ;
+    BpmnTaskManager aQ;
 	@Resource
 	TaskIdentityLinkManager i;
 	@Resource
-	BpmTaskOpinionManager aO;
+	BpmnTaskOpinionManager aO;
 	@Resource
-	BpmTaskStackManager aA;
+	BpmnTaskStackManager aA;
 
 	public EventType getBeforeTriggerEventType() {
 		return EventType.TASK_COMPLETE_EVENT;
@@ -85,34 +78,34 @@ public class TaskCompleteListener extends AbstractTaskListener<DefualtTaskAction
 	}
 
 	public DefualtTaskActionCmd b(TaskEntity taskEntity) {
-		DefualtTaskActionCmd model = (DefualtTaskActionCmd) BpmContext.getActionModel();
+		DefualtTaskActionCmd model = (DefualtTaskActionCmd) BpmnContext.getActionModel();
 		model.setDelagateTask((DelegateTask) taskEntity);
 		return model;
 	}
 
 	private void j(DefualtTaskActionCmd taskActionModel) {
-		BpmTaskOpinion bpmTaskOpinion;
+		BpmnTaskOpinion bpmnTaskOpinion;
 		InstanceStatus flowStatus = InstanceStatus.getByActionName((String) taskActionModel.getActionName());
-		BpmInstance instance = (BpmInstance) taskActionModel.getBpmInstance();
+		BpmnInstanceImpl instance = (BpmnInstanceImpl) taskActionModel.getBpmInstance();
 		if (!flowStatus.getKey().equals(instance.getStatus())) {
 			instance.setStatus(flowStatus.getKey());
 			this.f.update(instance);
 		}
-		if ((bpmTaskOpinion = this.aO.getByTaskId(taskActionModel.getTaskId())) == null) {
+		if ((bpmnTaskOpinion = this.aO.getByTaskId(taskActionModel.getTaskId())) == null) {
 			return;
 		}
 		OpinionStatus opnionStatus = this.d(taskActionModel.getActionName());
-		bpmTaskOpinion.setStatus(opnionStatus.getKey());
-		bpmTaskOpinion.setApproveTime(new Date());
-		bpmTaskOpinion.setDurMs(
-				Long.valueOf(bpmTaskOpinion.getApproveTime().getTime() - bpmTaskOpinion.getCreateTime().getTime()));
-		bpmTaskOpinion.setOpinion(taskActionModel.getOpinion());
+		bpmnTaskOpinion.setStatus(opnionStatus.getKey());
+		bpmnTaskOpinion.setApproveTime(new Date());
+		bpmnTaskOpinion.setDurMs(
+				Long.valueOf(bpmnTaskOpinion.getApproveTime().getTime() - bpmnTaskOpinion.getCreateTime().getTime()));
+		bpmnTaskOpinion.setOpinion(taskActionModel.getOpinion());
 		User user = ContextUtil.getCurrentUser();
 		if (user != null) {
-			bpmTaskOpinion.setApprover(user.getUserId());
-			bpmTaskOpinion.setApproverName(user.getFullname());
+			bpmnTaskOpinion.setApprover(user.getUserId());
+			bpmnTaskOpinion.setApproverName(user.getFullname());
 		}
-		this.aO.update(bpmTaskOpinion);
+		this.aO.update(bpmnTaskOpinion);
 	}
 
 	private OpinionStatus d(String actionName) {
@@ -144,10 +137,10 @@ public class TaskCompleteListener extends AbstractTaskListener<DefualtTaskAction
 	}
 
 	private void k(DefualtTaskActionCmd taskActionModel) {
-		BpmTaskStack bpmTaskStack = this.aA.getByTaskId(taskActionModel.getTaskId());
-		bpmTaskStack.setEndTime(new Date());
-		this.aA.update(bpmTaskStack);
-		taskActionModel.setTaskStack(bpmTaskStack);
+		BpmnTaskStack bpmnTaskStack = this.aA.getByTaskId(taskActionModel.getTaskId());
+		bpmnTaskStack.setEndTime(new Date());
+		this.aA.update(bpmnTaskStack);
+		taskActionModel.setTaskStack(bpmnTaskStack);
 	}
 
 	private void l(DefualtTaskActionCmd taskActionModel) {

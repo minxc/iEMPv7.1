@@ -3,13 +3,9 @@ package org.minxc.emp.bpm.engine.action.handler.task;
 
 import org.minxc.emp.bpm.api.constant.ActionType;
 import org.minxc.emp.bpm.api.constant.TaskStatus;
-import org.minxc.emp.bpm.api.engine.action.cmd.ActionCmd;
 import org.minxc.emp.bpm.api.engine.action.cmd.BaseActionCmd;
-import org.minxc.emp.bpm.api.model.task.IBpmTask;
-import org.minxc.emp.bpm.core.manager.BpmTaskManager;
-import org.minxc.emp.bpm.core.model.BpmTask;
+import org.minxc.emp.bpm.core.model.BpmnTaskImpl;
 import org.minxc.emp.bpm.engine.action.cmd.DefualtTaskActionCmd;
-import org.minxc.emp.bpm.engine.action.handler.task.AbstractTaskActionHandler;
 import org.minxc.emp.core.api.exception.BusinessException;
 import org.minxc.emp.system.util.ContextUtil;
 import org.springframework.stereotype.Component;
@@ -23,7 +19,7 @@ public class TaskLockActionHandler extends AbstractTaskActionHandler<DefualtTask
 	public void f(DefualtTaskActionCmd model) {
 		this.b(model);
 		this.k((BaseActionCmd) model);
-		BpmTask task = (BpmTask) model.getBpmTask();
+		BpmnTaskImpl task = (BpmnTaskImpl) model.getBpmTask();
 		if (!task.getAssigneeId().equals("0")) {
 			throw new BusinessException("该任务不支持锁定,或已经被锁定");
 		}

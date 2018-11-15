@@ -14,18 +14,18 @@ import org.minxc.emp.bpm.api.constant.ScriptType;
 import org.minxc.emp.bpm.api.engine.action.cmd.ActionCmd;
 import org.minxc.emp.bpm.api.engine.action.cmd.InstanceActionCmd;
 import org.minxc.emp.bpm.api.engine.action.cmd.TaskActionCmd;
-import org.minxc.emp.bpm.api.engine.context.BpmContext;
-import org.minxc.emp.bpm.api.exception.BpmStatusCode;
-import org.minxc.emp.bpm.api.model.def.IBpmDefinition;
-import org.minxc.emp.bpm.api.model.inst.IBpmInstance;
-import org.minxc.emp.bpm.api.service.BpmProcessDefService;
-import org.minxc.emp.bpm.core.manager.BpmDefinitionManager;
-import org.minxc.emp.bpm.core.manager.BpmInstanceManager;
-import org.minxc.emp.bpm.core.manager.BpmTaskOpinionManager;
-import org.minxc.emp.bpm.core.model.BpmDefinition;
-import org.minxc.emp.bpm.core.model.BpmInstance;
+import org.minxc.emp.bpm.api.engine.context.BpmnContext;
+import org.minxc.emp.bpm.api.exception.BpmnStatusCode;
+import org.minxc.emp.bpm.api.model.def.BpmnDefinition;
+import org.minxc.emp.bpm.api.model.inst.BpmnInstance;
+import org.minxc.emp.bpm.api.service.BpmnProcessDefinitionService;
+import org.minxc.emp.bpm.core.manager.BpmnDefinitionManager;
+import org.minxc.emp.bpm.core.manager.BpmnInstanceManager;
+import org.minxc.emp.bpm.core.manager.BpmnTaskOpinionManager;
+import org.minxc.emp.bpm.core.model.BpmnDefinitionImpl;
+import org.minxc.emp.bpm.core.model.BpmnInstanceImpl;
 import org.minxc.emp.bpm.engine.action.cmd.DefaultInstanceActionCmd;
-import org.minxc.emp.bpm.engine.model.DefaultBpmProcessDef;
+import org.minxc.emp.bpm.engine.model.DefaultBpmnProcessDefinition;
 import org.minxc.emp.core.api.exception.BusinessException;
 import org.minxc.emp.core.util.BeanUtils;
 import org.minxc.emp.core.util.StringUtil;
@@ -36,13 +36,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class InstanceStartEventListener extends AbstractInstanceListener {
 	@Resource
-	BpmTaskOpinionManager aO;
+	BpmnTaskOpinionManager aO;
 	@Resource
-	BpmProcessDefService a;
+    BpmnProcessDefinitionService a;
 	@Resource
-	BpmInstanceManager f;
+	BpmnInstanceManager f;
 	@Resource
-	BpmDefinitionManager aP;
+    BpmnDefinitionManager aP;
 
 	public EventType getBeforeTriggerEventType() {
 		return EventType.START_EVENT;
@@ -80,11 +80,11 @@ public class InstanceStartEventListener extends AbstractInstanceListener {
 	}
 
 	protected InstanceActionCmd a(ExecutionEntity excutionEntity) {
-		ActionCmd actionCmd = BpmContext.getActionModel();
+		ActionCmd actionCmd = BpmnContext.getActionModel();
 		this.a(excutionEntity, actionCmd);
-		DefaultInstanceActionCmd actionModel = (DefaultInstanceActionCmd) BpmContext.getActionModel();
+		DefaultInstanceActionCmd actionModel = (DefaultInstanceActionCmd) BpmnContext.getActionModel();
 		actionModel.setExecutionEntity(excutionEntity);
-		BpmInstance instance = (BpmInstance) actionModel.getBpmInstance();
+		BpmnInstanceImpl instance = (BpmnInstanceImpl) actionModel.getBpmInstance();
 		if (BeanUtils.isEmpty((Object) instance.getActInstId())) {
 			instance.setActDefId(excutionEntity.getProcessDefinitionId());
 			instance.setActInstId(excutionEntity.getProcessInstanceId());
@@ -93,8 +93,8 @@ public class InstanceStartEventListener extends AbstractInstanceListener {
 	}
 
 	private void g(DefaultInstanceActionCmd data) {
-		BpmInstance instance = (BpmInstance) data.getBpmInstance();
-		DefaultBpmProcessDef processDef = (DefaultBpmProcessDef) this.a.getBpmProcessDef(instance.getDefId());
+		BpmnInstanceImpl instance = (BpmnInstanceImpl) data.getBpmInstance();
+		DefaultBpmnProcessDefinition processDef = (DefaultBpmnProcessDefinition) this.a.getBpmProcessDef(instance.getDefId());
 		String subjectRule = processDef.getExtProperties().getSubjectRule();
 		if (StringUtil.isEmpty((String) subjectRule)) {
 			return;
@@ -155,24 +155,24 @@ public class InstanceStartEventListener extends AbstractInstanceListener {
 		String preActionDefKey = preAction.getBpmInstance().getDefKey();
 		if (preAction instanceof InstanceActionCmd) {
 			if (!excutionEntity.getProcessDefinitionKey().equals(preActionDefKey)) {
-				throw new BusinessException("流程启动失败，错误的线程数据！", BpmStatusCode.ACTIONCMD_ERROR);
+				throw new BusinessException("流程启动失败，错误的线程数据！", BpmnStatusCode.ACTIONCMD_ERROR);
 			}
 			return;
 		}
 		ExecutionEntity callActivityNode = excutionEntity.getSuperExecution();
 		if (preAction instanceof TaskActionCmd && (callActivityNode == null
 				|| !preAction.getBpmInstance().getActInstId().equals(callActivityNode.getProcessInstanceId()))) {
-			throw new BusinessException(BpmStatusCode.ACTIONCMD_ERROR);
+			throw new BusinessException(BpmnStatusCode.ACTIONCMD_ERROR);
 		}
-		BpmDefinition subDefinition = this.aP.getByKey(excutionEntity.getProcessDefinitionKey());
-		BpmInstance subInstance = this.f.genInstanceByDefinition((IBpmDefinition) subDefinition);
+		BpmnDefinitionImpl subDefinition = this.aP.getByKey(excutionEntity.getProcessDefinitionKey());
+		BpmnInstanceImpl subInstance = this.f.genInstanceByDefinition((BpmnDefinition) subDefinition);
 		subInstance.setActInstId(excutionEntity.getProcessInstanceId());
 		subInstance.setParentInstId(preAction.getBpmInstance().getId());
 		this.f.create(subInstance);
 		DefaultInstanceActionCmd startAction = new DefaultInstanceActionCmd();
-		startAction.setBpmDefinition((IBpmDefinition) subDefinition);
-		startAction.setBpmInstance((IBpmInstance) subInstance);
+		startAction.setBpmDefinition((BpmnDefinition) subDefinition);
+		startAction.setBpmInstance((BpmnInstance) subInstance);
 		startAction.setBizDataMap(preAction.getBizDataMap());
-		BpmContext.setActionModel((ActionCmd) startAction);
+		BpmnContext.setActionModel((ActionCmd) startAction);
 	}
 }

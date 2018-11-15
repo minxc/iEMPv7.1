@@ -16,8 +16,8 @@ import org.minxc.emp.biz.api.model.BusinessTableRelation;
 import org.minxc.emp.biz.api.model.BusinessObject;
 import org.minxc.emp.biz.api.model.BusinessPermission;
 import org.minxc.emp.biz.api.service.BusinessDataService;
-import org.minxc.emp.biz.core.executor.assemblyval.AssemblyValExecuteChain;
-import org.minxc.emp.biz.core.executor.assemblyval.AssemblyValParam;
+import org.minxc.emp.biz.core.executor.assemblyval.AssemblyValueExecuteChain;
+import org.minxc.emp.biz.core.executor.assemblyval.AssemblyValueParam;
 import org.minxc.emp.biz.core.executor.parseval.ParseValExecuteChain;
 import org.minxc.emp.biz.core.executor.parseval.ParseValParam;
 import org.minxc.emp.biz.core.manager.BusinessObjectManager;
@@ -88,8 +88,8 @@ public class BusinessDataServiceImpl implements BusinessDataService {
 
 	private void a(JSONObject data, BusinessData ibusinessData) {
 		BusinessDataImpl businessData = (BusinessDataImpl) ibusinessData;
-		AssemblyValParam param = new AssemblyValParam(data, businessData);
-		ExecutorFactory.execute(AssemblyValExecuteChain.class, param);
+		AssemblyValueParam param = new AssemblyValueParam(data, businessData);
+		ExecutorFactory.execute(AssemblyValueExecuteChain.class, param);
 		Iterator var5 = businessData.getChildren().entrySet().iterator();
 
 		while (true) {

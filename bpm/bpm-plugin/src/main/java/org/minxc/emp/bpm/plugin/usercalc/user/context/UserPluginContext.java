@@ -3,20 +3,20 @@ package org.minxc.emp.bpm.plugin.usercalc.user.context;
 import com.alibaba.fastjson.JSONObject;
 
 import org.minxc.emp.bpm.api.engine.plugin.runtime.RunTimePlugin;
-import org.minxc.emp.bpm.engine.plugin.context.AbstractUserCalcPluginContext;
-import org.minxc.emp.bpm.plugin.usercalc.user.def.UserPluginDef;
+import org.minxc.emp.bpm.engine.plugin.context.AbstractUserCalculatePluginContext;
+import org.minxc.emp.bpm.plugin.usercalc.user.def.UserPluginDefinition;
 import org.minxc.emp.bpm.plugin.usercalc.user.runtime.UserPlugin;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 @Component
 @Scope(value = "prototype")
-public class UserPluginContext extends AbstractUserCalcPluginContext<UserPluginDef> {
+public class UserPluginContext extends AbstractUserCalculatePluginContext<UserPluginDefinition> {
 	private static final long serialVersionUID = 8757352972830358986L;
 
 	public String getDescription() {
 		String str = "";
-		UserPluginDef def = (UserPluginDef) this.getBpmPluginDef();
+		UserPluginDefinition def = (UserPluginDefinition) this.getBpmPluginDef();
 		if (def == null) {
 			return "";
 		}
@@ -42,9 +42,9 @@ public class UserPluginContext extends AbstractUserCalcPluginContext<UserPluginD
 		return UserPlugin.class;
 	}
 
-	protected UserPluginDef parseJson(JSONObject pluginJson) {
+	protected UserPluginDefinition parseJson(JSONObject pluginJson) {
 		String source = pluginJson.getString("source");
-		UserPluginDef def = new UserPluginDef();
+		UserPluginDefinition def = new UserPluginDefinition();
 		def.setSource(source);
 		if ("spec".equals(source)) {
 			String accounts = pluginJson.getString("account");
@@ -55,7 +55,7 @@ public class UserPluginContext extends AbstractUserCalcPluginContext<UserPluginD
 		return def;
 	}
 
-//	protected BpmUserCalcPluginDef parseJson(JSONObject jSONObject) {
+//	protected BpmnUserCalculatePluginDefinition parseJson(JSONObject jSONObject) {
 //		return this.d(jSONObject);
 //	}
 }

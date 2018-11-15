@@ -8,13 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.minxc.emp.bpm.api.constant.EventType;
-import org.minxc.emp.bpm.api.engine.plugin.context.UserCalcPluginContext;
+import org.minxc.emp.bpm.api.engine.plugin.context.UserCalculatePluginContext;
 import org.minxc.emp.bpm.api.engine.plugin.context.UserQueryPluginContext;
 import org.minxc.emp.bpm.api.engine.plugin.def.UserAssignRule;
 import org.minxc.emp.bpm.api.engine.plugin.runtime.RunTimePlugin;
-import org.minxc.emp.bpm.engine.plugin.context.AbstractBpmTaskPluginContext;
-import org.minxc.emp.bpm.engine.plugin.context.AbstractUserCalcPluginContext;
-import org.minxc.emp.bpm.plugin.task.userassign.def.UserAssignPluginDef;
+import org.minxc.emp.bpm.engine.plugin.context.AbstractBpmnTaskPluginContext;
+import org.minxc.emp.bpm.engine.plugin.context.AbstractUserCalculatePluginContext;
+import org.minxc.emp.bpm.plugin.task.userassign.def.UserAssignPluginDefinition;
 import org.minxc.emp.bpm.plugin.task.userassign.plugin.UserAssignPlugin;
 import org.minxc.emp.core.util.AppContextUtil;
 import org.minxc.emp.core.util.BeanUtils;
@@ -25,7 +25,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Scope(value = "prototype")
-public class UserAssignPluginContext extends AbstractBpmTaskPluginContext<UserAssignPluginDef>
+public class UserAssignPluginContext extends AbstractBpmnTaskPluginContext<UserAssignPluginDefinition>
 		implements
 			UserQueryPluginContext {
 	public Class getPluginClass() {
@@ -43,15 +43,15 @@ public class UserAssignPluginContext extends AbstractBpmTaskPluginContext<UserAs
 	}
 
 	public JSON getJson() {
-		List ruleList = ((UserAssignPluginDef) this.getBpmPluginDef()).getRuleList();
+		List ruleList = ((UserAssignPluginDefinition) this.getBpmPluginDef()).getRuleList();
 		if (BeanUtils.isEmpty((Object) ruleList)) {
 			return (JSON) JSON.parse((String) "[]");
 		}
 		return (JSON) JSON.toJSON((Object) ruleList);
 	}
 
-	protected UserAssignPluginDef parseFromJson(JSON pluginJson) {
-		UserAssignPluginDef def = new UserAssignPluginDef();
+	protected UserAssignPluginDefinition parseFromJson(JSON pluginJson) {
+		UserAssignPluginDefinition def = new UserAssignPluginDefinition();
 		JSONArray userRuleList = null;
 		if (pluginJson instanceof JSONObject) {
 			JSONObject json = (JSONObject) pluginJson;
@@ -73,12 +73,12 @@ public class UserAssignPluginContext extends AbstractBpmTaskPluginContext<UserAs
 				continue;
 			}
 			JSONArray calcAry = ruleJson.getJSONArray("calcs");
-			ArrayList<UserCalcPluginContext> calcPluginContextList = new ArrayList<UserCalcPluginContext>();
+			ArrayList<UserCalculatePluginContext> calcPluginContextList = new ArrayList<UserCalculatePluginContext>();
 			for (Object obj : calcAry) {
 				JSONObject calcObj = (JSONObject) obj;
 				String pluginContext = JsonUtil.getString((JSONObject) calcObj, (String) "pluginType")
 						+ "PluginContext";
-				AbstractUserCalcPluginContext ctx = (AbstractUserCalcPluginContext) AppContextUtil
+				AbstractUserCalculatePluginContext ctx = (AbstractUserCalculatePluginContext) AppContextUtil
 						.getBean((String) pluginContext);
 				if (ctx == null) {
 					this.LOG.warn("插件{}查找失败！", (Object) pluginContext);
@@ -97,7 +97,7 @@ public class UserAssignPluginContext extends AbstractBpmTaskPluginContext<UserAs
 		return "用户分配插件";
 	}
 
-//	protected BpmPluginDef parseFromJson(JSON jSON) {
+//	protected BpmnPluginDef parseFromJson(JSON jSON) {
 //		return this.g(jSON);
 //	}
 }

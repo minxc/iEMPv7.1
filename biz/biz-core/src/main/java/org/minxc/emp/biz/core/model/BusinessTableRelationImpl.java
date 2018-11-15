@@ -25,7 +25,7 @@ public class BusinessTableRelationImpl implements BusinessTableRelation, Seriali
 	private String tableKey;
 	private String tableComment;
 	private String type;
-	private List<BizTableRelationForeignKeyImpl> fks;
+	private List<BusinessTableRelationForeignKeyImpl> fks;
 	private BusinessTable table;
 	private BusinessTableRelation parent;
 	private BusinessObject busObj;
@@ -118,11 +118,11 @@ public class BusinessTableRelationImpl implements BusinessTableRelation, Seriali
 	 * @return
 	 */
 	@Override
-	public List<BizTableRelationForeignKeyImpl> getFks() {
+	public List<BusinessTableRelationForeignKeyImpl> getFks() {
 		return this.fks;
 	}
 
-	public void setFks(List<BizTableRelationForeignKeyImpl> fks) {
+	public void setFks(List<BusinessTableRelationForeignKeyImpl> fks) {
 		this.fks = fks;
 	}
 
