@@ -12,7 +12,7 @@ import org.minxc.emp.biz.api.model.BusinessData;
  * form_bus_set 处理接口
  * 构建组：x5-bpmx-platform
  */
-public interface FormBusManager {
+public interface FormBusinessManager {
     /**
      * 通过 boKey，id获取bo数据
      *

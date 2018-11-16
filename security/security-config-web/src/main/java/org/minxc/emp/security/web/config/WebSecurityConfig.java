@@ -110,6 +110,12 @@ public class WebSecurityConfig {
     @Bean(name = "securityMetadataSource")
     public FilterInvocationSecurityMetadataSource securityMetadataSource() {
         FilterInvocationSecurityMetadataSourceImpl securityMetaDataSource = new FilterInvocationSecurityMetadataSourceImpl();
+
+        //设置不需要过滤的url地址
+
+        List<String> ingnores = new ArrayList<>(8);
+        ingnores.add("/login.*");
+        securityMetaDataSource.setIngores(ingnores);
         return securityMetaDataSource;
     }
 

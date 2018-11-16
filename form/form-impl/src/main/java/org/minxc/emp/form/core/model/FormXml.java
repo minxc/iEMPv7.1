@@ -19,8 +19,8 @@ public class FormXml {
     @XmlElement(name = "bpmForm", type = FormDefinitionImpl.class)
     private FormDefinition bpmForm;
 
-    @XmlElement(name = "formBusSet", type = FormBusSet.class)
-    private FormBusSet formBusSet;
+    @XmlElement(name = "formBusinessSet", type = FormBusinessSet.class)
+    private FormBusinessSet formBusinessSet;
 
     @XmlElement(name = "boCodes")
     private List<String> boCodes;
@@ -40,13 +40,13 @@ public class FormXml {
         return bpmForm;
     }
  
-    public FormBusSet getFormBusSet() {
-        return formBusSet;
+    public FormBusinessSet getFormBusinessSet() {
+        return formBusinessSet;
     }
 
 
-    public void setFormBusSet(FormBusSet formBusSet) {
-        this.formBusSet = formBusSet;
+    public void setFormBusinessSet(FormBusinessSet formBusinessSet) {
+        this.formBusinessSet = formBusinessSet;
     }
 
 

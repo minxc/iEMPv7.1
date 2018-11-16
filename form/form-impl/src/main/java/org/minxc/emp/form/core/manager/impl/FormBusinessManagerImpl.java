@@ -12,10 +12,10 @@ import org.minxc.emp.core.util.BeanUtils;
 import org.minxc.emp.core.util.StringUtil;
 import org.minxc.emp.core.util.ThreadMsgUtil;
 import org.minxc.emp.form.api.model.FormDefinition;
-import org.minxc.emp.form.core.manager.FormBusManager;
-import org.minxc.emp.form.core.manager.FormBusSetManager;
+import org.minxc.emp.form.core.manager.FormBusinessManager;
+import org.minxc.emp.form.core.manager.FormBusinessSetManager;
 import org.minxc.emp.form.core.manager.FormDefinitionManager;
-import org.minxc.emp.form.core.model.FormBusSet;
+import org.minxc.emp.form.core.model.FormBusinessSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -29,13 +29,13 @@ import com.alibaba.fastjson.JSONArray;
  * 
  */
 @Service("formBusManager")
-public class FormBusManagerImpl implements FormBusManager {
+public class FormBusinessManagerImpl implements FormBusinessManager {
     private final Logger log = LoggerFactory.getLogger(getClass());
 
     @Resource
     BusinessDataService bizDataService;
     @Resource
-    FormBusSetManager formBusSetManager;
+    FormBusinessSetManager formBusinessSetManager;
     @Resource
     FormDefinitionManager formDefManager;
     @Resource
@@ -67,7 +67,7 @@ public class FormBusManagerImpl implements FormBusManager {
 
         BusinessData bizData = null;//bizDataService.getBusDataByBoData(boCode, JSON.parseObject(json));
 
-        FormBusSet busSet = formBusSetManager.getByFormKey(formKey);
+        FormBusinessSet busSet = formBusinessSetManager.getByFormKey(formKey);
         Map<String, Object> param = new HashMap<String, Object>();
         param.put("bizData", bizData);
 

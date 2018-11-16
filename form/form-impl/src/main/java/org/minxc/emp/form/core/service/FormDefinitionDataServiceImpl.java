@@ -9,7 +9,7 @@ import org.minxc.emp.biz.api.service.BusinessDataService;
 import org.minxc.emp.biz.api.service.BusinessObjectService;
 import org.minxc.emp.biz.api.service.BusinessPermissionService;
 import org.minxc.emp.biz.api.service.BusinessTableService;
-import org.minxc.emp.form.api.service.FormDefDataService;
+import org.minxc.emp.form.api.service.FormDefinitionDataService;
 import org.minxc.emp.form.core.manager.FormDefinitionManager;
 import org.minxc.emp.form.core.model.FormDefinitionImpl;
 import org.minxc.emp.form.core.model.FormDefinitionData;
@@ -23,7 +23,7 @@ import com.alibaba.fastjson.JSONObject;
  * FormDefData的服务类
  */
 @Service
-public class FormDefDataServiceImpl implements FormDefDataService {
+public class FormDefinitionDataServiceImpl implements FormDefinitionDataService {
 	
 	@Autowired
 	FormDefinitionManager formDefManager;

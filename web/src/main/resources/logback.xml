@@ -3,7 +3,8 @@
 <configuration scan="true">
    <!--  <property name="APP" value="${project.artifactId}" /> -->
     <property name="APP" value="emp" />
-    <property name="LOG_HOME" value="/data/www/log/${APP}" />
+    <property name="LOG_HOME" value="/data/log/${APP}" />
+
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>%d{yy-MM-dd.HH:mm:ss.SSS} [%-16t] %-5p %-22c{0} %X{ServiceId} - %m%n</pattern>
@@ -54,7 +55,7 @@
     	<appender-ref ref="DETAIL" />
     </logger>
 
-    <root level="DEBUG">
+    <root level="INFO">
         <appender-ref ref="DETAIL" />
         <appender-ref ref="CONSOLE" />
     </root>

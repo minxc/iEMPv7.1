@@ -28,9 +28,9 @@
 	<properties>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
-		<spring-boot-version>2.0.4.RELEASE</spring-boot-version>
-		<spring-version>5.0.8.RELEASE</spring-version>
-		<spring-security-version>5.0.7.RELEASE</spring-security-version>
+		<spring-boot-version>2.0.6.RELEASE</spring-boot-version>
+		<spring-version>5.0.10.RELEASE</spring-version>
+		<spring-security-version>5.0.9.RELEASE</spring-security-version>
 		<hikaricp>3.2.0</hikaricp>
 		<mysql-jdbc-version>8.0.11</mysql-jdbc-version>
 		<commons-collection-version>4.2</commons-collection-version>
@@ -40,7 +40,6 @@
 		<commons-math3> 3.6.1</commons-math3>
 		<commons-codec>1.11</commons-codec>
 		<commons-beanutils>1.9.3</commons-beanutils>
-
 		<lombok-version>1.18.2</lombok-version>
 		<guava-version>26.0-jre</guava-version>
 
@@ -53,14 +52,12 @@
 		<jackson>2.9.7</jackson>
 		<fastjson>1.2.49</fastjson>
 		<http-client>4.5.6</http-client>
-
 		<mybatis-pagehelper>5.1.4</mybatis-pagehelper>
 		<logback-version>1.2.3</logback-version>
 		<hibernate-validator>6.0.12.Final</hibernate-validator>
 		<validation-api>2.0.1.Final</validation-api>
 		<caffeine-version>2.6.2</caffeine-version>
 		<fastjson-version>1.2.51</fastjson-version>
-
 		<pinyin4j-version>2.5.1</pinyin4j-version>
 	</properties>
 

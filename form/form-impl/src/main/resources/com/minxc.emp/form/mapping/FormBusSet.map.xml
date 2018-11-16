@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.minxc.emp.form.core.dao.FormBusSetDao">
-    <resultMap id="FormBusSet" type="org.minxc.emp.form.core.model.FormBusSet">
+<mapper namespace="org.minxc.emp.form.core.dao.FormBusinessSetDao">
+    <resultMap id="FormBusSet" type="org.minxc.emp.form.core.model.FormBusinessSet">
         <id property="id" column="id_" jdbcType="VARCHAR"/>
         <result property="formKey" column="form_key_" jdbcType="VARCHAR"/>
         <result property="jsPreScript" column="JS_PRE_SCRIPT" jdbcType="VARCHAR"/>
@@ -13,7 +13,7 @@
         <result property="treeConf" column="treeConf" jdbcType="VARCHAR"/>
     </resultMap>
 
-    <insert id="create" parameterType="org.minxc.emp.form.core.model.FormBusSet">
+    <insert id="create" parameterType="org.minxc.emp.form.core.model.FormBusinessSet">
 		INSERT INTO form_bus_set
 		(id_,form_key_,JS_PRE_SCRIPT,JS_AFTER_SCRIPT,SHOW_SCRIPT,PRE_SCRIPT,AFTER_SCRIPT,isTreeList,treeConf)
 		VALUES 
@@ -47,7 +47,7 @@
         </if>
     </select>
 
-    <update id="update" parameterType="org.minxc.emp.form.core.model.FormBusSet">
+    <update id="update" parameterType="org.minxc.emp.form.core.model.FormBusinessSet">
 		UPDATE form_bus_set SET
 		form_key_=#{formKey,jdbcType=VARCHAR},
 		JS_PRE_SCRIPT=#{jsPreScript,jdbcType=VARCHAR},

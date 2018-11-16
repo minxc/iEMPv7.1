@@ -18,8 +18,8 @@ import org.minxc.emp.biz.api.model.BusinessPermission;
 import org.minxc.emp.biz.api.service.BusinessDataService;
 import org.minxc.emp.biz.core.executor.assemblyval.AssemblyValueExecuteChain;
 import org.minxc.emp.biz.core.executor.assemblyval.AssemblyValueParam;
-import org.minxc.emp.biz.core.executor.parseval.ParseValExecuteChain;
-import org.minxc.emp.biz.core.executor.parseval.ParseValParam;
+import org.minxc.emp.biz.core.executor.parseval.ParseValueExecuteChain;
+import org.minxc.emp.biz.core.executor.parseval.ParseValueParam;
 import org.minxc.emp.biz.core.manager.BusinessObjectManager;
 import org.minxc.emp.biz.core.model.BusinessTableRelationImpl;
 import org.minxc.emp.biz.core.model.BusinessDataImpl;
@@ -132,8 +132,8 @@ public class BusinessDataServiceImpl implements BusinessDataService {
 			while (var6.hasNext()) {
 				Entry<String, Object> enty = (Entry) var6.next();
 				if (!(enty.getValue() instanceof JSONArray) && !(enty.getValue() instanceof JSONObject)) {
-					ParseValParam param = new ParseValParam((String) enty.getKey(), enty.getValue(), bdData, relation);
-					ExecutorFactory.execute(ParseValExecuteChain.class, param);
+					ParseValueParam param = new ParseValueParam((String) enty.getKey(), enty.getValue(), bdData, relation);
+					ExecutorFactory.execute(ParseValueExecuteChain.class, param);
 				}
 
 				if (enty.getValue() instanceof JSONArray) {

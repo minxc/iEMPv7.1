@@ -6,10 +6,10 @@ import org.minxc.emp.biz.api.model.BusinessColumn;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ParseValTypeExecutor extends ParseValExecuteChain {
+public class ParseValueTypeExecutor extends ParseValueExecuteChain {
 	
 	@Override
-	protected void run(ParseValParam param) {
+	protected void run(ParseValueParam param) {
 		String key = param.getKey();
 		Object value = param.getValue();
 		if (value == null || StringUtils.isEmpty((String) value.toString())) {

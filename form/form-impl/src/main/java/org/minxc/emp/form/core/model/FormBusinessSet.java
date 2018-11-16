@@ -9,7 +9,7 @@ import org.minxc.emp.core.api.model.IdModel;
 /**
  * form_bus_set 实体对象
  */
-public class FormBusSet implements IdModel {
+public class FormBusinessSet implements IdModel {
 
 	private static final long serialVersionUID = -7216569159158971561L;
 

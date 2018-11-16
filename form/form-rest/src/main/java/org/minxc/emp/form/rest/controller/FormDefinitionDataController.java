@@ -22,7 +22,7 @@ import org.minxc.emp.core.api.query.QueryFilter;
 import org.minxc.emp.form.core.manager.FormDefinitionManager;
 import org.minxc.emp.form.core.model.FormDefinitionImpl;
 import org.minxc.emp.form.core.model.FormDefinitionData;
-import org.minxc.emp.form.core.service.FormDefDataServiceImpl;
+import org.minxc.emp.form.core.service.FormDefinitionDataServiceImpl;
 import org.minxc.emp.system.api.model.SystemDataSource;
 import org.minxc.emp.system.api.service.SystemDataSourceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +42,7 @@ import com.alibaba.fastjson.JSONObject;
 @RequestMapping("/form/formDefData/")
 public class FormDefinitionDataController extends GenericController {
 	@Autowired
-	FormDefDataServiceImpl formDefDataService;
+    FormDefinitionDataServiceImpl formDefDataService;
 	@Autowired
 	BusinessDataService businessDataService;
 	@Autowired

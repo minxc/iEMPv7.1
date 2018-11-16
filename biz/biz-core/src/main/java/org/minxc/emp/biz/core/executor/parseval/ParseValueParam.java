@@ -4,13 +4,13 @@ import java.util.Map;
 
 import org.minxc.emp.biz.core.model.BusinessTableRelationImpl;
 
-public class ParseValParam {
+public class ParseValueParam {
 	private String key;
 	private Object value;
 	private Map<String, Object> data;
 	private BusinessTableRelationImpl busTableRel;
 
-	public ParseValParam(String key, Object value, Map<String, Object> data, BusinessTableRelationImpl busTableRel) {
+	public ParseValueParam(String key, Object value, Map<String, Object> data, BusinessTableRelationImpl busTableRel) {
 		this.key = key;
 		this.value = value;
 		this.data = data;
