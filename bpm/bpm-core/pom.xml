@@ -11,22 +11,19 @@
 	</parent>
 	<artifactId>bpm-core</artifactId>
 	<name>bpm-core</name>
+	
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<dependencies>
-
 		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis-spring</artifactId>
 		</dependency>
-		
-		
 		<dependency>
 			<groupId>org.minxc.emp</groupId>
 			<artifactId>common-db</artifactId>
@@ -52,13 +49,10 @@
 			<artifactId>system-impl</artifactId>
 			<version>1.0-SNAPSHOT</version>
 		</dependency>
-		
-		<!-- https://mvnrepository.com/artifact/org.flowable/flowable-modeler -->
 		<dependency>
 			<groupId>org.flowable</groupId>
 			<artifactId>flowable-modeler</artifactId>
 			<version>5.23.0</version>
 		</dependency>
-		
 	</dependencies>
 </project>

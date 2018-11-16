@@ -141,7 +141,7 @@ public class WebSecurityConfig {
         DefaultSecurityFilterChain rootChains = buildSecurityFilterChain("/", resourceFilters); // // 路径
 
         List<Filter> anyFilters = new ArrayList<>();
-        anyFilters.add(channelProcessingFilter());
+//        anyFilters.add(channelProcessingFilter());   //TODO:暂时注释掉channelProcessingFilter
         anyFilters.add(securityContextPersistenceFilter());
         anyFilters.add(concurrentSessionFilter());
         anyFilters.add(usernamePasswordAuthenticationFilter());
@@ -172,7 +172,6 @@ public class WebSecurityConfig {
         ChannelProcessingFilter channelProcessingFilter = new ChannelProcessingFilter();
         channelProcessingFilter.setChannelDecisionManager(channelDecisionManager());
         channelProcessingFilter.setSecurityMetadataSource(securityMetadataSource());
-
         return channelProcessingFilter;
     }
 

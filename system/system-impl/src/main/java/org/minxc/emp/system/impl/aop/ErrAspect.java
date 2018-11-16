@@ -32,10 +32,10 @@ import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * @说明 使用AOP拦截出现异常的Controller, service的方法，并反馈标准的异常描述，记录日志<br>
- * 在需要拦截的方法之前添加注解  {@ErrorCatching }<br>
+ *  使用AOP拦截出现异常的Controller, service的方法，并反馈标准的异常描述，记录日志
+ * 在需要拦截的方法之前添加注解  {@ErrorCatching }
  * 一般使用在【不需要事物控制】的方法中，比如controller或者服务接口
- * @eg:创建用户方法@ErrorCatching 新增的账户存在 则可以throw new BusException("账户已存在");
+ *eg: 创建用户方法@ErrorCatching 新增的账户存在 则可以throw new BusException("账户已存在");
  * 则前端会接受到这个result的标准json。服务接口也是如此
  * 该方法避免了所有服务接口捕获异常反馈信息的重复操作
  */

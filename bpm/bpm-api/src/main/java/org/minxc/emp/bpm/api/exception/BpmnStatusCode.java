@@ -3,7 +3,7 @@ package org.minxc.emp.bpm.api.exception;
 import org.minxc.emp.core.api.status.StatusCode;
 
 /**
- * @说明 流程组件状态码定义
+  *  流程组件状态码定义
  */
 public enum BpmnStatusCode implements StatusCode {
 

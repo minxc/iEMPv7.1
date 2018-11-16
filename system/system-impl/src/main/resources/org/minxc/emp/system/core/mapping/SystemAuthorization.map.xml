@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.minxc.emp.system.impl.dao.SysAuthorizationDao">
+<mapper namespace="org.minxc.emp.system.impl.dao.SystemAuthorizationDao">
     
     
-    <resultMap id="SysAuthorization" type="org.minxc.emp.system.impl.model.BizAuthorizationEntity">
+    <resultMap id="SysAuthorization" type="org.minxc.emp.system.impl.model.BusinessAuthorizationEntity">
         <id column="RIGHTS_ID" jdbcType="VARCHAR" property="rightsId" />
 	    <result column="RIGHTS_OBJECT" jdbcType="VARCHAR" property="rightsObject" />
 	    <result column="RIGHTS_TARGET" jdbcType="VARCHAR" property="rightsTarget" />
@@ -22,7 +22,7 @@
 	  </sql>
   
   
-    <insert id="create" parameterType="org.minxc.emp.system.impl.model.BizAuthorizationEntity">
+    <insert id="create" parameterType="org.minxc.emp.system.impl.model.BusinessAuthorizationEntity">
 		INSERT INTO YMMG_AUTHORIZATION (RIGHTS_ID, RIGHTS_OBJECT, RIGHTS_TARGET, 
       RIGHTS_TYPE, RIGHTS_IDENTITY, RIGHTS_IDENTITY_NAME, 
       RIGHTS_PERMISSION_CODE, RIGHTS_CREATE_TIME, 
@@ -60,7 +60,7 @@
         </if>
     </select>
 
-    <update id="update" parameterType="org.minxc.emp.system.impl.model.BizAuthorizationEntity">
+    <update id="update" parameterType="org.minxc.emp.system.impl.model.BusinessAuthorizationEntity">
 		UPDATE YMMG_AUTHORIZATION
     SET RIGHTS_OBJECT = #{rightsObject,jdbcType=VARCHAR},
       RIGHTS_TARGET = #{rightsTarget,jdbcType=VARCHAR},

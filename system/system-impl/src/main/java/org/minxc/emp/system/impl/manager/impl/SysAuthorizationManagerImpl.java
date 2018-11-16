@@ -15,9 +15,9 @@ import org.minxc.emp.common.manager.impl.CommonManager;
 import org.minxc.emp.core.util.BeanUtils;
 import org.minxc.emp.idm.api.model.Group;
 import org.minxc.emp.idm.api.service.GroupService;
-import org.minxc.emp.system.impl.dao.SysAuthorizationDao;
+import org.minxc.emp.system.impl.dao.SystemAuthorizationDao;
 import org.minxc.emp.system.impl.manager.SystemAuthorizationManager;
-import org.minxc.emp.system.impl.model.BizAuthorizationEntity;
+import org.minxc.emp.system.impl.model.BusinessAuthorizationEntity;
 import org.minxc.emp.system.util.ContextUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,10 +25,10 @@ import org.springframework.stereotype.Service;
 
 
 @Service("sysAuthorizationManager")
-public class SysAuthorizationManagerImpl extends CommonManager<String, BizAuthorizationEntity> implements SystemAuthorizationManager {
+public class SysAuthorizationManagerImpl extends CommonManager<String, BusinessAuthorizationEntity> implements SystemAuthorizationManager {
 
     @Resource
-    private SysAuthorizationDao sysAuthorizationDao;
+    private SystemAuthorizationDao sysAuthorizationDao;
 
     @Autowired(required = false)
     private GroupService userGroupService;
@@ -42,8 +42,8 @@ public class SysAuthorizationManagerImpl extends CommonManager<String, BizAuthor
         List<Group> list = userGroupService.getGroupsByUserId(userId);
 
         Set<String> rights = new HashSet<String>();
-        rights.add(String.format("%s-%s", userId, BizAuthorizationEntity.RIGHT_TYPE_USER));
-        rights.add(String.format("%s-%s", BizAuthorizationEntity.RIGHT_TYPE_USER, BizAuthorizationEntity.RIGHT_TYPE_ALL));
+        rights.add(String.format("%s-%s", userId, BusinessAuthorizationEntity.RIGHT_TYPE_USER));
+        rights.add(String.format("%s-%s", BusinessAuthorizationEntity.RIGHT_TYPE_USER, BusinessAuthorizationEntity.RIGHT_TYPE_ALL));
 
 
         if (BeanUtils.isEmpty(list)) return rights;
@@ -91,16 +91,16 @@ public class SysAuthorizationManagerImpl extends CommonManager<String, BizAuthor
 
 
     @Override
-    public List<BizAuthorizationEntity> getByTarget(RightsObjectConstants rightsObject, String rightsTarget) {
+    public List<BusinessAuthorizationEntity> getByTarget(RightsObjectConstants rightsObject, String rightsTarget) {
         return sysAuthorizationDao.getByTarget(rightsObject.key(), rightsTarget);
     }
 
 
     @Override
-    public void createAll(List<BizAuthorizationEntity> sysAuthorizationList, String targetId, String targetObject) {
+    public void createAll(List<BusinessAuthorizationEntity> sysAuthorizationList, String targetId, String targetObject) {
         sysAuthorizationDao.deleteByTarget(targetObject, targetId);
 
-        for (BizAuthorizationEntity authorization : sysAuthorizationList) {
+        for (BusinessAuthorizationEntity authorization : sysAuthorizationList) {
             authorization.setRightsPermissionCode(String.format("%s-%s", authorization.getRightsIdentity(), authorization.getRightsType()));
             if (StringUtils.isEmpty(authorization.getRightsObject())) {
                 authorization.setRightsObject(targetObject);

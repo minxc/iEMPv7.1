@@ -8,7 +8,7 @@ import org.minxc.emp.form.api.model.FormDefinition;
 
 
 /**
- *  表单对象
+  *  表单对象
  */
 public class FormDefinitionImpl extends AbstractCommonModel implements FormDefinition {
 	

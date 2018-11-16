@@ -8,24 +8,11 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-
-    <groupId>org.minxc.emp</groupId>
+     <groupId>org.minxc.emp</groupId>
     <artifactId>common</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>common-api</module>
         <module>common-rest</module>
         <module>common-db</module>
     </modules>
-
-
-    <dependencies>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-        </dependency>
-
-
-    </dependencies>
-
 </project>

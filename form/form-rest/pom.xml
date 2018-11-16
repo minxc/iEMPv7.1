@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+<?xml version="1.0" ?>
 <project
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
 	xmlns="http://maven.apache.org/POM/4.0.0"
@@ -9,11 +9,8 @@
 		<artifactId>form</artifactId>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
-	<groupId>org.minxc.emp</groupId>
 	<artifactId>form-rest</artifactId>
-	<version>1.0-SNAPSHOT</version>
 	<name>form-rest</name>
-	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
@@ -28,8 +25,6 @@
 			<artifactId>javax.servlet-api</artifactId>
 			<scope>provided</scope>
 		</dependency>
-
-
 		<dependency>
 			<groupId>org.minxc.emp</groupId>
 			<artifactId>common-rest</artifactId>
@@ -45,6 +40,5 @@
 			<artifactId>form-impl</artifactId>
 			<version>1.0-SNAPSHOT</version>
 		</dependency>
-
 	</dependencies>
 </project>

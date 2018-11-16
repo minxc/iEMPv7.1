@@ -14,7 +14,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @EqualsAndHashCode(callSuper=true)
-public class BizAuthorizationEntity extends AbstractCommonModel {
+public class BusinessAuthorizationEntity extends AbstractCommonModel {
 
 	private static final long serialVersionUID = -9041027522795386765L;
 	public static final String RIGHT_TYPE_USER = "user";

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
  * SysTreeNodeService接口
  */
 @Service
-public class SysTreeNodeService implements SystemTreeNodeService {
+public class SystemTreeNodeServiceImpl implements SystemTreeNodeService {
     @Autowired
     SystemTreeNodeManager systemTreeNodeManager;
 

@@ -16,7 +16,7 @@ import groovy.lang.GroovyShell;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * 脚本引擎用于执行groovy脚本
+ * 脚本引擎用于执行 Groovy 脚本
  * 实现了IScript接口的类。 可以在脚本中使用。
  */
 @Slf4j
@@ -98,4 +98,6 @@ public class DefaultGroovyScriptEngineImpl implements GroovyScriptEngine, Applic
     		groovyBinding.setProperty(scriptMap.getKey(), scriptMap.getValue());
     	}
     }
+
+	
 }

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 /**
  * 角色
  */
+
 @Service
 public class RolePermissionCalculator extends GroupPermissionCalculator {
 	

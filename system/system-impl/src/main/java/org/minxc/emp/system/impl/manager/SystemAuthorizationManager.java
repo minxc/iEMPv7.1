@@ -6,10 +6,10 @@ import java.util.Set;
 
 import org.minxc.emp.basis.api.constant.RightsObjectConstants;
 import org.minxc.emp.common.manager.Manager;
-import org.minxc.emp.system.impl.model.BizAuthorizationEntity;
+import org.minxc.emp.system.impl.model.BusinessAuthorizationEntity;
 
 
-public interface SystemAuthorizationManager extends Manager<String, BizAuthorizationEntity> {
+public interface SystemAuthorizationManager extends Manager<String, BusinessAuthorizationEntity> {
 
     Set<String> getUserRights(String userId);
 
@@ -22,9 +22,9 @@ public interface SystemAuthorizationManager extends Manager<String, BizAuthoriza
      */
     Map<String, Object> getUserRightsSql(RightsObjectConstants rightsObject, String userId, String targetKey);
 
-    List<BizAuthorizationEntity> getByTarget(RightsObjectConstants rightsObject, String rightsTarget);
+    List<BusinessAuthorizationEntity> getByTarget(RightsObjectConstants rightsObject, String rightsTarget);
 
 
-    void createAll(List<BizAuthorizationEntity> sysAuthorizationList, String targetId, String targetObject);
+    void createAll(List<BusinessAuthorizationEntity> sysAuthorizationList, String targetId, String targetObject);
 
 }

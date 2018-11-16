@@ -11,7 +11,7 @@
     <artifactId>basis</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>basis-db</module>
+        
     <module>basis-api</module>
     <module>basis-impl</module>
   </modules>

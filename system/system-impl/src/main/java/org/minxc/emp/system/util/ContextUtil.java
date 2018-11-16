@@ -7,7 +7,6 @@ import org.minxc.emp.idm.api.context.CurrentContext;
 import org.minxc.emp.idm.api.model.Group;
 import org.minxc.emp.idm.api.model.User;
 
-
 /**
  * 获取上下文数据对象的工具类。
  */

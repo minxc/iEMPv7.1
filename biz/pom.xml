@@ -13,8 +13,7 @@
 
 	<modules>
 		<module>biz-api</module>
-		<module>biz-impl</module>
 		<module>biz-rest</module>
-    <module>biz-core</module>
+		<module>biz-core</module>
   </modules>
 </project>

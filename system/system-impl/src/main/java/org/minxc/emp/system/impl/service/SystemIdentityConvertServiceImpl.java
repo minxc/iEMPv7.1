@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 
 
 @Component
-public class SysIdentityConvertServiceImpl implements SystemIdentityConvert {
+public class SystemIdentityConvertServiceImpl implements SystemIdentityConvert {
 	
 	@Resource
 	GroupService groupService;

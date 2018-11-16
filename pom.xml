@@ -8,6 +8,7 @@
 	<artifactId>iEMPv7.1</artifactId>
 	<packaging>pom</packaging>
 	<version>1.0-SNAPSHOT</version>
+	
 	<modules>
 		<module>core</module>
 		<module>common</module>
@@ -22,8 +23,8 @@
 		<module>windows-service</module>
 		<module>cache</module>
 		<module>workflow</module>
+		<module>shiro</module>
 	</modules>
-
 
 	<properties>
 		<maven.compiler.source>1.8</maven.compiler.source>
@@ -40,8 +41,8 @@
 		<commons-math3> 3.6.1</commons-math3>
 		<commons-codec>1.11</commons-codec>
 		<commons-beanutils>1.9.3</commons-beanutils>
-		<lombok-version>1.18.2</lombok-version>
-		<guava-version>26.0-jre</guava-version>
+		<lombok-version>1.18.4</lombok-version>
+		<guava-version>27.0-jre</guava-version>
 
 		<slf4j-version>1.7.25</slf4j-version>
 		<thymeleaf-version>3.0.9.RELEASE</thymeleaf-version>
@@ -88,13 +89,11 @@
 				<version>${hibernate-validator}</version>
 			</dependency>
 
-
 			<dependency>
 				<groupId>ch.qos.logback</groupId>
 				<artifactId>logback-core</artifactId>
 				<version>${logback-version}</version>
 			</dependency>
-
 
 			<!--Spring -->
 			<dependency>
@@ -132,7 +131,6 @@
 				<version>${spring-boot-version}</version>
 				<optional>true</optional>
 			</dependency>
-
 
 			<!--springBoot的aop -->
 			<dependency>
@@ -251,13 +249,12 @@
 				<artifactId>thymeleaf</artifactId>
 				<version>${thymeleaf-version}</version>
 			</dependency>
-			<!-- https://mvnrepository.com/artifact/org.thymeleaf/thymeleaf-spring5 -->
 			<dependency>
 				<groupId>org.thymeleaf</groupId>
 				<artifactId>thymeleaf-spring5</artifactId>
 				<version>${thymeleaf-version}</version>
 			</dependency>
-			<!-- https://mvnrepository.com/artifact/com.belerweb/pinyin4j -->
+			
 			<dependency>
 				<groupId>com.belerweb</groupId>
 				<artifactId>pinyin4j</artifactId>
@@ -270,7 +267,6 @@
 				<version>${spring-security-version}</version>
 			</dependency>
 
-			<!--Jackson 工具类库 -->
 			<dependency>
 				<groupId>com.fasterxml.jackson.dataformat</groupId>
 				<artifactId>jackson-dataformat-yaml</artifactId>
@@ -292,13 +288,11 @@
 				<artifactId>jackson-databind</artifactId>
 				<version>${jackson}</version>
 			</dependency>
-			<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
 			<dependency>
 				<groupId>com.fasterxml.jackson.core</groupId>
 				<artifactId>jackson-core</artifactId>
 				<version>${jackson}</version>
 			</dependency>
-			<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations -->
 			<dependency>
 				<groupId>com.fasterxml.jackson.core</groupId>
 				<artifactId>jackson-annotations</artifactId>
