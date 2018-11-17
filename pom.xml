@@ -60,6 +60,7 @@
 		<caffeine-version>2.6.2</caffeine-version>
 		<fastjson-version>1.2.51</fastjson-version>
 		<pinyin4j-version>2.5.1</pinyin4j-version>
+		<joda-time>2.10.1</joda-time>
 	</properties>
 
 	<dependencies>
@@ -99,6 +100,17 @@
 			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-context</artifactId>
+				<version>${spring-version}</version>
+			</dependency>
+			<!--Spring -->
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-orm</artifactId>
+				<version>${spring-version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-test</artifactId>
 				<version>${spring-version}</version>
 			</dependency>
 
@@ -310,6 +322,12 @@
 				<artifactId>fastjson</artifactId>
 				<version>${fastjson-version}</version>
 			</dependency>
+<!-- https://mvnrepository.com/artifact/joda-time/joda-time -->
+<dependency>
+    <groupId>joda-time</groupId>
+    <artifactId>joda-time</artifactId>
+    <version>${joda-time}</version>
+</dependency>
 
 		</dependencies>
 	</dependencyManagement>

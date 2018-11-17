@@ -55,6 +55,7 @@ import org.springframework.security.web.authentication.session.SessionAuthentica
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.security.web.context.SecurityContextPersistenceFilter;
 import org.springframework.security.web.session.ConcurrentSessionFilter;
+import org.springframework.security.web.session.SessionManagementFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 
@@ -118,8 +119,10 @@ public class WebSecurityConfig {
         securityMetaDataSource.setIngores(ingnores);
         return securityMetaDataSource;
     }
-
-    private SecurityRequestCsrfMatcher csrfSecurityRequestMatcher() { // 加入需要排除阻止CSRF攻击的链表链接，链接地址中包含/rest字符串的，对其忽略CSRF保护策略
+    
+    
+    @SuppressWarnings("unused")
+	private SecurityRequestCsrfMatcher csrfSecurityRequestMatcher() { // 加入需要排除阻止CSRF攻击的链表链接，链接地址中包含/rest字符串的，对其忽略CSRF保护策略
         SecurityRequestCsrfMatcher csrfSecurityRequestMatcher = new SecurityRequestCsrfMatcher();
         List<String> list = new ArrayList<String>();
         list.add("/rest/");
@@ -129,34 +132,35 @@ public class WebSecurityConfig {
 
     @Bean(name = "springSecurityFilterChain")
     public FilterChainProxy springSecurityFilterChain() {
-
+    	
         List<SecurityFilterChain> filterChains = new ArrayList<>();
-
         List<Filter> resourceFilters = new ArrayList<>();
         resourceFilters.add(channelProcessingFilter());
         DefaultSecurityFilterChain resourcesChains = buildSecurityFilterChain("/resources/**", resourceFilters); // /resources/**
+        
         // 路径
         DefaultSecurityFilterChain loginChains = buildSecurityFilterChain("/login", resourceFilters); // /login 路径
         DefaultSecurityFilterChain errorChains = buildSecurityFilterChain("/error", resourceFilters); // /error 路径
         DefaultSecurityFilterChain rootChains = buildSecurityFilterChain("/", resourceFilters); // // 路径
 
         List<Filter> anyFilters = new ArrayList<>();
-//        anyFilters.add(channelProcessingFilter());   //TODO:暂时注释掉channelProcessingFilter
+        anyFilters.add(channelProcessingFilter());   //TODO:暂时注释掉channelProcessingFilter
         anyFilters.add(securityContextPersistenceFilter());
         anyFilters.add(concurrentSessionFilter());
         anyFilters.add(usernamePasswordAuthenticationFilter());
         anyFilters.add(rememberMeAuthenticationFilter());
         anyFilters.add(logoutFilter());
         anyFilters.add(exceptionTranslationFilter());
+        anyFilters.add(sessionManagementFilter());
         anyFilters.add(filterSecurityInterceptor());
 
         DefaultSecurityFilterChain anyChains = buildSecurityFilterChain("/**", anyFilters);
 
-        filterChains.add(resourcesChains);
-        filterChains.add(loginChains);
-        filterChains.add(errorChains);
+//        filterChains.add(resourcesChains);
+//        filterChains.add(loginChains);
+//        filterChains.add(errorChains);
         filterChains.add(rootChains);
-        filterChains.add(anyChains);
+//        filterChains.add(anyChains);
         FilterChainProxy filterChainProxy = new FilterChainProxy(filterChains);
         return filterChainProxy;
     }
@@ -380,6 +384,9 @@ public class WebSecurityConfig {
         return exceptionTranslationFilter;
     }
 
+    
+    
+    //登录过滤处理器
     @Bean
     public AuthenticationEntryPoint authenticationEntryPoint() {
         LoginUrlAuthenticationEntryPoint authenticationEntryPoint = new LoginUrlAuthenticationEntryPoint(
@@ -433,4 +440,10 @@ public class WebSecurityConfig {
 //            }
 //        }
 //    }
+    
+    @Bean("SESSION_MANAGEMENT_FILTER")
+    public SessionManagementFilter  sessionManagementFilter() {
+    	SessionManagementFilter sessionFilter = new SessionManagementFilter(httpSessionSecurityContextRepository(), sessionAuthenticationStrategy());
+    	return sessionFilter;
+    }
 }

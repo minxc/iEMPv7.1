@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
+<!--
+<pattern>%date{yyyy-MM-dd HH:mm:ss.SSS} | %thread | %-5level | %logger{36}.%M\(%line\) | %X{clientDatetime} | %X{ip} | %X{clientIp} | %X{upIp} | %X{tokenId} | %X{operateId} | %X{deviceId} | %chain | %X{systemId} | %X{clientSystemId} | %X{serverSystemId} | %msg%n</pattern> 
+ -->
 <configuration scan="true">
    <!--  <property name="APP" value="${project.artifactId}" /> -->
     <property name="APP" value="emp" />
@@ -7,14 +9,15 @@
 
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%d{yy-MM-dd.HH:mm:ss.SSS} [%-16t] %-5p %-22c{0} %X{ServiceId} - %m%n</pattern>
+            <pattern>%date{yyyy-MM-dd HH:mm:ss.SSS} | %thread | %-5level | %logger{36}.%M\(%line\) | %X{ServiceId} - %m%n</pattern>
         </encoder>
     </appender>
     <appender name="DETAIL"
         class="ch.qos.logback.core.rolling.RollingFileAppender" additivity="false">
         <File>${LOG_HOME}/${APP}_detail.log</File>
         <encoder>
-            <pattern>%d{yy-MM-dd.HH:mm:ss.SSS} [%-16t] %-5p %-22c{0} %X{ServiceId} - %m%n</pattern>
+            <!-- <pattern>%d{yy-MM-dd.HH:mm:ss.SSS} [%-16t] %-5p %-22c{0} %X{ServiceId} - %m%n</pattern> -->
+             <pattern>%date{yyyy-MM-dd HH:mm:ss.SSS} | %thread | %-5level | %logger{36}.%M\(%line\) | %X{ServiceId} - %m%n</pattern>
         </encoder>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>${LOG_HOME}/${APP}_detail.log.%d{yyyyMMdd}</fileNamePattern>
@@ -35,8 +38,7 @@
     <logger name="ACCESS">
         <appender-ref ref="ACCESS" />
     </logger>
-    <logger name="druid.sql.Statement" level="DEBUG" />
-    <logger name="org.minxc.emp" level="DEBUG" >
+    <logger name="org.minxc.emp" level="INFO" >
     	<appender-ref ref="DETAIL" />
     </logger>
     <logger name="java.sql.Connection" level="DEBUG" >

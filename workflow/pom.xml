@@ -17,5 +17,14 @@
   </properties>
   <modules>
   	<module>workflow-core</module>
+  	<module>workflow-engine</module>
+  	<module>workflow-bpmn-converter</module>
+  	<module>workflow-process-validation</module>
+  	<module>workflow-image-generator</module>
+  	<module>workflow-bpmn-model</module>
+  	<module>workflow-modeler</module>
+  	<module>worflow-common-rest</module>
+  	<module>workflow-json-converter</module>
+  	<module>workflow-spring</module>
   </modules>
 </project>

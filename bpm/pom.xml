@@ -12,11 +12,10 @@
 
 	<packaging>pom</packaging>
 	<dependencies>
-		<!-- https://mvnrepository.com/artifact/org.flowable/flowable-engine -->
 		<dependency>
-			<groupId>org.flowable</groupId>
-			<artifactId>flowable-engine</artifactId>
-			<version>5.23.0</version>
+			<groupId>org.minxc.emp</groupId>
+			<artifactId>workflow-engine</artifactId>
+			<version>1.0-SNAPSHOT</version>
 		</dependency>
 
 	</dependencies>
@@ -24,8 +23,8 @@
 	<modules>
 		<module>bpm-api</module>
 		<module>bpm-rest</module>
-    <module>bpm-act</module>
-    <module>bpm-plugin</module>
-    <module>bpm-core</module>
+	    <module>bpm-act</module>
+	    <module>bpm-plugin</module>
+	    <module>bpm-core</module>
   </modules>
 </project>

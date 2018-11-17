@@ -18,7 +18,6 @@
         <module>core-impl</module>
         <module>core-cache</module>
     </modules>
-
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework</groupId>
