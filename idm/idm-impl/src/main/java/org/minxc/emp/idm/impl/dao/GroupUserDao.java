@@ -46,7 +46,7 @@ public interface GroupUserDao extends CommonDao<String, GroupUserEntity> {
     Integer cancelUserMasterGroup(String userId);
 
     /**
-     * 根据组织和关系id获取用户列表。
+          *  根据组织和关系id获取用户列表。
      *
      * @param queryFilter
      * @return

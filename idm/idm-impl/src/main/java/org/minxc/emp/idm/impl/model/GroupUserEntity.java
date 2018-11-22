@@ -1,12 +1,14 @@
 package org.minxc.emp.idm.impl.model;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.minxc.emp.core.impl.model.AbstractCommonModel;
+
+import lombok.ToString;
 
 
 /**
  * 用户组织关系 实体对象
  */
+@ToString
 public class GroupUserEntity extends AbstractCommonModel {
 
 	private static final long serialVersionUID = -3921358687321165230L;
@@ -62,11 +64,6 @@ public class GroupUserEntity extends AbstractCommonModel {
         this.id = id;
     }
 
-    /**
-     * 返回 id_
-     *
-     * @return
-     */
     public String getId() {
         return this.id;
     }
@@ -76,11 +73,6 @@ public class GroupUserEntity extends AbstractCommonModel {
         this.userId = userId;
     }
 
-    /**
-     * 返回 user_id_
-     *
-     * @return
-     */
     public String getUserId() {
         return this.userId;
     }
@@ -90,7 +82,7 @@ public class GroupUserEntity extends AbstractCommonModel {
     }
 
     /**
-     * 返回 0:非主部门，1：主部门
+     * 	返回 0:非主部门，1：主部门
      *
      * @return
      */
@@ -117,19 +109,6 @@ public class GroupUserEntity extends AbstractCommonModel {
      */
     public String getRelId() {
         return this.relId;
-    }
-
-    /**
-     * @see Object#toString()
-     */
-    public String toString() {
-        return new ToStringBuilder(this)
-                .append("id", this.id)
-                .append("groupId", this.groupId)
-                .append("userId", this.userId)
-                .append("isMaster", this.isMaster)
-                .append("relId", this.relId)
-                .toString();
     }
 
 

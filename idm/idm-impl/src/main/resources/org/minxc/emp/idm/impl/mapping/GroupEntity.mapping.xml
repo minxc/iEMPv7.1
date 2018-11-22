@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.dstz.org.core.dao.GroupDao">
-	<resultMap id="Group" type="com.dstz.org.core.model.Group">
+<mapper namespace="org.minxc.emp.idm.impl.dao.GroupDao">
+	<resultMap id="Group" type="org.minxc.emp.idm.impl.model.GroupEntity">
 		<id property="id" column="id_" jdbcType="VARCHAR"/>
 		<result property="name" column="name_" jdbcType="VARCHAR"/>
 		<result property="parentId" column="parent_id_" jdbcType="VARCHAR"/>

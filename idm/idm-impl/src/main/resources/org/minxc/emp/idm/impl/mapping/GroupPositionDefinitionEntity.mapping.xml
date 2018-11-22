@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.minxc.emp.idm.impl.dao.GroupPositionDefinitionDao">
+    <resultMap id="GroupPositionDefinition" type="org.minxc.emp.idm.impl.model.GroupPositionDefinitionEntity">
+        <id property="id" column="ID" jdbcType="VARCHAR"/>
+        <result property="name" column="NAME" jdbcType="VARCHAR"/>
+        <result property="code" column="CODE" jdbcType="VARCHAR"/>
+        <result property="postLevel" column="POST_LEVEL" jdbcType="VARCHAR"/>
+        <result property="description" column="DESCRIPTION" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <insert id="create" parameterType="org.minxc.emp.idm.impl.model.GroupPositionDefinitionEntity">
+		INSERT INTO YMMG_POSITION (ID, NAME, CODE,POST_LEVEL, DESCRIPTION)
+		VALUES 
+		(#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{postLevel,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR})
+	</insert>
+
+    <select id="get" parameterType="java.lang.String" resultMap="org.minxc.emp.idm.impl.model.GroupPositionDefinitionEntity">
+		SELECT * FROM YMMG_POSITION 
+		WHERE 
+		ID =#{id}
+	</select>
+
+    <select id="getByCode" parameterType="java.lang.String" resultMap="GroupPositionDefinition">
+		SELECT * FROM YMMG_POSITION 
+		WHERE 
+		CODE = #{code}
+	</select>
+    <select id="query" parameterType="java.util.Map" resultMap="GroupPositionDefinition">
+        SELECT * FROM YMMG_POSITION
+        <where>
+            <if test="whereSql!=null">
+                ${whereSql}
+            </if>
+        </where>
+        <if test="orderBySql!=null">
+            ORDER BY ${orderBySql}
+        </if>
+        <if test="orderBySql==null">
+            ORDER BY ID DESC
+        </if>
+    </select>
+
+
+    <update id="update" parameterType="org.minxc.emp.idm.impl.model.GroupPositionDefinitionEntity">
+		UPDATE YMMG_POSITION SET
+		NAME =#{name,jdbcType=VARCHAR},
+		CODE =#{code,jdbcType=VARCHAR},
+		POST_LEVEL =#{postLevel,jdbcType=VARCHAR},
+		DESCRIPTION =#{description,jdbcType=VARCHAR}
+		WHERE
+		ID =#{id}
+	</update>
+
+    <delete id="remove" parameterType="java.lang.String">
+		DELETE FROM YMMG_POSITION 
+		WHERE
+		ID =#{id}
+	</delete>
+
+</mapper>

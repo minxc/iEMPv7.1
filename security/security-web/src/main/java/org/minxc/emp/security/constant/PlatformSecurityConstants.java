@@ -7,7 +7,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 public class PlatformSecurityConstants {
 
-    private final static String ROLE_SUPER = "ROLE_SUPER";//超级
+    private final static String ROLE_SUPER = "ROLE_SUPER";//超级用户
     private final static String ROLE_PUBLIC = "ROLE_PUBLIC";//公共角色
     private final static String ROLE_ANONYMOUS = "ROLE_ANONYMOUS";//匿名级
 

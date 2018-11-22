@@ -142,7 +142,6 @@ public class WebSecurityConfig {
         DefaultSecurityFilterChain loginChains = buildSecurityFilterChain("/login", resourceFilters); // /login 路径
         DefaultSecurityFilterChain errorChains = buildSecurityFilterChain("/error", resourceFilters); // /error 路径
         DefaultSecurityFilterChain rootChains = buildSecurityFilterChain("/", resourceFilters); // // 路径
-
         List<Filter> anyFilters = new ArrayList<>();
         anyFilters.add(channelProcessingFilter());   //TODO:暂时注释掉channelProcessingFilter
         anyFilters.add(securityContextPersistenceFilter());
@@ -153,17 +152,17 @@ public class WebSecurityConfig {
         anyFilters.add(exceptionTranslationFilter());
         anyFilters.add(sessionManagementFilter());
         anyFilters.add(filterSecurityInterceptor());
-
         DefaultSecurityFilterChain anyChains = buildSecurityFilterChain("/**", anyFilters);
-
-//        filterChains.add(resourcesChains);
-//        filterChains.add(loginChains);
-//        filterChains.add(errorChains);
+        filterChains.add(resourcesChains);
+        filterChains.add(loginChains);
+        filterChains.add(errorChains);
         filterChains.add(rootChains);
-//        filterChains.add(anyChains);
+        filterChains.add(anyChains);
         FilterChainProxy filterChainProxy = new FilterChainProxy(filterChains);
         return filterChainProxy;
     }
+    
+    
 
     private DefaultSecurityFilterChain buildSecurityFilterChain(String pathMatcherPattern, List<Filter> filters) {
         RequestMatcher requestMatcher = new AntPathRequestMatcher(pathMatcherPattern);
@@ -390,7 +389,7 @@ public class WebSecurityConfig {
     @Bean
     public AuthenticationEntryPoint authenticationEntryPoint() {
         LoginUrlAuthenticationEntryPoint authenticationEntryPoint = new LoginUrlAuthenticationEntryPoint(
-                "/login?para=errorauth");
+                "/login");
         authenticationEntryPoint.setUseForward(false);
         authenticationEntryPoint.setForceHttps(false);
         return authenticationEntryPoint;

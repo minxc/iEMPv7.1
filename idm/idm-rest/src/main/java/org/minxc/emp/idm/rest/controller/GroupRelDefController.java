@@ -6,8 +6,8 @@ import org.minxc.emp.common.rest.util.RequestUtil;
 import org.minxc.emp.core.api.aop.annotation.ErrorCatching;
 import org.minxc.emp.core.api.exception.BusinessException;
 import org.minxc.emp.core.api.response.impl.ResultMessage;
-import org.minxc.emp.idm.impl.manager.GroupRelDefManager;
-import org.minxc.emp.idm.impl.model.GroupRelDefEntity;
+import org.minxc.emp.idm.impl.manager.GroupPositionDefinitionManager;
+import org.minxc.emp.idm.impl.model.GroupPositionDefinitionEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,15 +22,15 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/org/groupRelDef")
-public class GroupRelDefController extends CommonController<GroupRelDefEntity> {
+public class GroupRelDefController extends CommonController<GroupPositionDefinitionEntity> {
 	
     @Resource
-    private GroupRelDefManager groupRelDefManager;
+    private GroupPositionDefinitionManager groupRelDefManager;
 
 
     @RequestMapping("getAllJson")
-    public List<GroupRelDefEntity> getAllJson(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        List<GroupRelDefEntity> orgReldefList = groupRelDefManager.getAll();
+    public List<GroupPositionDefinitionEntity> getAllJson(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        List<GroupPositionDefinitionEntity> orgReldefList = groupRelDefManager.getAll();
         return orgReldefList;
     }
 
@@ -47,10 +47,10 @@ public class GroupRelDefController extends CommonController<GroupRelDefEntity> {
     @RequestMapping("save")
     @ErrorCatching
     @Override
-    public ResultMessage<String> save(@RequestBody GroupRelDefEntity orgReldef) throws Exception {
+    public ResultMessage<String> save(@RequestBody GroupPositionDefinitionEntity orgReldef) throws Exception {
 
         if (StringUtils.isEmpty(orgReldef.getId())) {
-        	GroupRelDefEntity temp = groupRelDefManager.getByCode(orgReldef.getCode());
+        	GroupPositionDefinitionEntity temp = groupRelDefManager.getByCode(orgReldef.getCode());
             if (temp != null) throw new BusinessException("code已存在，不可重复");
         }
 
@@ -65,7 +65,7 @@ public class GroupRelDefController extends CommonController<GroupRelDefEntity> {
         if (StringUtils.isNotEmpty(id))
             return false;
         if (StringUtils.isNotEmpty(code)) {
-        	GroupRelDefEntity temp = groupRelDefManager.getByCode(code);
+        	GroupPositionDefinitionEntity temp = groupRelDefManager.getByCode(code);
             return temp != null;
         }
         return false;

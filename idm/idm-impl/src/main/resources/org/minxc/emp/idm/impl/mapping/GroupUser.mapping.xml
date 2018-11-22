@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.dstz.org.core.dao.GroupUserDao">
-    <resultMap id="GroupUser" type="com.dstz.org.core.model.GroupUser">
+<mapper namespace="org.minxc.emp.idm.impl.dao.GroupUserDao">
+    <resultMap id="GroupUser" type="org.minxc.emp.idm.impl.model.GroupUserEntity">
         <id property="id" column="id_" jdbcType="VARCHAR"/>
         <result property="groupId" column="group_id_" jdbcType="VARCHAR"/>
         <result property="userId" column="user_id_" jdbcType="VARCHAR"/>
@@ -9,7 +9,7 @@
         <result property="relId" column="rel_id_" jdbcType="VARCHAR"/>
     </resultMap>
 
-    <insert id="create" parameterType="com.dstz.org.core.model.GroupUser">
+    <insert id="create" parameterType="org.minxc.emp.idm.impl.model.GroupUserEntity">
 		INSERT INTO org_group_user
 		(id_,group_id_,user_id_,is_master_,rel_id_)
 		VALUES 
@@ -43,7 +43,7 @@
         </if>
     </select>
 
-    <update id="update" parameterType="com.dstz.org.core.model.GroupUser">
+    <update id="update" parameterType="org.minxc.emp.idm.impl.model.GroupUserEntity">
 		UPDATE org_group_user SET
 		group_id_=#{groupId,jdbcType=VARCHAR},
 		user_id_=#{userId,jdbcType=VARCHAR},

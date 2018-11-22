@@ -6,7 +6,7 @@ import java.io.Serializable;
  * 默认的消息
  *
  */
-public class DefaultJmsDTO<T extends Serializable> implements JmsDTO{
+public class DefaultJmsDTO<T extends Serializable> implements JmsDTO<T>{
 
 	private static final long serialVersionUID = 6441512940066825924L;
 

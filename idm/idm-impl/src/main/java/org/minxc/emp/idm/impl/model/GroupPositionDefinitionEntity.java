@@ -1,13 +1,15 @@
 package org.minxc.emp.idm.impl.model;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.minxc.emp.core.impl.model.AbstractCommonModel;
+
+import lombok.ToString;
 
 
 /**
- * 组织关系定义
+ * 组织职务信息
  */
-public class GroupRelDefEntity extends AbstractCommonModel {
+@ToString
+public class GroupPositionDefinitionEntity extends AbstractCommonModel {
 
 	/**
 	 * 
@@ -104,11 +106,4 @@ public class GroupRelDefEntity extends AbstractCommonModel {
 		return this.description;
 	}
 
-	/**
-	 * @see Object#toString()
-	 */
-	public String toString() {
-		return new ToStringBuilder(this).append("id", this.id).append("name", this.name).append("code", this.code)
-				.append("postLevel", this.postLevel).append("description", this.description).toString();
-	}
 }

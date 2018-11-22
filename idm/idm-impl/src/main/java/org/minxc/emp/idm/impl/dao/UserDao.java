@@ -54,9 +54,9 @@ public interface UserDao extends CommonDao<String, UserEntity> {
 	 */
 	Integer isUserExist(UserEntity user);
 
-	List getUserListByRelId(String relId);
+	List<UserEntity> getUserListByRelId(String relId);
 
-	List queryUserGroupRel(QueryFilter queryFilter);
+	List<UserEntity>  queryUserGroupRel(QueryFilter queryFilter);
 
 	List<UserEntity> getUserListByOrgId(String orgId);
 }

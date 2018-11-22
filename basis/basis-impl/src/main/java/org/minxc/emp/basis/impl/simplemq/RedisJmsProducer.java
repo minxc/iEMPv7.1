@@ -1,5 +1,6 @@
 package org.minxc.emp.basis.impl.simplemq;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -10,24 +11,21 @@ import org.springframework.data.redis.core.RedisTemplate;
 
 import org.springframework.stereotype.Service;
 
-
-
 @Service("Service")
-public class RedisJmsProducer implements JmsProducer {
+public class RedisJmsProducer<K,V extends Serializable> implements JmsProducer<V> {
 	
    @Resource
-    private RedisTemplate redisTemplate;
+    private RedisTemplate<K, V> redisTemplate;
 	   
 	@Override
-	public void sendToQueue(JmsDTO message) {
+	public void sendToQueue(JmsDTO<V> message) {
         redisTemplate.convertAndSend("message", message);
     }
 
 	@Override
-	public void sendToQueue(List<JmsDTO> jsmDtos) {
-		for(JmsDTO dto : jsmDtos) {
+	public void sendToQueue(List<JmsDTO<V>> jsmDtos) {
+		for(JmsDTO<V> dto : jsmDtos) {
 			this.sendToQueue(dto);
 		}
 	}
-
 }
