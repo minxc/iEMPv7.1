@@ -21,7 +21,6 @@ import org.springframework.web.filter.DelegatingFilterProxy;
 * @version V1.0  
 
 */
-@Slf4j
 @Configuration
 public class WebConfig {
 

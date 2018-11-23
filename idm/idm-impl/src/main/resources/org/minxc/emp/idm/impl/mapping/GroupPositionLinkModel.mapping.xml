@@ -12,7 +12,7 @@
         <result property="jobName" column="JOB_NAME" jdbcType="VARCHAR"/><!--  职务名称-->
     </resultMap>
 
-    <insert id="create" parameterType="org.minxc.emp.idm.impl.model.GroupRelationEntity">
+    <insert id="create" parameterType="org.minxc.emp.idm.impl.model.GroupPositionLinkModel">
 		INSERT INTO YMMG_GROUP_POSITION_LINK
 		  (ID,
 		   GROUP_ID,
@@ -107,7 +107,7 @@
             ORDER BY ID DESC
         </if>
     </select>
-    <update id="update" parameterType="org.minxc.emp.idm.impl.model.GroupRelationEntity">
+    <update id="update" parameterType="org.minxc.emp.idm.impl.model.GroupPositionLinkModel">
 		UPDATE YMMG_GROUP_POSITION_LINK SET
 		GROUP_ID=#{groupId,jdbcType=VARCHAR},
 		POSITION_ID=#{positionId,jdbcType=VARCHAR},

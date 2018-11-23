@@ -3,7 +3,6 @@ package org.minxc.emp.web.controller;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,9 +29,7 @@ import javax.servlet.http.HttpServletResponse;
 @Slf4j
 @Controller
 public class MainController {
-
-
-    @RequestMapping(value = "/main", method = RequestMethod.POST)
+    @RequestMapping(value = "/index")
     public ModelAndView mainPage(HttpServletRequest request, HttpServletResponse response){
 
         log.info("Main page request...");

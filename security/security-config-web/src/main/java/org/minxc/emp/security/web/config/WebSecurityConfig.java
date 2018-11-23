@@ -39,6 +39,7 @@ import org.springframework.security.web.access.channel.RetryWithHttpsEntryPoint;
 import org.springframework.security.web.access.channel.SecureChannelProcessor;
 import org.springframework.security.web.access.intercept.FilterInvocationSecurityMetadataSource;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
+import org.springframework.security.web.authentication.AnonymousAuthenticationFilter;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
@@ -54,6 +55,8 @@ import org.springframework.security.web.authentication.session.ConcurrentSession
 import org.springframework.security.web.authentication.session.SessionAuthenticationStrategy;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.security.web.context.SecurityContextPersistenceFilter;
+import org.springframework.security.web.savedrequest.RequestCacheAwareFilter;
+import org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter;
 import org.springframework.security.web.session.ConcurrentSessionFilter;
 import org.springframework.security.web.session.SessionManagementFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
@@ -113,9 +116,12 @@ public class WebSecurityConfig {
         FilterInvocationSecurityMetadataSourceImpl securityMetaDataSource = new FilterInvocationSecurityMetadataSourceImpl();
 
         //设置不需要过滤的url地址
-
         List<String> ingnores = new ArrayList<>(8);
-        ingnores.add("/login.*");
+//        ingnores.add("/login.*");
+//        ingnores.add("/index");
+        ingnores.add("/hplus/*");
+        ingnores.add("/favicon.ico");
+        ingnores.add("/");
         securityMetaDataSource.setIngores(ingnores);
         return securityMetaDataSource;
     }
@@ -134,29 +140,33 @@ public class WebSecurityConfig {
     public FilterChainProxy springSecurityFilterChain() {
     	
         List<SecurityFilterChain> filterChains = new ArrayList<>();
-        List<Filter> resourceFilters = new ArrayList<>();
-        resourceFilters.add(channelProcessingFilter());
-        DefaultSecurityFilterChain resourcesChains = buildSecurityFilterChain("/resources/**", resourceFilters); // /resources/**
+//        List<Filter> resourceFilters = new ArrayList<>();
+//        resourceFilters.add(channelProcessingFilter());
+//        DefaultSecurityFilterChain resourcesChains = buildSecurityFilterChain("/resources/**", resourceFilters); // /resources/**
+//        
+//        // 路径
+//        DefaultSecurityFilterChain loginPageChains = buildSecurityFilterChain("/index", resourceFilters); // /login 路径
+//        DefaultSecurityFilterChain errorChains = buildSecurityFilterChain("/error", resourceFilters); // /error 路径
+//        DefaultSecurityFilterChain rootChains = buildSecurityFilterChain("/", resourceFilters); // // 路径
         
-        // 路径
-        DefaultSecurityFilterChain loginChains = buildSecurityFilterChain("/login", resourceFilters); // /login 路径
-        DefaultSecurityFilterChain errorChains = buildSecurityFilterChain("/error", resourceFilters); // /error 路径
-        DefaultSecurityFilterChain rootChains = buildSecurityFilterChain("/", resourceFilters); // // 路径
         List<Filter> anyFilters = new ArrayList<>();
-        anyFilters.add(channelProcessingFilter());   //TODO:暂时注释掉channelProcessingFilter
-        anyFilters.add(securityContextPersistenceFilter());
-        anyFilters.add(concurrentSessionFilter());
+//        anyFilters.add(channelProcessingFilter());   //TODO:暂时注释掉channelProcessingFilter
+        anyFilters.add(securityContextPersistenceFilter());  // 2
+//        anyFilters.add(concurrentSessionFilter());
+        anyFilters.add(logoutFilter());    // 设置登出过滤器
         anyFilters.add(usernamePasswordAuthenticationFilter());
+        anyFilters.add(requestCacheAwareFilter());  
+        anyFilters.add(securityContextHolderAwareRequestFilter());  
+        anyFilters.add(anonymousAuthenticationFilter());  
         anyFilters.add(rememberMeAuthenticationFilter());
-        anyFilters.add(logoutFilter());
         anyFilters.add(exceptionTranslationFilter());
         anyFilters.add(sessionManagementFilter());
         anyFilters.add(filterSecurityInterceptor());
         DefaultSecurityFilterChain anyChains = buildSecurityFilterChain("/**", anyFilters);
-        filterChains.add(resourcesChains);
-        filterChains.add(loginChains);
-        filterChains.add(errorChains);
-        filterChains.add(rootChains);
+//        filterChains.add(resourcesChains);
+//        filterChains.add(loginPageChains);
+//        filterChains.add(errorChains);
+//        filterChains.add(rootChains);
         filterChains.add(anyChains);
         FilterChainProxy filterChainProxy = new FilterChainProxy(filterChains);
         return filterChainProxy;
@@ -243,7 +253,7 @@ public class WebSecurityConfig {
         SecurityContextPersistenceFilter securityContextPersistenceFilter = new SecurityContextPersistenceFilter(
                 httpSessionSecurityContextRepository());
         securityContextPersistenceFilter.setBeanName("securityContextPersistenceFilter");
-        securityContextPersistenceFilter.setForceEagerSessionCreation(true);
+        securityContextPersistenceFilter.setForceEagerSessionCreation(false);  //设置是否生成session
         return securityContextPersistenceFilter;
 
     }
@@ -272,9 +282,8 @@ public class WebSecurityConfig {
     }
 
     /**
-     * usernamePassword授权拦截
+     * usernamePassword授权拦截     请求方式："/login", "POST"
      */
-
     @Bean(name = "usernamePasswordAuthenticationFilter")
     public UsernamePasswordAuthenticationFilter usernamePasswordAuthenticationFilter() {
         UsernamePasswordAuthenticationFilter usernamePasswordAuthenticationFilter = new UsernamePasswordAuthenticationFilter();
@@ -318,14 +327,14 @@ public class WebSecurityConfig {
     @Bean(name = "authenticationFailureHandler")
     public AuthenticationFailureHandler authenticationFailureHandler() {
         SimpleUrlAuthenticationFailureHandler authenticationFailureHandler = new SimpleUrlAuthenticationFailureHandler();
-        authenticationFailureHandler.setDefaultFailureUrl("/login?para=loginfailure");
+        authenticationFailureHandler.setDefaultFailureUrl("/index");
         return authenticationFailureHandler;
     }
 
-    // 注销过滤器
+    // 注销过滤器    默认处理url为  /logout
     @Bean(name = "logoutFilter")
     public LogoutFilter logoutFilter() {
-        LogoutFilter logoutFilter = new LogoutFilter("/login", logoutHandler()); // 退出成功跳转页面
+        LogoutFilter logoutFilter = new LogoutFilter("/", logoutHandler()); // 退出成功跳转页面 /login   
         return logoutFilter;
     }
 
@@ -389,7 +398,7 @@ public class WebSecurityConfig {
     @Bean
     public AuthenticationEntryPoint authenticationEntryPoint() {
         LoginUrlAuthenticationEntryPoint authenticationEntryPoint = new LoginUrlAuthenticationEntryPoint(
-                "/login");
+                "/index");
         authenticationEntryPoint.setUseForward(false);
         authenticationEntryPoint.setForceHttps(false);
         return authenticationEntryPoint;
@@ -412,7 +421,7 @@ public class WebSecurityConfig {
         FilterSecurityInterceptor interceptor = new FilterSecurityInterceptor();
         interceptor.setAccessDecisionManager(accessDecisionManager());
         interceptor.setAuthenticationManager(authenticationManager());
-        interceptor.setRejectPublicInvocations(true);
+        interceptor.setRejectPublicInvocations(false);
         interceptor.setSecurityMetadataSource(securityMetadataSource()); // 核心资源获取
         return interceptor;
     }
@@ -444,5 +453,19 @@ public class WebSecurityConfig {
     public SessionManagementFilter  sessionManagementFilter() {
     	SessionManagementFilter sessionFilter = new SessionManagementFilter(httpSessionSecurityContextRepository(), sessionAuthenticationStrategy());
     	return sessionFilter;
+    }
+    
+    @Bean
+    public RequestCacheAwareFilter  requestCacheAwareFilter() {
+    	return new RequestCacheAwareFilter();
+    }
+    @Bean
+    public SecurityContextHolderAwareRequestFilter  securityContextHolderAwareRequestFilter() {
+    	return new SecurityContextHolderAwareRequestFilter();
+    }
+    @Bean
+    public AnonymousAuthenticationFilter anonymousAuthenticationFilter() {
+    	AnonymousAuthenticationFilter anonymousFilter = new AnonymousAuthenticationFilter("ANONYMOUS_FILTER");
+    	return anonymousFilter;
     }
 }

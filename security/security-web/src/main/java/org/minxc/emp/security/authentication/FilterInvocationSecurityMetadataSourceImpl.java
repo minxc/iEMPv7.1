@@ -57,7 +57,10 @@ public class FilterInvocationSecurityMetadataSourceImpl extends IngoreChecker
 
 		String url = request.getRequestURI();
 		url = removeWebContextPath(url, request.getContextPath());
-
+		
+//		if(url.equals("/index")) {
+//			return configAttribute;   //进入登录页面
+//		}
 		if (isIngores(url)) {
 			configAttribute.add(PlatformSecurityConstants.ROLE_CONFIG_ANONYMOUS);
 			return configAttribute;
