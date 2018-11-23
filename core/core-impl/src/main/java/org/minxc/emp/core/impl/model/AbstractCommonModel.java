@@ -42,10 +42,9 @@ import java.util.Date;
 @EqualsAndHashCode
 @NoArgsConstructor
 public abstract class AbstractCommonModel implements CommonModel {
-
 	
 		private static final long serialVersionUID = -4468635720384821075L;
-	
+		
 		@NotEmpty
 	    protected String id;
 	    // 创建时间

@@ -11,7 +11,7 @@ import org.minxc.emp.core.api.exception.BusinessException;
 import org.minxc.emp.core.api.query.QueryFilter;
 import org.minxc.emp.core.api.response.impl.ResultMessage;
 import org.minxc.emp.idm.impl.manager.GroupRelationManager;
-import org.minxc.emp.idm.impl.model.GroupRelationEntity;
+import org.minxc.emp.idm.impl.model.GroupPositionLinkModel;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,7 +26,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/org/groupRelation")
-public class GroupRelationController extends CommonController<GroupRelationEntity> {
+public class GroupPositionLinkController extends CommonController<GroupPositionLinkModel> {
 	
     @Resource
     private GroupRelationManager groupRelationManager;
@@ -48,7 +48,7 @@ public class GroupRelationController extends CommonController<GroupRelationEntit
         if (StringUtils.isNotEmpty(groupId)) {
             queryFilter.addParamsFilter("groupId", groupId);
         }
-        Page<GroupRelationEntity> orgRelList = (Page<GroupRelationEntity>) groupRelationManager.queryInfoList(queryFilter);
+        Page<GroupPositionLinkModel> orgRelList = (Page<GroupPositionLinkModel>) groupRelationManager.queryInfoList(queryFilter);
         return new PageJson(orgRelList);
     }
 
@@ -59,10 +59,10 @@ public class GroupRelationController extends CommonController<GroupRelationEntit
     @RequestMapping("save")
     @ErrorCatching
     @Override
-    public ResultMessage<String> save(@RequestBody GroupRelationEntity orgRel) throws Exception {
+    public ResultMessage<String> save(@RequestBody GroupPositionLinkModel orgRel) throws Exception {
 
         if (StringUtils.isEmpty(orgRel.getId())) {
-        	GroupRelationEntity relation = groupRelationManager.getByCode(orgRel.getGroupCode());
+        	GroupPositionLinkModel relation = groupRelationManager.getByCode(orgRel.getGroupCode());
             if (relation != null) {
                 throw new BusinessException("岗位编码已经存在！");
             }
@@ -78,7 +78,7 @@ public class GroupRelationController extends CommonController<GroupRelationEntit
         if (StringUtils.isNotEmpty(id))
             return false;
         if (StringUtils.isNotEmpty(code)) {
-        	GroupRelationEntity temp = groupRelationManager.getByCode(code);
+        	GroupPositionLinkModel temp = groupRelationManager.getByCode(code);
             return temp != null;
         }
         return false;
@@ -88,7 +88,7 @@ public class GroupRelationController extends CommonController<GroupRelationEntit
     @RequestMapping("getByGroupId")
     @ErrorCatching
     public void getByGroupId(HttpServletRequest request, HttpServletResponse response, String groupId) throws Exception {
-        List<GroupRelationEntity> list = groupRelationManager.getListByGroupId(groupId);
+        List<GroupPositionLinkModel> list = groupRelationManager.getListByGroupId(groupId);
         writeSuccessData(response, list);
     }
 

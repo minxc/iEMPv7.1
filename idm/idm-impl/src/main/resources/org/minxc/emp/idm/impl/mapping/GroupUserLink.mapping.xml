@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.minxc.emp.idm.impl.dao.GroupUserLinkDao">
+    <resultMap id="GroupUser" type="org.minxc.emp.idm.impl.model.GroupUserLinkModel">
+        <id property="id" column="ID" jdbcType="VARCHAR"/>
+        <result property="groupId" column="GROUP_ID" jdbcType="VARCHAR"/>
+        <result property="userId" column="USER_ID" jdbcType="VARCHAR"/>
+        <result property="isMaster" column="IS_MASTER" jdbcType="NUMERIC"/>
+        <result property="positionId" column="POSITION_ID" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <insert id="create" parameterType="org.minxc.emp.idm.impl.model.GroupUserLinkModel">
+		INSERT INTO YMMG_GROUP_USER_LINK
+		(ID,GROUP_ID,USER_ID,IS_MASTER,POSITION_ID)
+		VALUES 
+		(#{id,jdbcType=VARCHAR}, #{groupId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{isMaster,jdbcType=NUMERIC}, #{relId,jdbcType=VARCHAR})
+	</insert>
+
+    <select id="get" parameterType="java.lang.String" resultMap="GroupUser">
+		SELECT * FROM YMMG_GROUP_USER_LINK 
+		WHERE 
+		ID=#{id}
+	</select>
+
+    <select id="getListByGroupIdUserId" parameterType="java.util.Map" resultMap="GroupUser">
+        SELECT * FROM YMMG_GROUP_USER_LINK
+        WHERE GROUP_ID=#{groupId}  and USER_ID=#{userId}
+    </select>
+
+    <select id="query" parameterType="java.util.Map" resultMap="GroupUser">
+        SELECT * FROM YMMG_GROUP_USER_LINK
+        <where>
+            <if test="whereSql!=null">
+                ${whereSql}
+            </if>
+        </where>
+
+        <if test="orderBySql!=null">
+            ORDER BY ${orderBySql}
+        </if>
+        <if test="orderBySql==null">
+            ORDER BY ID DESC
+        </if>
+    </select>
+
+    <update id="update" parameterType="org.minxc.emp.idm.impl.model.GroupUserLinkModel">
+		UPDATE YMMG_GROUP_USER_LINK SET
+		GROUP_ID=#{groupId,jdbcType=VARCHAR},
+		USER_ID=#{userId,jdbcType=VARCHAR},
+		IS_MASTER=#{isMaster,jdbcType=NUMERIC},
+		POSITION_ID=#{relId,jdbcType=VARCHAR}
+		WHERE
+		ID=#{id}
+	</update>
+
+    <update id="updateUserPost" parameterType="java.util.Map">
+		UPDATE YMMG_GROUP_USER_LINK SET
+        POSITION_ID=#{relId,jdbcType=VARCHAR}
+		WHERE
+		ID=#{id}
+	</update>
+
+    <!-- 设置用户的主岗位-->
+    <update id="setMaster" parameterType="java.util.Map">
+     	update YMMG_GROUP_USER_LINK set IS_MASTER=1  where ID=#{id}   
+	</update>
+
+    <!--取消用户所有主岗位-->
+    <update id="cancelUserMasterGroup" parameterType="java.util.Map">
+	<![CDATA[
+	 	 update YMMG_GROUP_USER_LINK set IS_MASTER=0 where USER_ID=#{userId} 
+        ]]>
+	</update>
+
+    <delete id="remove" parameterType="java.lang.String">
+		DELETE FROM YMMG_GROUP_USER_LINK 
+		WHERE
+		ID=#{id}
+	</delete>
+    <delete id="removeBygroupIdUserId" parameterType="java.util.Map">
+		DELETE FROM YMMG_GROUP_USER_LINK 
+		WHERE
+		USER_ID=#{userId} and GROUP_ID =#{groupId}
+	</delete>
+
+
+    <select id="getUserByGroup" parameterType="java.util.Map" resultType="java.util.HashMap">
+		SELECT U.ID,
+		       U.FULLNAME,
+		       U.ACCOUNT,
+		       U.PASSWORD,
+		       U.EMAIL,
+		       U.MOBILE,
+		       U.WEIXIN,
+		       U.CREATE_TIME,
+		       U.SEX,
+		       U.STATUS,
+		       GUL.ID            AS GROUPUSERID,
+		       GUL.IS_MASTER     AS ISMASTER,
+		       G.ID              AS GROUPID,
+		       G.NAME            AS GROUPNAME,
+		       G.CODE            AS GROUPCODE,
+		       GPL.POSITION_NAME AS POSITIONNAME
+		  FROM YMMG_USER U
+		  JOIN YMMG_GROUP_USER_LINK GUL
+		    ON U.ID = GUL.USER_ID
+		  JOIN YMMG_GROUP G
+		    ON G.ID = GUL.GROUP_ID
+		  LEFT JOIN YMMG_GROUP_POSITION_LINK GPL
+		    ON GUL.POSITION_ID = GPL.POSITION_ID
+        <where>
+            <if test="whereSql!=null">
+                ${whereSql}
+            </if>
+        </where>
+        <if test="orderBySql!=null">
+            ORDER BY ${orderBySql}
+        </if>
+        <if test="orderBySql==null">
+            ORDER BY U.CREATE_TIME DESC
+        </if>
+    </select>
+
+
+	  <select id="getGroupUserMaster" parameterType="java.util.Map" resultMap="GroupUser">
+	        SELECT * FROM YMMG_GROUP_USER_LINK WHERE  USER_ID=#{userId}  and IS_MASTER= 1
+	    </select>
+
+	 <select id="getGroupUser" parameterType="java.util.Map" resultMap="GroupUser">
+        SELECT * FROM YMMG_GROUP_USER_LINK
+        WHERE  GROUP_ID=#{groupId}  and USER_ID=#{userId}
+        <if test="positionId!=null">
+            and POSITION_ID=#{positionId} 
+        </if>
+        <if test="positionId==null">
+            and POSITION_ID is null
+        </if>
+    </select>
+</mapper>

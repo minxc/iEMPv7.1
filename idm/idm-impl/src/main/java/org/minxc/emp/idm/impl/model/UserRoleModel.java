@@ -4,7 +4,6 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.minxc.emp.core.impl.model.AbstractCommonModel;
 import org.minxc.emp.idm.api.model.UserRole;
 
-
 /**
  * 
 * 项目名称：idm-impl   
@@ -16,9 +15,8 @@ import org.minxc.emp.idm.api.model.UserRole;
 * 修改时间：2018年9月4日 下午11:47:46   
 * 修改备注：   
 * @version  1.0  
-*
- */
-public class UserRoleEntity extends AbstractCommonModel implements UserRole {
+*/
+public class UserRoleModel extends AbstractCommonModel implements UserRole {
 
 	private static final long serialVersionUID = -5985721994440075379L;
 
@@ -43,7 +41,9 @@ public class UserRoleEntity extends AbstractCommonModel implements UserRole {
     protected String alias;
     //账号
     protected String account = "";
-
+    protected boolean enbaled =  true;
+    
+    
     public void setAlias(String alias) {
         this.alias = alias;
     }

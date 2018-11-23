@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.minxc.emp.idm.impl.dao.UserDao">
+
+    <resultMap id="User" type="org.minxc.emp.idm.impl.model.UserEntity">
+        <id property="id" column="ID" jdbcType="VARCHAR"/>
+        <result property="fullname" column="FULLNAME" jdbcType="VARCHAR"/>
+        <result property="account" column="ACCOUNT" jdbcType="VARCHAR"/>
+        <result property="password" column="PASSWORD" jdbcType="VARCHAR"/>
+        <result property="email" column="EMAIL" jdbcType="VARCHAR"/>
+        <result property="mobile" column="MOBILE" jdbcType="VARCHAR"/>
+        <result property="weixin" column="WEIXIN" jdbcType="VARCHAR"/>
+        <result property="createTime" column="CREATE_TIME" jdbcType="TIMESTAMP"/>
+        <result property="address" column="ADDRESS" jdbcType="VARCHAR"/>
+        <result property="photo" column="PHOTO" jdbcType="VARCHAR"/>
+        <result property="sex" column="SEX" jdbcType="VARCHAR"/>
+        <result property="from" column="USERFROM" jdbcType="VARCHAR"/>
+        <result property="status" column="STATUS" jdbcType="NUMERIC"/>
+    </resultMap>
+
+    <insert id="create" parameterType="org.minxc.emp.idm.impl.model.UserEntity">
+		INSERT INTO YMMG_USER
+		(ID,FULLNAME,ACCOUNT,PASSWORD,EMAIL,MOBILE,WEIXIN,CREATE_TIME,ADDRESS,PHOTO,SEX,USERFROM,STATUS)
+		VALUES 
+		(#{id,jdbcType=VARCHAR}, #{fullname,jdbcType=VARCHAR}, #{account,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{weixin,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{address,jdbcType=VARCHAR}, #{photo,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{from,jdbcType=VARCHAR}, #{status,jdbcType=NUMERIC})
+	</insert>
+
+    <select id="get" parameterType="java.lang.String" resultMap="User">
+		SELECT * FROM YMMG_USER 
+		WHERE 
+		ID=#{id}
+	</select>
+
+    <select id="getByAccount" parameterType="java.lang.String" resultMap="User">
+		SELECT * FROM YMMG_USER 
+		WHERE 
+		ACCOUNT=#{account}
+	</select>
+
+    <select id="query" parameterType="java.util.Map" resultMap="User">
+        SELECT * FROM YMMG_USER
+        <where>
+            <if test="whereSql!=null">
+                ${whereSql}
+            </if>
+        </where>
+        <if test="orderBySql!=null">
+            ORDER BY ${orderBySql}
+        </if>
+        <if test="orderBySql==null">
+            ORDER BY ID DESC
+        </if>
+    </select>
+
+    <select id="getUserListByRelId" parameterType="java.util.Map" resultMap="User">
+        SELECT org.ID "group_ID", org.name_ "group_name_" ,org.code_ "group_code_",
+        orguser.is_master_ "is_master_",orguser.rel_ID "relId",orguser.ID "orgUserId", u.*,rel.rel_name_ "relName"
+        FROM YMMG_USER u inner JOIN org_group_user orguser on u.ID=orguser.user_ID
+        inner join org_group org on org.ID=orguser.group_ID
+        inner join org_group_rel rel ON orguser.rel_ID=rel.ID
+         and orguser.rel_ID=#{relId}
+    </select>
+
+    <select id="getUserListByRole" parameterType="java.util.Map" resultMap="User">
+        SELECT u.*,r.alias_ from YMMG_USER u inner JOIN YMMG_USER_role ur on u.ID=ur.user_ID
+        inner join org_role r on ur.role_ID=r.ID
+        <if test="roleId!=null">
+            and ur.role_ID=#{roleId}
+        </if>
+        <if test="roleCode!=null">
+            and r.alias_=#{roleCode}
+        </if>
+    </select>
+
+
+    <!-- 组织用户-->
+    <select id="queryOrgUser" parameterType="java.util.Map" resultMap="User">
+        SELECT org.ID "group_ID", org.name_ "org_name_" ,org.code_ "org_code_", u.*
+        FROM YMMG_USER u inner JOIN (select DISTINCT group_ID,user_ID from org_group_user) orguser on
+        u.ID=orguser.user_ID
+        inner join org_group org on org.ID=orguser.group_ID
+        <if test="orgId!=null">
+            and org.ID=#{groupId}
+        </if>
+        <where>
+            <if test="whereSql!=null">
+                ${whereSql}
+            </if>
+        </where>
+
+
+        <if test="orderBySql!=null">
+            ORDER BY ${orderBySql}
+        </if>
+        <if test="orderBySql==null">
+            ORDER BY u.ID DESC
+        </if>
+    </select>
+    
+    
+     <select id="getUserListByOrgId" parameterType="java.util.Map" resultMap="User">
+        SELECT org.ID "group_ID", org.name_ "org_name_" ,org.code_ "org_code_", u.*
+        FROM YMMG_USER u inner JOIN (select DISTINCT group_ID,user_ID from org_group_user) orguser on
+        u.ID=orguser.user_ID
+        inner join org_group org on org.ID=orguser.group_ID
+         and org.ID=#{groupId}
+    </select>
+
+
+    <update id="update" parameterType="org.minxc.emp.idm.impl.model.UserEntity">
+		UPDATE YMMG_USER SET
+		FULLNAME=#{fullname,jdbcType=VARCHAR},
+		ACCOUNT=#{account,jdbcType=VARCHAR},
+		PASSWORD=#{password,jdbcType=VARCHAR},
+		EMAIL=#{email,jdbcType=VARCHAR},
+		MOBILE=#{mobile,jdbcType=VARCHAR},
+		WEIXIN=#{weixin,jdbcType=VARCHAR},
+		CREATE_TIME=#{createTime,jdbcType=TIMESTAMP},
+		ADDRESS=#{address,jdbcType=VARCHAR},
+		PHOTO=#{photo,jdbcType=VARCHAR},
+		SEX=#{sex,jdbcType=VARCHAR},
+		USERFROM=#{from,jdbcType=VARCHAR},
+		STATUS=#{status,jdbcType=NUMERIC}
+		WHERE
+		ID=#{id}
+	</update>
+
+    <delete id="remove" parameterType="java.lang.String">
+		DELETE FROM YMMG_USER 
+		WHERE
+		ID=#{id}
+	</delete>
+
+
+    <select id="isUserExist" resultType="java.lang.Integer">
+        SELECT count(1) FROM YMMG_USER where ACCOUNT=#{account}
+        <if test="id!=null">
+            and ID!=#{id}
+        </if>
+    </select>
+
+    <select id="queryUserGroupRel" parameterType="java.util.Map" resultType="java.util.HashMap">
+        SELECT orguser.ID "groupUserId", org.ID "orgId", org.name_ "orgName" ,org.code_ "orgCode",
+        orguser.is_master_ "isMaster",rel.rel_name_ "relName" FROM org_group_user orguser
+        join org_group org on org.ID=orguser.group_ID LEFT JOIN org_group_rel rel ON orguser.rel_ID=rel.ID
+        <where>
+            <if test="whereSql!=null">
+                ${whereSql}
+            </if>
+        </where>
+        <if test="orderBySql!=null">
+            ORDER BY ${orderBySql}
+        </if>
+        <if test="orderBySql==null">
+            ORDER BY orguser.ID DESC
+        </if>
+    </select>
+
+</mapper>

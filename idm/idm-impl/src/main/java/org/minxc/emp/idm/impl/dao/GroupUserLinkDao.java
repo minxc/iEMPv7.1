@@ -1,7 +1,7 @@
 package org.minxc.emp.idm.impl.dao;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.minxc.emp.idm.impl.model.GroupUserEntity;
+import org.minxc.emp.idm.impl.model.GroupUserLinkModel;
 
 import java.util.List;
 
@@ -13,21 +13,21 @@ import org.minxc.emp.core.api.query.QueryFilter;
  * 用户组织关系 DAO接口
  */
 @Mapper
-public interface GroupUserDao extends CommonDao<String, GroupUserEntity> {
+public interface GroupUserLinkDao extends CommonDao<String, GroupUserLinkModel> {
 
     int updateUserPost(@Param("id") String id, @Param("relId") String relId);
 
-    GroupUserEntity getGroupUser(@Param("groupId") String groupId, @Param("userId") String userId, @Param("relId") String relId);
+    GroupUserLinkModel getGroupUser(@Param("groupId") String groupId, @Param("userId") String userId, @Param("relId") String relId);
 
     int removeByGroupIdUserId(@Param("groupId") String groupId, @Param("userId") String userId);
 
-    List<GroupUserEntity> getListByGroupIdUserId(@Param("groupId") String groupId, @Param("userId") String userId);
+    List<GroupUserLinkModel> getListByGroupIdUserId(@Param("groupId") String groupId, @Param("userId") String userId);
 
     /**
      * 获取用户的主岗位组织关系
      * @return
      */
-    GroupUserEntity getGroupUserMaster(String userId);
+    GroupUserLinkModel getGroupUserMaster(String userId);
 
     /**
      * 设置主部门

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.minxc.emp.idm.impl.dao.UserRoleDao">
+
+    <resultMap id="UserRole" type="org.minxc.emp.idm.impl.model.UserRoleModel">
+        <id property="id" column="ID" jdbcType="VARCHAR"/>
+        <result property="roleId" column="ROLE_ID" jdbcType="VARCHAR"/>
+        <result property="userId" column="USER_ID" jdbcType="VARCHAR"/>
+        <result property="enabled" column="ENABLED" jdbcType="VARCHAR"/> <!-- 新增信息内容 -->
+        <result property="fullname" column="FULLNAME" jdbcType="VARCHAR"/>
+        <result property="roleName" column="ROLL_NAME" jdbcType="VARCHAR"/>
+        <result property="alias" column="ALIAS" jdbcType="VARCHAR"/>
+        <result property="account" column="ACCOUNT" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <insert id="create" parameterType="org.minxc.emp.idm.impl.model.UserRoleModel">
+		INSERT INTO YMMG_USER_ROLE_LINK
+		(ID,ROLE_ID,USER_ID)
+		VALUES 
+		(#{id,jdbcType=VARCHAR}, #{roleId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR})
+	</insert>
+
+    <select id="get" parameterType="java.lang.String" resultMap="UserRole">
+		SELECT * FROM YMMG_USER_ROLE_LINK 
+		WHERE 
+		ID=#{id}
+	</select>
+	
+
+    <select id="getByRoleIdUserId" parameterType="java.util.Map" resultMap="UserRole">
+		SELECT * FROM YMMG_USER_ROLE_LINK 
+		WHERE 
+		ROLE_ID=#{roleId} AND USER_ID=#{userId}
+	</select>
+
+    <select id="query" parameterType="java.util.Map" resultMap="UserRole">
+		  SELECT LNK.ID,
+		       LNK.ROLE_ID,
+		       LNK.USER_ID,
+		       LNK.ENABLED,
+		       U.FULLNAME,
+		       U.ACCOUNT,
+		       R.NAME AS ROLE_NAME,
+		       R.ALIAS
+		  FROM YMMG_USER_ROLE_LINK LNK
+		 INNER JOIN YMMG_USER U
+		    ON LNK.USER_ID = U.ID
+		 INNER JOIN YMMG_ROLE R
+		    ON LNK.ROLE_ID = R.ID
+        <if test="roleId!=null">
+            AND LNK.ROLE_ID= #{roleId}
+        </if>
+        <if test="userId!=null">
+            AND LNK.USER_ID= #{userId}
+        </if>
+        <if test="alias!=null">
+            AND R.ALIAS= #{alias}
+        </if>
+        <where>
+            <if test="whereSql!=null">
+                ${whereSql}
+            </if>
+        </where>
+        <if test="orderBySql!=null">
+            ORDER BY ${orderBySql}
+        </if>
+        <if test="orderBySql==null">
+            ORDER BY ID DESC
+        </if>
+    </select>
+    
+     <select id="queryByParams" parameterType="java.util.Map" resultMap="UserRole">
+       SELECT LNK.ID,
+		       LNK.ROLE_ID,
+		       LNK.USER_ID,
+		       LNK.ENABLED,
+		       U.FULLNAME,
+		       U.ACCOUNT,
+		       R.NAME AS ROLE_NAME,
+		       R.ALIAS
+		  FROM YMMG_USER_ROLE_LINK LNK
+		 INNER JOIN YMMG_USER U
+		    ON LNK.USER_ID = U.ID
+		 INNER JOIN YMMG_ROLE R
+		    ON LNK.ROLE_ID = R.ID
+        <if test="roleId!=null">
+            AND LNK.ROLE_ID= #{roleId}
+        </if>
+        <if test="userId!=null">
+            AND LNK.USER_ID= #{userId}
+        </if>
+        <if test="alias!=null">
+            AND R.ALIAS= #{alias}
+        </if>
+    </select>
+
+    <update id="update" parameterType="org.minxc.emp.idm.impl.model.UserRoleModel">
+		UPDATE YMMG_USER_ROLE_LINK SET
+		ROLE_ID = #{roleId,jdbcType=VARCHAR},
+		USER_ID = #{userId,jdbcType=VARCHAR}
+		WHERE
+		ID=#{id}
+	</update>
+
+    <delete id="remove" parameterType="java.lang.String">
+		DELETE FROM YMMG_USER_ROLE_LINK 
+		WHERE
+		ID=#{id}
+	</delete>
+</mapper>

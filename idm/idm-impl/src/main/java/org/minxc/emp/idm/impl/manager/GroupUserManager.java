@@ -1,6 +1,6 @@
 package org.minxc.emp.idm.impl.manager;
 
-import org.minxc.emp.idm.impl.model.GroupUserEntity;
+import org.minxc.emp.idm.impl.model.GroupUserLinkModel;
 import org.minxc.emp.common.manager.Manager;
 import org.minxc.emp.core.api.query.QueryFilter;
 
@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * 用户组织关系 处理接口
  */
-public interface GroupUserManager extends Manager<String, GroupUserEntity> {
+public interface GroupUserManager extends Manager<String, GroupUserLinkModel> {
 
 	int updateUserPost(String id, String relId);
 
@@ -21,7 +21,7 @@ public interface GroupUserManager extends Manager<String, GroupUserEntity> {
 	 * @param relId
 	 * @return
 	 */
-	GroupUserEntity getGroupUser(String orgId, String userId, String relId);
+	GroupUserLinkModel getGroupUser(String orgId, String userId, String relId);
 
 	/**
 	 * 根据用户和组织ID获取关联关系。
@@ -30,14 +30,14 @@ public interface GroupUserManager extends Manager<String, GroupUserEntity> {
 	 * @param userId
 	 * @return
 	 */
-	List<GroupUserEntity> getListByGroupIdUserId(String orgId, String userId);
+	List<GroupUserLinkModel> getListByGroupIdUserId(String orgId, String userId);
 
 	/**
 	 * 获取用户的主岗位组织关系
 	 *
 	 * @return
 	 */
-	GroupUserEntity getGroupUserMaster(String userId);
+	GroupUserLinkModel getGroupUserMaster(String userId);
 
 	int removeByOrgIdUserId(String orgId, String userId);
 

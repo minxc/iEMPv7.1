@@ -15,7 +15,7 @@ import org.minxc.emp.core.api.response.impl.ResultMessage;
 import org.minxc.emp.core.util.CryptoUtil;
 import org.minxc.emp.idm.impl.manager.GroupUserManager;
 import org.minxc.emp.idm.impl.manager.UserManager;
-import org.minxc.emp.idm.impl.model.GroupUserEntity;
+import org.minxc.emp.idm.impl.model.GroupUserLinkModel;
 import org.minxc.emp.idm.impl.model.UserEntity;
 import org.minxc.emp.system.util.ContextUtil;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -97,9 +97,9 @@ public class UserController extends CommonController<UserEntity> {
             user.setPassword(password);
             //添加用户和组织的关系，默认为主关系。
             if (StringUtils.isNotEmpty(user.getGroupId())) {
-                GroupUserEntity orgUser = new GroupUserEntity();
+                GroupUserLinkModel orgUser = new GroupUserLinkModel();
                 orgUser.setId(UniqueIdUtil.getSuid());
-                orgUser.setIsMaster(GroupUserEntity.MASTER_YES);
+                orgUser.setIsMaster(GroupUserLinkModel.MASTER_YES);
                 orgUser.setGroupId(user.getGroupId());
                 orgUser.setUserId(user.getUserId());
                 orgUserManager.create(orgUser);

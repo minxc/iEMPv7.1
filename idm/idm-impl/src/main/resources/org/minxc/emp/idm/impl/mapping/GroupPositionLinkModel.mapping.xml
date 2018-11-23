@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.minxc.emp.idm.impl.dao.GroupPositionLinkDao">
+
+    <resultMap id="GroupRelation" type="org.minxc.emp.idm.impl.model.GroupPositionLinkModel">
+        <id property="id" column="ID" jdbcType="VARCHAR"/>
+        <result property="groupId" column="GROUP_ID" jdbcType="VARCHAR"/>
+        <result property="positionId" column="POSITION_ID" jdbcType="VARCHAR"/><!-- 岗位ID -->
+        <result property="positionName" column="POSITION_NAME" jdbcType="VARCHAR"/><!-- 岗位名称   -->
+        <result property="positionCode" column="POSITION_CODE" jdbcType="VARCHAR"/><!-- 岗位编码 -->
+        <result property="groupName" column="GROUP_NAME" jdbcType="VARCHAR"/><!--  组织名称-->
+        <result property="jobName" column="JOB_NAME" jdbcType="VARCHAR"/><!--  职务名称-->
+    </resultMap>
+
+    <insert id="create" parameterType="org.minxc.emp.idm.impl.model.GroupRelationEntity">
+		INSERT INTO YMMG_GROUP_POSITION_LINK
+		  (ID,
+		   GROUP_ID,
+		   POSITION_ID,
+		   POSITION_NAME,
+		   POSITION_CODE,
+		   JOB_NAME,
+		   CREATE_TIME,
+		   CREATE_BY,
+		   UPDATE_TIME,
+		   UPDATE_BY,
+		   ENABLED)
+		VALUES 
+		(#{id,jdbcType=VARCHAR}, #{groupId,jdbcType=VARCHAR}, #{positionId,jdbcType=VARCHAR}, #{positionName,jdbcType=VARCHAR}, #{positionCode,jdbcType=VARCHAR},#{jobName,jdbcType=VARCHAR})
+	</insert>
+
+    <select id="get" parameterType="java.lang.String" resultMap="GroupRelation">
+		SELECT * FROM YMMG_GROUP_POSITION_LINK 
+		WHERE 
+		ID=#{id}
+	</select>
+    <select id="getByCode" parameterType="java.lang.String" resultMap="GroupRelation">
+		SELECT * FROM YMMG_GROUP_POSITION_LINK 
+		WHERE 
+		POSITION_CODE=#{code}
+	</select>
+    <select id="getByGroupIdAndPositionId" parameterType="java.lang.String" resultMap="GroupRelation">
+		SELECT * FROM YMMG_GROUP_POSITION_LINK 
+		WHERE 
+		GROUP_ID=#{groupId} and POSITION_ID=#{positionId}
+	</select>
+
+    <select id="query" parameterType="java.util.Map" resultMap="GroupRelation">
+        SELECT * FROM YMMG_GROUP_POSITION_LINK
+        <where>
+            <if test="whereSql!=null">
+                ${whereSql}
+            </if>
+        </where>
+        <if test="orderBySql!=null">
+            ORDER BY ${orderBySql}
+        </if>
+        <if test="orderBySql==null">
+            ORDER BY ID DESC
+        </if>
+    </select>
+
+    <select id="getGroupPositionLinkListByParam" parameterType="java.util.Map" resultMap="GroupRelation">
+       SELECT LNK.*, GUL.USER_ID, U.ACCOUNT
+		  FROM YMMG_GROUP_USER_LINK GUL
+		 INNER JOIN YMMG_GROUP_POSITION_LINK LNK
+		    ON LNK.ID = GUL.GRP_POS_LNK_ID
+		 INNER JOIN YMMG_USER U
+		    ON GUL.USER_ID = U.ID
+        <if test="userId!=null">
+            AND GUL.USER_ID=#{userId}
+        </if>
+        <if test="account!=null">
+            AND U.ACCOUNT=#{account}
+        </if>
+    </select>
+
+    <!-- 查询岗位全信息，包含组织名称，职务名称 -->
+    <select id="queryInfoList" parameterType="java.util.Map" resultMap="GroupRelation">
+        SELECT LNK.ID,
+       LNK.GROUP_ID,
+       LNK.POSITION_ID,
+       LNK.POSITION_NAME,
+       LNK.POSITION_CODE,
+       LNK.JOB_NAME,
+       LNK.CREATE_TIME,
+       LNK.CREATE_BY,
+       LNK.UPDATE_TIME,
+       LNK.UPDATE_BY,
+       LNK.ENABLED,
+       G.NAME AS GOURP_NAME
+  FROM YMMG_GROUP_POSITION_LINK LNK
+ INNER JOIN YMMG_GROUP G
+    ON LNK.GROUP_ID = G.ID
+        <if test="groupId!=null">
+            AND LNK.GROUP_ID=#{groupId}
+        </if>
+        <where>
+            <if test="whereSql!=null">
+                ${whereSql}
+            </if>
+        </where>
+        <if test="orderBySql!=null">
+            ORDER BY ${orderBySql}
+        </if>
+        <if test="orderBySql==null">
+            ORDER BY ID DESC
+        </if>
+    </select>
+    <update id="update" parameterType="org.minxc.emp.idm.impl.model.GroupRelationEntity">
+		UPDATE YMMG_GROUP_POSITION_LINK SET
+		GROUP_ID=#{groupId,jdbcType=VARCHAR},
+		POSITION_ID=#{positionId,jdbcType=VARCHAR},
+		JOB_NAME=#{jobName,jdbcType=VARCHAR},
+		POSITION_NAME=#{positionName,jdbcType=VARCHAR},
+		POSITION_CODE=#{positionCode,jdbcType=VARCHAR}
+		WHERE
+		ID=#{id}
+	</update>
+
+    <delete id="remove" parameterType="java.lang.String">
+		DELETE FROM YMMG_GROUP_POSITION_LINK 
+		WHERE
+		ID=#{id}
+	</delete>
+
+
+	 <select id="getListByGroupId" parameterType="java.util.Map" resultMap="GroupRelation">
+	        SELECT LNK.ID,
+		       LNK.GROUP_ID,
+		       LNK.POSITION_ID,
+		       LNK.POSITION_NAME,
+		       LNK.POSITION_CODE,
+		       LNK.JOB_NAME,
+		       LNK.CREATE_TIME,
+		       LNK.CREATE_BY,
+		       LNK.UPDATE_TIME,
+		       LNK.UPDATE_BY,
+		       LNK.ENABLED,
+		       G.NAME AS GOURP_NAME
+		  FROM YMMG_GROUP_POSITION_LINK LNK
+		 INNER JOIN YMMG_GROUP G
+		    ON LNK.GROUP_ID = G.ID
+	        WHERE LNK.GROUP_ID=#{groupId}
+	  </select>
+</mapper>

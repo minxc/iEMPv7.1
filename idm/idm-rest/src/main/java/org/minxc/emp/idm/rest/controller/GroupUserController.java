@@ -14,7 +14,7 @@ import org.minxc.emp.core.util.BeanUtils;
 import org.minxc.emp.idm.impl.manager.GroupRelationManager;
 import org.minxc.emp.idm.impl.manager.GroupUserManager;
 import org.minxc.emp.idm.impl.manager.UserManager;
-import org.minxc.emp.idm.impl.model.GroupUserEntity;
+import org.minxc.emp.idm.impl.model.GroupUserLinkModel;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -60,13 +60,13 @@ public class GroupUserController extends GenericController {
 	 * 用户组织关系明细页面
 	 */
     @RequestMapping("getJson")
-    public GroupUserEntity getJson(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public GroupUserLinkModel getJson(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String id = RequestUtil.getString(request, "id");
         if (StringUtils.isEmpty(id)) {
             return null;
         }
 
-        GroupUserEntity GroupUser = groupUserManager.get(id);
+        GroupUserLinkModel GroupUser = groupUserManager.get(id);
         return GroupUser;
     }
 
@@ -150,19 +150,19 @@ public class GroupUserController extends GenericController {
                 relId = relIds[i];
             }
 
-            GroupUserEntity groupUser = groupUserManager.getGroupUser(orgId, userId, relId);
+            GroupUserLinkModel groupUser = groupUserManager.getGroupUser(orgId, userId, relId);
             if (groupUser == null) {
             	groupUser = groupUserManager.getGroupUser(orgId, userId, "");
                 if (groupUser == null) {
-                	groupUser = new GroupUserEntity();
+                	groupUser = new GroupUserLinkModel();
                 	groupUser.setId(UniqueIdUtil.getSuid());
                 	groupUser.setGroupId(orgId);
                 	groupUser.setUserId(userId);
-                	groupUser.setRelId(relId);
+                	groupUser.setPositionId(relId);
                 	groupUser.setIsMaster(0);
                     groupUserManager.create(groupUser);
                 } else {
-                	groupUser.setRelId(relId);
+                	groupUser.setPositionId(relId);
                     groupUserManager.update(groupUser);
                 }
             }

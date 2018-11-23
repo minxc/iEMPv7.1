@@ -1,6 +1,6 @@
 package org.minxc.emp.idm.impl.manager;
 
-import org.minxc.emp.idm.impl.model.UserRoleEntity;
+import org.minxc.emp.idm.impl.model.UserRoleModel;
 import org.minxc.emp.common.manager.Manager;
 
 import java.util.List;
@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * 用户角色管理 处理接口
  */
-public interface UserRoleManager extends Manager<String, UserRoleEntity> {
+public interface UserRoleManager extends Manager<String, UserRoleModel> {
 
 	/**
 	 * 根据用户和角色id 查询 关联关系。
@@ -17,7 +17,7 @@ public interface UserRoleManager extends Manager<String, UserRoleEntity> {
 	 * @param userId
 	 * @return
 	 */
-	UserRoleEntity getByRoleIdUserId(String roleId, String userId);
+	UserRoleModel getByRoleIdUserId(String roleId, String userId);
 
 	/**
 	 * 获取用户的角色。
@@ -25,7 +25,7 @@ public interface UserRoleManager extends Manager<String, UserRoleEntity> {
 	 * @param userId
 	 * @return
 	 */
-	List<UserRoleEntity> getListByUserId(String userId);
+	List<UserRoleModel> getListByUserId(String userId);
 
 	/**
 	 * 根据角色ID查询关联的用户。
@@ -33,7 +33,7 @@ public interface UserRoleManager extends Manager<String, UserRoleEntity> {
 	 * @param roleId
 	 * @return
 	 */
-	List<UserRoleEntity> getListByRoleId(String roleId);
+	List<UserRoleModel> getListByRoleId(String roleId);
 
 	/**
 	 * 根据角色别名查询关联的用户。
@@ -41,5 +41,5 @@ public interface UserRoleManager extends Manager<String, UserRoleEntity> {
 	 * @param roleId
 	 * @return
 	 */
-	List<UserRoleEntity> getListByAlias(String alias);
+	List<UserRoleModel> getListByAlias(String alias);
 }

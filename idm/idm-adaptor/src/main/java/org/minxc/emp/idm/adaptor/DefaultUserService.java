@@ -17,7 +17,7 @@ import org.minxc.emp.idm.impl.manager.GroupManager;
 import org.minxc.emp.idm.impl.manager.UserManager;
 import org.minxc.emp.idm.impl.manager.UserRoleManager;
 import org.minxc.emp.idm.impl.model.UserEntity;
-import org.minxc.emp.idm.impl.model.UserRoleEntity;
+import org.minxc.emp.idm.impl.model.UserRoleModel;
 import org.springframework.stereotype.Service;
 
 /**
@@ -82,7 +82,7 @@ public class DefaultUserService implements UserService {
 
 	@Override
 	public List<UserRole> getUserRole(String userId) {
-		List<UserRoleEntity> userRole = userRoleManager.getListByUserId(userId);
+		List<UserRoleModel> userRole = userRoleManager.getListByUserId(userId);
 		
 		return  (List)BeanCopierUtils.transformList(userRole, UserRoleDto.class);
 	}

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.minxc.emp.idm.impl.dao.GroupPositionDefinitionDao">
+
+
     <resultMap id="GroupPositionDefinition" type="org.minxc.emp.idm.impl.model.GroupPositionDefinitionEntity">
         <id property="id" column="ID" jdbcType="VARCHAR"/>
         <result property="name" column="NAME" jdbcType="VARCHAR"/>
@@ -15,7 +17,7 @@
 		(#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{postLevel,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR})
 	</insert>
 
-    <select id="get" parameterType="java.lang.String" resultMap="org.minxc.emp.idm.impl.model.GroupPositionDefinitionEntity">
+    <select id="get" parameterType="java.lang.String" resultMap="GroupPositionDefinition">
 		SELECT * FROM YMMG_POSITION 
 		WHERE 
 		ID =#{id}

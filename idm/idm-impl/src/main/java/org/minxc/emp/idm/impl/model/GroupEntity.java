@@ -5,9 +5,12 @@ import org.minxc.emp.idm.api.constant.GroupTypeConstant;
 import org.minxc.emp.idm.api.model.GroupStructEnum;
 import org.minxc.emp.idm.api.model.Group;
 import org.minxc.emp.idm.api.model.IdentityType;
-import org.apache.commons.lang3.builder.ToStringBuilder;
+
+import lombok.ToString;
 
 import java.util.Map;
+
+
 
 /**
  * 
@@ -22,49 +25,34 @@ import java.util.Map;
 * @version  1.0  
 *
  */
+
+@ToString
 public class GroupEntity extends AbstractCommonModel implements Group {
 
 	private static final long serialVersionUID = 9058258883041062647L;
-
-
-	/**
-	 * name_
-	 */
 	protected String name;
-
-	/**
-	 * prent_id_
-	 */
 	protected String parentId;
-
-	/**
-	 * code_
-	 */
 	protected String code;
-
 	/**
 	 * 级别
 	 */
 	protected String grade;
-
 	protected Long seq;
-
 	protected String desc;;
-
+	
 	/**
 	 * 上级组织名称
 	 */
 	protected String parentOrgName;
-
 	/**
 	 * 是否主组织。
 	 */
 	private int isMaster = 0;
-
+	
+	
 	public void setParentOrgName(String parentOrgName) {
 		this.parentOrgName = parentOrgName;
 	}
-
 
 	/**
 	 * 返回 主键
@@ -74,7 +62,6 @@ public class GroupEntity extends AbstractCommonModel implements Group {
 	public String getId() {
 		return this.id;
 	}
-
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -127,13 +114,6 @@ public class GroupEntity extends AbstractCommonModel implements Group {
 		return this.grade;
 	}
 
-	/**
-	 * @see Object#toString()
-	 */
-	public String toString() {
-		return new ToStringBuilder(this).append("id", this.id).append("name", this.name)
-				.append("parentId", this.parentId).append("code", this.code).append("grade", this.grade).toString();
-	}
 
 	public String getIdentityType() {
 		return IdentityType.GROUP;
@@ -151,7 +131,7 @@ public class GroupEntity extends AbstractCommonModel implements Group {
 		return seq;
 	}
 
-	public void setSn(Long seq) {
+	public void setSeq(Long seq) {
 		this.seq = seq;
 	}
 

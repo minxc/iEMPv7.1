@@ -4,7 +4,6 @@ import org.minxc.emp.core.impl.model.AbstractCommonModel;
 
 import lombok.ToString;
 
-
 /**
  * 组织职务信息
  */
