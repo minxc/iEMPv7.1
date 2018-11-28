@@ -15,7 +15,7 @@ import java.util.List;
  * @date 2018/8/26 20:09
  */
 
-
+@Mapper
 public interface CommonDao<PK extends Serializable, T> {
     /**
      *  创建实体对象
@@ -48,7 +48,7 @@ public interface CommonDao<PK extends Serializable, T> {
     public T get(PK entityId);
 
     /**
-     * 查询实体对象
+          *    查询实体对象
      *
      * @param queryFilter
      * @return

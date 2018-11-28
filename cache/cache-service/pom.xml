@@ -5,13 +5,12 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>org.minxc</groupId>
+		<groupId>org.minxc.iemp</groupId>
 		<artifactId>cache</artifactId>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
 	<artifactId>cache-service</artifactId>
 	<name>cache-service</name>
-	<url>http://maven.apache.org</url>
 	<properties>
 	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 </properties>

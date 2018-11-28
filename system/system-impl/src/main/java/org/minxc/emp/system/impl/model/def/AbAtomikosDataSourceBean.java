@@ -2,13 +2,14 @@ package org.minxc.emp.system.impl.model.def;
 
 import java.util.Properties;
 
-import com.atomikos.jdbc.AtomikosDataSourceBean;
+//import com.atomikos.jdbc.AtomikosDataSourceBean;
 
 /**
  *  为了配合系统数据源的构造而做的AtomikosDataSourceBean
  * 有些必要参数在properties中，在页面很难设置，所以在这里提到了最外层配置
  */
-public class AbAtomikosDataSourceBean extends AtomikosDataSourceBean {
+public class AbAtomikosDataSourceBean {
+//extends AtomikosDataSourceBean {
 	
 	private static final long serialVersionUID = -5612937896080690391L;
 	private String url;
@@ -43,11 +44,11 @@ public class AbAtomikosDataSourceBean extends AtomikosDataSourceBean {
 	}
 
 	private void setProperty(String key, String val) {
-		Properties properties = getXaProperties();
-		if (properties == null) {
-			properties = new Properties();
-			setXaProperties(properties);
-		}
-		properties.setProperty(key, val);
+//		Properties properties = getXaProperties();
+//		if (properties == null) {
+//			properties = new Properties();
+//			setXaProperties(properties);
+//		}
+//		properties.setProperty(key, val);
 	}
 }

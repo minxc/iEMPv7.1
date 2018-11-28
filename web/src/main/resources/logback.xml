@@ -4,8 +4,8 @@
  -->
 <configuration scan="true">
    <!--  <property name="APP" value="${project.artifactId}" /> -->
-    <property name="APP" value="emp" />
-    <property name="LOG_HOME" value="/data/log/${APP}" />
+    <property name="APP" value="iemp" />
+    <property name="LOG_HOME" value="/${APP}/logs" />
 
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>

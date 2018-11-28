@@ -30,13 +30,13 @@ import java.util.List;
  * 组织管理
  */
 @RestController
-@RequestMapping("/org/group")
+@RequestMapping("/rest/groupmgr")
 public class GroupController extends CommonController<GroupEntity> {
 
 	@Resource
-	GroupManager groupManager;
+	private GroupManager groupManager;
 	@Resource
-	UserManager userManager;
+	private UserManager userManager;
 
 	/**
 	 * 组织架构列表(分页条件查询)数据
@@ -46,18 +46,19 @@ public class GroupController extends CommonController<GroupEntity> {
 	 * @return 
 	 * @throws Exception PageJson @throws
 	 */
-	@RequestMapping("listJson")
+	@RequestMapping("/listJson")
 	public PageJson listJson(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		QueryFilter queryFilter = getQueryFilter(request);
 		String parentId = request.getParameter("parentId");
 		if (StringUtils.isNotEmpty(parentId)) {
-			queryFilter.addFilter("parent_id_", parentId, QueryOperator.EQUAL);
+			queryFilter.addFilter("PARENT_ID", parentId, QueryOperator.EQUAL);
 		}
-		Page<GroupEntity> orgList = (Page<GroupEntity>) groupManager.query(queryFilter);
+		List<GroupEntity> groupList = groupManager.query(queryFilter);
+		Page<GroupEntity> orgList = (Page<GroupEntity>) groupList;
 		return new PageJson(orgList);
 	}
 
-	@RequestMapping("isExist")
+	@RequestMapping("/isExist")
 	public boolean isExist(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String oldCode = RequestUtil.getString(request, "oldCode");
 		String code = RequestUtil.getString(request, "key");
@@ -79,7 +80,7 @@ public class GroupController extends CommonController<GroupEntity> {
 	 * @return
 	 * @throws Exception ModelAndView
 	 */
-	@RequestMapping("get")
+	@RequestMapping("/get")
 	@Override
 	@ErrorCatching
 	public ResultMessage<GroupEntity> get(@RequestParam String id) throws Exception {
@@ -92,7 +93,7 @@ public class GroupController extends CommonController<GroupEntity> {
 		return getSuccessResult(group);
 	}
 
-	@RequestMapping("getTreeData")
+	@RequestMapping("/getTreeData")
 	public List<OrgTreeEntity> getTreeData(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		List<OrgTreeEntity> groupTreeList = getGroupTree();
 		if (BeanUtils.isEmpty(groupTreeList)) {

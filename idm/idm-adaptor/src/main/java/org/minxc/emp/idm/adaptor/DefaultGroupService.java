@@ -1,12 +1,10 @@
 package org.minxc.emp.idm.adaptor;
 
-
 import org.minxc.emp.core.util.BeanCopierUtils;
 import org.minxc.emp.core.util.BeanUtils;
 import org.minxc.emp.idm.api.constant.GroupTypeConstant;
 import org.minxc.emp.idm.api.model.Group;
 import org.minxc.emp.idm.api.model.GroupType;
-import org.minxc.emp.idm.api.model.User;
 import org.minxc.emp.idm.api.model.dto.GroupDto;
 import org.minxc.emp.idm.api.service.GroupService;
 import org.minxc.emp.idm.impl.manager.GroupManager;
@@ -23,7 +21,6 @@ import com.google.common.collect.Maps;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -52,7 +49,7 @@ public class DefaultGroupService implements GroupService {
     @SuppressWarnings("unchecked")
     @Override
     public List<Group> getGroupsByGroupTypeUserId(String groupType, String userId) {
-    	List listGroup  = null;
+    	List<Group> listGroup  = null;
     	
         if (groupType.equals(GroupTypeConstant.ORG.key())) {
         	listGroup = (List) groupManager.getByUserId(userId);

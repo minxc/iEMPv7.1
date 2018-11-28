@@ -25,15 +25,14 @@ import javax.servlet.http.HttpServletResponse;
 */
 
 
-
 @Slf4j
 @Controller
 public class MainController {
-    @RequestMapping(value = "/index")
+    @RequestMapping(value = "/home")
     public ModelAndView mainPage(HttpServletRequest request, HttpServletResponse response){
 
         log.info("Main page request...");
-        ModelAndView mainView = new ModelAndView("home/index");
+        ModelAndView mainView = new ModelAndView("home/home");
         return mainView;
     }
 

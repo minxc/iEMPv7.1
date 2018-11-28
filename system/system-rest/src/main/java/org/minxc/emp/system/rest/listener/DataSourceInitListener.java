@@ -20,7 +20,8 @@ import java.util.Map.Entry;
 
 /**
  * 在spring容器启动时加载数据源：
- * 从spring文件中做加载。 扫描系统spring 配置中数据源动态加入到系统的dataSourceMap数据源中，
+ * 从spring文件中做加载。 
+ * 扫描系统spring 配置中数据源动态加入到系统的dataSourceMap数据源中，
  */
 @Slf4j
 @Component
@@ -45,7 +46,7 @@ public class DataSourceInitListener implements ApplicationListener<ContextRefres
 
     /**
      * 
-     * 加载系统数据源到dynamicDataSource中
+          *    加载系统数据源到dynamicDataSource中
      * 
      */
     private void loadDataSourceFromSysDataSource() {

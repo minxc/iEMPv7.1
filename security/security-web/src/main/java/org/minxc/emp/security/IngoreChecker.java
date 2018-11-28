@@ -28,10 +28,17 @@ public class IngoreChecker {
 	 */
 	public boolean isIngores(String requestUrl) {
 		for (Pattern pattern : ingores) {
-			Matcher regexMatcher = pattern.matcher(requestUrl);
-			if (regexMatcher.find()) {
-				return true;
+			//处理web根路径的匹配问题 /
+			String patternString = pattern.pattern();
+			if(patternString.equals("/") && !requestUrl.equals("/")) {
+				return false;
+			}else {
+				Matcher regexMatcher = pattern.matcher(requestUrl);
+				if (regexMatcher.find()) {
+					return true;
+				}
 			}
+			
 		}
 		return false;
 	}

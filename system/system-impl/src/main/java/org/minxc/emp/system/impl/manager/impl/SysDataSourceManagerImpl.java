@@ -28,8 +28,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class SysDataSourceManagerImpl extends CommonManager<String, SystemDataSourceEntity> implements DataSourceManager {
    
-	@Autowired
-    SysDataSourceDao sysDataSourceDao;
+//	@Autowired
+//    private SysDataSourceDao sysDataSourceDao;
 
     @Override
     public DataSource tranform2DataSource(SystemDataSourceEntity sysDataSource) {

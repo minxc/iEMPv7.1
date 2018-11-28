@@ -7,15 +7,15 @@
     <artifactId>iEMPv7.1</artifactId>
     <version>1.0-SNAPSHOT</version>
   </parent>
+  <groupId>org.minxc.iemp</groupId>
   <artifactId>cache</artifactId>
   <name>cache</name>
   <packaging>pom</packaging>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
-  
-  
   <modules>
   	<module>cache-service</module>
+  	<module>cache-basis</module>
   </modules>
 </project>

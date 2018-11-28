@@ -4,6 +4,13 @@ import org.springframework.context.annotation.Configuration;
 import org.minxc.emp.security.authentication.AccessDecisionManagerImpl;
 import org.minxc.emp.security.authentication.FilterInvocationSecurityMetadataSourceImpl;
 import org.minxc.emp.security.filter.SecurityRequestCsrfMatcher;
+import org.minxc.emp.security.login.CustomAuthenticationFailureHandler;
+import org.minxc.emp.security.login.CustomPasswordEncoder;
+import org.minxc.emp.security.login.CustomeAuthenticationSuccessHandler;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.cache.Cache;
+import org.springframework.cache.CacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.access.AccessDecisionManager;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -14,7 +21,8 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.core.userdetails.cache.SpringCacheBasedUserCache;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.DefaultSecurityFilterChain;
@@ -43,7 +51,6 @@ import org.springframework.security.web.authentication.AnonymousAuthenticationFi
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
-import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutFilter;
@@ -83,7 +90,6 @@ import java.util.List;
 
 */
 
-
 @Configuration
 public class WebSecurityConfig {
 
@@ -95,9 +101,13 @@ public class WebSecurityConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+//        return new BCryptPasswordEncoder();
+        return new CustomPasswordEncoder();
     }
-
+    
+    @Autowired()
+    @Qualifier("securityCacheManager")
+    private CacheManager cacheManager;
 
     // @Bean
     // public JdbcTokenRepositoryImpl tokenRepository(){
@@ -119,8 +129,16 @@ public class WebSecurityConfig {
         List<String> ingnores = new ArrayList<>(8);
 //        ingnores.add("/login.*");
 //        ingnores.add("/index");
-        ingnores.add("/hplus/*");
-        ingnores.add("/favicon.ico");
+//        ingnores.add("/*");
+        ingnores.add(".js");
+        ingnores.add(".css");
+        ingnores.add(".ico");
+        ingnores.add(".ttf");
+        ingnores.add(".woff2");
+        ingnores.add(".jpg");
+        ingnores.add(".jpeg");
+        ingnores.add(".png");
+//        ingnores.add("/favicon.ico");
         ingnores.add("/");
         securityMetaDataSource.setIngores(ingnores);
         return securityMetaDataSource;
@@ -233,6 +251,7 @@ public class WebSecurityConfig {
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
         authenticationProvider.setUserDetailsService(userDetailsService);
         authenticationProvider.setPasswordEncoder(passwordEncoder());
+        authenticationProvider.setUserCache(springSecurityCache());
         return authenticationProvider;
     }
 
@@ -297,6 +316,7 @@ public class WebSecurityConfig {
         usernamePasswordAuthenticationFilter.setAuthenticationSuccessHandler(authenticationSuccessHandler());
         usernamePasswordAuthenticationFilter.setRememberMeServices(rememberMeServices());
         usernamePasswordAuthenticationFilter.setAuthenticationManager(authenticationManager());
+        
         return usernamePasswordAuthenticationFilter;
 
     }
@@ -319,16 +339,22 @@ public class WebSecurityConfig {
 
     @Bean(name = "authenticationSuccessHandler")
     public AuthenticationSuccessHandler authenticationSuccessHandler() {
-        SimpleUrlAuthenticationSuccessHandler authenticationSuccessHandler = new SimpleUrlAuthenticationSuccessHandler();
-        authenticationSuccessHandler.setDefaultTargetUrl("/home");
+    	
+    	CustomeAuthenticationSuccessHandler authenticationSuccessHandler = new CustomeAuthenticationSuccessHandler();
+//        SimpleUrlAuthenticationSuccessHandler authenticationSuccessHandler = new SimpleUrlAuthenticationSuccessHandler();
+//        authenticationSuccessHandler.setDefaultTargetUrl("/home");
         return authenticationSuccessHandler;
     }
 
     @Bean(name = "authenticationFailureHandler")
     public AuthenticationFailureHandler authenticationFailureHandler() {
-        SimpleUrlAuthenticationFailureHandler authenticationFailureHandler = new SimpleUrlAuthenticationFailureHandler();
-        authenticationFailureHandler.setDefaultFailureUrl("/index");
+//        SimpleUrlAuthenticationFailureHandler authenticationFailureHandler = new SimpleUrlAuthenticationFailureHandler();
+//        authenticationFailureHandler.setDefaultFailureUrl("/");
+//        return authenticationFailureHandler;
+    	CustomAuthenticationFailureHandler authenticationFailureHandler = new CustomAuthenticationFailureHandler();
         return authenticationFailureHandler;
+        
+         
     }
 
     // 注销过滤器    默认处理url为  /logout
@@ -397,8 +423,7 @@ public class WebSecurityConfig {
     //登录过滤处理器
     @Bean
     public AuthenticationEntryPoint authenticationEntryPoint() {
-        LoginUrlAuthenticationEntryPoint authenticationEntryPoint = new LoginUrlAuthenticationEntryPoint(
-                "/index");
+        LoginUrlAuthenticationEntryPoint authenticationEntryPoint = new LoginUrlAuthenticationEntryPoint("/");
         authenticationEntryPoint.setUseForward(false);
         authenticationEntryPoint.setForceHttps(false);
         return authenticationEntryPoint;
@@ -467,5 +492,22 @@ public class WebSecurityConfig {
     public AnonymousAuthenticationFilter anonymousAuthenticationFilter() {
     	AnonymousAuthenticationFilter anonymousFilter = new AnonymousAuthenticationFilter("ANONYMOUS_FILTER");
     	return anonymousFilter;
+    }
+    
+    /***
+     * 
+     *  Spring security使用的缓存
+     * 
+     */
+    @Bean("springSecurityCache")
+    public SpringCacheBasedUserCache springSecurityCache() {
+    	Cache ssche = this.cacheManager.getCache("SPRING_SECURITY_CACHE");
+    	SpringCacheBasedUserCache springSecurityCache = null;
+		try {
+			springSecurityCache = new SpringCacheBasedUserCache(ssche);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    	return springSecurityCache;
     }
 }

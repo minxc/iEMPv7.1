@@ -7,12 +7,15 @@ import org.minxc.emp.idm.api.service.UserService;
 import org.minxc.emp.security.constant.PlatformSecurityConstants;
 import org.minxc.emp.security.login.model.LoginUser;
 import org.minxc.emp.system.util.ContextUtil;
+import org.springframework.cache.Cache;
+import org.springframework.cache.CacheManager;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -28,8 +31,14 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Resource
     private UserService userService;
+    
+    @Resource(name="securityCacheManager")
+    private CacheManager cacheManager;
 
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    	
+    	
+    	
         User defaultUser = userService.getUserByAccount(username);
 
         if (BeanUtils.isEmpty(defaultUser)) {
@@ -50,7 +59,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             collection.add(PlatformSecurityConstants.ROLE_GRANT_SUPER);
         }
         loginUser.setAuthorities(collection);
-
+        Cache cache = cacheManager.getCache("SPRING_SECURITY_CACHE");
+        cache.put(username, loginUser);
         return loginUser;
     }
 }

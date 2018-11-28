@@ -2,7 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 
-<mapper namespace="org.minxc.emp.common.db.dao">
+<mapper namespace="org.minxc.emp.common.db.dao.CommonDao">
+
 	<update id="execute" parameterType="java.util.Map">
 		${sql}
 	</update>

@@ -1,10 +1,23 @@
 package org.minxc.emp.config;
 
 import lombok.extern.slf4j.Slf4j;
+
+import java.nio.charset.StandardCharsets;
+import java.util.List;
+
+import org.apache.commons.compress.utils.Lists;
+import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.MediaType;
+import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.filter.DelegatingFilterProxy;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+
+import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.alibaba.fastjson.support.config.FastJsonConfig;
+import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 
 /**
 
@@ -22,7 +35,7 @@ import org.springframework.web.filter.DelegatingFilterProxy;
 
 */
 @Configuration
-public class WebConfig {
+public class WebConfig{
 
 //    @Bean
 //    public FilterRegistrationBean springSecurityFilter() {
@@ -32,5 +45,28 @@ public class WebConfig {
 //        springSecurityFilterChain.setName("springSecurityFilterChain");
 //        return springSecurityFilterChain;
 //    }
+	
+//	@Bean
+//	public HttpMessageConverters customConverters() {
+//		// 1、需要先定义一个 convert 转换消息的对象;
+//        FastJsonHttpMessageConverter fastConverter = new FastJsonHttpMessageConverter();
+//
+//        //2、创建Fastjosn对象并设定序列化规则
+//        FastJsonConfig fastJsonConfig = new FastJsonConfig();
+//        fastJsonConfig.setSerializerFeatures(SerializerFeature.PrettyFormat);
+//
+//        //3、规则赋予转换对象
+//        fastConverter.setFastJsonConfig(fastJsonConfig);
+//
+//        
+//        StringHttpMessageConverter stringConverter = new StringHttpMessageConverter();
+//        stringConverter.setDefaultCharset(StandardCharsets.UTF_8);
+//        
+//        List<MediaType> supportedMediaTypes = Lists.newArrayList();
+//        supportedMediaTypes.add(MediaType.TEXT_PLAIN);
+//        supportedMediaTypes.add(MediaType.TEXT_HTML);
+//		return new HttpMessageConverters(fastConverter, stringConverter);
+//	}
+
 
 }

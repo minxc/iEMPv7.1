@@ -20,9 +20,7 @@ public class DefaultAccessDeniedHandler implements AccessDeniedHandler {
 
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException ex) throws IOException, ServletException {
-        HttpServletRequest httpRequest = (HttpServletRequest) request;
         response.setCharacterEncoding("UTF-8");
-
         ResultMessage ResultMessage = new ResultMessage(CommonStatusCode.NO_ACCESS, ex.getMessage());
         response.getWriter().print(JSONObject.toJSONString(ResultMessage));
         return;
