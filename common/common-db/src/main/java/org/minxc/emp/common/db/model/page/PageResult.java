@@ -26,7 +26,11 @@ public class PageResult implements Serializable {
      * 总记录数
      */
     private int totalCount = 0;
-
+    
+    public PageResult() {
+    	
+    }
+    
     public PageResult(int page, int limit, int totalCount) {
         super();
         this.limit = limit;

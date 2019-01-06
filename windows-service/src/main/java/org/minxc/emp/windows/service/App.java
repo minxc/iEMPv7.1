@@ -5,7 +5,8 @@ package org.minxc.emp.windows.service;
 
 import java.util.Date;
 
-/**      
+/**
+ *       
 * 项目名称：windows-service   
 * 类名称：App   
 * 类  Windows服务入口类

@@ -9,21 +9,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
-
 * @Title: MainController 
-
 * @Package: org.minxc.emp.web.controller 
-
 * @Description:  主页控制器
-
 * @author: Xianchang.min  
-
 * @date  2018/8/17 23:11 
-
 * @version V1.0  
-
 */
-
 
 @Slf4j
 @Controller

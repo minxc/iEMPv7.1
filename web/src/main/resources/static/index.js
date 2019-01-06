@@ -13,7 +13,7 @@
 //});
 
 $(document).ready(function() {
-
+	$("#password").val("");
 	var options = {
 		// target : '#output1', // target element(s) to be updated with server
 		// response
@@ -48,7 +48,13 @@ function showResponse(responseText, statusText, xhr, $form) {
 		
 		
 	}else{
-		window.location.href= window.location.href + "home";
+		var url = window.document.location.protocol + "//" +  window.document.location.hostname;
+		if("" == window.document.location.port){
+			url += "/home";
+		}else{
+			url = url + ":" + window.document.location.port + "/home";
+		}
+		window.location.href= url;
 	}
 }
 
@@ -59,8 +65,18 @@ function encryptPassword(form, options) {
 	$("#password").val(encrytedPassword);
 	return true;
 }
+function getURL() {
+	var curWwwPath = window.document.location.href;
+	// 获取主机地址之后的目录，如： test/test/test.htm  
+	var pathName = window.document.location.pathname;
+	var pos = curWwwPath.indexOf(pathName); // 获取主机地址，如： http://localhost:8080  
+	var localhostPaht = curWwwPath.substring(0, pos); // 获取带"/"的项目名，如：/web
+	var projectName = pathName.substring(0, pathName.substr(1).indexOf('/') + 1);
+	var rootPath = localhostPaht + projectName;
+	return rootPath;
 
-//$(document).ready(function() {
+}  
+// $(document).ready(function() {
 //	$(".demo1").click(function() {
 //		swal({
 //			title : "欢迎使用SweetAlert",

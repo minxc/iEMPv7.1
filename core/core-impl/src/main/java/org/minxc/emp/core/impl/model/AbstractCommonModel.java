@@ -1,15 +1,10 @@
 /**  
 
 * @Title: AbstractCommonModel.java 
-
 * @Package org.minxc.emp.base.core.model 
-
 * @Description: TODO(用一句话描述该文件做什么) 
-
 * @author Xianchang.min  
-
 * @date 2018年8月22日 下午11:46:33 
-
 * @version V1.0  
 
 */ 
@@ -43,7 +38,6 @@ import java.util.Date;
 public abstract class AbstractCommonModel implements CommonModel {
 	
 		private static final long serialVersionUID = -4468635720384821075L;
-		
 		@NotEmpty
 	    protected String id;
 	    // 创建时间
@@ -58,6 +52,4 @@ public abstract class AbstractCommonModel implements CommonModel {
 		protected int version = 0;
 	    // 逻辑删除标记
 		protected boolean isDelete = false;
-	
-	
 }

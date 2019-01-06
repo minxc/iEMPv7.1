@@ -38,10 +38,10 @@
     <logger name="ACCESS">
         <appender-ref ref="ACCESS" />
     </logger>
-    <logger name="org.minxc.emp" level="INFO" >
+    <logger name="org.minxc.emp" level="DEBUG" >
     	<appender-ref ref="DETAIL" />
     </logger>
-    <logger name="org.springframework" level="DEBUG" >
+    <logger name="org.springframework" level="INFO" >
     	<appender-ref ref="DETAIL" />
     </logger>
     <logger name="java.sql.Connection" level="DEBUG" >

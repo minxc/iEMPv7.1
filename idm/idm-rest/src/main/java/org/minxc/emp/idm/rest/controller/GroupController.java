@@ -1,5 +1,6 @@
 package org.minxc.emp.idm.rest.controller;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.github.pagehelper.Page;
 
 import org.apache.commons.lang3.StringUtils;
@@ -18,6 +19,7 @@ import org.minxc.emp.idm.impl.model.GroupEntity;
 import org.minxc.emp.idm.impl.model.OrgTreeEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;

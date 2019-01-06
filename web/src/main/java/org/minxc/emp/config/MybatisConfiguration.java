@@ -19,17 +19,11 @@ import javax.annotation.Resource;
 import javax.sql.DataSource;
 
 /**
-
 * @Title: MybatisConfiguration 
-
 * @Package: org.minxc.emp.config 
-
 * @Description:  Mybatis配置文件
-
 * @author: Xianchang.min  
-
 * @date  2018/8/19 16:51 
-
 * @version V1.0  
 
 */ 
