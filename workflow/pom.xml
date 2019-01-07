@@ -16,7 +16,6 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
   <modules>
-  	<module>workflow-core</module>
   	<module>workflow-engine</module>
   	<module>workflow-bpmn-converter</module>
   	<module>workflow-process-validation</module>
