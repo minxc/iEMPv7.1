@@ -1,5 +1,5 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  org.flowable.ui.common.properties.FlowableRemoteIdmAutoConfiguration
+  com.minxc.emp.ui.common.properties.FlowableRemoteIdmAutoConfiguration
 
 org.springframework.boot.env.EnvironmentPostProcessor=\
-  org.flowable.ui.common.properties.BackwardsCompatiblePropertiesLoader
+  com.minxc.emp.ui.common.properties.BackwardsCompatiblePropertiesLoader
