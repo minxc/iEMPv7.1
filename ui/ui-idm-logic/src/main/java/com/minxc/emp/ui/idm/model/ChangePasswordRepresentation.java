@@ -2,9 +2,6 @@ package com.minxc.emp.ui.idm.model;
 
 import com.minxc.emp.ui.common.model.AbstractRepresentation;
 
-/**
- * @author Joram Barrez
- */
 public class ChangePasswordRepresentation extends AbstractRepresentation {
 
     protected String originalPassword;

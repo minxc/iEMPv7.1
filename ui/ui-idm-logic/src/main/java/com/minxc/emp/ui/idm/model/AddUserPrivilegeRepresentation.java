@@ -2,9 +2,7 @@ package com.minxc.emp.ui.idm.model;
 
 import com.minxc.emp.ui.common.model.AbstractRepresentation;
 
-/**
- * @author Joram Barrez
- */
+
 public class AddUserPrivilegeRepresentation extends AbstractRepresentation {
 
     protected String userId;

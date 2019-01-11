@@ -8,10 +8,10 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @ComponentScan(basePackages = {
-    "org.flowable.idm.extension.conf", // For custom configuration classes
-    "org.flowable.idm.extension.bean" // For custom beans
+    "com.minxc.emp.ui.idm.extension.conf", // For custom configuration classes
+    "com.minxc.emp.ui.idm.extension.bean" // For custom beans
 })
-public class FlowableIdmEngineConfiguration {
+public class EnterpriseManagementPlatformIdmEngineConfiguration {
 
     @Bean(name = "clock")
     public Clock getClock(IdmEngine idmEngine) {

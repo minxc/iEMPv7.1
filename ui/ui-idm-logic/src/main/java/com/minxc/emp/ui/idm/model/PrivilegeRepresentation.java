@@ -7,9 +7,7 @@ import com.minxc.emp.ui.common.model.AbstractRepresentation;
 import com.minxc.emp.ui.common.model.GroupRepresentation;
 import com.minxc.emp.ui.common.model.UserRepresentation;
 
-/**
- * @author Joram Barrez
- */
+
 public class PrivilegeRepresentation extends AbstractRepresentation {
 
     protected String id;

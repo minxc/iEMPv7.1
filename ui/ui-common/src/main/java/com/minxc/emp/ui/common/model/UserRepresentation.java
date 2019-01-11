@@ -5,9 +5,7 @@ import java.util.List;
 
 import org.flowable.idm.api.User;
 
-/**
- * @author Joram Barrez
- */
+
 public class UserRepresentation extends AbstractRepresentation {
 
     protected String id;

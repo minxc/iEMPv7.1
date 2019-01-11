@@ -18,12 +18,13 @@
 		<module>system</module>
 		<module>basis</module>
 		<module>idm</module>
-		<module>windows-service</module>
+		<!--<module>windows-service</module>-->
 		<module>cache</module>
 		<module>workflow</module>
-		<module>shiro</module>
+		<!--<module>shiro</module>-->
 		<module>ui</module>
-	</modules>
+        <module>flowable-6</module>
+    </modules>
 
 	<properties>
 		<maven.compiler.source>1.8</maven.compiler.source>

@@ -1,8 +1,6 @@
 package com.minxc.emp.ui.idm.constant;
 
-/**
- * @author Joram Barrez
- */
+
 public interface GroupTypes {
 
     String TYPE_ASSIGNMENT = "assignment";

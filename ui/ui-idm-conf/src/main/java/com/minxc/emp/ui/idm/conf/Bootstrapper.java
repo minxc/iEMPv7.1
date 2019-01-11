@@ -11,7 +11,7 @@ import org.flowable.idm.api.Privilege;
 import org.flowable.idm.api.User;
 import org.flowable.spring.boot.ldap.FlowableLdapProperties;
 import com.minxc.emp.ui.common.security.DefaultPrivileges;
-import com.minxc.emp.ui.idm.properties.FlowableIdmAppProperties;
+import com.minxc.emp.ui.idm.properties.EnterpriseManagementPlatformIdmAppProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +37,7 @@ public class Bootstrapper implements ApplicationListener<ContextRefreshedEvent> 
     private FlowableLdapProperties ldapProperties;
 
     @Autowired
-    private FlowableIdmAppProperties idmAppProperties;
+    private EnterpriseManagementPlatformIdmAppProperties idmAppProperties;
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
@@ -77,7 +77,7 @@ public class Bootstrapper implements ApplicationListener<ContextRefreshedEvent> 
     }
 
     protected User initializeAdminUser() {
-        FlowableIdmAppProperties.Admin adminConfig = idmAppProperties.getAdmin();
+        EnterpriseManagementPlatformIdmAppProperties.Admin adminConfig = idmAppProperties.getAdmin();
         String adminUserId = adminConfig.getUserId();
         Assert.notNull(adminUserId, "flowable.idm.app.admin.user-id property must be set");
         String adminPassword = adminConfig.getPassword();

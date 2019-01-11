@@ -9,7 +9,7 @@ import org.springframework.boot.context.properties.NestedConfigurationProperty;
  * @author Filip Hrisafov
  */
 @ConfigurationProperties(prefix = "flowable.idm.app")
-public class FlowableIdmAppProperties {
+public class EnterpriseManagementPlatformIdmAppProperties {
 
     /**
      * Enables the REST API (this is not the REST api used by the UI, but an api that's available over basic auth authentication).

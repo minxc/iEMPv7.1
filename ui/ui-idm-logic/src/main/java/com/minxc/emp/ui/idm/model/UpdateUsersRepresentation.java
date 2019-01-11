@@ -5,9 +5,6 @@ import java.util.List;
 
 import com.minxc.emp.ui.common.model.AbstractRepresentation;
 
-/**
- * @author Joram Barrez
- */
 public class UpdateUsersRepresentation extends AbstractRepresentation {
 
     protected String id;

@@ -14,7 +14,7 @@ import org.flowable.idm.api.Token;
 import org.flowable.idm.api.User;
 import com.minxc.emp.ui.common.security.CookieConstants;
 import com.minxc.emp.ui.common.security.FlowableAppUser;
-import com.minxc.emp.ui.idm.properties.FlowableIdmAppProperties;
+import com.minxc.emp.ui.idm.properties.EnterpriseManagementPlatformIdmAppProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,13 +71,13 @@ public class CustomPersistentRememberMeServices extends AbstractRememberMeServic
     private final long tokenRefreshDurationInMilliseconds;
 
     @Autowired
-    public CustomPersistentRememberMeServices(FlowableIdmAppProperties properties,
-        org.springframework.security.core.userdetails.UserDetailsService userDetailsService) {
+    public CustomPersistentRememberMeServices(EnterpriseManagementPlatformIdmAppProperties properties,
+                                              org.springframework.security.core.userdetails.UserDetailsService userDetailsService) {
         super(properties.getSecurity().getRememberMeKey(), userDetailsService);
 
         setAlwaysRemember(true);
 
-        FlowableIdmAppProperties.Cookie cookie = properties.getSecurity().getCookie();
+        EnterpriseManagementPlatformIdmAppProperties.Cookie cookie = properties.getSecurity().getCookie();
         tokenMaxAgeInSeconds = cookie.getMaxAge();
         LOGGER.info("Cookie max-age set to {} seconds", tokenMaxAgeInSeconds);
         tokenMaxAgeInMilliseconds = tokenMaxAgeInSeconds * 1000L;

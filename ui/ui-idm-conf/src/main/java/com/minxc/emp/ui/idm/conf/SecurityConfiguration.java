@@ -5,7 +5,7 @@ import com.minxc.emp.ui.common.properties.FlowableRestAppProperties;
 import com.minxc.emp.ui.common.security.ActuatorRequestMatcher;
 import com.minxc.emp.ui.common.security.ClearFlowableCookieLogoutHandler;
 import com.minxc.emp.ui.common.security.DefaultPrivileges;
-import com.minxc.emp.ui.idm.properties.FlowableIdmAppProperties;
+import com.minxc.emp.ui.idm.properties.EnterpriseManagementPlatformIdmAppProperties;
 import com.minxc.emp.ui.idm.security.AjaxAuthenticationFailureHandler;
 import com.minxc.emp.ui.idm.security.AjaxAuthenticationSuccessHandler;
 import com.minxc.emp.ui.idm.security.AjaxLogoutSuccessHandler;
@@ -53,7 +53,7 @@ public class SecurityConfiguration {
     protected IdmIdentityService identityService;
     
     @Autowired
-    protected FlowableIdmAppProperties idmAppProperties;
+    protected EnterpriseManagementPlatformIdmAppProperties idmAppProperties;
     
     @Bean
     public UserDetailsService userDetailsService() {
@@ -89,7 +89,7 @@ public class SecurityConfiguration {
     public static class FormLoginWebSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
 
         @Autowired
-        private FlowableIdmAppProperties idmAppProperties;
+        private EnterpriseManagementPlatformIdmAppProperties idmAppProperties;
 
         @Autowired
         private AjaxAuthenticationSuccessHandler ajaxAuthenticationSuccessHandler;
@@ -165,10 +165,10 @@ public class SecurityConfiguration {
     public static class ApiWebSecurityConfigurationAdapter extends WebSecurityConfigurerAdapter {
 
         protected final FlowableRestAppProperties restAppProperties;
-        protected final FlowableIdmAppProperties idmAppProperties;
+        protected final EnterpriseManagementPlatformIdmAppProperties idmAppProperties;
 
         public ApiWebSecurityConfigurationAdapter(FlowableRestAppProperties restAppProperties,
-            FlowableIdmAppProperties idmAppProperties) {
+            EnterpriseManagementPlatformIdmAppProperties idmAppProperties) {
             this.restAppProperties = restAppProperties;
             this.idmAppProperties = idmAppProperties;
         }

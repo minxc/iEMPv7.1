@@ -7,8 +7,6 @@ import org.springframework.security.core.GrantedAuthority;
 
 /**
  * A cache of {@link User} objects.
- * 
- * @author Joram Barrez
  */
 public interface UserCache {
 
