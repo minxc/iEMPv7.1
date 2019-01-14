@@ -12,9 +12,9 @@ import java.util.concurrent.TimeUnit;
 
 import javax.annotation.PostConstruct;
 
-import org.flowable.idm.api.IdmIdentityService;
-import org.flowable.idm.api.User;
-import org.flowable.spring.boot.ldap.FlowableLdapProperties;
+//import org.flowable.idm.api.IdmIdentityService;
+//import org.flowable.idm.api.User;
+//import org.flowable.spring.boot.ldap.FlowableLdapProperties;
 import com.minxc.emp.ui.common.properties.FlowableCommonAppProperties;
 import com.minxc.emp.ui.idm.cache.UserCache;
 import com.minxc.emp.ui.idm.model.UserInformation;

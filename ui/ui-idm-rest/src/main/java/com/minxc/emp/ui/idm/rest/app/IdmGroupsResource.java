@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.minxc.emp.ui.idm.service.GroupService;
-import org.flowable.idm.api.Group;
-import org.flowable.idm.api.User;
+import org.minxc.emp.idm.api.model.Group;
+import org.minxc.emp.idm.api.model.User;
 import com.minxc.emp.ui.common.model.GroupRepresentation;
 import com.minxc.emp.ui.common.model.ResultListDataRepresentation;
 import com.minxc.emp.ui.common.model.UserRepresentation;

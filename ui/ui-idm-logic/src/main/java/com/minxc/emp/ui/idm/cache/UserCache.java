@@ -2,7 +2,7 @@ package com.minxc.emp.ui.idm.cache;
 
 import java.util.Collection;
 
-import org.flowable.idm.api.User;
+import org.minxc.emp.idm.api.model.User;
 import org.springframework.security.core.GrantedAuthority;
 
 /**

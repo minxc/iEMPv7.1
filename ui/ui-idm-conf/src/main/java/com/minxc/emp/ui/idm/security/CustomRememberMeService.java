@@ -1,7 +1,7 @@
 package com.minxc.emp.ui.idm.security;
 
-import org.flowable.idm.api.Token;
-import org.flowable.idm.api.User;
+import org.minxc.emp.idm.api.model.Token;
+import org.minxc.emp.idm.api.model.User;
 
 public interface CustomRememberMeService {
 

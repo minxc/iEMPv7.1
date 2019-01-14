@@ -275,20 +275,6 @@
 				<artifactId>commons-beanutils</artifactId>
 				<version>${commons-beanutils}</version>
 			</dependency>
-
-
-			<!-- https://mvnrepository.com/artifact/org.thymeleaf/thymeleaf -->
-		<!--	<dependency>
-				<groupId>org.thymeleaf</groupId>
-				<artifactId>thymeleaf</artifactId>
-				<version>${thymeleaf-version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.thymeleaf</groupId>
-				<artifactId>thymeleaf-spring5</artifactId>
-				<version>${thymeleaf-version}</version>
-			</dependency>-->
-			
 			<dependency>
 				<groupId>com.belerweb</groupId>
 				<artifactId>pinyin4j</artifactId>
@@ -316,7 +302,6 @@
 				<artifactId>jackson-dataformat-properties</artifactId>
 				<version>${jackson}</version>
 			</dependency>
-			<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
 			<dependency>
 				<groupId>com.fasterxml.jackson.core</groupId>
 				<artifactId>jackson-databind</artifactId>
@@ -345,7 +330,6 @@
 				<version>${fastjson-version}</version>
 			</dependency>
 			
-			<!-- https://mvnrepository.com/artifact/joda-time/joda-time -->
 			<dependency>
 			    <groupId>joda-time</groupId>
 			    <artifactId>joda-time</artifactId>
@@ -370,6 +354,5 @@
 			</dependency>-->
 		</dependencies>
 	</dependencyManagement>
-
 
 </project>

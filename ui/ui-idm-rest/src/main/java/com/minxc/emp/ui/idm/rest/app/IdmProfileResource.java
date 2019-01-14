@@ -22,8 +22,8 @@ import com.minxc.emp.ui.idm.model.ChangePasswordRepresentation;
 import com.minxc.emp.ui.idm.service.GroupService;
 import com.minxc.emp.ui.idm.service.ProfileService;
 import org.apache.commons.lang3.tuple.Pair;
-import org.flowable.idm.api.Group;
-import org.flowable.idm.api.User;
+import org.minxc.emp.idm.api.model.Group;
+import org.minxc.emp.idm.api.model.User;
 import com.minxc.emp.ui.common.model.GroupRepresentation;
 import com.minxc.emp.ui.common.model.UserRepresentation;
 import com.minxc.emp.ui.common.security.SecurityUtils;
@@ -58,7 +58,7 @@ public class IdmProfileResource {
     public UserRepresentation getProfile() {
         User user = SecurityUtils.getCurrentFlowableAppUser().getUserObject();
         UserRepresentation userRepresentation = new UserRepresentation(user);
-        for (Group group : groupService.getGroupsForUser(user.getId())) {
+        for (Group group : groupService.getGroupsForUser(user.getUserId())) {
             userRepresentation.getGroups().add(new GroupRepresentation(group));
         }
         return userRepresentation;
@@ -66,9 +66,8 @@ public class IdmProfileResource {
 
     @RequestMapping(value = "/profile", method = RequestMethod.POST, produces = "application/json")
     public UserRepresentation updateProfile(@RequestBody UserRepresentation userRepresentation) {
-        return new UserRepresentation(profileService.updateProfile(userRepresentation.getFirstName(),
-                userRepresentation.getLastName(),
-                userRepresentation.getEmail()));
+        return new UserRepresentation(profileService.updateProfile("","",
+                ""));
     }
 
     @ResponseStatus(value = HttpStatus.OK)

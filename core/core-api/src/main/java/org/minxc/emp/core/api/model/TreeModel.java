@@ -4,7 +4,7 @@ import java.util.List;
 
 /**
  *
- * 项目名称：base-intf
+ * 项目名称：
  * 类名称：TreeModel
  * 类树结构对象，用于将列表数据转换成树结构。 C类型参数声明子数据的类型，那么在实现类中就能直接使用实现类作为children
  * 创建人：Xianchang.min

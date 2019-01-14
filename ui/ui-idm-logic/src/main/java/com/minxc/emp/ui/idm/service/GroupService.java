@@ -14,8 +14,8 @@ package com.minxc.emp.ui.idm.service;
 
 import java.util.List;
 
-import org.flowable.idm.api.Group;
-import org.flowable.idm.api.User;
+import org.minxc.emp.idm.api.model.Group;
+import org.minxc.emp.idm.api.model.User;
 
 /**
  * @author Joram Barre

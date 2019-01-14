@@ -175,6 +175,31 @@ public class UserDto implements User {
         return this.weixin;
     }
 
+    @Override
+    public void setDisplayName(String displayName) {
+
+    }
+
+    @Override
+    public String getDisplayName() {
+        return null;
+    }
+
+    @Override
+    public String getTenantId() {
+        return null;
+    }
+
+    @Override
+    public void setTenantId(String tenantId) {
+
+    }
+
+    @Override
+    public boolean isPictureSet() {
+        return false;
+    }
+
     public void setCreateTime(java.util.Date createTime) {
         this.createTime = createTime;
     }

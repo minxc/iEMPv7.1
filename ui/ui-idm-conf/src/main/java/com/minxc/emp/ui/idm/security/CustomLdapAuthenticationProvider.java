@@ -1,7 +1,7 @@
 package com.minxc.emp.ui.idm.security;
 
 import org.flowable.idm.api.IdmIdentityService;
-import com.minxc.emp.ui.common.security.FlowableAppUser;
+import com.minxc.emp.ui.common.security.EMPAppUser;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -38,7 +38,7 @@ public class CustomLdapAuthenticationProvider implements AuthenticationProvider 
             throw new BadCredentialsException(messages.getMessage("LdapAuthenticationProvider.badCredentials", "Bad credentials"));
         }
         
-        FlowableAppUser userDetails = (FlowableAppUser) userDetailsService.loadUserByUsername(authenticationToken.getName());
+        EMPAppUser userDetails = (EMPAppUser) userDetailsService.loadUserByUsername(authenticationToken.getName());
         
         UsernamePasswordAuthenticationToken result = new UsernamePasswordAuthenticationToken(
                 userDetails, authenticationToken.getCredentials(), 

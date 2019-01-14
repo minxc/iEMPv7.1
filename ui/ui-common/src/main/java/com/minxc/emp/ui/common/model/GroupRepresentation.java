@@ -1,6 +1,6 @@
 package com.minxc.emp.ui.common.model;
 
-import org.flowable.idm.api.Group;
+import org.minxc.emp.idm.api.model.Group;
 
 /**
  * @author Joram Barrez
@@ -15,9 +15,9 @@ public class GroupRepresentation extends AbstractRepresentation {
     }
 
     public GroupRepresentation(Group group) {
-        setId(group.getId());
+        setId(group.getGroupId());
         setName(group.getName());
-        setType(group.getType());
+        setType(group.getGroupType());
     }
 
     public String getId() {

@@ -1,6 +1,6 @@
 package com.minxc.emp.ui.common.security;
 
-import org.flowable.idm.api.User;
+import org.minxc.emp.idm.api.model.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,7 +21,8 @@ public class SecurityUtils {
     public static String getCurrentUserId() {
         User user = getCurrentUserObject();
         if (user != null) {
-            return user.getId();
+//            return user.getId();
+            return user.getUserId();
         }
         return null;
     }
@@ -35,27 +36,27 @@ public class SecurityUtils {
         }
 
         User user = null;
-        FlowableAppUser appUser = getCurrentFlowableAppUser();
+        EMPAppUser appUser = getCurrentFlowableAppUser();
         if (appUser != null) {
             user = appUser.getUserObject();
         }
         return user;
     }
 
-    public static FlowableAppUser getCurrentFlowableAppUser() {
-        FlowableAppUser user = null;
+    public static EMPAppUser getCurrentFlowableAppUser() {
+        EMPAppUser user = null;
         SecurityContext securityContext = SecurityContextHolder.getContext();
         if (securityContext != null && securityContext.getAuthentication() != null) {
             Object principal = securityContext.getAuthentication().getPrincipal();
-            if (principal instanceof FlowableAppUser) {
-                user = (FlowableAppUser) principal;
+            if (principal instanceof EMPAppUser) {
+                user = (EMPAppUser) principal;
             }
         }
         return user;
     }
 
     public static boolean currentUserHasCapability(String capability) {
-        FlowableAppUser user = getCurrentFlowableAppUser();
+        EMPAppUser user = getCurrentFlowableAppUser();
         for (GrantedAuthority grantedAuthority : user.getAuthorities()) {
             if (capability.equals(grantedAuthority.getAuthority())) {
                 return true;

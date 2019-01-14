@@ -3,7 +3,7 @@ package com.minxc.emp.ui.common.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.flowable.idm.api.User;
+import org.minxc.emp.idm.api.model.User;
 
 
 public class UserRepresentation extends AbstractRepresentation {
@@ -21,10 +21,10 @@ public class UserRepresentation extends AbstractRepresentation {
     }
 
     public UserRepresentation(User user) {
-        setId(user.getId());
-        setFirstName(user.getFirstName());
-        setLastName(user.getLastName());
-        setFullName((user.getFirstName() != null ? user.getFirstName() : "") + " " + (user.getLastName() != null ? user.getLastName() : ""));
+        setId(user.getUserId());
+        setFirstName("");
+        setLastName("");
+        setFullName((user.getFullname()));
         setEmail(user.getEmail());
     }
 

@@ -3,7 +3,7 @@ package com.minxc.emp.ui.idm.service;
 import java.io.InputStream;
 
 import org.apache.commons.lang3.tuple.Pair;
-import org.flowable.idm.api.User;
+import org.minxc.emp.idm.api.model.User;
 
 /**
  * @author Joram Barrez

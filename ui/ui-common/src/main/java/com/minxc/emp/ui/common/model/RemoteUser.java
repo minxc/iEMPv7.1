@@ -2,8 +2,9 @@ package com.minxc.emp.ui.common.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
-import org.flowable.idm.api.User;
+import org.minxc.emp.idm.api.model.User;
 
 public class RemoteUser implements User {
 
@@ -14,35 +15,30 @@ public class RemoteUser implements User {
     protected String email;
     protected String fullName;
     protected String tenantId;
+
     protected List<RemoteGroup> groups = new ArrayList<>();
     protected List<String> privileges = new ArrayList<>();
 
-    @Override
     public String getId() {
         return id;
     }
 
-    @Override
     public void setId(String id) {
         this.id = id;
     }
 
-    @Override
     public String getFirstName() {
         return firstName;
     }
 
-    @Override
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
-    @Override
     public String getLastName() {
         return lastName;
     }
 
-    @Override
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
@@ -63,6 +59,35 @@ public class RemoteUser implements User {
     }
 
     @Override
+    public String getMobile() {
+        return null;
+    }
+
+    @Override
+    public void setAttributes(Map<String, String> map) {
+
+    }
+
+    @Override
+    public Map<String, String> getAttributes() {
+        return null;
+    }
+
+    @Override
+    public String getAttrbuite(String key) {
+        return null;
+    }
+
+    @Override
+    public Integer getStatus() {
+        return null;
+    }
+
+    @Override
+    public String getWeixin() {
+        return null;
+    }
+
     public void setEmail(String email) {
         this.email = email;
     }
@@ -92,12 +117,41 @@ public class RemoteUser implements User {
     }
 
     @Override
+    public String getUserId() {
+        return null;
+    }
+
+    @Override
+    public void setUserId(String userId) {
+
+    }
+
+    @Override
+    public String getFullname() {
+        return null;
+    }
+
+    @Override
+    public void setFullname(String fullName) {
+
+    }
+
+    @Override
+    public String getAccount() {
+        return null;
+    }
+
+    @Override
+    public void setAccount(String account) {
+
+    }
+
+    @Override
     public String getPassword() {
         // Not supported
         return null;
     }
 
-    @Override
     public void setPassword(String string) {
         // Not supported
     }
@@ -116,5 +170,10 @@ public class RemoteUser implements User {
     @Override
     public void setTenantId(String tenantId) {
         this.tenantId = tenantId;
+    }
+
+    @Override
+    public String getIdentityType() {
+        return null;
     }
 }

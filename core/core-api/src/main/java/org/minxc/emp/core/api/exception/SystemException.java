@@ -21,6 +21,9 @@ public class SystemException extends RuntimeException {
 
 	private static final long serialVersionUID = -7289238698048230824L;
 
+	protected boolean isLogged;
+	protected boolean reduceLogLevel;
+
 	public StatusCode statusCode = CommonStatusCode.SYSTEM_ERROR;
 
 	public SystemException(String msg) {
@@ -67,5 +70,22 @@ public class SystemException extends RuntimeException {
 
 	public void setStatusCode(StatusCode statusCode) {
 		this.statusCode = statusCode;
+	}
+
+
+	public boolean isLogged() {
+		return isLogged;
+	}
+
+	public void setLogged(boolean isLogged) {
+		this.isLogged = isLogged;
+	}
+
+	public boolean isReduceLogLevel() {
+		return reduceLogLevel;
+	}
+
+	public void setReduceLogLevel(boolean reduceLogLevel) {
+		this.reduceLogLevel = reduceLogLevel;
 	}
 }

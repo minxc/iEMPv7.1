@@ -75,7 +75,6 @@ public interface User extends IdentityType{
     /**
      * 获取用户其它属性
      *
-     * @param map
      */
     Map<String, String> getAttributes();
 
@@ -90,4 +89,14 @@ public interface User extends IdentityType{
     Integer getStatus();
 
     String getWeixin();
+
+
+    void setDisplayName(String displayName);
+
+    String getDisplayName();
+    String getTenantId();
+
+    void setTenantId(String tenantId);
+
+    boolean isPictureSet();
 }

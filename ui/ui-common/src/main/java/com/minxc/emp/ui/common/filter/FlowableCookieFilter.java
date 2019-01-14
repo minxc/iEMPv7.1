@@ -17,12 +17,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.minxc.emp.ui.common.service.idm.RemoteIdmService;
-import org.flowable.common.engine.api.FlowableException;
 import com.minxc.emp.ui.common.model.RemoteToken;
 import com.minxc.emp.ui.common.model.RemoteUser;
 import com.minxc.emp.ui.common.properties.FlowableCommonAppProperties;
 import com.minxc.emp.ui.common.security.CookieConstants;
-import com.minxc.emp.ui.common.security.FlowableAppUser;
+import com.minxc.emp.ui.common.security.EMPAppUser;
+import org.minxc.emp.core.api.exception.SystemException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,7 +59,7 @@ public class FlowableCookieFilter extends OncePerRequestFilter {
     // (eg when doing multiple requests at the same time)
     protected LoadingCache<String, RemoteToken> tokenCache;
 
-    protected LoadingCache<String, FlowableAppUser> userCache;
+    protected LoadingCache<String, EMPAppUser> userCache;
 
     public FlowableCookieFilter(RemoteIdmService remoteIdmService, FlowableCommonAppProperties properties) {
         this.remoteIdmService = remoteIdmService;
@@ -92,7 +92,7 @@ public class FlowableCookieFilter extends OncePerRequestFilter {
                         if (token != null) {
                             return token;
                         } else {
-                            throw new FlowableException("token not found " + tokenId);
+                            throw new SystemException("token not found " + tokenId);
                         }
                     }
 
@@ -104,13 +104,13 @@ public class FlowableCookieFilter extends OncePerRequestFilter {
         Long userMaxSize = cache.getMaxSize();
         Long userMaxAge = cache.getMaxAge();
         userCache = CacheBuilder.newBuilder().maximumSize(userMaxSize).expireAfterWrite(userMaxAge, TimeUnit.SECONDS).recordStats()
-                .build(new CacheLoader<String, FlowableAppUser>() {
+                .build(new CacheLoader<String, EMPAppUser>() {
 
                     @Override
-                    public FlowableAppUser load(final String userId) throws Exception {
+                    public EMPAppUser load(final String userId) throws Exception {
                         RemoteUser user = remoteIdmService.getUser(userId);
                         if (user == null) {
-                            throw new FlowableException("user not found " + userId);
+                            throw new SystemException("user not found " + userId);
                         }
 
                         Collection<GrantedAuthority> grantedAuthorities = new ArrayList<>();
@@ -119,7 +119,7 @@ public class FlowableCookieFilter extends OncePerRequestFilter {
                         }
 
                         // put account into security context (for controllers to use)
-                        FlowableAppUser appUser = new FlowableAppUser(user, user.getId(), grantedAuthorities);
+                        EMPAppUser appUser = new EMPAppUser(user, user.getId(), grantedAuthorities);
                         return appUser;
                     }
 
@@ -132,9 +132,9 @@ public class FlowableCookieFilter extends OncePerRequestFilter {
             RemoteToken token = getValidToken(request);
             if (token != null) {
                 try {
-                    FlowableAppUser appUser = userCache.get(token.getUserId());
+                    EMPAppUser appUser = userCache.get(token.getUserId());
                     if (!validateRequiredPriviliges(request, response, appUser)) {
-                        redirectOrSendNotPermitted(request, response, appUser.getUserObject().getId());
+                        redirectOrSendNotPermitted(request, response, appUser.getUserObject().getUserId());
                         return; // no need to execute any other filters
                     }
                     SecurityContextHolder.getContext().setAuthentication(new RememberMeAuthenticationToken(token.getId(),
@@ -195,7 +195,7 @@ public class FlowableCookieFilter extends OncePerRequestFilter {
         return null;
     }
 
-    protected boolean validateRequiredPriviliges(HttpServletRequest request, HttpServletResponse response, FlowableAppUser user) {
+    protected boolean validateRequiredPriviliges(HttpServletRequest request, HttpServletResponse response, EMPAppUser user) {
 
         if (user == null) {
             return true;
@@ -241,15 +241,15 @@ public class FlowableCookieFilter extends OncePerRequestFilter {
             if (userId != null) {
                 userCache.invalidate(userId);
             }
-            
+
             String baseRedirectUrl = idmAppUrl + "#/login?redirectOnAuthSuccess=true&redirectUrl=";
             if (redirectUrlOnAuthSuccess != null) {
                 response.sendRedirect(baseRedirectUrl + redirectUrlOnAuthSuccess);
-                
+
             } else {
                 response.sendRedirect(baseRedirectUrl + request.getRequestURL());
             }
-            
+
         } catch (IOException e) {
             LOGGER.warn("Could not redirect to {}", idmAppUrl, e);
         }

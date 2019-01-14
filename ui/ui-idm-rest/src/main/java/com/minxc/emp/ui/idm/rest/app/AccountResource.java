@@ -4,7 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.minxc.emp.ui.idm.model.UserInformation;
 import com.minxc.emp.ui.idm.service.UserService;
-import org.flowable.idm.api.Group;
+import org.minxc.emp.idm.api.model.Group;
 import com.minxc.emp.ui.common.model.GroupRepresentation;
 import com.minxc.emp.ui.common.model.UserRepresentation;
 import com.minxc.emp.ui.common.security.SecurityUtils;
@@ -54,7 +54,8 @@ public class AccountResource {
      */
     @RequestMapping(value = "/rest/account", method = RequestMethod.GET, produces = "application/json")
     public UserRepresentation getAccount() {
-        String userId = SecurityUtils.getCurrentFlowableAppUser().getUserObject().getId();
+
+        String userId = SecurityUtils.getCurrentFlowableAppUser().getUserObject().getUserId();
         UserInformation userInformation = userService.getUserInformation(userId);
         if (userInformation != null) {
             UserRepresentation userRepresentation = new UserRepresentation(userInformation.getUser());

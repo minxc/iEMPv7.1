@@ -13,7 +13,7 @@ import org.flowable.idm.api.IdmIdentityService;
 import org.flowable.idm.api.Token;
 import org.flowable.idm.api.User;
 import com.minxc.emp.ui.common.security.CookieConstants;
-import com.minxc.emp.ui.common.security.FlowableAppUser;
+import com.minxc.emp.ui.common.security.EMPAppUser;
 import com.minxc.emp.ui.idm.properties.EnterpriseManagementPlatformIdmAppProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -100,7 +100,7 @@ public class CustomPersistentRememberMeServices extends AbstractRememberMeServic
         String userEmail = successfulAuthentication.getName();
 
         LOGGER.debug("Creating new persistent login for user {}", userEmail);
-        FlowableAppUser appUser = (FlowableAppUser) successfulAuthentication.getPrincipal();
+        EMPAppUser appUser = (EMPAppUser) successfulAuthentication.getPrincipal();
 
         Token token = createAndInsertPersistentToken(appUser.getUserObject(), request.getRemoteAddr(), request.getHeader("User-Agent"));
         addCookie(token, request, response);

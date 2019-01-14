@@ -9,7 +9,7 @@ import com.minxc.emp.ui.idm.service.UserService;
 import org.flowable.idm.api.IdmIdentityService;
 import org.flowable.idm.api.User;
 import org.flowable.spring.boot.ldap.FlowableLdapProperties;
-import com.minxc.emp.ui.common.security.FlowableAppUser;
+import com.minxc.emp.ui.common.security.EMPAppUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -69,7 +69,7 @@ public class UserDetailsService implements org.springframework.security.core.use
         }
 
         userCache.putUser(userFromDatabase.getId(), new UserCache.CachedUser(userFromDatabase, grantedAuthorities));
-        return new FlowableAppUser(userFromDatabase, actualLogin, grantedAuthorities);
+        return new EMPAppUser(userFromDatabase, actualLogin, grantedAuthorities);
     }
 
     @Transactional
@@ -94,7 +94,7 @@ public class UserDetailsService implements org.springframework.security.core.use
         User user = cachedUser.getUser();
         String actualUserId = user.getId();
 
-        return new FlowableAppUser(cachedUser.getUser(), actualUserId, cachedUser.getGrantedAuthorities());
+        return new EMPAppUser(cachedUser.getUser(), actualUserId, cachedUser.getGrantedAuthorities());
     }
 
     public void setUserValidityPeriod(long userValidityPeriod) {
