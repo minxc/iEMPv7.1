@@ -2,7 +2,7 @@ package com.minxc.emp.ui.idm.service;
 
 import java.util.List;
 
-import org.flowable.idm.api.User;
+import org.minxc.emp.idm.api.model.User;
 import com.minxc.emp.ui.idm.model.UserInformation;
 
 /**

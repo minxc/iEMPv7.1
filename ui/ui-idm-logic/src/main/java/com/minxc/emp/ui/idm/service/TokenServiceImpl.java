@@ -1,7 +1,8 @@
 package com.minxc.emp.ui.idm.service;
 
 import org.flowable.idm.api.IdmIdentityService;
-import org.flowable.idm.api.Token;
+
+import  org.minxc.emp.idm.api.model.Token;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

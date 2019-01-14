@@ -1,6 +1,6 @@
 package com.minxc.emp.ui.idm.service;
 
-import org.flowable.idm.api.Token;
+import  org.minxc.emp.idm.api.model.Token;
 
 public interface TokenService {
 
