@@ -11,7 +11,7 @@ import org.springframework.util.StringUtils;
  * @author Filip Hrisafov
  */
 @ConfigurationProperties(prefix = "flowable.rest.app")
-public class FlowableRestAppProperties {
+public class EnterpriseManagementPlatformRestAppProperties {
 
     /**
      * Configures the way user credentials are verified when doing a REST API call:

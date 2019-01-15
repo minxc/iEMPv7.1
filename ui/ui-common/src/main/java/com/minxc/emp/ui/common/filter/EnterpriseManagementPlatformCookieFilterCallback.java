@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.minxc.emp.ui.common.model.RemoteToken;
 
-public interface FlowableCookieFilterCallback {
+public interface EnterpriseManagementPlatformCookieFilterCallback {
 
     void onValidTokenFound(HttpServletRequest request, HttpServletResponse response, RemoteToken token);
 

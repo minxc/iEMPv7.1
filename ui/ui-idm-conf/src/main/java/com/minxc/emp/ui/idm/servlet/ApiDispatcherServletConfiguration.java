@@ -16,7 +16,7 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Configuration
-@ComponentScan(value = { "org.flowable.ui.idm.rest.api", "org.flowable.ui.common.rest.exception" })
+@ComponentScan(value = { "com.minxc.emp.ui.idm.rest.api", "com.minxc.emp.ui.common.rest.exception" })
 @EnableAsync
 public class ApiDispatcherServletConfiguration extends WebMvcConfigurationSupport {
 

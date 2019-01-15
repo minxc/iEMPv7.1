@@ -2,7 +2,7 @@ package com.minxc.emp.ui.common.tenant;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import com.minxc.emp.ui.common.properties.FlowableCommonAppProperties;
+import com.minxc.emp.ui.common.properties.EnterpriseManagementPlatformCommonAppProperties;
 import com.minxc.emp.ui.common.security.EMPAppUser;
 import com.minxc.emp.ui.common.security.SecurityUtils;
 import org.springframework.stereotype.Component;
@@ -16,7 +16,7 @@ public class DefaultTenantProvider implements TenantProvider {
 
     private String tenantId;
     
-    public DefaultTenantProvider(FlowableCommonAppProperties commonAppProperties) {
+    public DefaultTenantProvider(EnterpriseManagementPlatformCommonAppProperties commonAppProperties) {
         super();
         String configuredTenantId = commonAppProperties.getTenantId();
         if(! StringUtils.isBlank(configuredTenantId)) {

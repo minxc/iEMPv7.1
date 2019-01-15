@@ -17,7 +17,7 @@ import javax.annotation.PostConstruct;
 //import org.flowable.spring.boot.ldap.FlowableLdapProperties;
 
 
-import com.minxc.emp.ui.common.properties.FlowableCommonAppProperties;
+import com.minxc.emp.ui.common.properties.EnterpriseManagementPlatformCommonAppProperties;
 import com.minxc.emp.ui.idm.cache.UserCache;
 import com.minxc.emp.ui.idm.model.UserInformation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +40,7 @@ import org.springframework.stereotype.Service;
 public class UserCacheImpl implements UserCache {
 
     @Autowired
-    protected FlowableCommonAppProperties properties;
+    protected EnterpriseManagementPlatformCommonAppProperties properties;
 
     protected FlowableLdapProperties ldapProperties;
 
@@ -54,7 +54,7 @@ public class UserCacheImpl implements UserCache {
 
     @PostConstruct
     protected void initCache() {
-        FlowableCommonAppProperties.Cache cache = properties.getCacheUsers();
+        EnterpriseManagementPlatformCommonAppProperties.Cache cache = properties.getCacheUsers();
         long userCacheMaxSize = cache.getMaxSize();
         long userCacheMaxAge = cache.getMaxAge();
 

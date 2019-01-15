@@ -16,7 +16,7 @@ import javax.annotation.PostConstruct;
 import org.flowable.idm.api.IdmIdentityService;
 import org.flowable.idm.api.Token;
 import org.flowable.idm.api.User;
-import com.minxc.emp.ui.common.properties.FlowableCommonAppProperties;
+import com.minxc.emp.ui.common.properties.EnterpriseManagementPlatformCommonAppProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +42,7 @@ public class PersistentTokenServiceImpl implements PersistentTokenService {
     private SecureRandom random;
 
     @Autowired
-    private FlowableCommonAppProperties properties;
+    private EnterpriseManagementPlatformCommonAppProperties properties;
 
     @Autowired
     private IdmIdentityService idmIdentityService;
@@ -57,7 +57,7 @@ public class PersistentTokenServiceImpl implements PersistentTokenService {
 
     @PostConstruct
     protected void initTokenCache() {
-        FlowableCommonAppProperties.Cache cacheLoginUsers = properties.getCacheLoginUsers();
+        EnterpriseManagementPlatformCommonAppProperties.Cache cacheLoginUsers = properties.getCacheLoginUsers();
         long maxSize = cacheLoginUsers.getMaxSize();
         long maxAge = cacheLoginUsers.getMaxAge();
         tokenCache = CacheBuilder.newBuilder().maximumSize(maxSize).expireAfterWrite(maxAge, TimeUnit.SECONDS).recordStats()

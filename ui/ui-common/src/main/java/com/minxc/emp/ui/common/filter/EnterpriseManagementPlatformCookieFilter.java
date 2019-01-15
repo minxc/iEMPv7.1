@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.minxc.emp.ui.common.service.idm.RemoteIdmService;
 import com.minxc.emp.ui.common.model.RemoteToken;
 import com.minxc.emp.ui.common.model.RemoteUser;
-import com.minxc.emp.ui.common.properties.FlowableCommonAppProperties;
+import com.minxc.emp.ui.common.properties.EnterpriseManagementPlatformCommonAppProperties;
 import com.minxc.emp.ui.common.security.CookieConstants;
 import com.minxc.emp.ui.common.security.EMPAppUser;
 import org.minxc.emp.core.api.exception.SystemException;
@@ -38,17 +38,17 @@ import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 
-public class FlowableCookieFilter extends OncePerRequestFilter {
+public class EnterpriseManagementPlatformCookieFilter extends OncePerRequestFilter {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(FlowableCookieFilter.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(EnterpriseManagementPlatformCookieFilter.class);
 
     protected static final String DELIMITER = ":";
 
     protected final RemoteIdmService remoteIdmService;
 
-    protected final FlowableCommonAppProperties properties;
+    protected final EnterpriseManagementPlatformCommonAppProperties properties;
 
-    protected FlowableCookieFilterCallback filterCallback;
+    protected EnterpriseManagementPlatformCookieFilterCallback filterCallback;
 
     protected String idmAppUrl;
     protected String redirectUrlOnAuthSuccess;
@@ -61,7 +61,7 @@ public class FlowableCookieFilter extends OncePerRequestFilter {
 
     protected LoadingCache<String, EMPAppUser> userCache;
 
-    public FlowableCookieFilter(RemoteIdmService remoteIdmService, FlowableCommonAppProperties properties) {
+    public EnterpriseManagementPlatformCookieFilter(RemoteIdmService remoteIdmService, EnterpriseManagementPlatformCommonAppProperties properties) {
         this.remoteIdmService = remoteIdmService;
         this.properties = properties;
     }
@@ -80,7 +80,7 @@ public class FlowableCookieFilter extends OncePerRequestFilter {
     }
 
     protected void initTokenCache() {
-        FlowableCommonAppProperties.Cache cache = properties.getCacheLoginTokens();
+        EnterpriseManagementPlatformCommonAppProperties.Cache cache = properties.getCacheLoginTokens();
         Long maxSize = cache.getMaxSize();
         Long maxAge = cache.getMaxAge();
         tokenCache = CacheBuilder.newBuilder().maximumSize(maxSize).expireAfterWrite(maxAge, TimeUnit.SECONDS).recordStats()
@@ -100,7 +100,7 @@ public class FlowableCookieFilter extends OncePerRequestFilter {
     }
 
     protected void initUserCache() {
-        FlowableCommonAppProperties.Cache cache = properties.getCacheLoginUsers();
+        EnterpriseManagementPlatformCommonAppProperties.Cache cache = properties.getCacheLoginUsers();
         Long userMaxSize = cache.getMaxSize();
         Long userMaxAge = cache.getMaxAge();
         userCache = CacheBuilder.newBuilder().maximumSize(userMaxSize).expireAfterWrite(userMaxAge, TimeUnit.SECONDS).recordStats()
@@ -315,7 +315,7 @@ public class FlowableCookieFilter extends OncePerRequestFilter {
     }
 
     @Autowired(required = false)
-    public void setFilterCallback(FlowableCookieFilterCallback filterCallback) {
+    public void setFilterCallback(EnterpriseManagementPlatformCookieFilterCallback filterCallback) {
         this.filterCallback = filterCallback;
     }
 }

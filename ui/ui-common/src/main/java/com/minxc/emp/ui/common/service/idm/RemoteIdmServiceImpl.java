@@ -20,7 +20,7 @@ import org.apache.http.ssl.SSLContextBuilder;
 import com.minxc.emp.ui.common.model.RemoteGroup;
 import com.minxc.emp.ui.common.model.RemoteToken;
 import com.minxc.emp.ui.common.model.RemoteUser;
-import com.minxc.emp.ui.common.properties.FlowableCommonAppProperties;
+import com.minxc.emp.ui.common.properties.EnterpriseManagementPlatformCommonAppProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +43,7 @@ public class RemoteIdmServiceImpl implements RemoteIdmService {
     protected String adminUser;
     protected String adminPassword;
 
-    public RemoteIdmServiceImpl(FlowableCommonAppProperties properties) {
+    public RemoteIdmServiceImpl(EnterpriseManagementPlatformCommonAppProperties properties) {
         url = properties.determineIdmAppUrl();
         adminUser = properties.getIdmAdmin().getUser();
         Assert.hasText(adminUser, "Admin user must not be empty");

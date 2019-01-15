@@ -10,7 +10,7 @@ import org.springframework.util.Assert;
  * @author Filip Hrisafov
  */
 @ConfigurationProperties(prefix = "flowable.common.app")
-public class FlowableCommonAppProperties {
+public class EnterpriseManagementPlatformCommonAppProperties {
 
     /**
      * The static tenant id used for the DefaultTenantProvider. The modeler app uses this to determine under which tenant id to store and publish models.

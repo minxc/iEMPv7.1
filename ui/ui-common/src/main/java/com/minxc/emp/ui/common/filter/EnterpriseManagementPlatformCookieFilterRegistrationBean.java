@@ -5,23 +5,23 @@ import java.util.Collection;
 import javax.annotation.PostConstruct;
 
 import com.minxc.emp.ui.common.service.idm.RemoteIdmService;
-import com.minxc.emp.ui.common.properties.FlowableCommonAppProperties;
+import com.minxc.emp.ui.common.properties.EnterpriseManagementPlatformCommonAppProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 
 /**
  * @author Filip Hrisafov
  */
-public class FlowableCookieFilterRegistrationBean extends FilterRegistrationBean {
+public class EnterpriseManagementPlatformCookieFilterRegistrationBean extends FilterRegistrationBean {
 
     protected final RemoteIdmService remoteIdmService;
 
-    protected final FlowableCommonAppProperties properties;
+    protected final EnterpriseManagementPlatformCommonAppProperties properties;
 
-    protected FlowableCookieFilterCallback filterCallback;
+    protected EnterpriseManagementPlatformCookieFilterCallback filterCallback;
     protected Collection<String> requiredPrivileges;
 
-    public FlowableCookieFilterRegistrationBean(RemoteIdmService remoteIdmService, FlowableCommonAppProperties properties) {
+    public EnterpriseManagementPlatformCookieFilterRegistrationBean(RemoteIdmService remoteIdmService, EnterpriseManagementPlatformCommonAppProperties properties) {
         this.remoteIdmService = remoteIdmService;
         this.properties = properties;
     }
@@ -29,7 +29,7 @@ public class FlowableCookieFilterRegistrationBean extends FilterRegistrationBean
     @PostConstruct
     protected void initializeFilter() {
         if (getFilter() == null) {
-            FlowableCookieFilter flowableCookieFilter = new FlowableCookieFilter(remoteIdmService, properties);
+            EnterpriseManagementPlatformCookieFilter flowableCookieFilter = new EnterpriseManagementPlatformCookieFilter(remoteIdmService, properties);
             flowableCookieFilter.setFilterCallback(filterCallback);
             flowableCookieFilter.setRequiredPrivileges(requiredPrivileges);
             flowableCookieFilter.initCaches();
@@ -38,7 +38,7 @@ public class FlowableCookieFilterRegistrationBean extends FilterRegistrationBean
     }
 
     @Autowired(required = false)
-    public void setFilterCallback(FlowableCookieFilterCallback filterCallback) {
+    public void setFilterCallback(EnterpriseManagementPlatformCookieFilterCallback filterCallback) {
         this.filterCallback = filterCallback;
     }
 

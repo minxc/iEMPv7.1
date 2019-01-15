@@ -1,7 +1,6 @@
 package com.minxc.emp.ui.idm.conf;
 
-import org.flowable.idm.api.IdmIdentityService;
-import com.minxc.emp.ui.common.properties.FlowableRestAppProperties;
+import com.minxc.emp.ui.common.properties.EnterpriseManagementPlatformRestAppProperties;
 import com.minxc.emp.ui.common.security.ActuatorRequestMatcher;
 import com.minxc.emp.ui.common.security.ClearFlowableCookieLogoutHandler;
 import com.minxc.emp.ui.common.security.DefaultPrivileges;
@@ -164,11 +163,11 @@ public class SecurityConfiguration {
     @Order(1)
     public static class ApiWebSecurityConfigurationAdapter extends WebSecurityConfigurerAdapter {
 
-        protected final FlowableRestAppProperties restAppProperties;
+        protected final EnterpriseManagementPlatformRestAppProperties restAppProperties;
         protected final EnterpriseManagementPlatformIdmAppProperties idmAppProperties;
 
-        public ApiWebSecurityConfigurationAdapter(FlowableRestAppProperties restAppProperties,
-            EnterpriseManagementPlatformIdmAppProperties idmAppProperties) {
+        public ApiWebSecurityConfigurationAdapter(EnterpriseManagementPlatformRestAppProperties restAppProperties,
+                                                  EnterpriseManagementPlatformIdmAppProperties idmAppProperties) {
             this.restAppProperties = restAppProperties;
             this.idmAppProperties = idmAppProperties;
         }

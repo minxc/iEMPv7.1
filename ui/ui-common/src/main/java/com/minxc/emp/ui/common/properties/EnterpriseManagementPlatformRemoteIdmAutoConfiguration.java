@@ -10,15 +10,15 @@ import org.springframework.security.config.core.GrantedAuthorityDefaults;
  * @author Filip Hrisafov
  */
 @EnableConfigurationProperties({
-    FlowableCommonAppProperties.class,
-    FlowableRestAppProperties.class
+    EnterpriseManagementPlatformCommonAppProperties.class,
+    EnterpriseManagementPlatformRestAppProperties.class
 })
 @Configuration
-public class FlowableRemoteIdmAutoConfiguration {
+public class EnterpriseManagementPlatformRemoteIdmAutoConfiguration {
 
     @ConditionalOnMissingBean
     @Bean
-    public GrantedAuthorityDefaults grantedAuthorityDefaults(FlowableCommonAppProperties commonAppProperties) {
+    public GrantedAuthorityDefaults grantedAuthorityDefaults(EnterpriseManagementPlatformCommonAppProperties commonAppProperties) {
         return new GrantedAuthorityDefaults(commonAppProperties.getRolePrefix());
     }
 }

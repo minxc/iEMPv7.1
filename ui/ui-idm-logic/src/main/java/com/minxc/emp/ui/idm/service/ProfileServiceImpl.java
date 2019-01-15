@@ -2,8 +2,6 @@ package com.minxc.emp.ui.idm.service;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
-import org.flowable.idm.api.Picture;
-import org.flowable.idm.api.User;
 import com.minxc.emp.ui.common.security.SecurityUtils;
 import com.minxc.emp.ui.common.service.exception.BadRequestException;
 import com.minxc.emp.ui.common.service.exception.NotFoundException;
