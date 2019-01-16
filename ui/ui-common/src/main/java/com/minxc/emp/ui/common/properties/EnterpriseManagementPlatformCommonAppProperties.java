@@ -9,7 +9,7 @@ import org.springframework.util.Assert;
  *
  * @author Filip Hrisafov
  */
-@ConfigurationProperties(prefix = "flowable.common.app")
+@ConfigurationProperties(prefix = "com.minxc.emp.common.app")
 public class EnterpriseManagementPlatformCommonAppProperties {
 
     /**
@@ -18,7 +18,7 @@ public class EnterpriseManagementPlatformCommonAppProperties {
      */
     private String tenantId;
 
-    /**
+    /**com.minxc.emp
      * The default role prefix that needs to be used by Spring Security.
      */
     private String rolePrefix = "ROLE_";
