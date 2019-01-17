@@ -9,7 +9,6 @@ import com.minxc.emp.ui.idm.security.AjaxAuthenticationFailureHandler;
 import com.minxc.emp.ui.idm.security.AjaxAuthenticationSuccessHandler;
 import com.minxc.emp.ui.idm.security.AjaxLogoutSuccessHandler;
 import com.minxc.emp.ui.idm.security.CustomDaoAuthenticationProvider;
-import com.minxc.emp.ui.idm.security.CustomLdapAuthenticationProvider;
 import com.minxc.emp.ui.idm.security.CustomPersistentRememberMeServices;
 import com.minxc.emp.ui.idm.security.Http401UnauthorizedEntryPoint;
 import com.minxc.emp.ui.idm.web.CustomFormLoginConfig;
@@ -71,13 +70,6 @@ public class SecurityConfiguration {
         return daoAuthenticationProvider;
     }
 
-    @Bean(name = "ldapAuthenticationProvider")
-    @ConditionalOnProperty(prefix = "flowable.idm.ldap", name = "enabled", havingValue = "true")
-    public AuthenticationProvider ldapAuthenticationProvider() {
-        CustomLdapAuthenticationProvider ldapAuthenticationProvider = new CustomLdapAuthenticationProvider(
-                userDetailsService(), identityService);
-        return ldapAuthenticationProvider;
-    }
 
     //
     // REGULAR WEBAP CONFIG

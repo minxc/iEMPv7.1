@@ -5,6 +5,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import com.minxc.emp.ui.common.security.SecurityUtils;
 import com.minxc.emp.ui.common.service.exception.BadRequestException;
 import com.minxc.emp.ui.common.service.exception.NotFoundException;
+import org.minxc.emp.idm.api.model.User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

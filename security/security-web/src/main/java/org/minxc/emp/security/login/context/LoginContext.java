@@ -2,7 +2,6 @@ package org.minxc.emp.security.login.context;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.minxc.emp.core.util.AppContextUtil;
 import org.minxc.emp.idm.api.context.CurrentContext;
 import org.minxc.emp.idm.api.model.Group;
 import org.minxc.emp.idm.api.model.User;

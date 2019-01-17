@@ -30,8 +30,7 @@ public class UserDetailsService implements org.springframework.security.core.use
     @Autowired
     protected UserService userService;
 
-    @Autowired(required = false)
-    protected FlowableLdapProperties ldapProperties;
+
 
     protected long userValidityPeriod;
 
@@ -46,13 +45,9 @@ public class UserDetailsService implements org.springframework.security.core.use
         String actualLogin = login;
         User userFromDatabase = null;
 
-        if (ldapProperties == null || !ldapProperties.isEnabled()) {
-            actualLogin = login.toLowerCase();
-            userFromDatabase = identityService.createUserQuery().userIdIgnoreCase(actualLogin).singleResult();
 
-        } else {
             userFromDatabase = identityService.createUserQuery().userId(actualLogin).singleResult();
-        }
+
 
         // Verify user
         if (userFromDatabase == null) {

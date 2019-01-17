@@ -6,14 +6,11 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
-import org.flowable.idm.api.Group;
-import org.flowable.idm.api.Privilege;
-import org.flowable.idm.api.User;
-import org.flowable.idm.api.UserQuery;
 import com.minxc.emp.ui.common.service.exception.BadRequestException;
 import com.minxc.emp.ui.common.service.exception.ConflictingRequestException;
 import com.minxc.emp.ui.common.service.exception.NotFoundException;
 import com.minxc.emp.ui.idm.model.UserInformation;
+import org.minxc.emp.idm.api.model.User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

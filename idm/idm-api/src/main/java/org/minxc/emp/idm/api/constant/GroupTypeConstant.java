@@ -4,11 +4,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 组织常量。
+ * 组织常量
  *
- * @author ray
+ * @author
  */
 public enum GroupTypeConstant {
+
+
     ORG("org", "组织"),
     ROLE("role", "角色"),
     JOB("job", "职位"),

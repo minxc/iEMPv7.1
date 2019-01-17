@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 * @Package: org.minxc.emp.config 
 
-* @Description:  TODO:(用一句话描述该文件做什么) 
+* @Description:
 
 * @author: Xianchang.min  
 

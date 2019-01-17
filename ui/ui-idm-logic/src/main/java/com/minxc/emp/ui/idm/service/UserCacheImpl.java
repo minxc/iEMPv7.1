@@ -12,11 +12,6 @@ import java.util.concurrent.TimeUnit;
 
 import javax.annotation.PostConstruct;
 
-//import org.flowable.idm.api.IdmIdentityService;
-//import org.flowable.idm.api.User;
-//import org.flowable.spring.boot.ldap.FlowableLdapProperties;
-
-
 import com.minxc.emp.ui.common.properties.EnterpriseManagementPlatformCommonAppProperties;
 import com.minxc.emp.ui.idm.cache.UserCache;
 import com.minxc.emp.ui.idm.model.UserInformation;
@@ -42,7 +37,6 @@ public class UserCacheImpl implements UserCache {
     @Autowired
     protected EnterpriseManagementPlatformCommonAppProperties properties;
 
-    protected FlowableLdapProperties ldapProperties;
 
     @Autowired
     protected IdmIdentityService identityService;
@@ -63,11 +57,8 @@ public class UserCacheImpl implements UserCache {
 
                     public CachedUser load(final String userId) throws Exception {
                         User userFromDatabase = null;
-                        if (ldapProperties == null || !ldapProperties.isEnabled()) {
-                            userFromDatabase = identityService.createUserQuery().userIdIgnoreCase(userId.toLowerCase()).singleResult();
-                        } else {
-                            userFromDatabase = identityService.createUserQuery().userId(userId).singleResult();
-                        }
+                        userFromDatabase = identityService.createUserQuery().userId(userId).singleResult();
+
 
                         if (userFromDatabase == null) {
                             throw new UsernameNotFoundException("User " + userId + " was not found in the database");
@@ -78,7 +69,6 @@ public class UserCacheImpl implements UserCache {
                         for (String privilege : userInformation.getPrivileges()) {
                             grantedAuthorities.add(new SimpleGrantedAuthority(privilege));
                         }
-
                         return new CachedUser(userFromDatabase, grantedAuthorities);
                     }
 
@@ -135,8 +125,5 @@ public class UserCacheImpl implements UserCache {
         userCache.invalidate(userId);
     }
 
-    @Autowired(required = false)
-    public void setLdapProperties(FlowableLdapProperties ldapProperties) {
-        this.ldapProperties = ldapProperties;
-    }
+
 }

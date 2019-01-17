@@ -2,7 +2,7 @@ package com.minxc.emp.ui.idm.model;
 
 import java.util.Date;
 
-import org.flowable.idm.api.Token;
+import org.minxc.emp.idm.api.model.Token;
 import com.minxc.emp.ui.common.model.AbstractRepresentation;
 
 public class TokenRepresentation extends AbstractRepresentation {

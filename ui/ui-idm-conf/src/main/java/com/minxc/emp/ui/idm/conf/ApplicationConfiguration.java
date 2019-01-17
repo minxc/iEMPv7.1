@@ -19,7 +19,7 @@ import org.springframework.web.servlet.DispatcherServlet;
     "com.minxc.emp.ui.common.conf",
     "com.minxc.emp.ui.idm.conf",
     "com.minxc.emp.ui.idm.security",
-    "com.minxc.emp.ui.idm.idm",
+    "com.minxc.emp.ui.idm",
     "com.minxc.emp.ui.idm.service"}, excludeFilters = {@ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, value = RemoteIdmServiceImpl.class)})
 public class ApplicationConfiguration {
 
